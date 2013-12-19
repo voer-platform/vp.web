@@ -1,0 +1,50 @@
+@charset "UTF-8";
+body .scrollpanel {
+  float: left;
+  height: 250px;
+  width: 100%;
+}
+body .scrollpanel .sp-scrollbar {
+  width: 1px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+body .scrollpanel .sp-scrollbar .sp-thumb {
+  background-color: #aaa;
+  -webkit-transition: height 0.2s ease-in-out;
+  -moz-transition: height 0.2s ease-in-out;
+  -ms-transition: height 0.2s ease-in-out;
+  -o-transition: height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
+  width: 9px;
+  left: -4px;
+}
+body .scrollpanel .sp-scrollbar.active .sp-thumb {
+  background-color: #999;
+}
+body .no2 .sp-scrollbar,
+body .no4 .sp-scrollbar {
+  margin: 4px;
+}
+body .no3,
+body .no4 {
+}
+body .no3 .sp-scrollbar,
+body .no4 .sp-scrollbar {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+body .no3 .sp-scrollbar .sp-thumb,
+body .no4 .sp-scrollbar .sp-thumb {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+body .foo {
+  min-height: 30px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  margin: 1em;
+  padding: 1em;
+}

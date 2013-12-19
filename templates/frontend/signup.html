@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% block titleSite %}Sign up{% endblock %}
+
+{% block content %}
+<div class="signup-form">
+    <div class="header-signup-form">Join VOER. Take Creative Control.</div>
+    <div class="social-signup-form">
+        <a class="link-fb-signup left"></a>
+        <a class="link-tw-signup left"></a>
+        <a class="link-gg-signup left"></a>
+        <a class="link-in-signup left"></a>
+    </div>
+    <div class="content-signup-form">
+        <div class="title-signup-email">
+            <span>or sign up using your email</span>
+        </div>
+        <input type="text" placeholder="Your email Address" class="form-control">
+        <input type="password" placeholder="Choose a Password" class="form-control passwordsg">
+        <div class="block-showpassword">
+            <label class="checkbox checkbox-user-tool checkbox-showpassword" id="checkbox-showpassword">
+                <span class="icons">
+                    <span class="first-icon fui-checkbox-unchecked"></span>
+                    <span class="second-icon fui-checkbox-checked"></span>
+                </span>
+                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input type="checkbox" data-toggle="checkbox">
+                Show password
+            </label>
+        </div>
+        
+        <span class="left clear">
+            By registering you are agreeing to our <a class="link-blue">Terms of Use</a> and <a class="link-blue">Privacy Policy</a>.</span>
+        <a href="info_signup.html" class="btn-sign-up left clear">Get started</a>
+    </div>
+</div>
+{% endblock %}

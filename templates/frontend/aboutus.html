@@ -1,0 +1,58 @@
+{% extends "base/base-content.html" %}
+
+{% block titleSite %}About Us{% endblock %}
+
+{% block content %}        
+<!-- left content -->
+<div class="col-lg-2">
+    <div class="hffilter-right">
+        <div class="bigbox-common">                         
+            <div class="content">
+                <script>
+                    $(document).ready(function(){
+                        $('a[id|=about]').click(function(){
+                            var $idabout = ($(this).attr('id'));
+                            $('a[id|=about]').removeClass('active');
+                            $(this).addClass('active');                                     
+                        });
+                    });
+                </script>
+                <ul class="hfmenu-common">
+                    <li><a id="about-1">Our Vision<i class="chev-right"></i></a></li>
+                    <li><a class="active" id="about-2">Pedagogy<i class="chev-right"></i></a></li>
+                    <li><a id="about-3">Leadership<i class="chev-right"></i></a></li>
+                    <li><a id="about-4">Team<i class="chev-right"></i></a></li>
+                    <li><a id="about-5">Community<i class="chev-right"></i></a></li>
+                    <li><a id="about-6">Programs<i class="chev-right"></i></a></li>
+                </ul>
+                <ul class="hfmenu-common second">
+                    <li><a id="about-7">Press<i class="chev-right"></i></a></li>
+                    <li><a id="about-8">Careers<i class="chev-right"></i></a></li>
+                    <li><a id="about-9">Terms<i class="chev-right"></i></a></li>                                
+                </ul>
+                <ul class="hfmenu-common second">                               
+                    <li><a id="about-10">How it works<i class="chev-right"></i></a></li>                            
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-1 right-row">
+    <div class="hfcontent">
+        <h1>About Coursera</h1>
+        <p>We believe in connecting people to a great education so that anyone around the world can learn without limits.
+Coursera is an education company that partners with the top universities and organizations in the world to offer courses online for anyone to take, for free. Our technology enables our partners to teach millions of students rather than hundreds.
+We envision a future where everyone has access to a world-class education that has so far been available to a select few. We aim to empower people with education that will improve their lives, the lives of their families, and the communities they live in</p>
+        <h1>Our Courses</h1>
+        <p>
+                    Classes offered on Coursera are designed to help you master the material. When you take one of our classes, you will watch lectures taught by world-class professors, learn at your own pace, test your knowledge, and reinforce concepts through interactive exercises. When you join one of our classes, you'll also join a global community of thousands of students learning alongside you. We know that your life is busy, and that you have many commitments on your time. Thus, our courses are designed based on sound pedagogical foundations, to help you master new concepts quickly and effectively. Key ideas include mastery learning, to make sure that you have multiple attempts to demonstrate your new knowledge; using interactivity, to ensure student engagement and to assist long-term retention; and providing frequent feedback, so that you can monitor your own progress, and know when you've really mastered the material.
+
+We offer courses in a wide range of topics, spanning the Humanities, Medicine, Biology, Social Sciences, Mathematics, Business, Computer Science, and many others. Whether you're looking to improve your resume, advance your career, or just learn more and expand your knowledge, we hope there will be multiple courses that you find interesting.
+                    </p>
+        <h1>Contact Us</h1>
+        <p>Please visit our Contact Us page to learn about the different ways you can reach us.</p>
+    </div>
+    
+</div>           
+        
+{% endblock %}

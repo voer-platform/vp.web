@@ -1,0 +1,231 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block titleSite %}{{ material.title }}{% endblock %}
+
+{% block content %}
+<!-- LEFT ROW -->
+<div class="col-lg-1 left-row">
+    <!-- TITLE MODULE -->
+    <div class="module-view-title left padding-content-15">
+        <span class="module-view-name left clear">{{ material.title }}</span>
+        <a class="module-view-category left clear">{{ category.name }}</a>
+    </div>
+    <!-- END TITLE MODULE -->
+    <!-- CONTENT MODULE -->
+    <div class="module-view-content left padding-content-15">{{ material.text|safe }}</div>
+    <!-- END CONTENT MODULE -->
+    <!-- SOCIAL MODULE -->
+    <div class="bottom-module-content left padding-content-15">
+        <ul class="list-social-module left">
+            <li>
+                <a class="link-fb"></a>
+            </li>
+            <li>
+                <a class="link-tw"></a>
+            </li>
+            <li>
+                <a class="link-gg"></a>
+            </li>
+            <li>
+                <a class="link-in"></a>
+            </li>
+        </ul>
+        <ul class="list-status-module-content right">
+            <li>
+                <span class="checkout-icon-view">1000</span>
+            </li>
+            <li>
+                <span class="checkout-icon-favourite">340</span>
+            </li>
+        </ul>
+    </div>
+    <!-- END SOCIAL MODULE -->
+    <!-- COMMENT MODULE -->
+    <div class="comment-module-content left padding-content-15">
+        <div class="module-content-comment">
+            <ul>
+                <li>
+                    <a class="left">
+                        <img src="images/module_view/avatar-product-comment.jpg">
+                    </a>
+                    <textarea rows="1" class="form-control"></textarea>
+                </li>
+            </ul>
+            <a class="btn-module-content-comment right">Comment</a>
+        </div>
+    </div>
+    <!-- END COMMENT MODULE -->
+</div>
+<!-- END LEFT ROW -->
+<!-- RIGHT ROW -->
+<div class="col-lg-2 right-row">
+    <!-- AUTHOR NAME -->
+    <div class="module-view-author padding-content-10 left">
+        <a class="module-view-author-avatar left">
+            <img src="images/module_view/avatar-big.jpg">
+        </a>
+        <ul class="module-view-author-name left padding-content-10">
+            <li>
+                <a href="/profile/{{ author.id }}">{{ author.fullname }}</a>
+            </li>
+            <li>
+                <span class="text-italic">{{ trans 'View my profile' }}</span>
+            </li>
+        </ul>
+    </div>
+    <!-- END AUTHOR NAME -->
+    <!-- AUTHOR STATUS -->
+    <div class="module-view-author-status left">
+        <span class="module-view-author-block left padding-content-5">
+            <a class="clear left">10</a>
+            <label class="clear left">Modules</label>
+        </span>
+        <span class="module-view-author-block left padding-content-5">
+            <a class="clear left">3</a>
+            <label class="clear left">Collections</label>
+        </span>
+        <span class="module-view-author-block left padding-content-5">
+            <a class="clear left">11</a>
+            <label class="clear left">Following</label>
+        </span>
+        <span class="module-view-author-block left padding-content-5">
+            <a class="clear left">15</a>
+            <label class="clear left">Followers</label>
+        </span>
+    </div>
+    <!-- END AUTHOR STATUS -->
+    <!-- REUSE -->
+    <div class="module-block">
+        <div class="module-block-header">
+            <div class="icon-module icon-checkout"></div>
+            <div class="tilte-module">
+                <a>Reuse</a>
+            </div>                          
+        </div>
+    </div>
+    <!-- END REUSE -->
+    <!-- DOWNLOAD -->
+    <div class="module-block">
+        <div class="module-block-header">
+            <div class="icon-module icon-download"></div>
+            <div class="tilte-module">
+                <a>Download</a>
+            </div>
+        </div>
+    </div>
+    <!-- END DOWNLOAD -->
+    <!-- TAG -->
+    <div class="module-block module-simple">
+        <div class="module-block-header">
+            <div class="icon-module"></div>
+            <div class="tilte-module">Tag</div>                         
+        </div>
+        <div class="module-block-content">
+            <a class="link-tag">Zen</a>
+            <a class="link-tag">Book</a>
+            <a class="link-tag">Khoa học</a>
+            <a class="link-tag">Bản đồ</a>
+            <a class="link-tag">Nghiên cứu</a>
+            <a class="link-tag">Phát triển</a>
+        </div>
+    </div>
+    <!-- END TAG -->
+    <!-- OTHER FROM AUTHOR -->
+    <div class="module-block module-simple">
+        <div class="module-block-header">
+            <div class="icon-module"></div>
+            <div class="tilte-module">Other from Author</div>                           
+        </div>
+        <div class="module-block-content">
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other1.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
+                    <a class="link-other-author-collection left clear">College Physics</a>
+                </div>
+            </div>
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other2.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
+                    <a class="link-other-author-collection left clear">General Approach ...</a>
+                </div>
+            </div>
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other3.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
+                    <a class="link-other-author-collection left clear">General Approach ...</a>
+                </div>
+            </div>
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other4.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
+                    <a class="link-other-author-collection left clear">College Physics</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- END OTHER FROM AUTHOR -->
+    
+    <!-- OTHER FROM AUTHOR -->
+    <div class="module-block module-simple">
+        <div class="module-block-header">
+            <div class="icon-module"></div>
+            <div class="tilte-module">Similar item</div>                            
+        </div>
+        <div class="module-block-content">
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other3.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
+                    <a class="link-other-author-collection left clear">General Approach ...</a>
+                </div>
+            </div>
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other4.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
+                    <a class="link-other-author-collection left clear">College Physics</a>
+                </div>
+            </div>
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other2.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
+                    <a class="link-other-author-collection left clear">General Approach ...</a>
+                </div>
+            </div>
+            <div class="other-module-author">
+                <div class="other-author-img">
+                    <img src="images/module_view/other1.jpg">
+                </div>
+                <div class="other-author-title left padding-content-5">
+                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
+                    <a class="link-other-author-collection left clear">College Physics</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OTHER FROM AUTHOR -->
+</div>
+<!-- END RIGHT ROW -->
+{% endblock %}

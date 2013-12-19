@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="">
+
+    <title>Index VOER</title>
+
+    <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/slide.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/flat-ui.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}fonts/font.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/templates.css" rel="stylesheet">
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/flatui-checkbox.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+<!--    <script type="text/javascript" src="js/jquery.noconflict.js"></script>-->
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<!-- TOP -->
+  	<div id="top">
+  		<div id="header" class="main">
+  			<div class="logo">
+  				<a href="index.html">
+  					Logo
+  				</a>
+  			</div>
+  			<div id="main-menu">
+				<ul class="main-menu-nav">
+					<li>
+					  <a href="index.html">Home</a>
+					</li>
+					<li>
+					  <a href="#">Browser All</a>
+					</li>
+					<li>
+					  <a href="#">Discover</a>
+					</li>
+					<li>
+					  <a href="#">About Us</a>
+					</li>
+				</ul>
+		    </div>
+		    <!--RIGHT TOP-->
+		    <div id="right-top-nav" class="right">
+		    	<div class="block-top-language">
+		    		<ul class="list-right-top">
+		    			<li>Language:</li>
+		    			<li>
+		    				<div class="collapse navbar-collapse bs-js-navbar-collapse">
+								<ul class="nav navbar-nav">
+									<li class="dropdown">
+										<a id="drop-top-language" role="button" class="dropdown-toggle" data-toggle="dropdown">
+											English
+											<span class="caret"></span>
+										</a>
+										<div class="dropdown-menu" role="menu" aria-labelledby="drop-category-pd">
+											<ul class="dropdown-menu-language">
+												<li>
+													<a>Vietnamese</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</div>
+		    			</li>
+		    			<li>
+		    				<a href="signup.html">Join</a>
+		    			</li>
+		    			<li>
+		    				<a class="btn-top-login" data-toggle="modal" data-target="#modal-user-login"></a>
+		    			</li>
+		    		</ul>
+				</div>
+		    </div>
+		    <!--END RIGHT TOP-->
+  		</div>
+  	</div>
+  	<!-- END TOP -->
+  	<!-- Modal -->
+	<div class="modal fade" id="modal-user-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-login">
+	    <div class="modal-content">
+	      <div class="modal-header padding-content-15">
+	        <h4 class="modal-title" id="myModalLabel">Login to VOER</h4>
+	      </div>
+	      <div class="modal-body padding-content-15">
+	        <input type="text" class="form-control" placeholder="Username">
+	        <input type="password" class="form-control" placeholder="Password">
+	        <ul class="list-user-login-tools">
+	        	<li>
+					<label class="checkbox checkbox-user-tool">
+						<span class="icons">
+							<span class="first-icon fui-checkbox-unchecked"></span>
+							<span class="second-icon fui-checkbox-checked"></span>
+						</span>
+						<input type="checkbox" data-toggle="checkbox">
+						Remember me
+					</label>
+	        	</li>
+	        	<li class="right">
+	        		<a>Forgot your password ?</a>
+	        	</li>
+	        </ul>
+	        <button type="button" class="btn btn-primary">Login</button>
+	      </div>
+	      <div class="modal-footer">
+	        <a class="btn-form-login-signup left" href="signup.html">
+	        	Don't have an account? Sign up for VOER
+	        </a>
+
+	        <div class="alert-modal-login left padding-content-10"><!-- Add class 'hidden' to hide alert -->
+	        	<span class="left">The username or password is incorrect.</span>
+	        </div>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+  	<!-- SLIDE -->
+  	<div id="slider" class="slide1">
+  		<div class="slider-content main">
+  			<div class="slider-content-left left">
+  				<div class="text-header-slider-left left clear">Take the world's best documents, online, for free.</div>
+  				<div class="div-input-search left clear">
+  					<input type="text" class="input-search-top">
+  				</div>
+  				<div class="text-slider-left clear">
+  					Join 21598 modules, 502 collections from 2052 authors
+  				</div>
+  			</div>
+			<div class="hfslide right">
+				<div id="generic" class="slide active" style="display:block;">
+					<div class="book"></div>
+					<div class="cloud1"></div>
+					<div class="cloud2"></div>
+					<div class="tree1"></div>
+					<div class="tree2"></div>
+					<div class="tree3"></div>
+				</div>
+				<div id="slide2" class="slide" style="display:none;">
+					<div class="box"></div>
+					<div class="icon1"></div>
+					<div class="icon2"></div>
+					<div class="icon3"></div>
+					<div class="icon4"></div>
+					<div class="icon5"></div>
+					<div class="icon6"></div>
+					<div class="icon7"></div>
+					<div class="icon8"></div>
+				</div>
+				<div id="slide3" class="slide" style="display:none;">
+					<div class="macbook"></div>
+					<div class="group-icon1"></div>
+					<div class="group-icon2"></div>
+					<div class="group-icon3"></div>
+					<div class="group-icon4"></div>
+					<div class="group-icon5"></div>
+					<div class="group-icon6"></div>
+					<div class="group-icon7"></div>
+				</div>
+			</div>
+  		</div>
+  	</div>
+  	<!-- END SLIDE -->
+  	<div id="mainpage" class="main">
+  		<div class="container">
+  			<div class="row">
+  				<!-- LIST MODULE MAINPAGE -->
+  				<ul class="list-collection-mainpage left">
+  					<li>
+  						<div class="icon-hot"></div>
+  						<div class="collection-mainpage-cover left clear">
+  							<img src="images/thumb-collection1.jpg"/>
+  						</div>
+  						<div class="collection-mainpage-details left clear">
+  							<div class="collection-details-icon icon-book left">
+
+  							</div>
+  							<div class="collection-details-text left">
+  								<div class="title-collection left clear">
+  									<a>Common Core in Action: Math Formative Assessment</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Nguyễn Đức Anh</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Bùi Quang Thắng</a>
+  								</div>
+  							</div>
+  						</div>
+  					</li>
+  					<li>
+  						<div class="collection-mainpage-cover left clear">
+  							<img src="images/thumb-collection2.jpg"/>
+  						</div>
+  						<div class="collection-mainpage-details left clear">
+  							<div class="collection-details-icon icon-puzzle left">
+
+  							</div>
+  							<div class="collection-details-text left">
+  								<div class="title-collection left clear">
+  									<a>Common Core in Action: Math Formative Assessment</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Nguyễn Đức Anh</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Bùi Quang Thắng</a>
+  								</div>
+  							</div>
+  						</div>
+  					</li>
+  					<li>
+  						<div class="icon-hot"></div>
+  						<div class="collection-mainpage-cover left clear">
+  							<img src="images/thumb-collection3.jpg"/>
+  						</div>
+  						<div class="collection-mainpage-details left clear">
+  							<div class="collection-details-icon icon-course left">
+
+  							</div>
+  							<div class="collection-details-text left">
+  								<div class="title-collection left clear">
+  									<a>Hệ quản trị cơ sở dữ liệu</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Đặng Quang Hải</a>
+  								</div>
+  							</div>
+  						</div>
+  					</li>
+  					<li>
+  						<div class="icon-hot"></div>
+  						<div class="collection-mainpage-cover left clear">
+  							<img src="images/thumb-collection4.jpg"/>
+  						</div>
+  						<div class="collection-mainpage-details left clear">
+  							<div class="collection-details-icon icon-course left">
+
+  							</div>
+  							<div class="collection-details-text left">
+  								<div class="title-collection left clear">
+  									<a>Vi sinh vật học môi trường</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Bùi Quang Huy</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Tạ Đức Sơn</a>
+  								</div>
+  							</div>
+  						</div>
+  					</li>
+  					<li>
+  						<div class="icon-hot"></div>
+  						<div class="collection-mainpage-cover left clear">
+  							<img src="images/thumb-collection5.jpg"/>
+  						</div>
+  						<div class="collection-mainpage-details left clear">
+  							<div class="collection-details-icon icon-book left">
+
+  							</div>
+  							<div class="collection-details-text left">
+  								<div class="title-collection left clear">
+  									<a>Common Core in Action: Math Formative Assessment</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Nguyễn Đức Anh</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Bùi Quang Thắng</a>
+  								</div>
+  							</div>
+  						</div>
+  					</li>
+  					<li>
+  						<div class="collection-mainpage-cover left clear">
+  							<img src="images/thumb-collection6.jpg"/>
+  						</div>
+  						<div class="collection-mainpage-details left clear">
+  							<div class="collection-details-icon icon-book left">
+
+  							</div>
+  							<div class="collection-details-text left">
+  								<div class="title-collection left clear">
+  									<a>Common Core in Action: Math Formative Assessment</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Nguyễn Đức Anh</a>
+  								</div>
+  								<div class="author-collection left clear">
+  									<a>Bùi Quang Thắng</a>
+  								</div>
+  							</div>
+  						</div>
+  					</li>
+
+  				</ul>
+  				<!-- LIST MODULE MAINPAGE -->
+  				<!-- BROWSER -->
+  				<div class="mainpage-browser left">
+  					<a class="btn-browser-all left clear">Browser All</a>
+  					<div class="mainpage-browser-content left">
+	  					<ul class="list-mainpage-browser left">
+	  						<li>
+	  							<div class="browser-author-img left clear">
+	  								<img src="images/author1.jpg" />
+	  							</div>
+	  							<div class="browser-author-details left clear">
+	  								<div class="icon-browser-author"></div>
+	  								<div class="browser-author-name left clear">
+	  									<a>Đỗ Trọng Kiên</a>
+	  								</div>
+	  								<div class="browser-author-add left clear">GT.TS ĐH Kiến Trúc Hà Nội</div>
+	  							</div>
+	  						</li>
+	  						<li>
+	  							<div class="browser-author-img left clear">
+	  								<img src="images/author2.jpg" />
+	  							</div>
+	  							<div class="browser-author-details left clear">
+	  								<div class="icon-browser-author"></div>
+	  								<div class="browser-author-name left clear">
+	  									<a>Hồ Ngọc Đại</a>
+	  								</div>
+	  								<div class="browser-author-add left clear">Trung tâm Công nghệ giáo dục</div>
+	  							</div>
+	  						</li>
+	  						<li>
+	  							<div class="browser-author-img left clear">
+	  								<img src="images/author3.jpg" />
+	  							</div>
+	  							<div class="browser-author-details left clear">
+	  								<div class="icon-browser-author"></div>
+	  								<div class="browser-author-name left clear">
+	  									<a>Lê Văn Lan</a>
+	  								</div>
+	  								<div class="browser-author-add left clear">Giáo sư Sử học</div>
+	  							</div>
+	  						</li>
+	  						<li>
+	  							<div class="browser-author-img left clear">
+	  								<img src="images/author4.jpg" />
+	  							</div>
+	  							<div class="browser-author-details left clear">
+	  								<div class="icon-browser-author"></div>
+	  								<div class="browser-author-name left clear">
+	  									<a>Lê Văn Lan</a>
+	  								</div>
+	  								<div class="browser-author-add left clear">Giáo sư Sử học</div>
+	  							</div>
+	  						</li>
+	  						<li>
+	  							<div class="browser-author-img left clear">
+	  								<img src="images/author1.jpg" />
+	  							</div>
+	  							<div class="browser-author-details left clear">
+	  								<div class="icon-browser-author"></div>
+	  								<div class="browser-author-name left clear">
+	  									<a>Đỗ Trọng Kiên</a>
+	  								</div>
+	  								<div class="browser-author-add left clear">GT.TS ĐH Kiến Trúc Hà Nội</div>
+	  							</div>
+	  						</li>
+	  					</ul>
+	  				</div>
+  				</div>
+  				<!-- END BROWSER -->
+  				<!-- NEWS -->
+  				<div class="mainpage-news left">
+  					<!-- NEWS ROW1-->
+  					<div class="news-rows left">
+  						<div class="header-news-rows left clear">News</div>
+  						<!-- CONTENT NEWS -->
+  							<div class="news-rows-content left clear">
+	  							<div class="news-rows-block left">
+		  							<div class="thumb-news left">
+		  								<img src="images/thumb-news1.jpg" />
+		  							</div>
+		  							<ul class="list-news-rows left">
+		  								<li>
+		  									<a class="news-rows-title">Khoá học: Vi sinh vật học môi trường</a>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-date left"> Jul 16</span>
+		  									<span class="news-rows-post-by left">Posted by Nick Roach in <a>Fashion</a></span>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-des">
+		  										Proin laoreet sem libero, quis tincidunt sem fringilla eu. Donec euismod...
+		  									</span>
+		  								</li>
+		  							</ul>
+		  						</div>
+	  						</div>
+  						<!-- END CONTENT NEWS -->
+  						<!-- CONTENT NEWS -->
+  							<div class="news-rows-content left clear">
+	  							<div class="news-rows-block left">
+		  							<div class="thumb-news left">
+		  								<img src="images/thumb-news2.jpg" />
+		  							</div>
+		  							<ul class="list-news-rows left">
+		  								<li>
+		  									<a class="news-rows-title">Khoá học: Vi sinh vật học môi trường</a>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-date left"> Jul 16</span>
+		  									<span class="news-rows-post-by left">Posted by Nick Roach in <a>Fashion</a></span>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-des">
+		  										Proin laoreet sem libero, quis tincidunt sem fringilla eu. Donec euismod...
+		  									</span>
+		  								</li>
+		  							</ul>
+		  						</div>
+	  						</div>
+  						<!-- END CONTENT NEWS -->
+  						<!-- CONTENT NEWS -->
+  							<div class="news-rows-content left clear">
+	  							<div class="news-rows-block left">
+		  							<div class="thumb-news left">
+		  								<img src="images/thumb-news3.jpg" />
+		  							</div>
+		  							<ul class="list-news-rows left">
+		  								<li>
+		  									<a class="news-rows-title">Khoá học: Vi sinh vật học môi trường</a>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-date left"> Jul 16</span>
+		  									<span class="news-rows-post-by left">Posted by Nick Roach in <a>Fashion</a></span>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-des">
+		  										Proin laoreet sem libero, quis tincidunt sem fringilla eu. Donec euismod...
+		  									</span>
+		  								</li>
+		  							</ul>
+		  						</div>
+	  						</div>
+  						<!-- END CONTENT NEWS -->
+  					</div>
+  					<!-- END NEWS ROW1 -->
+
+  					<!-- NEWS ROW2-->
+  					<div class="news-rows left">
+  						<div class="header-news-rows left clear">News</div>
+  						<!-- CONTENT NEWS -->
+  							<div class="news-rows-content left clear">
+	  							<div class="news-rows-block left">
+		  							<div class="thumb-news left">
+		  								<img src="images/thumb-news1.jpg" />
+		  							</div>
+		  							<ul class="list-news-rows left">
+		  								<li>
+		  									<a class="news-rows-title">Khoá học: Vi sinh vật học môi trường</a>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-date left"> Jul 16</span>
+		  									<span class="news-rows-post-by left">Posted by Nick Roach in <a>Fashion</a></span>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-des">
+		  										Proin laoreet sem libero, quis tincidunt sem fringilla eu. Donec euismod...
+		  									</span>
+		  								</li>
+		  							</ul>
+		  						</div>
+	  						</div>
+  						<!-- END CONTENT NEWS -->
+  						<!-- CONTENT NEWS -->
+  							<div class="news-rows-content left clear">
+	  							<div class="news-rows-block left">
+		  							<div class="thumb-news left">
+		  								<img src="images/thumb-news2.jpg" />
+		  							</div>
+		  							<ul class="list-news-rows left">
+		  								<li>
+		  									<a class="news-rows-title">Khoá học: Vi sinh vật học môi trường</a>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-date left"> Jul 16</span>
+		  									<span class="news-rows-post-by left">Posted by Nick Roach in <a>Fashion</a></span>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-des">
+		  										Proin laoreet sem libero, quis tincidunt sem fringilla eu. Donec euismod...
+		  									</span>
+		  								</li>
+		  							</ul>
+		  						</div>
+	  						</div>
+  						<!-- END CONTENT NEWS -->
+  						<!-- CONTENT NEWS -->
+  							<div class="news-rows-content left clear">
+	  							<div class="news-rows-block left">
+		  							<div class="thumb-news left">
+		  								<img src="images/thumb-news3.jpg" />
+		  							</div>
+		  							<ul class="list-news-rows left">
+		  								<li>
+		  									<a class="news-rows-title">Khoá học: Vi sinh vật học môi trường</a>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-date left"> Jul 16</span>
+		  									<span class="news-rows-post-by left">Posted by Nick Roach in <a>Fashion</a></span>
+		  								</li>
+		  								<li>
+		  									<span class="news-rows-des">
+		  										Proin laoreet sem libero, quis tincidunt sem fringilla eu. Donec euismod...
+		  									</span>
+		  								</li>
+		  							</ul>
+		  						</div>
+	  						</div>
+  						<!-- END CONTENT NEWS -->
+  					</div>
+  					<!-- END NEWS ROW2 -->
+
+  					<!-- PARTNER -->
+  					<div class="mainpage-partner right">
+  						<div class="header-news-rows right clear">Partners</div>
+						<ul class="list-partner-block left">
+							<li>
+								<a><img src="images/partner1.jpg" /></a>
+							</li>
+							<li>
+								<a><img src="images/partner2.jpg" /></a>
+							</li>
+							<li>
+								<a><img src="images/partner3.jpg" /></a>
+							</li>
+							<li>
+								<a><img src="images/partner4.jpg" /></a>
+							</li>
+						</ul>
+  					</div>
+  					<!-- END PARTNER -->
+  				</div>
+  				<!-- END NEWS -->
+  				<div class="footer left">
+  					<div class="logo-footer left">
+  					</div>
+  					<ul class="list-menu-footer left">
+  						<li>
+  							<a>About</a>
+  						</li>
+  						<li>
+  							<a>Careers</a>
+  						</li>
+  						<li>
+  							<a>Team</a>
+  						</li>
+  						<li>
+  							<a>Store</a>
+  						</li>
+  						<li>
+  							<a>Contact</a>
+  						</li>
+  						<li>
+  							<a>Press</a>
+  						</li>
+  						<li>
+  							<a>Terms</a>
+  						</li>
+  					</ul>
+  					<ul class="list-footer-social right">
+  						<li><a>Facebook</a></li>
+  						<li><a>Google+</a></li>
+  						<li><a>Twitter</a></li>
+  					</ul>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "base/meta.html" %}
+    <title>{% block titleSite %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+    
+  </head>
+  <body>
+  	{% block topbar %}
+  	{% include "base/header.html" %}
+	{% endblock %}
+	{% block slide %}{% endblock %}
+	
+  	<div id="mainpage" class="main mainpage-content">
+  		<div class="container">
+  			<div class="row">
+  			    {% block content %}{% endblock %}
+  				{% include "base/footer.html" %}
+  			</div>
+  		</div>
+  	</div>
+  </body>
+</html>

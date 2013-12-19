@@ -1,0 +1,260 @@
+{% extends "base/base.html" %}
+
+{% block titleSite %}VOER{% endblock %}
+
+{% block slide %}
+<!-- SLIDE -->
+<div id="slider" class="slide1">
+    <div class="slider-content main">
+        <div class="slider-content-left left">
+            <div class="text-header-slider-left left clear">Take the world's best documents, online, for free.</div>
+            <div class="div-input-search left clear">
+                <input type="text" class="input-search-top">
+            </div>
+            <div class="text-slider-left clear">
+                Discover 21598 modules, 502 collections from 2052 authors
+            </div>
+        </div>
+        <div class="hfslide right">
+            <div id="generic" class="slide active" style="display:block;">
+                <div class="book"></div>
+                <div class="cloud1"></div>
+                <div class="cloud2"></div>
+                <div class="tree1"></div>
+                <div class="tree2"></div>
+                <div class="tree3"></div>
+            </div>
+            <div id="slide2" class="slide" style="display:none;">
+                <div class="box"></div>
+                <div class="icon1"></div>
+                <div class="icon2"></div>
+                <div class="icon3"></div>
+                <div class="icon4"></div>
+                <div class="icon5"></div>
+                <div class="icon6"></div>
+                <div class="icon7"></div>
+                <div class="icon8"></div>
+            </div>
+            <div id="slide3" class="slide" style="display:none;">
+                <div class="macbook"></div>
+                <div class="group-icon1"></div>
+                <div class="group-icon2"></div>
+                <div class="group-icon3"></div>
+                <div class="group-icon4"></div>
+                <div class="group-icon5"></div>
+                <div class="group-icon6"></div>
+                <div class="group-icon7"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SLIDE -->
+{% endblock %}
+
+{% block content %}
+<!-- LIST MODULE MAINPAGE -->
+<ul class="list-collection-mainpage left">
+    {% for material in materials_list %}
+    <li>
+        <div class="icon-hot"></div>
+        <div class="collection-mainpage-cover left clear">
+            <img src="images/thumb-collection1.jpg"/>
+        </div>
+        <div class="collection-mainpage-details left clear">
+            <div class="collection-details-icon icon-book left">
+
+            </div>
+            <div class="collection-details-text left">
+                <div class="title-collection left clear">
+                    <a href='{% url 'vpw.views.module_detail' mid=material.material_id %}'>{{ material.title }}</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Nguyễn Đức Anh</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Bùi Quang Thắng</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+    <!--
+    <li>
+        <div class="collection-mainpage-cover left clear">
+            <img src="images/thumb-collection2.jpg"/>
+        </div>
+        <div class="collection-mainpage-details left clear">
+            <div class="collection-details-icon icon-puzzle left">
+
+            </div>
+            <div class="collection-details-text left">
+                <div class="title-collection left clear">
+                    <a>Common Core in Action: Math Formative Assessment</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Nguyễn Đức Anh</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Bùi Quang Thắng</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="icon-hot"></div>
+        <div class="collection-mainpage-cover left clear">
+            <img src="images/thumb-collection3.jpg"/>
+        </div>
+        <div class="collection-mainpage-details left clear">
+            <div class="collection-details-icon icon-course left">
+
+            </div>
+            <div class="collection-details-text left">
+                <div class="title-collection left clear">
+                    <a>Hệ quản trị cơ sở dữ liệu</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Đặng Quang Hải</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="icon-hot"></div>
+        <div class="collection-mainpage-cover left clear">
+            <img src="images/thumb-collection4.jpg"/>
+        </div>
+        <div class="collection-mainpage-details left clear">
+            <div class="collection-details-icon icon-course left">
+
+            </div>
+            <div class="collection-details-text left">
+                <div class="title-collection left clear">
+                    <a>Vi sinh vật học môi trường</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Bùi Quang Huy</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Tạ Đức Sơn</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="icon-hot"></div>
+        <div class="collection-mainpage-cover left clear">
+            <img src="images/thumb-collection5.jpg"/>
+        </div>
+        <div class="collection-mainpage-details left clear">
+            <div class="collection-details-icon icon-book left">
+
+            </div>
+            <div class="collection-details-text left">
+                <div class="title-collection left clear">
+                    <a>Common Core in Action: Math Formative Assessment</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Nguyễn Đức Anh</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Bùi Quang Thắng</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collection-mainpage-cover left clear">
+            <img src="images/thumb-collection6.jpg"/>
+        </div>
+        <div class="collection-mainpage-details left clear">
+            <div class="collection-details-icon icon-book left">
+
+            </div>
+            <div class="collection-details-text left">
+                <div class="title-collection left clear">
+                    <a>Common Core in Action: Math Formative Assessment</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Nguyễn Đức Anh</a>
+                </div>
+                <div class="author-collection left clear">
+                    <a>Bùi Quang Thắng</a>
+                </div>
+            </div>
+        </div>
+    </li>
+-->
+</ul>
+<!-- LIST MODULE MAINPAGE -->
+<!-- BROWSER -->
+<div class="mainpage-browser left">
+    <a class="btn-browser-all left clear" href="/browse">Browser All</a>
+    <div class="mainpage-browser-content left">
+        <ul class="list-mainpage-browser left">
+            <li>
+                <div class="browser-author-img left clear">
+                    <img src="images/author1.jpg" />
+                </div>
+                <div class="browser-author-details left clear">
+                    <div class="icon-browser-author"></div>
+                    <div class="browser-author-name left clear">
+                        <a>Đỗ Trọng Kiên</a>
+                    </div>
+                    <div class="browser-author-add left clear">GT.TS ĐH Kiến Trúc Hà Nội</div>
+                </div>
+            </li>
+            <li>
+                <div class="browser-author-img left clear">
+                    <img src="images/author2.jpg" />
+                </div>
+                <div class="browser-author-details left clear">
+                    <div class="icon-browser-author"></div>
+                    <div class="browser-author-name left clear">
+                        <a>Hồ Ngọc Đại</a>
+                    </div>
+                    <div class="browser-author-add left clear">Trung tâm Công nghệ giáo dục</div>
+                </div>
+            </li>
+            <li>
+                <div class="browser-author-img left clear">
+                    <img src="images/author3.jpg" />
+                </div>
+                <div class="browser-author-details left clear">
+                    <div class="icon-browser-author"></div>
+                    <div class="browser-author-name left clear">
+                        <a>Lê Văn Lan</a>
+                    </div>
+                    <div class="browser-author-add left clear">Giáo sư Sử học</div>
+                </div>
+            </li>
+            <li>
+                <div class="browser-author-img left clear">
+                    <img src="images/author4.jpg" />
+                </div>
+                <div class="browser-author-details left clear">
+                    <div class="icon-browser-author"></div>
+                    <div class="browser-author-name left clear">
+                        <a>Lê Văn Lan</a>
+                    </div>
+                    <div class="browser-author-add left clear">Giáo sư Sử học</div>
+                </div>
+            </li>
+            <li>
+                <div class="browser-author-img left clear">
+                    <img src="images/author1.jpg" />
+                </div>
+                <div class="browser-author-details left clear">
+                    <div class="icon-browser-author"></div>
+                    <div class="browser-author-name left clear">
+                        <a>Đỗ Trọng Kiên</a>
+                    </div>
+                    <div class="browser-author-add left clear">GT.TS ĐH Kiến Trúc Hà Nội</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END BROWSER -->
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base/base-content.html" %}
+
+{% block titleSite %}Create module{% endblock %}
+
+{% block content %}        
+
+<!-- filter top -->
+<div class="hfcreate">
+    <div class="breakcump left">
+        <span>Create Content</span>
+        <span class="icon"></span>
+        <span class="current">Create a new module</span>
+    </div>
+    <div class="hfstep">
+        <ul>
+            <li class="active"><a id="hfstep-1"><div class="step">1</div> License</a></li>
+            <li class="active"><a id="hfstep-2"><div class="step">2</div>Metadata</a></li>
+            <li><a id="hfstep-3"><div class="step">3</div>Content</a></li>
+        </ul>
+    </div>
+</div>          <!-- left content -->
+            <div class="col-lg-2 left-row">
+                <div class="hfuser-tools">
+    <div class="smallbox-common">
+        <div class="hfbtn-create module"><a href="create_module.php">Create a new module</a></div>
+        <div class="hfbtn-create collection"><a href="create_collection.php">Create a new collection</a></div>
+    </div>
+    <div class="smallbox-common">
+        <div class="title">
+            My Items
+        </div>
+        <div class="content">
+            <ul>
+                <li><a>Add Resource</a></li>
+                <li><a>Saved Items</a></li>
+                <li><a>Submitted Items</a></li>
+                <li><a>Evaluated Items</a></li>
+                <li><a>Authored Items</a></li>
+                <li><a>Remixed Items</a></li>
+                <li><a>My Favorites</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="smallbox-common">
+        <div class="title">
+            My profile
+        </div>
+        <div class="content">
+            <ul>        
+                <li><a>Profile Information</a></li>
+                <li><a>Member Statistics</a></li>
+                <li><a>Account Settings</a></li>
+                <li><a>Delete Account</a></li>
+            </ul>
+        </div>      
+    </div>
+</div>  
+            </div>
+            <div class="col-lg-1 right-row">
+                <div class="hfcreate-1">
+                    <div class="content">                                   
+                        <p>I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute this content under the terms of the Creative Commons Attribution License available at <a href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a>. I understand that in doing so I retain my copyright in the work and warrant that I am the author or the owner or have permission to distribute the work in question and wish this work to be distributed under the terms of that license (including allowing modification of this work and requiring attribution) and agree that proper attribution of my work is any attribution that includes the authors' names, the title of the work, and the VOER URL to the work.</p>
+                    </div>
+                    <div class="accept-license">
+                        <label class="checkbox checkbox-user-tool">
+                        <span class="icons">
+                            <span class="first-icon fui-checkbox-unchecked"></span>
+                            <span class="second-icon fui-checkbox-checked"></span>
+                        </span>
+                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        I have read the above, and I agree to license this new work under its terms.                        
+                    </label>
+                        
+                    </div>
+                    <script>
+                        $(document).ready(function(){   
+                            $('.checkbox').click(function(){                                
+                                $('.hfbtn-next').toggleClass('hfbtn-active');
+                            });                     
+                        });
+                    </script>
+                    <a class="hfbtn-common hfbtn-next right" href="create_module_2.php">Next</a>
+                </div>
+            </div>
+{% endblock %}
