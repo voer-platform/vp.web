@@ -27,9 +27,29 @@ def module_detail(request, mid, version):
     return render(request, "frontend/module_detail.html", {"material": material, "author": author, "category": category})
 
 def create_module(request):
-    return render(request, "frontend/module/create_step1.html")
+    step = request.GET.get('step', '')
+    print "Step: " + step
+    if step == 1:
+        return render(request, "frontend/module/create_step1.html")
+    elif step == 2:
+        return render(request, "frontend/module/create_step2.html")
+    elif step == 3:
+        return render(request, "frontend/module/create_step3.html")
+    else:
+        return render(request, "frontend/module/create_step1.html")
+    
 
 def crete_collection(request):
+    step = request.GET.get('step', '')
+    print "Step: " + step
+    if step == 1:
+        return render(request, "frontend/collection/create_step1.html")
+    elif step == 2:
+        return render(request, "frontend/collection/create_step2.html")
+    elif step == 3:
+        return render(request, "frontend/collection/create_step3.html")
+    else:
+        return render(request, "frontend/collection/create_step1.html")
     return render(request, "frontend/collection/create_step1.html") 
 
 def view_profile(request, pid):
