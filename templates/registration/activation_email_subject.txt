@@ -1,0 +1,1 @@
+Activate your VOER account - you have {{ expiration_days }} days!

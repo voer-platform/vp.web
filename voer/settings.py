@@ -36,7 +36,9 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.humanize',
     'django.contrib.staticfiles',
+    'registration',
     'south',
     'vpw',
 )
@@ -92,8 +94,20 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
+## REGISTER
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
+EMAIL_HOST='email-smtp.us-east-1.amazonaws.com'
+EMAIL_PORT=25
+EMAIL_HOST_USER='AKIAJYYWT53Z4KQZMHUA'
+EMAIL_HOST_PASSWORD='AhM4gp8514eJB7Fv2kg4Z2Idj4kPEVXtHotO664Ggzc4'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'info@voer.edu.vn'
+## END REGISTER
+#
 STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]
 
 VPR_URL = 'dev.voer.vn'
 VPR_PORT = '2013'
 VPR_VERSION = '1.0'
+
+SITE_URL = 'voer.edu.vn'

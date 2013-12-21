@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
-    vpr_get_categories
+    vpr_get_categories, vpr_browse
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 
@@ -77,7 +77,14 @@ Browse page
 '''
 def browse(request):
     categories = vpr_get_categories()
-    return render(request, "frontend/browse.html", {"categories": categories})
+
+    cats = request.GET.get("categories", "")
+    types = request.GET.get("types", "")
+    languages = request.GET.get("languages", "")
+
+    materials = vpr_browse(categories=cats, types=types, languages=languages)
+
+    return render(request, "frontend/browse.html", {"materials": materials, "categories": categories})
 
 def vpw_authenticate(request):
     username = request.POST['username']

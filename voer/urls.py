@@ -5,6 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
+    url(r'^user/', include('registration.backends.default.urls')),
     url(r'^$', 'vpw.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^m/(?P<mid>[0-9a-z]+)(/(?P<version>\d+))?/?$', 'vpw.views.module_detail', name='module_detail'),
