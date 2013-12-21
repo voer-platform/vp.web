@@ -26,6 +26,39 @@
             </ul>
         </div>
         <!--RIGHT TOP-->
+        {% if user.is_authenticated %}
+	    <div class="right" id="right-top-nav">
+	        <div class="block-top-right">
+	            <ul class="list-right-top page-content">
+	                <li>
+	                    <input type="text" class="input-search-right-top">
+	                </li>
+	                <li>
+	                    <div class="collapse navbar-collapse bs-js-navbar-collapse">
+	                        <ul class="nav navbar-nav">
+	                            <li class="dropdown loged-top-user">
+	                                <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop-top-language">
+	                                    <span class="logo-user-right-top left"></span>{{ user.username }}
+	                                    <span class="caret"></span>
+	                                </a>
+	                                <div aria-labelledby="drop-category-pd" role="menu" class="dropdown-menu">
+	                                    <ul class="dropdown-menu-language">
+	                                        <li>
+	                                            <a href="{% url 'user_profile' %}">{% trans 'Account View' %}</a>
+	                                        </li>
+	                                        <li>
+	                                            <a href="{% url 'logout' %}">{% trans 'Logout'%}</a>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+        {% else %}
         <div id="right-top-nav" class="right">
             <div class="block-top-language">
                 <ul class="list-right-top">
@@ -58,6 +91,7 @@
                 </ul>
             </div>
         </div>
+        {% endif %}
         <!--END RIGHT TOP-->
     </div>
 </div>
@@ -70,8 +104,10 @@
         <h4 class="modal-title" id="myModalLabel">Login to VOER</h4>
       </div>
       <div class="modal-body padding-content-15">
-        <input type="text" class="form-control" placeholder="Username">
-        <input type="password" class="form-control" placeholder="Password">
+        <form action="{% url 'authenticate' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" class="form-control" placeholder="Username" name="username">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <ul class="list-user-login-tools">
             <li>
                 <label class="checkbox checkbox-user-tool">
@@ -87,7 +123,8 @@
                 <a>{% trans 'Forgot your password ?' %}</a>
             </li>
         </ul>
-        <button type="button" class="btn btn-primary">{% trans 'Login' %}</button>
+        <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
+        </form>
       </div>
       <div class="modal-footer">
         <a class="btn-form-login-signup left" href="signup.html">

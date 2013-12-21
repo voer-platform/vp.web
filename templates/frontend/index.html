@@ -55,6 +55,11 @@
 <!-- LIST MODULE MAINPAGE -->
 <ul class="list-collection-mainpage left">
     {% for material in materials_list %}
+    {% if material.material_type == 1 %}
+        {% url 'module_detail' mid=material.material_id as material_url %}
+    {% else %}
+        {% url 'collection_detail' cid=material.material_id as material_url %}
+    {% endif %}
     <li>
         <div class="icon-hot"></div>
         <div class="collection-mainpage-cover left clear">
@@ -66,7 +71,7 @@
             </div>
             <div class="collection-details-text left">
                 <div class="title-collection left clear">
-                    <a href='{% url 'vpw.views.module_detail' mid=material.material_id %}'>{{ material.title }}</a>
+                    <a href='{{ material_url }}'>{{ material.title }}</a>
                 </div>
                 <div class="author-collection left clear">
                     <a>Nguyễn Đức Anh</a>
@@ -189,7 +194,7 @@
 <!-- LIST MODULE MAINPAGE -->
 <!-- BROWSER -->
 <div class="mainpage-browser left">
-    <a class="btn-browser-all left clear" href="/browse">Browser All</a>
+    <a class="btn-browser-all left clear" href="{% url 'browse' %}">Browser All</a>
     <div class="mainpage-browser-content left">
         <ul class="list-mainpage-browser left">
             <li>
