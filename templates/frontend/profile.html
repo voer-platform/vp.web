@@ -12,9 +12,10 @@
     <div class="hfuser-content">
         <div class="hfuser-information left">
             <div class="hfuser-avatar left">
-                <img src="images/avatar.jpg">
+                <img src="{% if person.avatar %} http://dev.voer.vn:2013/0.1/persons/{{ person.id }}/avatar/ {% else %} {{ STATIC_URL }}images/author1_detail.jpg {% endif %}">
             </div>
             <div class="hfuser-info ">
+			{{ person }}
                 <div class="hfuser-name">{{ person.fullname }}</div>
                 <div class="hfuser-address">{{ person.title }}</div>
                 <div class="hfuser-website">{{ person.homepage }}</div>
