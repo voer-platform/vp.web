@@ -1,27 +1,40 @@
-{% extends "registration/base.html" %}
-
-{% block title %}Log in{% endblock %}
+{% extends "base/base.html" %}
+{% load i18n %}
+{% block titleSite %}Log in{% endblock %}
 
 {% block content %}
+<div class="signup-form">
+    <div class="header-signup-form">Join VOER. Take Creative Control.</div>
+    <div class="social-signup-form">
+        <a class="link-fb-signup left"></a>
+        <a class="link-tw-signup left"></a>
+        <a class="link-gg-signup left"></a>
+        <a class="link-in-signup left"></a>
+    </div>
+    <form method="post" action="?next={{ next|default:"/" }}" class="wide">
+    {% csrf_token %}
+    <div class="content-signup-form">
+        <div class="title-signup-email">
+            <span>or login with your account</span>
+        </div>
+        {% if form.errors %}
+        <p class="errors">Please correct the errors below: {{ form.non_field_errors }}</p>
+        {% endif %}
+        <input class="form-control" id="id_username" type="text" name="username" maxlength="30" placeholder="Your username">
+        <input class="form-control" id="id_password" type="password" name="password" placeholder="Your password">
+        <div class="block-showpassword">
+            <label class="checkbox checkbox-user-tool checkbox-showpassword" id="checkbox-showpassword">
+                <span class="icons">
+                    <span class="first-icon fui-checkbox-unchecked"></span>
+                    <span class="second-icon fui-checkbox-checked"></span>
+                </span>
+                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input type="checkbox" data-toggle="checkbox">
+                Show password
+            </label>
+        </div>
 
-<h1>Log in</h1>
-
-{% if form.errors %}
-<p class="error">Please correct the errors below:</p>
-{% endif %}
-
-<form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
-<dl>
-<dt><label for="id_username">Username:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
-<dd>{{ form.username }}</dd>
-<dt><label for="id_password">Password:</label>{% if form.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span>{% endif %}</dt>
-<dd>{{ form.password }}</dd>
-<dt><input type="submit" value="Log in" /></dt>
-</dl>
-</form>
-{% endblock %}
-
-{% block content-related %}
-<p>If you don't have an account, you can <a href="/accounts/register/">sign
-up</a> for one.
+        <input class="btn-sign-up left clear" type="submit" value="{% trans 'Login' %}">
+    </div>
+    </form>
+</div>
 {% endblock %}

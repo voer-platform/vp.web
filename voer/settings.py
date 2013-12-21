@@ -13,6 +13,7 @@ import os
 SETTING_DIR = os.path.dirname(__file__)
 PROJECT_DIR = os.path.join(SETTING_DIR, '../')
 
+LOGIN_URL='/user/login/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
