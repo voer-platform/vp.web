@@ -90,3 +90,19 @@ def vpr_search(keyword):
     return result
 
 # Browse materials
+def vpr_browse(**kwargs):
+    categories = kwargs.get("categories", "")
+    types = kwargs.get("types", "")
+    languages = kwargs.get("languages", "")
+    result = vpr_request("GET", "materials", json.dumps({
+            "categories": categories,
+            "material_type": types,
+            "language": languages
+        }))
+    return result
+
+def vpr_materials_by_author(aid):
+    result = vpr_request("GET", "materials", json.dumps({
+            "author": aid
+        }))
+    return result
