@@ -4,19 +4,18 @@
 
 {% block titleSite %}{% trans "User profile" %}{% endblock %}
 
-{% block content %}        
+{% block content %}
 
-
-            <!-- filter top -->
-            <div class="hfuser-top">
-    <h1>HiFlyer JSC</h1>
+<!-- filter top -->
+<div class="hfuser-top">
+    <h1>{{ user.username }}</h1>
     <div class="hfuser-content">
         <div class="hfuser-information left">
             <div class="hfuser-avatar left">
                 <img src="images/avatar.jpg">
             </div>
             <div class="hfuser-info ">
-                <div class="hfuser-name">HiFlyer JSC</div>
+                <div class="hfuser-name">{{ user.username }}</div>
                 <div class="hfuser-address">R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam</div>
                 <div class="hfuser-website">www.hiflyer.vn</div>
             </div>
@@ -52,12 +51,12 @@
             <div class="col-lg-2 left-row">
             <div class="hfuser-tools">
     <div class="smallbox-common">
-        <div class="hfbtn-create module"><a href="create_module.php">Create a new module</a></div>
-        <div class="hfbtn-create collection"><a href="create_collection.php">Create a new collection</a></div>
+        <div class="hfbtn-create module"><a href="{% url 'create_module' %}">{% trans 'Create a new module' %}</a></div>
+        <div class="hfbtn-create collection"><a href="{% url 'create_module' %}">{% trans 'Create a new collection' %}</a></div>
     </div>
     <div class="smallbox-common">
         <div class="title">
-            My Items
+            {% trans 'My Items' %}
         </div>
         <div class="content">
             <ul>
@@ -73,43 +72,43 @@
     </div>
     <div class="smallbox-common">
         <div class="title">
-            My profile
+            {% trans 'My profile' %}
         </div>
         <div class="content">
-            <ul>        
+            <ul>
                 <li><a>Profile Information</a></li>
                 <li><a>Member Statistics</a></li>
                 <li><a>Account Settings</a></li>
                 <li><a>Delete Account</a></li>
             </ul>
-        </div>      
+        </div>
     </div>
-</div>  
+</div>
             </div>
             <div class="col-lg-1 right-row">
                 <script>
                     $(document).ready(function(){
                         $('.hfbtn-save').click(function(){
-                            var $iditem = $(this).attr('metadata');                         
+                            var $iditem = $(this).attr('metadata');
                             $('div[metadata='+$iditem+']').toggleClass('hfvisible');
                         });
                         $('.hfbtn-saveto-type').click(function(){
                             var $iditemCreate = $(this).attr('metadata');
-                                                        
+
                             $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
                             //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
-                        });         
+                        });
                         $('.gridview').click(function(){
                             $('.hfitems').toggleClass('gridview');
                             $('.gridview').toggleClass('active');
                             $('.listview').toggleClass('active');
-                        });     
+                        });
                         $('.listview').click(function(){
                             $('.hfitems').toggleClass('gridview');
                             $('.gridview').toggleClass('active');
                             $('.listview').toggleClass('active');
                         });
-                    });         
+                    });
                 </script>
                 <div id="fitertop-browserall" class="hffitertop">
     <div class="dropdown left">
@@ -133,29 +132,29 @@
     </div>
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Featured</a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">         
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a>Featured</a></li>
             <li><a>Most Liked</a></li>
             <li><a>Most Viewed</a></li>
             <li><a>Most Discussed</a></li>
-            <li><a>Most Recent  </a></li>   
+            <li><a>Most Recent  </a></li>
         </ul>
-    </div>  
+    </div>
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Sort by</a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a>Title</a></li>
             <li><a>Relevance</a></li>
             <li><a>Rating</a></li>
-            <li><a>Date</a></li>        
+            <li><a>Date</a></li>
         </ul>
-    </div>  
+    </div>
     <div class="fiterbutton right">
         <a class="gridview left">Gridview</a>
         <a class="listview right">Listview</a>
-    </div>  
+    </div>
 </div>              <div class="hfitems">
-    <div class="hfitem">    
+    <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -163,7 +162,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -171,32 +170,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -204,7 +203,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -212,32 +211,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -245,7 +244,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -253,32 +252,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -286,7 +285,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -294,32 +293,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -327,7 +326,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -335,32 +334,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -368,7 +367,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -376,32 +375,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -409,7 +408,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -417,32 +416,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -450,7 +449,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -458,32 +457,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -491,7 +490,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -499,32 +498,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -532,7 +531,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -540,32 +539,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -573,7 +572,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -581,32 +580,32 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
+</div>  <div class="hfitem">
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -614,7 +613,7 @@
         <div class="collection-saveto" metadata="iditem-1">
             <div class="collection-saveto-title">My Favorites</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
@@ -622,30 +621,30 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+
+        <img src="images/thumb-collection1.jpg">
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
+        </div>
         <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
         <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
+
+    </div>
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="images/icon/information.png">
             <div class="hftooltipi">
                 Uploaded On: <strong>2013-12-06 10:37:39</strong>
             </div>
         </div>
     </div>
-</div></div>            </div>        
+</div></div>            </div>
 {% endblock %}

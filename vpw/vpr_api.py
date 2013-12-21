@@ -13,7 +13,7 @@ def vpr_request(method, path, body=None):
     connection.request(method, "/%s/%s" % (settings.VPR_VERSION, path), body, headers)
     result = json.loads(connection.getresponse().read())
     return result
-    
+
 def vpr_get_categories():
     result = vpr_request("GET", "categories")
     return result;
@@ -34,7 +34,7 @@ def vpr_update_category(cat_id, name, parent, description):
     result = vpr_request("PUT", "categories/%s" % cat_id, json.dumps({
         "name": name,
         "parent": parent,
-        "description": description                                                              
+        "description": description
     }))
     return result
 
@@ -78,9 +78,15 @@ def vpr_create_material(**kwargs):
         "attach02_name": kwargs.get("attach02_name"),
         "attach02_description": kwargs.get("attach02_description"),
         "language": kwargs.get("language"),
-        "license_id": kwargs.get("license_id", 1)                                                          
+        "license_id": kwargs.get("license_id", 1)
     }))
-    
+
     return result
- 
-    
+
+def vpr_search(keyword):
+    result = vpr_request("GET", "search", json.dumps({
+            "kw":keyword
+        }))
+    return result
+
+# Browse materials
