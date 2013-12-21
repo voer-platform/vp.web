@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
-    vpr_get_categories, vpr_browse
+    vpr_get_categories, vpr_browse, vpr_materials_by_author
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 
@@ -75,7 +75,8 @@ def crete_collection(request):
 
 def view_profile(request, pid):
     person = vpr_get_person(pid)
-    return render_to_response("frontend/profile.html", {"person": person}, context_instance=RequestContext(request))
+    materials = vpr_materials_by_author(pid)
+    return render_to_response("frontend/profile.html", {"person": person, "materials": materials}, context_instance=RequestContext(request))
 
 '''
 Browse page
