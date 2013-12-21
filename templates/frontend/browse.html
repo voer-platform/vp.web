@@ -1,5 +1,5 @@
 {% extends "base/base-content.html" %}
-
+{% load i18n %}
 {% block titleSite %}Browse{% endblock %}
 
 {% block js %}
@@ -79,7 +79,7 @@
                         });
                     });
                 </script>
-<div class="hfitems active">
+<div id="materials" class="hfitems active">
 {% for material in materials.results %}
 {% if material.material_type == 1 %}
     {% url 'module_detail' mid=material.material_id as material_url %}
@@ -145,9 +145,10 @@
                         }else{
                             $('label[id=types-all]').removeClass('checked');
                         }
-                        //Get value
 
+                        ajax_browse("{% url 'ajax_browse' %}", 1, "vi", 2);
                     });
+
                     $('label[id|=langs]').click(function(){
                         var $idtype = $(this).attr('id');
                         if($idtype == 'langs-all'){
@@ -155,22 +156,16 @@
                         }else{
                             $('label[id=langs-all]').removeClass('checked');
                         }
+                        ajax_browse("{% url 'ajax_browse' %}", 2, "vi", 2);
                     });
-                    $('label[id|=schools]').click(function(){
+                    $('label[id|=category]').click(function(){
                         var $idtype = $(this).attr('id');
-                        if($idtype == 'schools-all'){
-                            $('label[id|=schools]').removeClass('checked');
+                        if($idtype == 'category-all'){
+                            $('label[id|=category]').removeClass('checked');
                         }else{
-                            $('label[id=schools-all]').removeClass('checked');
+                            $('label[id=category-all]').removeClass('checked');
                         }
-                    });
-                    $('label[id|=authors]').click(function(){
-                        var $idtype = $(this).attr('id');
-                        if($idtype == 'authors-all'){
-                            $('label[id|=authors]').removeClass('checked');
-                        }else{
-                            $('label[id=authors-all]').removeClass('checked');
-                        }
+                        ajax_browse("{% url 'ajax_browse' %}", 2, "vi", 4);
                     });
                 });
             </script>
@@ -229,7 +224,7 @@
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <input data-toggle="checkbox" type="checkbox" value="en">
                         English
                         <div class="number-common right">200</div>
                     </label>
@@ -240,11 +235,38 @@
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <input data-toggle="checkbox" type="checkbox" value="vi">
                         Vietnam
                         <div class="number-common right">200</div>
                     </label>
                 </div>
+            </div>
+            <!-- Categories -->
+            <div class="smallbox-common">
+                <div class="checkbox-item">
+                    <label id="category-all" class="checkbox checkbox-user-tool checked">
+                        <span class="icons">
+                            <span class="first-icon fui-checkbox-unchecked"></span>
+                            <span class="second-icon fui-checkbox-checked"></span>
+                        </span>
+                        <input data-toggle="checkbox" type="checkbox">
+                        {% trans 'All Categories' %}
+                        <div class="number-common right">200</div>
+                    </label>
+                </div>
+                {% for category in categories %}
+                <div class="checkbox-item">
+                    <label id="category-{{category.id}}" class="checkbox checkbox-user-tool">
+                        <span class="icons">
+                            <span class="first-icon fui-checkbox-unchecked"></span>
+                            <span class="second-icon fui-checkbox-checked"></span>
+                        </span>
+                        <input data-toggle="checkbox" type="checkbox" values="{{ category.id }}">
+                        {{ category.name }}
+                        <div class="number-common right">200</div>
+                    </label>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
