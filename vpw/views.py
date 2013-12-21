@@ -6,6 +6,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 import json
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -56,7 +57,7 @@ def collection_detail(request, cid, mid):
 
     return render(request, "frontend/collection_detail.html", {"collection": collection, "material": material, "author": author, "category": category, "outline": strOutline})
 
-
+@login_required
 def create_module(request):
     step = request.GET.get('step', '')
     print "Step: " + step
@@ -69,7 +70,7 @@ def create_module(request):
     else:
         return render(request, "frontend/module/create_step1.html")
 
-
+@login_required
 def crete_collection(request):
     step = request.GET.get('step', '')
     print "Step: " + step
@@ -123,6 +124,7 @@ def vpw_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+@login_required
 def user_profile(request):
     return render(request, "frontend/user_profile.html")
 
