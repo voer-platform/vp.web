@@ -209,23 +209,7 @@
                         }else{
                             $('label[id=langs-all]').removeClass('checked');
                         }
-                    });                     
-                    $('label[id|=schools]').click(function(){
-                        var $idtype = $(this).attr('id');                       
-                        if($idtype == 'schools-all'){
-                            $('label[id|=schools]').removeClass('checked');
-                        }else{
-                            $('label[id=schools-all]').removeClass('checked');
-                        }
-                    });                     
-                    $('label[id|=authors]').click(function(){
-                        var $idtype = $(this).attr('id');                       
-                        if($idtype == 'authors-all'){
-                            $('label[id|=authors]').removeClass('checked');
-                        }else{
-                            $('label[id=authors-all]').removeClass('checked');
-                        }
-                    });                 
+                    });    
                 });
             </script>
             <!-- type -------------------------------------------------------------------->
@@ -236,7 +220,7 @@
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <input data-toggle="checkbox" type="checkbox">
                         All types
                         <div class="number-common right">200</div>
                     </label>
@@ -247,7 +231,7 @@
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox" value="1">
                         Modules
                         <div class="number-common right">200</div>
                     </label>
@@ -258,44 +242,11 @@
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <input data-toggle="checkbox" type="checkbox" value="2">
                         Collections
                         <div class="number-common right">200</div>
                     </label>
-                </div>
-                <div class="checkbox-item">
-                    <label id="types-exams" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Exams &amp; Questions Bank
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>
-                <div class="checkbox-item">
-                    <label id="types-courseware" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Courseware
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>
-                <div class="checkbox-item">
-                    <label id="types-authors" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Authors
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>              
+                </div>            
             </div>
             <!-- language -------------------------------------------------------------------->         
             <div class="smallbox-common">
@@ -316,7 +267,7 @@
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <input data-toggle="checkbox" type="checkbox" value="en">
                         English
                         <div class="number-common right">200</div>
                     </label>
@@ -327,44 +278,11 @@
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <input data-toggle="checkbox" type="checkbox" value="vi">
                         Vietnam
                         <div class="number-common right">200</div>
                     </label>
-                </div>
-                <div class="checkbox-item">
-                    <label id="langs-fr" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        French
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>
-                <div class="checkbox-item">
-                    <label id="langs-sp" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Spanish
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>  
-                <div class="checkbox-item">
-                    <label id="langs-ar" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Arabic
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>              
+                </div>            
             </div>
          
         </div>
