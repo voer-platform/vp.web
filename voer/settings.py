@@ -75,7 +75,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'voer_django',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }
@@ -112,6 +112,7 @@ EMAIL_HOST_USER='AKIAJYYWT53Z4KQZMHUA'
 EMAIL_HOST_PASSWORD='AhM4gp8514eJB7Fv2kg4Z2Idj4kPEVXtHotO664Ggzc4'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'info@voer.edu.vn'
+VOER_FACEBOOK_APP_ID = 271167089707244
 ## END REGISTER
 #
 STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]

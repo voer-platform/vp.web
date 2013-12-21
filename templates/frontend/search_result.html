@@ -70,9 +70,11 @@
                     {% endif %}
                 </div>
 
+                <div class="short-collection">
                 {% if material.description %}
-                <div class="short-collection">{{ material.description }}</div>
+                {{ material.description }}
                 {% endif %}
+                </div>
 
                 <div class="author-collection">
                   {% for person in material.person_list %}
@@ -81,9 +83,11 @@
                 </div>
                 <div class="category-collection">
                     {% if material.category_list %}
-                    {% for category in material.category_list %}
-                    <a>{{ category.cname }} </a>
-                    {% endfor %}
+                      {% for category in material.category_list %}
+                      <a>{{ category.cname }} </a>
+                      {% endfor %}
+                    {% else %}
+                      <a>&nbsp;</a>
                     {% endif %}
                 </div>
             </div>
