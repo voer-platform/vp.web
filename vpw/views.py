@@ -122,7 +122,8 @@ def vpw_logout(request):
     return HttpResponseRedirect('/')
 
 def user_profile(request):
-    return render(request, "frontend/user_profile.html")
+    materials = vpr_materials_by_author(request.user)
+    return render(request, "frontend/user_profile.html", {"materials": materials})
 
 def search_result(request):
     keyword = request.REQUEST.get('keyword', '')
