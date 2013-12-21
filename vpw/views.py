@@ -102,3 +102,6 @@ def vpw_logout(request):
 
 def user_profile(request):
     return render(request, "frontend/user_profile.html")
+
+def search_result(request):
+    return render(request, "frontend/search_result.html")
