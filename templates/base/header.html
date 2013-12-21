@@ -31,7 +31,10 @@
 	        <div class="block-top-right">
 	            <ul class="list-right-top page-content">
 	                <li>
-	                    <input type="text" class="input-search-right-top">
+                    <form action="{% url 'search' %}" method="POST">
+                      {% csrf_token %}
+	                    <input type="text" class="input-search-right-top" name="keyword" value="{{ keyword }}">
+                    </form>
 	                </li>
 	                <li>
 	                    <div class="collapse navbar-collapse bs-js-navbar-collapse">

@@ -87,8 +87,8 @@ def vpr_get_pdf(mid, version):
     result = vpr_request('GET', "materials/%s/%s" % (mid, version))
     return result
 
-def vpr_search(keyword):
-    result = vpr_request("GET", "search?kw=%s" % keyword)
+def vpr_search(keyword, page):
+    result = vpr_request("GET", "search?kw=%s&page=%s" % (keyword, page))
     return result
 
 # Browse materials
