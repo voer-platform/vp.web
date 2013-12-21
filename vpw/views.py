@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
-    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf
+    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 import json
@@ -125,7 +125,52 @@ def user_profile(request):
     return render(request, "frontend/user_profile.html")
 
 def search_result(request):
-    return render(request, "frontend/search_result.html")
+    keyword = request.REQUEST.get('keyword', '')
+    page = request.GET.get('page', 1)
+
+    search_results = vpr_search(keyword, page)
+    search_results = search_results['results']
+
+    categories = vpr_get_categories()
+    category_dict = {}
+    for category in categories:
+        category_dict[category['id']] = category['name']
+
+    result_array = []
+    for result in search_results:
+        if result['user_id']:
+            if (result.has_key('fullname') and result['fullname']):
+                result['title'] = result['fullname']
+            else:
+                result['title'] = result['user_id']
+            
+            if (result.has_key('affiliation') and result['affiliation']):
+              result['description'] = result['affiliation']
+
+        if result.has_key('author'): 
+            author_array = result['author'].split(',')
+            person_list = []
+            for pid in author_array:
+                pid = pid.strip()
+                person = vpr_get_person(pid.strip())
+                if person['fullname']:
+                  person_list.append({'pid': pid, 'pname': person['fullname']})
+                else:
+                  person_list.append({'pid': pid, 'pname': person['fullname']})
+            result['person_list'] = person_list
+
+        if (result.has_key('categories') and result['categories']):
+            category_array = result['categories'].split(',')
+            category_list = []
+            for cid in category_array:
+                cid = cid.strip()
+                category_list.append({'cid': cid, 'cname' : category_dict.get(int(cid))})
+
+            result['category_list'] = category_list
+
+        result_array.append(result)
+
+    return render(request, "frontend/search_result.html", {'keyword': keyword, "search_results": result_array})
 
 def get_pdf(request, mid, version):
     # mid = request.GET.get("mid", "")

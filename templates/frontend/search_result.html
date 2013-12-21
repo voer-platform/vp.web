@@ -1,9 +1,10 @@
 {% extends "base/base-content.html" %}
 
-{% block titleSite %}About Us{% endblock %}
+{% load i18n %}
+
+{% block titleSite %}{% trans "Search result" %}{% endblock %}
 
 {% block content %}
-{% extends "base/base-content.html" %}
 <!-- FILTER TOP BLOCK -->
 <div id="fitertop-browserall" class="hffitertop">
     <div class="dropdown left">
@@ -48,44 +49,53 @@
 <!-- END FILTER TOP BLOCK -->
 <!-- SEARCH RESULT BLOCK -->
 <div class="hfitems gridview search-result">
-    <div class="hfitem">
-        <div class="collection-mainpage-cover">
-            <img src="images/thumb-collection1.jpg">
-        </div>
-        <div class="collection-mainpage-details">
-            <div class="title-collection">
-                <a alt="Introduction to Sociology" title="Introduction to Sociology">Introduction to Sociology</a>
+    {% if search_results %}
+        {% for material in search_results %}
+        <div class="hfitem">
+            <div class="collection-mainpage-cover">
+                {% if material.user_id %}
+                <img src="{{STATIC_URL}}images/author1.jpg">
+                {% else %}
+                <img src="{{STATIC_URL}}images/thumb-collection1.jpg">
+                {% endif %}
             </div>
-            <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-            <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-            <div class="category-collection"><a>Science and Technology</a></div>
+            <div class="collection-mainpage-details">
+                <div class="title-collection">
+                    {% if material.user_id %}
+                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'view_profile' material.id %}">{{ material.title }}</a>
+                    {% elif material.material_type == 1 %}
+                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'module_detail' material.material_id %}">{{ material.title }}</a>
+                    {% else %}
+                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'collection_detail' material.material_id %}">{{ material.title }}</a>
+                    {% endif %}
+                </div>
 
-        </div>
-        <div class="collection-mainpage-other">
-            <div class="hflike left">100</div>
-            <div class="hfview left">120</div>
-        </div>
-    </div>
+                {% if material.description %}
+                <div class="short-collection">{{ material.description }}</div>
+                {% endif %}
 
-    <div class="hfitem">
-        <div class="collection-mainpage-cover">
-            <img src="images/thumb-collection1.jpg">
-        </div>
-        <div class="collection-mainpage-details">
-            <div class="title-collection">
-                <a alt="Introduction to Sociology" title="Introduction to Sociology">Introduction to Sociology</a>
+                <div class="author-collection">
+                  {% for person in material.person_list %}
+                  <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
+                  {% endfor %}
+                </div>
+                <div class="category-collection">
+                    {% if material.category_list %}
+                    {% for category in material.category_list %}
+                    <a>{{ category.cname }} </a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
-            <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-            <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-            <div class="category-collection"><a>Science and Technology</a></div>
-
+            <div class="collection-mainpage-other">
+                <div class="hflike left">100</div>
+                <div class="hfview left">120</div>
+            </div>
         </div>
-        <div class="collection-mainpage-other">
-            <div class="hflike left">100</div>
-            <div class="hfview left">120</div>
-        </div>
-    </div>
-
+        {% endfor %}
+    {% else %}
+        <p>{% trans "No data" %}</p>
+    {% endif %}
 </div>
 <!-- END SEARCH RESULT BLOCK -->
 {% endblock %}

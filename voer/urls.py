@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^user/authenticate$', 'vpw.views.vpw_authenticate', name='authenticate'),
     url(r'^user/profile$', 'vpw.views.user_profile', name='user_profile'),
     url(r'^user/logout$', 'vpw.views.vpw_logout', name='logout'),
+    url(r'^search/', 'vpw.views.search_result', name='search'),
 
     url(r'^pdf/m/(?P<mid>[0-9a-z]+)/(?P<version>\d+)/?$', 'vpw.views.get_pdf', name='get_pdf'),
     ## AJAX

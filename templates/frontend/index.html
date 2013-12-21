@@ -9,7 +9,10 @@
         <div class="slider-content-left left">
             <div class="text-header-slider-left left clear">Take the world's best documents, online, for free.</div>
             <div class="div-input-search left clear">
-                <input type="text" class="input-search-top">
+                <form action="{% url 'search' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="input-search-top" name="keyword" />
+                </form>
             </div>
             <div class="text-slider-left clear">
                 Discover 21598 modules, 502 collections from 2052 authors
