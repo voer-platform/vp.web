@@ -5,6 +5,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
     vpr_get_categories, vpr_browse, vpr_materials_by_author
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
+import json
 
 # Create your views here.
 
@@ -39,11 +40,18 @@ def module_detail(request, mid, version):
 def collection_detail(request, cid, mid):
     # Get collection
     collection = vpr_get_material(cid)
+
+    if not mid:
+        outline = json.loads(collection['text'])
+        mid = get_first_material_id(outline['content'])
+        # print first_material_id
+
     # Get material in collection
     material = vpr_get_material(mid)
 
-    author = vpr_get_person(material['author'])
-    category = vpr_get_category(material['categories'])
+    author = vpr_get_person(collection['author'])
+    category = vpr_get_category(collection['categories'])
+
     return render(request, "frontend/collection_detail.html", {"material": material, "author": author, "category": category})
 
 
@@ -118,3 +126,26 @@ def user_profile(request):
 
 def search_result(request):
     return render(request, "frontend/search_result.html")
+
+
+###### UTILITIES FUNCTION #######
+def get_first_material_id(outline):
+    for item in outline:
+        # import pdb;pdb.set_trace()
+        if item.has_key('content'):
+            return get_first_material_id(item['content'])
+        else:
+            return item['id']
+
+    return ''
+
+def ajax_browse(request):
+    categories = vpr_get_categories()
+
+    cats = request.GET.get("categories", "")
+    types = request.GET.get("types", "")
+    languages = request.GET.get("languages", "")
+
+    materials = vpr_browse(categories=cats, types=types, languages=languages)
+
+    return render(request, "frontend/ajax/browse.html", {"materials": materials, "categories": categories})

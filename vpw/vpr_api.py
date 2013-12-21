@@ -4,7 +4,7 @@ Created on 17 Dec 2013
 @author: huyvq
 '''
 from django.conf import settings
-import json,httplib
+import json,httplib,urllib
 
 def vpr_request(method, path, body=None):
     connection = httplib.HTTPConnection(settings.VPR_URL, settings.VPR_PORT)
@@ -84,9 +84,7 @@ def vpr_create_material(**kwargs):
     return result
 
 def vpr_search(keyword):
-    result = vpr_request("GET", "search", json.dumps({
-            "kw":keyword
-        }))
+    result = vpr_request("GET", "search?kw=%s" % keyword)
     return result
 
 # Browse materials
@@ -94,11 +92,21 @@ def vpr_browse(**kwargs):
     categories = kwargs.get("categories", "")
     types = kwargs.get("types", "")
     languages = kwargs.get("languages", "")
-    result = vpr_request("GET", "materials", json.dumps({
-            "categories": categories,
-            "material_type": types,
-            "language": languages
-        }))
+    params = []
+    # print "Type : " + types
+    if categories:
+        params.append("categories=%s" % categories)
+
+    if types:
+        params.append("material_type=%s" % types)
+
+    if languages:
+        params.append("language=%s" % languages)
+
+    params = "&".join(params)
+
+    # print "params: " + params
+    result = vpr_request("GET", "materials?%s" % params)
     return result
 
 def vpr_materials_by_author(aid):

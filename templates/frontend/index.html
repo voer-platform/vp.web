@@ -1,5 +1,5 @@
 {% extends "base/base.html" %}
-
+{% load i18n %}
 {% block titleSite %}VOER{% endblock %}
 
 {% block slide %}
@@ -70,7 +70,7 @@
 		   {% endif %}
         </div>
         <div class="collection-mainpage-details left clear">
-			
+
             <div class="collection-details-icon {% if material.material_type == 1 %} icon-puzzle {% else %} icon-book {% endif %} left">
 
             </div>
