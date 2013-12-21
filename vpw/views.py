@@ -15,7 +15,7 @@ def home(request):
         materials_list.append(material)
 
     # Get featured authors
-    person_features = []
+    person_features = [50,76,34,54,23]
     person_list = []
     for pid in person_features:
         person = vpr_get_person(pid)
