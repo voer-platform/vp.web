@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
+from django.template import RequestContext
 from django.http import HttpResponse
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
     vpr_get_categories
@@ -70,7 +71,7 @@ def crete_collection(request):
 
 def view_profile(request, pid):
     person = vpr_get_person(pid)
-    return render(request, "frontend/profile.html", {"person": person})
+    return render_to_response("frontend/profile.html", {"person": person}, context_instance=RequestContext(request))
 
 '''
 Browse page
