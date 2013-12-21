@@ -35,8 +35,12 @@ def module_detail(request, mid, version):
     category = vpr_get_category(material['categories'])
     return render(request, "frontend/module_detail.html", {"material": material, "author": author, "category": category})
 
-def collection_detail(request, cid, version):
-    material = vpr_get_material(cid)
+def collection_detail(request, cid, mid):
+    # Get collection
+    collection = vpr_get_material(cid)
+    # Get material in collection
+    material = vpr_get_material(mid)
+
     author = vpr_get_person(material['author'])
     category = vpr_get_category(material['categories'])
     return render(request, "frontend/collection_detail.html", {"material": material, "author": author, "category": category})
