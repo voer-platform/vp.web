@@ -52,6 +52,16 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
+)
+
 ROOT_URLCONF = 'voer.urls'
 
 WSGI_APPLICATION = 'voer.wsgi.application'
@@ -64,8 +74,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'voer_django',
-        'USER': 'django',
-        'PASSWORD': 'django',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }
@@ -109,5 +119,6 @@ STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]
 VPR_URL = 'dev.voer.vn'
 VPR_PORT = '2013'
 VPR_VERSION = '1.0'
+VPR_URL_FULL = os.path.join(VPR_URL, VPR_PORT, VPR_VERSION)
 
 SITE_URL = 'voer.edu.vn'

@@ -12,7 +12,7 @@
     <div class="hfuser-content">
         <div class="hfuser-information left">
             <div class="hfuser-avatar left">
-                <img src="images/avatar.jpg">
+                <img src="{% if person.avatar %} http://dev.voer.vn:2013/0.1/persons/{{ person.id }}/avatar/ {% else %} {{ STATIC_URL }}images/author1_detail.jpg {% endif %}">
             </div>
             <div class="hfuser-info ">
                 <div class="hfuser-name">{{ person.fullname }}</div>
@@ -116,8 +116,14 @@
                         });
                     });         
                 </script>               
-                <div class="hfitems">
-    <div class="hfitem">    
+ <div class="hfitems">
+  {% for material in materials.results %}  
+  {% if material.material_type == 1 %}
+        {% url 'module_detail' mid=material.material_id as material_url %}
+    {% else %}
+        {% url 'collection_detail' cid=material.material_id as material_url %}
+    {% endif %}
+  <div class="hfitem">    
     <div class="collection-save-hover">
         <div class="collection-save">
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
@@ -136,480 +142,51 @@
         </div>      
     </div>
     <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
+       {% if material.categories %}
+	   <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>     
+	   {% else %}
+	   <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
+	   {% endif %}
     </div>
     <div class="collection-mainpage-details">
         <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
+            <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
         </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
+        <div class="short-collection">{{ material.description }}</div>
         <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
+        <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
+			{% if material.categories == '1' %}
+				{% trans 'Business' %}
+			{% elif  material.categories == '2' %}
+				{% trans 'Social Sciences' %}
+			{% elif  material.categories == '3' %}
+				{% trans 'Science and Technology' %}
+			{% elif  material.categories == '4' %}
+				{% trans 'Humanities' %}
+			{% elif  material.categories == '5' %}
+				{% trans 'Arts' %}
+			{% elif  material.categories == '6' %}
+				{% trans 'Mathematics and Statistics' %}
+			{% else %}
+				{% trans 'Others' %}
+			{% endif %}
+		</a></div>
     </div> 
     <div class="collection-mainpage-other">
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
+            <img src="{{ STATIC_URL }}images/icon/information.png">         
             <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
+                Uploaded On: <strong>{{ material.modified }}</strong>
             </div>
         </div>
     </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div>  <div class="hfitem">    
-    <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
-            <div class="collection-saveto-content">
-                
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>      
-    </div>
-    <div class="collection-mainpage-cover">
-        
-        <img src="images/thumb-collection1.jpg">        
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="Introduction to Sociology" alt="Introduction to Sociology">Introduction to Sociology</a>
-        </div>      
-        <div class="short-collection">There are three ways in which light can travel from a source to another location. (See [link].) It can come directly from the source through empty space, such as from the Sun to Earth. Or light can travel through various media, such as air and glass, to the person. </div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
-        <div class="category-collection"><a>Science and Technology</a></div>
-        
-    </div> 
-    <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
-        <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">         
-            <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
-            </div>
-        </div>
-    </div>
-</div></div>            </div>
+  </div> 
+  {% endfor %}
+</div> 
+
+           </div>
             <div class="col-lg-2 right-row">
                 <div class="hffilter-right">
     <div class="bigbox-common">
