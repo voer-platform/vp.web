@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
-    vpr_get_categories, vpr_browse
+    vpr_get_categories, vpr_browse, vpr_get_pdf
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 import json
@@ -125,6 +125,13 @@ def user_profile(request):
 def search_result(request):
     return render(request, "frontend/search_result.html")
 
+def get_pdf(request, mid, version):
+    # mid = request.GET.get("mid", "")
+    # version = request.GET.get("version", "")
+
+    pdf_content = vpr_get_pdf(mid, version)
+
+    return HttpResponse(pdf_content, mimetype='application/pdf')
 
 ###### UTILITIES FUNCTION #######
 def get_first_material_id(outline):
@@ -137,6 +144,8 @@ def get_first_material_id(outline):
 
     return ''
 
+
+## Browse material
 def ajax_browse(request):
     categories = vpr_get_categories()
 

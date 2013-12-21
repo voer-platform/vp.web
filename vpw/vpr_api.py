@@ -83,6 +83,10 @@ def vpr_create_material(**kwargs):
 
     return result
 
+def vpr_get_pdf(mid, version):
+    result = vpr_request('GET', "materials/%s/%s" % (mid, version))
+    return result
+
 def vpr_search(keyword):
     result = vpr_request("GET", "search?kw=%s" % keyword)
     return result
@@ -110,7 +114,5 @@ def vpr_browse(**kwargs):
     return result
 
 def vpr_materials_by_author(aid):
-    result = vpr_request("GET", "materials", json.dumps({
-            "author": aid
-        }))
+    result = vpr_request("GET", "materials?author=%s" % aid)
     return result
