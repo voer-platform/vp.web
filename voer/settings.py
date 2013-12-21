@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'registration',
     'south',
     'vpw',
+    'gunicorn',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,6 +106,48 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': [],
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    }
+}
+
+
 ## REGISTER
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
 EMAIL_HOST='email-smtp.us-east-1.amazonaws.com'
@@ -113,6 +156,7 @@ EMAIL_HOST_USER='AKIAJYYWT53Z4KQZMHUA'
 EMAIL_HOST_PASSWORD='AhM4gp8514eJB7Fv2kg4Z2Idj4kPEVXtHotO664Ggzc4'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'info@voer.edu.vn'
+VOER_FACEBOOK_APP_ID = 271167089707244
 ## END REGISTER
 #
 STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]

@@ -116,7 +116,7 @@
                         });
                     });         
                 </script>               
- <div class="hfitems">
+ <div id="materials" class="hfitems">
   {% for material in materials.results %}  
   {% if material.material_type == 1 %}
         {% url 'module_detail' mid=material.material_id as material_url %}
@@ -193,29 +193,31 @@
         <div class="title">Filter By</div>      
         <div class="content">
             <script>
-                $(document).ready(function(){                   
+                $(document).ready(function(){  
                     $('label[id|=types]').click(function(){
-                        var $idtype = $(this).attr('id');                       
-                        if($idtype == 'types-all'){                         
+                        var $idtype = $(this).attr('id');
+                        if($idtype == 'types-0'){                         
                             $('label[id|=types]').removeClass('checked');
                         }else{
-                            $('label[id=types-all]').removeClass('checked');
+                            $('label[id=types-0]').removeClass('checked');
                         }
+						ajax_browse("{% url 'ajax_browse' %}", 1, "vi", 2);
                     });                     
                     $('label[id|=langs]').click(function(){
                         var $idtype = $(this).attr('id');                       
-                        if($idtype == 'langs-all'){
+                        if($idtype == 'langs-0'){
                             $('label[id|=langs]').removeClass('checked');
                         }else{
-                            $('label[id=langs-all]').removeClass('checked');
+                            $('label[id=langs-0]').removeClass('checked');
                         }
+						ajax_browse("{% url 'ajax_browse' %}", 1, "vi", 2);
                     });    
                 });
             </script>
             <!-- type -------------------------------------------------------------------->
             <div class="smallbox-common">
                 <div class="checkbox-item">
-                    <label id="types-all" class="checkbox checkbox-user-tool checked">
+                    <label id="types-0" class="checkbox checkbox-user-tool checked">
                         <span class="icons">
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
@@ -226,23 +228,23 @@
                     </label>
                 </div>
                 <div class="checkbox-item">
-                    <label id="types-modules" class="checkbox checkbox-user-tool">
+                    <label id="types-1" class="checkbox checkbox-user-tool">
                         <span class="icons">
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox" value="1">
+                        <input data-toggle="checkbox" type="checkbox">
                         Modules
                         <div class="number-common right">200</div>
                     </label>
                 </div>
                 <div class="checkbox-item">
-                    <label id="types-collections" class="checkbox checkbox-user-tool">
+                    <label id="types-2" class="checkbox checkbox-user-tool">
                         <span class="icons">
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <input data-toggle="checkbox" type="checkbox" value="2">
+                        <input data-toggle="checkbox" type="checkbox">
                         Collections
                         <div class="number-common right">200</div>
                     </label>
@@ -251,12 +253,12 @@
             <!-- language -------------------------------------------------------------------->         
             <div class="smallbox-common">
                 <div class="checkbox-item">
-                    <label id="langs-all" class="checkbox checkbox-user-tool checked">
+                    <label id="langs-0" class="checkbox checkbox-user-tool checked">
                         <span class="icons">
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
+                        <input data-toggle="checkbox" type="checkbox">
                         All Languages
                         <div class="number-common right">200</div>
                     </label>
@@ -273,7 +275,7 @@
                     </label>
                 </div>
                 <div class="checkbox-item">
-                    <label id="langs-vn" class="checkbox checkbox-user-tool">
+                    <label id="langs-vi" class="checkbox checkbox-user-tool">
                         <span class="icons">
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
