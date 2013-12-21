@@ -6,6 +6,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 import json
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -40,21 +41,23 @@ def module_detail(request, mid, version):
 def collection_detail(request, cid, mid):
     # Get collection
     collection = vpr_get_material(cid)
+    outline = json.loads(collection['text'])
 
     if not mid:
-        outline = json.loads(collection['text'])
+        # get the first material of collection
         mid = get_first_material_id(outline['content'])
-        # print first_material_id
 
     # Get material in collection
     material = vpr_get_material(mid)
+    # Generate outline html
+    strOutline = "<ul class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'])
 
     author = vpr_get_person(collection['author'])
     category = vpr_get_category(collection['categories'])
 
-    return render(request, "frontend/collection_detail.html", {"material": material, "author": author, "category": category})
+    return render(request, "frontend/collection_detail.html", {"collection": collection, "material": material, "author": author, "category": category, "outline": strOutline})
 
-
+@login_required
 def create_module(request):
     step = request.GET.get('step', '')
     print "Step: " + step
@@ -67,7 +70,7 @@ def create_module(request):
     else:
         return render(request, "frontend/module/create_step1.html")
 
-
+@login_required
 def crete_collection(request):
     step = request.GET.get('step', '')
     print "Step: " + step
@@ -121,6 +124,7 @@ def vpw_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+@login_required
 def user_profile(request):
     materials = vpr_materials_by_author(request.user)
     return render(request, "frontend/user_profile.html", {"materials": materials})
@@ -144,11 +148,11 @@ def search_result(request):
                 result['title'] = result['fullname']
             else:
                 result['title'] = result['user_id']
-            
+
             if (result.has_key('affiliation') and result['affiliation']):
               result['description'] = result['affiliation']
 
-        if result.has_key('author'): 
+        if result.has_key('author'):
             author_array = result['author'].split(',')
             person_list = []
             for pid in author_array:
@@ -191,6 +195,23 @@ def get_first_material_id(outline):
             return item['id']
 
     return ''
+
+def get_outline(cid, outline):
+    result = ""
+    for item in outline:
+        print item
+        if item['type'] == "module":
+            result += "<li><a href='/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
+        else:
+            strli = "<li>"
+            strli += "<a>%s</a>" % item['title']
+            strli += "<ul>"
+            strli += get_outline(cid, item['content'])
+            strli += "</ul>"
+            strli += "</li>"
+            result += strli
+
+    return result
 
 
 ## Browse material

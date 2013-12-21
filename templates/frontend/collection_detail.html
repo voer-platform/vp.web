@@ -47,13 +47,10 @@
         <div class="module-content-comment">
             <ul>
                 <li>
-                    <a class="left">
-                        <img src="images/module_view/avatar-product-comment.jpg">
-                    </a>
-                    <textarea rows="1" class="form-control"></textarea>
+                  <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="742" data-numposts="10" data-colorscheme="light"></div>
                 </li>
             </ul>
-            <a class="btn-module-content-comment right">{% trans 'Comment' %}</a>
+            <!-- <a class="btn-module-content-comment right">{% trans 'Comment' %}</a>  -->
         </div>
     </div>
     <!-- END COMMENT MODULE -->
@@ -96,13 +93,21 @@
         </span>
     </div>
     <!-- END AUTHOR STATUS -->
+    <div class="list-module-name padding-content-10 left">
+        <div class="scrollpanel no4">
+            <div class="header-list-module-name">
+                {{ collection.title }}
+            </div>
+            {{ outline | safe}}
+        </div>
+    </div>
     <!-- REUSE -->
     <div class="module-block">
         <div class="module-block-header">
             <div class="icon-module icon-checkout"></div>
             <div class="tilte-module">
                 <a>Reuse</a>
-            </div>                          
+            </div>
         </div>
     </div>
     <!-- END REUSE -->
@@ -120,7 +125,7 @@
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Tag</div>                         
+            <div class="tilte-module">Tag</div>
         </div>
         <div class="module-block-content">
             <a class="link-tag">Zen</a>
@@ -136,7 +141,7 @@
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Other from Author</div>                           
+            <div class="tilte-module">Other from Author</div>
         </div>
         <div class="module-block-content">
             <div class="other-module-author">
@@ -175,16 +180,16 @@
                     <a class="link-other-author-collection left clear">College Physics</a>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <!-- END OTHER FROM AUTHOR -->
-    
+
     <!-- OTHER FROM AUTHOR -->
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Similar item</div>                            
+            <div class="tilte-module">Similar item</div>
         </div>
         <div class="module-block-content">
             <div class="other-module-author">
@@ -228,4 +233,14 @@
     <!-- END OTHER FROM AUTHOR -->
 </div>
 <!-- END RIGHT ROW -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1&appId={{ VOER_FACEBOOK_APP_ID }}";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 {% endblock %}

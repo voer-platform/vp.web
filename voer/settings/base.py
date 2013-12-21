@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'vpw',
+    'gunicorn',
 )
 
 MIDDLEWARE_CLASSES = (
