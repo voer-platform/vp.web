@@ -102,7 +102,7 @@
             <div class="icon-module icon-checkout"></div>
             <div class="tilte-module">
                 <a>Reuse</a>
-            </div>                          
+            </div>
         </div>
     </div>
     <!-- END REUSE -->
@@ -111,7 +111,7 @@
         <div class="module-block-header">
             <div class="icon-module icon-download"></div>
             <div class="tilte-module">
-                <a>Download</a>
+                <a href="{% url 'get_pdf' material.material_id material.version %}">Download</a>
             </div>
         </div>
     </div>
@@ -120,7 +120,7 @@
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Tag</div>                         
+            <div class="tilte-module">Tag</div>
         </div>
         <div class="module-block-content">
             <a class="link-tag">Zen</a>
@@ -136,7 +136,7 @@
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Other from Author</div>                           
+            <div class="tilte-module">Other from Author</div>
         </div>
         <div class="module-block-content">
             <div class="other-module-author">
@@ -175,16 +175,16 @@
                     <a class="link-other-author-collection left clear">College Physics</a>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <!-- END OTHER FROM AUTHOR -->
-    
+
     <!-- OTHER FROM AUTHOR -->
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Similar item</div>                            
+            <div class="tilte-module">Similar item</div>
         </div>
         <div class="module-block-content">
             <div class="other-module-author">

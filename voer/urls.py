@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^user/profile$', 'vpw.views.user_profile', name='user_profile'),
     url(r'^user/logout$', 'vpw.views.vpw_logout', name='logout'),
 
+    url(r'^pdf/m/(?P<mid>[0-9a-z]+)/(?P<version>\d+)/?$', 'vpw.views.get_pdf', name='get_pdf'),
     ## AJAX
     url(r'^ajax/browse$', 'vpw.views.ajax_browse', name='ajax_browse'),
     url(r'^admin/', include(admin.site.urls)),
