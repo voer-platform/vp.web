@@ -117,7 +117,7 @@
                     });         
                 </script>               
  <div id="materials" class="hfitems">
-  {% for material in materials.results %}  
+  {% for material in materials %}  
   {% if material.material_type == 1 %}
         {% url 'module_detail' mid=material.material_id as material_url %}
     {% else %}
@@ -153,7 +153,11 @@
             <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
         </div>      
         <div class="short-collection">{{ material.description }}</div>
-        <div class="author-collection"><a href="user_profile.php">Pham Duc Manh</a></div>
+        {% for person in material.author_list %}
+        <div class="author-collection">
+            <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
+        </div>
+        {% endfor %}
         <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
 			{% if material.categories == '1' %}
 				{% trans 'Business' %}

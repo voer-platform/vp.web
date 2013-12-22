@@ -84,7 +84,7 @@ def vpr_create_material(**kwargs):
     return result
 
 def vpr_get_pdf(mid, version):
-    result = vpr_request('GET', "materials/%s/%s" % (mid, version))
+    result = vpr_request('GET', "materials/%s/%s/pdf/" % (mid, version))
     return result
 
 def vpr_search(keyword, page):

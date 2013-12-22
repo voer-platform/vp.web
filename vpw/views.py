@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 import json
 from django.contrib.auth.decorators import login_required
+from pickle import TRUE
 
 # Create your views here.
 
@@ -15,6 +16,17 @@ def home(request):
     materials_list = []
     for mid in material_features:
         material = vpr_get_material(mid)
+        author_id_list = material['author'].split(',')
+
+        p_list = []
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid)
+            if person['fullname']:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+            else:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+        material['author_list'] = p_list
         materials_list.append(material)
 
     # Get featured authors
@@ -87,7 +99,24 @@ def crete_collection(request):
 def view_profile(request, pid):
     person = vpr_get_person(pid)
     materials = vpr_materials_by_author(pid)
-    return render_to_response("frontend/profile.html", {"person": person, "materials": materials}, context_instance=RequestContext(request))
+    materials = materials['results']
+
+    person_materials = []
+    for material in materials:
+        author_id_list = material['author'].split(',')
+
+        p_list = []
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid)
+            if person['fullname']:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+            else:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+        material['author_list'] = p_list
+        person_materials.append(material)
+
+    return render_to_response("frontend/profile.html", {"person": person, "materials": person_materials}, context_instance=RequestContext(request))
 
 '''
 Browse page
@@ -108,16 +137,19 @@ def vpw_authenticate(request):
     password = request.POST['password']
     print username + "|" + password
     user = authenticate(username=username, password=password)
+
+    response_data = {}
+    response_data['status'] = False
+    response_data['message'] = 'The username or password is incorrect.'
+
     if user is not None:
         if user.is_active:
             login(request, user)
-            # Redirect to a success page.
-            return HttpResponseRedirect('/')
-        else:
-            # Return a 'disabled account' error message
-            return HttpResponseRedirect('/')
-    else:
-        # Return an 'invalid login' error message.
+            response_data['status'] = True
+
+    if request.is_ajax():
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+    else :
         return HttpResponseRedirect('/')
 
 def vpw_logout(request):
@@ -157,7 +189,7 @@ def search_result(request):
             person_list = []
             for pid in author_array:
                 pid = pid.strip()
-                person = vpr_get_person(pid.strip())
+                person = vpr_get_person(pid)
                 if person['fullname']:
                   person_list.append({'pid': pid, 'pname': person['fullname']})
                 else:
@@ -182,7 +214,7 @@ def get_pdf(request, mid, version):
     # version = request.GET.get("version", "")
 
     pdf_content = vpr_get_pdf(mid, version)
-
+    print pdf_content
     return HttpResponse(pdf_content, mimetype='application/pdf')
 
 ###### UTILITIES FUNCTION #######
@@ -212,7 +244,6 @@ def get_outline(cid, outline):
             result += strli
 
     return result
-
 
 ## Browse material
 def ajax_browse(request):

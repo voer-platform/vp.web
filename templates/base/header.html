@@ -31,7 +31,7 @@
 	        <div class="block-top-right">
 	            <ul class="list-right-top page-content">
 	                <li>
-                    <form action="{% url 'search' %}" method="POST">
+                    <form action="{% url 'search' %}" method="GET">
                       {% csrf_token %}
 	                    <input type="text" class="input-search-right-top" name="keyword" value="{{ keyword }}">
                     </form>
@@ -104,40 +104,47 @@
   <div class="modal-dialog modal-login">
     <div class="modal-content">
       <div class="modal-header padding-content-15">
-        <h4 class="modal-title" id="myModalLabel">Login to VOER</h4>
+        <h4 class="modal-title" id="myModalLabel">{% trans 'Login to VOER' %}</h4>
       </div>
-      <div class="modal-body padding-content-15">
-        <form action="{% url 'authenticate' %}" method="POST">
-        {% csrf_token %}
-        <input type="text" class="form-control" placeholder="Username" name="username">
-        <input type="password" class="form-control" placeholder="Password" name="password">
-        <ul class="list-user-login-tools">
-            <li>
-                <label class="checkbox checkbox-user-tool">
-                    <span class="icons">
-                        <span class="first-icon fui-checkbox-unchecked"></span>
-                        <span class="second-icon fui-checkbox-checked"></span>
-                    </span>
-                    <input type="checkbox" data-toggle="checkbox">
-                    Remember me
-                </label>
-            </li>
-            <li class="right">
-                <a>{% trans 'Forgot your password ?' %}</a>
-            </li>
-        </ul>
-        <button type="submit" class="btn btn-primary">{% trans 'Login' %}</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a class="btn-form-login-signup left" href="signup.html">
-            Don't have an account? Sign up for VOER
-        </a>
-
-        <div class="alert-modal-login left padding-content-10"><!-- Add class 'hidden' to hide alert -->
-            <span class="left">The username or password is incorrect.</span>
+      <form action="{% url 'authenticate' %}" method="POST" id="login-form">
+        <div class="modal-body padding-content-15">
+          {% csrf_token %}
+          <input type="text" class="form-control" placeholder="Username" name="username">
+          <input type="password" class="form-control" placeholder="Password" name="password">
+          <ul class="list-user-login-tools">
+              <li>
+                  <label class="checkbox checkbox-user-tool">
+                      <span class="icons">
+                          <span class="first-icon fui-checkbox-unchecked"></span>
+                          <span class="second-icon fui-checkbox-checked"></span>
+                      </span>
+                      <input type="checkbox" data-toggle="checkbox">
+                      {% trans 'Remember me' %}
+                  </label>
+              </li>
+              <li class="right">
+                  <a>{% trans 'Forgot your password ?' %}</a>
+              </li>
+          </ul>
+          <button type="submit" class="btn btn-primary btn-login-submit">{% trans 'Login' %}</button>
         </div>
-      </div>
+        <div class="modal-footer">
+          <a class="btn-form-login-signup left" href="/user/register">{% trans "Don't have an account? Sign up for VOER" %}</a>
+  
+          <div class="alert-modal-login left padding-content-10 hidden"><!-- Add class 'hidden' to hide alert -->
+              <span class="left">{% trans 'The username or password is incorrect.' %}</span>
+          </div>
+        </div>
+      </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script>
+(jQuery)(function($){
+  $(document).on('click', '.btn-login-submit', function() {
+    Voer.Helper.login();
+    return false;
+  });
+});
+</script>

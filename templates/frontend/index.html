@@ -9,7 +9,7 @@
         <div class="slider-content-left left">
             <div class="text-header-slider-left left clear">Take the world's best documents, online, for free.</div>
             <div class="div-input-search left clear">
-                <form action="{% url 'search' %}" method="POST">
+                <form action="{% url 'search' %}" method="GET">
                     {% csrf_token %}
                     <input type="text" class="input-search-top" name="keyword" />
                 </form>
@@ -81,123 +81,15 @@
                 <div class="title-collection left clear">
                     <a href='{{ material_url }}'>{{ material.title }}</a>
                 </div>
+                {% for person in material.author_list %}
                 <div class="author-collection left clear">
-                    <a>Nguyễn Đức Anh</a>
+                    <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
                 </div>
-                <div class="author-collection left clear">
-                    <a>Bùi Quang Thắng</a>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </li>
     {% endfor %}
-    <!--
-    <li>
-        <div class="collection-mainpage-cover left clear">
-            <img src="images/thumb-collection2.jpg"/>
-        </div>
-        <div class="collection-mainpage-details left clear">
-            <div class="collection-details-icon icon-puzzle left">
-
-            </div>
-            <div class="collection-details-text left">
-                <div class="title-collection left clear">
-                    <a>Common Core in Action: Math Formative Assessment</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Nguyễn Đức Anh</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Bùi Quang Thắng</a>
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="icon-hot"></div>
-        <div class="collection-mainpage-cover left clear">
-            <img src="images/thumb-collection3.jpg"/>
-        </div>
-        <div class="collection-mainpage-details left clear">
-            <div class="collection-details-icon icon-course left">
-
-            </div>
-            <div class="collection-details-text left">
-                <div class="title-collection left clear">
-                    <a>Hệ quản trị cơ sở dữ liệu</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Đặng Quang Hải</a>
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="icon-hot"></div>
-        <div class="collection-mainpage-cover left clear">
-            <img src="images/thumb-collection4.jpg"/>
-        </div>
-        <div class="collection-mainpage-details left clear">
-            <div class="collection-details-icon icon-course left">
-
-            </div>
-            <div class="collection-details-text left">
-                <div class="title-collection left clear">
-                    <a>Vi sinh vật học môi trường</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Bùi Quang Huy</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Tạ Đức Sơn</a>
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="icon-hot"></div>
-        <div class="collection-mainpage-cover left clear">
-            <img src="images/thumb-collection5.jpg"/>
-        </div>
-        <div class="collection-mainpage-details left clear">
-            <div class="collection-details-icon icon-book left">
-
-            </div>
-            <div class="collection-details-text left">
-                <div class="title-collection left clear">
-                    <a>Common Core in Action: Math Formative Assessment</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Nguyễn Đức Anh</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Bùi Quang Thắng</a>
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="collection-mainpage-cover left clear">
-            <img src="images/thumb-collection6.jpg"/>
-        </div>
-        <div class="collection-mainpage-details left clear">
-            <div class="collection-details-icon icon-book left">
-
-            </div>
-            <div class="collection-details-text left">
-                <div class="title-collection left clear">
-                    <a>Common Core in Action: Math Formative Assessment</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Nguyễn Đức Anh</a>
-                </div>
-                <div class="author-collection left clear">
-                    <a>Bùi Quang Thắng</a>
-                </div>
-            </div>
-        </div>
-    </li>
--->
 </ul>
 <!-- LIST MODULE MAINPAGE -->
 <!-- BROWSER -->
