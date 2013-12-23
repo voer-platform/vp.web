@@ -9,7 +9,7 @@ import json,httplib,urllib
 def vpr_request(method, path, body=None):
     connection = httplib.HTTPConnection(settings.VPR_URL, settings.VPR_PORT)
     connection.connect()
-    headers = {}
+    headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
     connection.request(method, "/%s/%s" % (settings.VPR_VERSION, path), body, headers)
     result = json.loads(connection.getresponse().read())
     return result
@@ -19,7 +19,7 @@ def vpr_get_categories():
     return result;
 
 def vpr_create_category(name, parent, description):
-    result = vpr_request("POST", "categories/", json.dumps({
+    result = vpr_request("POST", "categories/", urllib.urlencode({
        "name": name,
        "parent": parent,
        "description": description
@@ -113,6 +113,26 @@ def vpr_browse(**kwargs):
     result = vpr_request("GET", "materials?%s" % params)
     return result
 
+
 def vpr_materials_by_author(aid):
     result = vpr_request("GET", "materials?author=%s" % aid)
+    return result
+
+
+def vpr_create_person(**kwargs):
+    result = vpr_request("POST", "persons/", urllib.urlencode({
+        "fullname": kwargs.get("fullname"),
+        "user_id": kwargs.get("user_id"),
+        "first_name": kwargs.get("first_name"),
+        "last_name": kwargs.get("last_name"),
+        "email": kwargs.get("email"),
+        # "title": kwargs.get("title"),
+        # "homepage": kwargs.get("homepage"),
+        # "affiliation": kwargs.get("affiliation"),
+        # "affiliation_url": kwargs.get("affiliation_url"),
+        # "national": kwargs.get("national"),
+        # "biography": kwargs.get("biography"),
+        # "client_id": kwargs.get("client_id"),
+    }))
+
     return result
