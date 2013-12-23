@@ -76,6 +76,10 @@
 .hfitems {
 	overflow:hidden;
 }
+.hfitems.gridview,
+.hfitems.gridview.active {
+  background: none;
+}
 /* gridview */
 .hfitem {
 	margin:10px;
