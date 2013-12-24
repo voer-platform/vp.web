@@ -29,4 +29,3 @@ VPR_VERSION = '1.0'
 VPR_URL_FULL = os.path.join(VPR_URL, VPR_PORT, VPR_VERSION)
 
 SITE_URL = 'dev.voer.vn'
-
