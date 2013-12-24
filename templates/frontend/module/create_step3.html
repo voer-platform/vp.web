@@ -1,5 +1,7 @@
 {% extends "base/base-content.html" %}
 
+{% load i18n %}
+
 {% block titleSite %}Create module{% endblock %}
 
 {% block content %}        
@@ -7,50 +9,50 @@
             <!-- filter top -->
             <div class="hfcreate">
     <div class="breakcump left">
-        <span>Create Content</span>
+        <span>{% trans 'Create Content' %}</span>
         <span class="icon"></span>
-        <span class="current">Create a new module</span>
+        <span class="current">{% trans 'Create a new module' %}</span>
     </div>
     <div class="hfstep">
         <ul>
-            <li class="active"><a id="hfstep-1"><div class="step">1</div> License</a></li>
-            <li class="active"><a id="hfstep-2"><div class="step">2</div>Metadata</a></li>
-            <li><a id="hfstep-3"><div class="step">3</div>Content</a></li>
+            <li class="active"><a id="hfstep-1"><div class="step">1</div> {% trans 'License' %}</a></li>
+            <li class="active"><a id="hfstep-2"><div class="step">2</div>{% trans 'Metadata' %}</a></li>
+            <li><a id="hfstep-3"><div class="step">3</div>{% trans 'Content' %}</a></li>
         </ul>
     </div>
 </div>          <!-- left content -->
             <div class="col-lg-2 left-row">
                 <div class="hfuser-tools">
     <div class="smallbox-common">
-        <div class="hfbtn-create module"><a href="create_module.php">Create a new module</a></div>
-        <div class="hfbtn-create collection"><a href="create_collection.php">Create a new collection</a></div>
+        <div class="hfbtn-create module"><a href="create_module.php">{% trans 'Create a new module' %}</a></div>
+        <div class="hfbtn-create collection"><a href="create_collection.php">{% trans 'Create a new collection' %}</a></div>
     </div>
     <div class="smallbox-common">
         <div class="title">
-            My Items
+            {% trans 'My Items' %}
         </div>
         <div class="content">
             <ul>
-                <li><a>Add Resource</a></li>
-                <li><a>Saved Items</a></li>
-                <li><a>Submitted Items</a></li>
-                <li><a>Evaluated Items</a></li>
-                <li><a>Authored Items</a></li>
-                <li><a>Remixed Items</a></li>
-                <li><a>My Favorites</a></li>
+                <li><a>{% trans 'Add Resource' %}</a></li>
+                <li><a>{% trans 'Saved Items' %}</a></li>
+                <li><a>{% trans 'Submitted Items' %}</a></li>
+                <li><a>{% trans 'Evaluated Items' %}</a></li>
+                <li><a>{% trans 'Authored Items' %}</a></li>
+                <li><a>{% trans 'Remixed Items' %}</a></li>
+                <li><a>{% trans 'My Favorites' %}</a></li>
             </ul>
         </div>
     </div>
     <div class="smallbox-common">
         <div class="title">
-            My profile
+            {% trans 'My profile' %}
         </div>
         <div class="content">
             <ul>        
-                <li><a>Profile Information</a></li>
-                <li><a>Member Statistics</a></li>
-                <li><a>Account Settings</a></li>
-                <li><a>Delete Account</a></li>
+                <li><a>{% trans 'Profile Information' %}</a></li>
+                <li><a>{% trans 'Member Statistics' %}</a></li>
+                <li><a>{% trans 'Account Settings' %}</a></li>
+                <li><a>{% trans 'Delete Account' %}</a></li>
             </ul>
         </div>      
     </div>
@@ -60,8 +62,8 @@
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
-                      <li><a href="#metadata" data-toggle="tab">Metadata</a></li>
-                      <li class="active"><a href="#content" data-toggle="tab">Content</a></li>
+                      <li><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
+                      <li class="active"><a href="#content" data-toggle="tab">{% trans 'Content' %}</a></li>
                     </ul>
                     
                     <!-- Tab panes -->
@@ -70,43 +72,43 @@
                         <div class="content">
     <form role="form">
         <div class="form-group">
-            <label for="InputEmail1">Title</label>
+            <label for="InputEmail1">{% trans 'Title' %}</label>
             <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text">
         </div>
         <div class="form-group">
-            <label for="InputDescription">Description</label>
+            <label for="InputDescription">{% trans 'Description' %}</label>
             <textarea rows="4" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label for="InputAuthor">Author</label>
+            <label for="InputAuthor">{% trans 'Author' %}</label>
             <input class="form-control typetext" id="InputAuthor" placeholder="Enter Author" type="text">
-            <a class="AddNew" href="#addnewauthor">Add new Author</a>
+            <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
         </div>
         <div class="form-group listAuthor">
             <table class="listAuthor">
                 <thead>
                     <tr>
-                        <th>Name</th>                       
-                        <th>Author</th>
-                        <th>Editor</th>
-                        <th>Licensor</th>
-                        <th>Maintainer</th>
-                        <th>Translator</th>
-                        <th>Contributor</th>
+                        <th>{% trans 'Name' %}</th>                       
+                        <th>{% trans 'Author' %}</th>
+                        <th>{% trans 'Editor' %}</th>
+                        <th>{% trans 'Licensor' %}</th>
+                        <th>{% trans 'Maintainer' %}</th>
+                        <th>{% trans 'Translator' %}</th>
+                        <th>{% trans 'Contributor' %}</th>
                         <th></th> 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="author-block">
-                            <a class="hfbtn-author" href="author_profile.php">HiFlyer JSC
+                            <a class="hfbtn-author" href="author_profile.php">{% trans 'HiFlyer JSC' %}
                                 <div class="author-information">
                                     <div class="avatar left">
                                         <img src="images/avatar.jpg" height="70px" width="70px">
                                     </div>
                                     <div class="right">                                     
-                                        <div class="user-name">HiFlyer JSC</div>
-                                        <div class="user-address">R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam</div>
+                                        <div class="user-name">{% trans 'HiFlyer JSC' %}</div>
+                                        <div class="user-address">{% trans 'R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam' %}</div>
                                         <div class="user-website">www.hiflyer.vn</div>
                                     </div>
                                 </div>
@@ -172,7 +174,7 @@
             </table>
         </div>
         <div class="form-group">
-            <label for="InputCategories">Categories</label>
+            <label for="InputCategories">{% trans 'Categories' %}</label>
             <ul class="AddCategories">
                 <li>
                     <label class="checkbox checkbox-user-tool">
@@ -181,7 +183,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Business                        
+                        {% trans 'Business' %}                        
                     </label>                
                 </li>
                 <li>
@@ -191,7 +193,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Social Sciences                         
+                        {% trans 'Social Sciences' %}                         
                     </label>                
                 </li>
                 <li>
@@ -201,7 +203,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Science and Technology                          
+                        {% trans 'Science and Technology' %}                          
                     </label>                
                 </li>
                 <li>
@@ -211,7 +213,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Humanities                      
+                        {% trans 'Humanities' %}                      
                     </label>                
                 </li>
                 <li>
@@ -221,7 +223,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Arts                        
+                        {% trans 'Arts' %}                        
                     </label>                
                 </li>
                 <li>
@@ -231,45 +233,45 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Mathematics and Statistics                          
+                        {% trans 'Mathematics and Statistics' %}                          
                     </label>                
                 </li>
             </ul>
         </div>
         <div class="form-group">
-            <label for="InputFile">Image</label>
+            <label for="InputFile">{% trans 'Image' %}</label>
             <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">                      
             <div class="fakefile">              
                 <input onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile" type="text">
             </div>
-            <p class="help-block">Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.</p>           
+            <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>           
         </div>  
         <div class="form-group">
-            <label for="InputLanguage">Language</label> 
+            <label for="InputLanguage">{% trans 'Language' %}</label> 
             <div class="hfselectList">
                 <select style="display: none;" name="selectlist" class="select-block">
-                    <option>Choose country</option>
-                    <option>Korea</option>
-                    <option>United States</option>
-                    <option>England</option>
-                    <option>France</option>
-                    <option>Italy</option>
-                    <option>Japan</option>
-                    <option>Viet Nam</option>
-                </select><div style="" class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">Choose country</span>&nbsp;<span class="caret"></span></button><ul style="max-height: 664px; overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a style="" tabindex="-1" href="#" class=""><span class="pull-left">Choose country</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">Korea</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">United States</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">England</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">France</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">Italy</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">Japan</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">Viet Nam</span></a></li></ul></div>           
+                    <option>{% trans 'Choose country' %}</option>
+                    <option>{% trans 'Korea' %}</option>
+                    <option>{% trans 'United States' %}</option>
+                    <option>{% trans 'England' %}</option>
+                    <option>{% trans 'France' %}</option>
+                    <option>{% trans 'Italy' %}</option>
+                    <option>{% trans 'Japan' %}</option>
+                    <option>{% trans 'Viet Nam' %}</option>
+                </select><div style="" class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">{% trans 'Choose country' %}</span>&nbsp;<span class="caret"></span></button><ul style="max-height: 664px; overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a style="" tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Choose country' %}</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Korea' %}</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'United States' %}</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'England' %}</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'France' %}</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Italy' %}</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Japan' %}</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Viet Nam' %}</span></a></li></ul></div>           
             </div>          
         </div>
         <div class="form-group">
-            <label for="InputKeywords">Keywords</label>
+            <label for="InputKeywords">{% trans 'Keywords' %}</label>
             <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text">
         </div>  
         <div class="form-group">
-            <label for="InputTags">Tags</label>
+            <label for="InputTags">{% trans 'Tags' %}</label>
             <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
         </div>  
         <div class="form-group btn-common">         
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">Next</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">Back</a>
+            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">{% trans 'Next' %}</a>
+            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">{% trans 'Back' %}</a>
         </div>      
     </form>
 </div>                                                      
@@ -278,29 +280,29 @@
                         <div class="content">
     <form role="form">
         <div class="form-group">
-            <label for="InputFile">Document for import </label>
+            <label for="InputFile">{% trans 'Document for import' %} </label>
             <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="uploadfile_1" type="file">                      
             <div class="fakefile">              
                 <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
             </div>
-            <p class="help-block">Upload a file, allowed extensions: doc, docx, odt.</p>            
+            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt.' %}</p>            
         </div>
         <div class="form-group">
-            <label for="InputBody">Body</label>
+            <label for="InputBody">{% trans 'Body' %}</label>
             <textarea rows="4" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label for="InputFile">Files - Included Resources</label>
+            <label for="InputFile">{% trans 'Files - Included Resources' %}</label>
             <input onmouseout="document.getElementById('uploadfilename_2').value = this.value;" onchange="document.getElementById('uploadfilename_2').value = this.value;" class="uploadfile" id="uploadfile_2" name="uploadfile_2" type="file">                      
             <div class="fakefile">              
                 <input onclick="document.getElementById('uploadfile_2').click();" id="uploadfilename_2" value="" class="form-control typefile" type="text">
             </div>
-            <p class="help-block">Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg.</p>           
+            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg.' %}</p>           
         </div>      
         <div class="form-group btn-common">
-            <a class="hfbtn-common hfbtn-public right hfbtn-active" href="create_module_public.php">Public</a>
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_save.php">Save</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module_2.php">Back</a>
+            <a class="hfbtn-common hfbtn-public right hfbtn-active" href="create_module_public.php">{% trans 'Public' %}</a>
+            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_save.php">{% trans 'Save' %}</a>
+            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module_2.php">{% trans 'Back' %}</a>
         </div>          
     </form>
 </div>                    </div>

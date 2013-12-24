@@ -1,5 +1,7 @@
 {% extends "base/base-content.html" %}
+
 {% load i18n %}
+
 {% block titleSite %}{% trans 'Create module' %}{% endblock %}
 
 {% block content %}        
@@ -7,15 +9,15 @@
             <!-- filter top -->
             <div class="hfcreate">
     <div class="breakcump left">
-        <span>Create Content</span>
+        <span>{% trans 'Create Content' %}</span>
         <span class="icon"></span>
-        <span class="current">Create a new module</span>
+        <span class="current">{% trans 'Create a new module' %}</span>
     </div>
     <div class="hfstep">
         <ul>
-            <li class="active"><a id="hfstep-1"><div class="step">1</div> License</a></li>
-            <li class="active"><a id="hfstep-2"><div class="step">2</div>Metadata</a></li>
-            <li><a id="hfstep-3"><div class="step">3</div>Content</a></li>
+            <li class="active"><a id="hfstep-1"><div class="step">1</div> {% trans 'License' %}</a></li>
+            <li class="active"><a id="hfstep-2"><div class="step">2</div>{% trans 'Metadata' %}</a></li>
+            <li><a id="hfstep-3"><div class="step">3</div>{% trans 'Content' %}</a></li>
         </ul>
     </div>
 </div>
@@ -24,7 +26,7 @@
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
-                      <li class="active"><a href="#metadata" data-toggle="tab">Metadata</a></li>
+                      <li class="active"><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
                     </ul>
                     
                     <!-- Tab panes -->
@@ -49,27 +51,27 @@
             <table class="listAuthor">
                 <thead>
                     <tr>
-                        <th>Name</th>                       
-                        <th>Author</th>
-                        <th>Editor</th>
-                        <th>Licensor</th>
-                        <th>Maintainer</th>
-                        <th>Translator</th>
-                        <th>Contributor</th>
+                        <th>{% trans 'Name' %}</th>                       
+                        <th>{% trans 'Author' %}</th>
+                        <th>{% trans 'Editor' %}</th>
+                        <th>{% trans 'Licensor' %}</th>
+                        <th>{% trans 'Maintainer' %}</th>
+                        <th>{% trans 'Translator' %}</th>
+                        <th>{% trans 'Contributor' %}</th>
                         <th></th> 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="author-block">
-                            <a class="hfbtn-author" href="author_profile.php">HiFlyer JSC
+                            <a class="hfbtn-author" href="author_profile.php">{% trans 'HiFlyer JSC' %}
                                 <div class="author-information">
                                     <div class="avatar left">
                                         <img src="images/avatar.jpg" height="70px" width="70px">
                                     </div>
                                     <div class="right">                                     
-                                        <div class="user-name">HiFlyer JSC</div>
-                                        <div class="user-address">R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam</div>
+                                        <div class="user-name">{% trans 'HiFlyer JSC' %}</div>
+                                        <div class="user-address">{% trans 'R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam' %}</div>
                                         <div class="user-website">www.hiflyer.vn</div>
                                     </div>
                                 </div>
@@ -135,7 +137,7 @@
             </table>
         </div>
         <div class="form-group">
-            <label for="InputCategories">Categories</label>
+            <label for="InputCategories">{% trans 'Categories' %}</label>
             <ul class="AddCategories">
                 <li>
                     <label class="checkbox checkbox-user-tool">
@@ -144,7 +146,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Business                        
+                        {% trans 'Business' %}                        
                     </label>                
                 </li>
                 <li>
@@ -154,7 +156,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Social Sciences                         
+                        {% trans 'Social Sciences' %}                         
                     </label>                
                 </li>
                 <li>
@@ -164,7 +166,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Science and Technology                          
+                        {% trans 'Science and Technology' %}                          
                     </label>                
                 </li>
                 <li>
@@ -174,7 +176,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Humanities                      
+                        {% trans 'Humanities' %}                      
                     </label>                
                 </li>
                 <li>
@@ -184,7 +186,7 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Arts                        
+                        {% trans 'Arts' %}                        
                     </label>                
                 </li>
                 <li>
@@ -194,40 +196,40 @@
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
                         <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        Mathematics and Statistics                          
+                        {% trans 'Mathematics and Statistics' %}                          
                     </label>                
                 </li>
             </ul>
         </div>
         <div class="form-group">
-            <label for="InputFile">Image</label>
+            <label for="InputFile">{% trans 'Image' %}</label>
             <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">                      
             <div class="fakefile">              
                 <input onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile" type="text">
             </div>
-            <p class="help-block">Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.</p>           
+            <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>           
         </div>  
         <div class="form-group">
             <label for="InputLanguage">{% trans 'Language' %}</label>
             <div class="hfselectList">
                 <select style="display: none;" name="selectlist" class="select-block">
                     <option>{% trans 'Choose language' %}</option>
-                    <option>English</option>
-                    <option>Vietnamese</option>
-                </select><div class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">Choose country</span>&nbsp;<span class="caret"></span></button><ul style="overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a tabindex="-1" href="#" class=""><span class="pull-left">Choose country</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">Korea</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">United States</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">England</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">France</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">Italy</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">Japan</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">Viet Nam</span></a></li></ul></div>            
+                    <option>{% trans 'English' %}</option>
+                    <option>{% trans 'Vietnamese' %}</option>
+                </select><div class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">{% trans 'Choose country' %}</span>&nbsp;<span class="caret"></span></button><ul style="overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Choose country' %}</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Korea' %}</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'United States' %}</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'England' %}</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'France' %}</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Italy' %}</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Japan' %}</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Viet Nam' %}</span></a></li></ul></div>            
             </div>          
         </div>
         <div class="form-group">
-            <label for="InputKeywords">Keywords</label>
+            <label for="InputKeywords">{% trans 'Keywords' %}</label>
             <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text">
         </div>  
         <div class="form-group">
-            <label for="InputTags">Tags</label>
+            <label for="InputTags">{% trans 'Tags' %}</label>
             <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
         </div>  
         <div class="form-group btn-common">         
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">Next</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">Back</a>
+            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">{% trans 'Next' %}</a>
+            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">{% trans 'Back' %}</a>
         </div>      
     </form>
 </div>                    </div>
