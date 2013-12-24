@@ -160,7 +160,7 @@ def vpw_logout(request):
 def user_profile(request):
     current_user = request.user
     pid = current_user.author.author_id
-    author = vpr_get_person(pid)
+    author = vpr_get_person(pid, True)
     materials = vpr_materials_by_author(pid)
     return render(request, "frontend/user_profile.html", {"materials": materials, "author": author})
 
