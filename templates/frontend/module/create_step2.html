@@ -1,6 +1,6 @@
 {% extends "base/base-content.html" %}
-
-{% block titleSite %}Create module{% endblock %}
+{% load i18n %}
+{% block titleSite %}{% trans 'Create module' %}{% endblock %}
 
 {% block content %}        
 
@@ -208,17 +208,12 @@
             <p class="help-block">Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.</p>           
         </div>  
         <div class="form-group">
-            <label for="InputLanguage">Language</label> 
+            <label for="InputLanguage">{% trans 'Language' %}</label>
             <div class="hfselectList">
                 <select style="display: none;" name="selectlist" class="select-block">
-                    <option>Choose country</option>
-                    <option>Korea</option>
-                    <option>United States</option>
-                    <option>England</option>
-                    <option>France</option>
-                    <option>Italy</option>
-                    <option>Japan</option>
-                    <option>Viet Nam</option>
+                    <option>{% trans 'Choose language' %}</option>
+                    <option>English</option>
+                    <option>Vietnamese</option>
                 </select><div class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">Choose country</span>&nbsp;<span class="caret"></span></button><ul style="overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a tabindex="-1" href="#" class=""><span class="pull-left">Choose country</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">Korea</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">United States</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">England</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">France</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">Italy</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">Japan</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">Viet Nam</span></a></li></ul></div>            
             </div>          
         </div>
