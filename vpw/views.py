@@ -73,17 +73,17 @@ def collection_detail(request, cid, mid):
 def create_module(request):
     step = request.GET.get('step', '')
     print "Step: " + step
-    if step == 1:
+    if step == '1':
         return render(request, "frontend/module/create_step1.html")
-    elif step == 2:
+    elif step == '2':
         return render(request, "frontend/module/create_step2.html")
-    elif step == 3:
+    elif step == '3':
         return render(request, "frontend/module/create_step3.html")
     else:
         return render(request, "frontend/module/create_step1.html")
 
 @login_required
-def crete_collection(request):
+def create_collection(request):
     step = request.GET.get('step', '')
     print "Step: " + step
     if step == 1:
@@ -158,8 +158,12 @@ def vpw_logout(request):
 
 @login_required
 def user_profile(request):
-    materials = vpr_materials_by_author(request.user)
-    return render(request, "frontend/user_profile.html", {"materials": materials})
+    current_user = request.user
+    pid = current_user.author.author_id
+    author = vpr_get_person(pid)
+    materials = vpr_materials_by_author(pid)
+    return render(request, "frontend/user_profile.html", {"materials": materials, "author": author})
+
 
 def search_result(request):
     keyword = request.REQUEST.get('keyword', '')
