@@ -239,8 +239,11 @@
 	width: 278px;
 	padding: 0 8px;
 }
-.title-collection{
-	
+.title-collection {
+    height: 43px;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;       
 }
 .title-collection a{
 	font-size: 16px;

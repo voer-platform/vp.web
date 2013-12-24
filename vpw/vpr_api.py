@@ -11,10 +11,13 @@ def vpr_request(method, path, body=None):
     connection.connect()
     headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
     connection.request(method, "/%s/%s" % (settings.VPR_VERSION, path), body, headers)
-    if method == "DELETE":
-        result = connection.getresponse().status
-    else:
-        result = json.loads(connection.getresponse().read())
+    respond = connection.getresponse().read()
+
+    try :
+        result = json.loads(respond)
+    except:
+        result = respond
+
     return result
 
 def vpr_get_categories():
@@ -104,10 +107,12 @@ def vpr_search(keyword, page):
 
 # Browse materials
 def vpr_browse(**kwargs):
+    page = kwargs.get("page", 1)
     categories = kwargs.get("categories", "")
     types = kwargs.get("types", "")
     languages = kwargs.get("languages", "")
     params = []
+    params.append("page=%s" % page)
     # print "Type : " + types
     if categories:
         params.append("categories=%s" % categories)

@@ -1,15 +1,12 @@
 from django.contrib.auth.models import User
-from django import forms
 from django.db import models
 from django.db.models.fields import IntegerField, TextField, DateTimeField,\
     CharField
-from django.db.models.fields.files import ImageField
-
-
-# Create your models here.
 from registration.signals import user_activated
 from vpw.vpr_api import vpr_create_person
 
+
+# Create your models here.
 
 class MaterialFeature(models.Model):
     material_id = CharField(max_length=64, null=True)

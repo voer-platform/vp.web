@@ -172,7 +172,7 @@
 	top:0;
 	left:0;
 	width:100%;
-	height:55%;
+	height:50%;
 	border-radius:5px 5px 0px 0px;
 	background:url('../images/icon/transparent.png') repeat top left transparent;
 }
@@ -1006,3 +1006,14 @@ ul.successfull li.label {
 	margin-left:10px;
 	padding:7px 10px;
 }
+.pagination li:first-child a,
+.pagination li:last-child a{
+	background-color: #FFFFFF !important;
+    border: 1px solid #DDDDDD !important;
+    color: #C10C3E !important;
+}
+.pagination-block{
+	margin: 0 auto;
+	border: none !important;
+}
+
