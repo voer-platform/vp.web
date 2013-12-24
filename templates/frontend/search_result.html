@@ -101,6 +101,8 @@
             </div>
         </div>
         {% endfor %}
+
+        {% include "base/pager.html" %}
     {% else %}
         <p>{% trans "No data" %}</p>
     {% endif %}

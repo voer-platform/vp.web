@@ -5,7 +5,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person,\
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
-import json
+import json, math, urllib
 from django.contrib.auth.decorators import login_required
 from pickle import TRUE
 
@@ -122,15 +122,18 @@ def view_profile(request, pid):
 Browse page
 '''
 def browse(request):
+    page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
 
     cats = request.GET.get("categories", "")
     types = request.GET.get("types", "")
     languages = request.GET.get("languages", "")
 
-    materials = vpr_browse(categories=cats, types=types, languages=languages)
+    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages)
+    pager = pager_default_initialize(materials['count'], 12, page)
+    page_query = get_page_query(request)
 
-    return render(request, "frontend/browse.html", {"materials": materials, "categories": categories})
+    return render(request, "frontend/browse.html", {"materials": materials, "categories": categories, 'pager': pager, 'page_query': page_query})
 
 def vpw_authenticate(request):
     username = request.POST['username']
@@ -167,9 +170,12 @@ def user_profile(request):
 
 def search_result(request):
     keyword = request.REQUEST.get('keyword', '')
-    page = request.GET.get('page', 1)
+    page = int(request.GET.get('page', 1))
+
+    page_query = get_page_query(request)
 
     search_results = vpr_search(keyword, page)
+    pager = pager_default_initialize(search_results['count'], 12, page)
     search_results = search_results['results']
 
     categories = vpr_get_categories()
@@ -211,7 +217,7 @@ def search_result(request):
 
         result_array.append(result)
 
-    return render(request, "frontend/search_result.html", {'keyword': keyword, "search_results": result_array})
+    return render(request, "frontend/search_result.html", {'keyword': keyword, "search_results": result_array, 'pager': pager, 'page_query': page_query})
 
 def get_pdf(request, mid, version):
     # mid = request.GET.get("mid", "")
@@ -249,14 +255,101 @@ def get_outline(cid, outline):
 
     return result
 
+def pager_default_initialize(count, limit, current_page=1, page_rank=4):
+    pager_array = []
+    page_total = int(math.ceil((count + limit - 1) / limit))
+
+    if current_page > 1:
+        page_temp = {}
+        page_temp['text'] = '<<'
+        page_temp['value'] = 1
+        pager_array.append(page_temp)
+
+        page_temp = {}
+        page_temp['text'] = '<'
+        page_temp['value'] = current_page - 1
+        pager_array.append(page_temp)
+
+    if current_page > page_rank:
+        if (current_page - page_rank >= 2):
+            page_temp = {}
+            page_temp['text'] = '...'
+            page_temp['value'] = ''
+            pager_array.append(page_temp)
+
+        for i in range(0, page_rank):
+            xpage = current_page - page_rank + i
+
+            page_temp = {}
+            page_temp['text'] = xpage
+            page_temp['value'] = xpage
+            pager_array.append(page_temp)
+    else :
+        for i in range(1, current_page):
+            page_temp = {}
+            page_temp['text'] = i
+            page_temp['value'] = i
+            pager_array.append(page_temp)
+
+    page_temp = {}
+    page_temp['text'] = current_page
+    page_temp['value'] = ''
+    pager_array.append(page_temp)
+
+    if (current_page + page_rank < page_total):
+        for i in range(1, page_rank + 1):
+            xpage = current_page + i
+            page_temp = {}
+            page_temp['text'] = xpage
+            page_temp['value'] = xpage
+            pager_array.append(page_temp)
+
+        if (current_page + page_rank + 2 <= page_total):
+            page_temp = {}
+            page_temp['text'] = '...'
+            page_temp['value'] = ''
+            pager_array.append(page_temp)
+    else :
+        for i in range(current_page+1, page_total+1):
+            page_temp = {}
+            page_temp['text'] = i
+            page_temp['value'] = i
+            pager_array.append(page_temp)
+
+    if current_page < page_total:
+        page_temp = {}
+        page_temp['text'] = '>'
+        page_temp['value'] = current_page + 1
+        pager_array.append(page_temp)
+
+        page_temp = {}
+        page_temp['text'] = '>>'
+        page_temp['value'] = page_total
+        pager_array.append(page_temp)
+
+    if len(pager_array) > 1 :
+        return pager_array
+
+    return []
+
+def get_page_query(request):
+    page = request.GET.get('page', 1)
+    page_query = request.path.encode("utf8") + "?" + request.META.get('QUERY_STRING').encode("utf8")
+    page_query = page_query.replace('&page=' + str(page), '')
+
+    return page_query
+
 ## Browse material
 def ajax_browse(request):
+    page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
 
     cats = request.GET.get("categories", "")
     types = request.GET.get("types", "")
     languages = request.GET.get("languages", "")
 
-    materials = vpr_browse(categories=cats, types=types, languages=languages)
+    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages)
+    pager = pager_default_initialize(materials['count'], 12, page)
+    page_query = get_page_query(request)
 
-    return render(request, "frontend/ajax/browse.html", {"materials": materials, "categories": categories})
+    return render(request, "frontend/ajax/browse.html", {"materials": materials, "categories": categories, 'pager': pager, 'page_query': page_query})
