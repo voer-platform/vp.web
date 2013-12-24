@@ -1,1 +1,1 @@
-Activate your VOER account - you have {{ expiration_days }} days!
+Kích hoạt tài khoản VOER trong vòng {{ expiration_days }} ngày
