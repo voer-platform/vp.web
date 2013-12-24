@@ -157,11 +157,9 @@
             <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
         </div>      
         <div class="short-collection">{{ material.description }}</div>
-        {% for person in material.author_list %}
         <div class="author-collection">
-            <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
+            <a href="{% url 'view_profile' person.id %}">{{ person.fullname }}</a>
         </div>
-        {% endfor %}
         <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
 			{% if material.categories == '1' %}
 				{% trans 'Business' %}

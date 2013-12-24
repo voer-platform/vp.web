@@ -8,42 +8,46 @@
 
 <!-- filter top -->
 <div class="hfuser-top">
-    <h1>{{ user.username }}</h1>
+    <h1>{% if author %} {{ author.fullname }} {% else %} {{ user.username }} {% endif %}</h1>
     <div class="hfuser-content">
         <div class="hfuser-information left">
             <div class="hfuser-avatar left">
-                <img src="images/avatar.jpg">
+                <img src="{% if author.avatar %} http://dev.voer.vn:2013/0.1/persons/{{ author.id }}/avatar/ {% else %} {{ STATIC_URL }}images/author1_detail.jpg {% endif %}">
             </div>
             <div class="hfuser-info ">
-                <div class="hfuser-name">{{ user.username }}</div>
-                <div class="hfuser-address">R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam</div>
-                <div class="hfuser-website">www.hiflyer.vn</div>
+                <div class="hfuser-name">{% if author %} {{ author.fullname }} {% else %} {{ user.username }} {% endif %}</div>
+                <div class="hfuser-address">{{ author.title }}</div>
+                <div class="hfuser-website">{{ author.homepage }}</div>
             </div>
         </div>
         <div class="hfuser-other right">
             <ul class="hfuser-statics">
-                <li class="collection">
-                    <div class="icons left">Collections</div>
-                    <div class="number right">100</div>
+                <li class="module">
+                    <div class="icons left">{% trans 'Author' %}</div>
+                    <div class="number right">{{ author.author }}</div>
                 </li>
                 <li class="module">
-                    <div class="icons left">Modules</div>
-                    <div class="number right">100</div>
+                    <div class="icons left">{% trans 'Contributor' %}</div>
+                    <div class="number right">{{ author.contributor }}</div>
                 </li>
-                <li class="like">
-                    <div class="icons left">Likes</div>
-                    <div class="number right">100</div>
+                <li class="module">
+                    <div class="icons left">{% trans 'Editor' %}</div>
+                    <div class="number right">{{ author.editor }}</div>
                 </li>
-                <li class="follower">
-                    <div class="icons left">Followers</div>
-                    <div class="number right">100</div>
+                <li class="module">
+                    <div class="icons left">{% trans 'Licensor' %}</div>
+                    <div class="number right">{{ author.licensor }}</div>
                 </li>
-                <li class="following">
-                    <div class="icons left">Followings</div>
-                    <div class="number right">100</div>
+                <li class="module">
+                    <div class="icons left">{% trans 'Maintainer' %}</div>
+                    <div class="number right">{{ author.maintainer }}</div>
+                </li>
+				<li class="module">
+                    <div class="icons left">{% trans 'Translator' %}</div>
+                    <div class="number right">{{ author.translator }}</div>
                 </li>
             </ul>
-            <div class="hfuser-date">Member Since: Jan 19, 2009</div>
+            <!--<div class="hfuser-date">Member Since: Jan 19, 2009</div>-->
         </div>
     </div>
 </div>
@@ -60,13 +64,13 @@
         </div>
         <div class="content">
             <ul>
-                <li><a>Add Resource</a></li>
-                <li><a>Saved Items</a></li>
-                <li><a>Submitted Items</a></li>
-                <li><a>Evaluated Items</a></li>
-                <li><a>Authored Items</a></li>
-                <li><a>Remixed Items</a></li>
-                <li><a>My Favorites</a></li>
+                <li><a>{% trans 'Add Resource' %}</a></li>
+                <li><a>{% trans 'Saved Items' %}</a></li>
+                <li><a>{% trans 'Submitted Items' %}</a></li>
+                <li><a>{% trans 'Evaluated Items' %}</a></li>
+                <li><a>{% trans 'Authored Items' %}</a></li>
+                <li><a>{% trans 'Remixed Items' %}</a></li>
+                <li><a>{% trans 'My Favorites' %}</a></li>
             </ul>
         </div>
     </div>
@@ -76,10 +80,10 @@
         </div>
         <div class="content">
             <ul>
-                <li><a>Profile Information</a></li>
-                <li><a>Member Statistics</a></li>
-                <li><a>Account Settings</a></li>
-                <li><a>Delete Account</a></li>
+                <li><a>{% trans 'Profile Information' %}</a></li>
+                <li><a>{% trans 'Member Statistics' %}</a></li>
+                <li><a>{% trans 'Account Settings' %}</a></li>
+                <li><a>{% trans 'Delete Account' %}</a></li>
             </ul>
         </div>
     </div>
@@ -144,15 +148,15 @@
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Sort by</a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><a>Title</a></li>
-            <li><a>Relevance</a></li>
-            <li><a>Rating</a></li>
-            <li><a>Date</a></li>
+            <li><a>{% trans 'Title' %}</a></li>
+            <li><a>{% trans 'Relevance' %}</a></li>
+            <li><a>{% trans 'Rating' %}</a></li>
+            <li><a>{% trans 'Date' %}</a></li>
         </ul>
     </div>
     <div class="fiterbutton right">
-        <a class="gridview left">Gridview</a>
-        <a class="listview right">Listview</a>
+        <a class="gridview left">{% trans 'Gridview' %}</a>
+        <a class="listview right">{% trans 'Listview' %}</a>
     </div>
 </div>
 <div class="hfitems">
@@ -168,12 +172,12 @@
             <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
         </div>
         <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">My Favorites</div>
+            <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>
             <div class="collection-saveto-content">
 
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
+                <a class="hfbtn-saveto-type" metadata="iditem-1-create">{% trans 'Create new' %}</a>
             </div>
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
@@ -216,9 +220,9 @@
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
-            <img src="images/icon/information.png">
+            <img src="{{ STATIC_URL }}images/icon/information.png">
             <div class="hftooltipi">
-                Uploaded On: <strong>2013-12-06 10:37:39</strong>
+               {% trans 'Uploaded On:' %} <strong>{{ material.modified }}</strong>
             </div>
         </div>
     </div>
