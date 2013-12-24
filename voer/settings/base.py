@@ -38,6 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.staticfiles',
     'registration',
+    'tinymce',
+    'sorl.thumbnail',
+    'mce_filebrowser',
     'south',
     'vpw',
     'gunicorn',
@@ -159,3 +162,14 @@ VPR_VERSION = '' # VPR Version
 VPR_URL_FULL = os.path.join(VPR_URL, VPR_PORT, VPR_VERSION)
 
 SITE_URL = 'voer.edu.vn' # URL Site
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    'file_browser_callback': 'mce_filebrowser',
+}
+
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+MEDIA_URL = '/media/'

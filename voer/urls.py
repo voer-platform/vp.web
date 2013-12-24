@@ -1,11 +1,16 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
 
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
     url(r'^user/', include('registration.backends.default.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^mce_filebrowser/', include('mce_filebrowser.urls')),
     url(r'^profile/(?P<pid>[0-9a-z]+)/delete$', 'vpw.views.delete_profile', name='delete_profile'),
 
     url(r'^$', 'vpw.views.home', name='home'),
@@ -27,4 +32,4 @@ urlpatterns = patterns('',
     ## AJAX
     url(r'^ajax/browse$', 'vpw.views.ajax_browse', name='ajax_browse'),
     url(r'^admin/', include(admin.site.urls)),
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,6 +15,8 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person
 
 
+from vpw.forms import ModuleCreationForm
+
 # Create your views here.
 
 def home(request):
@@ -110,10 +112,12 @@ def create_module(request):
             material.categories = categories
             material.language = language
             # material.save()
-            material = Material.objects.get(id=1)
-            if material.id:
+            #material = Material.objects.get(id=1)
+            #if material.id:
+            if True:
+                form = ModuleCreationForm(request.POST)
                 return render(request, "frontend/module/create_step3.html",
-                              {"material": material, "categories": categories})
+                              {"material": material, "categories": categories, 'form': form})
 
         if current_step == 3:
             #Save content & metadata, or publish to VPR
