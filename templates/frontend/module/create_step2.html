@@ -1,6 +1,6 @@
 {% extends "base/base-content.html" %}
-
-{% block titleSite %}Create module{% endblock %}
+{% load i18n %}
+{% block titleSite %}{% trans 'Create module' %}{% endblock %}
 
 {% block content %}        
 
@@ -18,69 +18,32 @@
             <li><a id="hfstep-3"><div class="step">3</div>Content</a></li>
         </ul>
     </div>
-</div>          <!-- left content -->
-            <div class="col-lg-2 left-row">
-                <div class="hfuser-tools">
-    <div class="smallbox-common">
-        <div class="hfbtn-create module"><a href="create_module.php">Create a new module</a></div>
-        <div class="hfbtn-create collection"><a href="create_collection.php">Create a new collection</a></div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            My Items
-        </div>
-        <div class="content">
-            <ul>
-                <li><a>Add Resource</a></li>
-                <li><a>Saved Items</a></li>
-                <li><a>Submitted Items</a></li>
-                <li><a>Evaluated Items</a></li>
-                <li><a>Authored Items</a></li>
-                <li><a>Remixed Items</a></li>
-                <li><a>My Favorites</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            My profile
-        </div>
-        <div class="content">
-            <ul>        
-                <li><a>Profile Information</a></li>
-                <li><a>Member Statistics</a></li>
-                <li><a>Account Settings</a></li>
-                <li><a>Delete Account</a></li>
-            </ul>
-        </div>      
-    </div>
-</div>  
-            </div>
+</div>
+{% include "frontend/block/left_block_user.html" %}
             <div class="col-lg-1 right-row">
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
-                      <li class=""><a href="#metadata" data-toggle="tab">Metadata</a></li>
-                      <li class="active"><a href="#content" data-toggle="tab">Content</a></li>
+                      <li class="active"><a href="#metadata" data-toggle="tab">Metadata</a></li>
                     </ul>
                     
                     <!-- Tab panes -->
                     <div class="tab-content">                   
-                      <div class="tab-pane" id="metadata">
+                      <div class="tab-pane active" id="metadata">
                         <div class="content">
     <form role="form">
         <div class="form-group">
-            <label for="InputEmail1">Title</label>
+            <label for="InputEmail1">{% trans 'Title' %}</label>
             <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text">
         </div>
         <div class="form-group">
-            <label for="InputDescription">Description</label>
+            <label for="InputDescription">{% trans 'Description' %}</label>
             <textarea rows="4" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label for="InputAuthor">Author</label>
+            <label for="InputAuthor">{% trans 'Author' %}</label>
             <input class="form-control typetext" id="InputAuthor" placeholder="Enter Author" type="text">
-            <a class="AddNew" href="#addnewauthor">Add new Author</a>
+            <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
         </div>
         <div class="form-group listAuthor">
             <table class="listAuthor">
@@ -245,17 +208,12 @@
             <p class="help-block">Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.</p>           
         </div>  
         <div class="form-group">
-            <label for="InputLanguage">Language</label> 
+            <label for="InputLanguage">{% trans 'Language' %}</label>
             <div class="hfselectList">
                 <select style="display: none;" name="selectlist" class="select-block">
-                    <option>Choose country</option>
-                    <option>Korea</option>
-                    <option>United States</option>
-                    <option>England</option>
-                    <option>France</option>
-                    <option>Italy</option>
-                    <option>Japan</option>
-                    <option>Viet Nam</option>
+                    <option>{% trans 'Choose language' %}</option>
+                    <option>English</option>
+                    <option>Vietnamese</option>
                 </select><div class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">Choose country</span>&nbsp;<span class="caret"></span></button><ul style="overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a tabindex="-1" href="#" class=""><span class="pull-left">Choose country</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">Korea</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">United States</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">England</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">France</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">Italy</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">Japan</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">Viet Nam</span></a></li></ul></div>            
             </div>          
         </div>
@@ -271,36 +229,6 @@
             <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">Next</a>
             <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">Back</a>
         </div>      
-    </form>
-</div>                    </div>
-                      <div class="tab-pane active" id="content">
-                          <div class="content">
-    <form role="form">
-        <div class="form-group">
-            <label for="InputFile">Document for import </label>
-            <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="uploadfile_1" type="file">                      
-            <div class="fakefile">              
-                <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
-            </div>
-            <p class="help-block">Upload a file, allowed extensions: doc, docx, odt.</p>            
-        </div>
-        <div class="form-group">
-            <label for="InputBody">Body</label>
-            <textarea rows="4" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="InputFile">Files - Included Resources</label>
-            <input onmouseout="document.getElementById('uploadfilename_2').value = this.value;" onchange="document.getElementById('uploadfilename_2').value = this.value;" class="uploadfile" id="uploadfile_2" name="uploadfile_2" type="file">                      
-            <div class="fakefile">              
-                <input onclick="document.getElementById('uploadfile_2').click();" id="uploadfilename_2" value="" class="form-control typefile" type="text">
-            </div>
-            <p class="help-block">Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg.</p>           
-        </div>      
-        <div class="form-group btn-common">
-            <a class="hfbtn-common hfbtn-public right hfbtn-active" href="create_module_public.php">Public</a>
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_save.php">Save</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module_2.php">Back</a>
-        </div>          
     </form>
 </div>                    </div>
                     </div>

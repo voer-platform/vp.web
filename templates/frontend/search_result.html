@@ -56,7 +56,11 @@
                 {% if material.user_id %}
                 <img src="{{STATIC_URL}}images/author1.jpg">
                 {% else %}
-                <img src="{{STATIC_URL}}images/thumb-collection1.jpg">
+                  {% if material.categories %}
+                  <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>     
+                  {% else %}
+                  <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
+                  {% endif %}
                 {% endif %}
             </div>
             <div class="collection-mainpage-details">
