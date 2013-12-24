@@ -1,6 +1,8 @@
 import json
+import math
 
 from django.core.exceptions import PermissionDenied
+
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
