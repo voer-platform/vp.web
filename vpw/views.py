@@ -97,7 +97,7 @@ def create_collection(request):
     return render(request, "frontend/collection/create_step1.html")
 
 def view_profile(request, pid):
-    person = vpr_get_person(pid)
+    current_person = vpr_get_person(pid, True)
     materials = vpr_materials_by_author(pid)
     materials = materials['results']
 
@@ -116,7 +116,7 @@ def view_profile(request, pid):
         material['author_list'] = p_list
         person_materials.append(material)
 
-    return render_to_response("frontend/profile.html", {"person": person, "materials": person_materials}, context_instance=RequestContext(request))
+    return render_to_response("frontend/profile.html", {"person": current_person, "materials": person_materials}, context_instance=RequestContext(request))
 
 '''
 Browse page

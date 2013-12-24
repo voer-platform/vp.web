@@ -46,8 +46,11 @@ def vpr_get_persons():
     result = vpr_request("GET", "persons")
     return result
 
-def vpr_get_person(pid):
-    result = vpr_request("GET", "persons/%s" % pid)
+def vpr_get_person(pid, is_count=False):
+    if is_count:
+        result = vpr_request("GET", "persons/%s?count=1" % pid)
+    else:
+        result = vpr_request("GET", "persons/%s" % pid)
     return result
 
 def vpr_get_materials():

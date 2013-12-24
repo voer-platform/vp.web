@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django import forms
 from django.db import models
 from django.db.models.fields import IntegerField, TextField, DateTimeField,\
     CharField
@@ -62,3 +63,18 @@ def user_activated_callback(sender, user, request, **kwargs):
                 author.save()
 
 user_activated.connect(user_activated_callback, dispatch_uid="ACTIVE_USER")
+
+##### FORM ##################
+
+# def MaterialForm(forms.Form):
+#     material_type = IntegerField(default=1)
+#     text = TextField()
+#     title = forms.CharField(max_length=255)
+#     description = forms.CharField(blank=True, null=True)
+#     categories = CharField(max_length=256, blank=True, null=True)
+#     keywords = TextField(blank=True, null=True)
+#     language = CharField(max_length=2, blank=True)
+#     forms.
+#     license_id = IntegerField(null=True)
+#     modified = DateTimeField(blank=True)
+#     derived_from = CharField(max_length=64, blank=True, null=True)
