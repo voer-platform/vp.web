@@ -18,6 +18,9 @@
                 <div class="hfuser-name">{% if person.fullname %} {{ person.fullname }} {% else %} {{ person.user_id }} {% endif %}</div>
                 <div class="hfuser-address">{{ person.title }}</div>
                 <div class="hfuser-website">{{ person.homepage }}</div>
+                {% if request.user.is_superuser %}
+                <a class="hfbtn-common hfbtn-public right hfbtn-active" href="{% url 'delete_profile' person.id %}">Delete person</a>
+                {% endif %}
             </div>
         </div>
         <!--<div class="hfuser-other right">

@@ -11,7 +11,10 @@ def vpr_request(method, path, body=None):
     connection.connect()
     headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
     connection.request(method, "/%s/%s" % (settings.VPR_VERSION, path), body, headers)
-    result = json.loads(connection.getresponse().read())
+    if method == "DELETE":
+        result = connection.getresponse().status
+    else:
+        result = json.loads(connection.getresponse().read())
     return result
 
 def vpr_get_categories():
@@ -44,6 +47,11 @@ def vpr_delete_category(cat_id):
 
 def vpr_get_persons():
     result = vpr_request("GET", "persons")
+    return result
+
+
+def vpr_delete_person(pid):
+    result = vpr_request("DELETE", "persons/%s" % pid)
     return result
 
 def vpr_get_person(pid, is_count=False):

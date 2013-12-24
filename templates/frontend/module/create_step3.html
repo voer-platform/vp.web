@@ -20,44 +20,9 @@
             <li><a id="hfstep-3"><div class="step">3</div>{% trans 'Content' %}</a></li>
         </ul>
     </div>
-</div>          <!-- left content -->
-            <div class="col-lg-2 left-row">
-                <div class="hfuser-tools">
-    <div class="smallbox-common">
-        <div class="hfbtn-create module"><a href="create_module.php">{% trans 'Create a new module' %}</a></div>
-        <div class="hfbtn-create collection"><a href="create_collection.php">{% trans 'Create a new collection' %}</a></div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My Items' %}
-        </div>
-        <div class="content">
-            <ul>
-                <li><a>{% trans 'Add Resource' %}</a></li>
-                <li><a>{% trans 'Saved Items' %}</a></li>
-                <li><a>{% trans 'Submitted Items' %}</a></li>
-                <li><a>{% trans 'Evaluated Items' %}</a></li>
-                <li><a>{% trans 'Authored Items' %}</a></li>
-                <li><a>{% trans 'Remixed Items' %}</a></li>
-                <li><a>{% trans 'My Favorites' %}</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My profile' %}
-        </div>
-        <div class="content">
-            <ul>        
-                <li><a>{% trans 'Profile Information' %}</a></li>
-                <li><a>{% trans 'Member Statistics' %}</a></li>
-                <li><a>{% trans 'Account Settings' %}</a></li>
-                <li><a>{% trans 'Delete Account' %}</a></li>
-            </ul>
-        </div>      
-    </div>
-</div>  
-            </div>
+</div>
+{% include "frontend/block/left_block_user.html" %}
+
             <div class="col-lg-1 right-row">
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
@@ -73,11 +38,11 @@
     <form role="form">
         <div class="form-group">
             <label for="InputEmail1">{% trans 'Title' %}</label>
-            <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text">
+            <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text" name="title" value="{{ material.title }}">
         </div>
         <div class="form-group">
             <label for="InputDescription">{% trans 'Description' %}</label>
-            <textarea rows="4" class="form-control"></textarea>
+            <textarea rows="4" class="form-control" name="description">{{ material.description }}</textarea>
         </div>
         <div class="form-group">
             <label for="InputAuthor">{% trans 'Author' %}</label>
@@ -120,7 +85,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                                
                         </td>
                         <td>
@@ -129,7 +94,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -138,7 +103,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -147,7 +112,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -156,7 +121,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -165,7 +130,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td><div class="hfbtn-delete"></div></td>                       
@@ -176,66 +141,18 @@
         <div class="form-group">
             <label for="InputCategories">{% trans 'Categories' %}</label>
             <ul class="AddCategories">
+                {% for category in categories %}
                 <li>
                     <label class="checkbox checkbox-user-tool">
                         <span class="icons">
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Business' %}                        
+                        <input data-toggle="checkbox" type="checkbox" name="categories" value="{{ category.id }}">
+                        {{ category.name }}
                     </label>                
                 </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Social Sciences' %}                         
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Science and Technology' %}                          
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Humanities' %}                      
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Arts' %}                        
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Mathematics and Statistics' %}                          
-                    </label>                
-                </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="form-group">
@@ -249,30 +166,22 @@
         <div class="form-group">
             <label for="InputLanguage">{% trans 'Language' %}</label> 
             <div class="hfselectList">
-                <select style="display: none;" name="selectlist" class="select-block">
-                    <option>{% trans 'Choose country' %}</option>
-                    <option>{% trans 'Korea' %}</option>
-                    <option>{% trans 'United States' %}</option>
-                    <option>{% trans 'England' %}</option>
-                    <option>{% trans 'France' %}</option>
-                    <option>{% trans 'Italy' %}</option>
-                    <option>{% trans 'Japan' %}</option>
-                    <option>{% trans 'Viet Nam' %}</option>
-                </select><div style="" class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">{% trans 'Choose country' %}</span>&nbsp;<span class="caret"></span></button><ul style="max-height: 664px; overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a style="" tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Choose country' %}</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Korea' %}</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'United States' %}</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'England' %}</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'France' %}</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Italy' %}</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Japan' %}</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Viet Nam' %}</span></a></li></ul></div>           
+                <select name="language" class="select-block">
+                    <option>{% trans 'Choose language' %}</option>
+                    <option value="en">{% trans 'English' %}</option>
+                    <option value="vi">{% trans 'Vietnamese' %}</option>
+                </select>
+                <div style="" class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">{% trans 'Choose country' %}</span>&nbsp;<span class="caret"></span></button><ul style="max-height: 664px; overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a style="" tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Choose country' %}</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Korea' %}</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'United States' %}</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'England' %}</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'France' %}</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Italy' %}</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Japan' %}</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Viet Nam' %}</span></a></li></ul></div>
             </div>          
         </div>
         <div class="form-group">
             <label for="InputKeywords">{% trans 'Keywords' %}</label>
-            <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text">
+            <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text" name="keywords" value="{{ material.keywords }}">
         </div>  
         <div class="form-group">
             <label for="InputTags">{% trans 'Tags' %}</label>
             <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
         </div>  
-        <div class="form-group btn-common">         
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">{% trans 'Next' %}</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">{% trans 'Back' %}</a>
-        </div>      
     </form>
 </div>                                                      
                       </div>

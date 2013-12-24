@@ -33,204 +33,158 @@
                     <div class="tab-content">                   
                       <div class="tab-pane active" id="metadata">
                         <div class="content">
-    <form role="form">
-        <div class="form-group">
-            <label for="InputEmail1">{% trans 'Title' %}</label>
-            <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text">
-        </div>
-        <div class="form-group">
-            <label for="InputDescription">{% trans 'Description' %}</label>
-            <textarea rows="4" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="InputAuthor">{% trans 'Author' %}</label>
-            <input class="form-control typetext" id="InputAuthor" placeholder="Enter Author" type="text">
-            <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
-        </div>
-        <div class="form-group listAuthor">
-            <table class="listAuthor">
-                <thead>
-                    <tr>
-                        <th>{% trans 'Name' %}</th>                       
-                        <th>{% trans 'Author' %}</th>
-                        <th>{% trans 'Editor' %}</th>
-                        <th>{% trans 'Licensor' %}</th>
-                        <th>{% trans 'Maintainer' %}</th>
-                        <th>{% trans 'Translator' %}</th>
-                        <th>{% trans 'Contributor' %}</th>
-                        <th></th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="author-block">
-                            <a class="hfbtn-author" href="author_profile.php">{% trans 'HiFlyer JSC' %}
-                                <div class="author-information">
-                                    <div class="avatar left">
-                                        <img src="images/avatar.jpg" height="70px" width="70px">
-                                    </div>
-                                    <div class="right">                                     
-                                        <div class="user-name">{% trans 'HiFlyer JSC' %}</div>
-                                        <div class="user-address">{% trans 'R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam' %}</div>
-                                        <div class="user-website">www.hiflyer.vn</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </td>                       
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
-                            </label>                                
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
-                            </label>                        
-                        </td>
-                        <td><div class="hfbtn-delete"></div></td>                       
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="form-group">
-            <label for="InputCategories">{% trans 'Categories' %}</label>
-            <ul class="AddCategories">
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Business' %}                        
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Social Sciences' %}                         
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Science and Technology' %}                          
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Humanities' %}                      
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Arts' %}                        
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Mathematics and Statistics' %}                          
-                    </label>                
-                </li>
-            </ul>
-        </div>
-        <div class="form-group">
-            <label for="InputFile">{% trans 'Image' %}</label>
-            <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">                      
-            <div class="fakefile">              
-                <input onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile" type="text">
-            </div>
-            <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>           
-        </div>  
-        <div class="form-group">
-            <label for="InputLanguage">{% trans 'Language' %}</label>
-            <div class="hfselectList">
-                <select style="display: none;" name="selectlist" class="select-block">
-                    <option>{% trans 'Choose language' %}</option>
-                    <option>{% trans 'English' %}</option>
-                    <option>{% trans 'Vietnamese' %}</option>
-                </select><div class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">{% trans 'Choose country' %}</span>&nbsp;<span class="caret"></span></button><ul style="overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Choose country' %}</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Korea' %}</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'United States' %}</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'England' %}</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'France' %}</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Italy' %}</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Japan' %}</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Viet Nam' %}</span></a></li></ul></div>            
-            </div>          
-        </div>
-        <div class="form-group">
-            <label for="InputKeywords">{% trans 'Keywords' %}</label>
-            <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text">
-        </div>  
-        <div class="form-group">
-            <label for="InputTags">{% trans 'Tags' %}</label>
-            <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
-        </div>  
-        <div class="form-group btn-common">         
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">{% trans 'Next' %}</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">{% trans 'Back' %}</a>
-        </div>      
+    <form role="form" method="post">
+        {% csrf_token %}
+		<div class="form-group">
+			<label for="InputEmail1">Title</label>
+			<input type="text" class="form-control typetext" id="InputText" placeholder="Enter Title" name="title">
+		</div>
+		<div class="form-group">
+			<label for="InputDescription">Description</label>
+			<textarea rows="4" class="form-control" name="description"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="InputAuthor">Author</label>
+			<input type="text" class="form-control typetext" id="InputAuthor" placeholder="Enter Author">
+			<a class="AddNew" href="#addnewauthor">Add new Author</a>
+		</div>
+		<div class="form-group listAuthor">
+			<table class="listAuthor">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Author</th>
+						<th>Editor</th>
+						<th>Licensor</th>
+						<th>Maintainer</th>
+						<th>Translator</th>
+						<th>Contributor</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="author-block">
+							<a class="hfbtn-author" href="author_profile.php">HiFlyer JSC
+								<div class="author-information">
+									<div class="avatar left">
+										<img src="images/avatar.jpg" width="70px" height="70px">
+									</div>
+									<div class="right">
+										<div class="user-name">HiFlyer JSC</div>
+										<div class="user-address">R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam</div>
+										<div class="user-website">www.hiflyer.vn</div>
+									</div>
+								</div>
+							</a>
+						</td>
+						<td>
+							<label class="checkbox checkbox-user-tool">
+								<span class="icons">
+									<span class="first-icon fui-checkbox-unchecked"></span>
+									<span class="second-icon fui-checkbox-checked"></span>
+								</span>
+								<input type="checkbox" data-toggle="checkbox">
+							</label>
+						</td>
+						<td>
+							<label class="checkbox checkbox-user-tool">
+								<span class="icons">
+									<span class="first-icon fui-checkbox-unchecked"></span>
+									<span class="second-icon fui-checkbox-checked"></span>
+								</span>
+								<input type="checkbox" data-toggle="checkbox">
+							</label>
+						</td>
+						<td>
+							<label class="checkbox checkbox-user-tool">
+								<span class="icons">
+									<span class="first-icon fui-checkbox-unchecked"></span>
+									<span class="second-icon fui-checkbox-checked"></span>
+								</span>
+								<input type="checkbox" data-toggle="checkbox">
+							</label>
+						</td>
+						<td>
+							<label class="checkbox checkbox-user-tool">
+								<span class="icons">
+									<span class="first-icon fui-checkbox-unchecked"></span>
+									<span class="second-icon fui-checkbox-checked"></span>
+								</span>
+								<input type="checkbox" data-toggle="checkbox">
+							</label>
+						</td>
+						<td>
+							<label class="checkbox checkbox-user-tool">
+								<span class="icons">
+									<span class="first-icon fui-checkbox-unchecked"></span>
+									<span class="second-icon fui-checkbox-checked"></span>
+								</span>
+								<input type="checkbox" data-toggle="checkbox">
+							</label>
+						</td>
+						<td>
+							<label class="checkbox checkbox-user-tool">
+								<span class="icons">
+									<span class="first-icon fui-checkbox-unchecked"></span>
+									<span class="second-icon fui-checkbox-checked"></span>
+								</span>
+								<input type="checkbox" data-toggle="checkbox">
+							</label>
+						</td>
+						<td><div class="hfbtn-delete"></div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="form-group">
+			<label for="InputCategories">Categories</label>
+			<ul class="AddCategories">
+                {% for category in categories %}
+				<li>
+					<label class="checkbox checkbox-user-tool">
+						<span class="icons">
+							<span class="first-icon fui-checkbox-unchecked"></span>
+							<span class="second-icon fui-checkbox-checked"></span>
+						</span>
+						<input type="checkbox" data-toggle="checkbox" name="categories" value="{{ category.id }}">
+						{{ category.name }}
+					</label>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+		<div class="form-group">
+			<label for="InputFile">Image</label>
+			<input type="file" onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0">
+		    <div class="fakefile">
+		    	<input type="text" onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile">
+		    </div>
+		    <p class="help-block">Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.</p>
+		</div>
+		<div class="form-group">
+			<label for="InputLanguage">Language</label>
+			<div class="hfselectList">
+				<select class="select-block" name="language">
+					<option>Choose language</option>
+					<option value="en">English</option>
+					<option value="vi">Vietnamese</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="InputKeywords">Keywords</label>
+			<input type="text" class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" name="keywords">
+		</div>
+		<div class="form-group">
+			<label for="InputTags">Tags</label>
+			<input type="text" class="form-control typetext" id="InputTags" placeholder="Enter Tags" name="tags">
+		</div>
+		<div class="form-group btn-common">
+            <input type="hidden" name="step" value="2" />
+			<button class="hfbtn-common hfbtn-next right hfbtn-active" value="step2">Next</button>
+			<button class="hfbtn-common hfbtn-back right hfbtn-active" value="back">Back</button>
+		</div>
     </form>
 </div>                    </div>
                     </div>
