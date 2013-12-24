@@ -4,7 +4,7 @@ Created on 17 Dec 2013
 @author: huyvq
 '''
 from django.conf import settings
-import json,httplib,urllib
+import json, httplib, urllib
 
 def vpr_request(method, path, body=None):
     connection = httplib.HTTPConnection(settings.VPR_URL, settings.VPR_PORT)
@@ -13,11 +13,13 @@ def vpr_request(method, path, body=None):
     connection.request(method, "/%s/%s" % (settings.VPR_VERSION, path), body, headers)
     respond = connection.getresponse().read()
 
-    try :
-        result = json.loads(respond)
-    except:
-        result = respond
-
+    if method == "DELETE":
+        result = connection.getresponse().status
+    else:
+        try:
+            result = json.loads(respond)
+        except:
+            result = respond
     return result
 
 def vpr_get_categories():
