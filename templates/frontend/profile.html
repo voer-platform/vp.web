@@ -202,6 +202,12 @@
 		</a></div>
     </div> 
     <div class="collection-mainpage-other">
+        {% if material.material_type == 1 %}
+        <div class="voer-mol-ico left">&nbsp;</div>
+        {% elif material.material_type == 2 %}
+        <div class="voer-col-ico left">&nbsp;</div>
+        {% endif %}
+
         <div class="hflike left">100</div>
         <div class="hfview left">120</div>
         <div class="hfother right tooltipi-container">
