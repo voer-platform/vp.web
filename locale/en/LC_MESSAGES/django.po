@@ -1,0 +1,762 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-25 16:08+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/base/header.html:15
+msgid "Home"
+msgstr ""
+
+#: templates/base/header.html:18 templates/frontend/profile.html:80
+msgid "Browse All"
+msgstr ""
+
+#: templates/base/header.html:21
+msgid "Discover"
+msgstr ""
+
+#: templates/base/header.html:24
+msgid "About Us"
+msgstr ""
+
+#: templates/base/header.html:50
+msgid "Account View"
+msgstr ""
+
+#: templates/base/header.html:53
+msgid "Logout"
+msgstr ""
+
+#: templates/base/header.html:74
+#: templates/frontend/module/create_step2.html:166
+#: templates/frontend/module/create_step3.html:174
+msgid "Language"
+msgstr ""
+
+#: templates/base/header.html:100
+msgid "Join"
+msgstr ""
+
+#: templates/base/header.html:118
+msgid "Login to VOER"
+msgstr ""
+
+#: templates/base/header.html:133
+msgid "Remember me"
+msgstr ""
+
+#: templates/base/header.html:137
+msgid "Forgot your password ?"
+msgstr ""
+
+#: templates/base/header.html:140 templates/registration/login.html:36
+msgid "Login"
+msgstr ""
+
+#: templates/base/header.html:143
+msgid "Don't have an account? Sign up for VOER"
+msgstr ""
+
+#: templates/base/header.html:146
+msgid "The username or password is incorrect."
+msgstr ""
+
+#: templates/frontend/browse.html:105 templates/frontend/profile.html:156
+#: templates/frontend/module/create_step3.html:220
+msgid "Save"
+msgstr ""
+
+#: templates/frontend/browse.html:108 templates/frontend/profile.html:159
+#: templates/frontend/user_profile.html:93
+#: templates/frontend/user_profile.html:195
+#: templates/frontend/ajax/browse.html:14
+#: templates/frontend/block/left_block_user.html:16
+msgid "My Favorites"
+msgstr ""
+
+#: templates/frontend/browse.html:113 templates/frontend/profile.html:164
+#: templates/frontend/user_profile.html:200
+msgid "Create new"
+msgstr ""
+
+#: templates/frontend/browse.html:135 templates/frontend/profile.html:188
+#: templates/frontend/user_profile.html:222
+#: templates/frontend/ajax/browse.html:41
+msgid "Business"
+msgstr ""
+
+#: templates/frontend/browse.html:137 templates/frontend/profile.html:190
+#: templates/frontend/user_profile.html:224
+#: templates/frontend/ajax/browse.html:43
+msgid "Social Sciences"
+msgstr ""
+
+#: templates/frontend/browse.html:139 templates/frontend/profile.html:192
+#: templates/frontend/user_profile.html:226
+#: templates/frontend/ajax/browse.html:45
+msgid "Science and Technology"
+msgstr ""
+
+#: templates/frontend/browse.html:141 templates/frontend/profile.html:194
+#: templates/frontend/user_profile.html:228
+#: templates/frontend/ajax/browse.html:47
+msgid "Humanities"
+msgstr ""
+
+#: templates/frontend/browse.html:143 templates/frontend/profile.html:196
+#: templates/frontend/user_profile.html:230
+#: templates/frontend/ajax/browse.html:49
+msgid "Arts"
+msgstr ""
+
+#: templates/frontend/browse.html:145 templates/frontend/profile.html:198
+#: templates/frontend/user_profile.html:232
+#: templates/frontend/ajax/browse.html:51
+msgid "Mathematics and Statistics"
+msgstr ""
+
+#: templates/frontend/browse.html:147 templates/frontend/profile.html:200
+#: templates/frontend/user_profile.html:234
+#: templates/frontend/ajax/browse.html:53
+msgid "Others"
+msgstr ""
+
+#: templates/frontend/browse.html:293
+msgid "All Categories"
+msgstr ""
+
+#: templates/frontend/collection_detail.html:53
+#: templates/frontend/module_detail.html:53
+msgid "Comment"
+msgstr ""
+
+#: templates/frontend/collection_detail.html:71
+#: templates/frontend/module_detail.html:71
+msgid "View my profile"
+msgstr ""
+
+#: templates/frontend/profile.html:5 templates/frontend/user_profile.html:5
+msgid "User profile"
+msgstr ""
+
+#: templates/frontend/profile.html:29 templates/frontend/user_profile.html:26
+#: templates/frontend/module/create_step2.html:47
+#: templates/frontend/module/create_step2.html:56
+#: templates/frontend/module/create_step3.html:55
+#: templates/frontend/module/create_step3.html:64
+msgid "Author"
+msgstr ""
+
+#: templates/frontend/profile.html:33 templates/frontend/user_profile.html:30
+#: templates/frontend/module/create_step2.html:61
+#: templates/frontend/module/create_step3.html:69
+msgid "Contributor"
+msgstr ""
+
+#: templates/frontend/profile.html:37 templates/frontend/user_profile.html:34
+#: templates/frontend/module/create_step2.html:57
+#: templates/frontend/module/create_step3.html:65
+msgid "Editor"
+msgstr ""
+
+#: templates/frontend/profile.html:41 templates/frontend/user_profile.html:38
+#: templates/frontend/module/create_step2.html:58
+#: templates/frontend/module/create_step3.html:66
+msgid "Licensor"
+msgstr ""
+
+#: templates/frontend/profile.html:45 templates/frontend/user_profile.html:42
+#: templates/frontend/module/create_step2.html:59
+#: templates/frontend/module/create_step3.html:67
+msgid "Maintainer"
+msgstr ""
+
+#: templates/frontend/profile.html:49 templates/frontend/user_profile.html:46
+#: templates/frontend/module/create_step2.html:60
+#: templates/frontend/module/create_step3.html:68
+msgid "Translator"
+msgstr ""
+
+#: templates/frontend/profile.html:82
+msgid "Popular"
+msgstr ""
+
+#: templates/frontend/profile.html:83
+msgid "All Creative Fields"
+msgstr ""
+
+#: templates/frontend/profile.html:84
+msgid "Architecture"
+msgstr ""
+
+#: templates/frontend/profile.html:85
+msgid "Art Direction"
+msgstr ""
+
+#: templates/frontend/profile.html:86
+msgid "Branding"
+msgstr ""
+
+#: templates/frontend/profile.html:87
+msgid "Fashion"
+msgstr ""
+
+#: templates/frontend/profile.html:88
+msgid "Graphic Design"
+msgstr ""
+
+#: templates/frontend/profile.html:89
+msgid "Illustration"
+msgstr ""
+
+#: templates/frontend/profile.html:90
+msgid "Industrial Design"
+msgstr ""
+
+#: templates/frontend/profile.html:91
+msgid "Interaction Design"
+msgstr ""
+
+#: templates/frontend/profile.html:92
+msgid "Motion Graphics"
+msgstr ""
+
+#: templates/frontend/profile.html:93
+msgid "Photography"
+msgstr ""
+
+#: templates/frontend/profile.html:94
+msgid "UI/UX"
+msgstr ""
+
+#: templates/frontend/profile.html:95
+msgid "Web Design"
+msgstr ""
+
+#: templates/frontend/profile.html:99 templates/frontend/profile.html:101
+msgid "Featured"
+msgstr ""
+
+#: templates/frontend/profile.html:102
+msgid "Most Liked"
+msgstr ""
+
+#: templates/frontend/profile.html:103
+msgid "Most Viewed"
+msgstr ""
+
+#: templates/frontend/profile.html:104
+msgid "Most Discussed"
+msgstr ""
+
+#: templates/frontend/profile.html:105
+msgid "Most Recent"
+msgstr ""
+
+#: templates/frontend/profile.html:109
+msgid "Sort by"
+msgstr ""
+
+#: templates/frontend/profile.html:111
+#: templates/frontend/user_profile.html:171
+#: templates/frontend/module/create_step2.html:39
+#: templates/frontend/module/create_step3.html:47
+msgid "Title"
+msgstr ""
+
+#: templates/frontend/profile.html:112
+#: templates/frontend/user_profile.html:172
+msgid "Relevance"
+msgstr ""
+
+#: templates/frontend/profile.html:113
+#: templates/frontend/user_profile.html:173
+msgid "Rating"
+msgstr ""
+
+#: templates/frontend/profile.html:114
+#: templates/frontend/user_profile.html:174
+msgid "Date"
+msgstr ""
+
+#: templates/frontend/profile.html:118
+#: templates/frontend/user_profile.html:178
+msgid "Gridview"
+msgstr ""
+
+#: templates/frontend/profile.html:119
+#: templates/frontend/user_profile.html:179
+msgid "Listview"
+msgstr ""
+
+#: templates/frontend/profile.html:217
+#: templates/frontend/user_profile.html:252
+msgid "Uploaded On:"
+msgstr ""
+
+#: templates/frontend/profile.html:230
+msgid "Filter By"
+msgstr ""
+
+#: templates/frontend/profile.html:263
+msgid "All types"
+msgstr ""
+
+#: templates/frontend/profile.html:274
+msgid "Modules"
+msgstr ""
+
+#: templates/frontend/profile.html:285
+msgid "Collections"
+msgstr ""
+
+#: templates/frontend/profile.html:299
+msgid "All Languages"
+msgstr ""
+
+#: templates/frontend/profile.html:310
+#: templates/frontend/module/create_step3.html:178
+msgid "English"
+msgstr ""
+
+#: templates/frontend/profile.html:321
+msgid "Vietnam"
+msgstr ""
+
+#: templates/frontend/search_result.html:5
+msgid "Search result"
+msgstr ""
+
+#: templates/frontend/search_result.html:115
+msgid "No data"
+msgstr ""
+
+#: templates/frontend/user_profile.html:78
+#: templates/frontend/block/left_block_user.html:5
+#: templates/frontend/module/create_step1.html:13
+#: templates/frontend/module/create_step2.html:14
+#: templates/frontend/module/create_step3.html:19
+msgid "Create a new module"
+msgstr ""
+
+#: templates/frontend/user_profile.html:79
+#: templates/frontend/block/left_block_user.html:6
+msgid "Create a new collection"
+msgstr ""
+
+#: templates/frontend/user_profile.html:83
+msgid "My Items"
+msgstr ""
+
+#: templates/frontend/user_profile.html:87
+msgid "Add Resource"
+msgstr ""
+
+#: templates/frontend/user_profile.html:88
+#: templates/frontend/block/left_block_user.html:15
+msgid "Saved Items"
+msgstr ""
+
+#: templates/frontend/user_profile.html:89
+msgid "Submitted Items"
+msgstr ""
+
+#: templates/frontend/user_profile.html:90
+msgid "Evaluated Items"
+msgstr ""
+
+#: templates/frontend/user_profile.html:91
+msgid "Authored Items"
+msgstr ""
+
+#: templates/frontend/user_profile.html:92
+msgid "Remixed Items"
+msgstr ""
+
+#: templates/frontend/user_profile.html:99
+msgid "My profile"
+msgstr ""
+
+#: templates/frontend/user_profile.html:103
+msgid "Profile Information"
+msgstr ""
+
+#: templates/frontend/user_profile.html:104
+msgid "Member Statistics"
+msgstr ""
+
+#: templates/frontend/user_profile.html:105
+msgid "Account Settings"
+msgstr ""
+
+#: templates/frontend/user_profile.html:106
+msgid "Delete Account"
+msgstr ""
+
+#: templates/frontend/block/left_block_user.html:14
+msgid "Unpublish"
+msgstr ""
+
+#: templates/frontend/module/create_step1.html:11
+#: templates/frontend/module/create_step2.html:12
+#: templates/frontend/module/create_step3.html:17
+msgid "Create Content"
+msgstr ""
+
+#: templates/frontend/module/create_step1.html:17
+#: templates/frontend/module/create_step2.html:18
+#: templates/frontend/module/create_step3.html:23
+msgid "License"
+msgstr ""
+
+#: templates/frontend/module/create_step1.html:18
+#: templates/frontend/module/create_step2.html:19
+#: templates/frontend/module/create_step2.html:29
+#: templates/frontend/module/create_step3.html:24
+#: templates/frontend/module/create_step3.html:38
+msgid "Metadata"
+msgstr ""
+
+#: templates/frontend/module/create_step1.html:29
+msgid ""
+"I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute "
+"this content under the terms of the Creative Commons Attribution License "
+"available at <a href=\"http://creativecommons.org/licenses/by/3.0/\">http://"
+"creativecommons.org/licenses/by/3.0/</a>. I understand that in doing so I "
+"retain my copyright in the work and warrant that I am the author or the "
+"owner or have permission to distribute the work in question and wish this "
+"work to be distributed under the terms of that license (including allowing "
+"modification of this work and requiring attribution) and agree that proper "
+"attribution of my work is any attribution that includes the authors"
+msgstr ""
+
+#: templates/frontend/module/create_step1.html:38
+msgid ""
+"I have read the above, and I agree to license this new work under its terms."
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:5
+msgid "Create module"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:20
+#: templates/frontend/module/create_step3.html:25
+#: templates/frontend/module/create_step3.html:39
+msgid "Content"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:40
+msgid "Enter title"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:43
+#: templates/frontend/module/create_step3.html:51
+msgid "Description"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:48
+msgid "Enter author"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:49
+#: templates/frontend/module/create_step3.html:57
+msgid "Add new Author"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:55
+#: templates/frontend/module/create_step3.html:63
+msgid "Name"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:141
+#: templates/frontend/module/create_step3.html:149
+msgid "Categories"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:158
+#: templates/frontend/module/create_step3.html:166
+msgid "Image"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:169
+#: templates/frontend/module/create_step3.html:177
+msgid "Choose language"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:176
+#: templates/frontend/module/create_step3.html:185
+msgid "Keywords"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:177
+msgid "Enter keywords"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:180
+#: templates/frontend/module/create_step3.html:189
+msgid "Tags"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:181
+msgid "Enter tags"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:185
+msgid "Next"
+msgstr ""
+
+#: templates/frontend/module/create_step2.html:186
+#: templates/frontend/module/create_step3.html:221
+msgid "Back"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:76
+msgid "HiFlyer JSC"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:82
+msgid "Nguyen Lan Dung"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:83
+msgid "R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:171
+msgid "Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg."
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:179
+msgid "Vietnamese"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Choose country"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Korea"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "United States"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "England"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "France"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Italy"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Japan"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Viet Nam"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:197
+msgid "Document for import"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:202
+msgid "Import"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:203
+msgid "Upload a file, allowed extensions: doc, docx, odt."
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:206
+msgid "Body"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:211
+msgid "Files - Included Resources"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:216
+msgid "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:219
+msgid "Publish"
+msgstr ""
+
+#: templates/registration/password_change_done.html:4
+#: templates/registration/password_change_done.html:8
+msgid "Password change successful"
+msgstr ""
+
+#: templates/registration/password_change_done.html:10
+msgid "Your password was changed."
+msgstr ""
+
+#: templates/registration/password_change_form.html:5
+#: templates/registration/password_change_form.html:9
+msgid "Password change"
+msgstr ""
+
+#: templates/registration/password_change_form.html:11
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: templates/registration/password_change_form.html:16
+msgid "Old password:"
+msgstr ""
+
+#: templates/registration/password_change_form.html:18
+#: templates/registration/password_reset_confirm.html:19
+msgid "New password:"
+msgstr ""
+
+#: templates/registration/password_change_form.html:20
+#: templates/registration/password_reset_confirm.html:21
+msgid "Confirm password:"
+msgstr ""
+
+#: templates/registration/password_change_form.html:22
+#: templates/registration/password_reset_confirm.html:22
+msgid "Change my password"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:6
+#: templates/registration/password_reset_complete.html:10
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:12
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:14
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:6
+#: templates/registration/password_reset_form.html:6
+#: templates/registration/password_reset_form.html:10
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:12
+msgid "Enter new password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:14
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:27
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:29
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:6
+#: templates/registration/password_reset_done.html:10
+msgid "Password reset successful"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:12
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+msgid "You're receiving this e-mail because you requested a password reset"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:5
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:11
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:13
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:12
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:17
+msgid "E-mail address:"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:17
+msgid "Reset my password"
+msgstr ""
+
+#: templates/registration/registration_form.html:4
+msgid "Sign up"
+msgstr ""
+
+#: templates/registration/registration_form.html:24
+msgid "Your username"
+msgstr ""
+
+#: templates/registration/registration_form.html:25
+msgid "Your email Address"
+msgstr ""
+
+#: templates/registration/registration_form.html:26
+msgid "Your password"
+msgstr ""
+
+#: templates/registration/registration_form.html:27
+msgid "Enter password again"
+msgstr ""
+
+#: templates/registration/registration_form.html:35
+msgid "Show password"
+msgstr ""
+
+#: templates/registration/registration_form.html:42
+msgid "Register"
+msgstr ""
