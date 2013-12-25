@@ -102,8 +102,10 @@
                 <div class="voer-col-ico left">&nbsp;</div>
                 {% endif %}
 
-                <div class="hflike left">100</div>
-                <div class="hfview left">120</div>
+                {% if not material.user_id %}
+                <div class="hflike left">{% if material.favorite_count.count %} {{ material.favorite_count.count }}{% else %}0{% endif %}</div>
+                <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

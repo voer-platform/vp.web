@@ -132,8 +132,8 @@ def vpr_browse(**kwargs):
     return result
 
 
-def vpr_materials_by_author(aid):
-    result = vpr_request("GET", "materials?author=%s" % aid)
+def vpr_materials_by_author(aid, page=1):
+    result = vpr_request("GET", "materials?author=%s&page=%s" % (aid, str(page)))
     return result
 
 
@@ -153,4 +153,8 @@ def vpr_create_person(**kwargs):
         # "client_id": kwargs.get("client_id"),
     }))
 
+    return result
+
+def vpr_get_statistic_data(mid, version, field_name):
+    result = vpr_request('GET', "materials/%s/%s/%s/" % (mid, version, field_name))
     return result
