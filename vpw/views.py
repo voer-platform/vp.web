@@ -9,11 +9,11 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
-    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person
-
+    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpt_import
 
 from vpw.forms import ModuleCreationForm
 
@@ -93,9 +93,9 @@ def create_module(request):
         except ValueError:
             current_step = 0
 
-        categories = vpr_get_categories()
+        categories_list = vpr_get_categories()
         if current_step == 1:
-            return render(request, "frontend/module/create_step2.html", {"categories": categories})
+            return render(request, "frontend/module/create_step2.html", {"categories": categories_list})
 
         if current_step == 2:
             # Save metadata
@@ -111,20 +111,69 @@ def create_module(request):
             material.keywords = keywords
             material.categories = categories
             material.language = language
+            #get current user
+            material.creator = request.user
             # material.save()
-            #material = Material.objects.get(id=1)
-            #if material.id:
+            material = Material.objects.get(id=1)
+            # if material.id:
             if True:
                 form = ModuleCreationForm(request.POST)
                 return render(request, "frontend/module/create_step3.html",
-                              {"material": material, "categories": categories, 'form': form})
+                              {"material": material, "categories": categories_list, 'form': form})
 
         if current_step == 3:
+            action = request.POST.get("action", "")
+            if action == 'import':
+                upload_file = request.FILES['document_file']
+                with open(settings.MEDIA_ROOT + '/' + upload_file.name, 'wb+') as destination:
+                    # for chunk in upload_file.chunks():
+                    #     destination.write(chunk)
+                    # call import vpt
+                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
+                    status = result_import['status']
+                    task_id = result_import['task_id']
+
+                form = ModuleCreationForm(request.POST)
+                return render(request, "frontend/module/create_step3.html",
+                              {"material": material, "categories": categories_list, 'form': form})
+            if action == 'save':
+                #Save to workspace of current user
+                try:
+                    mid = int(request.POST.get("mid"))
+                except ValueError:
+                    mid = 0
+                try:
+                    material = Material.objects.get(id=mid)
+                    save_post_to_object(request, material)
+                    material.save()
+                except Material.DoesNotExist:
+                    pass
+            if action == 'publish':
+                mid = request.POST.get("mid", '0')
+                material = Material.objects.get(id=mid)
+                save_post_to_object(request, material)
+                material.save()
             #Save content & metadata, or publish to VPR
             pass
     else:
         return render(request, "frontend/module/create_step1.html")
 
+
+def save_post_to_object(request, material):
+    title = request.POST.get("title", "")
+    description = request.POST.get("description", "")
+    keywords = request.POST.get("keywords", "")
+    tags = request.POST.get("tags", "")
+    language = request.POST.get("language", "")
+    categories = request.POST.get('categories', "")
+    body = request.POST.get('body', "")
+    material.title = title
+    material.description = description
+    material.keywords = keywords
+    material.categories = categories
+    material.language = language
+    material.creator = request.user
+    material.text = body
 
 @login_required
 def create_collection(request):

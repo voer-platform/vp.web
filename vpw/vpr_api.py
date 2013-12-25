@@ -3,8 +3,28 @@ Created on 17 Dec 2013
 
 @author: huyvq
 '''
+import os
 from django.conf import settings
 import json, httplib, urllib
+import requests
+
+
+def vpt_request(method, path, body=None):
+    connection = httplib.HTTPConnection(settings.VPT_URL, settings.VPT_PORT)
+    connection.connect()
+    headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
+    connection.request(method, "/%s" % path, body, headers)
+    respond = connection.getresponse().read()
+
+    if method == "DELETE":
+        result = connection.getresponse().status
+    else:
+        try:
+            result = json.loads(respond)
+        except:
+            result = respond
+    return result
+
 
 def vpr_request(method, path, body=None):
     connection = httplib.HTTPConnection(settings.VPR_URL, settings.VPR_PORT)
@@ -21,6 +41,20 @@ def vpr_request(method, path, body=None):
         except:
             result = respond
     return result
+
+
+def vpt_import(file_path):
+    import_url = 'http://%s:%s/import' % (settings.VPT_URL, settings.VPT_PORT)
+
+    token = 'a9af1d6ca60243a38eb7d52dd344f7cb'
+    cid = 'vietdt'
+    payload = {'token': token, 'cid': cid}
+
+    file_name = os.path.basename(file_path)
+    file_data = open(file_path, 'rb').read()
+    files = {'file': (file_name, file_data)}
+    r = requests.post(import_url, files=files, data=payload)
+    return r.text
 
 def vpr_get_categories():
     result = vpr_request("GET", "categories")

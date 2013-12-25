@@ -27,7 +27,10 @@
     </div>
 </div>
 {% include "frontend/block/left_block_user.html" %}
-
+    <form role="form" method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+        <input type="hidden" name="step" value="3" />
+        <input type="hidden" name="mid" value="{{ material.id }}" />
             <div class="col-lg-1 right-row">
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
@@ -40,7 +43,6 @@
                     <div class="tab-content">                   
                       <div class="tab-pane" id="metadata">
                         <div class="content">
-    <form role="form">
         <div class="form-group">
             <label for="InputEmail1">{% trans 'Title' %}</label>
             <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text" name="title" value="{{ material.title }}">
@@ -77,9 +79,9 @@
                                         <img src="images/avatar.jpg" height="70px" width="70px">
                                     </div>
                                     <div class="right">                                     
-                                        <div class="user-name">{% trans 'HiFlyer JSC' %}</div>
+                                        <div class="user-name">{% trans 'Nguyen Lan Dung' %}</div>
                                         <div class="user-address">{% trans 'R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam' %}</div>
-                                        <div class="user-website">www.hiflyer.vn</div>
+                                        <div class="user-website">voer.edu.vn</div>
                                     </div>
                                 </div>
                             </a>
@@ -187,19 +189,18 @@
             <label for="InputTags">{% trans 'Tags' %}</label>
             <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
         </div>  
-    </form>
-</div>                                                      
+</div>
                       </div>
                       <div class="tab-pane active" id="content">
                         <div class="content">
-    <form role="form">
         <div class="form-group">
             <label for="InputFile">{% trans 'Document for import' %} </label>
-            <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="uploadfile_1" type="file">                      
+            <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="document_file" type="file">
             <div class="fakefile">              
                 <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
             </div>
-            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt.' %}</p>            
+            <button class="hfbtn-common hfbtn-active" name="action" value="import">{% trans 'Import' %}</button>
+            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt.' %}</p>
         </div>
         <div class="form-group">
             <label for="InputBody">{% trans 'Body' %}</label>
@@ -215,14 +216,14 @@
             <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg.' %}</p>           
         </div>      
         <div class="form-group btn-common">
-            <a class="hfbtn-common hfbtn-public right hfbtn-active" href="create_module_public.php">{% trans 'Public' %}</a>
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_save.php">{% trans 'Save' %}</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module_2.php">{% trans 'Back' %}</a>
+            <button class="hfbtn-common hfbtn-public right hfbtn-active" value="publish" name="action">{% trans 'Publish' %}</button>
+            <button class="hfbtn-common hfbtn-next right hfbtn-active" value="save" name="action">{% trans 'Save' %}</button>
+            <button class="hfbtn-common hfbtn-back right hfbtn-active" value="back" name="action">{% trans 'Back' %}</button>
         </div>          
-    </form>
 </div>                    </div>
                     </div>
 
                 </div>
             </div>
+    </form>
 {% endblock %}

@@ -36,29 +36,29 @@
     <form role="form" method="post">
         {% csrf_token %}
 		<div class="form-group">
-			<label for="InputEmail1">Title</label>
-			<input type="text" class="form-control typetext" id="InputText" placeholder="Enter Title" name="title">
+			<label for="InputEmail1">{% trans 'Title' %}</label>
+			<input type="text" class="form-control typetext" id="InputText" placeholder="{% trans 'Enter title' %}" name="title">
 		</div>
 		<div class="form-group">
-			<label for="InputDescription">Description</label>
+			<label for="InputDescription">{% trans 'Description' %}</label>
 			<textarea rows="4" class="form-control" name="description"></textarea>
 		</div>
 		<div class="form-group">
-			<label for="InputAuthor">Author</label>
-			<input type="text" class="form-control typetext" id="InputAuthor" placeholder="Enter Author">
-			<a class="AddNew" href="#addnewauthor">Add new Author</a>
+			<label for="InputAuthor">{% trans 'Author' %}</label>
+			<input type="text" class="form-control typetext" id="InputAuthor" placeholder="{% trans 'Enter author' %}">
+			<a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
 		</div>
 		<div class="form-group listAuthor">
 			<table class="listAuthor">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Author</th>
-						<th>Editor</th>
-						<th>Licensor</th>
-						<th>Maintainer</th>
-						<th>Translator</th>
-						<th>Contributor</th>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Author' %}</th>
+                        <th>{% trans 'Editor' %}</th>
+                        <th>{% trans 'Licensor' %}</th>
+                        <th>{% trans 'Maintainer' %}</th>
+                        <th>{% trans 'Translator' %}</th>
+                        <th>{% trans 'Contributor' %}</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -138,7 +138,7 @@
 			</table>
 		</div>
 		<div class="form-group">
-			<label for="InputCategories">Categories</label>
+			<label for="InputCategories">{% trans 'Categories' %}</label>
 			<ul class="AddCategories">
                 {% for category in categories %}
 				<li>
@@ -155,7 +155,7 @@
 			</ul>
 		</div>
 		<div class="form-group">
-			<label for="InputFile">Image</label>
+			<label for="InputFile">{% trans 'Image' %}</label>
 			<input type="file" onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0">
 		    <div class="fakefile">
 		    	<input type="text" onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile">
@@ -163,27 +163,27 @@
 		    <p class="help-block">Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.</p>
 		</div>
 		<div class="form-group">
-			<label for="InputLanguage">Language</label>
+			<label for="InputLanguage">{% trans 'Language' %}</label>
 			<div class="hfselectList">
 				<select class="select-block" name="language">
-					<option>Choose language</option>
+					<option>{% trans 'Choose language' %}</option>
 					<option value="en">English</option>
 					<option value="vi">Vietnamese</option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="InputKeywords">Keywords</label>
-			<input type="text" class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" name="keywords">
+			<label for="InputKeywords">{% trans 'Keywords' %}</label>
+			<input type="text" class="form-control typetext" id="InputKeywords" placeholder="{% trans 'Enter keywords' %}" name="keywords">
 		</div>
 		<div class="form-group">
-			<label for="InputTags">Tags</label>
-			<input type="text" class="form-control typetext" id="InputTags" placeholder="Enter Tags" name="tags">
+			<label for="InputTags">{% trans 'Tags' %}</label>
+			<input type="text" class="form-control typetext" id="InputTags" placeholder="{% trans 'Enter tags' %}" name="tags">
 		</div>
 		<div class="form-group btn-common">
             <input type="hidden" name="step" value="2" />
-			<button class="hfbtn-common hfbtn-next right hfbtn-active" value="step2">Next</button>
-			<button class="hfbtn-common hfbtn-back right hfbtn-active" value="back">Back</button>
+			<button class="hfbtn-common hfbtn-next right hfbtn-active" value="step2">{% trans 'Next' %}</button>
+			<button class="hfbtn-common hfbtn-back right hfbtn-active" value="back">{% trans 'Back' %}</button>
 		</div>
     </form>
 </div>                    </div>

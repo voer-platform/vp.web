@@ -36,6 +36,8 @@ class Material(models.Model):
     license_id = IntegerField(null=True, default=1)
     modified = DateTimeField(auto_now=True, blank=True)
     derived_from = CharField(max_length=64, blank=True)
+    creator = models.ForeignKey(User)
+    status = IntegerField(null=True, default=1)
 
 
 # Declare Signs
