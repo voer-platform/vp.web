@@ -71,44 +71,7 @@
         </div>-->
     </div>
 </div>
-            <!-- left content -->
-            <div class="col-lg-2 left-row">
-            <div class="hfuser-tools">
-    <div class="smallbox-common">
-        <div class="hfbtn-create module"><a href="{% url 'create_module' %}">{% trans 'Create a new module' %}</a></div>
-        <div class="hfbtn-create collection"><a href="{% url 'create_module' %}">{% trans 'Create a new collection' %}</a></div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My Items' %}
-        </div>
-        <div class="content">
-            <ul>
-                <li><a>{% trans 'Add Resource' %}</a></li>
-                <li><a>{% trans 'Saved Items' %}</a></li>
-                <li><a>{% trans 'Submitted Items' %}</a></li>
-                <li><a>{% trans 'Evaluated Items' %}</a></li>
-                <li><a>{% trans 'Authored Items' %}</a></li>
-                <li><a>{% trans 'Remixed Items' %}</a></li>
-                <li><a>{% trans 'My Favorites' %}</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My profile' %}
-        </div>
-        <div class="content">
-            <ul>
-                <li><a>{% trans 'Profile Information' %}</a></li>
-                <li><a>{% trans 'Member Statistics' %}</a></li>
-                <li><a>{% trans 'Account Settings' %}</a></li>
-                <li><a>{% trans 'Delete Account' %}</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-            </div>
+{% include 'frontend/block/left_block_user.html' %}
             <div class="col-lg-1 right-row">
                 <script>
                     $(document).ready(function(){
