@@ -13,3 +13,14 @@
   margin-top: 7px;
   width: 21px;
 }
+
+.link-other-author-module {
+  display: block;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.other-module-author {
+  height: auto;
+}
