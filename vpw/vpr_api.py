@@ -189,6 +189,10 @@ def vpr_create_person(**kwargs):
 
     return result
 
+
 def vpr_get_statistic_data(mid, version, field_name):
+    if not version:
+        version = 1
+
     result = vpr_request('GET', "materials/%s/%s/%s/" % (mid, version, field_name))
     return result

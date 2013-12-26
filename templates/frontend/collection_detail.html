@@ -34,10 +34,10 @@
         </ul>
         <ul class="list-status-module-content right">
             <li>
-                <span class="checkout-icon-view">1000</span>
+                <span class="checkout-icon-view">{% if collection.view_count.count > 0 %}{{ collection.view_count.count }}{% else %}0{% endif %}</span>
             </li>
             <li>
-                <span class="checkout-icon-favourite">340</span>
+                <span class="checkout-icon-favourite">{% if collection.favorite_count.view > 0 %}{{ collection.favorite_count.view }}{% else %}0{% endif %}</span>
             </li>
         </ul>
     </div>
@@ -121,6 +121,8 @@
         </div>
     </div>
     <!-- END DOWNLOAD -->
+
+    {% if tag_data %}
     <!-- TAG -->
     <div class="module-block module-simple">
         <div class="module-block-header">
@@ -137,99 +139,70 @@
         </div>
     </div>
     <!-- END TAG -->
+    {% endif %}
+
     <!-- OTHER FROM AUTHOR -->
+    {% if other_data %}
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Other from Author</div>
+            <div class="tilte-module">{% trans 'Other from Author' %}</div>
         </div>
         <div class="module-block-content">
+            {% for other_material in other_data %}
             <div class="other-module-author">
                 <div class="other-author-img">
-                    <img src="images/module_view/other1.jpg">
+                    {% if other_material.image %}
+                    {% else %}
+                    <img src="{{STATIC_URL}}images/module_view/other1.jpg">
+                    {% endif %}
                 </div>
                 <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
-                    <a class="link-other-author-collection left clear">College Physics</a>
+                    {% if other_material.material_type == 1 %}
+                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'module_detail' other_material.material_id %}">{{ other_material.title }}</a>
+                    {% else %}
+                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' material.material_id %}">{{ other_material.title }}</a>
+                    {% endif %}
                 </div>
             </div>
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    <img src="images/module_view/other2.jpg">
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
-                    <a class="link-other-author-collection left clear">General Approach ...</a>
-                </div>
-            </div>
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    <img src="images/module_view/other3.jpg">
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
-                    <a class="link-other-author-collection left clear">General Approach ...</a>
-                </div>
-            </div>
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    <img src="images/module_view/other4.jpg">
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
-                    <a class="link-other-author-collection left clear">College Physics</a>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
+    {% endif %}
     <!-- END OTHER FROM AUTHOR -->
 
     <!-- OTHER FROM AUTHOR -->
+    {% if similar_data %}
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">Similar item</div>
+            <div class="tilte-module">{% trans 'Similar item' %}</div>
         </div>
         <div class="module-block-content">
+            {% for similar in similar_data %}
             <div class="other-module-author">
                 <div class="other-author-img">
-                    <img src="images/module_view/other3.jpg">
+                    {% if similar.image %}
+                    {% else %}
+                    <img src="{{STATIC_URL}}images/module_view/other4.jpg">
+                    {% endif %}
                 </div>
                 <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
-                    <a class="link-other-author-collection left clear">General Approach ...</a>
+                    {% if similar.material_type == 1 %}
+                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.material_id %}">{{ similar.title }}</a>
+                    {% else %}
+                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' material.material_id %}">{{ similar.title }}</a>
+                    {% endif %}
+
+                    {% for person in similar.author_list %}
+                    <a class="link-other-author-collection left clear" href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    <img src="images/module_view/other4.jpg">
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
-                    <a class="link-other-author-collection left clear">College Physics</a>
-                </div>
-            </div>
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    <img src="images/module_view/other2.jpg">
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Dynamics: Force and Newton's ...</a>
-                    <a class="link-other-author-collection left clear">General Approach ...</a>
-                </div>
-            </div>
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    <img src="images/module_view/other1.jpg">
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    <a class="link-other-author-module left clear">Two-Dimensional Kinematics</a>
-                    <a class="link-other-author-collection left clear">College Physics</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
+    {% endif %}
     <!-- END OTHER FROM AUTHOR -->
 </div>
 <!-- END RIGHT ROW -->

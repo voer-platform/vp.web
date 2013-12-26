@@ -60,14 +60,60 @@ def module_detail(request, mid, version):
     material = vpr_get_material(mid)
     author = vpr_get_person(material['author'])
     category = vpr_get_category(material['categories'])
+
+    view_count = vpr_get_statistic_data(mid, material['version'], 'counter')
+    material['view_count'] = view_count
+
+    favorite_count = vpr_get_statistic_data(mid, material['version'], 'favorites')
+    material['favorite_count'] = favorite_count
+
+    similar_data = []
+    similar_materials = vpr_get_statistic_data(mid, material['version'], 'similar')
+    i = 1
+    for similar in similar_materials:
+        if i > 4:
+            break
+
+        i = i + 1
+        material_tmp = vpr_get_material(similar['material_id'])
+        author_id_list = material_tmp['author'].split(',')
+
+        p_list = []
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid)
+            if person['fullname']:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+            else:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+        material_tmp['author_list'] = p_list
+
+        similar_data.append(material_tmp)
+
+    other_data = []
+    other_materials = vpr_materials_by_author(material['author'])
+    i = 1
+    for other_material in other_materials['results']:
+        if i > 4:
+            break
+
+        i = i + 1
+        other_data.append(other_material)
+
     return render(request, "frontend/module_detail.html",
-                  {"material": material, "author": author, "category": category})
+                  {"material": material, "author": author, "category": category, 'other_data': other_data, 'similar_data': similar_data})
 
 
 def collection_detail(request, cid, mid):
     # Get collection
     collection = vpr_get_material(cid)
     outline = json.loads(collection['text'])
+
+    view_count = vpr_get_statistic_data(cid, collection['version'], 'counter')
+    collection['view_count'] = view_count
+
+    favorite_count = vpr_get_statistic_data(cid, collection['version'], 'favorites')
+    collection['favorite_count'] = favorite_count
 
     if not mid:
         # get the first material of collection
@@ -81,9 +127,42 @@ def collection_detail(request, cid, mid):
     author = vpr_get_person(collection['author'])
     category = vpr_get_category(collection['categories'])
 
+    other_data = []
+    other_materials = vpr_materials_by_author(collection['author'])
+    i = 1
+    for other_material in other_materials['results']:
+        if i > 4:
+            break
+
+        i = i + 1
+        other_data.append(other_material)
+
+    similar_data = []
+    similar_materials = vpr_get_statistic_data(cid, collection['version'], 'similar')
+    i = 1
+    for similar in similar_materials:
+        if i > 4:
+            break
+
+        i = i + 1
+        material_tmp = vpr_get_material(similar['material_id'])
+        author_id_list = material_tmp['author'].split(',')
+
+        p_list = []
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid)
+            if person['fullname']:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+            else:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+        material_tmp['author_list'] = p_list
+
+        similar_data.append(material_tmp)
+
     return render(request, "frontend/collection_detail.html",
                   {"collection": collection, "material": material, "author": author, "category": category,
-                   "outline": strOutline})
+                   "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data})
 
 
 @login_required
@@ -193,7 +272,6 @@ def create_collection(request):
 
 def view_profile(request, pid):
     page = int(request.GET.get('page', 1))
-    print page
     current_person = vpr_get_person(pid, True)
     materials = vpr_materials_by_author(pid, page)
     pager = pager_default_initialize(materials['count'], 12, page)
