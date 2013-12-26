@@ -4,7 +4,7 @@ import urllib
 
 from django.core.exceptions import PermissionDenied
 
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -15,7 +15,7 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info
+    voer_get_attachment_info,vpt_import, vpr_create_material
 
 
 from vpw.forms import ModuleCreationForm
@@ -92,19 +92,20 @@ def module_detail(request, mid, version):
 
         i = i + 1
         material_tmp = vpr_get_material(similar['material_id'])
-
-        if (material_tmp.has_key('author') and material_tmp['author']):
+        if 'author' in material_tmp:
             author_id_list = material_tmp['author'].split(',')
+        else:
+            author_id_list = []
 
-            p_list = []
-            for pid in author_id_list:
-                pid = pid.strip()
-                person = vpr_get_person(pid)
-                if person['fullname']:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
-                else:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
-            material_tmp['author_list'] = p_list
+        p_list = []
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid)
+            if person['fullname']:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+            else:
+                p_list.append({'pid': pid, 'pname': person['fullname']})
+        material_tmp['author_list'] = p_list
 
         similar_data.append(material_tmp)
 
@@ -196,6 +197,26 @@ def collection_detail(request, cid, mid):
                   {"collection": collection, "material": material, "author": author, "category": category,
                    "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
 
+@login_required
+def document_detail(request, did):
+    try:
+        material = Material.objects.get(id=did)
+        # Chi co tac gia moi vao xem duoc bai
+        if material.creator_id != request.user.id:
+            raise PermissionDenied
+        author_id = request.user.author.author_id
+        author = vpr_get_person(author_id)
+        category = vpr_get_category(material.categories)
+        if material.type == 1:
+            return render(request, "frontend/module_detail.html",
+                  {"material": material, "author": author, "category": category})
+        elif material.type == 2:
+            render(request, "frontend/collection_detail.html",
+                  {"material": material, "author": author, "category": category})
+        else:
+            raise PermissionDenied
+    except Material.DoesNotExist:
+        raise PermissionDenied
 
 @login_required
 def create_module(request):
@@ -209,29 +230,27 @@ def create_module(request):
         if current_step == 1:
             return render(request, "frontend/module/create_step2.html", {"categories": categories_list})
 
+        form = ModuleCreationForm(request.POST)
         if current_step == 2:
             # Save metadata
-            title = request.POST.get("title", "")
-            description = request.POST.get("description", "")
-            keywords = request.POST.get("keywords", "")
-            tags = request.POST.get("tags", "")
-            language = request.POST.get("language", "")
-            categories = request.POST.get('categories', "")
-            material = Material()
-            material.title = title
-            material.description = description
-            material.keywords = keywords
-            material.categories = categories
-            material.language = language
-            #get current user
-            material.creator = request.user
-            # material.save()
-            material = Material.objects.get(id=1)
-            # if material.id:
-            if True:
-                form = ModuleCreationForm(request.POST)
-                return render(request, "frontend/module/create_step3.html",
-                              {"material": material, "categories": categories_list, 'form': form})
+            if form.is_valid():
+                material = Material()
+                material.title = form.cleaned_data['title']
+                material.description = form.cleaned_data['description']
+                material.keywords = form.cleaned_data['keywords']
+                material.categories = form.cleaned_data['categories']
+                material.language = form.cleaned_data['language']
+                #get current user
+                material.creator = request.user
+                material.type = 1
+                material.save()
+                # material = Material.objects.get(id=1)
+                if material.id:
+                    return render(request, "frontend/module/create_step3.html",
+                                  {"material": material, "categories": categories_list, 'form': form})
+            else:
+                return render(request, "frontend/module/create_step2.html",
+                              {"categories": categories_list, 'form': form})
 
         if current_step == 3:
             action = request.POST.get("action", "")
@@ -255,20 +274,46 @@ def create_module(request):
                 except ValueError:
                     mid = 0
                 try:
-                    material = Material.objects.get(id=mid)
-                    save_post_to_object(request, material)
-                    material.save()
+                    if form.is_valid():
+                        material = Material.objects.get(id=mid)
+                        material.text = form.cleaned_data['body']
+                        material.save()
+                        return redirect('document_detail', did=mid)
                 except Material.DoesNotExist:
                     pass
             if action == 'publish':
-                mid = request.POST.get("mid", '0')
-                material = Material.objects.get(id=mid)
-                save_post_to_object(request, material)
-                material.save()
+                try:
+                    mid = int(request.POST.get("mid"))
+                except ValueError:
+                    mid = 0
+                try:
+                    if form.is_valid():
+                        material = Material.objects.get(id=mid)
+                        material.text = form.cleaned_data['body']
+                        # save_post_to_object(request, material)
+                        material.save()
+                        # Publish content to VPR
+                        result = vpr_create_material(
+                            material_type=material.type,
+                            text=material.text,
+                            version=1,
+                            title=material.title,
+                            description=material.description,
+                            categories=material.categories,
+                            author="50",
+                            editor="",
+                            licensor="",
+                            keywords=material.keywords,
+                            language=material.language,
+                            license_id=1
+                        )
+                        if 'material_id' in result:
+                            return redirect('module_detail', mid=result['material_id'])
+                except Material.DoesNotExist:
+                    pass
             #Save content & metadata, or publish to VPR
             pass
-    else:
-        return render(request, "frontend/module/create_step1.html")
+    return render(request, "frontend/module/create_step1.html")
 
 
 def save_post_to_object(request, material):

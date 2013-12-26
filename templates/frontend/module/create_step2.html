@@ -24,6 +24,17 @@
 {% include "frontend/block/left_block_user.html" %}
             <div class="col-lg-1 right-row">
                 <div class="hfcreate-1">
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }} - {{ error|escape }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
                       <li class="active"><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
@@ -166,7 +177,7 @@
 			<label for="InputLanguage">{% trans 'Language' %}</label>
 			<div class="hfselectList">
 				<select class="select-block" name="language">
-					<option>{% trans 'Choose language' %}</option>
+					<option value="00">{% trans 'Choose language' %}</option>
 					<option value="en">English</option>
 					<option value="vi">Vietnamese</option>
 				</select>
