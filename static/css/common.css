@@ -355,11 +355,14 @@
 }
 .smallbox-common {
 	margin:15px 0;
+	overflow:hidden;
+	display:block;
 }
 .smallbox-common .checkbox-item {
 	clear:both;
 	width:100%;
 	margin:5px 0;
+	height:20px;
 }
 .search-common {
     border: 1px solid #E8E8E8;
@@ -558,17 +561,25 @@ ul.hfmenu-common.second {
 .hfcontent {
 	padding:10px 20px;
 }
-.hfcontent h1 {
-	font-size:28px;
+.hfcontent h1, .content h1 {
+	font-size:18px;
+	margin:0 0 10px 0;
+	padding:0;	
+	font-family:arial;	
 }
 .hfcontent h2 {
 	font-size:24px;
 }
-.hfcontent h3 {
+.hfcontent h3, .content h3 {
 	font-size:20px;
+	margin:0 0 10px 0;
+	padding:0;	
+	font-family:arial;
 }
-.hfcontent h4 {
-	font-size:18px;
+.hfcontent h4, .content h4 {
+	font-size:14px;
+	font-family:arial;
+	font-weight:bold;
 }
 .hfcontent h5 {
 	font-size:16px;
@@ -703,9 +714,9 @@ ul.hfmenu-common.second {
 	border:none;
 	padding:0;
 }
-.hfcreate-1 .tab-content .content label{
-	line-height:30px;
+.hfcreate-1 .tab-content .content label, .content.edituser label{
 	font-weight:bold;
+	line-height:20px;	
 }
 
 .hfcreate-1 ul.AddCategories li label.checkbox  {
@@ -722,16 +733,16 @@ ul.hfmenu-common.second {
     background:url('../images/icon/new.png') no-repeat left center transparent;
     padding-left:25px;
 }
-.hfcreate-1 .tab-content .content .form-control.typetext{
+.hfcreate-1 .tab-content .content .form-control.typetext, .content .form-control.typetext{
 	width:45%;
 }
-.hfcreate-1 .tab-content .content .form-control.typefile{
+.content .form-control.typefile {
 	background:url('../images/icon/save.png') no-repeat 98% center transparent;
 }
-.hfcreate-1 .tab-content .content .form-group .select.select-block{
+.hfcreate-1 .tab-content .content .form-group .select.select-block {
 	width:45%;
 }
-.hfcreate-1 .form-group {
+.hfcreate-1 .form-group, .content .form-group {
 	position:relative;
 	clear:both;
 }
@@ -1017,3 +1028,170 @@ ul.successfull li.label {
 	border: none !important;
 }
 
+
+/* news */
+.hfnews-headline {
+    background: none repeat scroll 0 0 #f9f9f9;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    padding: 10px;
+    border:1px solid #E8E8E8;
+}
+.hfnews-headline img {	
+}
+.hfnews-headline .top {
+	overflow:hidden;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:1px solid #e8e8e8;
+}
+.top .image {
+	margin-right:20px;
+}
+.hfnews-headline .bottom {
+	clear:both;
+}
+.smallnews {
+	width:31%;
+	margin-right:25px;
+	overflow:hidden;	
+}
+.smallnews.last {
+	margin-right:0px;	
+}
+.smallnews h4 {
+	padding-right:5px;
+	line-height:1.4;
+	font-size:13px;
+}
+.smallnews img {
+	height:135px;
+}
+.hfnews-normal {
+	margin:10px 0;
+	padding:10px;
+	border:1px solid #e8e8e8;
+	overflow:hidden;
+}
+.hfnew-blog-item {
+	clear:both;
+	overflow:hidden;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:1px solid #e8e8e8;
+}
+.hfnews-normal .hfnew-blog-item:last-child{
+	margin-bottom:0px;
+	border-bottom:none;
+}
+.hfnew-blog-item h4 {
+	margin:0 0 5px 0;
+}
+.hfnew-blog-item .images {
+	margin-right:10px;
+}
+.hfnew-blog-item img {
+	width:200px;
+}
+.news-info {	
+	overflow:hidden;
+	margin:5px 0;
+}
+.content .bottom-module-content {
+	margin-top:10px;
+	padding-top:10px;	
+	border-top:1px solid #e8e8e8;
+}
+.more_news hr {
+    border-color: #DDDDDD -moz-use-text-color -moz-use-text-color;
+    border-style: solid none none;
+    border-width: 1px 0 0;
+    height: 1px;
+}
+.more_news #olderitemtitle, .more_news #neweritemtitle, .more_news #relateditemtitle {
+    color: #666666;
+    font-weight: bold;
+    margin-right: 5px;
+    text-align: left;
+    margin-left: 0;
+}
+.extranews_date {
+    color: #999999;
+}
+.more_news ul li {
+	line-height:2;
+}
+.extranews_priviuospage {
+    margin-right: 30px;
+}
+.extranews_nextpage {
+    margin-left: 30px;
+}
+
+.collspan {
+    background: url("../images/icon/collspan.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    display: block;
+    height: 9px;
+    left: -14px;
+    position: absolute;
+    top: 7px;
+    width: 9px;
+}
+.collspan.exspan {
+	background: url("../images/icon/exspan.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+}
+.collspaned {
+	display:none;
+}
+.list-module-name.padding-content-10.left .hffolders {
+    border: none;    
+    padding: 0px;
+    height:300px;    
+}
+
+/* checkbox new item */
+.grip_column {  
+    float: left;
+    height: 25px;
+    position: relative;
+    width: 25px;
+}
+.checkbox-custom {
+    height: 19px;    
+    opacity: 0.75;
+    width: 19px;
+}
+.checkbox-custom {
+    background-clip: padding-box;
+    background-color: #E3E6E8;
+    background-image: -moz-linear-gradient(center top , #FFFFFF 20%, rgba(255, 255, 255, 0));
+    background-image: linear-gradient(center top , #FFFFFF 20%, rgba(255, 255, 255, 0));
+    background-image: -o-linear-gradient(center top , #FFFFFF 20%, rgba(255, 255, 255, 0));
+    background-image: -webkit-linear-gradient(center top , #FFFFFF 20%, rgba(255, 255, 255, 0));
+    background-image: -ms-linear-gradient(center top , #FFFFFF 20%, rgba(255, 255, 255, 0));
+    
+    border: 1px solid #B2BAC2;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85) inset, 0 1px 0 0 rgba(0, 0, 0, 0.06);
+    cursor: default;
+}
+.checkbox-custom.file_selected {
+    background: url("../images/icon/custom-checkbox-tick.png") no-repeat scroll center center #FFFFFF;
+    opacity: 1;
+}
+.hfcheckinfo {
+	float:left;
+}
+.hfchecknumber {
+	float:right;
+}
+.file_selected .hfcheckinfo {
+	font-weight:bold;
+}
+.file_selected .hfchecknumber {
+	font-weight:bold;
+}
+
+.smallbox-common.second {
+	margin-top:20px;
+}
