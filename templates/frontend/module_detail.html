@@ -98,7 +98,7 @@
         <div class="module-block-header">
             <div class="icon-module icon-checkout"></div>
             <div class="tilte-module">
-                <a>Reuse</a>
+                <a>{% trans 'Reuse' %}</a>
             </div>
         </div>
     </div>
@@ -108,7 +108,7 @@
         <div class="module-block-header">
             <div class="icon-module icon-download"></div>
             <div class="tilte-module">
-                <a href="{% url 'get_pdf' material.material_id material.version %}">Download</a>
+                <a href="{% url 'get_pdf' material.material_id material.version %}">{% trans 'Download' %}</a>
             </div>
         </div>
     </div>
