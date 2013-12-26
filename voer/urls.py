@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^search/', 'vpw.views.search_result', name='search'),
 
     url(r'^pdf/m/(?P<mid>[0-9a-z]+)/(?P<version>\d+)/?$', 'vpw.views.get_pdf', name='get_pdf'),
+    url(r'^attachment/m/(?P<fid>[0-9a-z]+)/?$', 'vpw.views.get_attachment', name='get_attachment'),
     ## AJAX
     url(r'^ajax/browse$', 'vpw.views.ajax_browse', name='ajax_browse'),
     url(r'^admin/', include(admin.site.urls)),

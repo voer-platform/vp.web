@@ -192,7 +192,14 @@ def vpr_create_person(**kwargs):
 
 def vpr_get_statistic_data(mid, version, field_name):
     if not version:
-        version = 1
+        result = vpr_request('GET', "materials/%s/%s/" % (mid, field_name))
+    else:
+        result = vpr_request('GET', "materials/%s/%s/%s/" % (mid, version, field_name))
 
-    result = vpr_request('GET', "materials/%s/%s/%s/" % (mid, version, field_name))
+    return result
+
+
+def voer_get_attachment_info(attach_id):
+    result = vpr_request('GET', "mfiles/%s/" % attach_id)
+
     return result
