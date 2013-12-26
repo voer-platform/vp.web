@@ -94,7 +94,7 @@
 <!-- LIST MODULE MAINPAGE -->
 <!-- BROWSER -->
 <div class="mainpage-browser left">
-    <a class="btn-browser-all left clear" href="{% url 'browse' %}">Browser All</a>
+    <a class="btn-browser-all left clear" href="{% url 'browse' %}">{% trans 'Browser All' %}</a>
     <div class="mainpage-browser-content left">
         <ul class="list-mainpage-browser left">
 			{% for material in person_list %}

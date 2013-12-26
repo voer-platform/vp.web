@@ -70,7 +70,7 @@ def vpr_create_category(name, parent, description):
 
 def vpr_get_category(cat_id):
     result = vpr_request("GET", "categories/%s" % cat_id)
-    return result;
+    return result
 
 def vpr_update_category(cat_id, name, parent, description):
     result = vpr_request("PUT", "categories/%s" % cat_id, json.dumps({
@@ -104,12 +104,15 @@ def vpr_get_materials():
     result = vpr_request("GET", "materials")
     return result
 
+
 def vpr_get_material(mid):
     result = vpr_request("GET", "materials/%s" % mid)
     return result
 
+
 def vpr_create_material(**kwargs):
-    result = vpr_request("POST", "materials", json.dumps({
+    result = requests.post("http://dev.voer.vn:2013/1/materials", {
+        # result = vpr_request("POST", "materials", {
         "material_type": kwargs.get("material_type", 1),
         "text": kwargs.get("text"),
         "version": kwargs.get("version"),
@@ -129,9 +132,9 @@ def vpr_create_material(**kwargs):
         "attach02_description": kwargs.get("attach02_description"),
         "language": kwargs.get("language"),
         "license_id": kwargs.get("license_id", 1)
-    }))
+    })
 
-    return result
+    return json.loads(result.text)
 
 def vpr_get_pdf(mid, version):
     result = vpr_request('GET', "materials/%s/%s/pdf/" % (mid, version))
