@@ -16,6 +16,24 @@
     <!-- CONTENT MODULE -->
     <div class="module-view-content left padding-content-15">{{ material.text|safe }}</div>
     <!-- END CONTENT MODULE -->
+
+    {% if file_data %}
+    <!-- ATTACHMENT MODULE -->
+    <div class="attach-module-content left padding-content-15">
+        <span class="module-view-name left clear">{% trans 'File Attachments' %}:</span>
+        <div class="attach-content-comment">
+            <ol>
+                {% for attachment in file_data %}
+                <li>
+                    <a href="{% url 'get_attachment' attachment.attachment_id %}">{{ attachment.title }}</a>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <!-- END ATTACHMENT MODULE -->
+    {% endif %}
+
     <!-- SOCIAL MODULE -->
     <div class="bottom-module-content left padding-content-15">
         <ul class="list-social-module left">
@@ -42,6 +60,7 @@
         </ul>
     </div>
     <!-- END SOCIAL MODULE -->
+
     <!-- COMMENT MODULE -->
     <div class="comment-module-content left padding-content-15">
         <div class="module-content-comment">
@@ -58,6 +77,7 @@
 <!-- END LEFT ROW -->
 <!-- RIGHT ROW -->
 <div class="col-lg-2 right-row">
+    {% if author %}
     <!-- AUTHOR NAME -->
     <div class="module-view-author padding-content-10 left">
         <a class="module-view-author-avatar left">
@@ -73,6 +93,7 @@
         </ul>
     </div>
     <!-- END AUTHOR NAME -->
+
     <!-- AUTHOR STATUS -->
     <div class="module-view-author-status left">
         <span class="module-view-author-block left padding-content-5">
@@ -93,6 +114,8 @@
         </span>
     </div>
     <!-- END AUTHOR STATUS -->
+    {% endif %}
+
     {% if material.material_id %}
     <!-- REUSE -->
     <div class="module-block">

@@ -16,6 +16,24 @@
     <!-- CONTENT MODULE -->
     <div class="module-view-content left padding-content-15">{{ material.text|safe }}</div>
     <!-- END CONTENT MODULE -->
+
+    {% if file_data %}
+    <!-- ATTACHMENT MODULE -->
+    <div class="attach-module-content left padding-content-15">
+        <span class="module-view-name left clear">{% trans 'File Attachments' %}:</span>
+        <div class="attach-content-comment">
+            <ol>
+                {% for attachment in file_data %}
+                <li>
+                    <a href="{% url 'get_attachment' attachment.attachment_id %}">{{ attachment.title }}</a>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <!-- END ATTACHMENT MODULE -->
+    {% endif %}
+
     <!-- SOCIAL MODULE -->
     <div class="bottom-module-content left padding-content-15">
         <ul class="list-social-module left">

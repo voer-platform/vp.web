@@ -134,7 +134,7 @@
                   </label>
               </li>
               <li class="right">
-                  <a>{% trans 'Forgot your password ?' %}</a>
+                  <a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans 'Forgot your password ?' %}</a>
               </li>
           </ul>
           <button type="submit" class="btn btn-primary btn-login-submit">{% trans 'Login' %}</button>

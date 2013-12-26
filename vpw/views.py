@@ -1,5 +1,6 @@
 import json
 import math
+import urllib
 
 from django.core.exceptions import PermissionDenied
 
@@ -13,7 +14,9 @@ from django.conf import settings
 
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
-    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, vpt_import, vpr_create_material
+    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
+    voer_get_attachment_info,vpt_import, vpr_create_material
+
 
 from vpw.forms import ModuleCreationForm
 
@@ -57,17 +60,20 @@ def aboutus(request):
 
 def module_detail(request, mid, version):
     material = vpr_get_material(mid)
-    author = []
+
     other_data = []
-    if 'author' in material:
+    if (material.has_key('author') and material['author']):
         author = vpr_get_person(material['author'])
         other_materials = vpr_materials_by_author(material['author'])
         i = 1
         for other_material in other_materials['results']:
             if i > 4:
                 break
+
             i = i + 1
             other_data.append(other_material)
+    else:
+        author = {}
 
     category = vpr_get_category(material['categories'])
 
@@ -103,8 +109,19 @@ def module_detail(request, mid, version):
 
         similar_data.append(material_tmp)
 
+    file_data = []
+    file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
+    for file_attachment_id in file_attachments:
+        attachment_info = voer_get_attachment_info(file_attachment_id)
+
+        if attachment_info['mime_type'] != 'image/jpeg':
+            file_tmp = {}
+            file_tmp['title'] = attachment_info['name']
+            file_tmp['attachment_id'] = file_attachment_id
+            file_data.append(file_tmp)
+
     return render(request, "frontend/module_detail.html",
-                  {"material": material, "author": author, "category": category, 'other_data': other_data, 'similar_data': similar_data})
+                  {"material": material, "author": author, "category": category, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
 
 
 def collection_detail(request, cid, mid):
@@ -149,23 +166,36 @@ def collection_detail(request, cid, mid):
 
         i = i + 1
         material_tmp = vpr_get_material(similar['material_id'])
-        author_id_list = material_tmp['author'].split(',')
 
-        p_list = []
-        for pid in author_id_list:
-            pid = pid.strip()
-            person = vpr_get_person(pid)
-            if person['fullname']:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-            else:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-        material_tmp['author_list'] = p_list
+        if (material_tmp.has_key('author') and material_tmp['author']):
+            author_id_list = material_tmp['author'].split(',')
+
+            p_list = []
+            for pid in author_id_list:
+                pid = pid.strip()
+                person = vpr_get_person(pid)
+                if person['fullname']:
+                    p_list.append({'pid': pid, 'pname': person['fullname']})
+                else:
+                    p_list.append({'pid': pid, 'pname': person['fullname']})
+            material_tmp['author_list'] = p_list
 
         similar_data.append(material_tmp)
 
+    file_data = []
+    file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
+    for file_attachment_id in file_attachments:
+        attachment_info = voer_get_attachment_info(file_attachment_id)
+
+        if attachment_info['mime_type'] != 'image/jpeg':
+            file_tmp = {}
+            file_tmp['title'] = attachment_info['name']
+            file_tmp['attachment_id'] = file_attachment_id
+            file_data.append(file_tmp)
+
     return render(request, "frontend/collection_detail.html",
                   {"collection": collection, "material": material, "author": author, "category": category,
-                   "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data})
+                   "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
 
 @login_required
 def document_detail(request, did):
@@ -631,3 +661,12 @@ def ajax_browse(request):
     page_query = get_page_query(request)
 
     return render(request, "frontend/ajax/browse.html", {"materials": materials, "categories": categories, 'pager': pager, 'page_query': page_query})
+
+def get_attachment(request, fid):
+    attachment_info = voer_get_attachment_info(fid)
+    target_url = 'http://' + settings.VPR_URL + ':' + settings.VPR_PORT + '/' + settings.VPR_VERSION + '/mfiles/' + fid + '/get/'
+    content = urllib.urlopen(target_url).read()
+    response = HttpResponse(content, mimetype=attachment_info['mime_type'])
+    response['Content-Disposition'] = 'attachment; filename='+attachment_info['name']
+
+    return response
