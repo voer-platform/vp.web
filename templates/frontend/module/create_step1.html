@@ -23,28 +23,32 @@
 {% include "frontend/block/left_block_user.html" %}
 <div class="col-lg-1 right-row">
     <div class="hfcreate-1">
-        <div class="content">
-            <p>{% trans 'I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute this content under the terms of the Creative Commons Attribution License available at <a href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a>. I understand that in doing so I retain my copyright in the work and warrant that I am the author or the owner or have permission to distribute the work in question and wish this work to be distributed under the terms of that license (including allowing modification of this work and requiring attribution) and agree that proper attribution of my work is any attribution that includes the authors' names, the title of the work, and the VOER URL to the work.' %}</p>
-        </div>
-        <div class="accept-license">
-            <label class="checkbox checkbox-user-tool">
-            <span class="icons">
-                <span class="first-icon fui-checkbox-unchecked"></span>
-                <span class="second-icon fui-checkbox-checked"></span>
-            </span>
-            <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-            {% trans 'I have read the above, and I agree to license this new work under its terms.' %}
-        </label>
+        <form method="post">
+            {% csrf_token %}
+            <div class="content">
+                <p>{% trans 'I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute this content under the terms of the Creative Commons Attribution License available at <a href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a>. I understand that in doing so I retain my copyright in the work and warrant that I am the author or the owner or have permission to distribute the work in question and wish this work to be distributed under the terms of that license (including allowing modification of this work and requiring attribution) and agree that proper attribution of my work is any attribution that includes the authors'' names, the title of the work, and the VOER URL to the work.' %}</p>
+            </div>
+            <div class="accept-license">
+                <label class="checkbox checkbox-user-tool">
+                <span class="icons">
+                    <span class="first-icon fui-checkbox-unchecked"></span>
+                    <span class="second-icon fui-checkbox-checked"></span>
+                </span>
+                <input data-toggle="checkbox" type="checkbox">
+                {% trans 'I have read the above, and I agree to license this new work under its terms.' %}
+            </label>
 
-        </div>
-        <script>
-            $(document).ready(function(){
-                $('.checkbox').click(function(){
-                    $('.hfbtn-next').toggleClass('hfbtn-active');
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('.checkbox').click(function(){
+                        $('.hfbtn-next').toggleClass('hfbtn-active');
+                    });
                 });
-            });
-        </script>
-        <a class="hfbtn-common hfbtn-next right" href="{% url 'create_module' %}?step=2">Next</a>
+            </script>
+            <input type="hidden" name="step" value="1" />
+            <button class="hfbtn-common hfbtn-next right">Next</button>
+        </form>
     </div>
 </div>
 {% endblock %}

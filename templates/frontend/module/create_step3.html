@@ -2,6 +2,11 @@
 
 {% load i18n %}
 
+{% block js %}
+    {{ form.media }}
+    <script type="text/javascript" src="{{ STATIC_URL }}mce_filebrowser/js/filebrowser_init.js"></script>
+{% endblock %}
+
 {% block titleSite %}Create module{% endblock %}
 
 {% block content %}        
@@ -20,44 +25,12 @@
             <li><a id="hfstep-3"><div class="step">3</div>{% trans 'Content' %}</a></li>
         </ul>
     </div>
-</div>          <!-- left content -->
-            <div class="col-lg-2 left-row">
-                <div class="hfuser-tools">
-    <div class="smallbox-common">
-        <div class="hfbtn-create module"><a href="create_module.php">{% trans 'Create a new module' %}</a></div>
-        <div class="hfbtn-create collection"><a href="create_collection.php">{% trans 'Create a new collection' %}</a></div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My Items' %}
-        </div>
-        <div class="content">
-            <ul>
-                <li><a>{% trans 'Add Resource' %}</a></li>
-                <li><a>{% trans 'Saved Items' %}</a></li>
-                <li><a>{% trans 'Submitted Items' %}</a></li>
-                <li><a>{% trans 'Evaluated Items' %}</a></li>
-                <li><a>{% trans 'Authored Items' %}</a></li>
-                <li><a>{% trans 'Remixed Items' %}</a></li>
-                <li><a>{% trans 'My Favorites' %}</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My profile' %}
-        </div>
-        <div class="content">
-            <ul>        
-                <li><a>{% trans 'Profile Information' %}</a></li>
-                <li><a>{% trans 'Member Statistics' %}</a></li>
-                <li><a>{% trans 'Account Settings' %}</a></li>
-                <li><a>{% trans 'Delete Account' %}</a></li>
-            </ul>
-        </div>      
-    </div>
-</div>  
-            </div>
+</div>
+{% include "frontend/block/left_block_user.html" %}
+    <form role="form" method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+        <input type="hidden" name="step" value="3" />
+        <input type="hidden" name="mid" value="{{ material.id }}" />
             <div class="col-lg-1 right-row">
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
@@ -70,14 +43,13 @@
                     <div class="tab-content">                   
                       <div class="tab-pane" id="metadata">
                         <div class="content">
-    <form role="form">
         <div class="form-group">
             <label for="InputEmail1">{% trans 'Title' %}</label>
-            <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text">
+            <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text" name="title" value="{{ material.title }}">
         </div>
         <div class="form-group">
             <label for="InputDescription">{% trans 'Description' %}</label>
-            <textarea rows="4" class="form-control"></textarea>
+            <textarea rows="4" class="form-control" name="description">{{ material.description }}</textarea>
         </div>
         <div class="form-group">
             <label for="InputAuthor">{% trans 'Author' %}</label>
@@ -107,9 +79,9 @@
                                         <img src="images/avatar.jpg" height="70px" width="70px">
                                     </div>
                                     <div class="right">                                     
-                                        <div class="user-name">{% trans 'HiFlyer JSC' %}</div>
+                                        <div class="user-name">{% trans 'Nguyen Lan Dung' %}</div>
                                         <div class="user-address">{% trans 'R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam' %}</div>
-                                        <div class="user-website">www.hiflyer.vn</div>
+                                        <div class="user-website">voer.edu.vn</div>
                                     </div>
                                 </div>
                             </a>
@@ -120,7 +92,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                                
                         </td>
                         <td>
@@ -129,7 +101,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -138,7 +110,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -147,7 +119,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -156,7 +128,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td>
@@ -165,7 +137,7 @@
                                     <span class="first-icon fui-checkbox-unchecked"></span>
                                     <span class="second-icon fui-checkbox-checked"></span>
                                 </span>
-                                <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">                                              
+                                <input data-toggle="checkbox" type="checkbox">
                             </label>                        
                         </td>
                         <td><div class="hfbtn-delete"></div></td>                       
@@ -176,66 +148,18 @@
         <div class="form-group">
             <label for="InputCategories">{% trans 'Categories' %}</label>
             <ul class="AddCategories">
+                {% for category in categories %}
                 <li>
                     <label class="checkbox checkbox-user-tool">
                         <span class="icons">
                             <span class="first-icon fui-checkbox-unchecked"></span>
                             <span class="second-icon fui-checkbox-checked"></span>
                         </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Business' %}                        
+                        <input data-toggle="checkbox" type="checkbox" name="categories" value="{{ category.id }}">
+                        {{ category.name }}
                     </label>                
                 </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Social Sciences' %}                         
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Science and Technology' %}                          
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Humanities' %}                      
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Arts' %}                        
-                    </label>                
-                </li>
-                <li>
-                    <label class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Mathematics and Statistics' %}                          
-                    </label>                
-                </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="form-group">
@@ -249,47 +173,39 @@
         <div class="form-group">
             <label for="InputLanguage">{% trans 'Language' %}</label> 
             <div class="hfselectList">
-                <select style="display: none;" name="selectlist" class="select-block">
-                    <option>{% trans 'Choose country' %}</option>
-                    <option>{% trans 'Korea' %}</option>
-                    <option>{% trans 'United States' %}</option>
-                    <option>{% trans 'England' %}</option>
-                    <option>{% trans 'France' %}</option>
-                    <option>{% trans 'Italy' %}</option>
-                    <option>{% trans 'Japan' %}</option>
-                    <option>{% trans 'Viet Nam' %}</option>
-                </select><div style="" class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">{% trans 'Choose country' %}</span>&nbsp;<span class="caret"></span></button><ul style="max-height: 664px; overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a style="" tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Choose country' %}</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Korea' %}</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'United States' %}</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'England' %}</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'France' %}</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Italy' %}</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Japan' %}</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Viet Nam' %}</span></a></li></ul></div>           
+                <select name="language" class="select-block">
+                    <option>{% trans 'Choose language' %}</option>
+                    <option value="en">{% trans 'English' %}</option>
+                    <option value="vi">{% trans 'Vietnamese' %}</option>
+                </select>
+                <div style="" class="btn-group select select-block"><i class="dropdown-arrow dropdown-arrow-inverse"></i><button class="btn dropdown-toggle clearfix btn-primary" data-toggle="dropdown"><span class="filter-option pull-left">{% trans 'Choose country' %}</span>&nbsp;<span class="caret"></span></button><ul style="max-height: 664px; overflow-y: auto; min-height: 18px;" class="dropdown-menu dropdown-inverse" role="menu"><li class="selected" rel="0"><a style="" tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Choose country' %}</span></a></li><li rel="1"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Korea' %}</span></a></li><li rel="2"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'United States' %}</span></a></li><li rel="3"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'England' %}</span></a></li><li rel="4"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'France' %}</span></a></li><li rel="5"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Italy' %}</span></a></li><li rel="6"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Japan' %}</span></a></li><li rel="7"><a tabindex="-1" href="#" class=""><span class="pull-left">{% trans 'Viet Nam' %}</span></a></li></ul></div>
             </div>          
         </div>
         <div class="form-group">
             <label for="InputKeywords">{% trans 'Keywords' %}</label>
-            <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text">
+            <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text" name="keywords" value="{{ material.keywords }}">
         </div>  
         <div class="form-group">
             <label for="InputTags">{% trans 'Tags' %}</label>
             <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
         </div>  
-        <div class="form-group btn-common">         
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_3.php">{% trans 'Next' %}</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module.php">{% trans 'Back' %}</a>
-        </div>      
-    </form>
-</div>                                                      
+</div>
                       </div>
                       <div class="tab-pane active" id="content">
                         <div class="content">
-    <form role="form">
         <div class="form-group">
             <label for="InputFile">{% trans 'Document for import' %} </label>
-            <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="uploadfile_1" type="file">                      
+            <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="document_file" type="file">
             <div class="fakefile">              
                 <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
             </div>
-            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt.' %}</p>            
+            <button class="hfbtn-common hfbtn-active" name="action" value="import">{% trans 'Import' %}</button>
+            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt.' %}</p>
         </div>
         <div class="form-group">
             <label for="InputBody">{% trans 'Body' %}</label>
-            <textarea rows="4" class="form-control"></textarea>
+            {{ form.body.errors }}
+            {{ form.body }}
         </div>
         <div class="form-group">
             <label for="InputFile">{% trans 'Files - Included Resources' %}</label>
@@ -300,14 +216,14 @@
             <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg.' %}</p>           
         </div>      
         <div class="form-group btn-common">
-            <a class="hfbtn-common hfbtn-public right hfbtn-active" href="create_module_public.php">{% trans 'Public' %}</a>
-            <a class="hfbtn-common hfbtn-next right hfbtn-active" href="create_module_save.php">{% trans 'Save' %}</a>
-            <a class="hfbtn-common hfbtn-back right hfbtn-active" href="create_module_2.php">{% trans 'Back' %}</a>
+            <button class="hfbtn-common hfbtn-public right hfbtn-active" value="publish" name="action">{% trans 'Publish' %}</button>
+            <button class="hfbtn-common hfbtn-next right hfbtn-active" value="save" name="action">{% trans 'Save' %}</button>
+            <button class="hfbtn-common hfbtn-back right hfbtn-active" value="back" name="action">{% trans 'Back' %}</button>
         </div>          
-    </form>
 </div>                    </div>
                     </div>
 
                 </div>
             </div>
+    </form>
 {% endblock %}

@@ -63,6 +63,17 @@
                             var $iditem = $(this).attr('metadata');
                             $('div[metadata='+$iditem+']').toggleClass('hfvisible');
                         });
+                        $('.collection-save-hover').hover(
+                            function() {
+                            }, function() {
+                              var $iditem = $(this).attr('metadata').replace('col-hover-', '');
+                              var $selectItem = $('div[metadata=iditem-'+$iditem+']');
+
+                              if ($selectItem.hasClass('hfvisible')) {
+                                $selectItem.toggleClass('hfvisible');
+                              }
+                            }
+                        );
                         $('.hfbtn-saveto-type').click(function(){
                             var $iditemCreate = $(this).attr('metadata');
 
@@ -82,19 +93,20 @@
                     });
                 </script>
 <div id="materials" class="hfitems active">
-{% for material in materials.results %}
+{% for material in materials %}
 {% if material.material_type == 1 %}
     {% url 'module_detail' mid=material.material_id as material_url %}
 {% else %}
     {% url 'collection_detail' cid=material.material_id as material_url %}
 {% endif %}
 <div class="hfitem">
-    <div class="collection-save-hover">
+    <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
+        {% if user.is_authenticated %}
         <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
+            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}">{% trans 'Add to my favourite' %}</a></div>
         </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">{% trans 'My Favorites'</div>
+        <div class="collection-saveto" metadata="iditem-{{ material.material_id }}">
+            <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>
             <div class="collection-saveto-content">
 
             </div>
@@ -105,6 +117,7 @@
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
         </div>
+        {% endif %}
     </div>
     <div class="collection-mainpage-cover">
 		{% if material.categories %}
@@ -139,8 +152,15 @@
 
     </div>
     <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
+        {% if material.material_type == 1 %}
+        <div class="voer-mol-ico left">&nbsp;</div>
+        {% elif material.material_type == 2 %}
+        <div class="voer-col-ico left">&nbsp;</div>
+        {% endif %}
+
+        <div class="hflike left">{% if material.favorite_count.count %} {{ material.favorite_count.count }}{% else %}0{% endif %}</div>
+        <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
+
         <div class="hfother right tooltipi-container">
             <img src="{{ STATIC_URL }}images/icon/information.png">
             <div class="hftooltipi">
@@ -150,6 +170,7 @@
     </div>
 </div>
 {% endfor %}
+{% include "base/pager.html" %}
 </div>
 </div>
 <div class="col-lg-2 right-row">

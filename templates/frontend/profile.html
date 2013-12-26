@@ -18,6 +18,9 @@
                 <div class="hfuser-name">{% if person.fullname %} {{ person.fullname }} {% else %} {{ person.user_id }} {% endif %}</div>
                 <div class="hfuser-address">{{ person.title }}</div>
                 <div class="hfuser-website">{{ person.homepage }}</div>
+                {% if request.user.is_superuser %}
+                <a class="hfbtn-common hfbtn-public right hfbtn-active" href="{% url 'delete_profile' person.id %}">Delete person</a>
+                {% endif %}
             </div>
         </div>
         <!--<div class="hfuser-other right">
@@ -199,8 +202,15 @@
 		</a></div>
     </div> 
     <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
+        {% if material.material_type == 1 %}
+        <div class="voer-mol-ico left">&nbsp;</div>
+        {% elif material.material_type == 2 %}
+        <div class="voer-col-ico left">&nbsp;</div>
+        {% endif %}
+
+        <div class="hflike left">{% if material.favorite_count.count %} {{ material.favorite_count.count }}{% else %}0{% endif %}</div>
+        <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
+
         <div class="hfother right tooltipi-container">
             <img src="{{ STATIC_URL }}images/icon/information.png">         
             <div class="hftooltipi">
@@ -210,6 +220,7 @@
     </div>
   </div> 
   {% endfor %}
+  {% include "base/pager.html" %}
 </div> 
 
            </div>

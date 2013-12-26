@@ -180,7 +180,7 @@
     </div>
 </div>
 <div class="hfitems">
-    {% for material in materials.results %}
+    {% for material in materials %}
     {% if material.material_type == 1 %}
         {% url 'module_detail' mid=material.material_id as material_url %}
     {% else %}
@@ -237,8 +237,15 @@
 
     </div>
     <div class="collection-mainpage-other">
-        <div class="hflike left">100</div>
-        <div class="hfview left">120</div>
+        {% if material.material_type == 1 %}
+        <div class="voer-mol-ico left">&nbsp;</div>
+        {% elif material.material_type == 2 %}
+        <div class="voer-col-ico left">&nbsp;</div>
+        {% endif %}
+
+        <div class="hflike left">{% if material.favorite_count.count %} {{ material.favorite_count.count }}{% else %}0{% endif %}</div>
+        <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
+
         <div class="hfother right tooltipi-container">
             <img src="{{ STATIC_URL }}images/icon/information.png">
             <div class="hftooltipi">
@@ -248,6 +255,8 @@
     </div>
     </div>
     {% endfor %}
+
+    {% include "base/pager.html" %}
     </div>
  </div>
 {% endblock %}

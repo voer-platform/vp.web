@@ -65,19 +65,30 @@
         <div id="right-top-nav" class="right">
             <div class="block-top-language">
                 <ul class="list-right-top">
-                    <li>{% trans 'Language:' %}</li>
+                    <li></li>
                     <li>
                         <div class="collapse navbar-collapse bs-js-navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li class="dropdown">
                                     <a id="drop-top-language" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                                        English
+                                       {% trans 'Language' %}
                                         <span class="caret"></span>
                                     </a>
                                     <div class="dropdown-menu" role="menu" aria-labelledby="drop-category-pd">
                                         <ul class="dropdown-menu-language">
                                             <li>
-                                                <a>Vietnamese</a>
+                                                <form name="setLangEnglish" action="/language/setlang/" method="POST">{% csrf_token %}
+                                                    <input name="next" type="hidden" value="/" />
+                                                    <input type="hidden" name="language" value="en" />
+                                                    <a href="#" onclick="document.setLangEnglish.submit();return false;">English</a>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form name="setLangVietnamese" action="/language/setlang/" method="POST">{% csrf_token %}
+                                                    <input name="next" type="hidden" value="/" />
+                                                    <input type="hidden" name="language" value="vi" />
+                                                    <a href="#" onclick="document.setLangVietnamese.submit();return false;">Vietnamese</a>
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>

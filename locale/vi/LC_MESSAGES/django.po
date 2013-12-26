@@ -1,0 +1,796 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VOER Platform 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-25 15:36+0100\n"
+"PO-Revision-Date: 2013-12-25 21:44+0700\n"
+"Last-Translator: Cuong Nguyen <cuongnguyen@vnfoundation.org>\n"
+"Language-Team: VOER Dev <tech@voer.edu.vn>\n"
+"Language: Vietnamese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: templates/base/header.html:15
+msgid "Home"
+msgstr "Trang chủ"
+
+#: templates/base/header.html:18 templates/frontend/profile.html:80
+msgid "Browse All"
+msgstr "Duyệt tài liệu"
+
+#: templates/base/header.html:21
+msgid "Discover"
+msgstr "Mới"
+
+#: templates/base/header.html:24
+msgid "About Us"
+msgstr "Giới thiệu"
+
+#: templates/base/header.html:50
+msgid "Account View"
+msgstr "Xem tài khoản"
+
+#: templates/base/header.html:53
+msgid "Logout"
+msgstr "Đăng xuất"
+
+#: templates/base/header.html:68
+msgid "Language:"
+msgstr "Ngôn ngữ"
+
+#: templates/base/header.html:93
+msgid "Join"
+msgstr "Đăng ký"
+
+#: templates/base/header.html:111
+msgid "Login to VOER"
+msgstr "Đăng nhập"
+
+#: templates/base/header.html:126
+msgid "Remember me"
+msgstr "Ghi nhớ"
+
+#: templates/base/header.html:130
+msgid "Forgot your password ?"
+msgstr "Quên mật khẩu?"
+
+#: templates/base/header.html:133 templates/registration/login.html:36
+msgid "Login"
+msgstr "Đăng nhập"
+
+#: templates/base/header.html:136
+msgid "Don't have an account? Sign up for VOER"
+msgstr "Bạn chưa có tài khoản? Hãy đăng ký"
+
+#: templates/base/header.html:139
+msgid "The username or password is incorrect."
+msgstr "Tên đăng nhập hoặc mật khẩu chưa đúng"
+
+#: templates/frontend/browse.html:105 templates/frontend/profile.html:156
+#: templates/frontend/module/create_step3.html:220
+msgid "Save"
+msgstr "Thêm vào mục yêu thích"
+
+#: templates/frontend/browse.html:108 templates/frontend/profile.html:159
+#: templates/frontend/user_profile.html:93
+#: templates/frontend/user_profile.html:195
+#: templates/frontend/ajax/browse.html:14
+#: templates/frontend/block/left_block_user.html:16
+msgid "My Favorites"
+msgstr "Mục yêu thích"
+
+#: templates/frontend/browse.html:113 templates/frontend/profile.html:164
+#: templates/frontend/user_profile.html:200
+msgid "Create new"
+msgstr "Tạo mới"
+
+#: templates/frontend/browse.html:135 templates/frontend/profile.html:188
+#: templates/frontend/user_profile.html:222
+#: templates/frontend/ajax/browse.html:41
+msgid "Business"
+msgstr "Kinh tế"
+
+#: templates/frontend/browse.html:137 templates/frontend/profile.html:190
+#: templates/frontend/user_profile.html:224
+#: templates/frontend/ajax/browse.html:43
+msgid "Social Sciences"
+msgstr "Khoa học xã hội"
+
+#: templates/frontend/browse.html:139 templates/frontend/profile.html:192
+#: templates/frontend/user_profile.html:226
+#: templates/frontend/ajax/browse.html:45
+msgid "Science and Technology"
+msgstr "Khoa học và công nghệ"
+
+#: templates/frontend/browse.html:141 templates/frontend/profile.html:194
+#: templates/frontend/user_profile.html:228
+#: templates/frontend/ajax/browse.html:47
+msgid "Humanities"
+msgstr "Nhân văn"
+
+#: templates/frontend/browse.html:143 templates/frontend/profile.html:196
+#: templates/frontend/user_profile.html:230
+#: templates/frontend/ajax/browse.html:49
+msgid "Arts"
+msgstr "Nghệ thuật"
+
+#: templates/frontend/browse.html:145 templates/frontend/profile.html:198
+#: templates/frontend/user_profile.html:232
+#: templates/frontend/ajax/browse.html:51
+msgid "Mathematics and Statistics"
+msgstr "Toán học và thống kê"
+
+#: templates/frontend/browse.html:147 templates/frontend/profile.html:200
+#: templates/frontend/user_profile.html:234
+#: templates/frontend/ajax/browse.html:53
+msgid "Others"
+msgstr "Khác"
+
+#: templates/frontend/browse.html:293
+msgid "All Categories"
+msgstr "Tất cả"
+
+#: templates/frontend/collection_detail.html:53
+#: templates/frontend/module_detail.html:53
+msgid "Comment"
+msgstr "Góp ý"
+
+#: templates/frontend/collection_detail.html:71
+#: templates/frontend/module_detail.html:71
+msgid "View my profile"
+msgstr "Xem hồ sơ"
+
+#: templates/frontend/profile.html:5 templates/frontend/user_profile.html:5
+msgid "User profile"
+msgstr "Hồ sơ cá nhân"
+
+#: templates/frontend/profile.html:29 templates/frontend/user_profile.html:26
+#: templates/frontend/module/create_step2.html:47
+#: templates/frontend/module/create_step2.html:56
+#: templates/frontend/module/create_step3.html:55
+#: templates/frontend/module/create_step3.html:64
+msgid "Author"
+msgstr "Tác giả"
+
+#: templates/frontend/profile.html:33 templates/frontend/user_profile.html:30
+#: templates/frontend/module/create_step2.html:61
+#: templates/frontend/module/create_step3.html:69
+msgid "Contributor"
+msgstr "Đồng biên tập"
+
+#: templates/frontend/profile.html:37 templates/frontend/user_profile.html:34
+#: templates/frontend/module/create_step2.html:57
+#: templates/frontend/module/create_step3.html:65
+msgid "Editor"
+msgstr "Biên tập viên"
+
+#: templates/frontend/profile.html:41 templates/frontend/user_profile.html:38
+#: templates/frontend/module/create_step2.html:58
+#: templates/frontend/module/create_step3.html:66
+msgid "Licensor"
+msgstr "Người giữ tác quyền"
+
+#: templates/frontend/profile.html:45 templates/frontend/user_profile.html:42
+#: templates/frontend/module/create_step2.html:59
+#: templates/frontend/module/create_step3.html:67
+msgid "Maintainer"
+msgstr "Maintainer"
+
+#: templates/frontend/profile.html:49 templates/frontend/user_profile.html:46
+#: templates/frontend/module/create_step2.html:60
+#: templates/frontend/module/create_step3.html:68
+msgid "Translator"
+msgstr "Dịch giả"
+
+#: templates/frontend/profile.html:82
+msgid "Popular"
+msgstr "Phổ biến"
+
+#: templates/frontend/profile.html:83
+msgid "All Creative Fields"
+msgstr ""
+
+#: templates/frontend/profile.html:84
+msgid "Architecture"
+msgstr ""
+
+#: templates/frontend/profile.html:85
+msgid "Art Direction"
+msgstr ""
+
+#: templates/frontend/profile.html:86
+msgid "Branding"
+msgstr ""
+
+#: templates/frontend/profile.html:87
+msgid "Fashion"
+msgstr ""
+
+#: templates/frontend/profile.html:88
+msgid "Graphic Design"
+msgstr ""
+
+#: templates/frontend/profile.html:89
+msgid "Illustration"
+msgstr ""
+
+#: templates/frontend/profile.html:90
+msgid "Industrial Design"
+msgstr ""
+
+#: templates/frontend/profile.html:91
+msgid "Interaction Design"
+msgstr ""
+
+#: templates/frontend/profile.html:92
+msgid "Motion Graphics"
+msgstr ""
+
+#: templates/frontend/profile.html:93
+msgid "Photography"
+msgstr ""
+
+#: templates/frontend/profile.html:94
+msgid "UI/UX"
+msgstr ""
+
+#: templates/frontend/profile.html:95
+msgid "Web Design"
+msgstr ""
+
+#: templates/frontend/profile.html:99 templates/frontend/profile.html:101
+msgid "Featured"
+msgstr "Tiêu biểu"
+
+#: templates/frontend/profile.html:102
+msgid "Most Liked"
+msgstr "Yêu thích nhất"
+
+#: templates/frontend/profile.html:103
+msgid "Most Viewed"
+msgstr "Xem nhiều nhất"
+
+#: templates/frontend/profile.html:104
+msgid "Most Discussed"
+msgstr "Thảo luận nhiều nhất"
+
+#: templates/frontend/profile.html:105
+msgid "Most Recent"
+msgstr "Mới nhất"
+
+#: templates/frontend/profile.html:109
+msgid "Sort by"
+msgstr "Sắp xếp theo"
+
+#: templates/frontend/profile.html:111
+#: templates/frontend/user_profile.html:171
+#: templates/frontend/module/create_step2.html:39
+#: templates/frontend/module/create_step3.html:47
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: templates/frontend/profile.html:112
+#: templates/frontend/user_profile.html:172
+msgid "Relevance"
+msgstr "Mức tương tự"
+
+#: templates/frontend/profile.html:113
+#: templates/frontend/user_profile.html:173
+msgid "Rating"
+msgstr "Đánh giá"
+
+#: templates/frontend/profile.html:114
+#: templates/frontend/user_profile.html:174
+msgid "Date"
+msgstr "Ngày"
+
+#: templates/frontend/profile.html:118
+#: templates/frontend/user_profile.html:178
+msgid "Gridview"
+msgstr "Xem dạng lưới"
+
+#: templates/frontend/profile.html:119
+#: templates/frontend/user_profile.html:179
+msgid "Listview"
+msgstr "Xem dạng danh sách"
+
+#: templates/frontend/profile.html:217
+#: templates/frontend/user_profile.html:252
+msgid "Uploaded On:"
+msgstr "Tải lên ngày:"
+
+#: templates/frontend/profile.html:230
+msgid "Filter By"
+msgstr "Lọc theo"
+
+#: templates/frontend/profile.html:263
+msgid "All types"
+msgstr "Tất cả"
+
+#: templates/frontend/profile.html:274
+msgid "Modules"
+msgstr "Module"
+
+#: templates/frontend/profile.html:285
+msgid "Collections"
+msgstr "Tài liệu"
+
+#: templates/frontend/profile.html:299
+msgid "All Languages"
+msgstr "Tất cả ngôn ngữ"
+
+#: templates/frontend/profile.html:310
+#: templates/frontend/module/create_step3.html:178
+msgid "English"
+msgstr "Tiếng Anh"
+
+#: templates/frontend/profile.html:321
+msgid "Vietnam"
+msgstr "Tiếng Việt"
+
+#: templates/frontend/search_result.html:5
+msgid "Search result"
+msgstr "Kết quả tìm kiếm"
+
+#: templates/frontend/search_result.html:115
+msgid "No data"
+msgstr "Không có dữ liệu"
+
+#: templates/frontend/user_profile.html:78
+#: templates/frontend/block/left_block_user.html:5
+#: templates/frontend/module/create_step1.html:13
+#: templates/frontend/module/create_step2.html:14
+#: templates/frontend/module/create_step3.html:19
+msgid "Create a new module"
+msgstr "Tạo module mới"
+
+#: templates/frontend/user_profile.html:79
+#: templates/frontend/block/left_block_user.html:6
+msgid "Create a new collection"
+msgstr "Tạo collection mới"
+
+#: templates/frontend/user_profile.html:83
+msgid "My Items"
+msgstr "Các mục của tôi"
+
+#: templates/frontend/user_profile.html:87
+msgid "Add Resource"
+msgstr "Thêm tài nguyên"
+
+#: templates/frontend/user_profile.html:88
+#: templates/frontend/block/left_block_user.html:15
+msgid "Saved Items"
+msgstr "Các mục được lưu"
+
+#: templates/frontend/user_profile.html:89
+msgid "Submitted Items"
+msgstr "Các mục được nộp"
+
+#: templates/frontend/user_profile.html:90
+msgid "Evaluated Items"
+msgstr "Tài liệu quan tâm"
+
+#: templates/frontend/user_profile.html:91
+msgid "Authored Items"
+msgstr "Tài liệu của tôi"
+
+#: templates/frontend/user_profile.html:92
+msgid "Remixed Items"
+msgstr "Tài liệu tái sử dụng"
+
+#: templates/frontend/user_profile.html:99
+msgid "My profile"
+msgstr "Hồ sơ cá nhân"
+
+#: templates/frontend/user_profile.html:103
+msgid "Profile Information"
+msgstr "Thông tin hồ sơ"
+
+#: templates/frontend/user_profile.html:104
+msgid "Member Statistics"
+msgstr "Thống kê"
+
+#: templates/frontend/user_profile.html:105
+msgid "Account Settings"
+msgstr "Cài đặt"
+
+#: templates/frontend/user_profile.html:106
+msgid "Delete Account"
+msgstr "Xóa tài khoản"
+
+#: templates/frontend/block/left_block_user.html:14
+#, fuzzy
+msgid "Unpublish"
+msgstr "Tiếng Anh"
+
+#: templates/frontend/module/create_step1.html:11
+#: templates/frontend/module/create_step2.html:12
+#: templates/frontend/module/create_step3.html:17
+msgid "Create Content"
+msgstr "Đóng góp nội dung"
+
+#: templates/frontend/module/create_step1.html:17
+#: templates/frontend/module/create_step2.html:18
+#: templates/frontend/module/create_step3.html:23
+msgid "License"
+msgstr "Bản quyền"
+
+#: templates/frontend/module/create_step1.html:18
+#: templates/frontend/module/create_step2.html:19
+#: templates/frontend/module/create_step2.html:29
+#: templates/frontend/module/create_step3.html:24
+#: templates/frontend/module/create_step3.html:38
+msgid "Metadata"
+msgstr "Thông tin bổ sung"
+
+#: templates/frontend/module/create_step1.html:29
+msgid ""
+"I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute "
+"this content under the terms of the Creative Commons Attribution License "
+"available at <a href=\"http://creativecommons.org/licenses/by/3.0/\">http://"
+"creativecommons.org/licenses/by/3.0/</a>. I understand that in doing so I "
+"retain my copyright in the work and warrant that I am the author or the "
+"owner or have permission to distribute the work in question and wish this "
+"work to be distributed under the terms of that license (including allowing "
+"modification of this work and requiring attribution) and agree that proper "
+"attribution of my work is any attribution that includes the authors"
+msgstr ""
+"Tôi cho phép Thư viện Học liệu mở Việt Nam (VOER) phân phối nội dung này "
+"theo các điều khoản của giấy phép Creative Commons Attribution License có "
+"tại <a href=\"http://creativecommons.org/licenses/by/3.0/\">http://"
+"creativecommons.org/licenses/by/3.0/</a>. Tôi hiểu rằng với việc này tôi vẫn "
+"giữ tác quyền của nội dung và đảm rằng tôi là tác giả hoặc chủ sở hữu hoặc "
+"có quyền phân phối nội dung và mong muốn nội dung này sẽ được phân phối theo "
+"các điều khoản của giấy phép mở Creative Commons Attribution License (bao "
+"gồm cho phép hiệu chỉnh nội dung và yêu cầu quyền tác giả) và đồng ý rằng "
+"quyền tác giả hợp lý của nội dụng của tôi là bất kỳ quyền tá giả nào mà bao "
+"gồm tác giả."
+
+#: templates/frontend/module/create_step1.html:38
+msgid ""
+"I have read the above, and I agree to license this new work under its terms."
+msgstr ""
+"Tôi đã đọc nội dung trên, và tôi chấp thuận nội dung của tôi tuân thủ các "
+"điều khoản có trong giấy phép."
+
+#: templates/frontend/module/create_step2.html:5
+msgid "Create module"
+msgstr "Tạo module"
+
+#: templates/frontend/module/create_step2.html:20
+#: templates/frontend/module/create_step3.html:25
+#: templates/frontend/module/create_step3.html:39
+msgid "Content"
+msgstr "Nội dung"
+
+#: templates/frontend/module/create_step2.html:40
+msgid "Enter title"
+msgstr "Nhập tiêu đề"
+
+#: templates/frontend/module/create_step2.html:43
+#: templates/frontend/module/create_step3.html:51
+msgid "Description"
+msgstr "Mô tả"
+
+#: templates/frontend/module/create_step2.html:48
+#, fuzzy
+msgid "Enter author"
+msgstr "Thêm tác giả"
+
+#: templates/frontend/module/create_step2.html:49
+#: templates/frontend/module/create_step3.html:57
+msgid "Add new Author"
+msgstr "Thêm tác giả"
+
+#: templates/frontend/module/create_step2.html:55
+#: templates/frontend/module/create_step3.html:63
+msgid "Name"
+msgstr "Tên"
+
+#: templates/frontend/module/create_step2.html:141
+#: templates/frontend/module/create_step3.html:149
+msgid "Categories"
+msgstr "Phân loại"
+
+#: templates/frontend/module/create_step2.html:158
+#: templates/frontend/module/create_step3.html:166
+msgid "Image"
+msgstr "Ảnh"
+
+#: templates/frontend/module/create_step2.html:166
+#: templates/frontend/module/create_step3.html:174
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#: templates/frontend/module/create_step2.html:169
+#: templates/frontend/module/create_step3.html:177
+#, fuzzy
+msgid "Choose language"
+msgstr "Ngôn ngữ"
+
+#: templates/frontend/module/create_step2.html:176
+#: templates/frontend/module/create_step3.html:185
+msgid "Keywords"
+msgstr "Các từ khóa"
+
+#: templates/frontend/module/create_step2.html:177
+#, fuzzy
+msgid "Enter keywords"
+msgstr "Nhập mật khẩu mới"
+
+#: templates/frontend/module/create_step2.html:180
+#: templates/frontend/module/create_step3.html:189
+msgid "Tags"
+msgstr "Các Tag"
+
+#: templates/frontend/module/create_step2.html:181
+msgid "Enter tags"
+msgstr "Thêm tag"
+
+#: templates/frontend/module/create_step2.html:185
+msgid "Next"
+msgstr "Tiếp"
+
+#: templates/frontend/module/create_step2.html:186
+#: templates/frontend/module/create_step3.html:221
+msgid "Back"
+msgstr "Trước"
+
+#: templates/frontend/module/create_step3.html:76
+msgid "HiFlyer JSC"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:82
+msgid "Nguyen Lan Dung"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:83
+msgid "R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam"
+msgstr ""
+
+#: templates/frontend/module/create_step3.html:171
+msgid "Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg."
+msgstr ""
+"Kích thước tài liệu không vượt quá 50MB. <br>Hệ thống chấp nhận các định "
+"dạng: png gif jpg jpeg."
+
+#: templates/frontend/module/create_step3.html:179
+#, fuzzy
+msgid "Vietnamese"
+msgstr "Tiếng Việt"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Choose country"
+msgstr "Chọn quốc gia"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Korea"
+msgstr "Hàn Quốc"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "United States"
+msgstr "Hoa Kỳ"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "England"
+msgstr "Anh"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "France"
+msgstr "Pháp"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Italy"
+msgstr "Ý"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Japan"
+msgstr "Nhật"
+
+#: templates/frontend/module/create_step3.html:181
+msgid "Viet Nam"
+msgstr "Việt Nam"
+
+#: templates/frontend/module/create_step3.html:197
+msgid "Document for import"
+msgstr "Tải tài liệu"
+
+#: templates/frontend/module/create_step3.html:202
+msgid "Import"
+msgstr "Nhập"
+
+#: templates/frontend/module/create_step3.html:203
+msgid "Upload a file, allowed extensions: doc, docx, odt."
+msgstr "Tải tài liệu với định dạng DOC, DOCX, ODT"
+
+#: templates/frontend/module/create_step3.html:206
+msgid "Body"
+msgstr "Thân"
+
+#: templates/frontend/module/create_step3.html:211
+msgid "Files - Included Resources"
+msgstr "Các tài nguyên kèm theo"
+
+#: templates/frontend/module/create_step3.html:216
+msgid "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
+msgstr "Tải tài liệu với định dạng DOC, DOCX, ODT, PNG, GIF,  JPG, JPEG"
+
+#: templates/frontend/module/create_step3.html:219
+#, fuzzy
+msgid "Publish"
+msgstr "Công khai"
+
+#: templates/registration/password_change_done.html:4
+#: templates/registration/password_change_done.html:8
+msgid "Password change successful"
+msgstr "Đổi mật khẩu thành công"
+
+#: templates/registration/password_change_done.html:10
+msgid "Your password was changed."
+msgstr "Mật khẩu của bạn đã được đổi."
+
+#: templates/registration/password_change_form.html:5
+#: templates/registration/password_change_form.html:9
+msgid "Password change"
+msgstr "Đổi mật khẩu"
+
+#: templates/registration/password_change_form.html:11
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+"Vui lòng nhập mật khẩu hiện tại của bạn, sau đó nhập mật khẩu mới hai lần"
+
+#: templates/registration/password_change_form.html:16
+msgid "Old password:"
+msgstr "Mật khẩu cũ"
+
+#: templates/registration/password_change_form.html:18
+#: templates/registration/password_reset_confirm.html:19
+msgid "New password:"
+msgstr "Mật khẩu mới"
+
+#: templates/registration/password_change_form.html:20
+#: templates/registration/password_reset_confirm.html:21
+msgid "Confirm password:"
+msgstr "Xác nhận mật khẩu mới"
+
+#: templates/registration/password_change_form.html:22
+#: templates/registration/password_reset_confirm.html:22
+msgid "Change my password"
+msgstr "Đổi mật khẩu"
+
+#: templates/registration/password_reset_complete.html:6
+#: templates/registration/password_reset_complete.html:10
+msgid "Password reset complete"
+msgstr "Đặt lại mật khẩu hoàn tất"
+
+#: templates/registration/password_reset_complete.html:12
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Mật khẩu của bạn đã được đặt lại. Bạn có thể đăng nhập ngay bây giờ."
+
+#: templates/registration/password_reset_complete.html:14
+msgid "Log in"
+msgstr "Đăng nhập"
+
+#: templates/registration/password_reset_confirm.html:6
+#: templates/registration/password_reset_form.html:6
+#: templates/registration/password_reset_form.html:10
+msgid "Password reset"
+msgstr "Đặt lại mật khẩu"
+
+#: templates/registration/password_reset_confirm.html:12
+msgid "Enter new password"
+msgstr "Nhập mật khẩu mới"
+
+#: templates/registration/password_reset_confirm.html:14
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr "Vui lòng nhập mật khẩu mới hai lần"
+
+#: templates/registration/password_reset_confirm.html:27
+msgid "Password reset unsuccessful"
+msgstr "Đặt lại mật khẩu không thành công"
+
+#: templates/registration/password_reset_confirm.html:29
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+"Đường dẫn để đặt lại mật khẩu không đúng, có thể nó đã được sử dụng. Vui "
+"lòng làm lại yêu cầu đặt lại mật khẩu."
+
+#: templates/registration/password_reset_done.html:6
+#: templates/registration/password_reset_done.html:10
+msgid "Password reset successful"
+msgstr "Đặt lại mật khẩu thành công."
+
+#: templates/registration/password_reset_done.html:12
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+"Chúng tôi đã gửi email hướng dẫn đặt mật khẩu tới email của bạn. Vui lòng "
+"kiểm tra hòm thư của bạn, kể cả thư mục Thư rác."
+
+#: templates/registration/password_reset_email.html:2
+msgid "You're receiving this e-mail because you requested a password reset"
+msgstr "Bạn nhận được thư này bởi vì bạn đã yêu cầu đặt lại mật khẩu"
+
+#: templates/registration/password_reset_email.html:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr "cho tài khoản của bạn tại %(site_name)s."
+
+#: templates/registration/password_reset_email.html:5
+msgid "Please go to the following page and choose a new password:"
+msgstr "Xin vui lòng truy cập trang sau và chọn mật khẩu mới:"
+
+#: templates/registration/password_reset_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr "Tên tài khoản của bạn:"
+
+#: templates/registration/password_reset_email.html:11
+msgid "Thanks for using our site!"
+msgstr "Cảm ơn bạn đã sử dụng Thư viện Học liệu Mở Việt Nam"
+
+#: templates/registration/password_reset_email.html:13
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "Ban điều hành %(site_name)s."
+
+#: templates/registration/password_reset_form.html:12
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+"Quên mật khẩu? Hãy nhập địa chỉ email của bạn, chúng tôi sẽ gửi email hướng "
+"dẫn cách đặt lại mật khẩu."
+
+#: templates/registration/password_reset_form.html:17
+msgid "E-mail address:"
+msgstr "Email:"
+
+#: templates/registration/password_reset_form.html:17
+msgid "Reset my password"
+msgstr "Đặt lại mật khẩu"
+
+#: templates/registration/registration_form.html:4
+msgid "Sign up"
+msgstr "Đăng ký"
+
+#: templates/registration/registration_form.html:24
+msgid "Your username"
+msgstr "Tên đăng nhập"
+
+#: templates/registration/registration_form.html:25
+msgid "Your email Address"
+msgstr "Email của bạn"
+
+#: templates/registration/registration_form.html:26
+msgid "Your password"
+msgstr "Mật khẩu của bạn"
+
+#: templates/registration/registration_form.html:27
+msgid "Enter password again"
+msgstr "Nhập lại mật khẩu"
+
+#: templates/registration/registration_form.html:35
+msgid "Show password"
+msgstr "Hiện mật khẩu"
+
+#: templates/registration/registration_form.html:42
+msgid "Register"
+msgstr "Đăng ký"
+
+#~ msgid "Member Since:"
+#~ msgstr "Thành viên từ:"

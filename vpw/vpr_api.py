@@ -3,16 +3,58 @@ Created on 17 Dec 2013
 
 @author: huyvq
 '''
+import os
 from django.conf import settings
-import json,httplib,urllib
+import json, httplib, urllib
+import requests
+
+
+def vpt_request(method, path, body=None):
+    connection = httplib.HTTPConnection(settings.VPT_URL, settings.VPT_PORT)
+    connection.connect()
+    headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
+    connection.request(method, "/%s" % path, body, headers)
+    respond = connection.getresponse().read()
+
+    if method == "DELETE":
+        result = connection.getresponse().status
+    else:
+        try:
+            result = json.loads(respond)
+        except:
+            result = respond
+    return result
+
 
 def vpr_request(method, path, body=None):
     connection = httplib.HTTPConnection(settings.VPR_URL, settings.VPR_PORT)
     connection.connect()
     headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
     connection.request(method, "/%s/%s" % (settings.VPR_VERSION, path), body, headers)
-    result = json.loads(connection.getresponse().read())
+    respond = connection.getresponse().read()
+
+    if method == "DELETE":
+        result = connection.getresponse().status
+    else:
+        try:
+            result = json.loads(respond)
+        except:
+            result = respond
     return result
+
+
+def vpt_import(file_path):
+    import_url = 'http://%s:%s/import' % (settings.VPT_URL, settings.VPT_PORT)
+
+    token = 'a9af1d6ca60243a38eb7d52dd344f7cb'
+    cid = 'vietdt'
+    payload = {'token': token, 'cid': cid}
+
+    file_name = os.path.basename(file_path)
+    file_data = open(file_path, 'rb').read()
+    files = {'file': (file_name, file_data)}
+    r = requests.post(import_url, files=files, data=payload)
+    return r.text
 
 def vpr_get_categories():
     result = vpr_request("GET", "categories")
@@ -44,6 +86,11 @@ def vpr_delete_category(cat_id):
 
 def vpr_get_persons():
     result = vpr_request("GET", "persons")
+    return result
+
+
+def vpr_delete_person(pid):
+    result = vpr_request("DELETE", "persons/%s" % pid)
     return result
 
 def vpr_get_person(pid, is_count=False):
@@ -96,10 +143,12 @@ def vpr_search(keyword, page):
 
 # Browse materials
 def vpr_browse(**kwargs):
+    page = kwargs.get("page", 1)
     categories = kwargs.get("categories", "")
     types = kwargs.get("types", "")
     languages = kwargs.get("languages", "")
     params = []
+    params.append("page=%s" % page)
     # print "Type : " + types
     if categories:
         params.append("categories=%s" % categories)
@@ -117,8 +166,8 @@ def vpr_browse(**kwargs):
     return result
 
 
-def vpr_materials_by_author(aid):
-    result = vpr_request("GET", "materials?author=%s" % aid)
+def vpr_materials_by_author(aid, page=1):
+    result = vpr_request("GET", "materials?author=%s&page=%s" % (aid, str(page)))
     return result
 
 
@@ -138,4 +187,12 @@ def vpr_create_person(**kwargs):
         # "client_id": kwargs.get("client_id"),
     }))
 
+    return result
+
+
+def vpr_get_statistic_data(mid, version, field_name):
+    if not version:
+        version = 1
+
+    result = vpr_request('GET', "materials/%s/%s/%s/" % (mid, version, field_name))
     return result

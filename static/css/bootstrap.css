@@ -4891,6 +4891,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   text-decoration: none;
   background-color: #ffffff;
   border: 1px solid #dddddd;
+  font-weight: bold;
 }
 
 .pagination > li:first-child > a,
@@ -4922,8 +4923,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   z-index: 2;
   color: #ffffff;
   cursor: default;
-  background-color: #428bca;
-  border-color: #428bca;
+  background-color: #C10C3E;
+  border-color: #C10C3E;
 }
 
 .pagination > .disabled > span,

@@ -38,6 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.staticfiles',
     'registration',
+    'tinymce',
+    'sorl.thumbnail',
+    'mce_filebrowser',
     'south',
     'vpw',
     'gunicorn',
@@ -45,8 +48,8 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -63,7 +66,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 )
 
-LANGUAGES=(
+LANGUAGES = (
     ('en', 'English'),
     ('vi', 'Vietinamese')
 )
@@ -73,21 +76,16 @@ ROOT_URLCONF = 'voer.urls'
 WSGI_APPLICATION = 'voer.wsgi.application'
 
 
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
+LOCALE_PATHS = (
+    os.path.join(PROJECT_DIR, 'locale'),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
@@ -159,3 +157,14 @@ VPR_VERSION = '' # VPR Version
 VPR_URL_FULL = os.path.join(VPR_URL, VPR_PORT, VPR_VERSION)
 
 SITE_URL = 'voer.edu.vn' # URL Site
+
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    'file_browser_callback': 'mce_filebrowser',
+}
+
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+MEDIA_URL = '/media/'
