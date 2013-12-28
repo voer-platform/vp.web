@@ -73,30 +73,6 @@
 </div>
 {% include 'frontend/block/left_block_user.html' %}
             <div class="col-lg-1 right-row">
-                <script>
-                    $(document).ready(function(){
-                        $('.hfbtn-save').click(function(){
-                            var $iditem = $(this).attr('metadata');
-                            $('div[metadata='+$iditem+']').toggleClass('hfvisible');
-                        });
-                        $('.hfbtn-saveto-type').click(function(){
-                            var $iditemCreate = $(this).attr('metadata');
-
-                            $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
-                            //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
-                        });
-                        $('.gridview').click(function(){
-                            $('.hfitems').toggleClass('gridview');
-                            $('.gridview').toggleClass('active');
-                            $('.listview').toggleClass('active');
-                        });
-                        $('.listview').click(function(){
-                            $('.hfitems').toggleClass('gridview');
-                            $('.gridview').toggleClass('active');
-                            $('.listview').toggleClass('active');
-                        });
-                    });
-                </script>
                 <div id="fitertop-browserall" class="hffitertop">
     <!--
     <div class="dropdown left">
@@ -151,21 +127,6 @@
     {% endif %}
     <div class="hfitem">
     <div class="collection-save-hover">
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-1">
-            <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>
-            <div class="collection-saveto-content">
-
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">{% trans 'Create new' %}</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>
     </div>
     <div class="collection-mainpage-cover">
 		{% if material.categories %}

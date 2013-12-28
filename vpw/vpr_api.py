@@ -221,3 +221,9 @@ def vpr_get_material_images(mid):
         if 'name' in image:
             list_images[image['name']] = '%smfiles/%s/get' % (settings.VPR_URL, image_id)
     return list_images
+
+
+def voer_update_author(author):
+    result = vpr_request('PUT', "persons/%s/" % author['id'], author)
+
+    return result

@@ -16,9 +16,9 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info,vpt_import, vpr_create_material, vpr_get_material_images
+    voer_get_attachment_info,vpt_import, vpr_create_material, vpr_get_material_images, voer_update_author
 
-from vpw.forms import ModuleCreationForm, CollectionCreationForm
+from vpw.forms import ModuleCreationForm, EditProfileForm
 
 # Create your views here.
 
@@ -693,3 +693,36 @@ def get_attachment(request, fid):
     response['Content-Disposition'] = 'attachment; filename='+attachment_info['name']
 
     return response
+
+
+@login_required
+def edit_profile(request):
+    current_user = request.user
+    pid = current_user.author.author_id
+    author = vpr_get_person(pid)
+
+    if (request.REQUEST):
+        form = EditProfileForm(request.POST)
+
+        author_data = {}
+        author_data['id'] = pid
+        author_data['user_id'] = author['user_id']
+        author_data['email'] = request.POST['email']
+        author_data['fullname'] = request.POST['fullname']
+        author_data['first_name'] = request.POST['first_name']
+        author_data['last_name'] = request.POST['last_name']
+        author_data['title'] = request.POST['title']
+        author_data['homepage'] = request.POST['homepage']
+        author_data['affiliation'] = request.POST['affiliation']
+        author_data['affiliation_url'] = request.POST['affiliation_url']
+        author_data['biography'] = request.POST['biography']
+        author_data['national'] = request.POST['national']
+
+        if form.is_valid():
+            avatar_file = request.FILES['avatar_file']
+            voer_update_author(author_data)
+
+        return render(request, "frontend/user_edit_profile.html", {'author': author_data, 'form': form})
+
+    return render(request, "frontend/user_edit_profile.html", {'author': author})
+

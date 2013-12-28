@@ -33,3 +33,8 @@ class ModuleCreationForm(MaterialCreationForm):
 
 class CollectionCreationForm(MaterialCreationForm):
     body = forms.CharField(required=False)
+
+
+class EditProfileForm(forms.Form):
+    email = forms.EmailField(max_length=255)
+    fullname = forms.CharField(max_length=255)
