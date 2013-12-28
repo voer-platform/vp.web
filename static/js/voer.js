@@ -2,6 +2,7 @@ var Voer = {};
 
 function ajax_browse(url, types, languages, categories){
     //Get value
+    $("#materials").html('<div class="bg-loading"><img src="/static/images/loading.gif" height="31" width="31" alt="loading..." /></div>');
     $.get(url , {types: types, languages: languages, categories: categories}, function( data ) {
         $("#materials" ).html( data );
     });

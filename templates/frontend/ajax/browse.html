@@ -34,7 +34,6 @@
                         });
                     });
                 </script>
-<div id="materials" class="hfitems active">
 {% for material in materials.results %}
 {% if material.material_type == 1 %}
     {% url 'module_detail' mid=material.material_id as material_url %}
@@ -112,4 +111,3 @@
 </div>
 {% endfor %}
 {% include "base/pager.html" %}
-</div>
