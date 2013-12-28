@@ -87,7 +87,7 @@ def vpt_download(url):
     """
     download transformed file
     """
-    r = requests.get(url)
+    r = requests.get(url, stream=True)
     return r
 
 
