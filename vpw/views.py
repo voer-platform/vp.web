@@ -41,11 +41,12 @@ def home(request):
         materials_list.append(material)
 
     # Get featured authors
-    person_features = [50, 76, 34, 54, 23]
+    person_features = [50, 76, 90, 54, 23]
     person_list = []
     for pid in person_features:
         person = vpr_get_person(pid)
-        person_list.append(person)
+        if 'id' in person:
+            person_list.append(person)
 
     return render(request, "frontend/index.html", {"materials_list": materials_list, "person_list": person_list})
 
@@ -151,12 +152,28 @@ def collection_detail(request, cid, mid):
         mid = get_first_material_id(outline['content'])
 
     # Get material in collection
-    material = vpr_get_material(mid)
-    # lay anh trong noi dung
-    list_images = vpr_get_material_images(mid)
-    # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-    content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-    material['text'] = content
+    if mid:
+        material = vpr_get_material(mid)
+        # lay anh trong noi dung
+        list_images = vpr_get_material_images(mid)
+        # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+        if "text" in material:
+            content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+            material['text'] = content
+
+        file_data = []
+        file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
+        for file_attachment_id in file_attachments:
+            attachment_info = voer_get_attachment_info(file_attachment_id)
+
+            if attachment_info['mime_type'] != 'image/jpeg':
+                file_tmp = {}
+                file_tmp['title'] = attachment_info['name']
+                file_tmp['attachment_id'] = file_attachment_id
+                file_data.append(file_tmp)
+    else:
+        material = {}
+        file_data = []
 
     # Generate outline html
     strOutline = "<ul class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'])
@@ -196,19 +213,7 @@ def collection_detail(request, cid, mid):
                 else:
                     p_list.append({'pid': pid, 'pname': person['fullname']})
             material_tmp['author_list'] = p_list
-
         similar_data.append(material_tmp)
-
-    file_data = []
-    file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
-    for file_attachment_id in file_attachments:
-        attachment_info = voer_get_attachment_info(file_attachment_id)
-
-        if attachment_info['mime_type'] != 'image/jpeg':
-            file_tmp = {}
-            file_tmp['title'] = attachment_info['name']
-            file_tmp['attachment_id'] = file_attachment_id
-            file_data.append(file_tmp)
 
     return render(request, "frontend/collection_detail.html",
                   {"collection": collection, "material": material, "author": author, "category": category,

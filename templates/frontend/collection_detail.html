@@ -179,7 +179,7 @@
                     {% if other_material.material_type == 1 %}
                     <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'module_detail' other_material.material_id %}">{{ other_material.title }}</a>
                     {% else %}
-                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' material.material_id %}">{{ other_material.title }}</a>
+                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' other_material.material_id %}">{{ other_material.title }}</a>
                     {% endif %}
                 </div>
             </div>
@@ -209,7 +209,7 @@
                     {% if similar.material_type == 1 %}
                     <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.material_id %}">{{ similar.title }}</a>
                     {% else %}
-                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' material.material_id %}">{{ similar.title }}</a>
+                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' similar.material_id %}">{{ similar.title }}</a>
                     {% endif %}
 
                     {% for person in similar.author_list %}
