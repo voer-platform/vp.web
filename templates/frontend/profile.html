@@ -122,8 +122,18 @@
                 <script>
                     $(document).ready(function(){
                         $('.hfbtn-save').click(function(){
-                            var $iditem = $(this).attr('metadata');                         
-                            $('div[metadata='+$iditem+']').toggleClass('hfvisible');
+                            //var $iditem = $(this).attr('metadata');
+                            //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
+                            var btnSave = $(this);
+                            var mid = $(this).attr('mid');
+                            var version = $(this).attr('version');
+                            var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
+
+                            $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
+                                if (data.status) {
+                                    btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
+                                }
+                            });
                         });
                         $('.hfbtn-saveto-type').click(function(){
                             var $iditemCreate = $(this).attr('metadata');
@@ -154,7 +164,7 @@
     <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
         {% if user.is_authenticated %}
         <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}">{% trans 'Add to my favourite' %}</a></div>
+            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}" mid="{{ material.material_id }}" version="{{ material.version }}">{% trans 'Add to my favourite' %}</a></div>
         </div>
         <div class="collection-saveto" metadata="iditem-{{ material.material_id }}">
             <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>

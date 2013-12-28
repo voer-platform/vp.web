@@ -103,3 +103,9 @@
   left: 49%; 
   position: fixed
 }
+
+.collection-save > div {
+    background:url('../images/icon/favourite.png') no-repeat center left transparent;
+    padding-left:25px;
+
+}

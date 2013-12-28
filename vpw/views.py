@@ -750,11 +750,11 @@ def ajax_add_favorite(request):
         response_data['status'] = False
         response_data['message'] = 'Oops!.'
 
-        # result = voer_add_favorite(mid, version, pid)
-        # if result:
-        response_data['status'] = True
-        response_data['message'] = 'Add favorite successfull'
-        response_data['favorite_count'] = 3
+        result = voer_add_favorite(mid, version, pid)
+        if result:
+            response_data['status'] = True
+            response_data['message'] = 'Add favorite successfull'
+            response_data['favorite_count'] = result['favorite']
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
