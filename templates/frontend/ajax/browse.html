@@ -1,4 +1,40 @@
 {% load i18n %}
+<script>
+                    $(document).ready(function(){
+                        $('.hfbtn-save').click(function(){
+                            var $iditem = $(this).attr('metadata');
+                            $('div[metadata='+$iditem+']').toggleClass('hfvisible');
+                        });
+                        $('.collection-save-hover').hover(
+                            function() {
+                            }, function() {
+                              var $iditem = $(this).attr('metadata').replace('col-hover-', '');
+                              var $selectItem = $('div[metadata=iditem-'+$iditem+']');
+
+                              /*if ($selectItem.hasClass('hfvisible')) {
+                                $selectItem.toggleClass('hfvisible');
+                              }*/
+                            }
+                        );
+                        $('.hfbtn-saveto-type').click(function(){
+                            var $iditemCreate = $(this).attr('metadata');
+
+                            $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
+                            //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
+                        });
+                        $('.gridview').click(function(){
+                            $('.hfitems').toggleClass('gridview');
+                            $('.gridview').toggleClass('active');
+                            $('.listview').toggleClass('active');
+                        });
+                        $('.listview').click(function(){
+                            $('.hfitems').toggleClass('gridview');
+                            $('.gridview').toggleClass('active');
+                            $('.listview').toggleClass('active');
+                        });
+                    });
+                </script>
+<div id="materials" class="hfitems active">
 {% for material in materials.results %}
 {% if material.material_type == 1 %}
     {% url 'module_detail' mid=material.material_id as material_url %}
@@ -6,22 +42,24 @@
     {% url 'collection_detail' cid=material.material_id as material_url %}
 {% endif %}
 <div class="hfitem">
-    <div class="collection-save-hover">
+   <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
+        {% if user.is_authenticated %}
         <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">Save</a></div>
+            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}">{% trans 'Add to my favourite' %}</a></div>
         </div>
-        <div class="collection-saveto" metadata="iditem-1">
+        <div class="collection-saveto" metadata="iditem-{{ material.material_id }}">
             <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>
             <div class="collection-saveto-content">
 
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">Create new</a>
+                <a class="hfbtn-saveto-type" metadata="iditem-1-create">{% trans 'Create new' %}</a>
             </div>
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
         </div>
+        {% endif %}
     </div>
     <div class="collection-mainpage-cover">
 		{% if material.categories %}
@@ -74,3 +112,4 @@
 </div>
 {% endfor %}
 {% include "base/pager.html" %}
+</div>

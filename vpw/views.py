@@ -364,6 +364,7 @@ def view_profile(request, pid):
     materials = vpr_materials_by_author(pid, page)
     pager = pager_default_initialize(materials['count'], 12, page)
     page_query = get_page_query(request)
+    categories = vpr_get_categories()
 
     person_materials = []
     for material in materials['results']:
@@ -387,7 +388,7 @@ def view_profile(request, pid):
 
         person_materials.append(material)
 
-    return render_to_response("frontend/profile.html", {"person": current_person, "materials": person_materials, 'pager': pager, 'page_query': page_query},
+    return render_to_response("frontend/profile.html", {"person": current_person, "materials": person_materials, 'pager': pager, 'page_query': page_query, 'categories': ca},
                               context_instance=RequestContext(request))
 
 
