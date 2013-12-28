@@ -38,6 +38,7 @@ urlpatterns = patterns('',
     url(r'^user/logout$', 'vpw.views.vpw_logout', name='logout'),
     url(r'^user/create/module/?$', 'vpw.views.create_module', name='create_module'),
     url(r'^user/create/collection/?$', 'vpw.views.create_collection', name='create_collection'),
+    url(r'^user/edit/profile/?$', 'vpw.views.edit_profile', name='edit_profile'),
 
 
     url(r'^search/', 'vpw.views.search_result', name='search'),

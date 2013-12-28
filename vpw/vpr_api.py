@@ -159,12 +159,12 @@ def vpr_browse(**kwargs):
     params = ["page=%s" % page]
     # print "Type : " + types
     if categories and categories != "0":
-        params.append("categories=%s" % categories)
+        params.append("categories=%s&or=categories" % categories)
 
-    if types and types != "0":
+    if types and types != "0" and types != '1,2':
         params.append("material_type=%s" % types)
 
-    if languages and languages != "0":
+    if languages and languages != "0" and languages != 'vi,en':
         params.append("language=%s" % languages)
 
     params = "&".join(params)
@@ -221,3 +221,9 @@ def vpr_get_material_images(mid):
         if 'name' in image:
             list_images[image['name']] = '%smfiles/%s/get' % (settings.VPR_URL, image_id)
     return list_images
+
+
+def voer_update_author(author):
+    result = vpr_request('PUT', "persons/%s/" % author['id'], author)
+
+    return result

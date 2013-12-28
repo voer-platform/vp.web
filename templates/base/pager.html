@@ -7,19 +7,26 @@
     $('.pagination-block').css('width',wpagination);
   });
 </script>
-<div class="pagination-block">
-  <ul class="pagination">
-    {% for page in pager %}
-      {% if page.value %}
-      <li>
-        <a href="{{ page_query }}&page={{ page.value }}">{{ page.text }}</a>
-      </li>
-      {% else %}
-      <li class="pager-ellipsis disabled">
-        <a href="javascript:void(0)">{{ page.text }}</a>
-      </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
+    <div class="pagination-block">
+        <ul class="pagination">
+            {% for page in pager %}
+                {% if page.value %}
+                    <li>
+                        {% with page_query|slice:":6" as pre_url %}
+                            {% ifnotequal pre_url "/ajax/" %}
+                                <a href="{{ page_query }}&page={{ page.value }}">{{ page.text }}</a>
+                            {% else %}
+                                <a onclick="javascript:ajax_browse_page('{{ page_query }}&page={{ page.value }}');return false;"
+                                   href="#">{{ page.text }}</a>
+                            {% endifnotequal %}
+                        {% endwith %}
+                    </li>
+                {% else %}
+                    <li class="pager-ellipsis disabled">
+                        <a href="javascript:void(0)">{{ page.text }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 {% endif %}

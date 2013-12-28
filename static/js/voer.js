@@ -8,6 +8,14 @@ function ajax_browse(url, types, languages, categories){
     });
 }
 
+
+function ajax_browse_page(url){
+    $.get(url, function(data){
+        $('#materials').html(data)
+    });
+}
+
+
 (function($, Voer, document) {
     Voer.Helper = (function(){
       return {
@@ -19,7 +27,7 @@ function ajax_browse(url, types, languages, categories){
 
           $.post(url, formLogin.serialize(), function(data){
             if (data.status == 1) {
-              window.location.href = "/";
+              window.location.href = "/user/dashboard";
             } else {
               messageObj.children().html(data.message);
               messageObj.fadeIn("fast", function() {
