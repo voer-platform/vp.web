@@ -17,7 +17,6 @@ urlpatterns = patterns('',
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', name='password_reset_complete'),
 
     url(r'^language/', include('django.conf.urls.i18n')),
-    url(r'^user/', include('registration.backends.default.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^mce_filebrowser/', include('mce_filebrowser.urls')),
     url(r'^profile/(?P<pid>[0-9a-z]+)/delete$', 'vpw.views.delete_profile', name='delete_profile'),
@@ -30,12 +29,17 @@ urlpatterns = patterns('',
     url(r'^browse$', 'vpw.views.browse', name='browse'),
     url(r'^signup$', 'vpw.views.signup', name='signup'),
     url(r'^about-us$', 'vpw.views.aboutus', name='about-us'),
-    url(r'^create-module$', 'vpw.views.create_module', name='create_module'),
-    url(r'^create-collection$', 'vpw.views.create_collection', name='create_collection'),
     url(r'^profile/(?P<pid>[0-9a-z]+)$', 'vpw.views.view_profile', name='view_profile'),
+
+    ## User ###
+    url(r'^user/', include('registration.backends.default.urls')),
     url(r'^user/authenticate$', 'vpw.views.vpw_authenticate', name='authenticate'),
-    url(r'^user/profile$', 'vpw.views.user_profile', name='user_profile'),
+    url(r'^user/dashboard/?$', 'vpw.views.user_dashboard', name='user_dashboard'),
     url(r'^user/logout$', 'vpw.views.vpw_logout', name='logout'),
+    url(r'^user/create/module/?$', 'vpw.views.create_module', name='create_module'),
+    url(r'^user/create/collection/?$', 'vpw.views.create_collection', name='create_collection'),
+
+
     url(r'^search/', 'vpw.views.search_result', name='search'),
 
     url(r'^pdf/m/(?P<mid>[0-9a-z]+)/(?P<version>\d+)/?$', 'vpw.views.get_pdf', name='get_pdf'),

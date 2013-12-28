@@ -214,6 +214,7 @@ def collection_detail(request, cid, mid):
                   {"collection": collection, "material": material, "author": author, "category": category,
                    "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
 
+
 @login_required
 def document_detail(request, did):
     try:
@@ -225,15 +226,18 @@ def document_detail(request, did):
         author = vpr_get_person(author_id)
         category = vpr_get_category(material.categories)
         if material.type == 1:
-            return render(request, "frontend/module_detail.html",
-                  {"material": material, "author": author, "category": category})
+            return render(request, "frontend/module_detail.html", {
+                "material": material, "author": author, "category": category
+            })
         elif material.type == 2:
-            render(request, "frontend/collection_detail.html",
-                  {"material": material, "author": author, "category": category})
+            render(request, "frontend/collection_detail.html", {
+                "material": material, "author": author, "category": category
+            })
         else:
             raise PermissionDenied
     except Material.DoesNotExist:
         raise PermissionDenied
+
 
 @login_required
 def create_module(request):
@@ -333,35 +337,24 @@ def create_module(request):
     return render(request, "frontend/module/create_step1.html")
 
 
-def save_post_to_object(request, material):
-    title = request.POST.get("title", "")
-    description = request.POST.get("description", "")
-    keywords = request.POST.get("keywords", "")
-    tags = request.POST.get("tags", "")
-    language = request.POST.get("language", "")
-    categories = request.POST.get('categories', "")
-    body = request.POST.get('body', "")
-    material.title = title
-    material.description = description
-    material.keywords = keywords
-    material.categories = categories
-    material.language = language
-    material.creator = request.user
-    material.text = body
-
 @login_required
 def create_collection(request):
-    step = request.GET.get('step', '')
-    print "Step: " + step
-    if step == 1:
-        return render(request, "frontend/collection/create_step1.html")
-    elif step == 2:
-        return render(request, "frontend/collection/create_step2.html")
-    elif step == 3:
-        return render(request, "frontend/collection/create_step3.html")
+    if request.method == "POST":
+        try:
+            previous_step = int(request.GET.get('step', '0'))
+        except ValueError:
+            previous_step = 0
+
+        if previous_step == 1:
+            return render(request, "frontend/collection/create_step2.html")
+        elif previous_step == 2:
+            return render(request, "frontend/collection/create_step2.html")
+        elif previous_step == 3:
+            return render(request, "frontend/collection/create_step3.html")
+        else:
+            return render(request, "frontend/collection/create_step1.html")
     else:
         return render(request, "frontend/collection/create_step1.html")
-    return render(request, "frontend/collection/create_step1.html")
 
 
 def view_profile(request, pid):
@@ -396,6 +389,7 @@ def view_profile(request, pid):
     return render_to_response("frontend/profile.html", {"person": current_person, "materials": person_materials, 'pager': pager, 'page_query': page_query},
                               context_instance=RequestContext(request))
 
+
 def delete_profile(request, pid):
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -404,11 +398,10 @@ def delete_profile(request, pid):
         print "Xoa thanh cong!"
     return HttpResponseRedirect('/')
 
+
 '''
 Browse page
 '''
-
-
 def browse(request):
     page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
@@ -460,7 +453,7 @@ def vpw_logout(request):
 
 
 @login_required
-def user_profile(request):
+def user_dashboard(request):
     page = int(request.GET.get('page', 1))
     current_user = request.user
     pid = current_user.author.author_id
