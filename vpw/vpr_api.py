@@ -3,6 +3,7 @@ Created on 17 Dec 2013
 
 @author: huyvq
 '''
+import time
 import os
 from django.conf import settings
 import json, httplib, urllib
@@ -50,7 +51,44 @@ def vpt_import(file_path):
     file_data = open(file_path, 'rb').read()
     files = {'file': (file_name, file_data)}
     r = requests.post(import_url, files=files, data=payload)
-    return r.text
+    return json.loads(r.text)
+
+
+def vpt_check_status(task_id):
+    """
+    request import status by task id
+    """
+    import_url = '%simport' % settings.VPT_URL
+    r = requests.get(import_url, params={'task_id': task_id})
+    # TODO: check status_code for errors
+    return json.loads(r.text)
+
+
+def vpt_get_url(task_id):
+    """
+    ping status continuosly to get download url
+    """
+    # TODO: should perform at client side
+    # TODO: should put these defaults in settings
+    retry = 20
+    interval = 5
+
+    n = 0
+    while n < retry:
+        result = vpt_check_status(task_id)
+        if result.has_key('url'):
+            return result['url']
+        # pause a few second before continue
+        time.sleep(interval)
+        n += 1
+
+
+def vpt_download(url):
+    """
+    download transformed file
+    """
+    r = requests.get(url)
+    return r
 
 
 def vpr_get_categories():
