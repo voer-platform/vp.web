@@ -676,6 +676,15 @@ def ajax_browse(request):
     languages = request.GET.get("languages", "")
 
     materials = vpr_browse(page=page, categories=cats, types=types, languages=languages)
+    material_result = []
+    for material in materials['results']:
+        view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
+        material['view_count'] = view_count
+
+        favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
+        material['favorite_count'] = favorite_count
+        material_result.append(material)
+
     if 'count' in materials:
         pager = pager_default_initialize(materials['count'], 12, page)
         page_query = get_page_query(request)
@@ -684,7 +693,6 @@ def ajax_browse(request):
             "materials": materials, "categories": categories, 'pager': pager, 'page_query': page_query})
     else:
         return HttpResponse("No items found!")
-
 
 def get_attachment(request, fid):
     attachment_info = voer_get_attachment_info(fid)
