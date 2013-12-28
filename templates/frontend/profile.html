@@ -180,8 +180,20 @@
     <div class="collection-mainpage-details">
         <div class="title-collection">
             <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
-        </div>      
-        <div class="short-collection">{{ material.description }}</div>
+        </div>
+
+        <div class="short-collection">
+        {% if material.description %}
+            {% ifequal material.description '-' %}
+                <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+            {% else %}
+                {{ material.description }}
+            {% endifequal %}
+        {% else %}
+            <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+        {% endif %}
+        </div>
+
         <div class="author-collection">
             <a href="{% url 'view_profile' person.id %}">{{ person.fullname }}</a>
         </div>
@@ -210,7 +222,7 @@
         <div class="voer-col-ico left">&nbsp;</div>
         {% endif %}
 
-        <div class="hflike left">{% if material.favorite_count.count %} {{ material.favorite_count.count }}{% else %}0{% endif %}</div>
+        <div class="hflike left">{% if material.favorite_count.favorite %} {{ material.favorite_count.favorite }}{% else %}0{% endif %}</div>
         <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
 
         <div class="hfother right tooltipi-container">

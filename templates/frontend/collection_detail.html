@@ -52,10 +52,10 @@
         </ul>
         <ul class="list-status-module-content right">
             <li>
-                <span class="checkout-icon-view">{% if collection.view_count.count > 0 %}{{ collection.view_count.count }}{% else %}0{% endif %}</span>
+                <span class="checkout-icon-view">{% if collection.view_count.view > 0 %}{{ collection.view_count.view }}{% else %}0{% endif %}</span>
             </li>
             <li>
-                <span class="checkout-icon-favourite">{% if collection.favorite_count.view > 0 %}{{ collection.favorite_count.view }}{% else %}0{% endif %}</span>
+                <span class="checkout-icon-favourite">{% if collection.favorite_count.favorite > 0 %}{{ collection.favorite_count.favorite }}{% else %}0{% endif %}</span>
             </li>
         </ul>
     </div>

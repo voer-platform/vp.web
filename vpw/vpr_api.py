@@ -235,3 +235,12 @@ def voer_update_author(author):
     result = vpr_request('PUT', "persons/%s/" % author['id'], author)
 
     return result
+
+def voer_add_favorite(mid, version, pid):
+    if not version:
+        result = vpr_request('POST', "materials/%s/favorites" % mid, {'person': pid})
+    else:
+        result = vpr_request('POST', "materials/%s/%s/favorites" % (mid, version), {'person': pid})
+
+    return result
+

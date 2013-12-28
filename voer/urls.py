@@ -47,5 +47,6 @@ urlpatterns = patterns('',
     url(r'^attachment/m/(?P<fid>[0-9a-z]+)/?$', 'vpw.views.get_attachment', name='get_attachment'),
     ## AJAX
     url(r'^ajax/browse$', 'vpw.views.ajax_browse', name='ajax_browse'),
+    url(r'^ajax/add_favorite$', 'vpw.views.ajax_add_favorite', name='ajax_add_favorite'),
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

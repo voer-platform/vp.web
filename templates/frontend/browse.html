@@ -61,8 +61,18 @@
                 <script>
                     $(document).ready(function(){
                         $('.hfbtn-save').click(function(){
-                            var $iditem = $(this).attr('metadata');
-                            $('div[metadata='+$iditem+']').toggleClass('hfvisible');
+                            //var $iditem = $(this).attr('metadata');
+                            //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
+                            var btnSave = $(this);
+                            var mid = $(this).attr('mid');
+                            var version = $(this).attr('version');
+                            var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
+
+                            $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
+                                if (data.status) {
+                                    btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
+                                }
+                            });
                         });
                         $('.collection-save-hover').hover(
                             function() {
@@ -105,7 +115,7 @@
     <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
         {% if user.is_authenticated %}
         <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}">{% trans 'Add to my favourite' %}</a></div>
+            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}" mid="{{ material.material_id|safe }}" version="{{ material.version|safe }}">{% trans 'Add to my favourite' %}</a></div>
         </div>
         <div class="collection-saveto" metadata="iditem-{{ material.material_id }}">
             <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>
@@ -132,7 +142,19 @@
         <div class="title-collection">
             <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
         </div>
-        <div class="short-collection">{{ material.description }}</div>
+
+        <div class="short-collection">
+        {% if material.description %}
+            {% ifequal material.description '-' %}
+                <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+            {% else %}
+                {{ material.description }}
+            {% endifequal %}
+        {% else %}
+            <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+        {% endif %}
+        </div>
+
         <div class="author-collection"><a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a></div>
         <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories.0.0 }}">
             {% if material.categories.0.1 %}
@@ -150,7 +172,7 @@
         <div class="voer-col-ico left">&nbsp;</div>
         {% endif %}
 
-        <div class="hflike left">{% if material.favorite_count.count %} {{ material.favorite_count.count }}{% else %}0{% endif %}</div>
+        <div class="hflike left">{% if material.favorite_count.favorite %} {{ material.favorite_count.favorite }}{% else %}0{% endif %}</div>
         <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
 
         <div class="hfother right tooltipi-container">
