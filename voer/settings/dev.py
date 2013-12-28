@@ -23,10 +23,11 @@ DATABASES = {
     }
 }
 
-VPR_URL = 'dev.voer.vn'
-VPR_PORT = '2013'
-VPR_VERSION = '1.0'
-VPR_URL_FULL = os.path.join(VPR_URL, VPR_PORT, VPR_VERSION)
+#VPR Address
+VPR_URL = 'http://dev.voer.vn:2013/1.0/'
+
+#VPT Address
+VPT_URL = 'http://voer.edu.vn:6543/'
 
 SITE_URL = 'dev.voer.vn'
 

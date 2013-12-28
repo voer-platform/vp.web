@@ -1,5 +1,6 @@
 import json
 import math
+import re
 import urllib
 
 from django.core.exceptions import PermissionDenied
@@ -15,8 +16,7 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info,vpt_import, vpr_create_material
-
+    voer_get_attachment_info,vpt_import, vpr_create_material, vpr_get_material_images
 
 from vpw.forms import ModuleCreationForm
 
@@ -58,8 +58,19 @@ def aboutus(request):
     return render(request, "frontend/aboutus.html")
 
 
+def _get_image(list_images):
+    def replace_image(match_object):
+        return "<img src='" + list_images[match_object.group(1)] + "'"
+    return replace_image
+
+
 def module_detail(request, mid, version):
     material = vpr_get_material(mid)
+    # lay anh trong noi dung
+    list_images = vpr_get_material_images(mid)
+    # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+    content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+    material['text'] = content
 
     other_data = []
     if (material.has_key('author') and material['author']):
@@ -141,6 +152,12 @@ def collection_detail(request, cid, mid):
 
     # Get material in collection
     material = vpr_get_material(mid)
+    # lay anh trong noi dung
+    list_images = vpr_get_material_images(mid)
+    # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+    content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+    material['text'] = content
+
     # Generate outline html
     strOutline = "<ul class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'])
 

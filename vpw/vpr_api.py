@@ -27,25 +27,21 @@ def vpt_request(method, path, body=None):
 
 
 def vpr_request(method, path, body=None):
-    connection = httplib.HTTPConnection(settings.VPR_URL, settings.VPR_PORT)
-    connection.connect()
-    headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
-    connection.request(method, "/%s/%s" % (settings.VPR_VERSION, path), body, headers)
-    respond = connection.getresponse().read()
+    url = settings.VPR_URL + path
+    r = requests.request(method, url, data=body)
 
     if method == "DELETE":
-        result = connection.getresponse().status
+        result = r.status_code
     else:
         try:
-            result = json.loads(respond)
+            result = json.loads(r.text)
         except:
-            result = respond
+            result = r
     return result
 
 
 def vpt_import(file_path):
-    import_url = 'http://%s:%s/import' % (settings.VPT_URL, settings.VPT_PORT)
-
+    import_url = settings.VPT_URL + 'import'
     token = 'a9af1d6ca60243a38eb7d52dd344f7cb'
     cid = 'vietdt'
     payload = {'token': token, 'cid': cid}
@@ -56,33 +52,39 @@ def vpt_import(file_path):
     r = requests.post(import_url, files=files, data=payload)
     return r.text
 
+
 def vpr_get_categories():
     result = vpr_request("GET", "categories")
-    return result;
+    return result
+
 
 def vpr_create_category(name, parent, description):
-    result = vpr_request("POST", "categories/", urllib.urlencode({
-       "name": name,
-       "parent": parent,
-       "description": description
-     }))
+    result = vpr_request("POST", "categories/", {
+        "name": name,
+        "parent": parent,
+        "description": description
+    })
     return result
+
 
 def vpr_get_category(cat_id):
     result = vpr_request("GET", "categories/%s" % cat_id)
     return result
 
+
 def vpr_update_category(cat_id, name, parent, description):
-    result = vpr_request("PUT", "categories/%s" % cat_id, json.dumps({
+    result = vpr_request("PUT", "categories/%s" % cat_id, {
         "name": name,
         "parent": parent,
         "description": description
-    }))
+    })
     return result
+
 
 def vpr_delete_category(cat_id):
     result = vpr_request("DELETE", "categories/%s" % cat_id)
     return result
+
 
 def vpr_get_persons():
     result = vpr_request("GET", "persons")
@@ -93,12 +95,14 @@ def vpr_delete_person(pid):
     result = vpr_request("DELETE", "persons/%s" % pid)
     return result
 
+
 def vpr_get_person(pid, is_count=False):
     if is_count:
         result = vpr_request("GET", "persons/%s?count=1" % pid)
     else:
         result = vpr_request("GET", "persons/%s" % pid)
     return result
+
 
 def vpr_get_materials():
     result = vpr_request("GET", "materials")
@@ -111,8 +115,7 @@ def vpr_get_material(mid):
 
 
 def vpr_create_material(**kwargs):
-    result = requests.post("http://dev.voer.vn:2013/1/materials", {
-        # result = vpr_request("POST", "materials", {
+    result = vpr_request("POST", "materials", {
         "material_type": kwargs.get("material_type", 1),
         "text": kwargs.get("text"),
         "version": kwargs.get("version"),
@@ -134,15 +137,18 @@ def vpr_create_material(**kwargs):
         "license_id": kwargs.get("license_id", 1)
     })
 
-    return json.loads(result.text)
+    return result
+
 
 def vpr_get_pdf(mid, version):
     result = vpr_request('GET', "materials/%s/%s/pdf/" % (mid, version))
     return result
 
+
 def vpr_search(keyword, page):
     result = vpr_request("GET", "search?kw=%s&page=%s" % (urllib.quote(keyword.encode("utf8")), page))
     return result
+
 
 # Browse materials
 def vpr_browse(**kwargs):
@@ -150,8 +156,7 @@ def vpr_browse(**kwargs):
     categories = kwargs.get("categories", "")
     types = kwargs.get("types", "")
     languages = kwargs.get("languages", "")
-    params = []
-    params.append("page=%s" % page)
+    params = ["page=%s" % page]
     # print "Type : " + types
     if categories:
         params.append("categories=%s" % categories)
@@ -175,7 +180,7 @@ def vpr_materials_by_author(aid, page=1):
 
 
 def vpr_create_person(**kwargs):
-    result = vpr_request("POST", "persons/", urllib.urlencode({
+    result = vpr_request("POST", "persons/", {
         "fullname": kwargs.get("fullname"),
         "user_id": kwargs.get("user_id"),
         "first_name": kwargs.get("first_name"),
@@ -188,7 +193,7 @@ def vpr_create_person(**kwargs):
         # "national": kwargs.get("national"),
         # "biography": kwargs.get("biography"),
         # "client_id": kwargs.get("client_id"),
-    }))
+    })
 
     return result
 
@@ -206,3 +211,13 @@ def voer_get_attachment_info(attach_id):
     result = vpr_request('GET', "mfiles/%s/" % attach_id)
 
     return result
+
+
+def vpr_get_material_images(mid):
+    list_ids = vpr_request('GET', 'materials/%s/mfiles/' % mid)
+    list_images = {}
+    for image_id in list_ids:
+        image = vpr_request('GET', 'mfiles/%s' % image_id)
+        if 'name' in image:
+            list_images[image['name']] = '%smfiles/%s/get' % (settings.VPR_URL, image_id)
+    return list_images

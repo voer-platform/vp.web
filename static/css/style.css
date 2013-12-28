@@ -24,3 +24,67 @@
 .other-module-author {
   height: auto;
 }
+
+.module-view-content .example{
+    background-color: #F1F6E6;
+    border-top: 2px solid #FAA61A;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.module-view-content .example .title{
+    color: #0061AA;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.module-view-content .note{
+    background-color: #FBF2E2;
+    padding: 10px;
+}
+
+.module-view-content .note .title{
+    color: #0061AA;
+    line-height: 2;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+.module-view-content h1,
+.module-view-content h2,
+.module-view-content h3,
+.module-view-content h4,
+.module-view-content h5,
+.module-view-content h6{
+    color: #317EAC;
+    font-weight: bold;
+}
+
+.module-view-content figure{
+    text-align: center;
+}
+
+.module-view-content figure figcaption{
+    color: #777777;
+    font-size: 90%;
+    font-style: italic;
+}
+
+.module-view-content label.label{
+    text-align: left;
+    font-size: 100%;
+    color: #555;
+    font-weight: normal;
+    white-space: normal;
+    padding: 0px;
+    line-height: 20px;
+}
+
+.module-view-content img{
+    max-width: 740px;
+}
+
+.module-view-content p{
+    font-size: 14px;
+    text-align: justify;
+}
