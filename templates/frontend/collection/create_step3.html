@@ -40,6 +40,7 @@
         {% csrf_token %}
         <input type="hidden" name="step" value="3"/>
         <input type="hidden" name="mid" value="{{ material.id }}"/>
+        <input type="hidden" id="voer-outine-text" name="body" {{ material.text }} />
 
         <div class="col-lg-1 right-row">
             <div class="hfcreate-1">
@@ -256,78 +257,38 @@
                             </script>
                             <div class="form-group">
                                 <label for="InputBody">{% trans 'Content' %}</label>
-
-                                <div class="hffolders">
-                                    <ul id="level-0">
-                                        <li class="root">
-                                            <span><a>Fundamentals of Signal Processing</a></span>
-                                            <ul id="level-1">
-                                                <li class="has-child">
-                            <span>
-                                <a id="iditem-1" metadata="1">
-                                    <span id="content-1">Introduction: The Nature of Science and Physics </span>
-                                    <span class="collspan" metadata="1"></span>
-                                    <span id="replace-1" class="hfvisible">
-
-                                            <input class="form-control typetext left" id="InputText-1" value=""
-                                                   type="text">
-                                            <div class="hfbtn-group-save btn-group btn-group-xs">
-                                                <button id="save-1" type="button" metadata="1"
-                                                        class="btn btn-danger">Save
-                                                </button>
-                                                <button id="cancel-1" type="button" class="btn btn-default"
-                                                        metadata="1">Cancel
-                                                </button>
-                                            </div>
-
-                                    </span>
-
-                                    <div id="show-1" class="hfbtn-group btn-group btn-group-xs">
-                                        <button type="button" id="edit-1" metadata="1" class="btn btn-default">
-                                            <span class="hficon edit"></span>
-                                        </button>
-                                        <button type="button" id="delete-1" metadata="1" class="btn btn-default">
-                                            <span class="hficon delete"></span>
-                                        </button>
-                                    </div>
-                                </a>
-                            </span>
-                                                    <ul id="level-2" metadata="child-1" class="collspaned">
-                                                        <li><a>Introduction to Science and the Realm of Physics,
-                                                            Physical Quantities, and Units</a></li>
-                                                        <li><a>Physics: An Introduction</a></li>
-                                                        <li><a>Physical Quantities and Units</a></li>
-                                                        <li><a>Accuracy, Precision, and Significant Figures</a></li>
-                                                        <li><a>Approximation</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="has-child">
-                                                    <span><a>Kinematics</a></span><a>
-                                                </a>
-                                                    <ul id="level-2"><a>
-                                                    </a>
-                                                        <li><a></a><a>Introduction to One-Dimensional Kinematics</a>
-                                                        </li>
-                                                        <li><a>Displacement</a></li>
-                                                        <li><a>Vectors, Scalars, and Coordinate Systems</a></li>
-                                                        <li><a>Time, Velocity, and Speed</a></li>
-                                                        <li><a>Acceleration</a></li>
-                                                        <li><a>Motion Equations for Constant Acceleration in One
-                                                            Dimension</a></li>
-                                                        <li><a>Problem-Solving Basics for One-Dimensional
-                                                            Kinematics</a></li>
-                                                        <li><a>Falling Objects</a></li>
-                                                        <li><a>Graphical Analysis of One-Dimensional Motion</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div id="collection-outline" class="demo" style="height:300px;"></div>
                             </div>
                             <div class="form-group btn-common">
                                 <div class="hfleft left">
-                                    <a class="hfbtn-common hfbtn-next hfbtn-active" href="create_collection_save.php">{% trans 'Create Section' %}</a>
+                                    <a class="hfbtn-common hfbtn-next hfbtn-active" href="create_collection_save.php"
+                                       data-toggle="modal" data-target="#myModal">{% trans 'Create Section' %}</a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title"
+                                                        id="myModalLabel">{% trans 'Create section' %}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <textarea cols="10" rows="5" id="voer_sub_sessions"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">{% trans 'Close' %}</button>
+                                                    <button type="button"
+                                                            class="btn btn-primary" id="btn_add_sections">{% trans 'Create section' %}</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
                                 </div>
                                 <div class="hfright right">
                                     <a class="hfbtn-common hfbtn-next right hfbtn-active"
