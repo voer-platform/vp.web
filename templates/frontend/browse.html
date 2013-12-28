@@ -69,9 +69,9 @@
                               var $iditem = $(this).attr('metadata').replace('col-hover-', '');
                               var $selectItem = $('div[metadata=iditem-'+$iditem+']');
 
-                              if ($selectItem.hasClass('hfvisible')) {
+                              /*if ($selectItem.hasClass('hfvisible')) {
                                 $selectItem.toggleClass('hfvisible');
-                              }
+                              }*/
                             }
                         );
                         $('.hfbtn-saveto-type').click(function(){
@@ -177,43 +177,43 @@
     <div class="hffilter-right">
     <div class="bigbox-common">
         <div class="title">Filter By</div>
-        <div class="content">
+        <div class="content" id="main_list">
             <script>
                 $(document).ready(function(){
 					$('div[data-key|=authors]').click(function(){
 						var $datakey=$(this).attr('data-key');
-						if ($datakey == 'authors-all'){
+						if ($datakey == 'authors-0'){
 							$('div[data-key|=authors]').removeClass('file_selected');
-							$('div[data-key=authors-all]').addClass('file_selected');
+							$('div[data-key=authors-0]').addClass('file_selected');
 						}else {
-							$('div[data-key=authors-all]').removeClass('file_selected');
+							$('div[data-key=authors-0]').removeClass('file_selected');
 						}
 					});
 					$('div[data-key|=categories]').click(function(){
 						var $datakey=$(this).attr('data-key');
-						if($datakey == 'categories-all'){
+						if($datakey == 'categories-0'){
 							$('div[data-key|=categories]').removeClass('file_selected');
-							$('div[data-key=categories-all]').addClass('file_selected');
+							$('div[data-key=categories-0]').addClass('file_selected');
 						}else{
-							$('div[data-key=categories-all]').removeClass('file_selected');
+							$('div[data-key=categories-0]').removeClass('file_selected');
 						}
 					});
 					$('div[data-key|=langs]').click(function(){
 						var $datakey=$(this).attr('data-key');
-						if($datakey == 'langs-all'){
+						if($datakey == 'langs-0'){
 							$('div[data-key|=langs]').removeClass('file_selected');
-							$('div[data-key=langs-all]').addClass('file_selected');
+							$('div[data-key=langs-0]').addClass('file_selected');
 						}else{
-							$('div[data-key=langs-all]').removeClass('file_selected');
+							$('div[data-key=langs-0]').removeClass('file_selected');
 						}
 					});
 					$('div[data-key|=types]').click(function(){
 						var $datakey=$(this).attr('data-key');
-						if($datakey == 'types-all'){
+						if($datakey == 'types-0'){
 							$('div[data-key|=types]').removeClass('file_selected');
-							$('div[data-key=types-all]').addClass('file_selected');
+							$('div[data-key=types-0]').addClass('file_selected');
 						}else{
-							$('div[data-key=types-all]').removeClass('file_selected');
+							$('div[data-key=types-0]').removeClass('file_selected');
 						}
 					});
 					$('.checkbox-custom').click(function(){
@@ -230,7 +230,25 @@
 						listItems.push($(this).attr('data-key'));
 					});
 					numberItem = listItems.length;
-					alert(listItems.join(','));
+					//alert(listItems[.join(',')]);
+                    var html='';
+                    var types = [];
+                    var langs = [];
+                    var categories = [];
+                    for(i=0; i<numberItem; i++){
+                        if(listItems[i].substr(0, 6) == 'types-'){
+                            types.push(listItems[i].substr(6));
+                        }else if(listItems[i].substr(0,6) == 'langs-'){
+                            langs.push(listItems[i].substr(6));
+                        }else if(listItems[i].substr(0,11) == 'categories-'){
+                            categories.push(listItems[i].substr(11));
+                        }
+                    }
+                    if(types.length>0) html += 'types='+types;
+                    if(langs.length>0) html += 'langs='+langs;
+                    if(categories.length>0) html += 'categories='+categories;
+                    $('#filter_by').html(html);
+                    ajax_browse("{% url 'ajax_browse' %}", types, langs, categories);
 					if(numberItem > 0){
 						$('#selection-actions').removeClass('displaynone');
 						$('.selected_count').html(numberItem);
@@ -243,9 +261,9 @@
             <!-- type -------------------------------------------------------------------->
             <div class="smallbox-common">
                 <div class="checkbox-item">
-                    <div class="file_selected" data-key="types-all">
+                    <div class="file_selected" data-key="types-0">
 						<div class="grip_column">
-							<div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="types-all"></div>
+							<div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="types-0"></div>
 						</div>
 						<div class="hfcheckinfo">
 							{% trans 'All types' %}
@@ -285,9 +303,9 @@
             <!-- language -------------------------------------------------------------------->
             <div class="smallbox-common">
                 <div class="checkbox-item">
-                    <div class="file_selected" data-key="langs-all">
+                    <div class="file_selected" data-key="langs-0">
 						<div class="grip_column">
-							<div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="langs-all"></div>
+							<div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="langs-0"></div>
 						</div>
 						<div class="hfcheckinfo">
 							{% trans 'All languages' %}
@@ -327,9 +345,9 @@
             <!-- Categories -->
             <div class="smallbox-common">
                 <div class="checkbox-item">
-                    <div class="file_selected" data-key="categories-all">
+                    <div class="file_selected" data-key="categories-0">
 						<div class="grip_column">
-							<div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="categories-all"></div>
+							<div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="categories-0"></div>
 						</div>
 						<div class="hfcheckinfo">
 							{% trans 'All categories' %}
@@ -356,6 +374,7 @@
                 {% endfor %}
             </div>
         </div>
+        <div id="filter_by"></div>
     </div>
 </div>
 </div>

@@ -81,7 +81,7 @@
     <!-- AUTHOR NAME -->
     <div class="module-view-author padding-content-10 left">
         <a class="module-view-author-avatar left">
-            <img src="images/module_view/avatar-big.jpg">
+            <img src="{% if author.avatar %} http://dev.voer.vn:2013/0.1/persons/{{ author.id }}/avatar/ {% else %} {{ STATIC_URL }}images/author1_detail.jpg {% endif %}" width="60" height="60">
         </a>
         <ul class="module-view-author-name left padding-content-10">
             <li>
