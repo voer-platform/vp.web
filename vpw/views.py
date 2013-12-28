@@ -393,7 +393,7 @@ def view_profile(request, pid):
 
         person_materials.append(material)
 
-    return render_to_response("frontend/profile.html", {"person": current_person, "materials": person_materials, 'pager': pager, 'page_query': page_query, 'categories': ca},
+    return render_to_response("frontend/profile.html", {"person": current_person, "materials": person_materials, 'pager': pager, 'page_query': page_query, 'categories': categories},
                               context_instance=RequestContext(request))
 
 
