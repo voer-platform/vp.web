@@ -1,5 +1,7 @@
 import json
 import math
+import os
+import zipfile
 import re
 import urllib
 
@@ -16,7 +18,8 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info,vpt_import, vpr_create_material, vpr_get_material_images, voer_update_author
+    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author
+from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
 
@@ -285,16 +288,35 @@ def create_module(request):
             if action == 'import':
                 upload_file = request.FILES['document_file']
                 with open(settings.MEDIA_ROOT + '/' + upload_file.name, 'wb+') as destination:
-                    # for chunk in upload_file.chunks():
-                    #     destination.write(chunk)
+                    for chunk in upload_file.chunks():
+                        destination.write(chunk)
                     # call import vpt
                     result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
-                    status = result_import['status']
                     task_id = result_import['task_id']
+                    download_url = vpt_get_url(task_id)
+                    response = vpt_download(download_url)
+                    # save downloaded file to transforms directory
+                    # TODO: transforms dir name should be in settings
+                    download_dir = '%s/transforms' % settings.MEDIA_ROOT
+                    download_filename = download_url.split('/')[-1]
+                    download_filepath = '%s/%s' % (download_dir, download_filename)
+                    with open(download_filepath, 'wb') as f:
+                        for chunk in response.iter_content(chunk_size=1024):
+                            if chunk: # filter out keep-alive new chunks
+                                f.write(chunk)
+                                f.flush()
+
+                    # load downloaded zip file
+                    zip_archive = zipfile.ZipFile(download_filepath, 'r')
+                    # Unzip into a new directory
+                    filename, extension = os.path.splitext(download_filename)
+                    extract_path = os.path.join(download_dir, filename)
+                    os.mkdir(extract_path)
+                    zip_archive.extractall(path=extract_path)
 
                 form = ModuleCreationForm(request.POST)
                 return render(request, "frontend/module/create_step3.html",
-                              {"material": material, "categories": categories_list, 'form': form})
+                              {"categories": categories_list, 'form': form})
             if action == 'save':
                 #Save to workspace of current user
                 try:
