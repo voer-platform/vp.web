@@ -18,7 +18,7 @@ function ajax_browse(url, types, languages, categories){
 
           $.post(url, formLogin.serialize(), function(data){
             if (data.status == 1) {
-              window.location.href = "/";
+              window.location.href = "/user/dashboard";
             } else {
               messageObj.children().html(data.message);
               messageObj.fadeIn("fast", function() {
