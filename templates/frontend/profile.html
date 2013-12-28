@@ -19,7 +19,7 @@
                 <div class="hfuser-address">{{ person.title }}</div>
                 <div class="hfuser-website">{{ person.homepage }}</div>
                 {% if request.user.is_superuser %}
-                <a class="hfbtn-common hfbtn-public right hfbtn-active" href="{% url 'delete_profile' person.id %}">Delete person</a>
+                <a class="hfbtn-common hfbtn-public right hfbtn-active" href="{% url 'delete_profile' person.id %}" onclick="return confirm('Bạn muốn xóa tác giả này?')">{% trans 'Delete person' %}</a>
                 {% endif %}
             </div>
         </div>
@@ -228,102 +228,197 @@
                 <div class="hffilter-right">
     <div class="bigbox-common">
         <div class="title">{% trans 'Filter By' %}</div>      
-        <div class="content">
+        <div class="content" id="main_list">
             <script>
-                $(document).ready(function(){  
-                    $('label[id|=types]').click(function(){
-                        var $idtype = $(this).attr('id');
-                        if($idtype == 'types-0'){                         
-                            $('label[id|=types]').removeClass('checked');
-                        }else{
-                            $('label[id=types-0]').removeClass('checked');
+                $(document).ready(function(){
+                    $('div[data-key|=authors]').click(function(){
+                        var $datakey=$(this).attr('data-key');
+                        if ($datakey == 'authors-0'){
+                            $('div[data-key|=authors]').removeClass('file_selected');
+                            $('div[data-key=authors-0]').addClass('file_selected');
+                        }else {
+                            $('div[data-key=authors-0]').removeClass('file_selected');
                         }
-						ajax_browse("{% url 'ajax_browse' %}", 1, "vi", 2);
-                    });                     
-                    $('label[id|=langs]').click(function(){
-                        var $idtype = $(this).attr('id');                       
-                        if($idtype == 'langs-0'){
-                            $('label[id|=langs]').removeClass('checked');
+                    });
+                    $('div[data-key|=categories]').click(function(){
+                        var $datakey=$(this).attr('data-key');
+                        if($datakey == 'categories-0'){
+                            $('div[data-key|=categories]').removeClass('file_selected');
+                            $('div[data-key=categories-0]').addClass('file_selected');
                         }else{
-                            $('label[id=langs-0]').removeClass('checked');
+                            $('div[data-key=categories-0]').removeClass('file_selected');
                         }
-						ajax_browse("{% url 'ajax_browse' %}", 1, "vi", 2);
-                    });    
+                    });
+                    $('div[data-key|=langs]').click(function(){
+                        var $datakey=$(this).attr('data-key');
+                        if($datakey == 'langs-0'){
+                            $('div[data-key|=langs]').removeClass('file_selected');
+                            $('div[data-key=langs-0]').addClass('file_selected');
+                        }else{
+                            $('div[data-key=langs-0]').removeClass('file_selected');
+                        }
+                    });
+                    $('div[data-key|=types]').click(function(){
+                        var $datakey=$(this).attr('data-key');
+                        if($datakey == 'types-0'){
+                            $('div[data-key|=types]').removeClass('file_selected');
+                            $('div[data-key=types-0]').addClass('file_selected');
+                        }else{
+                            $('div[data-key=types-0]').removeClass('file_selected');
+                        }
+                    });
+                    $('.checkbox-custom').click(function(){
+                        var $datakey=$(this).attr('data-key');
+                        $('div[data-key='+$datakey+']').toggleClass('file_selected');
+                        getItemSelected()
+                    });
                 });
+                function getItemSelected(){
+                    // mang cac items duoc select
+                    listItems = [];
+                    $('#main_list').find('.checkbox-custom.file_selected').each(function(){
+                        listItems.push($(this).attr('data-key'));
+                    });
+                    numberItem = listItems.length;
+                    //alert(listItems[.join(',')]);
+                    var html='';
+                    var types = [];
+                    var langs = [];
+                    var categories = [];
+                    for(i=0; i<numberItem; i++){
+                        if(listItems[i].substr(0, 6) == 'types-'){
+                            types.push(listItems[i].substr(6));
+                        }else if(listItems[i].substr(0,6) == 'langs-'){
+                            langs.push(listItems[i].substr(6));
+                        }else if(listItems[i].substr(0,11) == 'categories-'){
+                            categories.push(listItems[i].substr(11));
+                        }
+                    }
+                    ajax_browse("{% url 'ajax_browse' %}", types.join(","), langs.join(","), categories.join(","));
+                    if(numberItem > 0){
+                        $('#selection-actions').removeClass('displaynone');
+                        $('.selected_count').html(numberItem);
+
+                    }else{
+                        $('#selection-actions').addClass('displaynone');
+                    }
+                }
             </script>
             <!-- type -------------------------------------------------------------------->
             <div class="smallbox-common">
                 <div class="checkbox-item">
-                    <label id="types-0" class="checkbox checkbox-user-tool checked">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <input data-toggle="checkbox" type="checkbox">
-                        {% trans 'All types' %}
-                        <div class="number-common right">200</div>
-                    </label>
+                    <div class="file_selected" data-key="types-0">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="types-0"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {% trans 'All types' %}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
+                </div>
+                 <div class="checkbox-item">
+                    <div class="" data-key="types-1">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="types-1"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {% trans 'Modules' %}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
                 </div>
                 <div class="checkbox-item">
-                    <label id="types-1" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Modules' %}
-                        <div class="number-common right">200</div>
-                    </label>
+                    <div class="" data-key="types-2">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="types-2"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {% trans 'Collection' %}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
                 </div>
-                <div class="checkbox-item">
-                    <label id="types-2" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <input data-toggle="checkbox" type="checkbox">
-                        {% trans 'Collections' %}
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>            
             </div>
-            <!-- language -------------------------------------------------------------------->         
+            <!-- language -------------------------------------------------------------------->
             <div class="smallbox-common">
                 <div class="checkbox-item">
-                    <label id="langs-0" class="checkbox checkbox-user-tool checked">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <input data-toggle="checkbox" type="checkbox">
-                        {% trans 'All Languages' %}
-                        <div class="number-common right">200</div>
-                    </label>
+                    <div class="file_selected" data-key="langs-0">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="langs-0"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {% trans 'All languages' %}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
                 </div>
                 <div class="checkbox-item">
-                    <label id="langs-en" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <input data-toggle="checkbox" type="checkbox" value="en">
-                        {% trans 'English' %}
-                        <div class="number-common right">200</div>
-                    </label>
+                    <div class="" data-key="langs-vi">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="langs-vi"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {% trans 'Vietnamese' %}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
                 </div>
                 <div class="checkbox-item">
-                    <label id="langs-vi" class="checkbox checkbox-user-tool">
-                        <span class="icons">
-                            <span class="first-icon fui-checkbox-unchecked"></span>
-                            <span class="second-icon fui-checkbox-checked"></span>
-                        </span>
-                        <input data-toggle="checkbox" type="checkbox" value="vi">
-                        {% trans 'Vietnam' %}
-                        <div class="number-common right">200</div>
-                    </label>
-                </div>            
+                    <div class="" data-key="langs-en">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="langs-en"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {% trans 'English' %}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
+                </div>
             </div>
-         
+            <!-- Categories -->
+            <div class="smallbox-common">
+                <div class="checkbox-item">
+                    <div class="file_selected" data-key="categories-0">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="categories-0"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {% trans 'All categories' %}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
+                </div>
+                {% for category in categories %}
+                <div class="checkbox-item">
+                    <div class="" data-key="categories-{{category.id}}">
+                        <div class="grip_column">
+                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="categories-{{category.id}}"></div>
+                        </div>
+                        <div class="hfcheckinfo">
+                            {{ category.name }}
+                        </div>
+                        <div class="hfchecknumber">
+                            200
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>  
