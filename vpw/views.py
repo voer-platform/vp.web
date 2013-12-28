@@ -674,8 +674,9 @@ def ajax_browse(request):
     cats = request.GET.get("categories", "")
     types = request.GET.get("types", "")
     languages = request.GET.get("languages", "")
+    author = request.GET.get("author", "")
 
-    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages)
+    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages, author=author)
     if 'count' in materials:
         pager = pager_default_initialize(materials['count'], 12, page)
         page_query = get_page_query(request)

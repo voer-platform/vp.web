@@ -72,7 +72,7 @@
             <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
         </div>
         <div class="short-collection">{{ material.description }}</div>
-        <div class="author-collection"><a href="{% url 'view_profile' 345 %}">Pham Duc Manh</a></div>
+        <div class="author-collection"><a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a></div>
         <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
 			{% if material.categories == '1' %}
 				{% trans 'Business' %}

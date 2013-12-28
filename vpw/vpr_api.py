@@ -156,6 +156,7 @@ def vpr_browse(**kwargs):
     categories = kwargs.get("categories", "")
     types = kwargs.get("types", "")
     languages = kwargs.get("languages", "")
+    author = kwargs.get("author", "")
     params = ["page=%s" % page]
     # print "Type : " + types
     if categories and categories != "0":
@@ -167,10 +168,13 @@ def vpr_browse(**kwargs):
     if languages and languages != "0" and languages != 'vi,en':
         params.append("language=%s" % languages)
 
+    if author:
+        params.append("author=%s" % author)
+
     params = "&".join(params)
 
     # print "params: " + params
-    result = vpr_request("GET", "materials?%s" % params)
+    result = vpr_request("GET", "materials?names=1&%s" % params)
 
     #Get information facet
     facet = vpr_request("GET", "facet?%s" % params)

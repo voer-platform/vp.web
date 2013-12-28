@@ -294,7 +294,7 @@
                             categories.push(listItems[i].substr(11));
                         }
                     }
-                    ajax_browse("{% url 'ajax_browse' %}", types.join(","), langs.join(","), categories.join(","));
+                    ajax_browse("{% url 'ajax_browse' %}?author={{ person.id }}", types.join(","), langs.join(","), categories.join(","));
                     if(numberItem > 0){
                         $('#selection-actions').removeClass('displaynone');
                         $('.selected_count').html(numberItem);
