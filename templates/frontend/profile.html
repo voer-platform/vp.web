@@ -76,7 +76,7 @@
 </div>
             <!-- left content -->
             <div id="fitertop-browserall" class="hffitertop">
-    <div class="dropdown left">
+    <!--<div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Browse All' %}</a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li class="dropdown-label">{% trans 'Popular' %}</li>
@@ -104,7 +104,7 @@
             <li><a>{% trans 'Most Discussed' %}</a></li>
             <li><a>{% trans 'Most Recent' %}  </a></li>   
         </ul>
-    </div>  
+    </div>-->  
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Sort by' %}</a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -151,14 +151,15 @@
         {% url 'collection_detail' cid=material.material_id as material_url %}
     {% endif %}
   <div class="hfitem">    
-    <div class="collection-save-hover">
+    <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
+        {% if user.is_authenticated %}
         <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-1">{% trans 'Save' %}</a></div>
+            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}">{% trans 'Add to my favourite' %}</a></div>
         </div>
-        <div class="collection-saveto" metadata="iditem-1">
+        <div class="collection-saveto" metadata="iditem-{{ material.material_id }}">
             <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>
             <div class="collection-saveto-content">
-                
+
             </div>
             <div class="collection-saveto-create" metadata="iditem-1-create">
                 <a class="hfbtn-saveto-type" metadata="iditem-1-create">{% trans 'Create new' %}</a>
@@ -166,7 +167,8 @@
             <div class="collection-saveto-type" metadata="iditem-1-create">
                 <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
             </div>
-        </div>      
+        </div>
+        {% endif %}
     </div>
     <div class="collection-mainpage-cover">
        {% if material.categories %}
