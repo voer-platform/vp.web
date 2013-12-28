@@ -1,0 +1,364 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.jstree.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.leanModal.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/voer-collection.js"></script>
+{% endblock %}
+
+{% block titleSite %}{% trans 'Create collection' %}{% endblock %}
+
+{% block content %}
+
+    <!-- filter top -->
+    <div class="hfcreate">
+        <div class="breakcump left">
+            <span>{% trans 'Create Content' %}</span>
+            <span class="icon"></span>
+            <span class="current">{% trans 'Create a new collection' %}</span>
+        </div>
+        <div class="hfstep">
+            <ul>
+                <li class="active"><a id="hfstep-1">
+                    <div class="step">1</div>
+                    {% trans 'License' %}</a></li>
+                <li class="active"><a id="hfstep-2">
+                    <div class="step">2</div>
+                    {% trans 'Metadata' %}</a></li>
+                <li><a id="hfstep-3">
+                    <div class="step">3</div>
+                    {% trans 'Content' %}</a></li>
+            </ul>
+        </div>
+    </div>
+    {% include "frontend/block/left_block_user.html" %}
+    <form role="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="step" value="3"/>
+        <input type="hidden" name="mid" value="{{ material.id }}"/>
+
+        <div class="col-lg-1 right-row">
+            <div class="hfcreate-1">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
+                    <li class="active"><a href="#content" data-toggle="tab">{% trans 'Content' %}</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane" id="metadata">
+                        <div class="content">
+                            <div class="form-group">
+                                <label for="InputEmail1">{% trans 'Title' %}</label>
+                                <input class="form-control typetext" id="InputText" placeholder="Enter Title"
+                                       type="text" name="title" value="{{ material.title }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="InputDescription">{% trans 'Description' %}</label>
+                                <textarea rows="4" class="form-control"
+                                          name="description">{{ material.description }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputAuthor">{% trans 'Author' %}</label>
+                                <input class="form-control typetext" id="InputAuthor" placeholder="Enter Author"
+                                       type="text">
+                                <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
+                            </div>
+                            <div class="form-group listAuthor">
+                                <table class="listAuthor">
+                                    <thead>
+                                    <tr>
+                                        <th>{% trans 'Name' %}</th>
+                                        <th>{% trans 'Author' %}</th>
+                                        <th>{% trans 'Editor' %}</th>
+                                        <th>{% trans 'Licensor' %}</th>
+                                        <th>{% trans 'Maintainer' %}</th>
+                                        <th>{% trans 'Translator' %}</th>
+                                        <th>{% trans 'Contributor' %}</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="author-block">
+                                            <a class="hfbtn-author" href="author_profile.php">{% trans 'HiFlyer JSC' %}
+                                                <div class="author-information">
+                                                    <div class="avatar left">
+                                                        <img src="images/avatar.jpg" height="70px" width="70px">
+                                                    </div>
+                                                    <div class="right">
+                                                        <div class="user-name">{% trans 'Nguyen Lan Dung' %}</div>
+                                                        <div class="user-address">{% trans 'R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam' %}</div>
+                                                        <div class="user-website">voer.edu.vn</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <label class="checkbox checkbox-user-tool">
+                                                <span class="icons">
+                                                    <span class="first-icon fui-checkbox-unchecked"></span>
+                                                    <span class="second-icon fui-checkbox-checked"></span>
+                                                </span>
+                                                <input data-toggle="checkbox" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="checkbox checkbox-user-tool">
+                                                <span class="icons">
+                                                    <span class="first-icon fui-checkbox-unchecked"></span>
+                                                    <span class="second-icon fui-checkbox-checked"></span>
+                                                </span>
+                                                <input data-toggle="checkbox" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="checkbox checkbox-user-tool">
+                                                <span class="icons">
+                                                    <span class="first-icon fui-checkbox-unchecked"></span>
+                                                    <span class="second-icon fui-checkbox-checked"></span>
+                                                </span>
+                                                <input data-toggle="checkbox" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="checkbox checkbox-user-tool">
+                                                <span class="icons">
+                                                    <span class="first-icon fui-checkbox-unchecked"></span>
+                                                    <span class="second-icon fui-checkbox-checked"></span>
+                                                </span>
+                                                <input data-toggle="checkbox" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="checkbox checkbox-user-tool">
+                                                <span class="icons">
+                                                    <span class="first-icon fui-checkbox-unchecked"></span>
+                                                    <span class="second-icon fui-checkbox-checked"></span>
+                                                </span>
+                                                <input data-toggle="checkbox" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="checkbox checkbox-user-tool">
+                                                <span class="icons">
+                                                    <span class="first-icon fui-checkbox-unchecked"></span>
+                                                    <span class="second-icon fui-checkbox-checked"></span>
+                                                </span>
+                                                <input data-toggle="checkbox" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="hfbtn-delete"></div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputCategories">{% trans 'Categories' %}</label>
+                                <ul class="AddCategories">
+                                    {% for category in categories %}
+                                        <li>
+                                            <label class="checkbox checkbox-user-tool">
+                                                <span class="icons">
+                                                    <span class="first-icon fui-checkbox-unchecked"></span>
+                                                    <span class="second-icon fui-checkbox-checked"></span>
+                                                </span>
+                                                <input data-toggle="checkbox" type="checkbox" name="categories"
+                                                       value="{{ category.id }}"
+                                                       {% if category.id == material.categories|add:0 %}checked{% endif %}>
+                                                {{ category.name }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputFile">{% trans 'Image' %}</label>
+                                <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;"
+                                       onchange="document.getElementById('uploadfilename_0').value = this.value;"
+                                       class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">
+
+                                <div class="fakefile">
+                                    <input onclick="document.getElementById('uploadfile_0').click();"
+                                           id="uploadfilename_0" value="" class="form-control typefile" type="text">
+                                </div>
+                                <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputLanguage">{% trans 'Language' %}</label>
+
+                                <div class="hfselectList">
+                                    <select name="language" class="select-block">
+                                        <option>{% trans 'Choose language' %}</option>
+                                        <option value="vi"
+                                                {% if material.language == "vi" %}selected="selected"{% endif %}>{% trans 'Vietnamese' %}</option>
+                                        <option value="en"
+                                                {% if material.language == "en" %}selected="selected"{% endif %}>{% trans 'English' %}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputKeywords">{% trans 'Keywords' %}</label>
+                                <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords"
+                                       type="text" name="keywords" value="{{ material.keywords }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="InputTags">{% trans 'Tags' %}</label>
+                                <input class="form-control typetext" id="InputTags" placeholder="Enter Tags"
+                                       type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane active" id="content">
+                        <div class="content">
+                            <script>
+                                $(document).ready(function () {
+                                    $('a[id|=iditem]').hover(function () {
+                                        var $iditemshow = $(this).attr('metadata');
+                                        $('div[id=show-' + $iditemshow + ']').addClass('hfvisible');
+                                    }, function () {
+                                        var $iditemshow = $(this).attr('metadata');
+                                        $('div[id=show-' + $iditemshow + ']').removeClass('hfvisible');
+                                    });
+
+                                    $('button[id|=edit]').click(function () {
+                                        var $iditemshow = $(this).attr('metadata');
+                                        $('span[id=content-' + $iditemshow + ']').toggleClass('hfvisible');
+                                        $('span[id=replace-' + $iditemshow + ']').toggleClass('hfvisible');
+                                        var $orgcontent = $('span[id=content-' + $iditemshow + ']').html();
+                                        $('input[id=InputText-' + $iditemshow + ']').attr('value', $orgcontent);
+                                    });
+                                    $('button[id|=save]').click(function () {
+                                        var $iditemshow = $(this).attr('metadata');
+                                        $('span[id=content-' + $iditemshow + ']').toggleClass('hfvisible');
+                                        $('span[id=replace-' + $iditemshow + ']').toggleClass('hfvisible');
+                                        var $orgcontent = $('input[id=InputText-' + $iditemshow + ']').attr('value');
+                                        $('span[id=content-' + $iditemshow + ']').html($orgcontent);
+                                    });
+                                    $('button[id|=cancel]').click(function () {
+                                        var $iditemshow = $(this).attr('metadata');
+                                        $('span[id=content-' + $iditemshow + ']').toggleClass('hfvisible');
+                                        $('span[id=replace-' + $iditemshow + ']').toggleClass('hfvisible');
+                                    });
+                                    $('.collspan').click(function () {
+                                        var $iditemshow = $(this).attr('metadata');
+                                        $(this).toggleClass('exspan');
+                                        $('ul[metadata=child-' + $iditemshow + ']').toggleClass('collspaned');
+                                    });
+                                });
+                            </script>
+                            <div class="form-group">
+                                <label for="InputBody">{% trans 'Content' %}</label>
+
+                                <div class="hffolders">
+                                    <ul id="level-0">
+                                        <li class="root">
+                                            <span><a>Fundamentals of Signal Processing</a></span>
+                                            <ul id="level-1">
+                                                <li class="has-child">
+                            <span>
+                                <a id="iditem-1" metadata="1">
+                                    <span id="content-1">Introduction: The Nature of Science and Physics </span>
+                                    <span class="collspan" metadata="1"></span>
+                                    <span id="replace-1" class="hfvisible">
+
+                                            <input class="form-control typetext left" id="InputText-1" value=""
+                                                   type="text">
+                                            <div class="hfbtn-group-save btn-group btn-group-xs">
+                                                <button id="save-1" type="button" metadata="1"
+                                                        class="btn btn-danger">Save
+                                                </button>
+                                                <button id="cancel-1" type="button" class="btn btn-default"
+                                                        metadata="1">Cancel
+                                                </button>
+                                            </div>
+
+                                    </span>
+
+                                    <div id="show-1" class="hfbtn-group btn-group btn-group-xs">
+                                        <button type="button" id="edit-1" metadata="1" class="btn btn-default">
+                                            <span class="hficon edit"></span>
+                                        </button>
+                                        <button type="button" id="delete-1" metadata="1" class="btn btn-default">
+                                            <span class="hficon delete"></span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </span>
+                                                    <ul id="level-2" metadata="child-1" class="collspaned">
+                                                        <li><a>Introduction to Science and the Realm of Physics,
+                                                            Physical Quantities, and Units</a></li>
+                                                        <li><a>Physics: An Introduction</a></li>
+                                                        <li><a>Physical Quantities and Units</a></li>
+                                                        <li><a>Accuracy, Precision, and Significant Figures</a></li>
+                                                        <li><a>Approximation</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="has-child">
+                                                    <span><a>Kinematics</a></span><a>
+                                                </a>
+                                                    <ul id="level-2"><a>
+                                                    </a>
+                                                        <li><a></a><a>Introduction to One-Dimensional Kinematics</a>
+                                                        </li>
+                                                        <li><a>Displacement</a></li>
+                                                        <li><a>Vectors, Scalars, and Coordinate Systems</a></li>
+                                                        <li><a>Time, Velocity, and Speed</a></li>
+                                                        <li><a>Acceleration</a></li>
+                                                        <li><a>Motion Equations for Constant Acceleration in One
+                                                            Dimension</a></li>
+                                                        <li><a>Problem-Solving Basics for One-Dimensional
+                                                            Kinematics</a></li>
+                                                        <li><a>Falling Objects</a></li>
+                                                        <li><a>Graphical Analysis of One-Dimensional Motion</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group btn-common">
+                                <div class="hfleft left">
+                                    <a class="hfbtn-common hfbtn-next hfbtn-active" href="create_collection_save.php">{% trans 'Create Section' %}</a>
+                                </div>
+                                <div class="hfright right">
+                                    <a class="hfbtn-common hfbtn-next right hfbtn-active"
+                                       href="create_collection_save.php">{% trans 'Add Module' %}</a>
+                                    <input class="form-control right typetext" id="InputText"
+                                           placeholder="Search module to add" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group" style="clear:both;margin-top:10px;">
+                                <label for="InputFile">Files - Included Resources</label>
+                                <input onmouseout="document.getElementById('uploadfilename_2').value = this.value;"
+                                       onchange="document.getElementById('uploadfilename_2').value = this.value;"
+                                       class="uploadfile" id="uploadfile_2" name="uploadfile_2" type="file">
+
+                                <div class="fakefile">
+                                    <input onclick="document.getElementById('uploadfile_2').click();"
+                                           id="uploadfilename_2" value="" class="form-control typefile" type="text">
+                                </div>
+                                <p class="help-block">Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg,
+                                    jpeg.</p>
+                            </div>
+                            <div class="form-group btn-common">
+                                <button class="btn hfbtn-common hfbtn-public right hfbtn-active" name="action" value="publish">{% trans 'Public' %}</button>
+                                <button class="btn hfbtn-common hfbtn-next right hfbtn-active" name="action" value="save">{% trans 'Save' %}</button>
+                                <button class="btn hfbtn-common hfbtn-back right hfbtn-active" name="action" value="back">{% trans 'Back' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+{% endblock %}

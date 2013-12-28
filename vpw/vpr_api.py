@@ -158,13 +158,13 @@ def vpr_browse(**kwargs):
     languages = kwargs.get("languages", "")
     params = ["page=%s" % page]
     # print "Type : " + types
-    if categories:
+    if categories and categories != "0":
         params.append("categories=%s" % categories)
 
-    if types:
+    if types and types != "0":
         params.append("material_type=%s" % types)
 
-    if languages:
+    if languages and languages != "0":
         params.append("language=%s" % languages)
 
     params = "&".join(params)

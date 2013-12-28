@@ -221,7 +221,6 @@
 						$('div[data-key='+$datakey+']').toggleClass('file_selected');
 						getItemSelected()
 					});
-					getItemSelected()
 				});
 				function getItemSelected(){
 					// mang cac items duoc select
@@ -244,11 +243,7 @@
                             categories.push(listItems[i].substr(11));
                         }
                     }
-                    if(types.length>0) html += 'types='+types;
-                    if(langs.length>0) html += 'langs='+langs;
-                    if(categories.length>0) html += 'categories='+categories;
-                    $('#filter_by').html(html);
-                    ajax_browse("{% url 'ajax_browse' %}", types, langs, categories);
+                    ajax_browse("{% url 'ajax_browse' %}", types.join(","), langs.join(","), categories.join(","));
 					if(numberItem > 0){
 						$('#selection-actions').removeClass('displaynone');
 						$('.selected_count').html(numberItem);

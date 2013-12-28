@@ -18,7 +18,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info,vpt_import, vpr_create_material, vpr_get_material_images
 
-from vpw.forms import ModuleCreationForm
+from vpw.forms import ModuleCreationForm, CollectionCreationForm
 
 # Create your views here.
 
@@ -339,18 +339,19 @@ def create_module(request):
 
 @login_required
 def create_collection(request):
+    form = CollectionCreationForm(request.POST or None)
     if request.method == "POST":
         try:
-            previous_step = int(request.GET.get('step', '0'))
+            previous_step = int(request.POST.get('step', '0'))
         except ValueError:
             previous_step = 0
 
         if previous_step == 1:
             return render(request, "frontend/collection/create_step2.html")
         elif previous_step == 2:
-            return render(request, "frontend/collection/create_step2.html")
-        elif previous_step == 3:
-            return render(request, "frontend/collection/create_step3.html")
+            return render(request, "frontend/collection/create_step3.html", {
+                'form': form
+            })
         else:
             return render(request, "frontend/collection/create_step1.html")
     else:
@@ -667,10 +668,15 @@ def ajax_browse(request):
     languages = request.GET.get("languages", "")
 
     materials = vpr_browse(page=page, categories=cats, types=types, languages=languages)
-    pager = pager_default_initialize(materials['count'], 12, page)
-    page_query = get_page_query(request)
+    if 'count' in materials:
+        pager = pager_default_initialize(materials['count'], 12, page)
+        page_query = get_page_query(request)
 
-    return render(request, "frontend/ajax/browse.html", {"materials": materials, "categories": categories, 'pager': pager, 'page_query': page_query})
+        return render(request, "frontend/ajax/browse.html", {
+            "materials": materials, "categories": categories, 'pager': pager, 'page_query': page_query})
+    else:
+        return HttpResponse("No items found!")
+
 
 def get_attachment(request, fid):
     attachment_info = voer_get_attachment_info(fid)
