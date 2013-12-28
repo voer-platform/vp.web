@@ -7,6 +7,14 @@ function ajax_browse(url, types, languages, categories){
     });
 }
 
+
+function ajax_browse_page(url){
+    $.get(url, function(data){
+        $('#materials').html(data)
+    });
+}
+
+
 (function($, Voer, document) {
     Voer.Helper = (function(){
       return {

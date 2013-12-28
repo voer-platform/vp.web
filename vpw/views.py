@@ -27,6 +27,8 @@ def home(request):
     materials_list = []
     for mid in material_features:
         material = vpr_get_material(mid)
+        if 'in' not in material:
+            continue
         author_id_list = material['author'].split(',')
 
         p_list = []
