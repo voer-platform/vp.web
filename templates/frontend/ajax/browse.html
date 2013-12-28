@@ -61,8 +61,8 @@
         {% endif %}
     </div>
     <div class="collection-mainpage-cover">
-		{% if material.categories %}
-	   <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>     
+		{% if material.categories.0.0 %}
+	   <img src="{{STATIC_URL}}images/cat{{material.categories.0.0}}.jpg"/>
 	   {% else %}
 	   <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
 	   {% endif %}
@@ -73,22 +73,12 @@
         </div>
         <div class="short-collection">{{ material.description }}</div>
         <div class="author-collection"><a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a></div>
-        <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
-			{% if material.categories == '1' %}
-				{% trans 'Business' %}
-			{% elif  material.categories == '2' %}
-				{% trans 'Social Sciences' %}
-			{% elif  material.categories == '3' %}
-				{% trans 'Science and Technology' %}
-			{% elif  material.categories == '4' %}
-				{% trans 'Humanities' %}
-			{% elif  material.categories == '5' %}
-				{% trans 'Arts' %}
-			{% elif  material.categories == '6' %}
-				{% trans 'Mathematics and Statistics' %}
-			{% else %}
-				{% trans 'Others' %}
-			{% endif %}
+        <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories.0.0 }}">
+            {% if material.categories.0.1 %}
+                {{ material.categories.0.1 }}
+            {% else %}
+                {% trans 'Other' %}
+            {% endif %}
 		</a></div>
 
     </div>
