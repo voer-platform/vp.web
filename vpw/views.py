@@ -18,7 +18,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info,vpt_import, vpr_create_material, vpr_get_material_images, voer_update_author
 
-from vpw.forms import ModuleCreationForm, EditProfileForm
+from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
 
 # Create your views here.
 

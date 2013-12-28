@@ -171,6 +171,10 @@ def vpr_browse(**kwargs):
 
     # print "params: " + params
     result = vpr_request("GET", "materials?%s" % params)
+
+    #Get information facet
+    facet = vpr_request("GET", "facet?%s" % params)
+    result['facet'] = facet
     return result
 
 

@@ -7,7 +7,7 @@
     </div>
     <div class="smallbox-common">
         <div class="title">
-            My Items
+            {% trans 'My Items' %}
         </div>
         <div class="content">
             <ul>
@@ -19,16 +19,27 @@
     </div>
     <div class="smallbox-common">
         <div class="title">
-            My profile
+            {% trans 'My profile' %}
         </div>
         <div class="content">
             <ul>        
                 <li><a href="{% url 'edit_profile' %}">{% trans 'Profile Information' %}</a></li>
-                <li><a>Member Statistics</a></li>
-                <li><a>Account Settings</a></li>
-                <li><a>Delete Account</a></li>
             </ul>
         </div>      
     </div>
-</div>  
+    {% if request.user.is_superuser %}
+    <div class="smallbox-common">
+        <div class="title">
+            {% trans 'Administration' %}
+        </div>
+        <div class="content">
+            <ul>
+                <li><a href="#">{% trans 'Most viewed' %}</a></li>
+                <li><a href="#">{% trans 'Most liked' %}</a></li>
+                <li><a href="#">{% trans 'Most favourite' %}</a></li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>
 </div>
