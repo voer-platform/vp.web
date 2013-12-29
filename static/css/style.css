@@ -112,6 +112,8 @@
 .list-menu-footer {
   margin: 6px 0 0 6px;
   color: #999;
+}
+
 .voer-mol-ico {
   background: url("../images/icon/icon-module.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
   height: 15px;
@@ -233,57 +235,6 @@
   border: 1px solid #efefef;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-}
-
 .tt-dropdown-menu {
     background-color: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -361,4 +312,18 @@ button.hfbtn-common{
     background-repeat:no-repeat;
     background-color:transparent;
     background-position: 0;
+}
+
+.modal-content{
+    padding: 10px;
+}
+
+.modal-footer{
+    border-top: 0px;
+}
+
+#voer_sub_sessions{
+    width: 100%;
+    height: 240px;
+    margin-top: 10px;
 }
