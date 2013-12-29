@@ -39,6 +39,8 @@ urlpatterns = patterns('',
     url(r'^user/create/collection/?$', 'vpw.views.create_collection', name='create_collection'),
     url(r'^user/edit/profile/?$', 'vpw.views.edit_profile', name='edit_profile'),
     url(r'^user/m/(?P<mid>[0-9]+)/?$', 'vpw.views.user_module_detail', name='user_module_detail'),
+    url(r'^user/c/(?P<cid>[0-9a-z]+)(/(?P<mid>[0-9a-z]+))?/?$', 'vpw.views.user_collection_detail',
+        name='user_collection_detail'),
 
 
     url(r'^search/', 'vpw.views.search_result', name='search'),
@@ -50,6 +52,7 @@ urlpatterns = patterns('',
     url(r'^ajax/browse$', 'vpw.views.ajax_browse', name='ajax_browse'),
     url(r'^ajax/add_favorite$', 'vpw.views.ajax_add_favorite', name='ajax_add_favorite'),
     url(r'^ajax/search_author$', 'vpw.views.ajax_search_author', name='ajax_search_author'),
+    url(r'^ajax/search_module$', 'vpw.views.ajax_search_module', name='ajax_search_module'),
 
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

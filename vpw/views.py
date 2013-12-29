@@ -18,7 +18,7 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author
+    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
@@ -272,18 +272,45 @@ def user_module_detail(request, mid):
 
 
 @login_required
-def user_collection_detail(request, mid):
+def user_collection_detail(request, cid, mid):
     try:
-        material = Material.objects.get(id=mid)
+        collection = Material.objects.get(id=cid)
+
         # Chi co tac gia moi vao xem duoc bai
-        if material.creator_id != request.user.id:
+        if collection.creator_id != request.user.id:
             raise PermissionDenied
         author_id = request.user.author.author_id
         author = vpr_get_person(author_id)
-        category = vpr_get_category(material.categories)
-        if material.type == MODULE_TYPE:
+        category = vpr_get_category(collection.categories)
+
+        outline = json.loads(collection.text)
+        if not mid:
+            # get the first material of collection
+            mid = get_first_material_id(outline['content'])
+
+        # Get material in collection
+        if mid:
+            material = vpr_get_material(mid)
+            # lay anh trong noi dung
+            list_images = vpr_get_material_images(mid)
+            # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+            if "text" in material:
+                content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+                material['text'] = content
+        else:
+            material = {}
+            file_data = []
+
+        # Generate outline html
+        str_outline = "<ul class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'], True)
+
+        if collection.type == COLLECTION_TYPE:
             return render(request, "frontend/collection_detail.html", {
-                "material": material, "author": author, "category": category
+                "material": material,
+                "collection": collection,
+                "author": author,
+                "category": category,
+                "outline": str_outline
             })
         else:
             raise PermissionDenied
@@ -414,20 +441,7 @@ def create_module(request):
                         # save_post_to_object(request, material)
                         material.save()
                         # Publish content to VPR
-                        result = vpr_create_material(
-                            material_type=material.type,
-                            text=material.text,
-                            version=1,
-                            title=material.title,
-                            description=material.description,
-                            categories=material.categories,
-                            author=material.author,
-                            editor=material.editor,
-                            licensor=material.licensor,
-                            keywords=material.keywords,
-                            language=material.language,
-                            license_id=1
-                        )
+                        result = _publish_material(material)
                         if 'material_id' in result:
                             material.material_id = result['material_id']
                             material.version = result['version']
@@ -443,9 +457,12 @@ def create_module(request):
 @login_required
 def create_collection(request):
     form = CollectionCreationForm(request.POST or None)
+    pid = request.user.author.author_id
+    author = vpr_get_person(pid)
     current_step = 1
     params = {}
     if request.method == "POST":
+        action = request.POST.get("action", "")
         try:
             previous_step = int(request.POST.get('step', '0'))
         except ValueError:
@@ -459,21 +476,86 @@ def create_collection(request):
             else:
                 current_step = 2
                 params['categories'] = categories_list
+                params['author'] = author
         elif previous_step == 2:
-            if form.is_valid():
-                _save_material(form, COLLECTION_TYPE, request.user)
-                current_step = 3
-                params['form'] = form
-                params['categories'] = categories_list
+            if action == 'back':
+                current_step = 1
             else:
-                current_step = 2
-                params['form'] = form
-                params['categories'] = categories_list
+                if form.is_valid():
+                    material = _save_material(form, COLLECTION_TYPE, request.user)
+                    params['form'] = form
+                    params['categories'] = categories_list
+                    if material.id:
+                        params['material'] = material
+                        current_step = 3
+                    else:
+                        # Save khong thanh cong
+                        params['author'] = author
+                        current_step = 2
+                else:
+                    current_step = 2
+                    params['form'] = form
+                    params['author'] = author
+                    params['categories'] = categories_list
+        elif previous_step == 3:
+            try:
+                mid = int(request.POST.get("mid"))
+            except ValueError:
+                current_step = 1
+            if action == "save":
+                if form.is_valid():
+                    material = Material.objects.get(id=mid)
+                    outline = json.loads(form.cleaned_data['body'])
+                    tmp = {'content': []}
+                    for item in outline[0]['children']:
+                        tmp['content'].append(_transform_outline_to_vpr(item))
+                    outline_format = json.dumps(tmp)
+                    material.text = outline_format
+                    material.save()
+                    return redirect('user_collection_detail', mid=mid)
+                else:
+                    current_step = 2
+            elif action == "publish":
+                if form.is_valid():
+                    material = Material.objects.get(id=mid)
+                    outline = json.loads(form.cleaned_data['body'])
+                    tmp = {'content': []}
+                    for item in outline[0]['children']:
+                        tmp['content'].append(_transform_outline_to_vpr(item))
+                    outline_format = json.dumps(tmp)
+                    material.text = outline_format
+                    material.save()
+                    result = _publish_material(material)
+                    if 'material_id' in result:
+                        material.material_id = result['material_id']
+                        material.version = result['version']
+                        material.save()
+                        return redirect('collection_detail', cid=result['material_id'])
 
+            elif action == "back":
+                current_step = 2
         else:
             current_step = 1
 
     return render(request, COLLECTION_TEMPLATES[current_step], params)
+
+
+def _publish_material(material):
+    result = vpr_create_material(
+        material_type=material.type,
+        text=material.text,
+        version=1,
+        title=material.title,
+        description=material.description,
+        categories=material.categories,
+        author=material.author,
+        editor=material.editor,
+        licensor=material.licensor,
+        keywords=material.keywords,
+        language=material.language,
+        license_id=1
+    )
+    return result
 
 
 def _save_material(form, material_type, current_user):
@@ -696,17 +778,20 @@ def get_first_material_id(outline):
     return ''
 
 
-def get_outline(cid, outline):
+def get_outline(cid, outline, private=False):
     result = ""
     for item in outline:
         print item
         if item['type'] == "module":
-            result += "<li><a href='/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
+            if private:
+                result += "<li><a href='/user/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
+            else:
+                result += "<li><a href='/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
         else:
             strli = "<li>"
             strli += "<a>%s</a>" % item['title']
             strli += "<ul>"
-            strli += get_outline(cid, item['content'])
+            strli += get_outline(cid, item['content'], private)
             strli += "</ul>"
             strli += "</li>"
             result += strli
@@ -902,3 +987,35 @@ def ajax_search_author(request):
         if result['count'] > 0:
             authors = result['results']
     return HttpResponse(json.dumps(authors), content_type='application/json')
+
+
+def ajax_search_module(request):
+    keyword = request.GET.get('keyword', '')
+    result = vpr_search_module(keyword)
+    modules = []
+    if 'count' in result:
+        if result['count'] > 0:
+            modules = result['results']
+    return HttpResponse(json.dumps(modules), content_type='application/json')
+
+
+def _transform_outline_to_vpr(outline):
+    material_type = outline['attr']['rel']
+    result = {}
+    if material_type == 'module':
+        result['title'] = outline['data']
+        tmpid = outline['attr']['id']
+        pies = tmpid.split("|")
+        result['id'] = pies[0]
+        result['version'] = pies[1]
+        result['type'] = 'module'
+        result['url'] = "http://voer.edu.vn/m/" + result['id'] + "/" + result['version']
+        result['license'] = "http://creativecommons.org/licenses/by/3.0/"
+    else:
+        result['title'] = outline['data']
+        result['type'] = 'subcollection'
+        result['content'] = []
+        if 'children' in outline:
+            for item in outline['children']:
+                result['content'].append(_transform_outline_to_vpr(item))
+    return result

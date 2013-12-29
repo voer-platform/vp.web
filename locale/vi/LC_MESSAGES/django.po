@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-29 04:06+0100\n"
-"PO-Revision-Date: 2013-12-27 03:41+0700\n"
+"PO-Revision-Date: 2013-12-29 14:55+0700\n"
 "Last-Translator: Cuong Nguyen <cuongnguyen@vnfoundation.org>\n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.5.7\n"
 
 #: templates/base/header.html:15
 msgid "Home"
@@ -72,7 +72,7 @@ msgstr "Đăng nhập"
 
 #: templates/base/header.html:143
 msgid "Don't have an account? Sign up for VOER"
-msgstr "Bạn chưa có tài khoản? Hãy đăng ký"
+msgstr "Bạn chưa có tài khoản? Hãy đăng ký."
 
 #: templates/base/header.html:146
 msgid "The username or password is incorrect."
@@ -172,7 +172,7 @@ msgstr "Tất cả"
 #: templates/frontend/collection_detail.html:23
 #: templates/frontend/module_detail.html:23
 msgid "File Attachments"
-msgstr ""
+msgstr "Tập tin đính kèm"
 
 #: templates/frontend/collection_detail.html:71
 #: templates/frontend/module_detail.html:72
@@ -187,12 +187,12 @@ msgstr "Xem hồ sơ"
 #: templates/frontend/collection_detail.html:127
 #: templates/frontend/module_detail.html:125
 msgid "Reuse"
-msgstr "Sử dụng"
+msgstr "Tái sử dụng"
 
 #: templates/frontend/collection_detail.html:137
 #: templates/frontend/module_detail.html:135
 msgid "Download"
-msgstr ""
+msgstr "Tải về"
 
 #: templates/frontend/collection_detail.html:167
 #: templates/frontend/module_detail.html:166
@@ -202,7 +202,7 @@ msgstr "Thêm tác giả"
 #: templates/frontend/collection_detail.html:197
 #: templates/frontend/module_detail.html:196
 msgid "Similar item"
-msgstr ""
+msgstr "Nội dung tương tự"
 
 #: templates/frontend/index.html:97
 #, fuzzy
@@ -408,12 +408,11 @@ msgstr "Không có dữ liệu"
 #: templates/frontend/collection/create_step3.html:315
 #: templates/frontend/module/create_step3.html:219
 msgid "Save"
-msgstr "Thêm vào mục yêu thích"
+msgstr "Lưu lại"
 
 #: templates/frontend/user_edit_profile.html:134
-#, fuzzy
 msgid "Cancel"
-msgstr "Pháp"
+msgstr "Hủy"
 
 #: templates/frontend/block/left_block_user.html:5
 #: templates/frontend/module/create_step1.html:13
@@ -451,7 +450,7 @@ msgstr "Thông tin hồ sơ"
 
 #: templates/frontend/block/left_block_user.html:33
 msgid "Administration"
-msgstr ""
+msgstr "Quản trị"
 
 #: templates/frontend/block/left_block_user.html:37
 #, fuzzy
@@ -631,24 +630,21 @@ msgstr ""
 "dạng: png gif jpg jpeg."
 
 #: templates/frontend/collection/create_step3.html:265
-#, fuzzy
 msgid "Create Section"
-msgstr "Tạo collection mới"
+msgstr "Tạo mục mới"
 
 #: templates/frontend/collection/create_step3.html:275
 #: templates/frontend/collection/create_step3.html:284
-#, fuzzy
 msgid "Create section"
-msgstr "Tạo collection mới"
+msgstr "Tạo mục mới"
 
 #: templates/frontend/collection/create_step3.html:282
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 #: templates/frontend/collection/create_step3.html:295
-#, fuzzy
 msgid "Add Module"
-msgstr "Module"
+msgstr "Thêm Module"
 
 #: templates/frontend/collection/create_step3.html:314
 #, fuzzy
@@ -714,9 +710,8 @@ msgid "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
 msgstr "Tải tài liệu với định dạng DOC, DOCX, ODT, PNG, GIF,  JPG, JPEG"
 
 #: templates/frontend/module/create_step3.html:218
-#, fuzzy
 msgid "Publish"
-msgstr "Công khai"
+msgstr "Công bố"
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:8

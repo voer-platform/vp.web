@@ -134,7 +134,11 @@
         <div class="module-block-header">
             <div class="icon-module icon-download"></div>
             <div class="tilte-module">
-                <a>{% trans 'Download' %}</a>
+                {% if collection.version %}
+                <a href="{% url 'get_pdf' collection.material_id collection.version %}">{% trans 'Download' %}</a>
+                {% else %}
+                <a href="#">{% trans 'Download' %}</a>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -290,3 +290,8 @@ def vpr_search_author(author_name):
     """
     result = vpr_request('GET', 'search?kw=%s&on=p' % author_name)
     return result
+
+
+def vpr_search_module(keyword):
+    result = vpr_request('GET', 'search?kw=%s&on=m&type=1' % keyword)
+    return result

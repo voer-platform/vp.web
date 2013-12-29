@@ -4,12 +4,80 @@
 
 {% block titleSite %}{% trans 'Create collection' %}{% endblock %}
 
+{% block js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/typeahead.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/hogan.js"></script>
+    <script>
+    function delete_row_author(e){
+        $(e).parent().parent().remove();
+    };
+    $(document).ready(function(){
+        $('.search-author').typeahead({
+            name: 'authors',
+            valueKey: 'fullname',
+            remote: "{% url 'ajax_search_author' %}?keyword=%QUERY",
+            template: [
+                '<p class="item-fullname">{% verbatim %}{{fullname}}{% endverbatim %}</p>',
+                '<p class="item-email">{% verbatim %}{{email}}{% endverbatim %}</p>',
+            ].join(''),
+            engine: Hogan,
+            limit: 10
+        });
+
+        $('.search-author').on('typeahead:selected', function (object, datum) {
+            var template = Hogan.compile(ITEM_TEMPLATE);
+            var output = template.render(datum);
+            $('#listAuthor tbody').append(output);
+            $('.search-author').val('');
+        });
+
+
+        var ITEM_TEMPLATE = ['<tr>',
+            '<td class="author-block">',
+            '<a class="hfbtn-author" href="#">{% verbatim %}{{fullname}}{% endverbatim %}',
+            '<div class="author-information">',
+            '<div class="avatar left">',
+            '<img src="images/avatar.jpg" width="70px" height="70px">',
+            '</div>',
+            '<div class="right">',
+            '<div class="user-name">{% verbatim %}{{fullname}}{% endverbatim %}</div>',
+            '<div class="user-address">{% verbatim %}{{email}}{% endverbatim %}</div>',
+            '<div class="user-website">{% verbatim %}{{homepage}}{% endverbatim %}</div>',
+            '</div>',
+            '</div>',
+            '</a>',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="authors">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editors">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="licensors">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="maintainers">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="translators">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="coeditors">',
+            '</td>',
+            '<td><div class="hfbtn-delete" onclick="delete_row_author(this)"></div></td>',
+            '</tr>'].join('\n');
+
+    });
+    </script>
+{% endblock %}
+
 {% block content %}        
 
             <!-- filter top -->
             <div class="hfcreate">
     <div class="breakcump left">
-        <span>{% trans 'Create collection' %}</span>
+        <span>{% trans 'Create Content' %}</span>
         <span class="icon"></span>
         <span class="current">{% trans 'Create a new collection' %}</span>
     </div>
@@ -22,46 +90,46 @@
     </div>
 </div>
 {% include "frontend/block/left_block_user.html" %}
-<div class="col-lg-1 right-row">
-    <div class="hfcreate-1">
-        {% if form.errors %}
-            <div class="alert alert-danger">
-                <ul>
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <li>{{ field.label }} - {{ error|escape }}</li>
-                {% endfor %}
-            {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div class="tab-pane active" id="metadata">
-            <div class="content">
+            <div class="col-lg-1 right-row">
+                <div class="hfcreate-1">
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }} - {{ error|escape }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
+                    </ul>
+                    
+                    <!-- Tab panes -->
+                    <div class="tab-content">                   
+                      <div class="tab-pane active" id="metadata">
+                        <div class="content">
     <form role="form" method="post">
         {% csrf_token %}
 		<div class="form-group">
 			<label for="InputEmail1">{% trans 'Title' %}</label>
-			<input type="text" class="form-control typetext" id="InputText"
-                   placeholder="{% trans 'Enter title' %}" name="title" value="{{ form.title.value }}">
+			<input type="text" class="form-control typetext" id="InputText" placeholder="{% trans 'Enter title' %}" name="title" value="{{ form.title.value }}">
 		</div>
 		<div class="form-group">
 			<label for="InputDescription">{% trans 'Description' %}</label>
 			<textarea rows="4" class="form-control" name="description">{{ form.description.value }}</textarea>
 		</div>
 		<div class="form-group">
-			<label for="InputAuthor">{% trans 'Author' %}</label>
-			<input type="text" class="form-control typetext" id="InputAuthor" placeholder="{% trans 'Enter author' %}">
-			<a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
+			<label for="InputAuthor" style="display: block;">{% trans 'Author' %}</label>
+			<input type="text" class="form-control search-author"  autocomplete="off"
+                   id="InputAuthor" placeholder="{% trans 'Enter author' %}">
+			<!-- <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a> -->
 		</div>
 		<div class="form-group listAuthor">
-			<table class="listAuthor">
+			<table class="listAuthor" id="listAuthor">
 				<thead>
 					<tr>
                         <th>{% trans 'Name' %}</th>
@@ -77,74 +145,38 @@
 				<tbody>
 					<tr>
 						<td class="author-block">
-							<a class="hfbtn-author" href="author_profile.php">HiFlyer JSC
+							<a class="hfbtn-author" href="#">{{ author.fullname }}
 								<div class="author-information">
 									<div class="avatar left">
 										<img src="images/avatar.jpg" width="70px" height="70px">
 									</div>
 									<div class="right">
-										<div class="user-name">HiFlyer JSC</div>
-										<div class="user-address">R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam</div>
-										<div class="user-website">www.hiflyer.vn</div>
+										<div class="user-name">{{ author.fullname }}</div>
+										<div class="user-address">{{ author.email }}</div>
+										<div class="user-website">{{ author.homepage }}</div>
 									</div>
 								</div>
 							</a>
 						</td>
 						<td>
-							<label class="checkbox checkbox-user-tool">
-								<span class="icons">
-									<span class="first-icon fui-checkbox-unchecked"></span>
-									<span class="second-icon fui-checkbox-checked"></span>
-								</span>
-								<input type="checkbox" data-toggle="checkbox">
-							</label>
+                            <input type="checkbox"  value="{{ author.id }}" name="authors" checked>
 						</td>
 						<td>
-							<label class="checkbox checkbox-user-tool">
-								<span class="icons">
-									<span class="first-icon fui-checkbox-unchecked"></span>
-									<span class="second-icon fui-checkbox-checked"></span>
-								</span>
-								<input type="checkbox" data-toggle="checkbox">
-							</label>
+                            <input type="checkbox" value="{{ author.id }}" name="editors" checked>
 						</td>
 						<td>
-							<label class="checkbox checkbox-user-tool">
-								<span class="icons">
-									<span class="first-icon fui-checkbox-unchecked"></span>
-									<span class="second-icon fui-checkbox-checked"></span>
-								</span>
-								<input type="checkbox" data-toggle="checkbox">
-							</label>
+                            <input type="checkbox" name="{{ author.id }}" name="licensors">
 						</td>
 						<td>
-							<label class="checkbox checkbox-user-tool">
-								<span class="icons">
-									<span class="first-icon fui-checkbox-unchecked"></span>
-									<span class="second-icon fui-checkbox-checked"></span>
-								</span>
-								<input type="checkbox" data-toggle="checkbox">
-							</label>
+                            <input type="checkbox" name="{{ author.id }}" name="maintainers">
 						</td>
 						<td>
-							<label class="checkbox checkbox-user-tool">
-								<span class="icons">
-									<span class="first-icon fui-checkbox-unchecked"></span>
-									<span class="second-icon fui-checkbox-checked"></span>
-								</span>
-								<input type="checkbox" data-toggle="checkbox">
-							</label>
+                            <input type="checkbox" name="{{ author.id }}" name="translators">
 						</td>
 						<td>
-							<label class="checkbox checkbox-user-tool">
-								<span class="icons">
-									<span class="first-icon fui-checkbox-unchecked"></span>
-									<span class="second-icon fui-checkbox-checked"></span>
-								</span>
-								<input type="checkbox" data-toggle="checkbox">
-							</label>
+                            <input type="checkbox" name="{{ author.id }}" name="coeditors">
 						</td>
-						<td><div class="hfbtn-delete"></div></td>
+						<td style="width:25px;">&nbsp;</td>
 					</tr>
 				</tbody>
 			</table>
@@ -179,8 +211,8 @@
 			<div class="hfselectList">
 				<select class="select-block" name="language">
 					<option value="00">{% trans 'Choose language' %}</option>
-					<option value="vi" {% if material.language == "vi" %}selected="selected"{% endif %}>Vietnamese</option>
-					<option value="en" {% if material.language == "en" %}selected="selected"{% endif %}>English</option>
+					<option value="vi" {% if material.language == "vi" %}selected="selected"{% endif %}>{% trans 'Vietnamese' %}</option>
+					<option value="en" {% if material.language == "en" %}selected="selected"{% endif %}>{% trans 'English' %}</option>
 				</select>
 			</div>
 		</div>

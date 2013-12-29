@@ -8,6 +8,47 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.hotkeys.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.leanModal.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/voer-collection.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/typeahead.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/hogan.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#search-module').typeahead({
+            name: 'modules',
+            valueKey: 'title',
+            remote: "{% url 'ajax_search_module' %}?keyword=%QUERY",
+            template: [
+                '<p class="item-fullname">{% verbatim %}{{title}}{% endverbatim %}</p>',
+                '<p class="item-email">{% verbatim %}{{fullname}}{% endverbatim %}</p>',
+            ].join(''),
+            engine: Hogan,
+            limit: 10
+        });
+
+        $('#search-module').on('typeahead:selected', function (object, datum) {
+            $('#search-author').val('');
+
+            var parentNode = -1;
+            if ($("#collection-outline").jstree("get_selected")){
+                if ($("#collection-outline").jstree("get_selected").length > 1){
+                    parentNode = $('ul>li#root-outline');
+                }else{
+                    var selected = $("#collection-outline").jstree("get_selected");
+                    if (selected.attr("rel") == "bundle" || selected.attr("rel") == "root"){
+                        parentNode = null;
+                    }else{
+                        parentNode = $('ul>li#root-outline');
+                    }
+                }
+            }
+            title = datum.title;
+            id = datum.material_id + "|" + datum.version;
+
+            $("#collection-outline").jstree("create", parentNode, "last", { "data": title, "attr" : { "id": id, "rel" : "module" } });
+            $("#collection-outline").find('input.jstree-rename-input').blur();
+
+        });
+    });
+    </script>
 {% endblock %}
 
 {% block titleSite %}{% trans 'Create collection' %}{% endblock %}
@@ -70,6 +111,7 @@
                                        type="text">
                                 <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
                             </div>
+                            <!--
                             <div class="form-group listAuthor">
                                 <table class="listAuthor">
                                     <thead>
@@ -102,55 +144,31 @@
                                         </td>
                                         <td>
                                             <label class="checkbox checkbox-user-tool">
-                                                <span class="icons">
-                                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                                    <span class="second-icon fui-checkbox-checked"></span>
-                                                </span>
                                                 <input data-toggle="checkbox" type="checkbox">
                                             </label>
                                         </td>
                                         <td>
                                             <label class="checkbox checkbox-user-tool">
-                                                <span class="icons">
-                                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                                    <span class="second-icon fui-checkbox-checked"></span>
-                                                </span>
                                                 <input data-toggle="checkbox" type="checkbox">
                                             </label>
                                         </td>
                                         <td>
                                             <label class="checkbox checkbox-user-tool">
-                                                <span class="icons">
-                                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                                    <span class="second-icon fui-checkbox-checked"></span>
-                                                </span>
                                                 <input data-toggle="checkbox" type="checkbox">
                                             </label>
                                         </td>
                                         <td>
                                             <label class="checkbox checkbox-user-tool">
-                                                <span class="icons">
-                                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                                    <span class="second-icon fui-checkbox-checked"></span>
-                                                </span>
                                                 <input data-toggle="checkbox" type="checkbox">
                                             </label>
                                         </td>
                                         <td>
                                             <label class="checkbox checkbox-user-tool">
-                                                <span class="icons">
-                                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                                    <span class="second-icon fui-checkbox-checked"></span>
-                                                </span>
                                                 <input data-toggle="checkbox" type="checkbox">
                                             </label>
                                         </td>
                                         <td>
                                             <label class="checkbox checkbox-user-tool">
-                                                <span class="icons">
-                                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                                    <span class="second-icon fui-checkbox-checked"></span>
-                                                </span>
                                                 <input data-toggle="checkbox" type="checkbox">
                                             </label>
                                         </td>
@@ -161,6 +179,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            -->
                             <div class="form-group">
                                 <label for="InputCategories">{% trans 'Categories' %}</label>
                                 <ul class="AddCategories">
@@ -219,44 +238,8 @@
                     </div>
                     <div class="tab-pane active" id="content">
                         <div class="content">
-                            <script>
-                                $(document).ready(function () {
-                                    $('a[id|=iditem]').hover(function () {
-                                        var $iditemshow = $(this).attr('metadata');
-                                        $('div[id=show-' + $iditemshow + ']').addClass('hfvisible');
-                                    }, function () {
-                                        var $iditemshow = $(this).attr('metadata');
-                                        $('div[id=show-' + $iditemshow + ']').removeClass('hfvisible');
-                                    });
-
-                                    $('button[id|=edit]').click(function () {
-                                        var $iditemshow = $(this).attr('metadata');
-                                        $('span[id=content-' + $iditemshow + ']').toggleClass('hfvisible');
-                                        $('span[id=replace-' + $iditemshow + ']').toggleClass('hfvisible');
-                                        var $orgcontent = $('span[id=content-' + $iditemshow + ']').html();
-                                        $('input[id=InputText-' + $iditemshow + ']').attr('value', $orgcontent);
-                                    });
-                                    $('button[id|=save]').click(function () {
-                                        var $iditemshow = $(this).attr('metadata');
-                                        $('span[id=content-' + $iditemshow + ']').toggleClass('hfvisible');
-                                        $('span[id=replace-' + $iditemshow + ']').toggleClass('hfvisible');
-                                        var $orgcontent = $('input[id=InputText-' + $iditemshow + ']').attr('value');
-                                        $('span[id=content-' + $iditemshow + ']').html($orgcontent);
-                                    });
-                                    $('button[id|=cancel]').click(function () {
-                                        var $iditemshow = $(this).attr('metadata');
-                                        $('span[id=content-' + $iditemshow + ']').toggleClass('hfvisible');
-                                        $('span[id=replace-' + $iditemshow + ']').toggleClass('hfvisible');
-                                    });
-                                    $('.collspan').click(function () {
-                                        var $iditemshow = $(this).attr('metadata');
-                                        $(this).toggleClass('exspan');
-                                        $('ul[metadata=child-' + $iditemshow + ']').toggleClass('collspaned');
-                                    });
-                                });
-                            </script>
                             <div class="form-group">
-                                <label for="InputBody">{% trans 'Content' %}</label>
+                                <input type="hidden" name="body" id="voer-outline-text" value='[{"attr":{"id":"root-outline","rel":"root"},"data":"Outline","state":"open"}]' />
                                 <div id="collection-outline" class="demo" style="height:300px;"></div>
                             </div>
                             <div class="form-group btn-common">
@@ -293,22 +276,9 @@
                                 <div class="hfright right">
                                     <a class="hfbtn-common hfbtn-next right hfbtn-active"
                                        href="create_collection_save.php">{% trans 'Add Module' %}</a>
-                                    <input class="form-control right typetext" id="InputText"
+                                    <input class="form-control right typetext" id="search-module"
                                            placeholder="Search module to add" type="text">
                                 </div>
-                            </div>
-                            <div class="form-group" style="clear:both;margin-top:10px;">
-                                <label for="InputFile">Files - Included Resources</label>
-                                <input onmouseout="document.getElementById('uploadfilename_2').value = this.value;"
-                                       onchange="document.getElementById('uploadfilename_2').value = this.value;"
-                                       class="uploadfile" id="uploadfile_2" name="uploadfile_2" type="file">
-
-                                <div class="fakefile">
-                                    <input onclick="document.getElementById('uploadfile_2').click();"
-                                           id="uploadfilename_2" value="" class="form-control typefile" type="text">
-                                </div>
-                                <p class="help-block">Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg,
-                                    jpeg.</p>
                             </div>
                             <div class="form-group btn-common">
                                 <button class="btn hfbtn-common hfbtn-public right hfbtn-active" name="action" value="publish">{% trans 'Public' %}</button>

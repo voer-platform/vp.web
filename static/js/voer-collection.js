@@ -26,7 +26,7 @@ $(document).ready(function(){
                     // can have files and folders inside, but NOT other `drive` nodes
                     "valid_children" : [ "module", "bundle" ],
                     "icon" : {
-                        "image" : "/misc/kdm_home.png"
+                        "image" : "/static/images/kdm_home.png"
                     },
                     // those prevent the functions with the same name to be used on `drive` nodes
                     // internally the `before` event is used
@@ -126,7 +126,6 @@ $(document).ready(function(){
 //        return false;
 //    });
 
-    $("#add_folder").leanModal({closeButton: ".modal_close" });
     $('#btn_add_sections').click(function () {
         var voer_sub_sessions = $('#voer_sub_sessions').val();
 

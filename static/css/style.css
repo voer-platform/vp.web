@@ -114,6 +114,16 @@
   color: #999;
 }
 
+.tt-dropdown-menu {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 12px;
+    padding: 8px 0;
+    width: 422px;
+}
+
 .tt-suggestion {
     font-size: 18px;
     line-height: 24px;
@@ -165,4 +175,15 @@ button.hfbtn-common{
 
 .list-module-name-content{
     height: 230px;
+}
+
+#search-module{
+    width: 470px;
+}
+
+.jstree-default li[rel=module] a ins {
+    background-image:url("/static/images/file.png");
+    background-repeat:no-repeat;
+    background-color:transparent;
+    background-position: 0;
 }
