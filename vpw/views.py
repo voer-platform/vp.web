@@ -19,7 +19,7 @@ from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module
-from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download
+from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
 from django.utils.translation import ugettext as _
@@ -697,6 +697,30 @@ def user_dashboard(request):
         person_materials.append(material)
 
     return render(request, "frontend/user_profile.html", {"materials": person_materials, "author": author, 'pager': pager, 'page_query': page_query})
+
+
+@login_required
+def mostViewedView(request):
+    #page = int(request.GET.get('page', 1))
+    current_user = request.user
+    pid = current_user.author.author_id
+    author = vpr_get_person(pid, True)
+    materials = vpr_request('GET', 'stats/materials/counter/')
+
+    #page_query = get_page_query(request)
+    #pager = pager_default_initialize(materials['count'], 12, page)
+
+    #person_materials = []
+    #for material in materials['results']:
+    #    view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
+    #    material['view_count'] = view_count
+
+    #    favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
+    #    material['favorite_count'] = favorite_count
+
+    #    person_materials.append(material)
+
+    return render(request, "frontend/material_stats.html", {"materials": materials, "author": author})
 
 
 def search_result(request):

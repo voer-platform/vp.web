@@ -41,6 +41,7 @@ urlpatterns = patterns('',
     url(r'^user/m/(?P<mid>[0-9]+)/?$', 'vpw.views.user_module_detail', name='user_module_detail'),
     url(r'^user/c/(?P<cid>[0-9a-z]+)(/(?P<mid>[0-9a-z]+))?/?$', 'vpw.views.user_collection_detail',
         name='user_collection_detail'),
+    url(r'^user/most-viewed/?$', 'vpw.views.mostViewedView', name='most-viewed'),
 
 
     url(r'^search/', 'vpw.views.search_result', name='search'),
