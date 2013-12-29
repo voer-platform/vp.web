@@ -30,12 +30,14 @@
 	    <div class="right" id="right-top-nav">
 	        <div class="block-top-right">
 	            <ul class="list-right-top page-content">
+                    {% if not is_home %}
 	                <li>
                     <form action="{% url 'search' %}" method="GET">
                       {% csrf_token %}
 	                    <input type="text" class="input-search-right-top" name="keyword" value="{{ keyword }}">
                     </form>
 	                </li>
+                    {% endif %}
 	                <li>
 	                    <div class="collapse navbar-collapse bs-js-navbar-collapse">
 	                        <ul class="nav navbar-nav">

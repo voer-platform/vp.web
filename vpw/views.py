@@ -75,7 +75,8 @@ def home(request):
         if 'id' in person:
             person_list.append(person)
 
-    return render(request, "frontend/index.html", {"materials_list": materials_list, "person_list": person_list})
+    return render(request, "frontend/index.html",
+                  {"materials_list": materials_list, "person_list": person_list, "is_home": True})
 
 
 def signup(request):
