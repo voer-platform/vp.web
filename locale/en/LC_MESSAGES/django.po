@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-29 04:06+0100\n"
+"POT-Creation-Date: 2013-12-29 20:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgid "Browse All"
 msgstr ""
 
 #: templates/base/header.html:21
-msgid "Discover"
+msgid "Contribute"
 msgstr ""
 
 #: templates/base/header.html:24
@@ -41,47 +41,47 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: templates/base/header.html:74
-#: templates/frontend/collection/create_step2.html:177
-#: templates/frontend/collection/create_step3.html:196
-#: templates/frontend/module/create_step2.html:177
-#: templates/frontend/module/create_step3.html:174
+#: templates/base/header.html:90
+#: templates/frontend/collection/create_step2.html:210
+#: templates/frontend/collection/create_step3.html:215
+#: templates/frontend/module/create_step2.html:210
+#: templates/frontend/module/create_step3.html:176
 msgid "Language"
 msgstr ""
 
-#: templates/base/header.html:100
+#: templates/base/header.html:116
 msgid "Join"
 msgstr ""
 
-#: templates/base/header.html:118
+#: templates/base/header.html:134
 msgid "Login to VOER"
 msgstr ""
 
-#: templates/base/header.html:133
+#: templates/base/header.html:149
 msgid "Remember me"
 msgstr ""
 
-#: templates/base/header.html:137
+#: templates/base/header.html:153
 msgid "Forgot your password ?"
 msgstr ""
 
-#: templates/base/header.html:140 templates/registration/login.html:36
+#: templates/base/header.html:156 templates/registration/login.html:36
 msgid "Login"
 msgstr ""
 
-#: templates/base/header.html:143
+#: templates/base/header.html:159
 msgid "Don't have an account? Sign up for VOER"
 msgstr ""
 
-#: templates/base/header.html:146
+#: templates/base/header.html:162
 msgid "The username or password is incorrect."
 msgstr ""
 
 #: templates/frontend/browse.html:48 templates/frontend/profile.html:111
 #: templates/frontend/user_profile.html:110
-#: templates/frontend/collection/create_step2.html:50
-#: templates/frontend/collection/create_step3.html:58
-#: templates/frontend/module/create_step2.html:50
+#: templates/frontend/collection/create_step2.html:118
+#: templates/frontend/collection/create_step3.html:99
+#: templates/frontend/module/create_step2.html:118
 #: templates/frontend/module/create_step3.html:47
 msgid "Title"
 msgstr ""
@@ -135,31 +135,35 @@ msgstr ""
 msgid "All types"
 msgstr ""
 
-#: templates/frontend/browse.html:291 templates/frontend/profile.html:352
+#: templates/frontend/browse.html:290 templates/frontend/profile.html:352
 msgid "Modules"
 msgstr ""
 
-#: templates/frontend/browse.html:304 templates/frontend/profile.html:365
+#: templates/frontend/browse.html:302 templates/frontend/profile.html:365
 msgid "Collection"
 msgstr ""
 
-#: templates/frontend/browse.html:320 templates/frontend/profile.html:381
+#: templates/frontend/browse.html:317 templates/frontend/profile.html:381
 msgid "All languages"
 msgstr ""
 
-#: templates/frontend/browse.html:333 templates/frontend/profile.html:394
-#: templates/frontend/collection/create_step3.html:202
-#: templates/frontend/module/create_step3.html:178
+#: templates/frontend/browse.html:329 templates/frontend/profile.html:394
+#: templates/frontend/collection/create_step2.html:214
+#: templates/frontend/collection/create_step3.html:221
+#: templates/frontend/module/create_step2.html:214
+#: templates/frontend/module/create_step3.html:180
 msgid "Vietnamese"
 msgstr ""
 
-#: templates/frontend/browse.html:346 templates/frontend/profile.html:407
-#: templates/frontend/collection/create_step3.html:204
-#: templates/frontend/module/create_step3.html:179
+#: templates/frontend/browse.html:341 templates/frontend/profile.html:407
+#: templates/frontend/collection/create_step2.html:215
+#: templates/frontend/collection/create_step3.html:223
+#: templates/frontend/module/create_step2.html:215
+#: templates/frontend/module/create_step3.html:181
 msgid "English"
 msgstr ""
 
-#: templates/frontend/browse.html:362 templates/frontend/profile.html:423
+#: templates/frontend/browse.html:356 templates/frontend/profile.html:423
 msgid "All categories"
 msgstr ""
 
@@ -183,17 +187,18 @@ msgstr ""
 msgid "Reuse"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:137
+#: templates/frontend/collection_detail.html:138
+#: templates/frontend/collection_detail.html:140
 #: templates/frontend/module_detail.html:135
 msgid "Download"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:167
+#: templates/frontend/collection_detail.html:171
 #: templates/frontend/module_detail.html:166
 msgid "Other from Author"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:197
+#: templates/frontend/collection_detail.html:201
 #: templates/frontend/module_detail.html:196
 msgid "Similar item"
 msgstr ""
@@ -213,54 +218,54 @@ msgid "Delete person"
 msgstr ""
 
 #: templates/frontend/profile.html:29 templates/frontend/user_profile.html:26
-#: templates/frontend/collection/create_step2.html:58
-#: templates/frontend/collection/create_step2.html:67
-#: templates/frontend/collection/create_step3.html:68
-#: templates/frontend/collection/create_step3.html:78
-#: templates/frontend/module/create_step2.html:58
-#: templates/frontend/module/create_step2.html:67
-#: templates/frontend/module/create_step3.html:55
-#: templates/frontend/module/create_step3.html:64
+#: templates/frontend/collection/create_step2.html:126
+#: templates/frontend/collection/create_step2.html:136
+#: templates/frontend/collection/create_step3.html:109
+#: templates/frontend/collection/create_step3.html:120
+#: templates/frontend/module/create_step2.html:126
+#: templates/frontend/module/create_step2.html:136
+#: templates/frontend/module/create_step3.html:56
+#: templates/frontend/module/create_step3.html:65
 msgid "Author"
 msgstr ""
 
 #: templates/frontend/profile.html:33 templates/frontend/user_profile.html:30
-#: templates/frontend/collection/create_step2.html:72
-#: templates/frontend/collection/create_step3.html:83
-#: templates/frontend/module/create_step2.html:72
-#: templates/frontend/module/create_step3.html:69
+#: templates/frontend/collection/create_step2.html:141
+#: templates/frontend/collection/create_step3.html:125
+#: templates/frontend/module/create_step2.html:141
+#: templates/frontend/module/create_step3.html:70
 msgid "Contributor"
 msgstr ""
 
 #: templates/frontend/profile.html:37 templates/frontend/user_profile.html:34
-#: templates/frontend/collection/create_step2.html:68
-#: templates/frontend/collection/create_step3.html:79
-#: templates/frontend/module/create_step2.html:68
-#: templates/frontend/module/create_step3.html:65
+#: templates/frontend/collection/create_step2.html:137
+#: templates/frontend/collection/create_step3.html:121
+#: templates/frontend/module/create_step2.html:137
+#: templates/frontend/module/create_step3.html:66
 msgid "Editor"
 msgstr ""
 
 #: templates/frontend/profile.html:41 templates/frontend/user_profile.html:38
-#: templates/frontend/collection/create_step2.html:69
-#: templates/frontend/collection/create_step3.html:80
-#: templates/frontend/module/create_step2.html:69
-#: templates/frontend/module/create_step3.html:66
+#: templates/frontend/collection/create_step2.html:138
+#: templates/frontend/collection/create_step3.html:122
+#: templates/frontend/module/create_step2.html:138
+#: templates/frontend/module/create_step3.html:67
 msgid "Licensor"
 msgstr ""
 
 #: templates/frontend/profile.html:45 templates/frontend/user_profile.html:42
-#: templates/frontend/collection/create_step2.html:70
-#: templates/frontend/collection/create_step3.html:81
-#: templates/frontend/module/create_step2.html:70
-#: templates/frontend/module/create_step3.html:67
+#: templates/frontend/collection/create_step2.html:139
+#: templates/frontend/collection/create_step3.html:123
+#: templates/frontend/module/create_step2.html:139
+#: templates/frontend/module/create_step3.html:68
 msgid "Maintainer"
 msgstr ""
 
 #: templates/frontend/profile.html:49 templates/frontend/user_profile.html:46
-#: templates/frontend/collection/create_step2.html:71
-#: templates/frontend/collection/create_step3.html:82
-#: templates/frontend/module/create_step2.html:71
-#: templates/frontend/module/create_step3.html:68
+#: templates/frontend/collection/create_step2.html:140
+#: templates/frontend/collection/create_step3.html:124
+#: templates/frontend/module/create_step2.html:140
+#: templates/frontend/module/create_step3.html:69
 msgid "Translator"
 msgstr ""
 
@@ -397,8 +402,8 @@ msgid "No data"
 msgstr ""
 
 #: templates/frontend/user_edit_profile.html:133
-#: templates/frontend/collection/create_step3.html:315
-#: templates/frontend/module/create_step3.html:219
+#: templates/frontend/collection/create_step3.html:283
+#: templates/frontend/module/create_step3.html:223
 msgid "Save"
 msgstr ""
 
@@ -408,15 +413,15 @@ msgstr ""
 
 #: templates/frontend/block/left_block_user.html:5
 #: templates/frontend/module/create_step1.html:13
-#: templates/frontend/module/create_step2.html:14
+#: templates/frontend/module/create_step2.html:82
 #: templates/frontend/module/create_step3.html:19
 msgid "Create a new module"
 msgstr ""
 
 #: templates/frontend/block/left_block_user.html:6
-#: templates/frontend/collection/create_step1.html:12
-#: templates/frontend/collection/create_step2.html:14
-#: templates/frontend/collection/create_step3.html:22
+#: templates/frontend/collection/create_step1.html:11
+#: templates/frontend/collection/create_step2.html:82
+#: templates/frontend/collection/create_step3.html:63
 msgid "Create a new collection"
 msgstr ""
 
@@ -458,182 +463,185 @@ msgstr ""
 
 #: templates/frontend/collection/create_step1.html:3
 #: templates/frontend/collection/create_step2.html:5
-#: templates/frontend/collection/create_step2.html:12
-#: templates/frontend/collection/create_step3.html:13
+#: templates/frontend/collection/create_step3.html:54
 msgid "Create collection"
 msgstr ""
 
-#: templates/frontend/collection/create_step1.html:10
+#: templates/frontend/collection/create_step1.html:9
 msgid "Create content"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:18
-#: templates/frontend/collection/create_step3.html:28
+#: templates/frontend/collection/create_step1.html:56
+#: templates/frontend/module/create_step1.html:45
+msgid ""
+"I have read the above, and I agree to license this new work under its terms."
+msgstr ""
+
+#: templates/frontend/collection/create_step1.html:67
+#: templates/frontend/collection/create_step2.html:231
+#: templates/frontend/module/create_step1.html:57
+#: templates/frontend/module/create_step2.html:231
+msgid "Next"
+msgstr ""
+
+#: templates/frontend/collection/create_step2.html:80
+#: templates/frontend/collection/create_step3.html:61
+#: templates/frontend/module/create_step1.html:11
+#: templates/frontend/module/create_step2.html:80
+#: templates/frontend/module/create_step3.html:17
+msgid "Create Content"
+msgstr ""
+
+#: templates/frontend/collection/create_step2.html:86
+#: templates/frontend/collection/create_step3.html:69
 #: templates/frontend/module/create_step1.html:17
-#: templates/frontend/module/create_step2.html:18
+#: templates/frontend/module/create_step2.html:86
 #: templates/frontend/module/create_step3.html:23
 msgid "License"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:19
-#: templates/frontend/collection/create_step2.html:40
-#: templates/frontend/collection/create_step3.html:31
-#: templates/frontend/collection/create_step3.html:49
+#: templates/frontend/collection/create_step2.html:87
+#: templates/frontend/collection/create_step2.html:108
+#: templates/frontend/collection/create_step3.html:72
+#: templates/frontend/collection/create_step3.html:90
 #: templates/frontend/module/create_step1.html:18
-#: templates/frontend/module/create_step2.html:19
-#: templates/frontend/module/create_step2.html:40
+#: templates/frontend/module/create_step2.html:87
+#: templates/frontend/module/create_step2.html:108
 #: templates/frontend/module/create_step3.html:24
 #: templates/frontend/module/create_step3.html:38
 msgid "Metadata"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:20
-#: templates/frontend/collection/create_step3.html:34
-#: templates/frontend/collection/create_step3.html:50
-#: templates/frontend/collection/create_step3.html:259
-#: templates/frontend/module/create_step2.html:20
+#: templates/frontend/collection/create_step2.html:88
+#: templates/frontend/collection/create_step3.html:75
+#: templates/frontend/collection/create_step3.html:91
+#: templates/frontend/module/create_step2.html:88
 #: templates/frontend/module/create_step3.html:25
 #: templates/frontend/module/create_step3.html:39
 msgid "Content"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:51
-#: templates/frontend/module/create_step2.html:51
+#: templates/frontend/collection/create_step2.html:119
+#: templates/frontend/module/create_step2.html:119
 msgid "Enter title"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:54
-#: templates/frontend/collection/create_step3.html:63
-#: templates/frontend/module/create_step2.html:54
+#: templates/frontend/collection/create_step2.html:122
+#: templates/frontend/collection/create_step3.html:104
+#: templates/frontend/module/create_step2.html:122
 #: templates/frontend/module/create_step3.html:51
 msgid "Description"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:59
-#: templates/frontend/module/create_step2.html:59
+#: templates/frontend/collection/create_step2.html:128
+#: templates/frontend/module/create_step2.html:128
 msgid "Enter author"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:60
-#: templates/frontend/collection/create_step3.html:71
-#: templates/frontend/module/create_step2.html:60
-#: templates/frontend/module/create_step3.html:57
+#: templates/frontend/collection/create_step2.html:129
+#: templates/frontend/collection/create_step3.html:112
+#: templates/frontend/module/create_step2.html:129
+#: templates/frontend/module/create_step3.html:58
 msgid "Add new Author"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:66
-#: templates/frontend/collection/create_step3.html:77
-#: templates/frontend/module/create_step2.html:66
-#: templates/frontend/module/create_step3.html:63
+#: templates/frontend/collection/create_step2.html:135
+#: templates/frontend/collection/create_step3.html:119
+#: templates/frontend/module/create_step2.html:135
+#: templates/frontend/module/create_step3.html:64
 msgid "Name"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:152
-#: templates/frontend/collection/create_step3.html:165
-#: templates/frontend/module/create_step2.html:152
-#: templates/frontend/module/create_step3.html:149
+#: templates/frontend/collection/create_step2.html:185
+#: templates/frontend/collection/create_step3.html:184
+#: templates/frontend/module/create_step2.html:185
+#: templates/frontend/module/create_step3.html:151
 msgid "Categories"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:169
-#: templates/frontend/collection/create_step3.html:184
-#: templates/frontend/module/create_step2.html:169
-#: templates/frontend/module/create_step3.html:166
+#: templates/frontend/collection/create_step2.html:202
+#: templates/frontend/collection/create_step3.html:203
+#: templates/frontend/module/create_step2.html:202
+#: templates/frontend/module/create_step3.html:168
 msgid "Image"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:180
-#: templates/frontend/collection/create_step3.html:200
-#: templates/frontend/module/create_step2.html:180
-#: templates/frontend/module/create_step3.html:177
+#: templates/frontend/collection/create_step2.html:213
+#: templates/frontend/collection/create_step3.html:219
+#: templates/frontend/module/create_step2.html:213
+#: templates/frontend/module/create_step3.html:179
 msgid "Choose language"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:187
-#: templates/frontend/collection/create_step3.html:209
-#: templates/frontend/module/create_step2.html:187
-#: templates/frontend/module/create_step3.html:184
+#: templates/frontend/collection/create_step2.html:220
+#: templates/frontend/collection/create_step3.html:228
+#: templates/frontend/module/create_step2.html:220
+#: templates/frontend/module/create_step3.html:186
 msgid "Keywords"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:188
-#: templates/frontend/module/create_step2.html:188
+#: templates/frontend/collection/create_step2.html:222
+#: templates/frontend/module/create_step2.html:222
 msgid "Enter keywords"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:191
-#: templates/frontend/collection/create_step3.html:214
-#: templates/frontend/module/create_step2.html:191
-#: templates/frontend/module/create_step3.html:188
+#: templates/frontend/collection/create_step2.html:225
+#: templates/frontend/collection/create_step3.html:233
+#: templates/frontend/module/create_step2.html:225
+#: templates/frontend/module/create_step3.html:190
 msgid "Tags"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:192
-#: templates/frontend/module/create_step2.html:192
+#: templates/frontend/collection/create_step2.html:227
+#: templates/frontend/module/create_step2.html:227
 msgid "Enter tags"
 msgstr ""
 
-#: templates/frontend/collection/create_step2.html:196
-#: templates/frontend/module/create_step2.html:196
-msgid "Next"
-msgstr ""
-
-#: templates/frontend/collection/create_step2.html:197
-#: templates/frontend/collection/create_step3.html:316
-#: templates/frontend/module/create_step2.html:197
-#: templates/frontend/module/create_step3.html:220
+#: templates/frontend/collection/create_step2.html:232
+#: templates/frontend/collection/create_step3.html:284
+#: templates/frontend/module/create_step2.html:232
+#: templates/frontend/module/create_step3.html:224
 msgid "Back"
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:20
-#: templates/frontend/module/create_step1.html:11
-#: templates/frontend/module/create_step2.html:12
-#: templates/frontend/module/create_step3.html:17
-msgid "Create Content"
-msgstr ""
-
-#: templates/frontend/collection/create_step3.html:90
-#: templates/frontend/module/create_step3.html:76
+#: templates/frontend/collection/create_step3.html:132
+#: templates/frontend/module/create_step3.html:77
 msgid "HiFlyer JSC"
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:96
-#: templates/frontend/module/create_step3.html:82
+#: templates/frontend/collection/create_step3.html:138
+#: templates/frontend/module/create_step3.html:83
 msgid "Nguyen Lan Dung"
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:97
-#: templates/frontend/module/create_step3.html:83
+#: templates/frontend/collection/create_step3.html:139
+#: templates/frontend/module/create_step3.html:84
 msgid "R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam"
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:193
-#: templates/frontend/module/create_step3.html:171
+#: templates/frontend/collection/create_step3.html:212
+#: templates/frontend/module/create_step3.html:173
 msgid "Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg."
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:265
+#: templates/frontend/collection/create_step3.html:248
 msgid "Create Section"
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:275
-#: templates/frontend/collection/create_step3.html:284
+#: templates/frontend/collection/create_step3.html:258
+#: templates/frontend/collection/create_step3.html:265
 msgid "Create section"
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:282
-msgid "Close"
-msgstr ""
-
-#: templates/frontend/collection/create_step3.html:295
+#: templates/frontend/collection/create_step3.html:276
 msgid "Add Module"
 msgstr ""
 
-#: templates/frontend/collection/create_step3.html:314
+#: templates/frontend/collection/create_step3.html:282
 msgid "Public"
 msgstr ""
 
-#: templates/frontend/module/create_step1.html:29
+#: templates/frontend/module/create_step1.html:36
 msgid ""
 "I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute "
 "this content under the terms of the Creative Commons Attribution License "
@@ -646,40 +654,35 @@ msgid ""
 "attribution of my work is any attribution that includes the authors"
 msgstr ""
 
-#: templates/frontend/module/create_step1.html:38
-msgid ""
-"I have read the above, and I agree to license this new work under its terms."
-msgstr ""
-
 #: templates/frontend/module/create_step2.html:5
 msgid "Create module"
 msgstr ""
 
-#: templates/frontend/module/create_step3.html:196
+#: templates/frontend/module/create_step3.html:198
 msgid "Document for import"
 msgstr ""
 
-#: templates/frontend/module/create_step3.html:201
+#: templates/frontend/module/create_step3.html:203
 msgid "Import"
 msgstr ""
 
-#: templates/frontend/module/create_step3.html:202
+#: templates/frontend/module/create_step3.html:204
 msgid "Upload a file, allowed extensions: doc, docx, odt."
 msgstr ""
 
-#: templates/frontend/module/create_step3.html:205
+#: templates/frontend/module/create_step3.html:207
 msgid "Body"
 msgstr ""
 
-#: templates/frontend/module/create_step3.html:210
+#: templates/frontend/module/create_step3.html:213
 msgid "Files - Included Resources"
 msgstr ""
 
-#: templates/frontend/module/create_step3.html:215
+#: templates/frontend/module/create_step3.html:218
 msgid "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
 msgstr ""
 
-#: templates/frontend/module/create_step3.html:218
+#: templates/frontend/module/create_step3.html:222
 msgid "Publish"
 msgstr ""
 
@@ -840,6 +843,6 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: vpw/forms.py:16 vpw/forms.py:21 vpw/forms.py:26
-msgid "Required"
+#: vpw/views.py:337 vpw/views.py:474
+msgid "You must agree to the terms and conditions!"
 msgstr ""
