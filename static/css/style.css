@@ -113,3 +113,7 @@
   margin: 6px 0 0 6px;
   color: #999;
 }
+.navbar-collapse img {
+  width: 22px;
+  border: 1px solid #efefef;
+}
