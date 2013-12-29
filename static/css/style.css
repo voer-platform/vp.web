@@ -113,7 +113,63 @@
   margin: 6px 0 0 6px;
   color: #999;
 }
+<<<<<<< HEAD
 .navbar-collapse img {
   width: 22px;
   border: 1px solid #efefef;
 }
+=======
+
+.tt-suggestion {
+    font-size: 18px;
+    line-height: 24px;
+    padding: 3px 20px;
+    text-shadow: none;
+    border-top: 1px solid #DDD;
+}
+
+.tt-suggestion:first-child{
+    border-top: none;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+    background-color: #0097CF;
+    color: #FFFFFF;
+}
+
+.tt-suggestion .item-fullname {
+    font-weight: bold;
+}
+
+.tt-suggestion .item-email {
+    margin: 0;
+}
+
+input.search-author{
+    width: 420px;
+}
+
+.tt-hint{
+    display: none;
+}
+
+.hfcreate-1 ul.AddCategories li{
+    margin: 5px 0px;
+}
+.hfcreate-1 ul.AddCategories li label.checkbox{
+    display: inline-block;
+    line-height: 22px;
+}
+
+div.fakefile{
+    top: 24px;
+}
+
+button.hfbtn-common{
+    margin-left: 10px;
+}
+
+.list-module-name-content{
+    height: 230px;
+}
+>>>>>>> e2cb22813177901a0ea86cc580f303cbb1559082

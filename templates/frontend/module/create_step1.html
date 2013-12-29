@@ -25,6 +25,13 @@
     <div class="hfcreate-1">
         <form method="post">
             {% csrf_token %}
+            {% if errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{{ errors|escape }}</li>
+                    </ul>
+                </div>
+            {% endif %}
             <div class="content">
                 <p>{% trans 'I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute this content under the terms of the Creative Commons Attribution License available at <a href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a>. I understand that in doing so I retain my copyright in the work and warrant that I am the author or the owner or have permission to distribute the work in question and wish this work to be distributed under the terms of that license (including allowing modification of this work and requiring attribution) and agree that proper attribution of my work is any attribution that includes the authors'' names, the title of the work, and the VOER URL to the work.' %}</p>
             </div>
@@ -34,7 +41,7 @@
                     <span class="first-icon fui-checkbox-unchecked"></span>
                     <span class="second-icon fui-checkbox-checked"></span>
                 </span>
-                <input data-toggle="checkbox" type="checkbox">
+                <input data-toggle="checkbox" type="checkbox" name="agree">
                 {% trans 'I have read the above, and I agree to license this new work under its terms.' %}
             </label>
 
@@ -47,7 +54,7 @@
                 });
             </script>
             <input type="hidden" name="step" value="1" />
-            <button class="btn hfbtn-common hfbtn-next right">Next</button>
+            <button class="btn hfbtn-common hfbtn-next right">{% trans 'Next' %}</button>
         </form>
     </div>
 </div>

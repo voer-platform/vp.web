@@ -18,13 +18,35 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite
+    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
+from django.utils.translation import ugettext as _
+
+
+# Template for create module
+MODULE_TEMPLATES = [
+    '',
+    'frontend/module/create_step1.html',
+    'frontend/module/create_step2.html',
+    'frontend/module/create_step3.html',
+]
+
+# Template for create collection
+COLLECTION_TEMPLATES = [
+    '',
+    'frontend/collection/create_step1.html',
+    'frontend/collection/create_step2.html',
+    'frontend/collection/create_step3.html',
+]
+
+# Material type
+MODULE_TYPE = 1
+COLLECTION_TYPE = 2
+
 
 # Create your views here.
-
 def home(request):
     material_features = ['64b4a7a7', 'fd2f579c', 'f2feed3c', '4dbdd6c5', 'c3ad3533', '0e60bfc6']
     materials_list = []
@@ -66,7 +88,11 @@ def aboutus(request):
 
 def _get_image(list_images):
     def replace_image(match_object):
-        return "<img src='" + list_images[match_object.group(1)] + "'"
+        try:
+            result = "<img src='" + list_images[match_object.group(1)] + "'"
+        except KeyError:
+            result = "<img src='" + match_object.group(1) + "'"
+        return result
     return replace_image
 
 
@@ -79,7 +105,7 @@ def module_detail(request, mid, version):
     material['text'] = content
 
     other_data = []
-    if (material.has_key('author') and material['author']):
+    if material.has_key('author') and material['author']:
         author = vpr_get_person(material['author'])
         other_materials = vpr_materials_by_author(material['author'])
         i = 1
@@ -226,21 +252,37 @@ def collection_detail(request, cid, mid):
 
 
 @login_required
-def document_detail(request, did):
+def user_module_detail(request, mid):
     try:
-        material = Material.objects.get(id=did)
+        material = Material.objects.get(id=mid)
         # Chi co tac gia moi vao xem duoc bai
         if material.creator_id != request.user.id:
             raise PermissionDenied
         author_id = request.user.author.author_id
         author = vpr_get_person(author_id)
         category = vpr_get_category(material.categories)
-        if material.type == 1:
+        if material.type == MODULE_TYPE:
             return render(request, "frontend/module_detail.html", {
                 "material": material, "author": author, "category": category
             })
-        elif material.type == 2:
-            render(request, "frontend/collection_detail.html", {
+        else:
+            raise PermissionDenied
+    except Material.DoesNotExist:
+        raise PermissionDenied
+
+
+@login_required
+def user_collection_detail(request, mid):
+    try:
+        material = Material.objects.get(id=mid)
+        # Chi co tac gia moi vao xem duoc bai
+        if material.creator_id != request.user.id:
+            raise PermissionDenied
+        author_id = request.user.author.author_id
+        author = vpr_get_person(author_id)
+        category = vpr_get_category(material.categories)
+        if material.type == MODULE_TYPE:
+            return render(request, "frontend/collection_detail.html", {
                 "material": material, "author": author, "category": category
             })
         else:
@@ -251,86 +293,100 @@ def document_detail(request, did):
 
 @login_required
 def create_module(request):
+    form = ModuleCreationForm(request.POST or None)
+    pid = request.user.author.author_id
+    author = vpr_get_person(pid)
+    params = {}
+    current_step = 1
     if request.method == "POST":
         try:
-            current_step = int(request.POST.get("step", "0"))
+            previous_step = int(request.POST.get("step", "0"))
         except ValueError:
-            current_step = 0
+            previous_step = 0
 
         categories_list = vpr_get_categories()
-        if current_step == 1:
-            return render(request, "frontend/module/create_step2.html", {"categories": categories_list})
-
-        form = ModuleCreationForm(request.POST)
-        if current_step == 2:
+        if previous_step == 1:
+            if not request.POST.get("agree"):
+                errors = _('You must agree to the terms and conditions!')
+                params['errors'] = errors
+            else:
+                current_step = 2
+                params['categories'] = categories_list
+                params['author'] = author
+        elif previous_step == 2:
             # Save metadata
             if form.is_valid():
-                material = Material()
-                material.title = form.cleaned_data['title']
-                material.description = form.cleaned_data['description']
-                material.keywords = form.cleaned_data['keywords']
-                material.categories = form.cleaned_data['categories']
-                material.language = form.cleaned_data['language']
-                #get current user
-                material.creator = request.user
-                material.type = 1
-                material.save()
-                # material = Material.objects.get(id=1)
+                material = _save_material(form, MODULE_TYPE, request.user)
+                params['material'] = material
+                params['categories'] = categories_list
+                params['form'] = form
                 if material.id:
-                    return render(request, "frontend/module/create_step3.html",
-                                  {"material": material, "categories": categories_list, 'form': form})
+                    current_step = 3
+                else:
+                    # Save khong thanh cong
+                    current_step = 2
             else:
-                return render(request, "frontend/module/create_step2.html",
-                              {"categories": categories_list, 'form': form})
-
-        if current_step == 3:
+                current_step = 2
+                params['categories'] = categories_list
+                params['author'] = author
+                params['form'] = form
+        elif previous_step == 3:
             action = request.POST.get("action", "")
             if action == 'import':
-                upload_file = request.FILES['document_file']
-                with open(settings.MEDIA_ROOT + '/' + upload_file.name, 'wb+') as destination:
-                    for chunk in upload_file.chunks():
-                        destination.write(chunk)
-                # call import vpt
-                result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
-                task_id = result_import['task_id']
-                download_url = vpt_get_url(task_id)
-                response = vpt_download(download_url)
-                # save downloaded file to transforms directory
-                # TODO: transforms dir name should be in settings
-                download_dir = '%s/transforms' % settings.MEDIA_ROOT
-                download_filename = download_url.split('/')[-1]
-                download_filepath = '%s/%s' % (download_dir, download_filename)
-                with open(download_filepath, 'wb') as f:
-                    for chunk in response.iter_content(chunk_size=1024):
-                        if chunk: # filter out keep-alive new chunks
-                            f.write(chunk)
-                            f.flush()
-
-                # load downloaded zip file
-                zip_archive = zipfile.ZipFile(download_filepath, 'r')
-                # Unzip into a new directory
-                filename, extension = os.path.splitext(download_filename)
-                extract_path = os.path.join(download_dir, filename)
-                os.mkdir(extract_path)
-                zip_archive.extractall(path=extract_path)
-
-                # get transformed html content
-                content = open(extract_path+'/index.html', 'r').read()
-                # fix images' urls
-                images = [f.filename for f in zip_archive.filelist if f.filename <> 'index.html']
-                for image in images:
-                    old_src = 'src="%s"' % image
+                if 'document_file' in request.FILES:
+                    upload_file = request.FILES['document_file']
+                    with open(settings.MEDIA_ROOT + '/' + upload_file.name, 'wb+') as destination:
+                        for chunk in upload_file.chunks():
+                            destination.write(chunk)
+                    # call import vpt
+                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
+                    task_id = result_import['task_id']
+                    download_url = vpt_get_url(task_id)
+                    response = vpt_download(download_url)
+                    # save downloaded file to transforms directory
                     # TODO: transforms dir name should be in settings
-                    new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
-                    content = content.replace(old_src, new_src)
+                    download_dir = '%s/transforms' % settings.MEDIA_ROOT
+                    download_filename = download_url.split('/')[-1]
+                    download_filepath = '%s/%s' % (download_dir, download_filename)
+                    with open(download_filepath, 'wb') as f:
+                        for chunk in response.iter_content(chunk_size=1024):
+                            if chunk: # filter out keep-alive new chunks
+                                f.write(chunk)
+                                f.flush()
 
-                form = ModuleCreationForm(request.POST)
-                # set form body
-                form.data['body'] = content
+                    # load downloaded zip file
+                    zip_archive = zipfile.ZipFile(download_filepath, 'r')
+                    # Unzip into a new directory
+                    filename, extension = os.path.splitext(download_filename)
+                    extract_path = os.path.join(download_dir, filename)
+                    os.mkdir(extract_path)
+                    zip_archive.extractall(path=extract_path)
 
-                return render(request, "frontend/module/create_step3.html",
-                              {"categories": categories_list, 'form': form})
-            if action == 'save':
+                    # get transformed html content
+                    content = open(extract_path+'/index.html', 'r').read()
+                    # fix images' urls
+                    images = [f.filename for f in zip_archive.filelist if f.filename != 'index.html']
+                    for image in images:
+                        old_src = 'src="%s"' % image
+                        # TODO: transforms dir name should be in settings
+                        new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
+                        content = content.replace(old_src, new_src)
+
+                    form = ModuleCreationForm(request.POST)
+                    # set form body
+                    form.data['body'] = content
+
+                current_step = 3
+                params['categories'] = categories_list
+                mid = request.POST.get('mid', '')
+                try:
+                    material = Material.objects.get(id=mid)
+                    params['material'] = material
+                except Material.DoesNotExist:
+                    pass
+                params['form'] = form
+                # TODO: nen truyen ca matrial
+            elif action == 'save':
                 #Save to workspace of current user
                 try:
                     mid = int(request.POST.get("mid"))
@@ -341,10 +397,12 @@ def create_module(request):
                         material = Material.objects.get(id=mid)
                         material.text = form.cleaned_data['body']
                         material.save()
-                        return redirect('document_detail', did=mid)
+                        return redirect('user_module_detail', mid=mid)
                 except Material.DoesNotExist:
-                    pass
-            if action == 'publish':
+                    current_step = 2
+                    params['form'] = form
+                    params['categories'] = categories_list
+            elif action == 'publish':
                 try:
                     mid = int(request.POST.get("mid"))
                 except ValueError:
@@ -363,41 +421,79 @@ def create_module(request):
                             title=material.title,
                             description=material.description,
                             categories=material.categories,
-                            author="50",
-                            editor="",
-                            licensor="",
+                            author=material.author,
+                            editor=material.editor,
+                            licensor=material.licensor,
                             keywords=material.keywords,
                             language=material.language,
                             license_id=1
                         )
                         if 'material_id' in result:
+                            material.material_id = result['material_id']
+                            material.version = result['version']
+                            material.save()
                             return redirect('module_detail', mid=result['material_id'])
                 except Material.DoesNotExist:
-                    pass
-            #Save content & metadata, or publish to VPR
-            pass
-    return render(request, "frontend/module/create_step1.html")
+                    current_step = 2
+                    params['form'] = form
+                    params['categories'] = categories_list
+    return render(request, MODULE_TEMPLATES[current_step], params)
 
 
 @login_required
 def create_collection(request):
     form = CollectionCreationForm(request.POST or None)
+    current_step = 1
+    params = {}
     if request.method == "POST":
         try:
             previous_step = int(request.POST.get('step', '0'))
         except ValueError:
             previous_step = 0
 
+        categories_list = vpr_get_categories()
         if previous_step == 1:
-            return render(request, "frontend/collection/create_step2.html")
+            if not request.POST.get("agree"):
+                errors = _('You must agree to the terms and conditions!')
+                params['errors'] = errors
+            else:
+                current_step = 2
+                params['categories'] = categories_list
         elif previous_step == 2:
-            return render(request, "frontend/collection/create_step3.html", {
-                'form': form
-            })
+            if form.is_valid():
+                _save_material(form, COLLECTION_TYPE, request.user)
+                current_step = 3
+                params['form'] = form
+                params['categories'] = categories_list
+            else:
+                current_step = 2
+                params['form'] = form
+                params['categories'] = categories_list
+
         else:
-            return render(request, "frontend/collection/create_step1.html")
-    else:
-        return render(request, "frontend/collection/create_step1.html")
+            current_step = 1
+
+    return render(request, COLLECTION_TEMPLATES[current_step], params)
+
+
+def _save_material(form, material_type, current_user):
+    material = Material()
+    material.title = form.cleaned_data['title']
+    material.description = form.cleaned_data['description']
+    material.keywords = form.cleaned_data['keywords']
+    material.categories = form.cleaned_data['categories']
+    material.language = form.cleaned_data['language']
+    material.author = form.cleaned_data['authors']
+    material.editor = form.cleaned_data['editors']
+    material.licensor = form.cleaned_data['licensors']
+    material.maintainer = form.cleaned_data['maintainers']
+    material.translator = form.cleaned_data['translators']
+    material.coeditor = form.cleaned_data['coeditors']
+    # get current user
+    material.creator = current_user
+    material.type = material_type
+    material.save()
+    return material
 
 
 def view_profile(request, pid):
@@ -796,3 +892,13 @@ def ajax_add_favorite(request):
 
     else:
       return HttpResponseRedirect('/')
+
+
+def ajax_search_author(request):
+    keyword = request.GET.get('keyword', '')
+    result = vpr_search_author(keyword)
+    authors = []
+    if 'count' in result:
+        if result['count'] > 0:
+            authors = result['results']
+    return HttpResponse(json.dumps(authors), content_type='application/json')

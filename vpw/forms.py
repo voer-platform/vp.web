@@ -10,21 +10,12 @@ class MaterialCreationForm(forms.Form):
     keywords = forms.CharField(max_length=200, required=False)
     language = forms.CharField(max_length=2)
     categories = forms.CharField(max_length=3)
-
-    def clean_title(self):
-        if self.cleaned_data.get('title', '') == '':
-            raise ValidationError(_('Required'))
-        return self.cleaned_data.get('title', '')
-
-    def clean_categories(self):
-        if self.cleaned_data.get('categories', '') == '':
-            raise ValidationError(_('Required'))
-        return self.cleaned_data.get('categories', '')
-
-    def clean_language(self):
-        if self.cleaned_data.get('language', '') == '':
-            raise ValidationError(_('Required'))
-        return self.cleaned_data.get('language', '')
+    authors = forms.CharField(max_length=100, required=False)
+    editors = forms.CharField(max_length=100, required=False)
+    licensors = forms.CharField(max_length=100, required=False)
+    maintainers = forms.CharField(max_length=100, required=False)
+    translators = forms.CharField(max_length=100, required=False)
+    coeditors = forms.CharField(max_length=100, required=False)
 
 
 class ModuleCreationForm(MaterialCreationForm):
