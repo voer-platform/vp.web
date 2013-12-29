@@ -274,6 +274,7 @@ def voer_update_author(author):
 
     return result
 
+
 def voer_add_favorite(mid, version, pid):
     if not version:
         result = vpr_request('POST', "materials/%s/favorites" % mid, {'person': pid})
@@ -282,3 +283,10 @@ def voer_add_favorite(mid, version, pid):
 
     return result
 
+
+def vpr_search_author(author_name):
+    """
+    Search author by name
+    """
+    result = vpr_request('GET', 'search?kw=%s&on=p' % author_name)
+    return result

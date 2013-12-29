@@ -48,11 +48,12 @@
         {% csrf_token %}
 		<div class="form-group">
 			<label for="InputEmail1">{% trans 'Title' %}</label>
-			<input type="text" class="form-control typetext" id="InputText" placeholder="{% trans 'Enter title' %}" name="title">
+			<input type="text" class="form-control typetext" id="InputText"
+                   placeholder="{% trans 'Enter title' %}" name="title" value="{{ form.title.value }}">
 		</div>
 		<div class="form-group">
 			<label for="InputDescription">{% trans 'Description' %}</label>
-			<textarea rows="4" class="form-control" name="description"></textarea>
+			<textarea rows="4" class="form-control" name="description">{{ form.description.value }}</textarea>
 		</div>
 		<div class="form-group">
 			<label for="InputAuthor">{% trans 'Author' %}</label>
@@ -158,7 +159,7 @@
 							<span class="first-icon fui-checkbox-unchecked"></span>
 							<span class="second-icon fui-checkbox-checked"></span>
 						</span>
-						<input type="checkbox" data-toggle="checkbox" name="categories" value="{{ category.id }}">
+						<input type="checkbox" data-toggle="checkbox" name="categories" value="{{ category.id }}" {% if category.id == form.categories.value|add:0 %}checked{% endif %}>
 						{{ category.name }}
 					</label>
 				</li>
@@ -178,18 +179,20 @@
 			<div class="hfselectList">
 				<select class="select-block" name="language">
 					<option value="00">{% trans 'Choose language' %}</option>
-					<option value="vi">Vietnamese</option>
-					<option value="en">English</option>
+					<option value="vi" {% if material.language == "vi" %}selected="selected"{% endif %}>Vietnamese</option>
+					<option value="en" {% if material.language == "en" %}selected="selected"{% endif %}>English</option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="InputKeywords">{% trans 'Keywords' %}</label>
-			<input type="text" class="form-control typetext" id="InputKeywords" placeholder="{% trans 'Enter keywords' %}" name="keywords">
+			<input type="text" class="form-control typetext" id="InputKeywords"
+                   placeholder="{% trans 'Enter keywords' %}" name="keywords" value="{{ form.keywords.value }}">
 		</div>
 		<div class="form-group">
 			<label for="InputTags">{% trans 'Tags' %}</label>
-			<input type="text" class="form-control typetext" id="InputTags" placeholder="{% trans 'Enter tags' %}" name="tags">
+			<input type="text" class="form-control typetext" id="InputTags"
+                   placeholder="{% trans 'Enter tags' %}" name="tags" value="{{ form.tags.value }}">
 		</div>
 		<div class="form-group btn-common">
             <input type="hidden" name="step" value="2" />

@@ -39,6 +39,12 @@ class Material(models.Model):
     creator = models.ForeignKey(User)
     type = models.IntegerField(null=False, default=1)
     status = IntegerField(null=True, default=1)
+    author = CharField(max_length=100, blank=True, default="")
+    editor = CharField(max_length=100, blank=True, default="")
+    licensor = CharField(max_length=100, blank=True, default="")
+    maintainer = CharField(max_length=100, blank=True, default="")
+    translator = CharField(max_length=100, blank=True, default="")
+    coeditor = CharField(max_length=100, blank=True, default="")
 
 
 # Declare Signs

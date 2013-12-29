@@ -109,3 +109,66 @@
     padding-left:25px;
 
 }
+
+.tt-dropdown-menu {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 12px;
+    padding: 8px 0;
+    width: 422px;
+}
+
+.tt-suggestion {
+    font-size: 18px;
+    line-height: 24px;
+    padding: 3px 20px;
+    text-shadow: none;
+    border-top: 1px solid #DDD;
+}
+
+.tt-suggestion:first-child{
+    border-top: none;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+    background-color: #0097CF;
+    color: #FFFFFF;
+}
+
+.tt-suggestion .item-fullname {
+    font-weight: bold;
+}
+
+.tt-suggestion .item-email {
+    margin: 0;
+}
+
+input.search-author{
+    width: 420px;
+}
+
+.tt-hint{
+    display: none;
+}
+
+.hfcreate-1 ul.AddCategories li{
+    margin: 5px 0px;
+}
+.hfcreate-1 ul.AddCategories li label.checkbox{
+    display: inline-block;
+    line-height: 22px;
+}
+
+div.fakefile{
+    top: 24px;
+}
+
+button.hfbtn-common{
+    margin-left: 10px;
+}
+
+.list-module-name-content{
+    height: 230px;
+}
