@@ -109,15 +109,9 @@
     padding-left:25px;
 
 }
-
-.tt-dropdown-menu {
-    background-color: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    margin-top: 12px;
-    padding: 8px 0;
-    width: 422px;
+.list-menu-footer {
+  margin: 6px 0 0 6px;
+  color: #999;
 }
 
 .tt-suggestion {
