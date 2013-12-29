@@ -18,7 +18,7 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author
+    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
@@ -771,3 +771,28 @@ def edit_profile(request):
 
     return render(request, "frontend/user_edit_profile.html", {'author': author})
 
+
+
+@login_required
+def ajax_add_favorite(request):
+    if request.is_ajax():
+        current_user = request.user
+        pid = current_user.author.author_id
+
+        mid = request.POST['mid']
+        version = request.POST['version']
+
+        response_data = {}
+        response_data['status'] = False
+        response_data['message'] = 'Oops!.'
+
+        result = voer_add_favorite(mid, version, pid)
+        if result:
+            response_data['status'] = True
+            response_data['message'] = 'Add favorite successfull'
+            response_data['favorite_count'] = result['favorite']
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+    else:
+      return HttpResponseRedirect('/')
