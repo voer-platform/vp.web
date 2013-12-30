@@ -67,7 +67,7 @@
         <div class="icon-hot"></div>
         <div class="collection-mainpage-cover left clear">
             {% if material.categories %}
-		   <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>     
+		   <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg"/>
 		   {% else %}
 		   <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
 		   {% endif %}
@@ -100,7 +100,7 @@
 			{% for material in person_list %}
             <li>
                 <div class="browser-author-img left clear">
-                    <img src="{{STATIC_URL}}images/author1.jpg" />
+                    <img src="{{STATIC_URL}}images/authors/{{ material.id }}.jpg" />
                 </div>
                 <div class="browser-author-details left clear">
                     <div class="icon-browser-author"></div>

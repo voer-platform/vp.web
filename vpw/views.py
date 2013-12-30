@@ -4,6 +4,7 @@ import os
 import zipfile
 import re
 import urllib
+import random
 
 from django.core.exceptions import PermissionDenied
 
@@ -48,7 +49,10 @@ COLLECTION_TYPE = 2
 
 # Create your views here.
 def home(request):
-    material_features = ['64b4a7a7', 'fd2f579c', 'f2feed3c', '4dbdd6c5', 'c3ad3533', '0e60bfc6']
+    # material_features = ['64b4a7a7', 'fd2f579c', 'f2feed3c', '4dbdd6c5', 'c3ad3533', '0e60bfc6']
+    material_features_sample = ['01f46fc2', '022e4f84', '0e60bfc6', '2d2e6a46', '3ec080b8', '45df218a', '4c212f92',
+                         '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'fd2f579c']
+    material_features = random.sample(material_features_sample, 6)
     materials_list = []
     for mid in material_features:
         material = vpr_get_material(mid)
@@ -68,7 +72,7 @@ def home(request):
         materials_list.append(material)
 
     # Get featured authors
-    person_features = [50, 76, 90, 54, 23]
+    person_features = [50, 214, 702, 1651, 69]
     person_list = []
     for pid in person_features:
         person = vpr_get_person(pid)
