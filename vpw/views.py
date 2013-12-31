@@ -224,7 +224,8 @@ def collection_detail(request, cid, mid):
         for file_attachment_id in file_attachments:
             attachment_info = voer_get_attachment_info(file_attachment_id)
 
-            if attachment_info['mime_type'] != 'image/jpeg':
+            image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2', 'image/iff']
+            if attachment_info['mime_type'] not in image_mime_types:
                 file_tmp = {}
                 file_tmp['title'] = attachment_info['name']
                 file_tmp['attachment_id'] = file_attachment_id
