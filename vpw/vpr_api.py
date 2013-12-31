@@ -295,3 +295,12 @@ def vpr_search_author(author_name):
 def vpr_search_module(keyword):
     result = vpr_request('GET', 'search?kw=%s&on=m&type=1' % keyword)
     return result
+
+
+def voer_add_view_count(mid, version):
+    if not version:
+        result = vpr_request('PUT', "materials/%s/counter" % mid, {'increment': 1})
+    else:
+        result = vpr_request('PUT', "materials/%s/%s/counter" % (mid, version), {'increment': 1})
+
+    return result

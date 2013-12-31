@@ -19,7 +19,8 @@ from django.conf import settings
 from vpw.models import Material
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
-    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module
+    voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
+    voer_add_view_count
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
@@ -125,7 +126,14 @@ def module_detail(request, mid, version):
 
     category = vpr_get_category(material['categories'])
 
-    view_count = vpr_get_statistic_data(mid, material['version'], 'counter')
+    cookie_name = 'vnf-view-' + mid
+
+    # update & get view count
+    if cookie_name in request.COOKIES:
+        view_count = vpr_get_statistic_data(mid, material['version'], 'counter')
+    else:
+        view_count = voer_add_view_count(mid, material['version'])
+
     material['view_count'] = view_count
 
     favorite_count = vpr_get_statistic_data(mid, material['version'], 'favorites')
@@ -162,14 +170,21 @@ def module_detail(request, mid, version):
     for file_attachment_id in file_attachments:
         attachment_info = voer_get_attachment_info(file_attachment_id)
 
-        if attachment_info['mime_type'] != 'image/jpeg':
+        image_mime_type = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff']
+        if attachment_info['mime_type'] not in image_mime_type:
             file_tmp = {}
             file_tmp['title'] = attachment_info['name']
             file_tmp['attachment_id'] = file_attachment_id
             file_data.append(file_tmp)
 
-    return render(request, "frontend/module_detail.html",
+    response = render(request, "frontend/module_detail.html",
                   {"material": material, "author": author, "category": category, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
+
+    if cookie_name not in request.COOKIES:
+        max_age = settings.VPW_SESSION_MAX_AGE*24*60*60
+        response.set_cookie(cookie_name, True, max_age)
+
+    return response
 
 
 def collection_detail(request, cid, mid):
@@ -177,7 +192,14 @@ def collection_detail(request, cid, mid):
     collection = vpr_get_material(cid)
     outline = json.loads(collection['text'])
 
-    view_count = vpr_get_statistic_data(cid, collection['version'], 'counter')
+    cookie_name = 'vnf-view-' + cid
+
+    # update & get view count
+    if cookie_name in request.COOKIES:
+        view_count = vpr_get_statistic_data(cid, collection['version'], 'counter')
+    else:
+        view_count = voer_add_view_count(cid, collection['version'])
+
     collection['view_count'] = view_count
 
     favorite_count = vpr_get_statistic_data(cid, collection['version'], 'favorites')
@@ -251,9 +273,15 @@ def collection_detail(request, cid, mid):
             material_tmp['author_list'] = p_list
         similar_data.append(material_tmp)
 
-    return render(request, "frontend/collection_detail.html",
+    response = render(request, "frontend/collection_detail.html",
                   {"collection": collection, "material": material, "author": author, "category": category,
                    "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
+
+    if cookie_name not in request.COOKIES:
+        max_age = settings.VPW_SESSION_MAX_AGE*24*60*60
+        response.set_cookie(cookie_name, True, max_age)
+
+    return response
 
 
 @login_required
@@ -997,9 +1025,9 @@ def ajax_add_favorite(request):
         response_data['message'] = 'Oops!.'
 
         result = voer_add_favorite(mid, version, pid)
-        if result:
+        if 'favorite' in result:
             response_data['status'] = True
-            response_data['message'] = 'Add favorite successfull'
+            response_data['message'] = 'Add favorite successful'
             response_data['favorite_count'] = result['favorite']
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")

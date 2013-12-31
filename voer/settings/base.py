@@ -71,6 +71,8 @@ LANGUAGES = (
     ('vi', 'Vietinamese')
 )
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 ROOT_URLCONF = 'voer.urls'
 
 WSGI_APPLICATION = 'voer.wsgi.application'
@@ -155,6 +157,7 @@ VPR_URL = '' # URL VPR
 VPR_PORT = '' # PORT VPR
 VPR_VERSION = '' # VPR Version
 VPR_URL_FULL = os.path.join(VPR_URL, VPR_PORT, VPR_VERSION)
+VPW_SESSION_MAX_AGE = 1 # days
 
 SITE_URL = 'voer.edu.vn' # URL Site
 
