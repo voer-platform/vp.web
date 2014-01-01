@@ -11,9 +11,11 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 
 from vpw.models import Material
@@ -102,6 +104,7 @@ def _get_image(list_images):
     return replace_image
 
 
+# @user_passes_test(lambda u: u.is_superuser)
 def module_detail(request, mid, version):
     material = vpr_get_material(mid)
     # lay anh trong noi dung
@@ -984,6 +987,7 @@ def edit_profile(request):
     current_user = request.user
     pid = current_user.author.author_id
     author = vpr_get_person(pid)
+    user = User.objects.get(id=current_user.author.user_id)
 
     if (request.REQUEST):
         form = EditProfileForm(request.POST)
@@ -1003,8 +1007,23 @@ def edit_profile(request):
         author_data['national'] = request.POST['national']
 
         if form.is_valid():
-            avatar_file = request.FILES['avatar_file']
-            voer_update_author(author_data)
+            if user.check_password(request.POST['current_password']):
+                if request.POST['new_password']:
+                    user.set_password(request.POST['new_password'])
+                    user.save()
+
+                if 'avatar_file' in request.FILES:
+                    avatar_file = request.FILES['avatar_file']
+                    with open(settings.MEDIA_ROOT + '/' + avatar_file.name, 'wb+') as destination:
+                        for chunk in avatar_file.chunks():
+                            destination.write(chunk)
+
+                voer_update_author(author_data)
+
+                # messages.add_message(request, messages.SUCCESS, 'Profile details updated.')
+                messages.success(request, 'Profile details updated.')
+            else:
+                form._errors['current_password'] = form.error_class(['Current password is incorrect'])
 
         return render(request, "frontend/user_edit_profile.html", {'author': author_data, 'form': form})
 

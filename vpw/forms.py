@@ -27,5 +27,17 @@ class CollectionCreationForm(MaterialCreationForm):
 
 
 class EditProfileForm(forms.Form):
+    current_password = forms.CharField(required=True, max_length=50)
     email = forms.EmailField(max_length=255)
+    new_password = forms.CharField(max_length=255, required=False)
+    confirm_password = forms.CharField(max_length=255, required=False)
     fullname = forms.CharField(max_length=255)
+
+    def clean(self):
+        cleaned_data = self.cleaned_data # individual field's clean methods have already been called
+        new_password = cleaned_data.get("new_password")
+        confirm_password = cleaned_data.get("confirm_password")
+        if new_password != confirm_password:
+            self._errors["confirm_password"] = self.error_class([u"Confirm password is not matchs"])
+
+        return cleaned_data
