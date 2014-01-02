@@ -47,6 +47,7 @@ $(document).ready(function(){
 	function changebg(){
 	var images = ['bg-slide1.jpg', 'bg-slide2.jpg', 'bg-slide3.jpg'];
 	$('#slider').css({'background-image': 'url(/static/images/' + images[Math.floor(Math.random() * images.length)] + ')'});
+	$('#slider').css({'background-size': 'cover'});
 	
 	
 }
