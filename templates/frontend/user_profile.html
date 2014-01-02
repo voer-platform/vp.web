@@ -136,23 +136,25 @@
 	   {% endif %}
     </div>
     <div class="collection-mainpage-details">
-        <div class="title-collection">
-            <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
-        </div>
+        <div class="info-collection">
+            <div class="title-collection">
+                <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
+            </div>
 
-        <div class="short-collection">
-        {% if material.description %}
-            {% ifequal material.description '-' %}
-                <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+            <div class="short-collection">
+            {% if material.description %}
+                {% ifequal material.description '-' %}
+                    <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+                {% else %}
+                    {{ material.description }}
+                {% endifequal %}
             {% else %}
-                {{ material.description }}
-            {% endifequal %}
-        {% else %}
-            <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
-        {% endif %}
-        </div>
+                <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+            {% endif %}
+            </div>
 
-        <div class="author-collection"><a href="{% url 'view_profile' author.id %}">{{ author.fullname }}</a></div>
+            <div class="author-collection"><a href="{% url 'view_profile' author.id %}">{{ author.fullname }}</a></div>
+        </div>
         <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
 			{% if material.categories == '1' %}
 				{% trans 'Business' %}

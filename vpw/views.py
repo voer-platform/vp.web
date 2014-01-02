@@ -173,7 +173,7 @@ def module_detail(request, mid, version):
     for file_attachment_id in file_attachments:
         attachment_info = voer_get_attachment_info(file_attachment_id)
 
-        image_mime_type = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff']
+        image_mime_type = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2', 'image/iff']
         if attachment_info['mime_type'] not in image_mime_type:
             file_tmp = {}
             file_tmp['title'] = attachment_info['name']
