@@ -336,3 +336,7 @@ button.hfbtn-common{
 .hfitems.gridview.active {
   background: none;
 }
+
+.red {
+    color: red;
+}

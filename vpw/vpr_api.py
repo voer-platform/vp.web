@@ -284,7 +284,12 @@ def voer_update_author(author):
 
     r = requests.put(url + 'persons/%s/' % author['id'], files=files, data=author)
 
-    return json.loads(r.text)
+    if r.status_code == 200:
+        result = json.loads(r.text)
+    else:
+        result = {}
+
+    return result
 
 
 def voer_add_favorite(mid, version, pid):
