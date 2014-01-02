@@ -270,9 +270,21 @@ def vpr_get_material_images(mid):
 
 
 def voer_update_author(author):
-    result = vpr_request('PUT', "persons/%s/" % author['id'], author)
+    url = settings.VPR_URL
+    files = {}
+    if 'avatar' in author:
+        file_path = author['avatar']
+        del author['avatar']
 
-    return result
+        file_name = os.path.basename(file_path)
+        file_data = open(file_path, 'rb').read()
+        files = {'avatar': (file_name, file_data)}
+
+        os.remove(file_path)
+
+    r = requests.put(url + 'persons/%s/' % author['id'], files=files, data=author)
+
+    return json.loads(r.text)
 
 
 def voer_add_favorite(mid, version, pid):

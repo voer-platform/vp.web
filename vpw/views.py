@@ -1018,7 +1018,10 @@ def edit_profile(request):
                         for chunk in avatar_file.chunks():
                             destination.write(chunk)
 
-                voer_update_author(author_data)
+                    author_data['avatar'] = settings.MEDIA_ROOT + '/' + avatar_file.name
+
+                result = voer_update_author(author_data)
+                author_data = result
 
                 # messages.add_message(request, messages.SUCCESS, 'Profile details updated.')
                 messages.success(request, 'Profile details updated.')
