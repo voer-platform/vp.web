@@ -24,7 +24,7 @@ String.prototype.repeat = function(num) {
 
     // Custom Selects
     $("select[name='huge']").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
-    $("select[name='language']").selectpicker({style: 'btn-primary', menuStyle: 'dropdown-inverse'});
+    $("select[name='selectlist']").selectpicker({style: 'btn-primary', menuStyle: 'dropdown-inverse'});
     $("select[name='info']").selectpicker({style: 'btn-info'});
 
     // Tooltips
@@ -32,18 +32,6 @@ String.prototype.repeat = function(num) {
 
     // Tags Input
     //$(".tagsinput").tagsInput();
-
-    // jQuery UI Sliders
-    var $slider = $("#slider");
-    if ($slider.length) {
-      $slider.slider({
-        min: 1,
-        max: 5,
-        value: 2,
-        orientation: "horizontal",
-        range: "min"
-      }).addSliderSegments($slider.slider("option").max);
-    }
 
     // Placeholders for input/textarea
    // $("input, textarea").placeholder();

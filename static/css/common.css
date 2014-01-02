@@ -68,6 +68,9 @@
 	background:url('../images/icon/list-view-active.png') no-repeat center center transparent;	
 	margin-right:10px;	
 }
+.hfitems.gridview.active {
+	background:none;
+}
 /* item */
 .left-row div.hfitems {
 	border-bottom:none;
@@ -75,10 +78,6 @@
 }
 .hfitems {
 	overflow:hidden;
-}
-.hfitems.gridview,
-.hfitems.gridview.active {
-  background: none;
 }
 /* gridview */
 .hfitem {
@@ -107,8 +106,7 @@
 .hfitem .title-collection a {
 	font-size:14px;
 }
-.hfitem .author-collection a{	
-	border-bottom:1px solid #E8E8E8;
+.hfitem .author-collection a{		
 	padding-bottom:3px;
 	display:block;	
 }
@@ -320,12 +318,13 @@
 	width:65%;
 }
 .hfitems.gridview .hfitem .short-collection {
-	display:block;
-	height: 54px;
-	font-size:12px;
-	color:#9d9d9d;
-	line-height: 17px;
-	overflow:hidden;
+    color: #9D9D9D;
+    display: block;
+    font-size: 12px;
+    height: 40px;
+    line-height: 18px;
+    margin-bottom: 14px;
+    overflow: hidden;
 }
 .hfitems.gridview .hfitem .author-collection a {
 	float:left;
@@ -361,8 +360,10 @@
 .smallbox-common .checkbox-item {
 	clear:both;
 	width:100%;
-	margin:5px 0;
-	height:20px;
+	margin:1px 0;
+	height:auto;
+	display:block;
+	overflow:hidden;
 }
 .search-common {
     border: 1px solid #E8E8E8;
@@ -725,6 +726,7 @@ ul.hfmenu-common.second {
 .hfcreate-1 ul.AddCategories li{
 	float:left;
 	width:30%;
+	margin:5px 0;
 }
 .hfcreate-1 a.AddNew {
     left: 47%;
@@ -743,8 +745,12 @@ ul.hfmenu-common.second {
 	width:45%;
 }
 .hfcreate-1 .form-group, .content .form-group {
-	position:relative;
-	clear:both;
+    clear: both;
+    display: block;        
+    position: relative;
+}
+.form-group.listAuthor {
+	overflow:visible;
 }
 .hfselectList .btn-primary, .hfselectList .open .dropdown-toggle.btn-primary {
 	background-color:#fff;
@@ -813,11 +819,11 @@ input.uploadfile {
 
 div.fakefile {
     height: 40px;
-    left: 0;    
+    left: 0;
     position: absolute;
-    top: 33px;
+    top: 22px;
+    width: 45%;
     z-index: 1;
-    width:45%;
 }
 .author-information:before {
     background: none repeat scroll 0 0 #c8293c;
@@ -977,11 +983,12 @@ ul.successfull li.label {
 }
 .hffolders ul ul li {
 	background:url('../images/icon/folder.png') no-repeat top left transparent;
-	padding-left:30px;
+	padding-left:18px;
 }
 .hffolders ul li.has-child span a {
-	background:url('../images/icon/icon-module.png') no-repeat left 2px transparent;
-	padding-left:25px;
+	/*background:url('../images/icon/icon-module.png') no-repeat left 2px transparent;*/
+	background:none;
+	padding-left:0px;
 	position:relative;
 }
 .hffolders .form-control {
@@ -1195,3 +1202,65 @@ ul.successfull li.label {
 .smallbox-common.second {
 	margin-top:20px;
 }
+#header {
+	
+}
+.form-group.listSearchAuthor {
+	position:relative;
+	overflow:visible;
+}
+.listSearchAuthors {
+    box-shadow: 0 2px 5px #444444;
+    left: 0;
+    position: absolute;
+    top: 54px;
+    z-index: 10;
+    display:none;
+}
+.listSearchAuthors ul {
+	width:330px;
+	height:200px;
+	overflow-x:hidden;
+	background:#fff;
+	border:1px solid #e8e8e8;
+	padding: 0 10px;	
+}
+.listSearchAuthors ul li {
+	display:block;
+	clear:both;
+	margin:10px 0;
+	overflow:hidden;
+	border-bottom:1px solid #e8e8e8;
+	padding-bottom:10px;
+}
+.listSearchAuthors ul li .info {
+	margin-left:10px;
+}
+.listSearchAuthors ul li .info p{
+	font-size:11px;
+	color:#6f6f6f;
+	line-height:1;
+}
+.listSearchAuthors .grip_column {
+	float:right;
+}
+.listSearchAuthors.hfvisible {
+	display:block;
+}
+@media (max-width: 640px) {
+	.main {
+		width:100%;
+		padding:0 10px;	
+		width:640px;	
+	}
+
+}
+@media (max-width: 480px) {
+	.main {
+		width:100%;
+		padding:0 10px;	
+		width:480px;	
+	}
+
+}
+
