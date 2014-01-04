@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 
 from vpw.models import Material, Author
+from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
@@ -401,11 +402,12 @@ def create_module(request):
             if action == 'import':
                 if 'document_file' in request.FILES:
                     upload_file = request.FILES['document_file']
-                    with open(settings.MEDIA_ROOT + '/' + upload_file.name, 'wb+') as destination:
+                    upload_filename = no_accent_vietnamese(upload_file.name)
+                    with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
                         for chunk in upload_file.chunks():
                             destination.write(chunk)
                     # call import vpt
-                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
+                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
                     task_id = result_import['task_id']
                     download_url = vpt_get_url(task_id)
                     response = vpt_download(download_url)
