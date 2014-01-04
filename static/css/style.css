@@ -349,3 +349,7 @@ button.hfbtn-common{
 .btn-sign-up{
     padding-right: 50px;
 }
+
+.hfcreate-1 .tab-content .content .form-control.typetext, .content .form-control.typetext{
+    width: 80%
+}
