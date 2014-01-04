@@ -331,3 +331,8 @@ button.hfbtn-common{
 .list-right-top li:nth-child(2) {
     padding: 0;
 }
+
+.hfstep ul li{
+    width: auto;
+    padding-right: 30px;
+}
