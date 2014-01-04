@@ -345,3 +345,7 @@ button.hfbtn-common{
 .red {
     color: red;
 }
+
+.btn-sign-up{
+    padding-right: 50px;
+}

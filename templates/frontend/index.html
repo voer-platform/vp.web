@@ -7,7 +7,7 @@
 <div id="slider" class="slide1">
     <div class="slider-content main">
         <div class="slider-content-left left">
-            <div class="text-header-slider-left left clear">Take the world's best documents, online, for free.</div>
+            <div class="text-header-slider-left left clear">{% trans 'Take the world''s best documents, online, for free.' %}</div>
             <div class="div-input-search left clear">
                 <form action="{% url 'search' %}" method="GET">
                     {% csrf_token %}
@@ -15,7 +15,7 @@
                 </form>
             </div>
             <div class="text-slider-left clear">
-                Discover 21598 modules, 502 collections from 2052 authors
+                {% trans 'Discover 21598 modules, 502 collections from 2052 authors' %}
             </div>
         </div>
         <div class="hfslide right">

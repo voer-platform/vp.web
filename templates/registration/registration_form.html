@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="signup-form">
-    <div class="header-signup-form">Join VOER. Take Creative Control.</div>
+    <div class="header-signup-form">{% trans 'Join VOER. Take Creative Control.' %}</div>
     <div class="social-signup-form">
         <a class="link-fb-signup left"></a>
         <a class="link-tw-signup left"></a>
@@ -39,7 +39,7 @@
         <span class="left clear">
             By registering you are agreeing to our <a class="link-blue">Terms of Use</a> and <a class="link-blue">Privacy Policy</a>.</span>
         <!-- <a href="info_signup.html" class="btn-sign-up left clear">Get started</a> -->
-        <input class="btn-sign-up left clear" type="submit" value="{% trans 'Register' %}">
+        <input class="btn btn-sign-up left clear" type="submit" value="{% trans 'Register' %}">
     </div>
     </form>
 </div>
