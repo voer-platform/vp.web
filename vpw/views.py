@@ -173,7 +173,7 @@ def module_detail(request, mid, version):
     for file_attachment_id in file_attachments:
         attachment_info = voer_get_attachment_info(file_attachment_id)
 
-        image_mime_type = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff']
+        image_mime_type = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2', 'image/iff']
         if attachment_info['mime_type'] not in image_mime_type:
             file_tmp = {}
             file_tmp['title'] = attachment_info['name']
@@ -1018,12 +1018,21 @@ def edit_profile(request):
                         for chunk in avatar_file.chunks():
                             destination.write(chunk)
 
-                voer_update_author(author_data)
+                    author_data['avatar'] = settings.MEDIA_ROOT + '/' + avatar_file.name
+
+                result = voer_update_author(author_data)
+
+                if result:
+                    author_data = result
+                else:
+                    author_data['avatar'] = author['avatar']
 
                 # messages.add_message(request, messages.SUCCESS, 'Profile details updated.')
                 messages.success(request, 'Profile details updated.')
             else:
                 form._errors['current_password'] = form.error_class(['Current password is incorrect'])
+        else:
+            author_data['avatar'] = author['avatar']
 
         return render(request, "frontend/user_edit_profile.html", {'author': author_data, 'form': form})
 

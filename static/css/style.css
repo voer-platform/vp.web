@@ -336,3 +336,12 @@ button.hfbtn-common{
     width: auto;
     padding-right: 30px;
 }
+
+.hfitems.gridview,
+.hfitems.gridview.active {
+  background: none;
+}
+
+.red {
+    color: red;
+}
