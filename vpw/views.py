@@ -549,7 +549,7 @@ def create_collection(request):
                     outline_format = json.dumps(tmp)
                     material.text = outline_format
                     material.save()
-                    return redirect('user_collection_detail', mid=mid)
+                    return redirect('user_collection_detail', cid=mid)
                 else:
                     current_step = 2
             elif action == "publish":
