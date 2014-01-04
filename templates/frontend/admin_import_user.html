@@ -1,0 +1,55 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block titleSite %}{% trans "Import user" %}{% endblock %}
+
+{% block content %}
+
+{% include 'frontend/block/left_block_user.html' %}
+
+<div class="col-lg-1 right-row">
+    <div class="content edituser" style="padding:10px 20px;margin-bottom:20px;overflow:hidden;">
+        {% if messages %}
+        <div class="alert alert-success">
+            <ul>
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <h1>{% trans 'Import user' %}</h1>
+        <form role="form" method="post" action="{% url 'import-user' %}" id="edit-user-profile-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="InputCurrentPassword">{% trans 'Set default password' %} <span class="red">*</span></label>
+                <input type="text" class="form-control typetext" id="InputCurrentPassword" placeholder="{% trans 'Enter default password' %}" name="default_password" value="vnfvoer123*">
+                <p class="help-block">{% trans 'Set default password for new user' %}</p>
+            </div>
+            <div class="form-group">
+                <label for="InputPicture">{% trans 'File' %}</label>
+                <input type="file" onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="user_list">
+                <div class="fakefile">
+                    <input type="text" onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile">
+                </div>
+                <p class="help-block">Your file contains list user, has format "[[1, "nguyenthihuong"], [2, "nguyenthiminhchau"], [3, "unknown"]]".</p>
+            </div>
+
+            <div class="form-group btn-common">
+                <a class="hfbtn-common hfbtn-next right hfbtn-active btn-edit-profile" href="">{% trans 'Save' %}</a>
+            </div>
+        </form>
+    </div>
+ </div>
+
+<script>
+$(document).ready(function(){
+    $(document).on('click', '.btn-edit-profile', function(){
+        $('#edit-user-profile-form').submit();
+        return false;
+    });
+});
+</script>
+{% endblock %}
