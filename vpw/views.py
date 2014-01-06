@@ -1,10 +1,13 @@
 import json
 import math
 import os
+from string import lower
 import zipfile
 import re
 import urllib
 import random
+import csv
+import time
 
 from django.core.exceptions import PermissionDenied
 
@@ -18,7 +21,8 @@ from django.http.response import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 
-from vpw.models import Material
+from vpw.models import Material, Author
+from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
@@ -104,7 +108,6 @@ def _get_image(list_images):
     return replace_image
 
 
-# @user_passes_test(lambda u: u.is_superuser)
 def module_detail(request, mid, version):
     material = vpr_get_material(mid)
     # lay anh trong noi dung
@@ -399,11 +402,12 @@ def create_module(request):
             if action == 'import':
                 if 'document_file' in request.FILES:
                     upload_file = request.FILES['document_file']
-                    with open(settings.MEDIA_ROOT + '/' + upload_file.name, 'wb+') as destination:
+                    upload_filename = no_accent_vietnamese(upload_file.name)
+                    with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
                         for chunk in upload_file.chunks():
                             destination.write(chunk)
                     # call import vpt
-                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
+                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
                     task_id = result_import['task_id']
                     download_url = vpt_get_url(task_id)
                     response = vpt_download(download_url)
@@ -549,7 +553,7 @@ def create_collection(request):
                     outline_format = json.dumps(tmp)
                     material.text = outline_format
                     material.save()
-                    return redirect('user_collection_detail', mid=mid)
+                    return redirect('user_collection_detail', cid=mid)
                 else:
                     current_step = 2
             elif action == "publish":
@@ -1105,3 +1109,101 @@ def _transform_outline_to_vpr(outline):
             for item in outline['children']:
                 result['content'].append(_transform_outline_to_vpr(item))
     return result
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_import_user(request):
+    if (request.REQUEST):
+        default_password = request.POST['default_password']
+
+        if not default_password:
+            messages.error(request, 'Please enter default password.')
+        elif 'user_list' not in request.FILES:
+            messages.error(request, 'Please select file')
+        else:
+            current_user_id_list = []
+            current_author_id_list = []
+
+            user_all = User.objects.filter()
+            for user in user_all:
+                current_user_id_list.append(user.username)
+                current_author_id_list.append(user.author.author_id)
+
+            user_list = request.FILES['user_list']
+            file_path = settings.MEDIA_ROOT + '/' + user_list.name
+            with open(file_path, 'wb+') as destination:
+                for chunk in user_list.chunks():
+                    destination.write(chunk)
+
+            file_data = open(file_path, 'rb').read()
+            os.remove(file_path)
+            user_list = json.loads(file_data)
+
+            user_created_count = 0
+            backup_data = []
+
+            for user in user_list:
+                csv_data = {}
+                insert_into_csv = False
+                if user[1]:
+                    username = user[1]
+                    username = lower(username)
+                else:
+                    username = 'unknown'
+
+                author_id = user[0]
+
+                if user[0] in current_author_id_list:
+                    continue
+                else:
+                    current_author_id_list.append(user[0])
+
+                if user[1] in current_user_id_list:
+                    insert_into_csv = True
+                    csv_data['old'] = user
+
+                for i in range(0, 200):
+                    if i == 0:
+                        tmp_username = username
+                    else:
+                        tmp_username = username + str(i)
+
+                    if tmp_username not in current_user_id_list:
+                        username = tmp_username
+                        break
+
+                # Save user
+                user = User.objects.create_user(username = username, password = default_password)
+                user.save()
+                author = Author(user=user)
+                author.author_id = author_id
+                author.save()
+
+                current_user_id_list.append(username)
+                user_created_count = user_created_count + 1
+
+                if insert_into_csv:
+                    csv_data['new'] = [author_id, username]
+
+                if csv_data:
+                    backup_data.append(csv_data)
+
+            messages.success(request, 'Import user successful.')
+
+            if (user_created_count > 0):
+                messages.success(request, '%s user(s) was created.' % user_created_count)
+
+            if backup_data:
+                backup_filename = 'backup-'+time.strftime("%Y%m%d%H%M%S")+'.csv'
+                csvWriter = csv.writer(open(settings.MEDIA_ROOT + '/' + backup_filename, 'w'))
+                csvWriter.writerow(['No.', 'Old data', 'New data'])
+
+                i = 0
+                for data in backup_data:
+                    i = i + 1
+                    csvWriter.writerow([str(i), data['old'], data['new']])
+
+                messages.success(request, '%s user(s) are exist. <a href="/media/%s">(%s)</a>' % (len(backup_data), backup_filename, backup_filename), extra_tags='safe')
+
+    return render(request, "frontend/admin_import_user.html", {})
+

@@ -333,6 +333,11 @@ button.hfbtn-common{
     padding: 0;
 }
 
+/* .hfstep ul li{
+    width: auto;
+    padding-right: 30px;
+} */
+
 .hfitems.gridview,
 .hfitems.gridview.active {
   background: none;
@@ -342,6 +347,12 @@ button.hfbtn-common{
     color: red;
 }
 
+.btn-sign-up{
+    padding-right: 50px;
+}
+
+.hfcreate-1 .tab-content .content .form-control.typetext, .content .form-control.typetext{
+    width: 80%
 #slider{
   padding-top: 60px;
   margin-bottom: 0;
@@ -354,3 +365,18 @@ button.hfbtn-common{
 .sp-container ul.list-module-name-content {
   height: auto;
 }
+}
+.btn-sign-up{
+    padding-right: 50px;
+}
+
+.hfcreate-1 .tab-content .content .form-control.typetext, .content .form-control.typetext{
+    width: 80%
+}
+#slider{
+  padding-top: 60px;
+  margin-bottom: 0;
+}
+.info-collection {
+  height: 88px;
+  margin-bottom: 0;
