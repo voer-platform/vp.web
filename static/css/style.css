@@ -132,13 +132,14 @@
 
 .link-other-author-module {
   display: block;
-  height: 40px;
+  height: auto;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .other-module-author {
-  height: auto;
+  height: 158px;
+  overflow: hidden;
 }
 
 .module-view-content .example{
@@ -339,4 +340,17 @@ button.hfbtn-common{
 
 .red {
     color: red;
+}
+
+#slider{
+  padding-top: 60px;
+  margin-bottom: 0;
+}
+.info-collection {
+  height: 88px;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+.sp-container ul.list-module-name-content {
+  height: auto;
 }

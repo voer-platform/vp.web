@@ -52,10 +52,16 @@
         </ul>
         <ul class="list-status-module-content right">
             <li>
-                <span class="checkout-icon-view">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</span>
+                <a class="checkout-icon-view">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</a>
             </li>
             <li>
-                <span class="checkout-icon-favourite">{% if material.favorite_count.favorite > 0 %}{{ material.favorite_count.favorite }}{% else %}0{% endif %}</span>
+                <a class="checkout-icon-favourite">{% if material.favorite_count.favorite > 0 %}{{ material.favorite_count.favorite }}{% else %}0{% endif %}</a>
+            </li>
+            <li>
+                 <a class="checkout-icon-comment">340</a>
+            </li>
+            <li>
+                <a class="checkout-icon-like">340</a>
             </li>
         </ul>
     </div>
@@ -183,6 +189,13 @@
                 </div>
             </div>
             {% endfor %}
+             <div class="hfcontrol">
+                <div class="left">{% trans 'View more items' %}</div>
+                <div class="right" style="margin-right:10px;">                                  
+                    <a class="back" href="">{% trans 'Back' %}</a>
+                    <a class="next" href="">{% trans 'Next' %}</a>
+                 </div>
+            </div>
         </div>
     </div>
     {% endif %}
@@ -217,6 +230,13 @@
                 </div>
             </div>
             {% endfor %}
+             <div class="hfcontrol">
+                <div class="left">{% trans 'View more items' %}</div>
+                <div class="right" style="margin-right:10px;">                                  
+                    <a class="back" href="">{% trans 'Back' %}</a>
+                    <a class="next" href="">{% trans 'Next' %}</a>
+                 </div>
+            </div>
         </div>
     </div>
     {% endif %}

@@ -12,6 +12,7 @@
                 <form action="{% url 'search' %}" method="GET">
                     {% csrf_token %}
                     <input type="text" class="input-search-top" name="keyword" />
+                    <input type="submit" class="hfbtn-common search-index" value="search">
                 </form>
             </div>
             <div class="text-slider-left clear">

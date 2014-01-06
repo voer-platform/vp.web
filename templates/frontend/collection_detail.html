@@ -52,10 +52,16 @@
         </ul>
         <ul class="list-status-module-content right">
             <li>
-                <span class="checkout-icon-view">{% if collection.view_count.view > 0 %}{{ collection.view_count.view }}{% else %}0{% endif %}</span>
+                <a class="checkout-icon-view">{% if collection.view_count.view > 0 %}{{ collection.view_count.view }}{% else %}0{% endif %}</a>
             </li>
             <li>
-                <span class="checkout-icon-favourite">{% if collection.favorite_count.favorite > 0 %}{{ collection.favorite_count.favorite }}{% else %}0{% endif %}</span>
+                <a class="checkout-icon-favourite">{% if collection.favorite_count.favorite > 0 %}{{ collection.favorite_count.favorite }}{% else %}0{% endif %}</a>
+            </li>
+            <li>
+                 <a class="checkout-icon-comment">340</a>
+            </li>
+            <li>
+                <a class="checkout-icon-like">340</a>
             </li>
         </ul>
     </div>
@@ -111,12 +117,40 @@
         </span>
     </div>
     <!-- END AUTHOR STATUS -->
-    <div class="list-module-name padding-content-10 left">
-        <div class="scrollpanel no4">
-            <div class="header-list-module-name">
-                {{ collection.title }}
-            </div>
-            {{ outline | safe}}
+    <script>
+                        $(document).ready(function(){               
+                            $('.collspan').click(function(){
+                                var $iditemshow = $(this).attr('metadata');
+                                $(this).toggleClass('exspan');
+                                $('ul[metadata=child-'+$iditemshow+']').toggleClass('collspaned');                      
+                            });
+                            var wh = $(window).height();
+                            $(window).scroll(function(){
+                                var wh = $(window).height();
+                                var wp = $(window).scrollTop();
+                                var dh = $(document).height();
+                                var visible = Math.round((wp/dh)*100);
+                                if(wp > 150){
+                                    $(".hflistmodule").addClass('extends');
+                                    $("#hfgroupright").addClass('extends');
+                                }else{
+                                    $(".hflistmodule").removeClass('extends');
+                                    $("#hfgroupright").removeClass('extends');
+                                }
+                                
+                            });                     
+                        });
+                    </script>
+<div class="hflistmodule">
+    <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host">
+        <div class="hffolders">
+            <ul id="level-0">
+                <li class="root">
+                    <span><a href="#">{{ collection.title }}<a></span>
+                </li>
+                {{ outline | safe}}
+            </ul>
+                   
         </div>
     </div>
     <!-- REUSE -->
@@ -143,7 +177,8 @@
         </div>
     </div>
     <!-- END DOWNLOAD -->
-
+</div>
+<div id="hfgroupright">
     {% if tag_data %}
     <!-- TAG -->
     <div class="module-block module-simple">
@@ -188,7 +223,15 @@
                 </div>
             </div>
             {% endfor %}
+            <div class="hfcontrol">
+                <div class="left">{% trans 'View more items' %}</div>
+                <div class="right" style="margin-right:10px;">                                  
+                    <a class="back" href="">{% trans 'Back' %}</a>
+                    <a class="next" href="">{% trans 'Next' %}</a>
+                 </div>
+            </div>
         </div>
+
     </div>
     {% endif %}
     <!-- END OTHER FROM AUTHOR -->
@@ -222,10 +265,18 @@
                 </div>
             </div>
             {% endfor %}
+             <div class="hfcontrol">
+                <div class="left">{% trans 'View more items' %}</div>
+                <div class="right" style="margin-right:10px;">                                  
+                    <a class="back" href="">{% trans 'Back' %}</a>
+                    <a class="next" href="">{% trans 'Next' %}</a>
+                 </div>
+            </div>
         </div>
     </div>
     {% endif %}
     <!-- END OTHER FROM AUTHOR -->
+</div>
 </div>
 <!-- END RIGHT ROW -->
 <div id="fb-root"></div>
