@@ -2,6 +2,37 @@
 
 {% load i18n %}
 
+{% block js %}
+    <script>
+    $( document ).ready(function() {
+        var currentURL = document.URL;
+        $('ul#outline-collection li > ul').hide();
+        $('ul#outline-collection li:has(ul)').addClass("folder");
+        $('ul#outline-collection li > a').each(function(index, e){
+            var href = $(this).attr('href');
+            if (currentURL.indexOf(href) != -1){
+                $(this).addClass("active");
+                var el = $(this).parent();
+                while(el.attr('id') != 'outline-collection' ){
+                    if (el.is('ul')){
+                        el.show();
+                        el.parent().addClass('open');
+                    }
+                    el = el.parent();
+                }
+            }
+        });
+        $('ul#outline-collection li.folder > a').click(function() {
+            $(this).parent().find('ul').slideToggle("quick", function(){
+                $(this).parent().toggleClass('open', $(this).is(':visible'));
+            });
+            return false;
+        });
+
+    });
+    </script>
+{% endblock %}
+
 {% block titleSite %}{{ material.title }}{% endblock %}
 
 {% block content %}
@@ -9,6 +40,7 @@
 <div class="col-lg-1 left-row">
     <!-- TITLE MODULE -->
     <div class="module-view-title left padding-content-15">
+        <span class="module-view-name left clear">{{ collection.title }}</span>
         <span class="module-view-name left clear">{{ material.title }}</span>
         <a class="module-view-category left clear">{{ category.name }}</a>
     </div>
@@ -94,20 +126,12 @@
     <!-- AUTHOR STATUS -->
     <div class="module-view-author-status left">
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear left">10</a>
-            <label class="clear left">Modules</label>
+            <a class="clear">{{ author.author.module }}</a>
+            <label class="clear">Modules</label>
         </span>
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear left">3</a>
-            <label class="clear left">Collections</label>
-        </span>
-        <span class="module-view-author-block left padding-content-5">
-            <a class="clear left">11</a>
-            <label class="clear left">Following</label>
-        </span>
-        <span class="module-view-author-block left padding-content-5">
-            <a class="clear left">15</a>
-            <label class="clear left">Followers</label>
+            <a class="clear">{{ author.author.collection }}</a>
+            <label class="clear">Collections</label>
         </span>
     </div>
     <!-- END AUTHOR STATUS -->

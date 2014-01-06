@@ -297,6 +297,28 @@ button.hfbtn-common{
 .list-module-name-content{
     height: 230px;
 }
+
+.list-module-name-content li{
+  background: url("../images/menu_dot.png") no-repeat scroll 0 8px rgba(0, 0, 0, 0);
+}
+
+.list-module-name-content li > a.active{
+  font-weight: bold;
+}
+
+.list-module-name-content li.folder{
+  background: url("../images/bullet-w2.png") no-repeat scroll 0 6px rgba(0, 0, 0, 0);
+}
+
+.list-module-name-content li.folder.open{
+  background: url("../images/bullet-w3.png") no-repeat scroll 0 8px rgba(0, 0, 0, 0);
+}
+
+.module-view-author-block{
+    width: 150px;
+    text-align: center;
+}
+
 .navbar-collapse img {
   width: 22px;
   height: 15px;
