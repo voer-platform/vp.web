@@ -157,7 +157,7 @@
             </div>
 
             <div class="author-collection"><a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a></div>
-        </div>
+       
         <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories.0.0 }}">
             {% if material.categories.0.1 %}
                 {{ material.categories.0.1 }}
@@ -165,7 +165,7 @@
                 {% trans 'Other' %}
             {% endif %}
 		</a></div>
-
+         </div>
     </div>
     <div class="collection-mainpage-other">
         {% if material.material_type == 1 %}

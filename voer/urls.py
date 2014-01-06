@@ -44,6 +44,7 @@ urlpatterns = patterns('',
         name='user_collection_detail'),
     url(r'^user/most-viewed/?$', 'vpw.views.mostViewedView', name='most-viewed'),
 
+    url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
 
     url(r'^search/', 'vpw.views.search_result', name='search'),
 
