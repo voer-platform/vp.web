@@ -8,19 +8,19 @@
 
 <!-- filter top -->
 <div class="hfuser-top">
-    <h1>{% if author %} {{ author.fullname }} {% else %} {{ user.username }} {% endif %}</h1>
+    <h1>{% trans 'My VOER' %}</h1>
     <div class="hfuser-content">
         <div class="hfuser-information left">
             <div class="hfuser-avatar left">
                 <img src="{% if author.avatar %} http://dev.voer.vn:2013/0.1/persons/{{ author.id }}/avatar/ {% else %} {{ STATIC_URL }}images/author1_detail.jpg {% endif %}">
             </div>
             <div class="hfuser-info ">
-                <div class="hfuser-name">{% if author %} {{ author.fullname }} {% else %} {{ user.username }} {% endif %}</div>
-                <div class="hfuser-address">{% if author.affiliation %}{{ author.affiliation }}{% else %}{% trans 'Undefined' %}{% endif %}</div>
-                <div class="hfuser-website">{% if author.affiliation_url %}<a href="{{ author.affiliation_url }}" target="_blank">{{ author.affiliation_url }}</a>{% else %}{% trans 'Undefined' %}{% endif %}</div>
-                <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if author.homepage %}<a href="{{ author.homepage }}" target="_blank">{{ author.homepage }}</a>{% else %}{% trans 'Undefined' %}{% endif %}</div>
-                <div class="hfuser-national">{% trans 'National' %}: {% if author.national %}{{ author.national }}{% else %}{% trans 'Undefined' %}{% endif %}</div>
-                <div class="hfuser-biography">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography }}{% else %}{% trans 'Undefined' %}{% endif %}</div>
+                <div class="hfuser-name">{% if author.fullname %}{% if author.title %}{{ author.title }} {% endif %}{{ author.fullname }} {% else %} {{ user.username }} {% endif %}</div>
+                <div class="hfuser-address">{% if author.affiliation %}{{ author.affiliation }}{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-website">{% if author.affiliation_url %}<a href="{{ author.affiliation_url }}" target="_blank">{{ author.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if author.homepage %}<a href="{{ author.homepage }}" target="_blank">{{ author.homepage }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-national">{% trans 'National' %}: {% if author.national %}{{ author.national }}{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-biography">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography }}{% else %}{% trans 'Not available' %}{% endif %}</div>
             </div>
         </div>
     </div>

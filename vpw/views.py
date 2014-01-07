@@ -157,24 +157,26 @@ def module_detail(request, mid, version):
         if i > 4:
             break
 
-        i = i + 1
-        material_tmp = vpr_get_material(similar['material_id'])
-        if 'author' in material_tmp:
-            author_id_list = material_tmp['author'].split(',')
-        else:
-            author_id_list = []
+        if similar['material_id']:
+          i = i + 1
+          material_tmp = vpr_get_material(similar['material_id'])
+          if 'author' in material_tmp:
+              author_id_list = material_tmp['author'].split(',')
+          else:
+              author_id_list = []
 
-        p_list = []
-        for pid in author_id_list:
-            pid = pid.strip()
-            person = vpr_get_person(pid)
-            if person['fullname']:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-            else:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-        material_tmp['author_list'] = p_list
+          p_list = []
+          for pid in author_id_list:
+              pid = pid.strip()
+              person = vpr_get_person(pid)
+              # print person
+              if person['fullname']:
+                  p_list.append({'pid': pid, 'pname': person['fullname']})
+              else:
+                  p_list.append({'pid': pid, 'pname': person['fullname']})
+          material_tmp['author_list'] = p_list
 
-        similar_data.append(material_tmp)
+          similar_data.append(material_tmp)
 
     file_data = []
     file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
@@ -733,10 +735,11 @@ def vpw_logout(request):
 @login_required
 def user_dashboard(request):
     page = int(request.GET.get('page', 1))
+    sort_on = request.GET.get('sort', '')
     current_user = request.user
     pid = current_user.author.author_id
     author = vpr_get_person(pid, True)
-    materials = vpr_materials_by_author(pid, page)
+    materials = vpr_materials_by_author(pid, page, sort_on)
 
     page_query = get_page_query(request)
     pager = pager_default_initialize(materials['count'], 12, page)
