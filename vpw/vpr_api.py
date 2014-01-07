@@ -220,8 +220,8 @@ def vpr_browse(**kwargs):
     return result
 
 
-def vpr_materials_by_author(aid, page=1):
-    result = vpr_request("GET", "materials?author=%s&page=%s" % (aid, str(page)))
+def vpr_materials_by_author(aid, page=1, sort_on=''):
+    result = vpr_request("GET", "materials?author=%s&page=%s&sort_on=%s" % (aid, str(page), sort_on))
     return result
 
 

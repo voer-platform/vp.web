@@ -5,7 +5,9 @@
   margin-top: 7px;
   width: 19px;
 }
-
+.text-justify {
+    text-align: justify;
+}
 .voer-col-ico {
   background: url("../images/icon/icon-collection.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
   height: 15px;
@@ -353,6 +355,7 @@ button.hfbtn-common{
 
 .hfcreate-1 .tab-content .content .form-control.typetext, .content .form-control.typetext{
     width: 80%
+}
 #slider{
   padding-top: 60px;
   margin-bottom: 0;
@@ -364,7 +367,6 @@ button.hfbtn-common{
 }
 .sp-container ul.list-module-name-content {
   height: auto;
-}
 }
 .btn-sign-up{
     padding-right: 50px;
@@ -380,3 +382,19 @@ button.hfbtn-common{
 .info-collection {
   height: 88px;
   margin-bottom: 0;
+}
+.hfuser-information {
+    width: 70%;
+}
+.hfuser-info {
+    display: inline-block;
+    float: left;
+    max-width: 73%;
+}
+.title-collection {
+    max-height: 40px;
+    overflow: hidden;
+}
+.hfitems.gridview .hfitem .short-collection {
+    height: 36px;
+}
