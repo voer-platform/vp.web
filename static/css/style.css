@@ -413,15 +413,14 @@ button.hfbtn-common{
 .hfuser-information {
     width: 70%;
 }
-.hfuser-info {
-    display: inline-block;
-    float: left;
-    max-width: 73%;
-}
 .title-collection {
     max-height: 40px;
     overflow: hidden;
 }
 .hfitems.gridview .hfitem .short-collection {
     height: 36px;
+}
+.hfuser-address,
+.hfuser-website {
+    margin-left: 191px;
 }

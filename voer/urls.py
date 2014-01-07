@@ -43,6 +43,8 @@ urlpatterns = patterns('',
     url(r'^user/c/(?P<cid>[0-9a-z]+)(/(?P<mid>[0-9a-z]+))?/?$', 'vpw.views.user_collection_detail',
         name='user_collection_detail'),
     url(r'^user/most-viewed/?$', 'vpw.views.mostViewedView', name='most-viewed'),
+    url(r'^user/favorite/?$', 'vpw.views.get_favorite', name='get_favorite'),
+    url(r'^user/unpublish/?$', 'vpw.views.get_unpublish', name='get_unpublish'),
 
     url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
 

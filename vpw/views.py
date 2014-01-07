@@ -1241,3 +1241,11 @@ def admin_import_user(request):
 
     return render(request, "frontend/admin_import_user.html", {})
 
+
+def get_favorite(request):
+    return render(request, "frontend/user_favorite.html", {})
+
+
+def get_unpublish(request):
+    return render(request, "frontend/user_unpublish.html", {})
+
