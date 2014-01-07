@@ -357,10 +357,10 @@ button.hfbtn-common{
     padding: 0;
 }
 
-/* .hfstep ul li{
+.hfstep ul li{
     width: auto;
     padding-right: 30px;
-} */
+}
 
 .hfitems.gridview,
 .hfitems.gridview.active {
@@ -377,6 +377,8 @@ button.hfbtn-common{
 
 .hfcreate-1 .tab-content .content .form-control.typetext, .content .form-control.typetext{
     width: 80%
+}
+
 #slider{
   padding-top: 60px;
   margin-bottom: 0;
