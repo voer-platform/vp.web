@@ -179,8 +179,21 @@ def vpr_create_material(**kwargs):
 
 
 def vpr_get_pdf(mid, version):
-    result = vpr_request('GET', "materials/%s/%s/pdf/" % (mid, version))
-    return result
+    url = settings.VPR_URL + "materials/%s/%s/pdf/" % (mid, version)
+    r = requests.request("GET", url)
+
+    retry = 20
+    interval = 5
+
+    n = 0
+    while n < retry:
+        r = requests.request("GET", url)
+        if r.status_code == 200:
+            return r.content
+        # pause a few second before continue
+        time.sleep(interval)
+        n += 1
+    return
 
 
 def vpr_search(keyword, page):

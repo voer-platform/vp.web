@@ -299,7 +299,7 @@ button.hfbtn-common{
     height: 230px;
 }
 
-.list-module-name-content li{
+.list-module-name-content li, .hffolders ul ul li{
   background: url("../images/menu_dot.png") no-repeat scroll 0 8px rgba(0, 0, 0, 0);
 }
 

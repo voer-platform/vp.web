@@ -1,3 +1,4 @@
+import codecs
 import json
 import math
 import os
@@ -20,6 +21,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
+from django.core.servers.basehttp import FileWrapper
 
 from vpw.models import Material, Author
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
@@ -52,6 +54,8 @@ COLLECTION_TEMPLATES = [
 # Material type
 MODULE_TYPE = 1
 COLLECTION_TYPE = 2
+
+EXPORT_PDF_DIR = '%s/pdf_export/' % settings.MEDIA_ROOT
 
 
 # Create your views here.
@@ -119,7 +123,7 @@ def module_detail(request, mid, version):
 
     other_data = []
     if material.has_key('author') and material['author']:
-        author = vpr_get_person(material['author'])
+        author = vpr_get_person(material['author'], True)
         other_materials = vpr_materials_by_author(material['author'])
         i = 1
         for other_material in other_materials['results']:
@@ -836,12 +840,24 @@ def search_result(request):
 
 
 def get_pdf(request, mid, version):
-    # mid = request.GET.get("mid", "")
-    # version = request.GET.get("version", "")
-
-    pdf_content = vpr_get_pdf(mid, version)
-    print pdf_content
-    return HttpResponse(pdf_content, mimetype='application/pdf')
+    file_name = '%s_%s.pdf' % (mid, version)
+    # file_path = EXPORT_PDF_DIR + file_name
+    # if os.path.isfile(file_path):
+    #     pass
+    # else:
+    #     result = vpr_get_pdf(mid, version)
+    #     if result.status_code == 200:
+    #         with codecs.open(file_path, 'w', 'utf-8') as pdf_file:
+    #             pdf_file.write(result.content)
+    #     elif result.status_code == 102:
+    #         #Processing
+    #         pass
+    # wrapper = FileWrapper(file(file_path, 'rb'))
+    result = vpr_get_pdf(mid, version)
+    response = HttpResponse(result, content_type='application/pdf')
+    # response['Content-Length'] = os.path.getsize(file_path)
+    response['Content-Disposition'] = 'attachment;filename=%s' % file_name
+    return response
 
 
 ###### UTILITIES FUNCTION #######
