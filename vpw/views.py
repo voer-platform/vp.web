@@ -1,3 +1,4 @@
+import codecs
 import json
 import math
 import os
@@ -20,6 +21,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
+from django.core.servers.basehttp import FileWrapper
 
 from vpw.models import Material, Author
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
@@ -53,12 +55,14 @@ COLLECTION_TEMPLATES = [
 MODULE_TYPE = 1
 COLLECTION_TYPE = 2
 
+EXPORT_PDF_DIR = '%s/pdf_export/' % settings.MEDIA_ROOT
+
 
 # Create your views here.
 def home(request):
     # material_features = ['64b4a7a7', 'fd2f579c', 'f2feed3c', '4dbdd6c5', 'c3ad3533', '0e60bfc6']
     material_features_sample = ['01f46fc2', '022e4f84', '0e60bfc6', '2d2e6a46', '3ec080b8', '45df218a', '4c212f92',
-                         '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'fd2f579c']
+                                '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'fd2f579c']
     material_features = random.sample(material_features_sample, 6)
     materials_list = []
     for mid in material_features:
@@ -105,6 +109,7 @@ def _get_image(list_images):
         except KeyError:
             result = "<img src='" + match_object.group(1) + "'"
         return result
+
     return replace_image
 
 
@@ -118,7 +123,7 @@ def module_detail(request, mid, version):
 
     other_data = []
     if material.has_key('author') and material['author']:
-        author = vpr_get_person(material['author'])
+        author = vpr_get_person(material['author'], True)
         other_materials = vpr_materials_by_author(material['author'])
         i = 1
         for other_material in other_materials['results']:
@@ -152,24 +157,26 @@ def module_detail(request, mid, version):
         if i > 4:
             break
 
-        i = i + 1
-        material_tmp = vpr_get_material(similar['material_id'])
-        if 'author' in material_tmp:
-            author_id_list = material_tmp['author'].split(',')
-        else:
-            author_id_list = []
+        if similar['material_id']:
+          i = i + 1
+          material_tmp = vpr_get_material(similar['material_id'])
+          if 'author' in material_tmp:
+              author_id_list = material_tmp['author'].split(',')
+          else:
+              author_id_list = []
 
-        p_list = []
-        for pid in author_id_list:
-            pid = pid.strip()
-            person = vpr_get_person(pid)
-            if person['fullname']:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-            else:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-        material_tmp['author_list'] = p_list
+          p_list = []
+          for pid in author_id_list:
+              pid = pid.strip()
+              person = vpr_get_person(pid)
+              # print person
+              if person['fullname']:
+                  p_list.append({'pid': pid, 'pname': person['fullname']})
+              else:
+                  p_list.append({'pid': pid, 'pname': person['fullname']})
+          material_tmp['author_list'] = p_list
 
-        similar_data.append(material_tmp)
+          similar_data.append(material_tmp)
 
     file_data = []
     file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
@@ -184,10 +191,11 @@ def module_detail(request, mid, version):
             file_data.append(file_tmp)
 
     response = render(request, "frontend/module_detail.html",
-                  {"material": material, "author": author, "category": category, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
+                      {"material": material, "author": author, "category": category, 'other_data': other_data,
+                       'similar_data': similar_data, 'file_data': file_data})
 
     if cookie_name not in request.COOKIES:
-        max_age = settings.VPW_SESSION_MAX_AGE*24*60*60
+        max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
         response.set_cookie(cookie_name, True, max_age)
 
     return response
@@ -230,7 +238,8 @@ def collection_detail(request, cid, mid):
         for file_attachment_id in file_attachments:
             attachment_info = voer_get_attachment_info(file_attachment_id)
 
-            image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2', 'image/iff']
+            image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2',
+                                'image/iff']
             if attachment_info['mime_type'] not in image_mime_types:
                 file_tmp = {}
                 file_tmp['title'] = attachment_info['name']
@@ -241,9 +250,11 @@ def collection_detail(request, cid, mid):
         file_data = []
 
     # Generate outline html
-    strOutline = "<ul class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'])
+    strOutline = "<ul id='outline-collection' class='list-module-name-content'>%s</ul>" % get_outline(cid, outline[
+        'content'])
 
-    author = vpr_get_person(collection['author'])
+    # Lay thong tin tac gia bao gom ca thong ke
+    author = vpr_get_person(collection['author'], True)
     category = vpr_get_category(collection['categories'])
 
     other_data = []
@@ -281,11 +292,12 @@ def collection_detail(request, cid, mid):
         similar_data.append(material_tmp)
 
     response = render(request, "frontend/collection_detail.html",
-                  {"collection": collection, "material": material, "author": author, "category": category,
-                   "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data, 'file_data': file_data})
+                      {"collection": collection, "material": material, "author": author, "category": category,
+                       "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data,
+                       'file_data': file_data})
 
     if cookie_name not in request.COOKIES:
-        max_age = settings.VPW_SESSION_MAX_AGE*24*60*60
+        max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
         response.set_cookie(cookie_name, True, max_age)
 
     return response
@@ -407,7 +419,7 @@ def create_module(request):
                         for chunk in upload_file.chunks():
                             destination.write(chunk)
                     # call import vpt
-                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
+                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
                     task_id = result_import['task_id']
                     download_url = vpt_get_url(task_id)
                     response = vpt_download(download_url)
@@ -431,7 +443,7 @@ def create_module(request):
                     zip_archive.extractall(path=extract_path)
 
                     # get transformed html content
-                    content = open(extract_path+'/index.html', 'r').read()
+                    content = open(extract_path + '/index.html', 'r').read()
                     # fix images' urls
                     images = [f.filename for f in zip_archive.filelist if f.filename != 'index.html']
                     for image in images:
@@ -649,7 +661,9 @@ def view_profile(request, pid):
 
         person_materials.append(material)
 
-    return render_to_response("frontend/profile.html", {"person": current_person, "materials": person_materials, 'pager': pager, 'page_query': page_query, 'categories': categories},
+    return render_to_response("frontend/profile.html",
+                              {"person": current_person, "materials": person_materials, 'pager': pager,
+                               'page_query': page_query, 'categories': categories},
                               context_instance=RequestContext(request))
 
 
@@ -665,6 +679,8 @@ def delete_profile(request, pid):
 '''
 Browse page
 '''
+
+
 def browse(request):
     page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
@@ -686,7 +702,8 @@ def browse(request):
     pager = pager_default_initialize(materials['count'], 12, page)
     page_query = get_page_query(request)
 
-    return render(request, "frontend/browse.html", {"materials": material_result, "categories": categories, 'pager': pager, 'page_query': page_query})
+    return render(request, "frontend/browse.html",
+                  {"materials": material_result, "categories": categories, 'pager': pager, 'page_query': page_query})
 
 
 def vpw_authenticate(request):
@@ -718,10 +735,11 @@ def vpw_logout(request):
 @login_required
 def user_dashboard(request):
     page = int(request.GET.get('page', 1))
+    sort_on = request.GET.get('sort', '')
     current_user = request.user
     pid = current_user.author.author_id
     author = vpr_get_person(pid, True)
-    materials = vpr_materials_by_author(pid, page)
+    materials = vpr_materials_by_author(pid, page, sort_on)
 
     page_query = get_page_query(request)
     pager = pager_default_initialize(materials['count'], 12, page)
@@ -736,7 +754,8 @@ def user_dashboard(request):
 
         person_materials.append(material)
 
-    return render(request, "frontend/user_profile.html", {"materials": person_materials, "author": author, 'pager': pager, 'page_query': page_query})
+    return render(request, "frontend/user_profile.html",
+                  {"materials": person_materials, "author": author, 'pager': pager, 'page_query': page_query})
 
 
 @login_required
@@ -819,16 +838,29 @@ def search_result(request):
 
         result_array.append(result)
 
-    return render(request, "frontend/search_result.html", {'keyword': keyword, "search_results": result_array, 'pager': pager, 'page_query': page_query})
+    return render(request, "frontend/search_result.html",
+                  {'keyword': keyword, "search_results": result_array, 'pager': pager, 'page_query': page_query})
 
 
 def get_pdf(request, mid, version):
-    # mid = request.GET.get("mid", "")
-    # version = request.GET.get("version", "")
-
-    pdf_content = vpr_get_pdf(mid, version)
-    print pdf_content
-    return HttpResponse(pdf_content, mimetype='application/pdf')
+    file_name = '%s_%s.pdf' % (mid, version)
+    # file_path = EXPORT_PDF_DIR + file_name
+    # if os.path.isfile(file_path):
+    #     pass
+    # else:
+    #     result = vpr_get_pdf(mid, version)
+    #     if result.status_code == 200:
+    #         with codecs.open(file_path, 'w', 'utf-8') as pdf_file:
+    #             pdf_file.write(result.content)
+    #     elif result.status_code == 102:
+    #         #Processing
+    #         pass
+    # wrapper = FileWrapper(file(file_path, 'rb'))
+    result = vpr_get_pdf(mid, version)
+    response = HttpResponse(result, content_type='application/pdf')
+    # response['Content-Length'] = os.path.getsize(file_path)
+    response['Content-Disposition'] = 'attachment;filename=%s' % file_name
+    return response
 
 
 ###### UTILITIES FUNCTION #######
@@ -863,6 +895,7 @@ def get_outline(cid, outline, private=False):
 
     return result
 
+
 def pager_default_initialize(count, limit, current_page=1, page_rank=4):
     pager_array = []
     page_total = int(math.ceil((count + limit - 1) / limit))
@@ -892,7 +925,7 @@ def pager_default_initialize(count, limit, current_page=1, page_rank=4):
             page_temp['text'] = xpage
             page_temp['value'] = xpage
             pager_array.append(page_temp)
-    else :
+    else:
         for i in range(1, current_page):
             page_temp = {}
             page_temp['text'] = i
@@ -917,8 +950,8 @@ def pager_default_initialize(count, limit, current_page=1, page_rank=4):
             page_temp['text'] = '...'
             page_temp['value'] = ''
             pager_array.append(page_temp)
-    else :
-        for i in range(current_page+1, page_total+1):
+    else:
+        for i in range(current_page + 1, page_total + 1):
             page_temp = {}
             page_temp['text'] = i
             page_temp['value'] = i
@@ -935,10 +968,11 @@ def pager_default_initialize(count, limit, current_page=1, page_rank=4):
         page_temp['value'] = page_total
         pager_array.append(page_temp)
 
-    if len(pager_array) > 1 :
+    if len(pager_array) > 1:
         return pager_array
 
     return []
+
 
 def get_page_query(request):
     page = request.GET.get('page', 1)
@@ -976,12 +1010,13 @@ def ajax_browse(request):
     else:
         return HttpResponse("No items found!")
 
+
 def get_attachment(request, fid):
     attachment_info = voer_get_attachment_info(fid)
     target_url = 'http://' + settings.VPR_URL + ':' + settings.VPR_PORT + '/' + settings.VPR_VERSION + '/mfiles/' + fid + '/get/'
     content = urllib.urlopen(target_url).read()
     response = HttpResponse(content, mimetype=attachment_info['mime_type'])
-    response['Content-Disposition'] = 'attachment; filename='+attachment_info['name']
+    response['Content-Disposition'] = 'attachment; filename=' + attachment_info['name']
 
     return response
 
@@ -1043,7 +1078,6 @@ def edit_profile(request):
     return render(request, "frontend/user_edit_profile.html", {'author': author})
 
 
-
 @login_required
 def ajax_add_favorite(request):
     if request.is_ajax():
@@ -1066,7 +1100,7 @@ def ajax_add_favorite(request):
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
     else:
-      return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/')
 
 
 def ajax_search_author(request):
