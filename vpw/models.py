@@ -8,6 +8,16 @@ from vpw.vpr_api import vpr_create_person
 
 # Create your models here.
 
+class Settings(models.Model):
+    """
+    A table to store configurable settings with a pair of name and value,
+    also support multiple languagues.
+    """
+    name = CharField(max_length=64)
+    value = TextField(blank=True, default='')
+    language= CharField(max_length=8, default='vi')
+
+
 class MaterialFeature(models.Model):
     material_id = CharField(max_length=64, null=True)
     weight = IntegerField(default=1)

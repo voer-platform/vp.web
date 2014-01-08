@@ -31,7 +31,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     voer_add_view_count
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 
-from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
+from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm
 from django.utils.translation import ugettext as _
 
 
@@ -1266,3 +1266,19 @@ def user_module_reuse(request, mid, version=1):
         pass
     params = {'material': material, 'categories': categories, 'form': form}
     return render(request, MODULE_TEMPLATES[3], params)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_settings(request):
+    """
+    Settings page for admin
+    """
+    if request.method == "POST":
+        form = SettingsForm(request.POST)
+        if form.is_valid():
+            # save changes
+            pass
+    else:
+        form = SettingsForm()
+
+    return render(request, "frontend/admin_settings.html", {'form': form})

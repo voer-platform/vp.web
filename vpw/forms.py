@@ -41,3 +41,8 @@ class EditProfileForm(forms.Form):
             self._errors["confirm_password"] = self.error_class([u"Confirm password is not matchs"])
 
         return cleaned_data
+
+
+class SettingsForm(forms.Form):
+    module_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=True)
+    collection_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=True)
