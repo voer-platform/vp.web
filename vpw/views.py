@@ -23,7 +23,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.core.servers.basehttp import FileWrapper
 
-from vpw.models import Material, Author, FeaturedAuthor
+from vpw.models import Material, Author, FeaturedAuthor, Settings
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
@@ -32,7 +32,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, get_language
 
 
 # Template for create module
@@ -1273,12 +1273,24 @@ def admin_settings(request):
     """
     Settings page for admin
     """
+    language = get_language() # current language
+    module_license, created = Settings.objects.get_or_create(name='module_license', language=language)
+    collection_license, created = Settings.objects.get_or_create(name='collection_license', language=language)
+
     if request.method == "POST":
         form = SettingsForm(request.POST)
         if form.is_valid():
-            # save changes
-            pass
+            # save module_license's change
+            module_license.value = form.cleaned_data['module_license']
+            module_license.save()
+            # save collection_license's change
+            collection_license.value = form.cleaned_data['collection_license']
+            collection_license.save()
+            messages.success(request, 'Settings updated successfully.')
+        else:
+            messages.error(request, 'Error while updating settings.')
     else:
-        form = SettingsForm()
+        form = SettingsForm(dict(module_license=module_license.value,
+                                 collection_license=collection_license.value))
 
     return render(request, "frontend/admin_settings.html", {'form': form})

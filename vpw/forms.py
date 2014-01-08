@@ -44,5 +44,5 @@ class EditProfileForm(forms.Form):
 
 
 class SettingsForm(forms.Form):
-    module_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=True)
-    collection_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=True)
+    module_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=False)
+    collection_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=False)
