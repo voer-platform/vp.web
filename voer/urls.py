@@ -49,6 +49,7 @@ urlpatterns = patterns('',
     url(r'^user/unpublish/?$', 'vpw.views.get_unpublish', name='get_unpublish'),
 
     url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
+    url(r'^admin/settings/?$', 'vpw.views.admin_settings', name='settings'),
 
     url(r'^search/', 'vpw.views.search_result', name='search'),
 
