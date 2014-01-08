@@ -58,6 +58,8 @@ urlpatterns = patterns('',
     url(r'^ajax/add_favorite$', 'vpw.views.ajax_add_favorite', name='ajax_add_favorite'),
     url(r'^ajax/search_author$', 'vpw.views.ajax_search_author', name='ajax_search_author'),
     url(r'^ajax/search_module$', 'vpw.views.ajax_search_module', name='ajax_search_module'),
+    url(r'^ajax/get-others$', 'vpw.views.ajax_get_others', name='ajax_get_others'),
+    url(r'^ajax/get-similars', 'vpw.views.ajax_get_similars', name='ajax_get_similars'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='frontend/robots.txt', content_type='text/plain')),

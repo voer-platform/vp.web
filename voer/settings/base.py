@@ -92,7 +92,7 @@ LOCALE_PATHS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+#STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
@@ -152,7 +152,7 @@ DEFAULT_FROM_EMAIL = 'info@voer.edu.vn'
 VOER_FACEBOOK_APP_ID = 271167089707244
 ## END REGISTER
 #
-# STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]
 
 VPR_URL = '' # URL VPR
 VPR_PORT = '' # PORT VPR
