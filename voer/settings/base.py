@@ -152,7 +152,12 @@ DEFAULT_FROM_EMAIL = 'info@voer.edu.vn'
 VOER_FACEBOOK_APP_ID = 271167089707244
 ## END REGISTER
 #
-# STATICFILES_DIRS = [os.path.join(PROJECT_DIR, 'static')]
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
 
 VPR_URL = '' # URL VPR
 VPR_PORT = '' # PORT VPR
