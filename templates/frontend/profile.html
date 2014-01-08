@@ -1,6 +1,7 @@
 {% extends "base/base-content.html" %}
 
 {% load i18n %}
+{% load thumbnail %}
 
 {% block titleSite %}{% trans "User profile" %}{% endblock %}
 
@@ -11,10 +12,16 @@
     <h1>{% if person.fullname %}{% if person.title %}{{ person.title }} {% endif %}{{ person.fullname }} {% else %} {{ person.user_id }} {% endif %}</h1>
     <div class="hfuser-content">
         <div class="hfuser-information left">
-            <div class="hfuser-avatar left">
-                <img src="{% if person.avatar %} http://dev.voer.vn:2013/0.1/persons/{{ person.id }}/avatar/ {% else %} {{ STATIC_URL }}images/author1_detail.jpg {% endif %}">
-            </div>
             <div class="hfuser-info ">
+                <div class="hfuser-avatar left">
+                {% with y=person.id|stringformat:"s" %}
+                {% thumbnail "http://dev.voer.vn:2013/0.1/persons/"|add:y|add:"/avatar/?l="|add:person.avatar "150x150" crop="center 20%" as im %}
+                    <img src="{{ im.url }}">
+                {% empty %}
+                    <img src="{{ STATIC_URL }}images/author1_detail.jpg">
+                {% endthumbnail %}
+                {% endwith %}
+                </div>
                 <div class="hfuser-name">{% if person.fullname %}{% if person.title %}{{ person.title }} {% endif %}{{ person.fullname }} {% else %} {{ person.user_id }} {% endif %}</div>
                 <div class="hfuser-address">{% if person.affiliation %}{{ person.affiliation }}{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-website">{% if person.affiliation_url %}<a href="{{ person.affiliation_url }}" target="_blank">{{ person.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>

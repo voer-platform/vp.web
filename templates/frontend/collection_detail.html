@@ -223,82 +223,27 @@
     {% endif %}
 
     <!-- OTHER FROM AUTHOR -->
-    {% if other_data %}
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">{% trans 'Other from Author' %}</div>
+            <div class="tilte-module">{% trans 'Others from Author' %}</div>
         </div>
         <div class="module-block-content">
-            {% for other_material in other_data %}
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    {% if other_material.image %}
-                    {% else %}
-                    <img src="{{STATIC_URL}}images/module_view/other1.jpg">
-                    {% endif %}
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    {% if other_material.material_type == 1 %}
-                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'module_detail' other_material.material_id %}">{{ other_material.title }}</a>
-                    {% else %}
-                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' other_material.material_id %}">{{ other_material.title }}</a>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-            <div class="hfcontrol">
-                <div class="left">{% trans 'View more items' %}</div>
-                <div class="right" style="margin-right:10px;">                                  
-                    <a class="back" href="">{% trans 'Back' %}</a>
-                    <a class="next" href="">{% trans 'Next' %}</a>
-                 </div>
-            </div>
+            <div id="module-others" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-others?authors={{ author.id }}">&nbsp;</div>
         </div>
-
     </div>
-    {% endif %}
     <!-- END OTHER FROM AUTHOR -->
 
     <!-- OTHER FROM AUTHOR -->
-    {% if similar_data %}
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">{% trans 'Similar item' %}</div>
+            <div class="tilte-module">{% trans 'Similars item' %}</div>
         </div>
         <div class="module-block-content">
-            {% for similar in similar_data %}
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    {% if similar.image %}
-                    {% else %}
-                    <img src="{{STATIC_URL}}images/module_view/other4.jpg">
-                    {% endif %}
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    {% if similar.material_type == 1 %}
-                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.material_id %}">{{ similar.title }}</a>
-                    {% else %}
-                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' similar.material_id %}">{{ similar.title }}</a>
-                    {% endif %}
-
-                    {% for person in similar.author_list %}
-                    <a class="link-other-author-collection left clear" href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-             <div class="hfcontrol">
-                <div class="left">{% trans 'View more items' %}</div>
-                <div class="right" style="margin-right:10px;">                                  
-                    <a class="back" href="">{% trans 'Back' %}</a>
-                    <a class="next" href="">{% trans 'Next' %}</a>
-                 </div>
-            </div>
+            <div id="module-similars" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-similars?mid={{ collection.material_id }}&version={{ collection.version }}">&nbsp;</div>
         </div>
     </div>
-    {% endif %}
     <!-- END OTHER FROM AUTHOR -->
 </div>
 </div>

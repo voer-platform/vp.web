@@ -11,9 +11,9 @@
         </div>
         <div class="content">
             <ul>
-                <li><a>{% trans 'Unpublish' %}</a></li>
-                <li><a>{% trans 'Saved Items' %}</a></li>
-                <li><a>{% trans 'My Favorites' %}</a></li>
+                <li><a href="{% url 'get_unpublish' %}">{% trans 'Unpublish' %}</a></li>
+                <!--<li><a>{% trans 'Saved Items' %}</a></li>-->
+                <li><a href="{% url 'get_favorite' %}">{% trans 'My Favorites' %}</a></li>
             </ul>
         </div>
     </div>
@@ -39,7 +39,6 @@
                 <li><a href="#">{% trans 'Most favourite' %}</a></li>
                 <li><a href="#">{% trans 'Featured materials' %}</a></li>
                 <li><a href="#">{% trans 'Featured authors' %}</a></li>
-                <li><a href="#">{% trans 'Most favourite' %}</a></li>
                 <li><a href="{% url 'import-user' %}">{% trans 'Import user' %}</a></li>
             </ul>
         </div>

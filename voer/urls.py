@@ -45,6 +45,8 @@ urlpatterns = patterns('',
     url(r'^user/c/(?P<cid>[0-9a-z]+)(/(?P<mid>[0-9a-z]+))?/?$', 'vpw.views.user_collection_detail',
         name='user_collection_detail'),
     url(r'^user/most-viewed/?$', 'vpw.views.mostViewedView', name='most-viewed'),
+    url(r'^user/favorite/?$', 'vpw.views.get_favorite', name='get_favorite'),
+    url(r'^user/unpublish/?$', 'vpw.views.get_unpublish', name='get_unpublish'),
 
     url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
 
@@ -58,6 +60,8 @@ urlpatterns = patterns('',
     url(r'^ajax/add_favorite$', 'vpw.views.ajax_add_favorite', name='ajax_add_favorite'),
     url(r'^ajax/search_author$', 'vpw.views.ajax_search_author', name='ajax_search_author'),
     url(r'^ajax/search_module$', 'vpw.views.ajax_search_module', name='ajax_search_module'),
+    url(r'^ajax/get-others$', 'vpw.views.ajax_get_others', name='ajax_get_others'),
+    url(r'^ajax/get-similars', 'vpw.views.ajax_get_similars', name='ajax_get_similars'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='frontend/robots.txt', content_type='text/plain')),

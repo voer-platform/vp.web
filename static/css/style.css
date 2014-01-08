@@ -414,9 +414,7 @@ button.hfbtn-common{
     width: 70%;
 }
 .hfuser-info {
-    display: inline-block;
-    float: left;
-    max-width: 73%;
+    display: block;
 }
 .title-collection {
     max-height: 40px;
@@ -424,4 +422,31 @@ button.hfbtn-common{
 }
 .hfitems.gridview .hfitem .short-collection {
     height: 36px;
+}
+.hfuser-address,
+.hfuser-website {
+    margin-left: 191px;
+}
+.hfcontrol .back.disabled {
+    background: url("../images/icon/back_disabled.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    color: #979797;
+    cursor: default;
+}
+.hfcontrol .next.disabled {
+    background: url("../images/icon/next_disabled.png") no-repeat scroll right center rgba(0, 0, 0, 0);
+    color: #979797;
+    cursor: default;
+}
+.ajax-loading {
+  font-size: 12px;
+  font-weight: bold;
+  background: #FFF none repeat scroll;
+  opacity: 0.8;
+  filter: alpha(opacity = 80);
+  text-align: center;
+}
+
+.ajax-loading img {
+  vertical-align: middle;
+  margin-right: 10px;
 }

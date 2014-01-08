@@ -121,17 +121,8 @@ def module_detail(request, mid, version):
     content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
     material['text'] = content
 
-    other_data = []
     if material.has_key('author') and material['author']:
         author = vpr_get_person(material['author'], True)
-        other_materials = vpr_materials_by_author(material['author'])
-        i = 1
-        for other_material in other_materials['results']:
-            if i > 4:
-                break
-
-            i = i + 1
-            other_data.append(other_material)
     else:
         author = {}
 
@@ -150,34 +141,6 @@ def module_detail(request, mid, version):
     favorite_count = vpr_get_statistic_data(mid, material['version'], 'favorites')
     material['favorite_count'] = favorite_count
 
-    similar_data = []
-    similar_materials = vpr_get_statistic_data(mid, material['version'], 'similar')
-    i = 1
-    for similar in similar_materials:
-        if i > 4:
-            break
-
-        if similar['material_id']:
-          i = i + 1
-          material_tmp = vpr_get_material(similar['material_id'])
-          if 'author' in material_tmp:
-              author_id_list = material_tmp['author'].split(',')
-          else:
-              author_id_list = []
-
-          p_list = []
-          for pid in author_id_list:
-              pid = pid.strip()
-              person = vpr_get_person(pid)
-              # print person
-              if person['fullname']:
-                  p_list.append({'pid': pid, 'pname': person['fullname']})
-              else:
-                  p_list.append({'pid': pid, 'pname': person['fullname']})
-          material_tmp['author_list'] = p_list
-
-          similar_data.append(material_tmp)
-
     file_data = []
     file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
     for file_attachment_id in file_attachments:
@@ -191,8 +154,7 @@ def module_detail(request, mid, version):
             file_data.append(file_tmp)
 
     response = render(request, "frontend/module_detail.html",
-                      {"material": material, "author": author, "category": category, 'other_data': other_data,
-                       'similar_data': similar_data, 'file_data': file_data})
+                      {"material": material, "author": author, "category": category, 'file_data': file_data})
 
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
@@ -222,7 +184,7 @@ def collection_detail(request, cid, mid):
     if not mid:
         # get the first material of collection
         mid = get_first_material_id(outline['content'])
-
+    print mid
     # Get material in collection
     if mid:
         material = vpr_get_material(mid)
@@ -260,44 +222,8 @@ def collection_detail(request, cid, mid):
     author = vpr_get_person(collection['author'], True)
     category = vpr_get_category(collection['categories'])
 
-    other_data = []
-    other_materials = vpr_materials_by_author(collection['author'])
-    i = 1
-    for other_material in other_materials['results']:
-        if i > 4:
-            break
-
-        i = i + 1
-        other_data.append(other_material)
-
-    similar_data = []
-    similar_materials = vpr_get_statistic_data(cid, collection['version'], 'similar')
-    i = 1
-    for similar in similar_materials:
-        if i > 4:
-            break
-
-        i = i + 1
-        material_tmp = vpr_get_material(similar['material_id'])
-
-        if (material_tmp.has_key('author') and material_tmp['author']):
-            author_id_list = material_tmp['author'].split(',')
-
-            p_list = []
-            for pid in author_id_list:
-                pid = pid.strip()
-                person = vpr_get_person(pid)
-                if person['fullname']:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
-                else:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
-            material_tmp['author_list'] = p_list
-        similar_data.append(material_tmp)
-
-    response = render(request, "frontend/collection_detail.html",
-                      {"collection": collection, "material": material, "author": author, "category": category,
-                       "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data,
-                       'file_data': file_data})
+    response = render(request, "frontend/collection_detail.html", {"collection": collection, "material": material, "author": author,
+                       "category": category, "outline": strOutline, 'file_data': file_data})
 
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
@@ -1230,6 +1156,101 @@ def admin_import_user(request):
                 messages.success(request, '%s user(s) are exist. <a href="/media/%s">(%s)</a>' % (len(backup_data), backup_filename, backup_filename), extra_tags='safe')
 
     return render(request, "frontend/admin_import_user.html", {})
+
+
+def get_favorite(request):
+    return render(request, "frontend/user_favorite.html", {})
+
+
+def get_unpublish(request):
+    return render(request, "frontend/user_unpublish.html", {})
+
+
+def ajax_get_similars(request):
+    mid = request.GET['mid']
+    version = request.GET['version']
+    page = int(request.GET.get('page', 1))
+    number_record = 4
+
+    prev_page = ''
+    next_page = ''
+    similar_data = []
+    similar_materials = vpr_get_statistic_data(mid, version, 'similar')
+
+    i = 1
+    for similar in similar_materials:
+        if i < (page - 1) * number_record + 1:
+            prev_page = str(page - 1)
+            i += 1
+            continue
+
+        if i > page * number_record:
+            next_page = str(page + 1)
+            break
+
+        if similar['material_id']:
+            i += 1
+            material_tmp = vpr_get_material(similar['material_id'])
+            if 'author' in material_tmp:
+                author_id_list = material_tmp['author'].split(',')
+            else:
+                author_id_list = []
+
+            p_list = []
+            for pid in author_id_list:
+                pid = pid.strip()
+                person = vpr_get_person(pid)
+                if person['fullname']:
+                    p_list.append({'pid': pid, 'pname': person['fullname']})
+                else:
+                    p_list.append({'pid': pid, 'pname': person['fullname']})
+            material_tmp['author_list'] = p_list
+
+            similar_data.append(material_tmp)
+
+    return render(request, "frontend/ajax/similars.html", {'prev_page': prev_page, 'next_page': next_page, 'similar_data': similar_data})
+
+
+def ajax_get_others(request):
+    author_list = request.GET.get('authors', '')
+    page = int(request.GET.get('page', 1))
+    number_record = 4
+
+    real_page = int(math.ceil((page * number_record + 11) / 12))
+    print real_page
+
+    prev_page = ''
+    next_page = ''
+    other_data = []
+    other_materials = vpr_materials_by_author(author_list, real_page)
+
+    if other_materials['next']:
+        next_page = str(page + 1)
+
+    if other_materials['previous']:
+        prev_page = str(page - 1)
+
+    actual_page = page % 3
+
+    if actual_page == 0:
+        actual_page = 3
+
+    i = 1
+    for other_material in other_materials['results']:
+        print other_material
+        if i < (actual_page - 1) * number_record + 1:
+            prev_page = str(page - 1)
+            i += 1
+            continue
+
+        if i > actual_page * number_record:
+            next_page = str(page + 1)
+            break
+
+        i += 1
+        other_data.append(other_material)
+
+    return render(request, "frontend/ajax/others.html", {'prev_page': prev_page, 'next_page': next_page, 'other_data': other_data})
 
 
 def user_module_reuse(request, mid, version=1):

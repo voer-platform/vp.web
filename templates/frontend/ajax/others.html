@@ -1,0 +1,38 @@
+{% load i18n %}
+{% if other_data %}
+    {% for other_material in other_data %}
+    <div class="other-module-author">
+        <div class="other-author-img">
+            {% if other_material.image %}
+            {% else %}
+            <img src="{{STATIC_URL}}images/module_view/other1.jpg">
+            {% endif %}
+        </div>
+        <div class="other-author-title left padding-content-5">
+            {% if other_material.material_type == 1 %}
+            <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'module_detail' other_material.material_id %}">{{ other_material.title }}</a>
+            {% else %}
+            <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' other_material.material_id %}">{{ other_material.title }}</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+     <div class="hfcontrol clear">
+        <div class="left">{% trans 'View more items' %}</div>
+        <div class="right" style="margin-right:10px;">
+            {% if prev_page %}
+            <a class="back ajax-ev" href="javascript:void(0)" data-ajax-url="/ajax/get-others?authors={{ request.GET.authors }}&page={{ prev_page }}" role="button" data-ajax-target="#module-others">{% trans 'Back' %}</a>
+            {% else %}
+            <a class="back disabled" href="javascript:void(0)" data-ajax-url="" role="button">{% trans 'Back' %}</a>
+            {%  endif %}
+
+            {% if next_page %}
+            <a class="next ajax-ev" href="javascript:void(0)" data-ajax-url="/ajax/get-others?authors={{ request.GET.authors }}&page={{ next_page }}" role="button" data-ajax-target="#module-others">{% trans 'Next' %}</a>
+            {% else %}
+            <a class="next disabled" href="javascript:void(0)" data-ajax-url="" role="button">{% trans 'Next' %}</a>
+            {% endif %}
+         </div>
+    </div>
+{% else %}
+    <p>{% trans 'No data.' %}</p>
+{% endif %}
