@@ -120,7 +120,7 @@
         <div class="module-block-header">
             <div class="icon-module icon-checkout"></div>
             <div class="tilte-module">
-                <a>{% trans 'Reuse' %}</a>
+                <a href="{% url 'user_module_reuse' material.material_id material.version %}">{% trans 'Reuse' %}</a>
             </div>
         </div>
     </div>
