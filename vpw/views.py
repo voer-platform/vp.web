@@ -23,7 +23,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.core.servers.basehttp import FileWrapper
 
-from vpw.models import Material, Author
+from vpw.models import Material, Author, FeaturedAuthor
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
@@ -226,25 +226,28 @@ def collection_detail(request, cid, mid):
     # Get material in collection
     if mid:
         material = vpr_get_material(mid)
-        # lay anh trong noi dung
-        list_images = vpr_get_material_images(mid)
-        # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-        if "text" in material:
-            content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-            material['text'] = content
+        if 'material_id' in material:
+            # lay anh trong noi dung
+            list_images = vpr_get_material_images(mid)
+            # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+            if "text" in material:
+                content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+                material['text'] = content
 
-        file_data = []
-        file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
-        for file_attachment_id in file_attachments:
-            attachment_info = voer_get_attachment_info(file_attachment_id)
+            file_data = []
+            file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
+            for file_attachment_id in file_attachments:
+                attachment_info = voer_get_attachment_info(file_attachment_id)
 
-            image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2',
-                                'image/iff']
-            if attachment_info['mime_type'] not in image_mime_types:
-                file_tmp = {}
-                file_tmp['title'] = attachment_info['name']
-                file_tmp['attachment_id'] = file_attachment_id
-                file_data.append(file_tmp)
+                image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2',
+                                    'image/iff']
+                if attachment_info['mime_type'] not in image_mime_types:
+                    file_tmp = {}
+                    file_tmp['title'] = attachment_info['name']
+                    file_tmp['attachment_id'] = file_attachment_id
+                    file_data.append(file_tmp)
+        else:
+            file_data = []
     else:
         material = {}
         file_data = []
@@ -844,21 +847,8 @@ def search_result(request):
 
 def get_pdf(request, mid, version):
     file_name = '%s_%s.pdf' % (mid, version)
-    # file_path = EXPORT_PDF_DIR + file_name
-    # if os.path.isfile(file_path):
-    #     pass
-    # else:
-    #     result = vpr_get_pdf(mid, version)
-    #     if result.status_code == 200:
-    #         with codecs.open(file_path, 'w', 'utf-8') as pdf_file:
-    #             pdf_file.write(result.content)
-    #     elif result.status_code == 102:
-    #         #Processing
-    #         pass
-    # wrapper = FileWrapper(file(file_path, 'rb'))
     result = vpr_get_pdf(mid, version)
     response = HttpResponse(result, content_type='application/pdf')
-    # response['Content-Length'] = os.path.getsize(file_path)
     response['Content-Disposition'] = 'attachment;filename=%s' % file_name
     return response
 
@@ -1241,3 +1231,17 @@ def admin_import_user(request):
 
     return render(request, "frontend/admin_import_user.html", {})
 
+
+def user_module_reuse(request, mid, version=1):
+    if version is None:
+        version = 1
+    material = vpr_get_material(mid, version)
+    categories = vpr_get_categories()
+    form = ModuleCreationForm(body=material['text'])
+    if request.method == "POST":
+        pass
+    else:
+        #form.data['body'] = material['text']
+        pass
+    params = {'material': material, 'categories': categories, 'form': form}
+    return render(request, MODULE_TEMPLATES[3], params)
