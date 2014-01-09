@@ -121,10 +121,15 @@ def module_detail(request, mid, version):
     content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
     material['text'] = content
 
-    if material.has_key('author') and material['author']:
-        author = vpr_get_person(material['author'], True)
-    else:
-        author = {}
+    author = []
+    if 'author' in material and material['author']:
+        author_id_list = material['author'].split(',')
+
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid, True)
+            if person:
+                author.append(person)
 
     category = vpr_get_category(material['categories'])
 
@@ -219,7 +224,16 @@ def collection_detail(request, cid, mid):
         'content'])
 
     # Lay thong tin tac gia bao gom ca thong ke
-    author = vpr_get_person(collection['author'], True)
+    author = []
+    if 'author' in collection and collection['author']:
+        author_id_list = material['author'].split(',')
+
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid, True)
+            if person:
+                author.append(person)
+
     category = vpr_get_category(collection['categories'])
 
     response = render(request, "frontend/collection_detail.html", {"collection": collection, "material": material, "author": author,
