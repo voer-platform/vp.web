@@ -16,6 +16,9 @@ class MaterialCreationForm(forms.Form):
     maintainers = forms.CharField(max_length=100, required=False)
     translators = forms.CharField(max_length=100, required=False)
     coeditors = forms.CharField(max_length=100, required=False)
+    version = forms.IntegerField(required=False)
+    material_id = forms.CharField(max_length=64, required=False)
+    mid = forms.IntegerField(required=False)
 
 
 class ModuleCreationForm(MaterialCreationForm):

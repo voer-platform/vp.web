@@ -28,7 +28,7 @@ from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
-    voer_add_view_count
+    voer_add_view_count, vpr_get_content_file
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm
@@ -541,7 +541,10 @@ def _publish_material(material):
 
 
 def _save_material(form, material_type, current_user):
-    material = Material()
+    if form.cleaned_data['mid']:
+        material = Material.objects.get(id=form.cleaned_data['mid'])
+    else:
+        material = Material()
     material.title = form.cleaned_data['title']
     material.description = form.cleaned_data['description']
     material.keywords = form.cleaned_data['keywords']
@@ -553,6 +556,8 @@ def _save_material(form, material_type, current_user):
     material.maintainer = form.cleaned_data['maintainers']
     material.translator = form.cleaned_data['translators']
     material.coeditor = form.cleaned_data['coeditors']
+    material.version = form.cleaned_data['version']
+    material.material_id = form.cleaned_data['material_id']
     # get current user
     material.creator = current_user
     material.type = material_type
@@ -1252,18 +1257,35 @@ def ajax_get_others(request):
 
     return render(request, "frontend/ajax/others.html", {'prev_page': prev_page, 'next_page': next_page, 'other_data': other_data})
 
-
+@login_required
 def user_module_reuse(request, mid, version=1):
     if version is None:
         version = 1
     material = vpr_get_material(mid, version)
     categories = vpr_get_categories()
-    form = ModuleCreationForm(body=material['text'])
     if request.method == "POST":
-        pass
+        form = ModuleCreationForm(request.POST)
+        action = request.POST.get("action", "")
+        if action == 'save':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                return redirect('user_module_detail', mid=mid)
+        elif action == 'publish':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                # Publish content to VPR
+                result = _publish_material(material)
+                if 'material_id' in result:
+                    material.material_id = result['material_id']
+                    material.version = result['version']
+                    material.save()
+                    return redirect('module_detail', mid=result['material_id'])
     else:
-        #form.data['body'] = material['text']
-        pass
+        form = ModuleCreationForm(dict(body=material['text']))
     params = {'material': material, 'categories': categories, 'form': form}
     return render(request, MODULE_TEMPLATES[3], params)
 
@@ -1294,3 +1316,9 @@ def admin_settings(request):
                                  collection_license=collection_license.value))
 
     return render(request, "frontend/admin_settings.html", {'form': form})
+
+
+def get_content_file(request, fid):
+    r = vpr_get_content_file(fid)
+    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    return response
