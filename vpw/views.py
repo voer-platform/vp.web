@@ -228,7 +228,7 @@ def collection_detail(request, cid, mid):
     # Lay thong tin tac gia bao gom ca thong ke
     author = []
     if 'author' in collection and collection['author']:
-        author_id_list = material['author'].split(',')
+        author_id_list = collection['author'].split(',')
 
         for pid in author_id_list:
             pid = pid.strip()
