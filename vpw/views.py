@@ -254,11 +254,12 @@ def user_module_detail(request, mid):
         if material.creator_id != request.user.id:
             raise PermissionDenied
         author_id = request.user.author.author_id
-        author = vpr_get_person(author_id)
+        author = vpr_get_person(author_id, True)
+        authors = [author]
         category = vpr_get_category(material.categories)
         if material.type == MODULE_TYPE:
             return render(request, "frontend/module_detail.html", {
-                "material": material, "author": author, "category": category
+                "material": material, "author": authors, "category": category
             })
         else:
             raise PermissionDenied
@@ -1289,6 +1290,7 @@ def user_module_reuse(request, mid, version=1):
         version = 1
     material = vpr_get_material(mid, version)
     categories = vpr_get_categories()
+    author = vpr_get_person(request.user.author.author_id)
     if request.method == "POST":
         form = ModuleCreationForm(request.POST)
         action = request.POST.get("action", "")
@@ -1297,7 +1299,7 @@ def user_module_reuse(request, mid, version=1):
                 material = _save_material(form, MODULE_TYPE, request.user)
                 material.text = form.cleaned_data['body']
                 material.save()
-                return redirect('user_module_detail', mid=mid)
+                return redirect('user_module_detail', mid=material.id)
         elif action == 'publish':
             if form.is_valid():
                 material = _save_material(form, MODULE_TYPE, request.user)
@@ -1312,7 +1314,8 @@ def user_module_reuse(request, mid, version=1):
                     return redirect('module_detail', mid=result['material_id'])
     else:
         form = ModuleCreationForm(dict(body=material['text']))
-    params = {'material': material, 'categories': categories, 'form': form}
+    params = {'material': material, 'categories': categories,
+              'form': form, 'author': author}
     return render(request, MODULE_TEMPLATES[3], params)
 
 

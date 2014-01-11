@@ -67,11 +67,13 @@
     <li>
         <div class="icon-hot"></div>
         <div class="collection-mainpage-cover left clear">
+            <a href="{{ material_url }}">
             {% if material.categories %}
-		   <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg"/>
-		   {% else %}
-		   <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
-		   {% endif %}
+		    <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg"/>
+		    {% else %}
+		    <img src="{{STATIC_URL}}images/cat_other.jpg"/>
+		    {% endif %}
+            </a>
         </div>
         <div class="collection-mainpage-details left clear">
 
@@ -101,7 +103,7 @@
 			{% for material in person_list %}
             <li>
                 <div class="browser-author-img left clear">
-                    <img src="{{STATIC_URL}}images/authors/{{ material.id }}.jpg" />
+                    <a href="{% url 'view_profile' material.id %}"><img src="{{STATIC_URL}}images/authors/{{ material.id }}.jpg" /></a>
                 </div>
                 <div class="browser-author-details left clear">
                     <div class="icon-browser-author"></div>

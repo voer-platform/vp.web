@@ -129,6 +129,7 @@
 
     {% if material.material_id %}
     <!-- REUSE -->
+    {% if user.is_authenticated %}
     <div class="module-block">
         <div class="module-block-header">
             <div class="icon-module icon-checkout"></div>
@@ -137,6 +138,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     <!-- END REUSE -->
     <!-- DOWNLOAD -->
     <div class="module-block">

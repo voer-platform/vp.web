@@ -279,7 +279,7 @@ def vpr_get_material_images(mid):
     for image_id in list_ids:
         image = vpr_request('GET', 'mfiles/%s' % image_id)
         if 'name' in image:
-            list_images[image['name']] = '/file/%s' % image_id #reverse('get_content_file', args=image_id)
+            list_images[image['name']] = '/file/%s' % image_id
     return list_images
 
 
