@@ -90,7 +90,7 @@
     <div class="module-view-author arrow-author-collection padding-content-10 left">
         <a class="module-view-author-avatar left" href="{% url 'view_profile' author_info.id %}">
             {% with y=author_info.id|stringformat:"s" %}
-            {% thumbnail "http://dev.voer.vn:2013/0.1/persons/"|add:y|add:"/avatar/?l="|add:author_info.avatar "60x60" crop="center 20%" as im %}
+            {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y|add:"?l="|add:author_info.avatar "60x60" crop="center 20%" as im %}
                 <img src="{{ im.url }}" width="60" height="60">
             {% empty %}
                 <img src="{{ STATIC_URL }}images/author1_detail.jpg" width="60" height="60">
