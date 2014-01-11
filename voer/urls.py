@@ -53,7 +53,7 @@ urlpatterns = patterns('',
 
     url(r'^search/', 'vpw.views.search_result', name='search'),
 
-    url(r'^pdf/m/(?P<mid>[0-9a-z]+)/(?P<version>\d+)/?$', 'vpw.views.get_pdf', name='get_pdf'),
+    url(r'^pdf/(?P<mid>[0-9a-z]+)/(?P<version>\d+)/?$', 'vpw.views.get_pdf', name='get_pdf'),
     url(r'^attachment/m/(?P<fid>[0-9a-z]+)/?$', 'vpw.views.get_attachment', name='get_attachment'),
     url(r'^file/(?P<fid>[0-9a-z]+)/?$', 'vpw.views.get_content_file', name='get_content_file'),
 
