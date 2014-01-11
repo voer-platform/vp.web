@@ -450,3 +450,24 @@ button.hfbtn-common{
   vertical-align: middle;
   margin-right: 10px;
 }
+#pdf-download{
+    cursor: hand;
+}
+#more-download{
+    clear: both;
+    border: 1px solid #DFDFDF;
+}
+#more-download ul{
+    padding: 3px 8px;
+}
+#more-download li{
+    padding-left: 35px;
+    line-height: 25px;
+}
+#more-download li.module{
+    background: url("../images/icon/icon-module.png") no-repeat 0 4px;
+}
+
+#more-download li.collection{
+    background: url("../images/icon/icon-collection.png") no-repeat 0 4px;
+}
