@@ -1189,10 +1189,8 @@ def admin_import_user(request):
 
     return render(request, "frontend/admin_import_user.html", {})
 
-<<<<<<< HEAD
 def admin_featured_materials(request):
     return render(request, "frontend/admin_featured_materials.html", {})
-=======
 
 def get_favorite(request):
     return render(request, "frontend/user_favorite.html", {})
@@ -1365,5 +1363,3 @@ def get_setting_value(license_type, language='vi'):
         return setting.value
     except ObjectDoesNotExist:
         return str()
-
->>>>>>> c6c1397fac76ba7b39f8c61c1e2c98a79c255e4d
