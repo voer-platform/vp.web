@@ -47,9 +47,12 @@ urlpatterns = patterns('',
     url(r'^user/most-viewed/?$', 'vpw.views.mostViewedView', name='most-viewed'),
     url(r'^user/favorite/?$', 'vpw.views.get_favorite', name='get_favorite'),
     url(r'^user/unpublish/?$', 'vpw.views.get_unpublish', name='get_unpublish'),
+    url(r'^user/avatar/(?P<pid>[0-9a-z]+)/?$', 'vpw.views.get_avatar', name='get_avatar'),
 
     url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
     url(r'^admin/settings/?$', 'vpw.views.admin_settings', name='settings'),
+
+    url(r'^admin/featured-materials/?$', 'vpw.views.admin_featured_materials', name='featured-materials'),
 
     url(r'^search/', 'vpw.views.search_result', name='search'),
 

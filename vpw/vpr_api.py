@@ -341,3 +341,9 @@ def vpr_get_content_file(fid):
     url = settings.VPR_URL + "mfiles/%s/get" % fid
     r = requests.request("GET", url)
     return r
+
+
+def vpr_get_user_avatar(pid):
+    url = settings.VPR_URL + "persons/%s/avatar" % pid
+    r = requests.request("GET", url)
+    return r

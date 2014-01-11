@@ -11,6 +11,8 @@ import csv
 import time
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from django.core.paginator import Paginator, EmptyPage
+from digg_paginator import DiggPaginator
 
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
@@ -28,7 +30,7 @@ from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
-    voer_add_view_count, vpr_get_content_file
+    voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm
@@ -926,6 +928,7 @@ def get_page_query(request):
     page = request.GET.get('page', 1)
     page_query = request.path.encode("utf8") + "?" + request.META.get('QUERY_STRING').encode("utf8")
     page_query = page_query.replace('&page=' + str(page), '')
+    page_query = page_query.replace('?page=' + str(page), '?')
 
     return page_query
 
@@ -961,7 +964,7 @@ def ajax_browse(request):
 
 def get_attachment(request, fid):
     attachment_info = voer_get_attachment_info(fid)
-    target_url = 'http://' + settings.VPR_URL + ':' + settings.VPR_PORT + '/' + settings.VPR_VERSION + '/mfiles/' + fid + '/get/'
+    target_url = settings.VPR_URL + '/mfiles/' + fid + '/get/'
     content = urllib.urlopen(target_url).read()
     response = HttpResponse(content, mimetype=attachment_info['mime_type'])
     response['Content-Disposition'] = 'attachment; filename=' + attachment_info['name']
@@ -1190,12 +1193,41 @@ def admin_import_user(request):
     return render(request, "frontend/admin_import_user.html", {})
 
 
+def admin_featured_materials(request):
+    return render(request, "frontend/admin_featured_materials.html", {})
+
+
 def get_favorite(request):
     return render(request, "frontend/user_favorite.html", {})
 
 
 def get_unpublish(request):
-    return render(request, "frontend/user_unpublish.html", {})
+    current_user = request.user
+    pid = current_user.author.author_id
+    author = vpr_get_person(pid)
+
+    sort = request.GET.get('sort', '')
+    page = int(request.GET.get('page', 1))
+
+    try:
+        materials = Material.objects.filter(creator_id=current_user.id, material_id='', version=None)
+
+        if sort:
+            materials = materials.order_by(sort)
+
+        paginator = DiggPaginator(materials, 12, body=3, padding=1, margin=1, tail=0)
+
+        try:
+            materials = paginator.page(page)
+        except EmptyPage:
+            materials = paginator.page(paginator.num_pages)
+
+        page_query = get_page_query(request)
+
+        return render(request, "frontend/user_unpublish.html", {'materials': materials, 'author': author, 'page_query': page_query})
+
+    except Material.DoesNotExist:
+        return HttpResponseRedirect('/')
 
 
 def ajax_get_similars(request):
@@ -1249,7 +1281,6 @@ def ajax_get_others(request):
     number_record = 4
 
     real_page = int(math.ceil((page * number_record + 11) / 12))
-    print real_page
 
     prev_page = ''
     next_page = ''
@@ -1269,7 +1300,6 @@ def ajax_get_others(request):
 
     i = 1
     for other_material in other_materials['results']:
-        print other_material
         if i < (actual_page - 1) * number_record + 1:
             prev_page = str(page - 1)
             i += 1
@@ -1346,6 +1376,7 @@ def admin_settings(request):
 
     return render(request, "frontend/admin_settings.html", {'form': form})
 
+
 def get_content_file(request, fid):
     r = vpr_get_content_file(fid)
     response = HttpResponse(r.content, content_type=r.headers['content-type'])
@@ -1362,3 +1393,8 @@ def get_setting_value(license_type, language='vi'):
     except ObjectDoesNotExist:
         return str()
 
+
+def get_avatar(request, pid):
+    r = vpr_get_user_avatar(pid)
+    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    return response

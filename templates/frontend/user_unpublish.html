@@ -44,6 +44,7 @@
     </div>
 
     <div class="hfitems">
+    {% if materials %}
     {% for material in materials %}
     {% if material.material_type == 1 %}
         {% url 'module_detail' mid=material.material_id as material_url %}
@@ -119,7 +120,10 @@
     </div>
     {% endfor %}
 
-    {% include "base/pager.html" %}
+    {% include "base/pager_pagination.html" with pager=materials %}
+    {% else %}
+        <p class="no-data">{% trans 'No data.' %}</p>
+    {% endif %}
     </div>
  </div>
 {% endblock %}

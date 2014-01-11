@@ -423,6 +423,11 @@ button.hfbtn-common{
 .hfitems.gridview .hfitem .short-collection {
     height: 36px;
 }
+/*.content{
+  padding:10px 20px;
+  margin-bottom:20px;
+  overflow:hidden;
+}*/
 .hfuser-address,
 .hfuser-website {
     margin-left: 191px;
@@ -450,6 +455,10 @@ button.hfbtn-common{
   vertical-align: middle;
   margin-right: 10px;
 }
+.no-data {
+    padding: 10px 15px;
+}
+
 #pdf-download{
     cursor: hand;
 }
