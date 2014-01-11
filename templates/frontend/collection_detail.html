@@ -221,7 +221,9 @@
         <div id="more-download" style="display: none;">
             <ul>
                 <li class="collection"><a href="{% url 'get_pdf' collection.material_id collection.version %}">{% trans 'PDF Collection' %}</a></li>
+                {% if 'material_id' in material %}
                 <li class="module"><a href="{% url 'get_pdf' material.material_id material.version %}">{% trans 'PDF Module' %}</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
