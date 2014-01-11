@@ -1,0 +1,17 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block titleSite %}{% trans "Import user" %}{% endblock %}
+
+{% block content %}
+
+{% include 'frontend/block/left_block_user.html' %}
+
+<div class="content">
+    <h1>{% trans 'Featured materials' %}</h1>
+    {% m = MaterialFeature.objects.create(material_id="234356") %}
+    {% m.save() %}
+    id="{{ MaterialFeature.material_id }}"
+</div>
+{% endblock %}

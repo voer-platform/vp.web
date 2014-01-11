@@ -425,3 +425,8 @@ button.hfbtn-common{
 .hfitems.gridview .hfitem .short-collection {
     height: 36px;
 }
+.content{
+  padding:10px 20px;
+  margin-bottom:20px;
+  overflow:hidden;
+}

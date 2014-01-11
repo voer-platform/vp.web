@@ -202,7 +202,12 @@
 							$('div[data-key|=authors]').removeClass('file_selected');
 							$('div[data-key=authors-0]').addClass('file_selected');
 						}else {
-							$('div[data-key=authors-0]').removeClass('file_selected');
+							if($('div[data-key|=authors]').hasClass('file_selected')){
+                                $('div[data-key=authors-0]').removeClass('file_selected');
+                            }else{                              
+                                $('div[data-key=authors-0]').addClass('file_selected');
+                                getItemSelected()
+                            }   
 						}
 					});
 					$('div[data-key|=categories]').click(function(){
@@ -211,7 +216,12 @@
 							$('div[data-key|=categories]').removeClass('file_selected');
 							$('div[data-key=categories-0]').addClass('file_selected');
 						}else{
-							$('div[data-key=categories-0]').removeClass('file_selected');
+							if($('div[data-key|=categories]').hasClass('file_selected')){
+                                $('div[data-key=categories-0]').removeClass('file_selected');
+                            }else{                              
+                                $('div[data-key=categories-0]').addClass('file_selected');
+                                getItemSelected()
+                            }   
 						}
 					});
 					$('div[data-key|=langs]').click(function(){
@@ -220,7 +230,12 @@
 							$('div[data-key|=langs]').removeClass('file_selected');
 							$('div[data-key=langs-0]').addClass('file_selected');
 						}else{
-							$('div[data-key=langs-0]').removeClass('file_selected');
+							if($('div[data-key|=langs]').hasClass('file_selected')){
+                                $('div[data-key=langs-0]').removeClass('file_selected');
+                            }else{                              
+                                $('div[data-key=langs-0]').addClass('file_selected');
+                                getItemSelected()
+                            }       
 						}
 					});
 					$('div[data-key|=types]').click(function(){
@@ -229,7 +244,12 @@
 							$('div[data-key|=types]').removeClass('file_selected');
 							$('div[data-key=types-0]').addClass('file_selected');
 						}else{
-							$('div[data-key=types-0]').removeClass('file_selected');
+							if($('div[data-key|=types]').hasClass('file_selected')){
+                                $('div[data-key=types-0]').removeClass('file_selected');
+                            }else{                              
+                                $('div[data-key=types-0]').addClass('file_selected');
+                                getItemSelected()
+                            }   
 						}
 					});
 					$('.checkbox-custom').click(function(){

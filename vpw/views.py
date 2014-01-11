@@ -1241,3 +1241,5 @@ def admin_import_user(request):
 
     return render(request, "frontend/admin_import_user.html", {})
 
+def admin_featured_materials(request):
+    return render(request, "frontend/admin_featured_materials.html", {})

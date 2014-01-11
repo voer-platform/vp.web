@@ -46,6 +46,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
 
+    url(r'^admin/featured-materials/?$', 'vpw.views.admin_featured_materials', name='featured-materials'),
+
     url(r'^search/', 'vpw.views.search_result', name='search'),
 
     url(r'^pdf/m/(?P<mid>[0-9a-z]+)/(?P<version>\d+)/?$', 'vpw.views.get_pdf', name='get_pdf'),
