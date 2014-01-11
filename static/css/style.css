@@ -423,13 +423,11 @@ button.hfbtn-common{
 .hfitems.gridview .hfitem .short-collection {
     height: 36px;
 }
-<<<<<<< HEAD
-.content{
+/*.content{
   padding:10px 20px;
   margin-bottom:20px;
   overflow:hidden;
-}
-=======
+}*/
 .hfuser-address,
 .hfuser-website {
     margin-left: 191px;
@@ -457,4 +455,6 @@ button.hfbtn-common{
   vertical-align: middle;
   margin-right: 10px;
 }
->>>>>>> c6c1397fac76ba7b39f8c61c1e2c98a79c255e4d
+.no-data {
+    padding: 10px 15px;
+}
