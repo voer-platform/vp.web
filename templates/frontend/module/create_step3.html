@@ -5,6 +5,72 @@
 {% block js %}
     {{ form.media }}
     <script type="text/javascript" src="{{ STATIC_URL }}mce_filebrowser/js/filebrowser_init.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/typeahead.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/hogan.js"></script>
+    <script>
+    function delete_row_author(e){
+        $(e).parent().parent().remove();
+    };
+    $(document).ready(function(){
+        $('.search-author').typeahead({
+            name: 'authors',
+            valueKey: 'fullname',
+            remote: "{% url 'ajax_search_author' %}?keyword=%QUERY",
+            template: [
+                '<p class="item-fullname">{% verbatim %}{{fullname}}{% endverbatim %}</p>',
+                '<p class="item-email">{% verbatim %}{{email}}{% endverbatim %}</p>',
+            ].join(''),
+            engine: Hogan,
+            limit: 10
+        });
+
+        $('.search-author').on('typeahead:selected', function (object, datum) {
+            var template = Hogan.compile(ITEM_TEMPLATE);
+            var output = template.render(datum);
+            $('#listAuthor tbody').append(output);
+            $('.search-author').val('');
+        });
+
+
+        var ITEM_TEMPLATE = ['<tr>',
+            '<td class="author-block">',
+            '<a class="hfbtn-author" href="#">{% verbatim %}{{fullname}}{% endverbatim %}',
+            '<div class="author-information">',
+            '<div class="avatar left">',
+            '<img src="images/avatar.jpg" width="70px" height="70px">',
+            '</div>',
+            '<div class="right">',
+            '<div class="user-name">{% verbatim %}{{fullname}}{% endverbatim %}</div>',
+            '<div class="user-address">{% verbatim %}{{email}}{% endverbatim %}</div>',
+            '<div class="user-website">{% verbatim %}{{homepage}}{% endverbatim %}</div>',
+            '</div>',
+            '</div>',
+            '</a>',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="authors">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editors">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="licensors">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="maintainers">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="translators">',
+            '</td>',
+            '<td>',
+            '<input type="checkbox" name="{% verbatim %}{{id}}{% endverbatim %}" name="coeditors">',
+            '</td>',
+            '<td><div class="hfbtn-delete" onclick="delete_row_author(this)"></div></td>',
+            '</tr>'].join('\n');
+
+    });
+    </script>
 {% endblock %}
 
 {% block titleSite %}Create module{% endblock %}
@@ -31,6 +97,8 @@
        {% csrf_token %}
         <input type="hidden" name="step" value="3" />
         <input type="hidden" name="mid" value="{{ material.id}}" />
+        <input type="hidden" name="material_id" value="{{ material.material_id }}" />
+        <input type="hidden" name="version" value="{{ material.version }}" />
             <div class="col-lg-1 right-row">
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
@@ -51,102 +119,84 @@
             <label for="InputDescription">{% trans 'Description' %}</label>
             <textarea rows="4" class="form-control" name="description">{{ material.description }}</textarea>
         </div>
-        <!--
         <div class="form-group">
             <label for="InputAuthor">{% trans 'Author' %}</label>
-            <input class="form-control typetext" id="InputAuthor" placeholder="Enter Author" type="text">
-            <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
         </div>
-        <div class="form-group listAuthor">
-            <table class="listAuthor">
-                <thead>
-                    <tr>
-                        <th>{% trans 'Name' %}</th>                       
+		<div class="form-group listAuthor">
+			<table class="listAuthor" id="author">
+				<thead>
+					<tr>
+                        <th>{% trans 'Name' %}</th>
                         <th>{% trans 'Author' %}</th>
                         <th>{% trans 'Editor' %}</th>
                         <th>{% trans 'Licensor' %}</th>
                         <th>{% trans 'Maintainer' %}</th>
                         <th>{% trans 'Translator' %}</th>
                         <th>{% trans 'Contributor' %}</th>
-                        <th></th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="author-block">
-                            <a class="hfbtn-author" href="author_profile.php">{% trans 'HiFlyer JSC' %}
-                                <div class="author-information">
-                                    <div class="avatar left">
-                                        <img src="images/avatar.jpg" height="70px" width="70px">
-                                    </div>
-                                    <div class="right">                                     
-                                        <div class="user-name">{% trans 'Nguyen Lan Dung' %}</div>
-                                        <div class="user-address">{% trans 'R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam' %}</div>
-                                        <div class="user-website">voer.edu.vn</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </td>                       
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <input data-toggle="checkbox" type="checkbox">
-                            </label>                                
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <input data-toggle="checkbox" type="checkbox">
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <input data-toggle="checkbox" type="checkbox">
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <input data-toggle="checkbox" type="checkbox">
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <input data-toggle="checkbox" type="checkbox">
-                            </label>                        
-                        </td>
-                        <td>
-                            <label class="checkbox checkbox-user-tool">
-                                <span class="icons">
-                                    <span class="first-icon fui-checkbox-unchecked"></span>
-                                    <span class="second-icon fui-checkbox-checked"></span>
-                                </span>
-                                <input data-toggle="checkbox" type="checkbox">
-                            </label>                        
-                        </td>
-                        <td><div class="hfbtn-delete"></div></td>                       
-                    </tr>
-                </tbody>
-            </table>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="author-block">
+							<a class="hfbtn-author" href="#">{{ author.fullname }}
+								<div class="author-information">
+									<div class="avatar left">
+										<img src="images/avatar.jpg" width="70px" height="70px">
+									</div>
+									<div class="right">
+										<div class="user-name">{{ author.fullname }}</div>
+										<div class="user-address">{{ author.email }}</div>
+										<div class="user-website">{{ author.homepage }}</div>
+									</div>
+								</div>
+							</a>
+						</td>
+						<td>
+                            <input type="checkbox" value="{{ author.id }}" name="authors" checked />
+						</td>
+						<td>
+                            <input type="checkbox" value="{{ author.id }}" name="editors" checked />
+						</td>
+						<td>
+                            <input type="checkbox" name="{{ author.id }}" name="licensors">
+						</td>
+						<td>
+                            <input type="checkbox" name="{{ author.id }}" name="maintainers">
+						</td>
+						<td>
+                            <input type="checkbox" name="{{ author.id }}" name="translators">
+						</td>
+						<td>
+                            <input type="checkbox" name="{{ author.id }}" name="coeditors">
+						</td>
+						<td style="width:25px;">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        <div class="form-group">
+            <label for="InputAuthor">{% trans 'Add new author' %}</label><br/>
+            <input class="form-control search-author" id="InputAuthor" placeholder="Enter Author" type="text">
         </div>
-        -->
+		<div class="form-group listAuthor">
+			<table class="listAuthor" id="listAuthor">
+				<thead>
+					<tr>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Author' %}</th>
+                        <th>{% trans 'Editor' %}</th>
+                        <th>{% trans 'Licensor' %}</th>
+                        <th>{% trans 'Maintainer' %}</th>
+                        <th>{% trans 'Translator' %}</th>
+                        <th>{% trans 'Contributor' %}</th>
+						<th style="width: 25px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
         <div class="form-group">
             <label for="InputCategories">{% trans 'Categories' %}</label>
             <ul class="AddCategories">
@@ -184,8 +234,8 @@
         </div>
         <div class="form-group">
             <label for="InputKeywords">{% trans 'Keywords' %}</label>
-            <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords" type="text" name="keywords" value="{{ material.keywords }}">
-        </div>  
+            <textarea rows="4" name="keywords" class="form-control">{{ material.keywords }}</textarea>
+        </div>
         <div class="form-group">
             <label for="InputTags">{% trans 'Tags' %}</label>
             <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
@@ -199,8 +249,8 @@
             <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="document_file" type="file">
             <div class="fakefile">              
                 <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
+                <button class="btn hfbtn-common hfbtn-active" name="action" value="import">{% trans 'Import' %}</button>
             </div>
-            <button class="hfbtn-common hfbtn-active" name="action" value="import">{% trans 'Import' %}</button>
             <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt.' %}</p>
         </div>
         <div class="form-group">

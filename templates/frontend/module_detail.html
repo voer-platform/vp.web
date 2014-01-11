@@ -1,6 +1,7 @@
 {% extends "base/base-content.html" %}
 
 {% load i18n %}
+{% load thumbnail %}
 
 {% block titleSite %}{{ material.title }}{% endblock %}
 
@@ -85,45 +86,59 @@
 <div class="col-lg-2 right-row">
     {% if author %}
     <!-- AUTHOR NAME -->
-    <div class="module-view-author padding-content-10 left">
-        <a class="module-view-author-avatar left">
-            <img src="{% if author.avatar %} http://dev.voer.vn:2013/0.1/persons/{{ author.id }}/avatar/ {% else %} {{ STATIC_URL }}images/author1_detail.jpg {% endif %}" width="60" height="60">
+    {% for author_info in author %}
+    <div class="module-view-author arrow-author-collection padding-content-10 left">
+        <a class="module-view-author-avatar left" href="{% url 'view_profile' author_info.id %}">
+            {% with y=author_info.id|stringformat:"s" %}
+            {% thumbnail "http://dev.voer.vn:2013/0.1/persons/"|add:y|add:"/avatar/?l="|add:author_info.avatar "60x60" crop="center 20%" as im %}
+                <img src="{{ im.url }}" width="60" height="60">
+            {% empty %}
+                <img src="{{ STATIC_URL }}images/author1_detail.jpg" width="60" height="60">
+            {% endthumbnail %}
+            {% endwith %}
         </a>
         <ul class="module-view-author-name left padding-content-10">
             <li>
-                <a href="{% url 'view_profile' author.id %}">{{ author.fullname }}</a>
+                <a href="{% url 'view_profile' author_info.id %}">{{ author_info.fullname }}</a>
             </li>
             <li>
                 <span class="text-italic">{% trans 'View my profile' %}</span>
             </li>
         </ul>
     </div>
+    {% endfor %}
     <!-- END AUTHOR NAME -->
+    {% endif %}
 
+    {% if author|length == 1 %}
     <!-- AUTHOR STATUS -->
+    {% for author_info in author %}
     <div class="module-view-author-status left">
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear">{{ author.author.module }}</a>
-            <label class="clear">Modules</label>
+            <a class="clear">{{ author_info.author.module }}</a>
+            <label class="clear">{% trans 'Modules' %}</label>
         </span>
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear">{{ author.author.collection }}</a>
-            <label class="clear">Collections</label>
+            <a class="clear">{{ author_info.author.collection }}</a>
+            <label class="clear">{% trans 'Collections' %}</label>
         </span>
     </div>
+    {% endfor %}
     <!-- END AUTHOR STATUS -->
     {% endif %}
 
     {% if material.material_id %}
     <!-- REUSE -->
+    {% if user.is_authenticated %}
     <div class="module-block">
         <div class="module-block-header">
             <div class="icon-module icon-checkout"></div>
             <div class="tilte-module">
-                <a>{% trans 'Reuse' %}</a>
+                <a href="{% url 'user_module_reuse' material.material_id material.version %}">{% trans 'Reuse' %}</a>
             </div>
         </div>
     </div>
+    {% endif %}
     <!-- END REUSE -->
     <!-- DOWNLOAD -->
     <div class="module-block">
@@ -157,81 +172,27 @@
     {% endif %}
 
     <!-- OTHER FROM AUTHOR -->
-    {% if other_data %}
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">{% trans 'Other from Author' %}</div>
+            <div class="tilte-module">{% trans 'Others from Author' %}</div>
         </div>
         <div class="module-block-content">
-            {% for other_material in other_data %}
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    {% if other_material.image %}
-                    {% else %}
-                    <img src="{{STATIC_URL}}images/module_view/other1.jpg">
-                    {% endif %}
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    {% if other_material.material_type == 1 %}
-                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'module_detail' other_material.material_id %}">{{ other_material.title }}</a>
-                    {% else %}
-                    <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' material.material_id %}">{{ other_material.title }}</a>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-             <div class="hfcontrol">
-                <div class="left">{% trans 'View more items' %}</div>
-                <div class="right" style="margin-right:10px;">                                  
-                    <a class="back" href="">{% trans 'Back' %}</a>
-                    <a class="next" href="">{% trans 'Next' %}</a>
-                 </div>
-            </div>
+            <div id="module-others" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-others?authors={{ material.author }}">&nbsp;</div>
         </div>
     </div>
-    {% endif %}
     <!-- END OTHER FROM AUTHOR -->
 
-    {% if similar_data %}
     <!-- OTHER FROM AUTHOR -->
     <div class="module-block module-simple">
         <div class="module-block-header">
             <div class="icon-module"></div>
-            <div class="tilte-module">{% trans 'Similar item' %}</div>
+            <div class="tilte-module">{% trans 'Similars item' %}</div>
         </div>
         <div class="module-block-content">
-            {% for similar in similar_data %}
-            <div class="other-module-author">
-                <div class="other-author-img">
-                    {% if similar.image %}
-                    {% else %}
-                    <img src="{{STATIC_URL}}images/module_view/other3.jpg">
-                    {% endif %}
-                </div>
-                <div class="other-author-title left padding-content-5">
-                    {% if similar.material_type == 1 %}
-                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.material_id %}">{{ similar.title }}</a>
-                    {% else %}
-                    <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' material.material_id %}">{{ similar.title }}</a>
-                    {% endif %}
-
-                    {% for person in similar.author_list %}
-                    <a class="link-other-author-collection left clear" href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-             <div class="hfcontrol">
-                <div class="left">{% trans 'View more items' %}</div>
-                <div class="right" style="margin-right:10px;">                                  
-                    <a class="back" href="">{% trans 'Back' %}</a>
-                    <a class="next" href="">{% trans 'Next' %}</a>
-                 </div>
-            </div>
+            <div id="module-similars" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-similars?mid={{ material.material_id }}&version={{ material.version }}">&nbsp;</div>
         </div>
     </div>
-    {% endif %}
     <!-- END OTHER FROM AUTHOR -->
 </div>
 <!-- END RIGHT ROW -->

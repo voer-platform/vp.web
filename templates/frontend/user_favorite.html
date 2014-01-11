@@ -1,85 +1,14 @@
 {% extends "base/base-content.html" %}
 
 {% load i18n %}
-{% load thumbnail %}
 
-{% block titleSite %}{% trans "User profile" %}{% endblock %}
+{% block titleSite %}{% trans "User favorite" %}{% endblock %}
 
 {% block content %}
 
 <!-- filter top -->
 <div class="hfuser-top">
     <h1>{% trans 'My VOER' %}</h1>
-    <div class="hfuser-content">
-        <div class="hfuser-information left">
-            <div class="hfuser-info ">
-                <div class="hfuser-avatar left">
-                {% with y=author.id|stringformat:"s" %}
-                {% thumbnail "http://dev.voer.vn:2013/0.1/persons/"|add:y|add:"/avatar/?l="|add:author.avatar "150x150" crop="center 20%" as im %}
-                    <img src="{{ im.url }}">
-                {% empty %}
-                    <img src="{{ STATIC_URL }}images/author1_detail.jpg">
-                {% endthumbnail %}
-                {% endwith %}
-                </div>
-                <div class="hfuser-name">{% if author.fullname %} {% if author.title %}{{ author.title }} {% endif %}{{ author.fullname }} {% else %} {{ user.username }} {% endif %}</div>
-                <div class="hfuser-address">{% if author.affiliation %}{{ author.affiliation }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-website">{% if author.affiliation_url %}<a href="{{ author.affiliation_url }}" target="_blank">{{ author.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if author.homepage %}<a href="{{ author.homepage }}" target="_blank">{{ author.homepage }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-national">{% trans 'National' %}: {% if author.national %}{{ author.national }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-            </div>
-        </div>
-        <!--<div class="hfuser-other right">
-            <ul class="hfuser-statics">
-                <li class="module">
-                    <div class="icons left">{% trans 'Author' %}</div>
-                    <div class="number right">{{ author.author }}</div>
-                </li>
-                <li class="module">
-                    <div class="icons left">{% trans 'Contributor' %}</div>
-                    <div class="number right">{{ author.contributor }}</div>
-                </li>
-                <li class="module">
-                    <div class="icons left">{% trans 'Editor' %}</div>
-                    <div class="number right">{{ author.editor }}</div>
-                </li>
-                <li class="module">
-                    <div class="icons left">{% trans 'Licensor' %}</div>
-                    <div class="number right">{{ author.licensor }}</div>
-                </li>
-                <li class="module">
-                    <div class="icons left">{% trans 'Maintainer' %}</div>
-                    <div class="number right">{{ author.maintainer }}</div>
-                </li>
-				<li class="module">
-                    <div class="icons left">{% trans 'Translator' %}</div>
-                    <div class="number right">{{ author.translator }}</div>
-                </li>
-				<li class="collection">
-                    <div class="icons left">Collections</div>
-                    <div class="number right">100</div>
-                </li>
-                <li class="module">
-                    <div class="icons left">Modules</div>
-                    <div class="number right">100</div>
-                </li>
-                <li class="like">
-                    <div class="icons left">Likes</div>
-                    <div class="number right">100</div>
-                </li>
-                <li class="follower">
-                    <div class="icons left">Followers</div>
-                    <div class="number right">100</div>
-                </li>
-                <li class="following">
-                    <div class="icons left">Followings</div>
-                    <div class="number right">100</div>
-                </li>
-            </ul>
-            <div class="hfuser-date">Member Since: Jan 19, 2009</div>
-        </div>-->
-    </div>
 </div>
 {% include 'frontend/block/left_block_user.html' %}
 <div class="col-lg-1 right-row">
@@ -88,8 +17,6 @@
             <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Sort by</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <li><a href="{{ request.path }}?sort=title">{% trans 'Title' %}</a></li>
-                <!--<li><a>{% trans 'Relevance' %}</a></li>
-                <li><a>{% trans 'Rating' %}</a></li>-->
                 <li><a href="{{ request.path }}?sort=modified">{% trans 'Date' %}</a></li>
             </ul>
         </div>

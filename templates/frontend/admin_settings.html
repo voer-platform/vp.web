@@ -1,0 +1,60 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block js %}
+    {{ form.media }}
+    <script type="text/javascript" src="{{ STATIC_URL }}mce_filebrowser/js/filebrowser_init.js"></script>
+{% endblock %}
+
+{% block titleSite %}{% trans "Settings" %}{% endblock %}
+
+{% block content %}
+
+{% include 'frontend/block/left_block_user.html' %}
+
+<div class="col-lg-1 right-row">
+    <div class="content edituser" style="padding:10px 20px;margin-bottom:20px;overflow:hidden;">
+        {% if messages %}
+        <div class="alert alert-success">
+            <ul>
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <h1>{% trans 'Settings' %}</h1>
+        <form role="form" method="POST" action="{% url 'settings' %}" id="settings-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="module-license">{% trans 'Module License' %} <span class="red">*</span></label>
+                {{ form.module_license.errors }}
+                {{ form.module_license }}
+                <p class="help-block">{% trans 'Set license content for module creation.' %}</p>
+            </div>
+
+            <div class="form-group">
+                <label for="collection-license">{% trans 'Collection License' %} <span class="red">*</span></label>
+                {{ form.collection_license.errors }}
+                {{ form.collection_license }}
+                <p class="help-block">{% trans 'Set license content for collection creation.' %}</p>
+            </div>
+
+            <div class="form-group btn-common">
+                <a class="hfbtn-common hfbtn-next right hfbtn-active btn-save-settings" href="">{% trans 'Save' %}</a>
+            </div>
+        </form>
+    </div>
+ </div>
+
+<script>
+$(document).ready(function(){
+    $(document).on('click', '.btn-save-settings', function(){
+        $('#settings-form').submit();
+        return false;
+    });
+});
+</script>
+{% endblock %}

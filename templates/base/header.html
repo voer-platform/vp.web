@@ -46,14 +46,14 @@
                             <ul>
                                 <li>
                                     <form name="setLangVietnamese" action="/language/setlang/" method="POST">{% csrf_token %}
-                                        <input name="next" type="hidden" value="/" />
+                                        <input name="next" type="hidden" value="{{ request.path }}" />
                                         <input type="hidden" name="language" value="vi" />
                                         <a href="#" onclick="document.setLangVietnamese.submit();return false;"><img src="{{ STATIC_URL }}images/vi.jpg" alt="Tiếng Việt" title="Tiếng Việt" /></a>
                                     </form>
                                 </li>
                                 <li>
                                     <form name="setLangEnglish" action="/language/setlang/" method="POST">{% csrf_token %}
-                                        <input name="next" type="hidden" value="/" />
+                                        <input name="next" type="hidden" value="{{ request.path }}" />
                                         <input type="hidden" name="language" value="en" />
                                         <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="{{ STATIC_URL }}images/en.jpg" alt="English" title="English" /></a>
                                     </form>

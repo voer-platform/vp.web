@@ -60,7 +60,91 @@ function ajax_browse_page(url){
                 }
             }
             return cookieValue;
+        },
+        ajaxCatcher: function(){
+          $('.ajax-ev[data-ajax-trigger="load"]').each(function(){
+            var $this = $(this);
+            var url = $this.attr('data-ajax-url');
+            var target = $this.attr('data-ajax-target') || '#' + $(this).attr('id');
+            _run(url, target);
+          });
+          $(document).on('click','.ajax-ev[data-ajax-trigger!="load"]', function(){
+            var $this = $(this);
+            var url = $this.attr('data-ajax-url');
+            var target = $this.attr('data-ajax-target') || '#' + $(this).attr('id');
+            _run(url, target);
+          });
+
+          function _run(url, target) {
+            var $target = $(target);
+            Voer.Helper.showLoadingState(target);
+            $.ajax(url,{
+              success: function(r){
+                Voer.Helper.removeLoadingState(target);
+                $target.html(r);
+              },
+              error: function() {
+                Voer.Helper.removeLoadingState(target);
+              }
+            });
+          }
+        },
+        showLoadingState: function(element) {
+          if (element === undefined) {
+            element = 'document';
+            var coordinate = {top:0, left: 0};
+            var loadingWidth = $(window).width() - 2;
+            var loadingHeight = $(window).height() - 2;
+
+          } else {
+            var coordinate = $(element).offset();
+            var loadingWidth = $(element).width() - 2;
+            var loadingHeight = $(element).height() - 2;
+          }
+
+          if (loadingWidth == -2) {
+            loadingWidth = 350;
+          }
+
+          if (loadingHeight == -2) {
+            loadingHeight = 32;
+          }
+
+          var div = $(document.createElement('div'));
+          var elementId = element.substring(1);
+
+          div.attr('id', elementId + '-loading');
+          div.attr('class', 'ajax-loading');
+          if (coordinate) {
+            div.css({
+              width: loadingWidth,
+              height: loadingHeight,
+              position: element == 'document' ? 'fixed' : 'absolute',
+              zIndex: element == 'document' ? '2' : '999999',
+              top: coordinate.top + 1,
+              left: element == 'document' ? (coordinate.left + 1) : (coordinate.left + 1 + parseInt($(element).css('padding-left')))
+            });
+          }
+
+          var loadingMargin = Math.round((loadingHeight / 2) - 16);
+          var content = '<div style="text-align:center;margin-top:' + loadingMargin + 'px"><img src="/static/images/ajax-loader.gif" /></div>';
+
+          div.html(content);
+          div.appendTo('body');
+        },
+        removeLoadingState: function(element) {
+          if (element === undefined) {
+            element = '#document';
+          } else {
+            element = '#' + element.substring(1);
+          }
+
+          $(element + '-loading').remove();
         }
       };
     })();
 })(jQuery, window.Voer, window.document);
+
+(jQuery)(function($){
+    Voer.Helper.ajaxCatcher();
+});

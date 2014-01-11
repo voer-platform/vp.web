@@ -8,6 +8,7 @@ import os
 from django.conf import settings
 import json, httplib, urllib
 import requests
+from django.core.urlresolvers import reverse
 
 
 def vpt_request(method, path, body=None):
@@ -147,8 +148,8 @@ def vpr_get_materials():
     return result
 
 
-def vpr_get_material(mid):
-    result = vpr_request("GET", "materials/%s" % mid)
+def vpr_get_material(mid, version=1):
+    result = vpr_request("GET", "materials/%s/%s" % (mid, version))
     return result
 
 
@@ -278,7 +279,7 @@ def vpr_get_material_images(mid):
     for image_id in list_ids:
         image = vpr_request('GET', 'mfiles/%s' % image_id)
         if 'name' in image:
-            list_images[image['name']] = '%smfiles/%s/get' % (settings.VPR_URL, image_id)
+            list_images[image['name']] = '/file/%s' % image_id
     return list_images
 
 
@@ -334,3 +335,9 @@ def voer_add_view_count(mid, version):
         result = vpr_request('PUT', "materials/%s/%s/counter" % (mid, version), {'increment': 1})
 
     return result
+
+
+def vpr_get_content_file(fid):
+    url = settings.VPR_URL + "mfiles/%s/get" % fid
+    r = requests.request("GET", url)
+    return r

@@ -10,7 +10,7 @@ import random
 import csv
 import time
 
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
@@ -23,16 +23,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.core.servers.basehttp import FileWrapper
 
-from vpw.models import Material, Author
+from vpw.models import Material, Author, FeaturedAuthor, Settings
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
-    voer_add_view_count
+    voer_add_view_count, vpr_get_content_file
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 
-from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm
-from django.utils.translation import ugettext as _
+from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm
+from django.utils.translation import ugettext as _, get_language
 
 
 # Template for create module
@@ -121,19 +121,15 @@ def module_detail(request, mid, version):
     content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
     material['text'] = content
 
-    other_data = []
-    if material.has_key('author') and material['author']:
-        author = vpr_get_person(material['author'], True)
-        other_materials = vpr_materials_by_author(material['author'])
-        i = 1
-        for other_material in other_materials['results']:
-            if i > 4:
-                break
+    author = []
+    if 'author' in material and material['author']:
+        author_id_list = material['author'].split(',')
 
-            i = i + 1
-            other_data.append(other_material)
-    else:
-        author = {}
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid, True)
+            if person:
+                author.append(person)
 
     category = vpr_get_category(material['categories'])
 
@@ -150,34 +146,6 @@ def module_detail(request, mid, version):
     favorite_count = vpr_get_statistic_data(mid, material['version'], 'favorites')
     material['favorite_count'] = favorite_count
 
-    similar_data = []
-    similar_materials = vpr_get_statistic_data(mid, material['version'], 'similar')
-    i = 1
-    for similar in similar_materials:
-        if i > 4:
-            break
-
-        if similar['material_id']:
-          i = i + 1
-          material_tmp = vpr_get_material(similar['material_id'])
-          if 'author' in material_tmp:
-              author_id_list = material_tmp['author'].split(',')
-          else:
-              author_id_list = []
-
-          p_list = []
-          for pid in author_id_list:
-              pid = pid.strip()
-              person = vpr_get_person(pid)
-              # print person
-              if person['fullname']:
-                  p_list.append({'pid': pid, 'pname': person['fullname']})
-              else:
-                  p_list.append({'pid': pid, 'pname': person['fullname']})
-          material_tmp['author_list'] = p_list
-
-          similar_data.append(material_tmp)
-
     file_data = []
     file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
     for file_attachment_id in file_attachments:
@@ -191,8 +159,7 @@ def module_detail(request, mid, version):
             file_data.append(file_tmp)
 
     response = render(request, "frontend/module_detail.html",
-                      {"material": material, "author": author, "category": category, 'other_data': other_data,
-                       'similar_data': similar_data, 'file_data': file_data})
+                      {"material": material, "author": author, "category": category, 'file_data': file_data})
 
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
@@ -222,29 +189,32 @@ def collection_detail(request, cid, mid):
     if not mid:
         # get the first material of collection
         mid = get_first_material_id(outline['content'])
-
+    print mid
     # Get material in collection
     if mid:
         material = vpr_get_material(mid)
-        # lay anh trong noi dung
-        list_images = vpr_get_material_images(mid)
-        # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-        if "text" in material:
-            content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-            material['text'] = content
+        if 'material_id' in material:
+            # lay anh trong noi dung
+            list_images = vpr_get_material_images(mid)
+            # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+            if "text" in material:
+                content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+                material['text'] = content
 
-        file_data = []
-        file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
-        for file_attachment_id in file_attachments:
-            attachment_info = voer_get_attachment_info(file_attachment_id)
+            file_data = []
+            file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
+            for file_attachment_id in file_attachments:
+                attachment_info = voer_get_attachment_info(file_attachment_id)
 
-            image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2',
-                                'image/iff']
-            if attachment_info['mime_type'] not in image_mime_types:
-                file_tmp = {}
-                file_tmp['title'] = attachment_info['name']
-                file_tmp['attachment_id'] = file_attachment_id
-                file_data.append(file_tmp)
+                image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2',
+                                    'image/iff']
+                if attachment_info['mime_type'] not in image_mime_types:
+                    file_tmp = {}
+                    file_tmp['title'] = attachment_info['name']
+                    file_tmp['attachment_id'] = file_attachment_id
+                    file_data.append(file_tmp)
+        else:
+            file_data = []
     else:
         material = {}
         file_data = []
@@ -254,47 +224,20 @@ def collection_detail(request, cid, mid):
         'content'])
 
     # Lay thong tin tac gia bao gom ca thong ke
-    author = vpr_get_person(collection['author'], True)
+    author = []
+    if 'author' in collection and collection['author']:
+        author_id_list = material['author'].split(',')
+
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid, True)
+            if person:
+                author.append(person)
+
     category = vpr_get_category(collection['categories'])
 
-    other_data = []
-    other_materials = vpr_materials_by_author(collection['author'])
-    i = 1
-    for other_material in other_materials['results']:
-        if i > 4:
-            break
-
-        i = i + 1
-        other_data.append(other_material)
-
-    similar_data = []
-    similar_materials = vpr_get_statistic_data(cid, collection['version'], 'similar')
-    i = 1
-    for similar in similar_materials:
-        if i > 4:
-            break
-
-        i = i + 1
-        material_tmp = vpr_get_material(similar['material_id'])
-
-        if (material_tmp.has_key('author') and material_tmp['author']):
-            author_id_list = material_tmp['author'].split(',')
-
-            p_list = []
-            for pid in author_id_list:
-                pid = pid.strip()
-                person = vpr_get_person(pid)
-                if person['fullname']:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
-                else:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
-            material_tmp['author_list'] = p_list
-        similar_data.append(material_tmp)
-
-    response = render(request, "frontend/collection_detail.html",
-                      {"collection": collection, "material": material, "author": author, "category": category,
-                       "outline": strOutline, 'other_data': other_data, 'similar_data': similar_data,
-                       'file_data': file_data})
+    response = render(request, "frontend/collection_detail.html", {"collection": collection, "material": material, "author": author,
+                       "category": category, "outline": strOutline, 'file_data': file_data})
 
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
@@ -311,11 +254,12 @@ def user_module_detail(request, mid):
         if material.creator_id != request.user.id:
             raise PermissionDenied
         author_id = request.user.author.author_id
-        author = vpr_get_person(author_id)
+        author = vpr_get_person(author_id, True)
+        authors = [author]
         category = vpr_get_category(material.categories)
         if material.type == MODULE_TYPE:
             return render(request, "frontend/module_detail.html", {
-                "material": material, "author": author, "category": category
+                "material": material, "author": authors, "category": category
             })
         else:
             raise PermissionDenied
@@ -375,8 +319,13 @@ def create_module(request):
     form = ModuleCreationForm(request.POST or None)
     pid = request.user.author.author_id
     author = vpr_get_person(pid)
+    language = get_language()
     params = {}
     current_step = 1
+
+    if request.method == "GET":
+        params['license'] = get_setting_value('module_license', language)
+
     if request.method == "POST":
         try:
             previous_step = int(request.POST.get("step", "0"))
@@ -388,6 +337,7 @@ def create_module(request):
             if not request.POST.get("agree"):
                 errors = _('You must agree to the terms and conditions!')
                 params['errors'] = errors
+                params['license'] = get_setting_value('module_license', language)
             else:
                 current_step = 2
                 params['categories'] = categories_list
@@ -512,8 +462,13 @@ def create_collection(request):
     form = CollectionCreationForm(request.POST or None)
     pid = request.user.author.author_id
     author = vpr_get_person(pid)
+    language = get_language()
     current_step = 1
     params = {}
+
+    if request.method == "GET":
+        params['license'] = get_setting_value('collection_license', language)
+
     if request.method == "POST":
         action = request.POST.get("action", "")
         try:
@@ -526,6 +481,7 @@ def create_collection(request):
             if not request.POST.get("agree"):
                 errors = _('You must agree to the terms and conditions!')
                 params['errors'] = errors
+                params['license'] = get_setting_value('collection_license', language)
             else:
                 current_step = 2
                 params['categories'] = categories_list
@@ -612,7 +568,10 @@ def _publish_material(material):
 
 
 def _save_material(form, material_type, current_user):
-    material = Material()
+    if form.cleaned_data['mid']:
+        material = Material.objects.get(id=form.cleaned_data['mid'])
+    else:
+        material = Material()
     material.title = form.cleaned_data['title']
     material.description = form.cleaned_data['description']
     material.keywords = form.cleaned_data['keywords']
@@ -624,6 +583,8 @@ def _save_material(form, material_type, current_user):
     material.maintainer = form.cleaned_data['maintainers']
     material.translator = form.cleaned_data['translators']
     material.coeditor = form.cleaned_data['coeditors']
+    material.version = form.cleaned_data['version']
+    material.material_id = form.cleaned_data['material_id']
     # get current user
     material.creator = current_user
     material.type = material_type
@@ -844,21 +805,8 @@ def search_result(request):
 
 def get_pdf(request, mid, version):
     file_name = '%s_%s.pdf' % (mid, version)
-    # file_path = EXPORT_PDF_DIR + file_name
-    # if os.path.isfile(file_path):
-    #     pass
-    # else:
-    #     result = vpr_get_pdf(mid, version)
-    #     if result.status_code == 200:
-    #         with codecs.open(file_path, 'w', 'utf-8') as pdf_file:
-    #             pdf_file.write(result.content)
-    #     elif result.status_code == 102:
-    #         #Processing
-    #         pass
-    # wrapper = FileWrapper(file(file_path, 'rb'))
     result = vpr_get_pdf(mid, version)
     response = HttpResponse(result, content_type='application/pdf')
-    # response['Content-Length'] = os.path.getsize(file_path)
     response['Content-Disposition'] = 'attachment;filename=%s' % file_name
     return response
 
@@ -1241,5 +1189,181 @@ def admin_import_user(request):
 
     return render(request, "frontend/admin_import_user.html", {})
 
+<<<<<<< HEAD
 def admin_featured_materials(request):
     return render(request, "frontend/admin_featured_materials.html", {})
+=======
+
+def get_favorite(request):
+    return render(request, "frontend/user_favorite.html", {})
+
+
+def get_unpublish(request):
+    return render(request, "frontend/user_unpublish.html", {})
+
+
+def ajax_get_similars(request):
+    mid = request.GET['mid']
+    version = request.GET['version']
+    page = int(request.GET.get('page', 1))
+    number_record = 4
+
+    prev_page = ''
+    next_page = ''
+    similar_data = []
+    similar_materials = vpr_get_statistic_data(mid, version, 'similar')
+
+    i = 1
+    for similar in similar_materials:
+        if i < (page - 1) * number_record + 1:
+            prev_page = str(page - 1)
+            i += 1
+            continue
+
+        if i > page * number_record:
+            next_page = str(page + 1)
+            break
+
+        if similar['material_id']:
+            i += 1
+            material_tmp = vpr_get_material(similar['material_id'])
+            if 'author' in material_tmp:
+                author_id_list = material_tmp['author'].split(',')
+            else:
+                author_id_list = []
+
+            p_list = []
+            for pid in author_id_list:
+                pid = pid.strip()
+                person = vpr_get_person(pid)
+                if person['fullname']:
+                    p_list.append({'pid': pid, 'pname': person['fullname']})
+                else:
+                    p_list.append({'pid': pid, 'pname': person['fullname']})
+            material_tmp['author_list'] = p_list
+
+            similar_data.append(material_tmp)
+
+    return render(request, "frontend/ajax/similars.html", {'prev_page': prev_page, 'next_page': next_page, 'similar_data': similar_data})
+
+
+def ajax_get_others(request):
+    author_list = request.GET.get('authors', '')
+    page = int(request.GET.get('page', 1))
+    number_record = 4
+
+    real_page = int(math.ceil((page * number_record + 11) / 12))
+    print real_page
+
+    prev_page = ''
+    next_page = ''
+    other_data = []
+    other_materials = vpr_materials_by_author(author_list, real_page)
+
+    if other_materials['next']:
+        next_page = str(page + 1)
+
+    if other_materials['previous']:
+        prev_page = str(page - 1)
+
+    actual_page = page % 3
+
+    if actual_page == 0:
+        actual_page = 3
+
+    i = 1
+    for other_material in other_materials['results']:
+        print other_material
+        if i < (actual_page - 1) * number_record + 1:
+            prev_page = str(page - 1)
+            i += 1
+            continue
+
+        if i > actual_page * number_record:
+            next_page = str(page + 1)
+            break
+
+        i += 1
+        other_data.append(other_material)
+
+    return render(request, "frontend/ajax/others.html", {'prev_page': prev_page, 'next_page': next_page, 'other_data': other_data})
+
+@login_required
+def user_module_reuse(request, mid, version=1):
+    if version is None:
+        version = 1
+    material = vpr_get_material(mid, version)
+    categories = vpr_get_categories()
+    author = vpr_get_person(request.user.author.author_id)
+    if request.method == "POST":
+        form = ModuleCreationForm(request.POST)
+        action = request.POST.get("action", "")
+        if action == 'save':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                return redirect('user_module_detail', mid=material.id)
+        elif action == 'publish':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                # Publish content to VPR
+                result = _publish_material(material)
+                if 'material_id' in result:
+                    material.material_id = result['material_id']
+                    material.version = result['version']
+                    material.save()
+                    return redirect('module_detail', mid=result['material_id'])
+    else:
+        form = ModuleCreationForm(dict(body=material['text']))
+    params = {'material': material, 'categories': categories,
+              'form': form, 'author': author}
+    return render(request, MODULE_TEMPLATES[3], params)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_settings(request):
+    """
+    Settings page for admin
+    """
+    language = get_language() # current language
+    module_license, created = Settings.objects.get_or_create(name='module_license', language=language)
+    collection_license, created = Settings.objects.get_or_create(name='collection_license', language=language)
+
+    if request.method == "POST":
+        form = SettingsForm(request.POST)
+        if form.is_valid():
+            # save module_license's change
+            module_license.value = form.cleaned_data['module_license']
+            module_license.save()
+            # save collection_license's change
+            collection_license.value = form.cleaned_data['collection_license']
+            collection_license.save()
+            messages.success(request, 'Settings updated successfully.')
+        else:
+            messages.error(request, 'Error while updating settings.')
+    else:
+        form = SettingsForm(dict(module_license=module_license.value,
+                                 collection_license=collection_license.value))
+
+    return render(request, "frontend/admin_settings.html", {'form': form})
+
+def get_content_file(request, fid):
+    r = vpr_get_content_file(fid)
+    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    return response
+
+
+def get_setting_value(license_type, language='vi'):
+    """
+    Get value of a setting by language
+    """
+    try:
+        setting = Settings.objects.get(name=license_type, language=language)
+        return setting.value
+    except ObjectDoesNotExist:
+        return str()
+
+>>>>>>> c6c1397fac76ba7b39f8c61c1e2c98a79c255e4d

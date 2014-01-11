@@ -16,6 +16,9 @@ class MaterialCreationForm(forms.Form):
     maintainers = forms.CharField(max_length=100, required=False)
     translators = forms.CharField(max_length=100, required=False)
     coeditors = forms.CharField(max_length=100, required=False)
+    version = forms.IntegerField(required=False)
+    material_id = forms.CharField(max_length=64, required=False)
+    mid = forms.IntegerField(required=False)
 
 
 class ModuleCreationForm(MaterialCreationForm):
@@ -41,3 +44,8 @@ class EditProfileForm(forms.Form):
             self._errors["confirm_password"] = self.error_class([u"Confirm password is not matchs"])
 
         return cleaned_data
+
+
+class SettingsForm(forms.Form):
+    module_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=False)
+    collection_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=False)
