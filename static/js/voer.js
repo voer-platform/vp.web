@@ -82,6 +82,9 @@ function ajax_browse_page(url){
               success: function(r){
                 Voer.Helper.removeLoadingState(target);
                 $target.html(r);
+              },
+              error: function() {
+                Voer.Helper.removeLoadingState(target);
               }
             });
           }

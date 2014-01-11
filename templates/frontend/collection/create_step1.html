@@ -37,14 +37,7 @@
                     </div>
                 {% endif %}
                 <div class="content">
-                    <p>I hereby allow the Vietnam Open Educational Resouces (VOER) to distribute this content under the
-                        terms of the Creative Commons Attribution License available at <a
-                                href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a>.
-                        I understand that in doing so I retain my copyright in the work and warrant that I am the author
-                        or the owner or have permission to distribute the work in question and wish this work to be
-                        distributed under the terms of that license (including allowing modification of this work and
-                        requiring attribution) and agree that proper attribution of my work is any attribution that
-                        includes the authors' names, the title of the work, and the VOER URL to the work.</p>
+                    {{ license | safe }}
                 </div>
                 <div class="accept-license">
                     <label class="checkbox checkbox-user-tool">

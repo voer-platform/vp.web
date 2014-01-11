@@ -86,10 +86,11 @@
 <div class="col-lg-2 right-row">
     {% if author %}
     <!-- AUTHOR NAME -->
-    <div class="module-view-author padding-content-10 left">
-        <a class="module-view-author-avatar left">
-            {% with y=author.id|stringformat:"s" %}
-            {% thumbnail "http://dev.voer.vn:2013/0.1/persons/"|add:y|add:"/avatar/?l="|add:author.avatar "60x60" crop="center 20%" as im %}
+    {% for author_info in author %}
+    <div class="module-view-author arrow-author-collection padding-content-10 left">
+        <a class="module-view-author-avatar left" href="{% url 'view_profile' author_info.id %}">
+            {% with y=author_info.id|stringformat:"s" %}
+            {% thumbnail "http://dev.voer.vn:2013/0.1/persons/"|add:y|add:"/avatar/?l="|add:author_info.avatar "60x60" crop="center 20%" as im %}
                 <img src="{{ im.url }}" width="60" height="60">
             {% empty %}
                 <img src="{{ STATIC_URL }}images/author1_detail.jpg" width="60" height="60">
@@ -98,26 +99,31 @@
         </a>
         <ul class="module-view-author-name left padding-content-10">
             <li>
-                <a href="{% url 'view_profile' author.id %}">{{ author.fullname }}</a>
+                <a href="{% url 'view_profile' author_info.id %}">{{ author_info.fullname }}</a>
             </li>
             <li>
                 <span class="text-italic">{% trans 'View my profile' %}</span>
             </li>
         </ul>
     </div>
+    {% endfor %}
     <!-- END AUTHOR NAME -->
+    {% endif %}
 
+    {% if author|length == 1 %}
     <!-- AUTHOR STATUS -->
+    {% for author_info in author %}
     <div class="module-view-author-status left">
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear">{{ author.author.module }}</a>
+            <a class="clear">{{ author_info.author.module }}</a>
             <label class="clear">{% trans 'Modules' %}</label>
         </span>
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear">{{ author.author.collection }}</a>
+            <a class="clear">{{ author_info.author.collection }}</a>
             <label class="clear">{% trans 'Collections' %}</label>
         </span>
     </div>
+    {% endfor %}
     <!-- END AUTHOR STATUS -->
     {% endif %}
 
@@ -170,7 +176,7 @@
             <div class="tilte-module">{% trans 'Others from Author' %}</div>
         </div>
         <div class="module-block-content">
-            <div id="module-others" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-others?authors={{ author.id }}">&nbsp;</div>
+            <div id="module-others" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-others?authors={{ material.author }}">&nbsp;</div>
         </div>
     </div>
     <!-- END OTHER FROM AUTHOR -->

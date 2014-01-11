@@ -10,7 +10,7 @@ import random
 import csv
 import time
 
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
@@ -121,10 +121,15 @@ def module_detail(request, mid, version):
     content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
     material['text'] = content
 
-    if material.has_key('author') and material['author']:
-        author = vpr_get_person(material['author'], True)
-    else:
-        author = {}
+    author = []
+    if 'author' in material and material['author']:
+        author_id_list = material['author'].split(',')
+
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid, True)
+            if person:
+                author.append(person)
 
     category = vpr_get_category(material['categories'])
 
@@ -219,7 +224,16 @@ def collection_detail(request, cid, mid):
         'content'])
 
     # Lay thong tin tac gia bao gom ca thong ke
-    author = vpr_get_person(collection['author'], True)
+    author = []
+    if 'author' in collection and collection['author']:
+        author_id_list = material['author'].split(',')
+
+        for pid in author_id_list:
+            pid = pid.strip()
+            person = vpr_get_person(pid, True)
+            if person:
+                author.append(person)
+
     category = vpr_get_category(collection['categories'])
 
     response = render(request, "frontend/collection_detail.html", {"collection": collection, "material": material, "author": author,
@@ -304,8 +318,13 @@ def create_module(request):
     form = ModuleCreationForm(request.POST or None)
     pid = request.user.author.author_id
     author = vpr_get_person(pid)
+    language = get_language()
     params = {}
     current_step = 1
+
+    if request.method == "GET":
+        params['license'] = get_setting_value('module_license', language)
+
     if request.method == "POST":
         try:
             previous_step = int(request.POST.get("step", "0"))
@@ -317,6 +336,7 @@ def create_module(request):
             if not request.POST.get("agree"):
                 errors = _('You must agree to the terms and conditions!')
                 params['errors'] = errors
+                params['license'] = get_setting_value('module_license', language)
             else:
                 current_step = 2
                 params['categories'] = categories_list
@@ -441,8 +461,13 @@ def create_collection(request):
     form = CollectionCreationForm(request.POST or None)
     pid = request.user.author.author_id
     author = vpr_get_person(pid)
+    language = get_language()
     current_step = 1
     params = {}
+
+    if request.method == "GET":
+        params['license'] = get_setting_value('collection_license', language)
+
     if request.method == "POST":
         action = request.POST.get("action", "")
         try:
@@ -455,6 +480,7 @@ def create_collection(request):
             if not request.POST.get("agree"):
                 errors = _('You must agree to the terms and conditions!')
                 params['errors'] = errors
+                params['license'] = get_setting_value('collection_license', language)
             else:
                 current_step = 2
                 params['categories'] = categories_list
@@ -1317,8 +1343,19 @@ def admin_settings(request):
 
     return render(request, "frontend/admin_settings.html", {'form': form})
 
-
 def get_content_file(request, fid):
     r = vpr_get_content_file(fid)
     response = HttpResponse(r.content, content_type=r.headers['content-type'])
     return response
+
+
+def get_setting_value(license_type, language='vi'):
+    """
+    Get value of a setting by language
+    """
+    try:
+        setting = Settings.objects.get(name=license_type, language=language)
+        return setting.value
+    except ObjectDoesNotExist:
+        return str()
+
