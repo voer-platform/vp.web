@@ -480,3 +480,35 @@ button.hfbtn-common{
 #more-download li.collection{
     background: url("../images/icon/icon-collection.png") no-repeat 0 4px;
 }
+
+.error-page .big-error {
+    color: #CCCCCC;
+    font-family: museo-sans,sans-serif;
+    font-size: 175px;
+    font-weight: 100;
+    line-height: 175px;
+    margin-top: 20px;
+    opacity: 0.85;
+    text-align: center;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
+.error-page h2 {
+    color: #46433E;
+    font-family: museo-sans,sans-serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 40px;
+    margin: 13px auto 0;
+    text-align: center;
+}
+.error-page form {
+    background-color: rgba(94, 88, 78, 0.06);
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    margin: 35px auto 60px;
+    padding: 10px;
+    width: 304px;
+}
+.error-page form input {
+    width: 280px;
+}

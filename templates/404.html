@@ -1,0 +1,19 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block content %}
+
+<div class="error-page">
+    <div id="content">
+        <article class="big-error">404</article>
+        <h2>The page you were looking for was not found.<br>Would you like to try searching instead?</h2>
+
+        <form action="{% url 'search' %}" method="GET">
+          {% csrf_token %}
+            <input type="text" class="input-search-right-top" name="keyword" value="{{ keyword }}">
+        </form>
+    </div><!-- eo#content -->
+</div>
+
+{% endblock %}
