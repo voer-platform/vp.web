@@ -120,7 +120,7 @@
     </div>
     {% endfor %}
 
-    {% include "base/pager_pagination.html" with pager=materials %}
+    {% include "base/pager.html" %}
     {% else %}
         <p class="no-data">{% trans 'No data.' %}</p>
     {% endif %}

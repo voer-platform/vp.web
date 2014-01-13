@@ -23,7 +23,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.utils.translation import ugettext as _, get_language
 
-from digg_paginator import DiggPaginator
 from vpw.models import Material, Author, Settings
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
@@ -893,7 +892,7 @@ def pager_default_initialize(count, limit, current_page=1, page_rank=4):
             page_temp['value'] = xpage
             pager_array.append(page_temp)
 
-        if (current_page + page_rank + 2 <= page_total):
+        if (current_page + page_rank + 1 <= page_total):
             page_temp = {}
             page_temp['text'] = '...'
             page_temp['value'] = ''
@@ -1207,22 +1206,22 @@ def get_unpublish(request):
     sort = request.GET.get('sort', '')
     page = int(request.GET.get('page', 1))
 
+    number_record = 12
+    offset = (page - 1) * number_record
+    offset_limit = offset + number_record
+
     try:
         materials = Material.objects.filter(creator_id=current_user.id, material_id='', version=None)
+        material_count = len(materials)
 
         if sort:
             materials = materials.order_by(sort)
 
-        paginator = DiggPaginator(materials, 12, body=3, padding=1, margin=1, tail=0)
-
-        try:
-            materials = paginator.page(page)
-        except EmptyPage:
-            materials = paginator.page(paginator.num_pages)
-
+        materials = materials[offset: offset_limit]
+        pager = pager_default_initialize(material_count, number_record, page)
         page_query = get_page_query(request)
 
-        return render(request, "frontend/user_unpublish.html", {'materials': materials, 'author': author, 'page_query': page_query})
+        return render(request, "frontend/user_unpublish.html", {'materials': materials, 'author': author,'pager': pager, 'page_query': page_query})
 
     except Material.DoesNotExist:
         return HttpResponseRedirect('/')
