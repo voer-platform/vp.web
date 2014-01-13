@@ -1,4 +1,3 @@
-import codecs
 import json
 import math
 import os
@@ -11,9 +10,8 @@ import csv
 import time
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
-from django.core.paginator import Paginator, EmptyPage
-from digg_paginator import DiggPaginator
-
+from django.core.paginator import EmptyPage
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -23,18 +21,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
-from django.core.servers.basehttp import FileWrapper
+from django.utils.translation import ugettext as _, get_language
 
-from vpw.models import Material, Author, FeaturedAuthor, Settings
+from digg_paginator import DiggPaginator
+from vpw.models import Material, Author, Settings
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
     voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
-
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm
-from django.utils.translation import ugettext as _, get_language
+
 
 
 # Template for create module
@@ -744,7 +742,7 @@ def mostViewedView(request):
 
     return render(request, "frontend/material_stats.html", {"materials": materials, "author": author})
 
-
+@csrf_exempt
 def search_result(request):
     keyword = request.REQUEST.get('keyword', '')
     page = int(request.GET.get('page', 1))

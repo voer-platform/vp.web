@@ -10,7 +10,6 @@
             <div class="text-header-slider-left left clear">{% trans "Take the world's best documents, online, for free." %}</div>
             <div class="div-input-search left clear">
                 <form action="{% url 'search' %}" method="GET">
-                    {% csrf_token %}
                     <input type="text" class="input-search-top" name="keyword" />
                     <input type="submit" class="hfbtn-common search-index" value="search">
                 </form>
