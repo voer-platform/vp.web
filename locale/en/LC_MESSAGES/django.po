@@ -1079,3 +1079,16 @@ msgstr ""
 #: vpw/views.py:337 vpw/views.py:481
 msgid "You must agree to the terms and conditions!"
 msgstr ""
+
+#: templates/500.html:8
+msgid "Looks like something went wrong!"
+msgstr ""
+#: templates/500.html:10
+msgid "We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing."
+msgstr ""
+#: templates/500.html:13
+msgid "Contact Support"
+msgstr ""
+#: templates/404.html:10
+msgid "The page you were looking for was not found.<br>Would you like to try searching instead?"
+msgstr ""

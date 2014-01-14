@@ -315,6 +315,11 @@ def voer_add_favorite(mid, version, pid):
     return result
 
 
+def vpr_get_favorite(pid, page=1):
+    result = vpr_request("GET", "persons/%s/favorites/?page=%s" % (pid, str(page)))
+    return result
+
+
 def vpr_search_author(author_name):
     """
     Search author by name

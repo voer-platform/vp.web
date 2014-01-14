@@ -24,13 +24,12 @@ from django.conf import settings
 from django.utils.translation import ugettext as _, get_language
 from registration.backends.default.views import RegistrationView
 
-from digg_paginator import DiggPaginator
 from vpw.models import Material, Author, Settings
 from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
-    voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar
+    voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm, RecaptchaRegistrationForm
 
@@ -901,7 +900,7 @@ def pager_default_initialize(count, limit, current_page=1, page_rank=4):
             page_temp['value'] = xpage
             pager_array.append(page_temp)
 
-        if (current_page + page_rank + 2 <= page_total):
+        if (current_page + page_rank + 1 <= page_total):
             page_temp = {}
             page_temp['text'] = '...'
             page_temp['value'] = ''
@@ -1204,7 +1203,38 @@ def admin_featured_materials(request):
 
 
 def get_favorite(request):
-    return render(request, "frontend/user_favorite.html", {})
+    current_user = request.user
+    pid = current_user.author.author_id
+    page = int(request.GET.get('page', 1))
+
+    favorites = vpr_get_favorite(pid, page)
+
+    pager = pager_default_initialize(favorites['count'], 12, page)
+    page_query = get_page_query(request)
+
+    favorite_list = []
+    for favorite in favorites['results']:
+        if favorite['author']:
+            author_array = favorite['author'].split(',')
+            person_list = []
+            for pid in author_array:
+                pid = pid.strip()
+                person = vpr_get_person(pid)
+                if person['fullname']:
+                    person_list.append({'pid': pid, 'pname': person['fullname']})
+                else:
+                    person_list.append({'pid': pid, 'pname': person['user_id']})
+            favorite['person_list'] = person_list
+
+        view_count = vpr_get_statistic_data(favorite['material_id'], favorite['version'], 'counter')
+        favorite['view_count'] = view_count
+
+        favorite_count = vpr_get_statistic_data(favorite['material_id'], favorite['version'], 'favorites')
+        favorite['favorite_count'] = favorite_count
+
+        favorite_list.append(favorite)
+
+    return render(request, "frontend/user_favorite.html", {'materials': favorite_list, 'pager': pager, 'page_query': page_query})
 
 
 def get_unpublish(request):
@@ -1215,22 +1245,22 @@ def get_unpublish(request):
     sort = request.GET.get('sort', '')
     page = int(request.GET.get('page', 1))
 
+    number_record = 12
+    offset = (page - 1) * number_record
+    offset_limit = offset + number_record
+
     try:
         materials = Material.objects.filter(creator_id=current_user.id, material_id='', version=None)
+        material_count = len(materials)
 
         if sort:
             materials = materials.order_by(sort)
 
-        paginator = DiggPaginator(materials, 12, body=3, padding=1, margin=1, tail=0)
-
-        try:
-            materials = paginator.page(page)
-        except EmptyPage:
-            materials = paginator.page(paginator.num_pages)
-
+        materials = materials[offset: offset_limit]
+        pager = pager_default_initialize(material_count, number_record, page)
         page_query = get_page_query(request)
 
-        return render(request, "frontend/user_unpublish.html", {'materials': materials, 'author': author, 'page_query': page_query})
+        return render(request, "frontend/user_unpublish.html", {'materials': materials, 'author': author,'pager': pager, 'page_query': page_query})
 
     except Material.DoesNotExist:
         return HttpResponseRedirect('/')
@@ -1403,4 +1433,12 @@ def get_setting_value(license_type, language='vi'):
 def get_avatar(request, pid):
     r = vpr_get_user_avatar(pid)
     response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    return response
+
+
+def server_error(request):
+    # one of the things 'render' does is add 'STATIC_URL' to
+    # the context, making it available from within the template.
+    response = render(request, "500.html")
+    response.status_code = 500
     return response

@@ -73,3 +73,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='frontend/robots.txt', content_type='text/plain')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler500 = "vpw.views.server_error"

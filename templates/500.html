@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+
+<div class="error-500-page">
+  <p><strong>{% blocktrans %}Looks like something went wrong!{% endblocktrans %}</strong></p>
+
+  <p>{% blocktrans %}We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.{% endblocktrans %}</p>
+
+  <div id="suggestions">
+    <a href="#">{% blocktrans %}Contact Support{% endblocktrans %}</a> &mdash;
+    <a href="#">Facebook</a> &mdash;
+    <a href="#">Twitter</a>
+  </div>
+
+  <center>
+      <a href="/"><div class="logo-footer"></div></a>
+  </center>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

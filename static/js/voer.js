@@ -147,4 +147,16 @@ function ajax_browse_page(url){
 
 (jQuery)(function($){
     Voer.Helper.ajaxCatcher();
+
+    $(document).on('click', '.fiterbutton .gridview', function(){
+        $('.hfitems').toggleClass('gridview');
+        $('.gridview').toggleClass('active');
+        $('.listview').toggleClass('active');
+    });
+
+     $(document).on('click', '.fiterbutton .listview', function(){
+        $('.hfitems').toggleClass('gridview');
+        $('.gridview').toggleClass('active');
+        $('.listview').toggleClass('active');
+    });
 });
