@@ -22,6 +22,7 @@ from django.http.response import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.utils.translation import ugettext as _, get_language
+from registration.backends.default.views import RegistrationView
 
 from digg_paginator import DiggPaginator
 from vpw.models import Material, Author, Settings
@@ -31,7 +32,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
     voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
-from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm
+from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm, RecaptchaRegistrationForm
 
 
 
@@ -56,6 +57,13 @@ MODULE_TYPE = 1
 COLLECTION_TYPE = 2
 
 EXPORT_PDF_DIR = '%s/pdf_export/' % settings.MEDIA_ROOT
+
+
+class RecaptchaRegistrationView(RegistrationView):
+    """
+    Subclass of RegistrationView that uses RecaptchaRegistrationForm
+    """
+    form_class = RecaptchaRegistrationForm
 
 
 # Create your views here.

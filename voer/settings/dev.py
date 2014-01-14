@@ -31,3 +31,6 @@ VPT_URL = 'http://voer.edu.vn:6543/'
 
 SITE_URL = 'dev.voer.vn'
 
+RECAPTCHA_PUBLIC_KEY = '6Lf__uwSAAAAAPpTMYOLUOBf25clR7fGrqWrpOn0'
+RECAPTCHA_PRIVATE_KEY = '6Lf__uwSAAAAAPlCihico8fKiAfV09_kbywiI-xx'
+

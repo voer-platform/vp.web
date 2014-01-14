@@ -1,7 +1,7 @@
 from django import forms
-from django.core.exceptions import ValidationError
+from registration.forms import RegistrationForm
+from vpw.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
-from django.utils.translation import ugettext as _
 
 
 class MaterialCreationForm(forms.Form):
@@ -49,3 +49,8 @@ class EditProfileForm(forms.Form):
 class SettingsForm(forms.Form):
     module_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=False)
     collection_license = forms.CharField(widget=TinyMCE(attrs={'rows': 4}), required=False)
+
+
+class RecaptchaRegistrationForm(RegistrationForm):
+    recaptcha = ReCaptchaField(label="I'm a human")
+

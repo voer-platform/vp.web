@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.views.generic.base import TemplateView
+from vpw.views import RecaptchaRegistrationView
 
 admin.autodiscover()
 
@@ -32,6 +33,7 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<pid>[0-9a-z]+)$', 'vpw.views.view_profile', name='view_profile'),
 
     ## User ###
+    url(r'^user/register/?$', RecaptchaRegistrationView.as_view()),
     url(r'^user/', include('registration.backends.default.urls')),
     url(r'^user/authenticate$', 'vpw.views.vpw_authenticate', name='authenticate'),
     url(r'^user/dashboard/?$', 'vpw.views.user_dashboard', name='user_dashboard'),

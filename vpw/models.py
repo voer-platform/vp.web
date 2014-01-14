@@ -72,8 +72,8 @@ def user_activated_callback(sender, user, request, **kwargs):
 
         new_person = vpr_create_person(**params)
 
-        if new_person.has_key("id"):
-            if (new_person["id"] > 0):
+        if 'id' in new_person:
+            if new_person["id"] > 0:
                 author = Author(user=user)
                 author.author_id = new_person['id']
                 author.save()
