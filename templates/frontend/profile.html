@@ -152,17 +152,7 @@
                             $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
                             //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
                         });         
-                        $('.gridview').click(function(){
-                            $('.hfitems').toggleClass('gridview');
-                            $('.gridview').toggleClass('active');
-                            $('.listview').toggleClass('active');
-                        });     
-                        $('.listview').click(function(){
-                            $('.hfitems').toggleClass('gridview');
-                            $('.gridview').toggleClass('active');
-                            $('.listview').toggleClass('active');
-                        });
-                    });         
+                    });
                 </script>               
  <div id="materials" class="hfitems">
   {% for material in materials %}  
