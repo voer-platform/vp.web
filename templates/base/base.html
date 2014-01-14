@@ -17,7 +17,9 @@
   		<div class="container">
   			<div class="row">
   			    {% block content %}{% endblock %}
-  				{% include "base/footer.html" %}
+                {% block footer %}
+  				    {% include "base/footer.html" %}
+                {% endblock %}
   			</div>
   		</div>
   	</div>

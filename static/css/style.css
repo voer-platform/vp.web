@@ -481,8 +481,8 @@ button.hfbtn-common{
     background: url("../images/icon/icon-collection.png") no-repeat 0 4px;
 }
 
-.error-page .big-error {
-    color: #CCCCCC;
+.error-404-page .big-error {
+    color: #ffffff;
     font-family: museo-sans,sans-serif;
     font-size: 175px;
     font-weight: 100;
@@ -492,7 +492,7 @@ button.hfbtn-common{
     text-align: center;
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05);
 }
-.error-page h2 {
+.error-404-page h2 {
     color: #46433E;
     font-family: museo-sans,sans-serif;
     font-size: 32px;
@@ -501,7 +501,7 @@ button.hfbtn-common{
     margin: 13px auto 0;
     text-align: center;
 }
-.error-page form {
+.error-404-page form {
     background-color: rgba(94, 88, 78, 0.06);
     border-radius: 3px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -509,6 +509,33 @@ button.hfbtn-common{
     padding: 10px;
     width: 304px;
 }
-.error-page form input {
+.error-404-page form input {
     width: 280px;
+}
+
+.error-500-page {
+    margin: 50px auto 40px;
+    text-align: center;
+    width: 600px;
+}
+.error-500-page p {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.6em;
+    margin: 10px 0;
+}
+.error-500-page #suggestions {
+    color: #CCCCCC;
+    margin-top: 35px;
+    padding-bottom: 35px;
+}
+.error-500-page #suggestions a {
+    color: #666666;
+    font-size: 14px;
+    font-weight: 200;
+    margin: 0 10px;
+}
+.error-500-page #suggestions a:hover {
+    text-decoration: underline;
 }
