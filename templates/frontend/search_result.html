@@ -1,6 +1,7 @@
 {% extends "base/base-content.html" %}
 
 {% load i18n %}
+{% load vpw_filters %}
 
 {% block titleSite %}{% trans "Search result" %}{% endblock %}
 
@@ -68,9 +69,9 @@
                     {% if material.user_id %}
                     <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'view_profile' material.id %}">{{ material.title }}</a>
                     {% elif material.material_type == 1 %}
-                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'module_detail' material.material_id %}">{{ material.title }}</a>
+                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'module_detail' material.title|normalize_string material.material_id %}">{{ material.title }}</a>
                     {% else %}
-                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'collection_detail' material.material_id %}">{{ material.title }}</a>
+                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'collection_detail' material.title|normalize_string material.material_id %}">{{ material.title }}</a>
                     {% endif %}
                 </div>
 

@@ -1,5 +1,6 @@
 {% extends "base/base.html" %}
 {% load i18n %}
+{% load vpw_filters %}
 {% block titleSite %}Thu vien hoc lieu mo Viet Nam - VOER{% endblock %}
 
 {% block slide %}
@@ -59,9 +60,9 @@
 <ul class="list-collection-mainpage left">
     {% for material in materials_list %}
     {% if material.material_type == 1 %}
-        {% url 'module_detail' mid=material.material_id as material_url %}
+        {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
     {% else %}
-        {% url 'collection_detail' cid=material.material_id as material_url %}
+        {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
     {% endif %}
     <li>
         <div class="icon-hot"></div>

@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load thumbnail %}
+{% load vpw_filters %}
 
 {% block titleSite %}{% trans "User profile" %}{% endblock %}
 
@@ -102,9 +103,9 @@
     <div class="hfitems">
     {% for material in materials %}
     {% if material.material_type == 1 %}
-        {% url 'module_detail' mid=material.material_id as material_url %}
+        {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
     {% else %}
-        {% url 'collection_detail' cid=material.material_id as material_url %}
+        {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
     {% endif %}
     <div class="hfitem">
     <div class="collection-save-hover">

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load vpw_filters %}
 {% if other_data %}
     {% for other_material in other_data %}
     <div class="other-module-author">
@@ -10,9 +11,9 @@
         </div>
         <div class="other-author-title left padding-content-5">
             {% if other_material.material_type == 1 %}
-            <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'module_detail' other_material.material_id %}">{{ other_material.title }}</a>
+            <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'module_detail' other_material.title|normalize_string other_material.material_id %}">{{ other_material.title }}</a>
             {% else %}
-            <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' other_material.material_id %}">{{ other_material.title }}</a>
+            <a class="link-other-author-module left clear" alt="{{ other_material.title }}" title="{{ other_material.title }}" href="{% url 'collection_detail' other_material.title|normalize_string other_material.material_id %}">{{ other_material.title }}</a>
             {% endif %}
         </div>
     </div>

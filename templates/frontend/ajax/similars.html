@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load vpw_filters %}
 
 {% if similar_data %}
     {% for similar in similar_data %}
@@ -11,9 +12,9 @@
         </div>
         <div class="other-author-title left padding-content-5">
             {% if similar.material_type == 1 %}
-            <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.material_id %}">{{ similar.title }}</a>
+            <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.title|normalize_string similar.material_id %}">{{ similar.title }}</a>
             {% else %}
-            <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' similar.material_id %}">{{ similar.title }}</a>
+            <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' similar.title|normalize_string similar.material_id %}">{{ similar.title }}</a>
             {% endif %}
 
             {% for person in similar.author_list %}

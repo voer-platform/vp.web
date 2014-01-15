@@ -25,7 +25,7 @@ from django.utils.translation import ugettext as _, get_language
 from registration.backends.default.views import RegistrationView
 
 from vpw.models import Material, Author, Settings
-from vpw.no_accent_vietnamese_unicodedata import no_accent_vietnamese
+from vpw.utils import normalize_string
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
@@ -120,7 +120,7 @@ def _get_image(list_images):
     return replace_image
 
 
-def module_detail(request, mid, version):
+def module_detail(request, title, mid, version):
     material = vpr_get_material(mid)
     # lay anh trong noi dung
     list_images = vpr_get_material_images(mid)
@@ -175,7 +175,7 @@ def module_detail(request, mid, version):
     return response
 
 
-def collection_detail(request, cid, mid):
+def collection_detail(request, title, cid, mid):
     # Get collection
     collection = vpr_get_material(cid)
     outline = json.loads(collection['text'])
@@ -371,7 +371,7 @@ def create_module(request):
             if action == 'import':
                 if 'document_file' in request.FILES:
                     upload_file = request.FILES['document_file']
-                    upload_filename = no_accent_vietnamese(upload_file.name)
+                    upload_filename = normalize_string(upload_file.name)
                     with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
                         for chunk in upload_file.chunks():
                             destination.write(chunk)
@@ -838,7 +838,7 @@ def get_outline(cid, outline, private=False):
             if private:
                 result += "<li><a href='/user/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
             else:
-                result += "<li><a href='/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
+                result += "<li><a href='/c/%s/%s/%s'>%s</a></li>" % (normalize_string(item['title']), cid, item['id'], item['title'])
         else:
             strli = "<li>"
             strli += "<a>%s</a>" % item['title']

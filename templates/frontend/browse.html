@@ -1,5 +1,6 @@
 {% extends "base/base-content.html" %}
 {% load i18n %}
+{% load vpw_filters %}
 {% block titleSite %}Browse{% endblock %}
 
 {% block js %}
@@ -97,9 +98,9 @@
 <div id="materials" class="hfitems active">
 {% for material in materials %}
 {% if material.material_type == 1 %}
-    {% url 'module_detail' mid=material.material_id as material_url %}
+    {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
 {% else %}
-    {% url 'collection_detail' cid=material.material_id as material_url %}
+    {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
 {% endif %}
 <div class="hfitem">
     <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
