@@ -123,13 +123,10 @@
 			<textarea rows="4" class="form-control" name="description">{{ form.description.value }}</textarea>
 		</div>
 		<div class="form-group">
-			<label for="InputAuthor">{% trans 'Add more author' %}</label>
-			<input type="text" class="form-control search-author"  autocomplete="off"
-                   id="InputAuthor" placeholder="{% trans 'Enter an author' %}">
-			<!-- <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a> -->
+			<label>{% trans 'Author' %}</label>
 		</div>
-		<div class="form-group listAuthor">
-			<table class="listAuthor" id="listAuthor">
+        <div class="form-group listAuthor">
+			<table class="listAuthor" id="author">
 				<thead>
 					<tr>
                         <th>{% trans 'Name' %}</th>
@@ -159,10 +156,10 @@
 							</a>
 						</td>
 						<td>
-                            <input type="checkbox"  value="{{ author.id }}" name="authors" checked>
+                            <input type="checkbox" value="{{ author.id }}" name="authors" checked />
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="editors" checked>
+                            <input type="checkbox" value="{{ author.id }}" name="editors" checked />
 						</td>
 						<td>
                             <input type="checkbox" name="{{ author.id }}" name="licensors">
@@ -178,6 +175,29 @@
 						</td>
 						<td style="width:25px;">&nbsp;</td>
 					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="form-group">
+			<label for="InputAuthor" class="more-author">{% trans 'Add more author' %}</label>
+			<input type="text" class="form-control search-author"  autocomplete="off"
+                   id="InputAuthor" placeholder="{% trans 'Search author' %}">
+		</div>
+		<div class="form-group listAuthor">
+			<table class="listAuthor" id="listAuthor">
+				<thead>
+					<tr>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Author' %}</th>
+                        <th>{% trans 'Editor' %}</th>
+                        <th>{% trans 'Licensor' %}</th>
+                        <th>{% trans 'Maintainer' %}</th>
+                        <th>{% trans 'Translator' %}</th>
+                        <th>{% trans 'Contributor' %}</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
 				</tbody>
 			</table>
 		</div>
@@ -218,8 +238,7 @@
 		</div>
 		<div class="form-group">
 			<label for="InputKeywords">{% trans 'Keywords' %}</label>
-			<input type="text" class="form-control typetext" id="InputKeywords"
-                   placeholder="{% trans 'Enter keywords' %}" name="keywords" value="{{ form.keywords.value }}">
+            <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
 		</div>
 		<div class="form-group">
 			<label for="InputTags">{% trans 'Tags' %}</label>

@@ -291,6 +291,12 @@ input.search-author{
 
 div.fakefile{
     top: 24px;
+    width: auto;
+}
+
+div.fakefile input{
+    width: 300px;
+    display: inline-block;
 }
 
 button.hfbtn-common{
@@ -538,4 +544,8 @@ button.hfbtn-common{
 }
 .error-500-page #suggestions a:hover {
     text-decoration: underline;
+}
+
+label.more-author{
+    display: block;
 }

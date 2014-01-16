@@ -88,7 +88,7 @@
         <ul>
             <li class="active"><a id="hfstep-1"><div class="step">1</div> {% trans 'License' %}</a></li>
             <li class="active"><a id="hfstep-2"><div class="step">2</div>{% trans 'Metadata' %}</a></li>
-            <li><a id="hfstep-3"><div class="step">3</div>{% trans 'Content' %}</a></li>
+            <li class="active"><a id="hfstep-3"><div class="step">3</div>{% trans 'Content' %}</a></li>
         </ul>
     </div>
 </div>
@@ -177,7 +177,7 @@
 		</div>
         <div class="form-group">
             <label for="InputAuthor">{% trans 'Add new author' %}</label><br/>
-            <input class="form-control search-author" id="InputAuthor" placeholder="Enter Author" type="text">
+            <input class="form-control search-author" id="InputAuthor" placeholder="Search author" type="text">
         </div>
 		<div class="form-group listAuthor">
 			<table class="listAuthor" id="listAuthor">
@@ -234,7 +234,7 @@
         </div>
         <div class="form-group">
             <label for="InputKeywords">{% trans 'Keywords' %}</label>
-            <textarea rows="4" name="keywords" class="form-control">{{ material.keywords }}</textarea>
+            <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
         </div>
         <div class="form-group">
             <label for="InputTags">{% trans 'Tags' %}</label>
