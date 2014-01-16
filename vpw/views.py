@@ -1117,7 +1117,10 @@ def admin_import_user(request):
             user_all = User.objects.filter()
             for user in user_all:
                 current_user_id_list.append(user.username)
-                current_author_id_list.append(user.author.author_id)
+                try:
+                    current_author_id_list.append(user.author.author_id)
+                except Author.DoesNotExist:
+                    print 'no author'
 
             user_list = request.FILES['user_list']
             file_path = settings.MEDIA_ROOT + '/' + user_list.name
