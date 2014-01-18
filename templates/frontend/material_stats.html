@@ -36,7 +36,7 @@
 {% include 'frontend/block/left_block_user.html' %}
 <div class="col-lg-1 right-row">
     <div id="fitertop-browserall" class="hffitertop" style="text-align: center">
-        <h4>Top 10 Most Viewed Documents</h4>
+        <h4>{{ title }}</h4>
     </div>
 <div class="hfitems">
     {% for material in materials %}
@@ -101,7 +101,7 @@
             <div class="voer-col-ico left">&nbsp;</div>
             {% endif %}
 
-            <div class="hflike left">{% if material.favorite_count.favorite %} {{ material.favorite_count.favorite }}{% else %}0{% endif %}</div>
+            <div class="hflike left">{% if material.favorites %}{{ material.favorites }}{% else %}{% endif %}</div>
             <div class="hfview left">{{ material.count }}</div>
 
             <div class="hfother right tooltipi-container">

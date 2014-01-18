@@ -733,21 +733,28 @@ def mostViewedView(request):
     pid = current_user.author.author_id
     author = vpr_get_person(pid, True)
     materials = vpr_request('GET', 'stats/materials/counter/')
+    template = "frontend/material_stats.html"
+    return render(request, template, 
+        {"materials": materials, 
+         "author": author,
+         "title": "Top 12 Most Viewed Documents",
+        })
 
-    #page_query = get_page_query(request)
-    #pager = pager_default_initialize(materials['count'], 12, page)
 
-    #person_materials = []
-    #for material in materials['results']:
-    #    view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
-    #    material['view_count'] = view_count
+@login_required
+def mostFavedView(request):
+    #page = int(request.GET.get('page', 1))
+    current_user = request.user
+    pid = current_user.author.author_id
+    author = vpr_get_person(pid, True)
+    materials = vpr_request('GET', 'stats/materials/favorites/')
+    template = "frontend/material_stats.html"
+    return render(request, template, 
+        {"materials": materials, 
+         "author": author,
+         "title": "Top 12 Most Favorited Documents",
+        })
 
-    #    favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
-    #    material['favorite_count'] = favorite_count
-
-    #    person_materials.append(material)
-
-    return render(request, "frontend/material_stats.html", {"materials": materials, "author": author})
 
 @csrf_exempt
 def search_result(request):
