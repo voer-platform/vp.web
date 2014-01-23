@@ -306,7 +306,7 @@ def user_collection_detail(request, cid, mid):
             file_data = []
 
         # Generate outline html
-        str_outline = "<ul class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'], True)
+        str_outline = "<ul id='outline-collection' class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'], True)
 
         if collection.type == COLLECTION_TYPE:
             return render(request, "frontend/collection_detail.html", {
