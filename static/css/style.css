@@ -297,6 +297,7 @@ div.fakefile{
 div.fakefile input{
     width: 300px;
     display: inline-block;
+    padding-right: 30px;
 }
 
 button.hfbtn-common{
