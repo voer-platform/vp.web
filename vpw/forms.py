@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from registration.forms import RegistrationForm
 from vpw.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
+from django.utils.translation import ugettext as _
 
 
 class MaterialCreationForm(forms.Form):
@@ -20,6 +21,21 @@ class MaterialCreationForm(forms.Form):
     version = forms.IntegerField(initial=0, required=False)
     material_id = forms.CharField(max_length=64, required=False)
     mid = forms.IntegerField(required=False)
+
+    def clean_title(self):
+        if self.cleaned_data.get('title', '') == '':
+            raise ValidationError(_('Required'))
+        return self.cleaned_data.get('title', '')
+
+    def clean_categories(self):
+        if self.cleaned_data.get('categories', '') == '':
+            raise ValidationError(_('Required'))
+        return self.cleaned_data.get('categories', '')
+
+    def clean_language(self):
+        if self.cleaned_data.get('language', '00') == '00':
+            raise ValidationError(_('Required'))
+        return self.cleaned_data.get('language', '')
 
     def clean_version(self):
         if self.cleaned_data.get('version'):

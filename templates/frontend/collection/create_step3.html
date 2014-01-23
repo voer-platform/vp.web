@@ -12,6 +12,8 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/hogan.js"></script>
     <script>
     $(document).ready(function(){
+        jQuery.fn.addBack = jQuery.fn.andSelf;
+
         $('#search-module').typeahead({
             name: 'modules',
             valueKey: 'title',
@@ -105,13 +107,13 @@
                                 <textarea rows="4" class="form-control"
                                           name="description">{{ material.description }}</textarea>
                             </div>
+                            <!--
                             <div class="form-group">
                                 <label for="InputAuthor">{% trans 'Author' %}</label>
                                 <input class="form-control typetext" id="InputAuthor" placeholder="Enter Author"
                                        type="text">
                                 <a class="AddNew" href="#addnewauthor">{% trans 'Add new Author' %}</a>
                             </div>
-                            <!--
                             <div class="form-group listAuthor">
                                 <table class="listAuthor">
                                     <thead>
@@ -226,8 +228,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="InputKeywords">{% trans 'Keywords' %}</label>
-                                <input class="form-control typetext" id="InputKeywords" placeholder="Enter Keywords"
-                                       type="text" name="keywords" value="{{ material.keywords }}">
+                                <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="InputTags">{% trans 'Tags' %}</label>
@@ -244,7 +245,7 @@
                             </div>
                             <div class="form-group btn-common">
                                 <div class="hfleft left">
-                                    <a class="hfbtn-common hfbtn-next hfbtn-active" href="create_collection_save.php"
+                                    <a class="hfbtn-common hfbtn-next hfbtn-active" href="#"
                                        data-toggle="modal" data-target="#myModal">{% trans 'Create Section' %}</a>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"

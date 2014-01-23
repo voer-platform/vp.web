@@ -284,6 +284,7 @@ def user_collection_detail(request, cid, mid):
             raise PermissionDenied
         author_id = request.user.author.author_id
         author = vpr_get_person(author_id)
+        authors = [author]
         category = vpr_get_category(collection.categories)
 
         outline = json.loads(collection.text)
@@ -311,7 +312,7 @@ def user_collection_detail(request, cid, mid):
             return render(request, "frontend/collection_detail.html", {
                 "material": material,
                 "collection": collection,
-                "author": author,
+                "author": authors,
                 "category": category,
                 "outline": str_outline
             })
@@ -547,7 +548,8 @@ def create_collection(request):
                         material.material_id = result['material_id']
                         material.version = result['version']
                         material.save()
-                        return redirect('collection_detail', cid=result['material_id'])
+                        return redirect('collection_detail', title=normalize_string(material.title),
+                                        cid=result['material_id'])
 
             elif action == "back":
                 current_step = 2
