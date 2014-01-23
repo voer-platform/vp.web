@@ -25,14 +25,18 @@
         });
 
         $('.search-author').on('typeahead:selected', function (object, datum) {
-            var template = Hogan.compile(ITEM_TEMPLATE);
-            var output = template.render(datum);
-            $('#listAuthor tbody').append(output);
-            $('.search-author').val('');
+            if ($('table.listAuthor tbody').find('tr#'+datum.id).length){
+                alert('Tac gia da co trong danh sach!');
+            }else{
+                var template = Hogan.compile(ITEM_TEMPLATE);
+                var output = template.render(datum);
+                $('#listAuthor tbody').append(output);
+                $('.search-author').val('');
+            }
         });
 
 
-        var ITEM_TEMPLATE = ['<tr>',
+        var ITEM_TEMPLATE = ['<tr id="{% verbatim %}{{id}}{% endverbatim %}">',
             '<td class="author-block">',
             '<a class="hfbtn-author" href="#">{% verbatim %}{{fullname}}{% endverbatim %}',
             '<div class="author-information">',
@@ -140,9 +144,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr id="{{ author.id }}">
 						<td class="author-block">
-							<a class="hfbtn-author" href="#">{{ author.fullname }}
+							<a class="hfbtn-author" href="#" tabindex="-1">{{ author.fullname }}
 								<div class="author-information">
 									<div class="avatar left">
 										<img src="images/avatar.jpg" width="70px" height="70px">

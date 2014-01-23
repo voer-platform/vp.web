@@ -376,7 +376,7 @@ def create_module(request):
                         for chunk in upload_file.chunks():
                             destination.write(chunk)
                     # call import vpt
-                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_file.name)
+                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
                     task_id = result_import['task_id']
                     download_url = vpt_get_url(task_id)
                     response = vpt_download(download_url)
@@ -456,7 +456,8 @@ def create_module(request):
                             material.material_id = result['material_id']
                             material.version = result['version']
                             material.save()
-                            return redirect('module_detail', mid=result['material_id'])
+                            return redirect('module_detail', title=normalize_string(material.title),
+                                            mid=result['material_id'])
                 except Material.DoesNotExist:
                     current_step = 2
                     params['form'] = form

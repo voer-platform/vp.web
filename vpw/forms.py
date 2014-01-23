@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from registration.forms import RegistrationForm
 from vpw.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
@@ -16,10 +17,17 @@ class MaterialCreationForm(forms.Form):
     maintainers = forms.CharField(max_length=100, required=False)
     translators = forms.CharField(max_length=100, required=False)
     coeditors = forms.CharField(max_length=100, required=False)
-    version = forms.IntegerField(required=False)
+    version = forms.IntegerField(initial=0, required=False)
     material_id = forms.CharField(max_length=64, required=False)
     mid = forms.IntegerField(required=False)
 
+    def clean_version(self):
+        if self.cleaned_data.get('version'):
+            try:
+                return int(self.cleaned_data['version'].strip())
+            except ValueError:
+                raise ValidationError("Invalid number")
+        return 0
 
 class ModuleCreationForm(MaterialCreationForm):
     body = forms.CharField(widget=TinyMCE(attrs={'rows': 7}), required=False)
