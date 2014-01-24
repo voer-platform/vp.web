@@ -6,7 +6,7 @@
 
 {% block titleSite %}{% trans "User profile" %}{% endblock %}
 
-{% block content %}        
+{% block content %}
 
 <!-- filter top -->
 <div class="hfuser-top">
@@ -109,346 +109,228 @@
     </div>
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Featured' %}</a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">         
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a>{% trans 'Featured' %}</a></li>
             <li><a>{% trans 'Most Liked' %}</a></li>
             <li><a>{% trans 'Most Viewed' %}</a></li>
             <li><a>{% trans 'Most Discussed' %}</a></li>
-            <li><a>{% trans 'Most Recent' %}  </a></li>   
+            <li><a>{% trans 'Most Recent' %}  </a></li>
         </ul>
-    </div>-->  
+    </div>-->
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Sort by' %}</a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><a>{% trans 'Title' %}</a></li>
-            <li><a>{% trans 'Relevance' %}</a></li>
-            <li><a>{% trans 'Rating' %}</a></li>
-            <li><a>{% trans 'Date' %}</a></li>
+        <ul class="dropdown-menu dropdown-menu-sort" role="menu" aria-labelledby="dLabel">
+            <li><a href="javascript:void(0)" rel="title">{% trans 'Title' %}</a></li>
+            <!--<li><a>{% trans 'Relevance' %}</a></li>
+            <li><a>{% trans 'Rating' %}</a></li>-->
+            <li><a href="javascript:void(0)" rel="modified">{% trans 'Date' %}</a></li>
         </ul>
-    </div>  
+    </div>
     <div class="fiterbutton right">
         <a class="gridview left">{% trans 'Gridview' %}</a>
         <a class="listview right">{% trans 'Listview' %}</a>
-    </div>  
-</div>          <div class="col-lg-1 left-row">
-                <script>
-                    $(document).ready(function(){
-                        $('.hfbtn-save').click(function(){
-                            //var $iditem = $(this).attr('metadata');
-                            //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
-                            var btnSave = $(this);
-                            var mid = $(this).attr('mid');
-                            var version = $(this).attr('version');
-                            var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
-
-                            $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
-                                if (data.status) {
-                                    btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
-                                }
-                            });
-                        });
-                        $('.hfbtn-saveto-type').click(function(){
-                            var $iditemCreate = $(this).attr('metadata');
-                                                        
-                            $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
-                            //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
-                        });         
-                    });
-                </script>               
- <div id="materials" class="hfitems">
-  {% for material in materials %}  
-  {% if material.material_type == 1 %}
-        {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
-    {% else %}
-        {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
-    {% endif %}
-  <div class="hfitem">    
-    <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
-        {% if user.is_authenticated %}
-        <div class="collection-save">
-            <div><a class="hfbtn-save" metadata="iditem-{{ material.material_id }}" mid="{{ material.material_id }}" version="{{ material.version }}">{% trans 'Add to my favourite' %}</a></div>
-        </div>
-        <div class="collection-saveto" metadata="iditem-{{ material.material_id }}">
-            <div class="collection-saveto-title">{% trans 'My Favorites' %}</div>
-            <div class="collection-saveto-content">
-
-            </div>
-            <div class="collection-saveto-create" metadata="iditem-1-create">
-                <a class="hfbtn-saveto-type" metadata="iditem-1-create">{% trans 'Create new' %}</a>
-            </div>
-            <div class="collection-saveto-type" metadata="iditem-1-create">
-                <input onclick="" class="saveto-type" title="Create new" value="Create new" alt="Create new" type="text">
-            </div>
-        </div>
-        {% endif %}
     </div>
-    <div class="collection-mainpage-cover">
-       {% if material.categories %}
-	   <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>     
-	   {% else %}
-	   <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
-	   {% endif %}
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="info-collection">
-            <div class="title-collection">
-                <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
-            </div>
+</div>
+<div class="content-wrapper">
+    <div class="col-lg-1 left-row">
+        <script>
+        $(document).ready(function(){
+            $(document).on('click', '.dropdown-menu-sort a', function(){
+                $('#filter-sort').val($(this).attr('rel'));
+                ajaxGetMaterialByCondition();
+            });
+            $('.hfbtn-save').click(function(){
+                //var $iditem = $(this).attr('metadata');
+                //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
+                var btnSave = $(this);
+                var mid = $(this).attr('mid');
+                var version = $(this).attr('version');
+                var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
 
-            <div class="short-collection">
-            {% if material.description %}
-                {% ifequal material.description '-' %}
-                    <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
-                {% else %}
-                    {{ material.description }}
-                {% endifequal %}
-            {% else %}
-                <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
-            {% endif %}
-            </div>
-
-            <div class="author-collection">
-                <a href="{% url 'view_profile' person.id %}">{{ person.fullname }}</a>
-            </div>
-        </div>
-        <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
-			{% if material.categories == '1' %}
-				{% trans 'Business' %}
-			{% elif  material.categories == '2' %}
-				{% trans 'Social Sciences' %}
-			{% elif  material.categories == '3' %}
-				{% trans 'Science and Technology' %}
-			{% elif  material.categories == '4' %}
-				{% trans 'Humanities' %}
-			{% elif  material.categories == '5' %}
-				{% trans 'Arts' %}
-			{% elif  material.categories == '6' %}
-				{% trans 'Mathematics and Statistics' %}
-			{% else %}
-				{% trans 'Others' %}
-			{% endif %}
-		</a></div>
-    </div> 
-    <div class="collection-mainpage-other">
-        {% if material.material_type == 1 %}
-        <div class="voer-mol-ico left">&nbsp;</div>
-        {% elif material.material_type == 2 %}
-        <div class="voer-col-ico left">&nbsp;</div>
-        {% endif %}
-
-        <div class="hflike left">{% if material.favorite_count.favorite %} {{ material.favorite_count.favorite }}{% else %}0{% endif %}</div>
-        <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
-
-        <div class="hfother right tooltipi-container">
-            <img src="{{ STATIC_URL }}images/icon/information.png">         
-            <div class="hftooltipi">
-                {% trans 'Uploaded On:' %} <strong>{{ material.modified }}</strong>
-            </div>
-        </div>
-    </div>
-  </div> 
-  {% endfor %}
-  {% include "base/pager.html" %}
-</div> 
-
-           </div>
-            <div class="col-lg-2 right-row">
-                <div class="hffilter-right">
-    <div class="bigbox-common">
-        <div class="title">{% trans 'Filter By' %}</div>      
-        <div class="content" id="main_list">
-            <script>
-                $(document).ready(function(){
-                    $('div[data-key|=authors]').click(function(){
-                        var $datakey=$(this).attr('data-key');
-                        if ($datakey == 'authors-0'){
-                            $('div[data-key|=authors]').removeClass('file_selected');
-                            $('div[data-key=authors-0]').addClass('file_selected');
-                        }else {
-                            $('div[data-key=authors-0]').removeClass('file_selected');
-                        }
-                    });
-                    $('div[data-key|=categories]').click(function(){
-                        var $datakey=$(this).attr('data-key');
-                        if($datakey == 'categories-0'){
-                            $('div[data-key|=categories]').removeClass('file_selected');
-                            $('div[data-key=categories-0]').addClass('file_selected');
-                        }else{
-                            $('div[data-key=categories-0]').removeClass('file_selected');
-                        }
-                    });
-                    $('div[data-key|=langs]').click(function(){
-                        var $datakey=$(this).attr('data-key');
-                        if($datakey == 'langs-0'){
-                            $('div[data-key|=langs]').removeClass('file_selected');
-                            $('div[data-key=langs-0]').addClass('file_selected');
-                        }else{
-                            $('div[data-key=langs-0]').removeClass('file_selected');
-                        }
-                    });
-                    $('div[data-key|=types]').click(function(){
-                        var $datakey=$(this).attr('data-key');
-                        if($datakey == 'types-0'){
-                            $('div[data-key|=types]').removeClass('file_selected');
-                            $('div[data-key=types-0]').addClass('file_selected');
-                        }else{
-                            $('div[data-key=types-0]').removeClass('file_selected');
-                        }
-                    });
-                    $('.checkbox-custom').click(function(){
-                        var $datakey=$(this).attr('data-key');
-                        $('div[data-key='+$datakey+']').toggleClass('file_selected');
-                        getItemSelected()
-                    });
+                $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
+                    if (data.status) {
+                        btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
+                    }
                 });
-                function getItemSelected(){
-                    // mang cac items duoc select
-                    listItems = [];
-                    $('#main_list').find('.checkbox-custom.file_selected').each(function(){
-                        listItems.push($(this).attr('data-key'));
+            });
+        });
+        </script>
+        <div class="hfitems">
+            <div id="materials" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="{% url 'ajax_browse' %}">&nbsp;</div>
+        </div>
+    </div>
+
+    <div class="col-lg-2 right-row">
+        <div class="hffilter-right">
+            <div class="bigbox-common">
+                <div class="title">{% trans 'Filter By' %}</div>
+                <div class="content" id="main_list">
+                    <script>
+                    $(document).ready(function(){
+                        $('div[data-key|=authors]').click(function(){
+                            var $datakey=$(this).attr('data-key');
+                            if ($datakey == 'authors-0'){
+                                $('div[data-key|=authors]').removeClass('file_selected');
+                                $('div[data-key=authors-0]').addClass('file_selected');
+                            }else {
+                                $('div[data-key=authors-0]').removeClass('file_selected');
+                            }
+                        });
+                        $('div[data-key|=categories]').click(function(){
+                            var $datakey=$(this).attr('data-key');
+                            if($datakey == 'categories-0'){
+                                $('div[data-key|=categories]').removeClass('file_selected');
+                                $('div[data-key=categories-0]').addClass('file_selected');
+                            }else{
+                                $('div[data-key=categories-0]').removeClass('file_selected');
+                            }
+                        });
+                        $('div[data-key|=langs]').click(function(){
+                            var $datakey=$(this).attr('data-key');
+                            if($datakey == 'langs-0'){
+                                $('div[data-key|=langs]').removeClass('file_selected');
+                                $('div[data-key=langs-0]').addClass('file_selected');
+                            }else{
+                                $('div[data-key=langs-0]').removeClass('file_selected');
+                            }
+                        });
+                        $('div[data-key|=types]').click(function(){
+                            var $datakey=$(this).attr('data-key');
+                            if($datakey == 'types-0'){
+                                $('div[data-key|=types]').removeClass('file_selected');
+                                $('div[data-key=types-0]').addClass('file_selected');
+                            }else{
+                                $('div[data-key=types-0]').removeClass('file_selected');
+                            }
+                        });
+                        $('.checkbox-custom').click(function(){
+                            var $datakey=$(this).attr('data-key');
+                            $('div[data-key='+$datakey+']').toggleClass('file_selected');
+                            ajaxGetMaterialByCondition();
+                        });
                     });
-                    numberItem = listItems.length;
-                    //alert(listItems[.join(',')]);
-                    var html='';
-                    var types = [];
-                    var langs = [];
-                    var categories = [];
-                    for(i=0; i<numberItem; i++){
-                        if(listItems[i].substr(0, 6) == 'types-'){
-                            types.push(listItems[i].substr(6));
-                        }else if(listItems[i].substr(0,6) == 'langs-'){
-                            langs.push(listItems[i].substr(6));
-                        }else if(listItems[i].substr(0,11) == 'categories-'){
-                            categories.push(listItems[i].substr(11));
-                        }
-                    }
-                    ajax_browse("{% url 'ajax_browse' %}?author={{ person.id }}", types.join(","), langs.join(","), categories.join(","));
-                    if(numberItem > 0){
-                        $('#selection-actions').removeClass('displaynone');
-                        $('.selected_count').html(numberItem);
+                    </script>
+                    <!-- type -------------------------------------------------------------------->
+                    <div class="smallbox-common">
+                        <div class="checkbox-item">
+                            <div class="file_selected" data-key="types-0">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="types-0"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'All types' %}
+                                </div>
+                                <div class="hfchecknumber">
 
-                    }else{
-                        $('#selection-actions').addClass('displaynone');
-                    }
-                }
-            </script>
-            <!-- type -------------------------------------------------------------------->
-            <div class="smallbox-common">
-                <div class="checkbox-item">
-                    <div class="file_selected" data-key="types-0">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="types-0"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="hfcheckinfo">
-                            {% trans 'All types' %}
-                        </div>
-                        <div class="hfchecknumber">
+                         <div class="checkbox-item">
+                            <div class="" data-key="types-1">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-key="types-1"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Modules' %}
+                                </div>
+                                <div class="hfchecknumber">
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="" data-key="types-2">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-key="types-2"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Collection' %}
+                                </div>
+                                <div class="hfchecknumber">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                 <div class="checkbox-item">
-                    <div class="" data-key="types-1">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="types-1"></div>
-                        </div>
-                        <div class="hfcheckinfo">
-                            {% trans 'Modules' %}
-                        </div>
-                        <div class="hfchecknumber">
+                    <!-- language -------------------------------------------------------------------->
+                    <div class="smallbox-common">
+                        <div class="checkbox-item">
+                            <div class="file_selected" data-key="langs-0">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="langs-0"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'All languages' %}
+                                </div>
+                                <div class="hfchecknumber">
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="" data-key="langs-vi">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-key="langs-vi"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Vietnamese' %}
+                                </div>
+                                <div class="hfchecknumber">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="" data-key="langs-en">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-key="langs-en"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'English' %}
+                                </div>
+                                <div class="hfchecknumber">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="checkbox-item">
-                    <div class="" data-key="types-2">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="types-2"></div>
-                        </div>
-                        <div class="hfcheckinfo">
-                            {% trans 'Collection' %}
-                        </div>
-                        <div class="hfchecknumber">
+                    <!-- Categories -->
+                    <div class="smallbox-common">
+                        <div class="checkbox-item">
+                            <div class="file_selected" data-key="categories-0">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="categories-0"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'All categories' %}
+                                </div>
+                                <div class="hfchecknumber">
 
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- language -------------------------------------------------------------------->
-            <div class="smallbox-common">
-                <div class="checkbox-item">
-                    <div class="file_selected" data-key="langs-0">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="langs-0"></div>
-                        </div>
-                        <div class="hfcheckinfo">
-                            {% trans 'All languages' %}
-                        </div>
-                        <div class="hfchecknumber">
+                        {% for category in categories %}
+                        <div class="checkbox-item">
+                            <div class="" data-key="categories-{{category.id}}">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-key="categories-{{category.id}}"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {{ category.name }}
+                                </div>
+                                <div class="hfchecknumber">
 
+                                </div>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
+                    <!-- input hidden extra -->
+                    <input id="filter-author-id" type="hidden" value="{{ person.id }}" />
+                    <input id="filter-sort" type="hidden" value="{{ sort_direct }}" />
                 </div>
-                <div class="checkbox-item">
-                    <div class="" data-key="langs-vi">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="langs-vi"></div>
-                        </div>
-                        <div class="hfcheckinfo">
-                            {% trans 'Vietnamese' %}
-                        </div>
-                        <div class="hfchecknumber">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="checkbox-item">
-                    <div class="" data-key="langs-en">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="langs-en"></div>
-                        </div>
-                        <div class="hfcheckinfo">
-                            {% trans 'English' %}
-                        </div>
-                        <div class="hfchecknumber">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Categories -->
-            <div class="smallbox-common">
-                <div class="checkbox-item">
-                    <div class="file_selected" data-key="categories-0">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-key="categories-0"></div>
-                        </div>
-                        <div class="hfcheckinfo">
-                            {% trans 'All categories' %}
-                        </div>
-                        <div class="hfchecknumber">
-
-                        </div>
-                    </div>
-                </div>
-                {% for category in categories %}
-                <div class="checkbox-item">
-                    <div class="" data-key="categories-{{category.id}}">
-                        <div class="grip_column">
-                            <div title="Select/Deselect Item" class="checkbox-custom" data-key="categories-{{category.id}}"></div>
-                        </div>
-                        <div class="hfcheckinfo">
-                            {{ category.name }}
-                        </div>
-                        <div class="hfchecknumber">
-
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
     </div>
-</div>  
-            </div>          
+</div>
 {% endblock %}

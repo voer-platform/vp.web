@@ -1,40 +1,41 @@
 {% load i18n %}
 {% load vpw_filters %}
 <script>
-                    $(document).ready(function(){
-                        $('.hfbtn-save').click(function(){
-                            //var $iditem = $(this).attr('metadata');
-                            //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
-                            var btnSave = $(this);
-                            var mid = $(this).attr('mid');
-                            var version = $(this).attr('version');
-                            var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
+$(document).ready(function(){
+    $('.hfbtn-save').click(function(){
+        //var $iditem = $(this).attr('metadata');
+        //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
+        var btnSave = $(this);
+        var mid = $(this).attr('mid');
+        var version = $(this).attr('version');
+        var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
 
-                            $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
-                                if (data.status) {
-                                    btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
-                                }
-                            });
-                        });
-                        $('.collection-save-hover').hover(
-                            function() {
-                            }, function() {
-                              var $iditem = $(this).attr('metadata').replace('col-hover-', '');
-                              var $selectItem = $('div[metadata=iditem-'+$iditem+']');
+        $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
+            if (data.status) {
+                btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
+            }
+        });
+    });
+    $('.collection-save-hover').hover(
+        function() {
+        }, function() {
+          var $iditem = $(this).attr('metadata').replace('col-hover-', '');
+          var $selectItem = $('div[metadata=iditem-'+$iditem+']');
 
-                              /*if ($selectItem.hasClass('hfvisible')) {
-                                $selectItem.toggleClass('hfvisible');
-                              }*/
-                            }
-                        );
-                        $('.hfbtn-saveto-type').click(function(){
-                            var $iditemCreate = $(this).attr('metadata');
+          /*if ($selectItem.hasClass('hfvisible')) {
+            $selectItem.toggleClass('hfvisible');
+          }*/
+        }
+    );
+    $('.hfbtn-saveto-type').click(function(){
+        var $iditemCreate = $(this).attr('metadata');
 
-                            $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
-                            //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
-                        });
-                    });
-                </script>
+        $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
+        //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
+    });
+});
+</script>
+{% if materials.results %}
 {% for material in materials.results %}
 {% if material.material_type == 1 %}
     {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
@@ -65,7 +66,7 @@
 		{% if material.categories.0.0 %}
 	   <img src="{{STATIC_URL}}images/cat{{material.categories.0.0}}.jpg"/>
 	   {% else %}
-	   <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
+	   <img src="{{STATIC_URL}}images/cat_other.jpg"/>
 	   {% endif %}
     </div>
     <div class="collection-mainpage-details">
@@ -103,4 +104,7 @@
     </div>
 </div>
 {% endfor %}
+{% else %}
+<p class="no-data">{% trans 'No data.' %}</p>
+{% endif %}
 {% include "base/pager.html" %}

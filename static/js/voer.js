@@ -1,17 +1,46 @@
 var Voer = {};
 
-function ajax_browse(url, types, languages, categories){
-    //Get value
-    $("#materials").html('<div class="bg-loading"><img src="/static/images/loading.gif" height="31" width="31" alt="loading..." /></div>');
-    $.get(url , {types: types, languages: languages, categories: categories}, function( data ) {
-        $("#materials" ).html( data );
-    });
-}
-
-
 function ajax_browse_page(url){
     $.get(url, function(data){
         $('#materials').html(data)
+    });
+}
+
+function ajaxGetMaterialByCondition() {
+    var author_id = $('#filter-author-id').val();
+    var sort = $('#filter-sort').val();
+    var page = 1;
+
+    //Get values
+    var listItems = [];
+    $('#main_list').find('.checkbox-custom.file_selected').each(function(){
+        listItems.push($(this).attr('data-key'));
+    });
+    var numberItem = listItems.length;
+    var html='';
+    var types = [];
+    var langs = [];
+    var categories = [];
+    for(var i = 0; i < numberItem; i++){
+        if(listItems[i].substr(0, 6) == 'types-'){
+            types.push(listItems[i].substr(6));
+        }else if(listItems[i].substr(0,6) == 'langs-'){
+            langs.push(listItems[i].substr(6));
+        }else if(listItems[i].substr(0,11) == 'categories-'){
+            categories.push(listItems[i].substr(11));
+        }
+    }
+
+    if(numberItem > 0){
+        $('#selection-actions').removeClass('displaynone');
+        $('.selected_count').html(numberItem);
+    }else{
+        $('#selection-actions').addClass('displaynone');
+    }
+
+    $("#materials").html('<div class="bg-loading"><img src="/static/images/loading.gif" height="31" width="31" alt="loading..." /></div>');
+    $.get('/ajax/browse' , {author: author_id, types: types.join(","), languages: langs.join(","), categories: categories.join(","), sort: sort}, function( data ) {
+        $("#materials" ).html(data);
     });
 }
 
