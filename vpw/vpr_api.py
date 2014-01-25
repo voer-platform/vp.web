@@ -209,6 +209,7 @@ def vpr_browse(**kwargs):
     types = kwargs.get("types", "")
     languages = kwargs.get("languages", "")
     author = kwargs.get("author", "")
+    sort = kwargs.get("sort", "title")
     params = ["page=%s" % page]
     # print "Type : " + types
     if categories and categories != "0":
@@ -223,6 +224,7 @@ def vpr_browse(**kwargs):
     if author:
         params.append("author=%s" % author)
 
+    params.append("sort_on=%s" % sort)
     params = "&".join(params)
 
     # print "params: " + params

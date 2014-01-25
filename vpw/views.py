@@ -604,38 +604,10 @@ def _save_material(form, material_type, current_user):
 
 
 def view_profile(request, pid):
-    page = int(request.GET.get('page', 1))
     current_person = vpr_get_person(pid, True)
-    materials = vpr_materials_by_author(pid, page)
-    pager = pager_default_initialize(materials['count'], 12, page)
-    page_query = get_page_query(request)
     categories = vpr_get_categories()
 
-    person_materials = []
-    for material in materials['results']:
-        author_id_list = material['author'].split(',')
-
-        p_list = []
-        for pid in author_id_list:
-            pid = pid.strip()
-            person = vpr_get_person(pid)
-            if person['fullname']:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-            else:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
-        material['author_list'] = p_list
-
-        view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
-        material['view_count'] = view_count
-
-        favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
-        material['favorite_count'] = favorite_count
-
-        person_materials.append(material)
-
-    return render_to_response("frontend/profile.html",
-                              {"person": current_person, "materials": person_materials, 'pager': pager,
-                               'page_query': page_query, 'categories': categories},
+    return render_to_response("frontend/profile.html", {"person": current_person, 'categories': categories},
                               context_instance=RequestContext(request))
 
 
@@ -654,28 +626,9 @@ Browse page
 
 
 def browse(request):
-    page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
 
-    cats = request.GET.get("categories", "")
-    types = request.GET.get("types", "")
-    languages = request.GET.get("languages", "")
-
-    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages)
-    material_result = []
-    for material in materials['results']:
-        view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
-        material['view_count'] = view_count
-
-        favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
-        material['favorite_count'] = favorite_count
-        material_result.append(material)
-
-    pager = pager_default_initialize(materials['count'], 12, page)
-    page_query = get_page_query(request)
-
-    return render(request, "frontend/browse.html",
-                  {"materials": material_result, "categories": categories, 'pager': pager, 'page_query': page_query})
+    return render(request, "frontend/browse.html", {"categories": categories})
 
 
 def vpw_authenticate(request):
@@ -738,8 +691,8 @@ def mostViewedView(request):
     author = vpr_get_person(pid, True)
     materials = vpr_request('GET', 'stats/materials/counter/')
     template = "frontend/material_stats.html"
-    return render(request, template, 
-        {"materials": materials, 
+    return render(request, template,
+        {"materials": materials,
          "author": author,
          "title": "Top 12 Most Viewed Documents",
         })
@@ -753,8 +706,8 @@ def mostFavedView(request):
     author = vpr_get_person(pid, True)
     materials = vpr_request('GET', 'stats/materials/favorites/')
     template = "frontend/material_stats.html"
-    return render(request, template, 
-        {"materials": materials, 
+    return render(request, template,
+        {"materials": materials,
          "author": author,
          "title": "Top 12 Most Favorited Documents",
         })
@@ -948,6 +901,7 @@ def get_page_query(request):
 
     return page_query
 
+
 ## Browse material
 def ajax_browse(request):
     page = int(request.GET.get('page', 1))
@@ -957,8 +911,9 @@ def ajax_browse(request):
     types = request.GET.get("types", "")
     languages = request.GET.get("languages", "")
     author = request.GET.get("author", "")
+    sort = request.GET.get("sort", "title")
 
-    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages, author=author)
+    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages, author=author, sort=sort)
     material_result = []
     for material in materials['results']:
         view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
