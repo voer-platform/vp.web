@@ -17,3 +17,11 @@ def normalize_string(value):
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
     value = re.sub('[^\w\d\s-]', '', value).strip().lower()
     return mark_safe(re.sub('[-\s]+', '-', value))
+
+
+def normalize_filename(value):
+    value = re.sub(u'Đ', 'D', value)
+    value = re.sub(u'đ', 'd', value)
+    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
+    value = re.sub('[^\.\w\d\s-]', '', value).strip().lower()
+    return mark_safe(re.sub('[-\s]+', '-', value))

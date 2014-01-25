@@ -11,6 +11,7 @@ import time
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import EmptyPage
+from django.db.models.query_utils import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
@@ -25,7 +26,7 @@ from django.utils.translation import ugettext as _, get_language
 from registration.backends.default.views import RegistrationView
 
 from vpw.models import Material, Author, Settings
-from vpw.utils import normalize_string
+from vpw.utils import normalize_string, normalize_filename
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
@@ -372,7 +373,7 @@ def create_module(request):
             if action == 'import':
                 if 'document_file' in request.FILES:
                     upload_file = request.FILES['document_file']
-                    upload_filename = normalize_string(upload_file.name)
+                    upload_filename = normalize_filename(upload_file.name)
                     with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
                         for chunk in upload_file.chunks():
                             destination.write(chunk)
@@ -1218,7 +1219,7 @@ def get_unpublish(request):
     offset_limit = offset + number_record
 
     try:
-        materials = Material.objects.filter(creator_id=current_user.id, material_id='', version=None)
+        materials = Material.objects.filter(Q(creator_id=current_user.id) & (Q(version=None) | Q(version=0)))
         material_count = len(materials)
 
         if sort:
@@ -1348,6 +1349,39 @@ def user_module_reuse(request, mid, version=1):
                     return redirect('module_detail', mid=result['material_id'])
     else:
         form = ModuleCreationForm(dict(body=material['text']))
+    params = {'material': material, 'categories': categories,
+              'form': form, 'author': author}
+    return render(request, MODULE_TEMPLATES[3], params)
+
+
+@login_required
+def user_module_edit(request, mid):
+    material = Material.objects.get(id=mid, creator=request.user, material_type=1)
+    categories = vpr_get_categories()
+    author = vpr_get_person(request.user.author.author_id)
+    if request.method == "POST":
+        form = ModuleCreationForm(request.POST)
+        action = request.POST.get("action", "")
+        if action == 'save':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                return redirect('user_module_detail', mid=material.id)
+        elif action == 'publish':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                # Publish content to VPR
+                result = _publish_material(material)
+                if 'material_id' in result:
+                    material.material_id = result['material_id']
+                    material.version = result['version']
+                    material.save()
+                    return redirect('module_detail', mid=result['material_id'])
+    else:
+        form = ModuleCreationForm(dict(body=material.text))
     params = {'material': material, 'categories': categories,
               'form': form, 'author': author}
     return render(request, MODULE_TEMPLATES[3], params)

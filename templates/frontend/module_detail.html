@@ -12,6 +12,11 @@
     <div class="module-view-title left padding-content-15">
         <span class="module-view-name left clear">{{ material.title }}</span>
         <a class="module-view-category left clear">{{ category.name }}</a>
+        {% if material.id %}
+        {% if material.version == 0 or material.version == '0' or material.version == None %}
+        <a href="{% url 'user_module_edit' mid=material.id %}" class="btn btn-primary" style="float: right;">{% trans 'Edit' %}</a>
+        {% endif %}
+        {% endif %}
     </div>
     <!-- END TITLE MODULE -->
     <!-- CONTENT MODULE -->

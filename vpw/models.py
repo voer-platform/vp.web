@@ -37,7 +37,7 @@ class Material(models.Model):
     material_id = CharField(max_length=64, blank=True, default="")
     material_type = IntegerField(default=1)
     text = TextField(blank=True, default='')
-    version = IntegerField(null=True, blank=True)
+    version = IntegerField(null=True, blank=True, default=0)
     title = CharField(max_length=255)
     description = TextField(blank=True, default="")
     categories = CharField(max_length=256, blank=True)
