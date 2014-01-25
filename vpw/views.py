@@ -1354,6 +1354,39 @@ def user_module_reuse(request, mid, version=1):
     return render(request, MODULE_TEMPLATES[3], params)
 
 
+@login_required
+def user_module_edit(request, mid):
+    material = Material.objects.get(id=mid, creator=request.user, material_type=1)
+    categories = vpr_get_categories()
+    author = vpr_get_person(request.user.author.author_id)
+    if request.method == "POST":
+        form = ModuleCreationForm(request.POST)
+        action = request.POST.get("action", "")
+        if action == 'save':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                return redirect('user_module_detail', mid=material.id)
+        elif action == 'publish':
+            if form.is_valid():
+                material = _save_material(form, MODULE_TYPE, request.user)
+                material.text = form.cleaned_data['body']
+                material.save()
+                # Publish content to VPR
+                result = _publish_material(material)
+                if 'material_id' in result:
+                    material.material_id = result['material_id']
+                    material.version = result['version']
+                    material.save()
+                    return redirect('module_detail', mid=result['material_id'])
+    else:
+        form = ModuleCreationForm(dict(body=material.text))
+    params = {'material': material, 'categories': categories,
+              'form': form, 'author': author}
+    return render(request, MODULE_TEMPLATES[3], params)
+
+
 @user_passes_test(lambda u: u.is_superuser)
 def admin_settings(request):
     """
