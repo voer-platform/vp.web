@@ -775,7 +775,11 @@ def search_result(request):
 
 
 def get_pdf(request, mid, version):
-    file_name = '%s_%s.pdf' % (mid, version)
+    # file_name = '%s_%s.pdf' % (mid, version)
+    material = vpr_get_material(mid, version)
+    file_name = material['title']
+    file_name = normalize_string(file_name)
+    file_name = '%s.pdf' % file_name
     result = vpr_get_pdf(mid, version)
     response = HttpResponse(result, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment;filename=%s' % file_name

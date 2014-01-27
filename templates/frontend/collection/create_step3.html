@@ -44,9 +44,15 @@
             }
             title = datum.title;
             id = datum.material_id + "|" + datum.version;
+            idSearch = datum.material_id + "\\|" + datum.version;
 
-            $("#collection-outline").jstree("create", parentNode, "last", { "data": title, "attr" : { "id": id, "rel" : "module" } });
-            $("#collection-outline").find('input.jstree-rename-input').blur();
+            if ($("#collection-outline").find('#' + idSearch).length > 0){
+                alert('Module da ton tai!');
+            }else{
+                $("#collection-outline").jstree("create", parentNode, "last", { "data": title, "attr" : { "id": id, "rel" : "module" } });
+                $("#collection-outline").find('input.jstree-rename-input').blur();
+            }
+
 
         });
     });
@@ -280,7 +286,7 @@
                                 </div>
                             </div>
                             <div class="form-group btn-common">
-                                <button class="btn hfbtn-common hfbtn-public right hfbtn-active" name="action" value="publish">{% trans 'Public' %}</button>
+                                <button class="btn hfbtn-common hfbtn-public right hfbtn-active" name="action" value="publish">{% trans 'Publish' %}</button>
                                 <button class="btn hfbtn-common hfbtn-next right hfbtn-active" name="action" value="save">{% trans 'Save' %}</button>
                                 <button class="btn hfbtn-common hfbtn-back right hfbtn-active" name="action" value="back">{% trans 'Back' %}</button>
                             </div>
