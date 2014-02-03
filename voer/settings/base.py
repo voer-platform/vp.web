@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'south',
     'vpw',
     'gunicorn',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -179,3 +180,14 @@ TINYMCE_DEFAULT_CONFIG = {
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# COMPRESSOR
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_ENABLED = True
