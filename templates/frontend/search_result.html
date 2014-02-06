@@ -7,6 +7,7 @@
 
 {% block content %}
 <!-- FILTER TOP BLOCK -->
+<!-- hide for waiting solution
 <div id="fitertop-browserall" class="hffitertop">
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Browse All</a>
@@ -47,7 +48,9 @@
         </ul>
     </div>
 </div>
+-->
 <!-- END FILTER TOP BLOCK -->
+
 <!-- SEARCH RESULT BLOCK -->
 <div class="hfitems gridview search-result">
     {% if search_results %}
@@ -58,9 +61,9 @@
                 <img src="{{STATIC_URL}}images/author1.jpg">
                 {% else %}
                   {% if material.categories %}
-                  <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>     
+                  <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>
                   {% else %}
-                  <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
+                  <img src="{{STATIC_URL}}images/cat_other.jpg"/>
                   {% endif %}
                 {% endif %}
             </div>
@@ -97,7 +100,7 @@
                 <div class="category-collection">
                     {% if material.category_list %}
                       {% for category in material.category_list %}
-                      <a>{{ category.cname }} </a>
+                      <a href="{% url 'browse' %}?categories={{ category.cid }}" class="category-item">{{ category.cname }} </a>&nbsp;
                       {% endfor %}
                     {% else %}
                       <a>&nbsp;</a>

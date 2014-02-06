@@ -92,7 +92,7 @@
                 <a class="checkout-icon-view">{% if collection.view_count.view > 0 %}{{ collection.view_count.view }}{% else %}0{% endif %}</a>
             </li>
             <li>
-                <a class="checkout-icon-favourite">{% if collection.favorite_count.favorite > 0 %}{{ collection.favorite_count.favorite }}{% else %}0{% endif %}</a>
+                <a class="checkout-icon-favourite" data-mid="{{ collection.material_id }}" data-version="{{ collection.version }}">{% if collection.favorite_count.favorite > 0 %}{{ collection.favorite_count.favorite }}{% else %}0{% endif %}</a>
             </li>
             <li>
                  <a class="checkout-icon-comment">340</a>
@@ -163,11 +163,11 @@
     {% endif %}
 
     <script>
-                        $(document).ready(function(){               
+                        $(document).ready(function(){
                             $('.collspan').click(function(){
                                 var $iditemshow = $(this).attr('metadata');
                                 $(this).toggleClass('exspan');
-                                $('ul[metadata=child-'+$iditemshow+']').toggleClass('collspaned');                      
+                                $('ul[metadata=child-'+$iditemshow+']').toggleClass('collspaned');
                             });
                             var wh = $(window).height();
                             $(window).scroll(function(){
@@ -182,8 +182,8 @@
                                     $(".hflistmodule").removeClass('extends');
                                     $("#hfgroupright").removeClass('extends');
                                 }
-                                
-                            });                     
+
+                            });
                         });
                     </script>
 <div class="hflistmodule">
@@ -195,7 +195,7 @@
                 </li>
                 {{ outline | safe}}
             </ul>
-                   
+
         </div>
     </div>
     {% if collection.material_id %}
@@ -287,4 +287,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<script>$(function(){ Voer.Materials.run(); });</script>
 {% endblock %}
