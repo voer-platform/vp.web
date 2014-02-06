@@ -16,7 +16,6 @@
                         ele.html(data.favorite_count);
                     } else if (data.status === undefined) {
                         var currentUrl = window.location.pathname;
-                        currentUrl = currentUrl.replace('\/', '');
                         window.location.href = '/user/login/?next=' + currentUrl;
                     }
                 });
