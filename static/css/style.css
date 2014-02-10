@@ -552,7 +552,6 @@ label.more-author{
 }
 #materials {
     min-height: 40px;
-    overflow: auto;
 }
 div.content-wrapper {
     overflow: hidden;
