@@ -552,6 +552,7 @@ label.more-author{
 }
 #materials {
     min-height: 40px;
+    overflow: auto;
 }
 div.content-wrapper {
     overflow: hidden;
@@ -578,4 +579,10 @@ div.checkbox-select-items {
 }
 .checkbox .icons, .radio .icons {
     color: #d0d0d0;
+}
+.display_none {
+    display: none;
+}
+.hfitem a.category-item {
+    margin-right: 10px;
 }

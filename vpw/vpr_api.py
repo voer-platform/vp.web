@@ -197,8 +197,23 @@ def vpr_get_pdf(mid, version):
     return
 
 
-def vpr_search(keyword, page):
-    result = vpr_request("GET", "search?kw=%s&page=%s" % (urllib.quote(keyword.encode("utf8")), page))
+def vpr_search(**kwargs):
+    keyword = kwargs.get('keyword', '')
+    page = kwargs.get("page", 1)
+    search_type = kwargs.get('search_type', '')
+    material_type = kwargs.get('material_type', '')
+
+    search_string = "search?kw=%s&page=%s"
+    if search_type == "m":
+        search_string += "&on=m"
+    elif search_type == "p":
+        print "fajsfjagf"
+        search_string += "&on=p"
+
+    if material_type != "":
+        search_string += "&type=" + material_type
+
+    result = vpr_request("GET", search_string % (urllib.quote(keyword.encode("utf8")), page))
     return result
 
 

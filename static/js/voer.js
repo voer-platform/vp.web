@@ -1,8 +1,11 @@
 var Voer = {};
 
 function ajax_browse_page(url){
+    var target = '#materials';
+    Voer.Helper.showLoadingState(target);
     $.get(url, function(data){
-        $('#materials').html(data)
+        $('#materials').html(data);
+        Voer.Helper.removeLoadingState(target);
     });
 }
 
@@ -119,6 +122,8 @@ function ajaxGetMaterialByCondition() {
           }
         },
         showLoadingState: function(element) {
+          Voer.Helper.removeLoadingState(element);
+
           if (element === undefined) {
             element = 'document';
             var coordinate = {top:0, left: 0};
@@ -149,7 +154,7 @@ function ajaxGetMaterialByCondition() {
               width: loadingWidth,
               height: loadingHeight,
               position: element == 'document' ? 'fixed' : 'absolute',
-              zIndex: element == 'document' ? '2' : '999999',
+              zIndex: element == 'document' ? '2' : '40',
               top: coordinate.top + 1,
               left: element == 'document' ? (coordinate.left + 1) : (coordinate.left + 1 + parseInt($(element).css('padding-left')))
             });
