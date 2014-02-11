@@ -24,7 +24,7 @@ DATABASES = {
 }
 
 #VPR Address
-VPR_URL = 'http://localhost:2013/1.0/'
+VPR_URL = 'http://voer.edu.vn:2013/1.0/'
 
 #VPT Address
 VPT_URL = 'http://voer.edu.vn:6543/'
