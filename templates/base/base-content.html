@@ -1,4 +1,10 @@
 {% extends "base/base.html" %}	
+{% load vpw_filters %}
+
+{% block meta-description %}
+<meta name="description" content="{{ material.description|strip|default:material.title }}">
+{% endblock %}
+{% block keywords %}{{ material.keywords|break_keywords }}{% endblock %}
 
 {% block base-content %}
   	<div id="mainpage" class="main mainpage-content">
