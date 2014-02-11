@@ -47,7 +47,7 @@ class Material(models.Model):
     modified = DateTimeField(auto_now=True, blank=True)
     derived_from = CharField(max_length=64, blank=True)
     creator = models.ForeignKey(User)
-    type = models.IntegerField(null=False, default=1)
+    # type = models.IntegerField(null=False, default=1)
     status = IntegerField(null=True, default=1)
     author = CharField(max_length=100, blank=True, default="")
     editor = CharField(max_length=100, blank=True, default="")

@@ -265,7 +265,7 @@ def user_module_detail(request, mid):
         author = vpr_get_person(author_id, True)
         authors = [author]
         category = vpr_get_category(material.categories)
-        if material.type == MODULE_TYPE:
+        if material.material_type == MODULE_TYPE:
             return render(request, "frontend/module_detail.html", {
                 "material": material, "author": authors, "category": category
             })
@@ -309,7 +309,7 @@ def user_collection_detail(request, cid, mid):
         # Generate outline html
         str_outline = "<ul id='outline-collection' class='list-module-name-content'>%s</ul>" % get_outline(cid, outline['content'], True)
 
-        if collection.type == COLLECTION_TYPE:
+        if collection.material_type == COLLECTION_TYPE:
             return render(request, "frontend/collection_detail.html", {
                 "material": material,
                 "collection": collection,
@@ -526,8 +526,9 @@ def create_collection(request):
                     material = Material.objects.get(id=mid)
                     outline = json.loads(form.cleaned_data['body'])
                     tmp = {'content': []}
-                    for item in outline[0]['children']:
-                        tmp['content'].append(_transform_outline_to_vpr(item))
+                    if "children" in outline[0]:
+                        for item in outline[0]['children']:
+                            tmp['content'].append(_transform_outline_to_vpr(item))
                     outline_format = json.dumps(tmp)
                     material.text = outline_format
                     material.save()
@@ -539,8 +540,9 @@ def create_collection(request):
                     material = Material.objects.get(id=mid)
                     outline = json.loads(form.cleaned_data['body'])
                     tmp = {'content': []}
-                    for item in outline[0]['children']:
-                        tmp['content'].append(_transform_outline_to_vpr(item))
+                    if "children" in outline[0]:
+                        for item in outline[0]['children']:
+                            tmp['content'].append(_transform_outline_to_vpr(item))
                     outline_format = json.dumps(tmp)
                     material.text = outline_format
                     material.save()
@@ -562,7 +564,7 @@ def create_collection(request):
 
 def _publish_material(material):
     result = vpr_create_material(
-        material_type=material.type,
+        material_type=material.material_type,
         text=material.text,
         version=1,
         title=material.title,
@@ -598,7 +600,7 @@ def _save_material(form, material_type, current_user):
     material.material_id = form.cleaned_data['material_id']
     # get current user
     material.creator = current_user
-    material.type = material_type
+    material.material_type = material_type
     material.save()
     return material
 
