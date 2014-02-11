@@ -83,13 +83,13 @@
         </script>
 
         <div class="hfitems active">
-            <div id="materials" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="{% url 'ajax_browse' %}">&nbsp;</div>
+            <div id="materials" class="ajax-ev clearfix" data-ajax-trigger="load" data-ajax-url="{% url 'ajax_browse' %}">&nbsp;</div>
         </div>
     </div>
     <div class="col-lg-2 right-row">
         <div class="hffilter-right">
         <div class="bigbox-common">
-            <div class="title">Filter By</div>
+            <div class="title">{% trans 'Filter By' %}</div>
             <div class="content" id="main_list">
                 <script>
                     $(document).ready(function(){
@@ -103,7 +103,7 @@
                                     $('div[data-key=authors-0]').removeClass('file_selected');
                                 }else{
                                     $('div[data-key=authors-0]').addClass('file_selected');
-                                    getItemSelected()
+                                    ajaxGetMaterialByCondition();
                                 }
                             }
                         });
@@ -117,7 +117,7 @@
                                     $('div[data-key=categories-0]').removeClass('file_selected');
                                 }else{
                                     $('div[data-key=categories-0]').addClass('file_selected');
-                                    getItemSelected()
+                                    ajaxGetMaterialByCondition();
                                 }
                             }
                         });
@@ -131,7 +131,7 @@
                                     $('div[data-key=langs-0]').removeClass('file_selected');
                                 }else{
                                     $('div[data-key=langs-0]').addClass('file_selected');
-                                    getItemSelected()
+                                    ajaxGetMaterialByCondition();
                                 }
                             }
                         });
@@ -145,7 +145,7 @@
                                     $('div[data-key=types-0]').removeClass('file_selected');
                                 }else{
                                     $('div[data-key=types-0]').addClass('file_selected');
-                                    getItemSelected()
+                                    ajaxGetMaterialByCondition();
                                 }
                             }
                         });

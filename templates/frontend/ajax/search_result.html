@@ -1,0 +1,83 @@
+{% load i18n %}
+{% load vpw_filters %}
+{% load thumbnail %}
+
+{% if search_results %}
+    {% for material in search_results %}
+    <div class="hfitem">
+        <div class="collection-mainpage-cover">
+            {% if material.user_id %}
+                {% with y=material.id|stringformat:"s" %}
+                {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y "345x185" crop="center 20%" as im %}
+                    <img src="{{ im.url }}">
+                {% empty %}
+                    <img src="{{ STATIC_URL }}images/author1_detail.jpg">
+                {% endthumbnail %}
+                {% endwith %}
+            {% else %}
+              {% if material.categories %}
+              <img src="{{STATIC_URL}}images/cat{{material.category_first}}.jpg"/>
+              {% else %}
+              <img src="{{STATIC_URL}}images/cat_other.jpg"/>
+              {% endif %}
+            {% endif %}
+        </div>
+        <div class="collection-mainpage-details">
+            <div class="title-collection">
+                {% if material.user_id %}
+                <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'view_profile' material.id %}">{{ material.title }}</a>
+                {% elif material.material_type == 1 %}
+                <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'module_detail' material.title|normalize_string material.material_id %}">{{ material.title }}</a>
+                {% else %}
+                <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'collection_detail' material.title|normalize_string material.material_id %}">{{ material.title }}</a>
+                {% endif %}
+            </div>
+
+            <div class="short-collection">
+            {% if not material.user_id %}
+                {% if material.description %}
+                    {% ifequal material.description '-' %}
+                        <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+                    {% else %}
+                        {{ material.description }}
+                    {% endifequal %}
+                {% else %}
+                    <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
+                {% endif %}
+            {% endif %}
+            </div>
+
+            <div class="author-collection">
+              {% for person in material.person_list %}
+              <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
+              {% endfor %}
+            </div>
+            <div class="category-collection">
+                {% if material.category_list %}
+                  {% for category in material.category_list %}
+                  <a href="{% url 'browse' %}?categories={{ category.cid }}" class="category-item">{{ category.cname }} </a>&nbsp;
+                  {% endfor %}
+                {% else %}
+                  <a>&nbsp;</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="collection-mainpage-other">
+            {% if material.material_type == 1 %}
+            <div class="voer-mol-ico left">&nbsp;</div>
+            {% elif material.material_type == 2 %}
+            <div class="voer-col-ico left">&nbsp;</div>
+            {% endif %}
+
+            {% if not material.user_id %}
+            <div class="hflike left">{% if material.favorite_count.favorite %} {{ material.favorite_count.favorite }}{% else %}0{% endif %}</div>
+            <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    {% include "base/pager.html" %}
+{% else %}
+    <p class="no-data">{% trans "No data" %}</p>
+{% endif %}

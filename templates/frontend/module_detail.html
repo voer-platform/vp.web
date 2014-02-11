@@ -61,7 +61,7 @@
                 <a class="checkout-icon-view">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</a>
             </li>
             <li>
-                <a class="checkout-icon-favourite">{% if material.favorite_count.favorite > 0 %}{{ material.favorite_count.favorite }}{% else %}0{% endif %}</a>
+                <a class="checkout-icon-favourite" data-mid="{{ material.material_id }}" data-version="{{ material.version }}">{% if material.favorite_count.favorite > 0 %}{{ material.favorite_count.favorite }}{% else %}0{% endif %}</a>
             </li>
             <li>
                  <a class="checkout-icon-comment">340</a>
@@ -211,4 +211,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<script>$(function(){ Voer.Materials.run(); });</script>
 {% endblock %}

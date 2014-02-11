@@ -1,9 +1,12 @@
+{% load compress %}
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="VOER là dự án của chương trình Tài nguyên Giáo dục Mở Việt Nam (hỗ trợ bởi Quỹ Việt Nam, The Vietnam Foundation - VNF). Đây là nguồn dữ liệu trung tâm cho các giáo sư, các cán bộ giảng dạy, sinh viên và những cá nhân tự học đại học ở Việt Nam. Họ sẽ có cơ hội tiếp cận hàng nghìn tài liệu giảng dạy và học tập ở bất cứ nơi đâu và hoàn toàn miễn phí.">
 	<meta name="author" content="VOER">
 	<link rel="shortcut icon" href="">
 
+    {% compress css %}
 	<link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
 	<link href="{{STATIC_URL}}css/templates.css" rel="stylesheet">
 	<link href="{{STATIC_URL}}css/slide.css" rel="stylesheet">
@@ -13,8 +16,9 @@
 	<link href="{{STATIC_URL}}fonts/font.css" rel="stylesheet">
 	<link href="{{STATIC_URL}}css/display-mathml.css" rel="stylesheet">
 	<link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
+    {% endcompress %}
 
-
+    {% compress js %}
 	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-select.js"></script>
@@ -23,8 +27,11 @@
 	<script type="text/javascript" src="{{STATIC_URL}}js/application.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/display-mathml.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/voer.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/voer.materials.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/voer.search.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}js/scrollbar.js"></script>
-{#	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.noconflict.js"></script>#}
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.noconflict.js"></script>
+    {% endcompress %}
 
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

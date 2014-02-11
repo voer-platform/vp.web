@@ -715,63 +715,10 @@ def mostFavedView(request):
 
 @csrf_exempt
 def search_result(request):
-    keyword = request.REQUEST.get('keyword', '')
-    page = int(request.GET.get('page', 1))
-
-    page_query = get_page_query(request)
-
-    search_results = vpr_search(keyword, page)
-    pager = pager_default_initialize(search_results['count'], 12, page)
-    search_results = search_results['results']
-
     categories = vpr_get_categories()
-    category_dict = {}
-    for category in categories:
-        category_dict[category['id']] = category['name']
+    keyword = request.REQUEST.get('keyword', '')
 
-    result_array = []
-    for result in search_results:
-        if result['user_id']:
-            if (result.has_key('fullname') and result['fullname']):
-                result['title'] = result['fullname']
-            else:
-                result['title'] = result['user_id']
-
-            if (result.has_key('affiliation') and result['affiliation']):
-                result['description'] = result['affiliation']
-
-        if result.has_key('author'):
-            author_array = result['author'].split(',')
-            person_list = []
-            for pid in author_array:
-                pid = pid.strip()
-                person = vpr_get_person(pid)
-                if person['fullname']:
-                    person_list.append({'pid': pid, 'pname': person['fullname']})
-                else:
-                    person_list.append({'pid': pid, 'pname': person['fullname']})
-            result['person_list'] = person_list
-
-        if (result.has_key('categories') and result['categories']):
-            category_array = result['categories'].split(',')
-            category_list = []
-            for cid in category_array:
-                cid = cid.strip()
-                category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
-
-            result['category_list'] = category_list
-
-        if result['material_id']:
-            view_count = vpr_get_statistic_data(result['material_id'], result['version'], 'counter')
-            result['view_count'] = view_count
-
-            favorite_count = vpr_get_statistic_data(result['material_id'], result['version'], 'favorites')
-            result['favorite_count'] = favorite_count
-
-        result_array.append(result)
-
-    return render(request, "frontend/search_result.html",
-                  {'keyword': keyword, "search_results": result_array, 'pager': pager, 'page_query': page_query})
+    return render(request, "frontend/search_result.html", {'keyword': keyword, 'categories': categories})
 
 
 def get_pdf(request, mid, version):
@@ -1448,3 +1395,89 @@ def server_error(request):
     response = render(request, "500.html")
     response.status_code = 500
     return response
+
+
+def ajax_search_result(request):
+    if request.is_ajax():
+        keyword = request.REQUEST.get('keyword', '')
+        search_type = request.REQUEST.get('search_type', '')
+        material_type = request.REQUEST.get('material_type', '')
+        page = int(request.GET.get('page', 1))
+
+        page_query = get_page_query(request)
+
+        search_results = vpr_search(keyword=keyword, page=page, search_type=search_type, material_type=material_type)
+        pager = pager_default_initialize(search_results['count'], 12, page)
+        search_results = search_results['results']
+
+        categories = vpr_get_categories()
+        category_dict = {}
+        for category in categories:
+            category_dict[category['id']] = category['name']
+
+        result_array = []
+        for result in search_results:
+            if result['user_id']:
+                if 'fullname' in result and result['fullname']:
+                    result['title'] = result['fullname']
+                else:
+                    result['title'] = result['user_id']
+
+                if 'affiliation' in result and result['affiliation']:
+                    result['description'] = result['affiliation']
+
+            if 'author' in result and result['author']:
+                author_array = result['author'].split(',')
+                person_list = []
+                for pid in author_array:
+                    pid = pid.strip()
+                    person = vpr_get_person(pid)
+                    if person['fullname']:
+                        person_list.append({'pid': pid, 'pname': person['fullname']})
+                    else:
+                        person_list.append({'pid': pid, 'pname': person['fullname']})
+                result['person_list'] = person_list
+
+            if 'categories' in result and result['categories']:
+                category_array = result['categories'].split(',')
+                category_list = []
+                for cid in category_array:
+                    cid = cid.strip()
+                    category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
+
+                result['category_list'] = category_list
+                result['category_first'] = category_array[0]
+
+            if 'material_id' in result and result['material_id']:
+                view_count = vpr_get_statistic_data(result['material_id'], result['version'], 'counter')
+                result['view_count'] = view_count
+
+                favorite_count = vpr_get_statistic_data(result['material_id'], result['version'], 'favorites')
+                result['favorite_count'] = favorite_count
+
+            result_array.append(result)
+
+        return render(request, "frontend/ajax/search_result.html",
+                      {"search_results": result_array, 'pager': pager, 'page_query': page_query})
+
+    else:
+        return HttpResponseRedirect('/')
+
+
+@login_required
+def delete_unpublish(request):
+    if request.is_ajax():
+        current_user = request.user
+        ids = request.POST['ids']
+        id_list = ids.split(',')
+
+        response_data = {}
+        Material.objects.filter(creator_id=current_user.id, material_id='', version=None, id__in=id_list).delete()
+        response_data['status'] = True
+        response_data['message'] = 'Add favorite successful'
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+    else:
+        return HttpResponseRedirect('/')
+

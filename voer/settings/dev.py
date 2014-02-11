@@ -37,3 +37,4 @@ RECAPTCHA_PRIVATE_KEY = '6Lf__uwSAAAAAPlCihico8fKiAfV09_kbywiI-xx'
 #STATIC_ROOT = os.path.join(PROJECT_DIR, '_static')
 
 
+COMPRESS_ENABLED = False

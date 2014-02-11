@@ -7,6 +7,7 @@
 
 {% block content %}
 <!-- FILTER TOP BLOCK -->
+<!-- hide for waiting solution
 <div id="fitertop-browserall" class="hffitertop">
     <div class="dropdown left">
         <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Browse All</a>
@@ -47,82 +48,177 @@
         </ul>
     </div>
 </div>
+-->
 <!-- END FILTER TOP BLOCK -->
-<!-- SEARCH RESULT BLOCK -->
-<div class="hfitems gridview search-result">
-    {% if search_results %}
-        {% for material in search_results %}
-        <div class="hfitem">
-            <div class="collection-mainpage-cover">
-                {% if material.user_id %}
-                <img src="{{STATIC_URL}}images/author1.jpg">
-                {% else %}
-                  {% if material.categories %}
-                  <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>     
-                  {% else %}
-                  <img src="{{STATIC_URL}}images/cat_other.jpg"/>  
-                  {% endif %}
-                {% endif %}
-            </div>
-            <div class="collection-mainpage-details">
-                <div class="title-collection">
-                    {% if material.user_id %}
-                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'view_profile' material.id %}">{{ material.title }}</a>
-                    {% elif material.material_type == 1 %}
-                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'module_detail' material.title|normalize_string material.material_id %}">{{ material.title }}</a>
-                    {% else %}
-                    <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'collection_detail' material.title|normalize_string material.material_id %}">{{ material.title }}</a>
-                    {% endif %}
-                </div>
 
-                <div class="short-collection">
-                {% if not material.user_id %}
-                    {% if material.description %}
-                        {% ifequal material.description '-' %}
-                            <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
-                        {% else %}
-                            {{ material.description }}
-                        {% endifequal %}
-                    {% else %}
-                        <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
-                    {% endif %}
-                {% endif %}
-                </div>
+<div class="content-wrapper">
+    <!-- left content -->
+    <div class="col-lg-1 left-row">
+        <!-- SEARCH RESULT BLOCK -->
+        <div class="hfitems gridview search-result">
+            <div id="materials" class="ajax-ev clearfix" data-ajax-trigger="load" data-ajax-url="/ajax/search-result?keyword={{ keyword }}">&nbsp;</div>
+        </div>
+    </div>
 
-                <div class="author-collection">
-                  {% for person in material.person_list %}
-                  <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
-                  {% endfor %}
-                </div>
-                <div class="category-collection">
-                    {% if material.category_list %}
-                      {% for category in material.category_list %}
-                      <a>{{ category.cname }} </a>
-                      {% endfor %}
-                    {% else %}
-                      <a>&nbsp;</a>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="collection-mainpage-other">
-                {% if material.material_type == 1 %}
-                <div class="voer-mol-ico left">&nbsp;</div>
-                {% elif material.material_type == 2 %}
-                <div class="voer-col-ico left">&nbsp;</div>
-                {% endif %}
+    <div class="col-lg-2 right-row">
+        <div class="hffilter-right">
+            <div class="bigbox-common">
+                <div class="title">{% trans 'Filter By' %}</div>
+                <div class="content" id="main_list">
+                    <div class="smallbox-common search-type" data-key="search-type">
+                        <div class="checkbox-item">
+                            <div class="file_selected">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-value=""></div>
+                                </div>
+                                <div class="hfcheckinfo">{% trans 'All' %}</div>
+                                <div class="hfchecknumber">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="checkbox-item">
+                            <div>
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-value="m"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Material' %}
+                                </div>
+                                <div class="hfchecknumber">&nbsp;</div>
+                            </div>
+                        </div>
+                         <div class="checkbox-item">
+                            <div>
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-value="p"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Author' %}
+                                </div>
+                                <div class="hfchecknumber">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
 
-                {% if not material.user_id %}
-                <div class="hflike left">{% if material.favorite_count.favorite %} {{ material.favorite_count.favorite }}{% else %}0{% endif %}</div>
-                <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
-                {% endif %}
+                    <!-- type -------------------------------------------------------------------->
+                    <div class="smallbox-common multiable-select material-type display_none" data-key="material-type">
+                        <div class="checkbox-item">
+                            <div class="file_selected">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-value=""></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'All types' %}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                         <div class="checkbox-item">
+                            <div>
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-value="1"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Modules' %}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-item">
+                            <div>
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-value="2"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Collection' %}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- language -------------------------------------------------------------------->
+                    <!--
+                    <div class="smallbox-common multiable-select language-type display_none" data-key="language-type">
+                        <div class="checkbox-item">
+                            <div class="file_selected">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-value=""></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'All languages' %}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-item">
+                            <div>
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-value="vi"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'Vietnamese' %}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-item">
+                            <div>
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-value="en"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'English' %}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                    <!-- Categories -->
+                    <!--
+                    <div class="smallbox-common multiable-select category-type display_none" data-key="category-type">
+                        <div class="checkbox-item">
+                            <div class="file_selected">
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom file_selected" data-value=""></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {% trans 'All categories' %}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                        {% for category in categories %}
+                        <div class="checkbox-item">
+                            <div>
+                                <div class="grip_column">
+                                    <div title="Select/Deselect Item" class="checkbox-custom" data-value="{{category.id}}"></div>
+                                </div>
+                                <div class="hfcheckinfo">
+                                    {{ category.name }}
+                                </div>
+                                <div class="hfchecknumber">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    -->
+                    <!-- input hidden extra -->
+                    <input id="filter-search-type" type="hidden" value="" />
+                    <input type="hidden" id="search-keyword" value="{{ keyword }}">
+                </div>
             </div>
         </div>
-        {% endfor %}
-
-        {% include "base/pager.html" %}
-    {% else %}
-        <p>{% trans "No data" %}</p>
-    {% endif %}
+    </div>
 </div>
+
+<script type="text/javascript">$(function(){ Voer.Search.run(); });</script>
 <!-- END SEARCH RESULT BLOCK -->
 {% endblock %}

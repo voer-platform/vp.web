@@ -100,6 +100,8 @@
     </div>
 </div>
 <!-- END TOP -->
+
+{% if not user.is_authenticated %}
 <!-- Modal -->
 <div class="modal fade" id="modal-user-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-login">
@@ -131,7 +133,7 @@
         </div>
         <div class="modal-footer">
           <a class="btn-form-login-signup left" href="/user/register">{% trans "Don't have an account? Sign up for VOER" %}</a>
-  
+
           <div class="alert-modal-login left padding-content-10 hidden"><!-- Add class 'hidden' to hide alert -->
               <span class="left">{% trans 'The username or password is incorrect.' %}</span>
           </div>
@@ -149,3 +151,4 @@
   });
 });
 </script>
+{% endif %}
