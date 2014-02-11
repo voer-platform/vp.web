@@ -13,7 +13,8 @@
   	{% include "base/header.html" %}
 	{% endblock %}
 	{% block slide %}{% endblock %}
-	
+
+	{% block base-content %}
   	<div id="mainpage" class="main">
   		<div class="container">
   			<div class="row">
@@ -24,5 +25,7 @@
   			</div>
   		</div>
   	</div>
+    {% endblock %}
+
   </body>
 </html>
