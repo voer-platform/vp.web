@@ -11,7 +11,7 @@
     <!-- TITLE MODULE -->
     <div class="module-view-title left padding-content-15">
         <span class="module-view-name left clear">{{ material.title }}</span>
-        <a class="module-view-category left clear">{{ category.name }}</a>
+        <a class="module-view-category left clear" title="{{ category.name }}">{{ category.name }}</a>
         {% if material.id %}
         {% if material.version == 0 or material.version == '0' or material.version == None %}
         <a href="{% url 'user_module_edit' mid=material.id %}" class="btn btn-primary" style="float: right;">{% trans 'Edit' %}</a>
@@ -93,18 +93,18 @@
     <!-- AUTHOR NAME -->
     {% for author_info in author %}
     <div class="module-view-author arrow-author-collection padding-content-10 left">
-        <a class="module-view-author-avatar left" href="{% url 'view_profile' author_info.id %}">
+        <a class="module-view-author-avatar left" href="{% url 'view_profile' author_info.id %}" title="{{ author_info.fullname }}">
             {% with y=author_info.id|stringformat:"s" %}
             {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y|add:"?l="|add:author_info.avatar "60x60" crop="center 20%" as im %}
-                <img src="{{ im.url }}" width="60" height="60">
+                <img src="{{ im.url }}" width="60" height="60" title="{{ author_info.fullname }}" alt="{{ author_info.fullname }}">
             {% empty %}
-                <img src="{{ STATIC_URL }}images/author1_detail.jpg" width="60" height="60">
+                <img src="{{ STATIC_URL }}images/author1_detail.jpg" width="60" height="60" title="{{ author_info.fullname }}" alt="{{ author_info.fullname }}">
             {% endthumbnail %}
             {% endwith %}
         </a>
         <ul class="module-view-author-name left padding-content-10">
             <li>
-                <a href="{% url 'view_profile' author_info.id %}">{{ author_info.fullname }}</a>
+                <a href="{% url 'view_profile' author_info.id %}" title="{{ author_info.fullname }}">{{ author_info.fullname }}</a>
             </li>
             <li>
                 <span class="text-italic">{% trans 'View my profile' %}</span>
@@ -150,7 +150,7 @@
         <div class="module-block-header">
             <div class="icon-module icon-download"></div>
             <div class="tilte-module">
-                <a href="{% url 'get_pdf' material.material_id material.version %}">{% trans 'Download' %}</a>
+                <a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'Download' %}</a>
             </div>
         </div>
     </div>

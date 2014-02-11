@@ -67,11 +67,11 @@
     <li>
         <div class="icon-hot"></div>
         <div class="collection-mainpage-cover left clear">
-            <a href="{{ material_url }}">
+            <a href="{{ material_url }}" title="{{ material.title }}">
             {% if material.categories %}
-		    <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg"/>
+		    <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg" alt="{{ material.title }}"/>
 		    {% else %}
-		    <img src="{{STATIC_URL}}images/cat_other.jpg"/>
+		    <img src="{{STATIC_URL}}images/cat_other.jpg" alt="{{ material.title }}"/>
 		    {% endif %}
             </a>
         </div>
@@ -82,11 +82,11 @@
             </div>
             <div class="collection-details-text left">
                 <div class="title-collection left clear">
-                    <a href='{{ material_url }}'>{{ material.title }}</a>
+                    <a href='{{ material_url }}' title="{{ material.title }}">{{ material.title }}</a>
                 </div>
                 {% for person in material.author_list %}
                 <div class="author-collection left clear">
-                    <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
+                    <a href="{% url 'view_profile' person.pid %}" a>{{ person.pname }}</a>
                 </div>
                 {% endfor %}
             </div>
@@ -97,18 +97,18 @@
 <!-- LIST MODULE MAINPAGE -->
 <!-- BROWSER -->
 <div class="mainpage-browser left">
-    <a class="btn-browser-all left clear" href="{% url 'browse' %}">{% trans 'Browser All' %}</a>
+    <a class="btn-browser-all left clear" href="{% url 'browse' %}" title="{% trans 'Browser All' %}">{% trans 'Browser All' %}</a>
     <div class="mainpage-browser-content left">
         <ul class="list-mainpage-browser left">
 			{% for material in person_list %}
             <li>
                 <div class="browser-author-img left clear">
-                    <a href="{% url 'view_profile' material.id %}"><img src="{{STATIC_URL}}images/authors/{{ material.id }}.jpg" /></a>
+                    <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}"><img src="{{STATIC_URL}}images/authors/{{ material.id }}.jpg" /></a>
                 </div>
                 <div class="browser-author-details left clear">
                     <div class="icon-browser-author"></div>
                     <div class="browser-author-name left clear">
-                        <a href="{% url 'view_profile' material.id %}">{% if material.fullname != NULL %} {{ material.fullname }} {% else %} {{ material.user_id }} {% endif %}</a>
+                        <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}">{% if material.fullname != NULL %} {{ material.fullname }} {% else %} {{ material.user_id }} {% endif %}</a>
                     </div>
                     <div class="browser-author-add left clear">{% if material.affiliation != NULL %} {{ material.affiliation }} {% endif %}</div>
                 </div>
