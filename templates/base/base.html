@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% include "base/meta.html" %}
-    {% block keywords %}<meta name="keywords" content="voer, ocw, vietnam oer, vietnam ocw, học liệu mở, tài nguyên giáo dục mở, toán học, kinh tế, văn học, ngôn ngữ học, quản trị kinh doanh, vi sinh vật học, vật lý, hóa học, khí tượng thủy văn, ngoại ngữ, du học, công nghệ thông tin, công nghệ phần mềm, mạng máy tính" />{% endblock %}
+
+    <title>{% block titleSite %}{% endblock %}</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% block meta-description %}
+	<meta name="description" content="VOER là dự án của chương trình Tài nguyên Giáo dục Mở Việt Nam (hỗ trợ bởi Quỹ Việt Nam, The Vietnam Foundation - VNF). Đây là nguồn dữ liệu trung tâm cho các giáo sư, các cán bộ giảng dạy, sinh viên và những cá nhân tự học đại học ở Việt Nam.">
+	{% endblock %}
+	<meta name="author" content="VOER">
+    <meta name="keywords" content="voer, ocw, vietnam oer, vietnam ocw, học liệu mở, tài nguyên giáo dục mở,{% block keywords %}{% endblock %}"/>
+
+	<link rel="shortcut icon" href="">
+
+    {% load compress %}
+
+    {% compress css %}
+	<link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/templates.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/slide.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/scrollbar.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/common.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/flat-ui.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}fonts/font.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/display-mathml.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
+    {% endcompress %}
+
+    {% compress js %}
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-select.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/flatui-checkbox.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/application.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/display-mathml.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/voer.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/voer.materials.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/voer.search.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/scrollbar.js"></script>
+    {% endcompress %}
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="../../assets/js/html5shiv.js"></script>
+	  <script src="../../assets/js/respond.min.js"></script>
+	<![endif]-->
+
     {% block css %}{% endblock %}
     {% block js %}{% endblock %}
-    <title>{% block titleSite %}{% endblock %}</title>
 
   </head>
   <body>
@@ -13,7 +57,8 @@
   	{% include "base/header.html" %}
 	{% endblock %}
 	{% block slide %}{% endblock %}
-	
+
+	{% block base-content %}
   	<div id="mainpage" class="main">
   		<div class="container">
   			<div class="row">
@@ -24,5 +69,7 @@
   			</div>
   		</div>
   	</div>
+    {% endblock %}
+
   </body>
 </html>

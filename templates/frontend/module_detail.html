@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load thumbnail %}
 
-{% block titleSite %}{{ material.title }}{% endblock %}
+{% block titleSite %}{{ material.title|truncatewords:10 }} - VOER{% endblock %}
 
 {% block content %}
 <!-- LEFT ROW -->

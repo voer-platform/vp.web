@@ -14,3 +14,17 @@ def normalize_string(value):
     """
     from vpw.utils import normalize_string
     return normalize_string(value)
+
+
+@register.filter
+@stringfilter
+def break_keywords(value):
+    """ Replace CR-LF in string value by comma character """
+    return ', '.join(value.split('\n'))
+
+
+@register.filter
+@stringfilter
+def strip(value):
+    """ Replace CR-LF in string value by comma character """
+    return value.strip()

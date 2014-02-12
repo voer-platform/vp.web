@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load thumbnail %}
 
+{% block titleSite %}{{ collection.title }}: {{ material.title|truncatewords:6 }} - VOER{% endblock %}
+
 {% block js %}
     <script>
     $( document ).ready(function() {
@@ -37,8 +39,6 @@
     });
     </script>
 {% endblock %}
-
-{% block titleSite %}{{ material.title }}{% endblock %}
 
 {% block content %}
 <!-- LEFT ROW -->
