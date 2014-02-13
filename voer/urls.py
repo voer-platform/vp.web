@@ -37,7 +37,7 @@ urlpatterns = patterns('',
     url(r'^browse/?$', 'vpw.views.browse', name='browse'),
     url(r'^signup/?$', 'vpw.views.signup', name='signup'),
     url(r'^about-us/?$', 'vpw.views.aboutus', name='about-us'),
-    url(r'^profile/(?P<pid>[0-9a-z]+)$', 'vpw.views.view_profile', name='view_profile'),
+    url(r'^profile/(?P<pid>[0-9a-z]+)/?$', 'vpw.views.view_profile', name='view_profile'),
 
     ## User ###
     url(r'^user/register/?$', RecaptchaRegistrationView.as_view()),

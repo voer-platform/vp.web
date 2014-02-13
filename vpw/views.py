@@ -631,10 +631,15 @@ def view_profile(request, pid):
         pager = pager_default_initialize(materials['count'], 12, page)
         page_query = get_page_query(request)
 
+    person_name = current_person['fullname'].strip() or current_person['user_id']
+
     return render(request, "frontend/profile.html", {
         "materials": materials, "categories": categories,
         "person": current_person,
-        'pager': pager, 'page_query': page_query})
+        'pager': pager,
+        'page_query': page_query,
+        'person_name': person_name,
+        })
 
 
 def delete_profile(request, pid):
