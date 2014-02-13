@@ -4,9 +4,17 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.views.generic.base import TemplateView
+from vpw.sitemaps import VoerSitemap, VoerCategoriesSitemap, VoerTypeSitemap, VoerLanguagesSitemap
 from vpw.views import RecaptchaRegistrationView
 
 admin.autodiscover()
+
+sitemaps = {
+    'static': VoerSitemap,
+    'types': VoerTypeSitemap,
+    'categories': VoerCategoriesSitemap,
+    'languages': VoerLanguagesSitemap,
+}
 
 urlpatterns = patterns('',
     url(r'^password_change/$', 'django.contrib.auth.views.password_change', name='password_change'),
@@ -24,7 +32,6 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<pid>[0-9a-z]+)/delete$', 'vpw.views.delete_profile', name='delete_profile'),
 
     url(r'^$', 'vpw.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
     url(r'^m/(?P<title>[0-9A-Za-z_\-]+)/(?P<mid>[0-9a-z]+)(/(?P<version>\d+))?/?$', 'vpw.views.module_detail', name='module_detail'),
     url(r'^c/(?P<title>[0-9A-Za-z_\-]+)/(?P<cid>[0-9a-z]+)(/(?P<mid>[0-9a-z]+))?/?$', 'vpw.views.collection_detail', name='collection_detail'),
     url(r'^browse$', 'vpw.views.browse', name='browse'),
@@ -76,6 +83,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='frontend/robots.txt', content_type='text/plain')),
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler500 = "vpw.views.server_error"

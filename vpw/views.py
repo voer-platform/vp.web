@@ -609,8 +609,32 @@ def view_profile(request, pid):
     current_person = vpr_get_person(pid, True)
     categories = vpr_get_categories()
 
-    return render_to_response("frontend/profile.html", {"person": current_person, 'categories': categories},
-                              context_instance=RequestContext(request))
+    page = int(request.GET.get('page', 1))
+
+    cats = request.GET.get("categories", "")
+    types = request.GET.get("types", "")
+    languages = request.GET.get("languages", "")
+    sort = request.GET.get("sort", "title")
+
+    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages, author=pid, sort=sort)
+    material_result = []
+    for material in materials['results']:
+        view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
+        material['view_count'] = view_count
+
+        favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
+        material['favorite_count'] = favorite_count
+        material_result.append(material)
+
+    page_query = {}
+    if 'count' in materials:
+        pager = pager_default_initialize(materials['count'], 12, page)
+        page_query = get_page_query(request)
+
+    return render(request, "frontend/profile.html", {
+        "materials": materials, "categories": categories,
+        "person": current_person,
+        'pager': pager, 'page_query': page_query})
 
 
 def delete_profile(request, pid):
@@ -628,9 +652,33 @@ Browse page
 
 
 def browse(request):
+    page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
 
-    return render(request, "frontend/browse.html", {"categories": categories})
+    cats = request.GET.get("categories", "")
+    types = request.GET.get("types", "")
+    languages = request.GET.get("languages", "")
+    author = request.GET.get("author", "")
+    sort = request.GET.get("sort", "title")
+
+    materials = vpr_browse(page=page, categories=cats, types=types, languages=languages, author=author, sort=sort)
+    material_result = []
+    for material in materials['results']:
+        view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
+        material['view_count'] = view_count
+
+        favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
+        material['favorite_count'] = favorite_count
+        material_result.append(material)
+
+    if 'count' in materials:
+        pager = pager_default_initialize(materials['count'], 12, page)
+        page_query = get_page_query(request)
+
+        return render(request, "frontend/browse.html", {
+            "materials": materials, "categories": categories, 'pager': pager, 'page_query': page_query})
+    else:
+        return HttpResponse("No items found!")
 
 
 def vpw_authenticate(request):

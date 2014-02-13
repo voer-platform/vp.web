@@ -2,7 +2,9 @@
 {% load vpw_filters %}
 
 {% block meta-description %}
+{% if material %}
 <meta name="description" content="{{ material.description|strip|default:material.title }}">
+{% endif %}
 {% endblock %}
 {% block keywords %}{{ material.keywords|break_keywords }}{% endblock %}
 

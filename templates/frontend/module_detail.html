@@ -120,11 +120,11 @@
     {% for author_info in author %}
     <div class="module-view-author-status left">
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear">{{ author_info.author.module }}</a>
+            <a class="clear" href="{% url 'view_profile' author_info.id %}?types=1">{{ author_info.author.module }}</a>
             <label class="clear">{% trans 'Modules' %}</label>
         </span>
         <span class="module-view-author-block left padding-content-5">
-            <a class="clear">{{ author_info.author.collection }}</a>
+            <a class="clear" href="{% url 'view_profile' author_info.id %}?types=2">{{ author_info.author.collection }}</a>
             <label class="clear">{% trans 'Collections' %}</label>
         </span>
     </div>

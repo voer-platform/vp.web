@@ -585,3 +585,7 @@ div.checkbox-select-items {
 .hfitem a.category-item {
     margin-right: 10px;
 }
+
+#main_list .hfcheckinfo a{
+    color: #555;
+}
