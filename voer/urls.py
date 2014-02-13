@@ -82,9 +82,12 @@ urlpatterns = patterns('',
     url(r'^ajax/search-result$', 'vpw.views.ajax_search_result', name='ajax_search_result'),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^robots\.txt$', TemplateView.as_view(template_name='frontend/robots.txt', content_type='text/plain')),
-    url(r'^google9c25b243b9e3bacc\.html$', TemplateView.as_view(template_name='frontend/google9c25b243b9e3bacc.html')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='frontend/robots.txt', content_type='text/plain')),
+
+    url(r'^google9c25b243b9e3bacc\.html$', TemplateView.as_view(template_name='frontend/google9c25b243b9e3bacc.html')),
+    url(r'^BingSiteAuth\.xml', TemplateView.as_view(template_name='frontend/BingSiteAuth.xml')),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler500 = "vpw.views.server_error"
