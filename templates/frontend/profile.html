@@ -4,7 +4,11 @@
 {% load thumbnail %}
 {% load vpw_filters %}
 
-{% block titleSite %}{% trans "User profile" %}{% endblock %}
+{% block titleSite %}{{ person_name }} - {% trans "User profile" %}{% endblock %}
+
+{% block meta-description %}
+<meta name="description" content="Profile of {{ person_name }}">
+{% endblock %}
 
 {% block content %}
 
