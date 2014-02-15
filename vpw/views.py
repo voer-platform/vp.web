@@ -123,7 +123,7 @@ def _get_image(list_images):
 
 
 def module_detail_old(request, mid, version):
-    material = vpr_get_material(mid)
+    material = vpr_get_material(mid, version)
     if material and material['material_type'] == MODULE_TYPE:
         title = normalize_string(material['title'])
         return HttpResponseRedirect(reverse('module_detail', kwargs={'title': title, 'mid': mid}))
