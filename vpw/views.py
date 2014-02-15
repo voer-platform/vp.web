@@ -19,11 +19,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.utils.translation import ugettext as _, get_language
 from registration.backends.default.views import RegistrationView
+from django.core.urlresolvers import reverse
 
 from vpw.models import Material, Author, Settings
 from vpw.utils import normalize_string, normalize_filename
@@ -121,8 +122,20 @@ def _get_image(list_images):
     return replace_image
 
 
+def module_detail_old(request, mid, version):
+    material = vpr_get_material(mid)
+    if material and material['material_type'] == MODULE_TYPE:
+        title = normalize_string(material['title'])
+        return HttpResponseRedirect(reverse('module_detail', kwargs={'title': title, 'mid': mid}))
+    else:
+        raise Http404
+
+
 def module_detail(request, title, mid, version):
     material = vpr_get_material(mid)
+    if 'material_type' not in material or material['material_type'] != MODULE_TYPE:
+        raise Http404
+        
     # lay anh trong noi dung
     list_images = vpr_get_material_images(mid)
     # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
@@ -174,6 +187,18 @@ def module_detail(request, title, mid, version):
         response.set_cookie(cookie_name, True, max_age)
 
     return response
+
+
+def collection_detail_old(request, cid, mid):
+    collection = vpr_get_material(cid)
+    if collection and collection['material_type'] == COLLECTION_TYPE:
+        title = normalize_string(collection['title'])
+        if mid is None:
+            return HttpResponseRedirect(reverse('collection_detail', kwargs={'title': title, 'cid': cid}))
+        else:
+            return HttpResponseRedirect(reverse('collection_detail', kwargs={'title': title, 'cid': cid, 'mid': mid}))
+    else:
+        raise Http404
 
 
 def collection_detail(request, title, cid, mid):
