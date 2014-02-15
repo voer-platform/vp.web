@@ -202,6 +202,7 @@ def collection_detail_old(request, cid, mid):
 
 
 def collection_detail(request, title, cid, mid):
+
     # Get collection
     collection = vpr_get_material(cid)
     outline = json.loads(collection['text'])
@@ -222,7 +223,6 @@ def collection_detail(request, title, cid, mid):
     if not mid:
         # get the first material of collection
         mid = get_first_material_id(outline['content'])
-    print mid
     # Get material in collection
     if mid:
         material = vpr_get_material(mid)
@@ -828,7 +828,6 @@ def get_first_material_id(outline):
 def get_outline(cid, outline, private=False):
     result = ""
     for item in outline:
-        print item
         if item['type'] == "module":
             if private:
                 result += "<li><a href='/user/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
