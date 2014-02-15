@@ -589,3 +589,14 @@ div.checkbox-select-items {
 #main_list .hfcheckinfo a{
     color: #555;
 }
+
+h1.module-view-name{
+    margin: 0 0 11px 0;
+    font-size: 24px;
+    color: #317EAC;
+}
+
+h1.sub-title{
+    font-size: 22px;
+    color: #C10C3E;
+}
