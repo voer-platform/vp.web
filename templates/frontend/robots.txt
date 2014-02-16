@@ -2,3 +2,11 @@ User-agent: *
 Disallow: /admin/
 Disallow: /user/
 Disallow: /media/
+Disallow: /content/
+Disallow: /module/
+Disallow: /collection/
+Disallow: /giao-trinh/
+Disallow: /bai-viet/
+Disallow: /gioi-thieu/
+Disallow: /node/
+Disallow: /index.php/

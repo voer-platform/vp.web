@@ -149,7 +149,8 @@ def vpr_get_materials():
 
 
 def vpr_get_material(mid, version=1):
-    result = vpr_request("GET", "materials/%s/%s" % (mid, version))
+    version = version or 1
+    result = vpr_request("GET", "materials/%s/%s" % (mid, str(version)))
     return result
 
 

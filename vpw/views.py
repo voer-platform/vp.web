@@ -123,7 +123,7 @@ def _get_image(list_images):
 
 
 def module_detail_old(request, mid, version):
-    material = vpr_get_material(mid)
+    material = vpr_get_material(mid, version)
     if material and material['material_type'] == MODULE_TYPE:
         title = normalize_string(material['title'])
         return HttpResponseRedirect(reverse('module_detail', kwargs={'title': title, 'mid': mid}))
@@ -135,7 +135,7 @@ def module_detail(request, title, mid, version):
     material = vpr_get_material(mid)
     if 'material_type' not in material or material['material_type'] != MODULE_TYPE:
         raise Http404
-
+        
     # lay anh trong noi dung
     list_images = vpr_get_material_images(mid)
     # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
@@ -202,6 +202,7 @@ def collection_detail_old(request, cid, mid):
 
 
 def collection_detail(request, title, cid, mid):
+
     # Get collection
     collection = vpr_get_material(cid)
     outline = json.loads(collection['text'])
@@ -222,7 +223,6 @@ def collection_detail(request, title, cid, mid):
     if not mid:
         # get the first material of collection
         mid = get_first_material_id(outline['content'])
-    print mid
     # Get material in collection
     if mid:
         material = vpr_get_material(mid)
@@ -828,7 +828,6 @@ def get_first_material_id(outline):
 def get_outline(cid, outline, private=False):
     result = ""
     for item in outline:
-        print item
         if item['type'] == "module":
             if private:
                 result += "<li><a href='/user/c/%s/%s'>%s</a></li>" % (cid, item['id'], item['title'])
