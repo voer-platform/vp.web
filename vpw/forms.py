@@ -40,7 +40,7 @@ class MaterialCreationForm(forms.Form):
     def clean_version(self):
         if self.cleaned_data.get('version'):
             try:
-                return int(self.cleaned_data['version'].strip())
+                return int(self.cleaned_data['version'])
             except ValueError:
                 raise ValidationError("Invalid number")
         return 0
