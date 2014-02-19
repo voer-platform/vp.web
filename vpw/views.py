@@ -1018,6 +1018,13 @@ def edit_profile(request):
                 elif 'https://' not in author_data['homepage']:
                     author_data['homepage'] = 'https://' + author_data['homepage']
 
+                if 'http://' in author_data['affiliation_url'] or 'https://' in author_data['affiliation_url']:
+                    pass
+                elif 'http://' not in author_data['affiliation_url']:
+                    author_data['affiliation_url'] = 'http://' + author_data['affiliation_url']
+                elif 'https://' not in author_data['affiliation_url']:
+                    author_data['affiliation_url'] = 'https://' + author_data['affiliation_url']
+
                 if 'avatar_file' in request.FILES:
                     avatar_file = request.FILES['avatar_file']
                     with open(settings.MEDIA_ROOT + '/' + avatar_file.name, 'wb+') as destination:
