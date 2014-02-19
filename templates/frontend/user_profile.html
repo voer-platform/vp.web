@@ -4,7 +4,7 @@
 {% load thumbnail %}
 {% load vpw_filters %}
 
-{% block titleSite %}{% trans "User profile" %}{% endblock %}
+{% block titleSite %}{% trans "User profile" %} - {% if author.fullname %} {% if author.title %}{{ author.title }} {% endif %}{{ author.fullname }} {% else %} {{ user.username }} {% endif %}{% endblock %}
 
 {% block content %}
 

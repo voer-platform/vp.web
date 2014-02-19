@@ -59,6 +59,8 @@ class EditProfileForm(forms.Form):
     new_password = forms.CharField(max_length=255, required=False)
     confirm_password = forms.CharField(max_length=255, required=False)
     fullname = forms.CharField(max_length=255)
+    homepage = forms.URLField(max_length=255, required=False)
+    affiliation_url = forms.URLField(max_length=255, required=False)
 
     def clean(self):
         cleaned_data = self.cleaned_data # individual field's clean methods have already been called

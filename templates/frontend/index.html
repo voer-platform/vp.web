@@ -16,7 +16,9 @@
                 </form>
             </div>
             <div class="text-slider-left clear">
-                {% trans 'Discover 21598 modules, 502 collections from 2052 authors' %}
+                {% blocktrans with module_count=material_statistic.module_count collection_count=material_statistic.collection_count person_count=material_statistic.person_count %}
+                    Discover {{ module_count }} modules, {{ collection_count }} collections from {{ person_count }} authors
+                {% endblocktrans %}
             </div>
         </div>
         <div class="hfslide right">
