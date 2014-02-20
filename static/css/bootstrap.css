@@ -1419,9 +1419,10 @@ pre code {
   }
 }
 */
-@media (min-width: 1100px) {
-  .container {
-    
+
+@media screen and (min-width: 420px) {
+	.container {
+    	width: 1100px;
   }
   .col-lg-1,
   .col-lg-2,
@@ -4013,7 +4014,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  /*padding: 10px 15px;*/
 }
 
 .nav > li > a:hover,
@@ -4314,8 +4315,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-collapse {
   max-height: 340px;
   overflow-x: visible;
-  border-top: 1px solid transparent;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /*border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);*/
   -webkit-overflow-scrolling: touch;
 }
 
@@ -4341,6 +4342,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-collapse.in {
   overflow-y: auto;
+}
+.navbar-collapse.in .list-right-top li{
+	background: none;
 }
 
 @media (min-width: 768px) {
@@ -4411,7 +4415,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-fixed-top {
   top: 0;
-  border-width: 0 0 1px;
+  border-width: 0px;
 }
 
 .navbar-fixed-bottom {
@@ -4439,7 +4443,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-toggle {
-  position: relative;
+  position: absolute;
+  right: 10px;
   float: right;
   padding: 9px 10px;
   margin-top: 8px;
@@ -4468,7 +4473,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-nav {
-  margin: 7.5px -15px;
+  /*margin: 7.5px -15px;*/
 }
 
 .navbar-nav > li > a {
@@ -4614,7 +4619,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-default {
   background-color: #f8f8f8;
-  border-color: #e7e7e7;
 }
 
 .navbar-default .navbar-brand {
@@ -4637,7 +4641,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333333;
+  color: #FFFFFF;
   background-color: transparent;
 }
 
@@ -4656,12 +4660,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-toggle {
-  border-color: #dddddd;
+  border-color: #f0f0f0;
 }
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #dddddd;
+  background-color: #f0f0f0;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -4670,7 +4674,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #e7e7e7;
+  /*border-color: #e7e7e7;*/
 }
 
 .navbar-default .navbar-nav > .dropdown > a:hover .caret,
@@ -4683,7 +4687,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
   color: #555555;
-  background-color: #e7e7e7;
+  /*background-color: #e7e7e7;*/
 }
 
 .navbar-default .navbar-nav > .open > a .caret,
@@ -4694,8 +4698,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-nav > .dropdown > a .caret {
-  border-top-color: #777777;
-  border-bottom-color: #777777;
+  /*border-top-color: #777777;
+  border-bottom-color: #777777;*/
+  border-top-color: #FFFFFF;
+  border-bottom-color: #FFFFFF;
 }
 
 @media (max-width: 767px) {
@@ -7031,3 +7037,4 @@ td.visible-print {
     display: none !important;
   }
 }
+

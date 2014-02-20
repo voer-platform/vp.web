@@ -1241,20 +1241,7 @@ ul.successfull li.label {
 .listSearchAuthors.hfvisible {
 	display:block;
 }
-@media (max-width: 640px) {
-	.main {
-		width:100%;
-		padding:0 10px;
-		width:640px;
-	}
 
-}
-@media (max-width: 480px) {
-	.main {
-		width:100%;
-		padding:0 10px;
-		width:480px;
-	}
 
-}
+
 
