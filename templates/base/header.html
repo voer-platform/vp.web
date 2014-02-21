@@ -55,7 +55,7 @@
                                     <form name="setLangEnglish" action="/language/setlang/" method="POST">{% csrf_token %}
                                         <input name="next" type="hidden" value="{{ request.path }}" />
                                         <input type="hidden" name="language" value="en" />
-                                        <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="{{ STATIC_URL }}images/en.jpg" alt="English" title="English" /></a>
+                                        <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="{{ STATIC_URL }}images/us.png" alt="English" title="English" /></a>
                                     </form>
                                 </li>
                             </ul>
@@ -87,10 +87,10 @@
                     </li>
                     {% else %}
                     <li>
-                        <a href="/user/register">{% trans 'Join' %}</a>
+                        <a href="/user/register">{% trans 'Register' %}</a>
                     </li>
                     <li>
-                        <a class="btn-top-login" data-toggle="modal" data-target="#modal-user-login"></a>
+                        <a class="btn-top-login" data-toggle="modal" data-target="#modal-user-login">{% trans 'Login' %}</a>
                     </li>
                     {% endif %}
                 </ul>

@@ -600,3 +600,28 @@ h1.sub-title{
     font-size: 22px;
     color: #C10C3E;
 }
+
+.text-header-slider-left{
+    text-transform: capitalize;
+    font-variant: small-caps;
+    font-size: 36px;
+    line-height: 1;
+}
+
+.div-input-search{
+    margin-top: 15px;
+}
+
+.btn-top-login{
+    background: none;
+    width: auto;
+    float: none;
+}
+
+.logo{
+    background: url(../images/voer-new.png) no-repeat;
+}
+
+#top{
+    background-color: #ce204e;
+}

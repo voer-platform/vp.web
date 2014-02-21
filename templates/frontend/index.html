@@ -8,7 +8,7 @@
 <div id="slider" class="slide1">
     <div class="slider-content main">
         <div class="slider-content-left left">
-            <div class="text-header-slider-left left clear">{% trans "Take the world's best documents, online, for free." %}</div>
+            <div class="text-header-slider-left left clear">{% trans "Vietnam Open Education Resources" %}</div>
             <div class="div-input-search left clear">
                 <form action="{% url 'search' %}" method="GET">
                     <input type="text" class="input-search-top" name="keyword" />
@@ -16,9 +16,7 @@
                 </form>
             </div>
             <div class="text-slider-left clear">
-                {% blocktrans with module_count=material_statistic.module_count collection_count=material_statistic.collection_count person_count=material_statistic.person_count %}
-                    Discover {{ module_count }} modules, {{ collection_count }} collections from {{ person_count }} authors
-                {% endblocktrans %}
+                {% blocktrans with module_count=material_statistic.module_count collection_count=material_statistic.collection_count person_count=material_statistic.person_count %}Discover {{ module_count }} modules, {{ collection_count }} collections from {{ person_count }} authors{% endblocktrans %}
             </div>
         </div>
         <div class="hfslide right">
