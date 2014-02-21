@@ -5,6 +5,7 @@
 	margin-bottom: 60px;
 	position: relative;
 	background-size: cover;
+	min-width: 1100px;
 }
 #bg_slide1{
 	width: 100%;
