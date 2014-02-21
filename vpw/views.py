@@ -102,7 +102,7 @@ def home(request):
     material_statistic = {}
     person_array = vpr_get_persons()
     module_array = vpr_browse(types=MODULE_TYPE)
-    collection_array = vpr_browse(types=MODULE_TYPE)
+    collection_array = vpr_browse(types=COLLECTION_TYPE)
     material_statistic['module_count'] = module_array['count']
     material_statistic['collection_count'] = collection_array['count']
     material_statistic['person_count'] = person_array['count']
