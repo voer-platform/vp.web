@@ -1,0 +1,219 @@
+@media screen and (max-width: 420px) {
+	#mainpage{
+		padding-top: 60px !important;
+	}
+	#slider{
+		display: none;
+	}
+	.module-view-content img{
+		width: 100%;
+	}
+	.list-footer-social{
+		float: left !important;
+	}
+	.list-status-module-content{
+		float: left !important;
+	}
+	.hflistmodule.extends{
+		position: relative;
+	}
+	.arrow-author-collection{
+		background-position: right center
+	}
+	.hflistmodule.extends{
+		width: 100%;
+	}
+	.mainpage-partner{
+		display: none;
+	}
+	.news-rows{
+		width: 100%;
+	}
+	.list-news-rows {
+	    width: 72%;
+	}
+	.collection-mainpage-cover{
+		width: 100%;
+	}
+	.collection-details-text{
+		width: 77%;
+	}
+	.collection-mainpage-cover img{
+		height: 185px;
+    	width: 100%;
+	}
+	.list-collection-mainpage li{
+		margin-right: 0;
+		width: 100%;
+	}
+	.list-mainpage-browser li{
+		margin: 0 0 10px 7px;
+    	width: 47%;
+	}
+	.browser-author-img{
+		height: 125px;
+    	width: 100%;
+	}
+	.browser-author-img img{
+		border: medium none;
+	    height: 125px;
+	    width: 100%;
+	}
+	.browser-author-details{
+		width: 100%;
+	}
+	.collection-mainpage-details{
+		width: 100%;
+	}
+	.modal-dialog.modal-login{
+		width: 100%;
+	}
+	.social-signup-form{
+		width: 100%;
+	}
+	.content-signup-form{
+		width: 100%;
+	}
+	.link-fb-signup{
+		width: 35%;
+		background-size: 100% auto;
+	}
+	.link-tw-signup{
+		width: 35%;
+		background-size: 100% auto;
+	}
+	.link-gg-signup{
+		width: 9%;
+		background-size: 100% auto;
+	}
+	.link-in-signup{
+		width: 10%;
+		background-size: 100% auto;
+	}
+	.tooltipsg{
+		display: none;
+	}
+	.title-signup-email span{
+		font-size: 17px;
+	}
+	.people-to-follow-button{
+		width: 20%;
+		background-size: 100% auto;
+	}
+	.find-creative{
+		width: 100%;
+		background-size: 100% auto;
+		height: 230px;
+	}
+	.btn-find-creative{
+		left: 10%;
+		top: 18%;
+		position: absolute;
+		margin: 0;
+		padding: 10px 20px;
+	}
+	.hffitertop .dropdown{
+		width: 23%;
+		padding: 0;
+	}
+	.filter-title{
+		padding-left: 5px;
+		background: none;
+		font-size: 12px;
+	}
+	.hfitem{
+		width: 46%;
+		margin: 5px;
+	}
+	.hfitem:nth-child(3n+1){
+		margin-left: 5px;
+	}
+	.hfitem .title-collection a{
+		font-size: 11px;
+	}
+	.collection-saveto{
+		right: 5px;
+    	width: 93%;
+	}
+	.hfitems.gridview .hfitem:nth-child(n){
+		margin-left: 7px;
+	}
+	.hfitems.gridview .hfitem .collection-mainpage-details{
+		width: 100%;
+	}
+	.hfitems.gridview .hfitem .collection-save-hover, .hfitems.gridview .hfitem .collection-mainpage-cover{
+		width: 100%;
+		height: 50%;
+	}
+	.hfuser-information{
+		width: 31%;
+		margin: 20px 10px 20px 20px;
+	}
+	.hfuser-avatar{
+		width: 100%;
+	}
+	.hfuser-avatar img{
+		width: 100%;
+		height: auto;
+	}
+	.hfuser-other{
+		width: 48%;
+	}
+	.hfuser-name{
+		font-size: 14px;
+	}
+	.hfuser-address{
+		width: 100%;
+		font-size: 11px;
+	}
+	.hfuser-website{
+		font-size: 11px;
+	}
+	.hfstep{
+		display: none;
+	}
+	.hfcreate .breakcump span{
+		padding: 0 5px 0 20px;
+		font-size: 12px;
+	}
+	.listAuthor{
+		display: none;
+	}
+	.hfcreate-1 ul.AddCategories li{
+		width: 32%;
+	}
+	.hfcreate-1 .tab-content .content .form-group .select.select-block{
+		width: 60%;
+	}
+	.form-group.btn-common .hfleft{
+		width: 44%;
+	}
+	.form-group.btn-common .hfright{
+		width: 54%;
+	}
+	.hfalert{
+		font-size: 12px;
+	}
+	.link-fb{
+		width: 90px;
+		background-size: 100%;
+	}
+	.link-tw{
+		width: 94px;
+		background-size: 100%;
+	}
+	.link-gg{
+		width: 24px;
+		background-size: 100%;
+	}
+	.link-in{
+		width: 29px;
+		background-size: 100%;
+	}
+	.content img{
+		width: 100%;
+	}
+	.input-search-right-top{
+		display: block;
+	}
+}

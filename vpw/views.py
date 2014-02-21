@@ -28,7 +28,7 @@ from django.core.urlresolvers import reverse
 
 from vpw.models import Material, Author, Settings
 from vpw.utils import normalize_string, normalize_filename
-from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, \
+from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, vpr_get_persons, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
     voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite
@@ -99,8 +99,16 @@ def home(request):
         if 'id' in person:
             person_list.append(person)
 
+    material_statistic = {}
+    person_array = vpr_get_persons()
+    module_array = vpr_browse(types=MODULE_TYPE)
+    collection_array = vpr_browse(types=MODULE_TYPE)
+    material_statistic['module_count'] = module_array['count']
+    material_statistic['collection_count'] = collection_array['count']
+    material_statistic['person_count'] = person_array['count']
+
     return render(request, "frontend/index.html",
-                  {"materials_list": materials_list, "person_list": person_list, "is_home": True})
+                  {"materials_list": materials_list, "person_list": person_list, 'material_statistic': material_statistic, "is_home": True})
 
 
 def signup(request):
@@ -135,7 +143,7 @@ def module_detail(request, title, mid, version):
     material = vpr_get_material(mid)
     if 'material_type' not in material or material['material_type'] != MODULE_TYPE:
         raise Http404
-        
+
     # lay anh trong noi dung
     list_images = vpr_get_material_images(mid)
     # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
@@ -1002,6 +1010,20 @@ def edit_profile(request):
                 if request.POST['new_password']:
                     user.set_password(request.POST['new_password'])
                     user.save()
+
+                if 'http://' in author_data['homepage'] or 'https://' in author_data['homepage']:
+                    pass
+                elif 'http://' not in author_data['homepage']:
+                    author_data['homepage'] = 'http://' + author_data['homepage']
+                elif 'https://' not in author_data['homepage']:
+                    author_data['homepage'] = 'https://' + author_data['homepage']
+
+                if 'http://' in author_data['affiliation_url'] or 'https://' in author_data['affiliation_url']:
+                    pass
+                elif 'http://' not in author_data['affiliation_url']:
+                    author_data['affiliation_url'] = 'http://' + author_data['affiliation_url']
+                elif 'https://' not in author_data['affiliation_url']:
+                    author_data['affiliation_url'] = 'https://' + author_data['affiliation_url']
 
                 if 'avatar_file' in request.FILES:
                     avatar_file = request.FILES['avatar_file']

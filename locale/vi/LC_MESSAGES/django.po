@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-27 01:26+0000\n"
-"PO-Revision-Date: 2014-01-27 08:27+0700\n"
+"POT-Creation-Date: 2014-02-20 15:21+0000\n"
+"PO-Revision-Date: 2014-02-21 21:05+0700\n"
 "Last-Translator: Cuong Nguyen <cuongnguyen@vnfoundation.org>\n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Home"
 msgstr "Trang chủ"
 
-#: templates/base/header.html:18 templates/frontend/profile.html:92
+#: templates/base/header.html:18 templates/frontend/profile.html:96
 msgid "Browse All"
 msgstr "Duyệt tài liệu"
 
@@ -63,43 +63,45 @@ msgid "Logout"
 msgstr "Đăng xuất"
 
 #: templates/base/header.html:90
-msgid "Join"
+#: templates/registration/registration_form.html:41
+msgid "Register"
 msgstr "Đăng ký"
 
-#: templates/base/header.html:108
-msgid "Login to VOER"
-msgstr "Đăng nhập"
-
-#: templates/base/header.html:123
-msgid "Remember me"
-msgstr "Ghi nhớ"
-
-#: templates/base/header.html:127
-msgid "Forgot your password ?"
-msgstr "Quên mật khẩu?"
-
-#: templates/base/header.html:130 templates/registration/login.html:36
+#: templates/base/header.html:93 templates/base/header.html.py:132
+#: templates/registration/login.html:34
 msgid "Login"
 msgstr "Đăng nhập"
 
-#: templates/base/header.html:133
+#: templates/base/header.html:110
+msgid "Login to VOER"
+msgstr "Đăng nhập"
+
+#: templates/base/header.html:125
+msgid "Remember me"
+msgstr "Ghi nhớ"
+
+#: templates/base/header.html:129
+msgid "Forgot your password ?"
+msgstr "Quên mật khẩu?"
+
+#: templates/base/header.html:135
 msgid "Don't have an account? Sign up for VOER"
 msgstr "Bạn chưa có tài khoản? Hãy đăng ký."
 
-#: templates/base/header.html:136
+#: templates/base/header.html:138
 msgid "The username or password is incorrect."
 msgstr "Tên đăng nhập hoặc mật khẩu chưa đúng"
 
 #: templates/frontend/admin_featured_materials.html:5
 #: templates/frontend/admin_import_user.html:5
 #: templates/frontend/admin_import_user.html:23
-#: templates/frontend/block/left_block_user.html:41
+#: templates/frontend/block/left_block_user.html:42
 #, fuzzy
 msgid "Import user"
 msgstr "Nhập"
 
 #: templates/frontend/admin_featured_materials.html:12
-#: templates/frontend/block/left_block_user.html:39
+#: templates/frontend/block/left_block_user.html:40
 msgid "Featured materials"
 msgstr "Nội dung iêu biểu"
 
@@ -124,14 +126,14 @@ msgstr "Tệp"
 #: templates/frontend/admin_import_user.html:41
 #: templates/frontend/admin_settings.html:46
 #: templates/frontend/user_edit_profile.html:153
-#: templates/frontend/collection/create_step3.html:290
+#: templates/frontend/collection/create_step3.html:288
 #: templates/frontend/module/create_step3.html:273
 msgid "Save"
 msgstr "Lưu lại"
 
 #: templates/frontend/admin_settings.html:10
 #: templates/frontend/admin_settings.html:28
-#: templates/frontend/block/left_block_user.html:42
+#: templates/frontend/block/left_block_user.html:43
 #, fuzzy
 msgid "Settings"
 msgstr "Cài đặt"
@@ -154,7 +156,7 @@ msgstr "Tài liệu"
 msgid "Set license content for collection creation."
 msgstr "Xác lập Giấy phép cho collection."
 
-#: templates/frontend/browse.html:49 templates/frontend/profile.html:123
+#: templates/frontend/browse.html:49 templates/frontend/profile.html:127
 #: templates/frontend/user_edit_profile.html:129
 #: templates/frontend/user_favorite.html:20
 #: templates/frontend/user_profile.html:91
@@ -166,59 +168,100 @@ msgstr "Xác lập Giấy phép cho collection."
 msgid "Title"
 msgstr "Tiêu đề"
 
-#: templates/frontend/browse.html:50 templates/frontend/profile.html:124
+#: templates/frontend/browse.html:50 templates/frontend/profile.html:128
 #: templates/frontend/user_profile.html:92
 #: templates/frontend/user_unpublish.html:22
 msgid "Relevance"
 msgstr "Mức tương tự"
 
-#: templates/frontend/browse.html:51 templates/frontend/profile.html:125
+#: templates/frontend/browse.html:51 templates/frontend/profile.html:129
 #: templates/frontend/user_profile.html:93
 #: templates/frontend/user_unpublish.html:23
 msgid "Rating"
 msgstr "Đánh giá"
 
-#: templates/frontend/browse.html:52 templates/frontend/profile.html:126
+#: templates/frontend/browse.html:52 templates/frontend/profile.html:130
 #: templates/frontend/user_favorite.html:21
 #: templates/frontend/user_profile.html:94
 #: templates/frontend/user_unpublish.html:24
 msgid "Date"
 msgstr "Ngày"
 
-#: templates/frontend/browse.html:56 templates/frontend/profile.html:130
+#: templates/frontend/browse.html:56 templates/frontend/profile.html:134
 #: templates/frontend/user_favorite.html:25
 #: templates/frontend/user_profile.html:98
 #: templates/frontend/user_unpublish.html:28
 msgid "Gridview"
 msgstr "Xem dạng lưới"
 
-#: templates/frontend/browse.html:57 templates/frontend/profile.html:131
+#: templates/frontend/browse.html:57 templates/frontend/profile.html:135
 #: templates/frontend/user_favorite.html:26
 #: templates/frontend/user_profile.html:99
 #: templates/frontend/user_unpublish.html:29
 msgid "Listview"
 msgstr "Xem dạng danh sách"
 
-#: templates/frontend/browse.html:167 templates/frontend/profile.html:221
+#: templates/frontend/browse.html:133 templates/frontend/profile.html:210
+#: templates/frontend/ajax/browse.html:49
+msgid "Add to my favourite"
+msgstr "Yêu thích"
+
+#: templates/frontend/browse.html:136 templates/frontend/profile.html:213
+#: templates/frontend/ajax/browse.html:52
+#: templates/frontend/block/left_block_user.html:17
+msgid "My Favorites"
+msgstr "Mục yêu thích"
+
+#: templates/frontend/browse.html:141 templates/frontend/profile.html:218
+#: templates/frontend/ajax/browse.html:57
+msgid "Create new"
+msgstr "Tạo mới"
+
+#: templates/frontend/browse.html:170 templates/frontend/profile.html:245
+#: templates/frontend/ajax/browse.html:84
+#, fuzzy
+msgid "Other"
+msgstr "Khác"
+
+#: templates/frontend/browse.html:194 templates/frontend/profile.html:269
+#: templates/frontend/user_unpublish.html:112
+#: templates/frontend/ajax/browse.html:108
+#: templates/frontend/ajax/others.html:38
+#: templates/frontend/ajax/similars.html:38
+#, fuzzy
+msgid "No data."
+msgstr "Không có dữ liệu"
+
+#: templates/frontend/browse.html:203 templates/frontend/profile.html:279
+#: templates/frontend/search_result.html:66
+msgid "Filter By"
+msgstr "Lọc theo"
+
+#: templates/frontend/browse.html:278 templates/frontend/profile.html:334
+#: templates/frontend/search_result.html:110
 msgid "All types"
 msgstr "Tất cả"
 
-#: templates/frontend/browse.html:179
+#: templates/frontend/browse.html:290
 #: templates/frontend/module_detail.html:124
-#: templates/frontend/profile.html:234
+#: templates/frontend/profile.html:347
+#: templates/frontend/search_result.html:122
 msgid "Modules"
 msgstr "Module"
 
-#: templates/frontend/browse.html:191 templates/frontend/profile.html:247
+#: templates/frontend/browse.html:302 templates/frontend/profile.html:360
+#: templates/frontend/search_result.html:134
 #, fuzzy
 msgid "Collection"
 msgstr "Tài liệu"
 
-#: templates/frontend/browse.html:206 templates/frontend/profile.html:263
+#: templates/frontend/browse.html:317 templates/frontend/profile.html:376
+#: templates/frontend/search_result.html:150
 msgid "All languages"
 msgstr "Tất cả ngôn ngữ"
 
-#: templates/frontend/browse.html:218 templates/frontend/profile.html:276
+#: templates/frontend/browse.html:329 templates/frontend/profile.html:389
+#: templates/frontend/search_result.html:162
 #: templates/frontend/collection/create_step2.html:246
 #: templates/frontend/collection/create_step3.html:229
 #: templates/frontend/module/create_step2.html:238
@@ -227,7 +270,8 @@ msgstr "Tất cả ngôn ngữ"
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: templates/frontend/browse.html:230 templates/frontend/profile.html:289
+#: templates/frontend/browse.html:341 templates/frontend/profile.html:402
+#: templates/frontend/search_result.html:174
 #: templates/frontend/collection/create_step2.html:247
 #: templates/frontend/collection/create_step3.html:231
 #: templates/frontend/module/create_step2.html:239
@@ -235,7 +279,8 @@ msgstr "Tiếng Việt"
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: templates/frontend/browse.html:245 templates/frontend/profile.html:305
+#: templates/frontend/browse.html:356 templates/frontend/profile.html:418
+#: templates/frontend/search_result.html:191
 msgid "All categories"
 msgstr "Tất cả chủ đề"
 
@@ -286,12 +331,17 @@ msgid "Similar items"
 msgstr "Nội dung tương tự"
 
 #: templates/frontend/index.html:11
-msgid "Take the world's best documents, online, for free."
-msgstr "Thư viện Học liệu Mở Việt Nam"
+msgid "Vietnam Open Education Resources"
+msgstr "Thư Viện Học Liệu Mở Việt Nam"
 
 #: templates/frontend/index.html:19
-msgid "Discover 21598 modules, 502 collections from 2052 authors"
-msgstr "Khám phá 21.598 modules, 502 tài liệu từ 2.052 tác giả."
+#, python-format
+msgid ""
+"Discover %(module_count)s modules, %(collection_count)s collections from "
+"%(person_count)s authors"
+msgstr ""
+"Khám phá %(module_count)s modules, %(collection_count)s tài liệu từ "
+"%(person_count)s tác giả"
 
 #: templates/frontend/index.html:100
 msgid "Browser All"
@@ -309,9 +359,9 @@ msgstr "Hồ sơ cá nhân"
 #: templates/frontend/material_stats.html:29
 #: templates/frontend/material_stats.html:30
 #: templates/frontend/material_stats.html:31
-#: templates/frontend/profile.html:27 templates/frontend/profile.html.py:28
-#: templates/frontend/profile.html:29 templates/frontend/profile.html.py:30
-#: templates/frontend/profile.html:31
+#: templates/frontend/profile.html:31 templates/frontend/profile.html.py:32
+#: templates/frontend/profile.html:33 templates/frontend/profile.html.py:34
+#: templates/frontend/profile.html:35
 #: templates/frontend/user_edit_profile.html:26
 #: templates/frontend/user_edit_profile.html:27
 #: templates/frontend/user_edit_profile.html:28
@@ -326,7 +376,7 @@ msgid "Not available"
 msgstr "Chưa cập nhật"
 
 #: templates/frontend/material_stats.html:29
-#: templates/frontend/profile.html:29
+#: templates/frontend/profile.html:33
 #: templates/frontend/user_edit_profile.html:28
 #: templates/frontend/user_edit_profile.html:133
 #: templates/frontend/user_profile.html:29
@@ -334,14 +384,14 @@ msgid "Homepage"
 msgstr "Trang chủ"
 
 #: templates/frontend/material_stats.html:30
-#: templates/frontend/profile.html:30
+#: templates/frontend/profile.html:34
 #: templates/frontend/user_edit_profile.html:29
 #: templates/frontend/user_profile.html:30
 msgid "National"
 msgstr "Quốc gia"
 
 #: templates/frontend/material_stats.html:31
-#: templates/frontend/profile.html:31
+#: templates/frontend/profile.html:35
 #: templates/frontend/user_edit_profile.html:30
 #: templates/frontend/user_edit_profile.html:145
 #: templates/frontend/user_profile.html:31
@@ -413,12 +463,13 @@ msgstr "Chỉnh sửa"
 msgid "Collections"
 msgstr "Tài liệu"
 
-#: templates/frontend/profile.html:34
+#: templates/frontend/profile.html:38
 #, fuzzy
 msgid "Delete person"
 msgstr "Xóa tài khoản"
 
-#: templates/frontend/profile.html:41 templates/frontend/user_profile.html:37
+#: templates/frontend/profile.html:45 templates/frontend/search_result.html:95
+#: templates/frontend/user_profile.html:37
 #: templates/frontend/collection/create_step2.html:138
 #: templates/frontend/collection/create_step2.html:145
 #: templates/frontend/collection/create_step2.html:203
@@ -433,7 +484,7 @@ msgstr "Xóa tài khoản"
 msgid "Author"
 msgstr "Tác giả"
 
-#: templates/frontend/profile.html:45 templates/frontend/user_profile.html:41
+#: templates/frontend/profile.html:49 templates/frontend/user_profile.html:41
 #: templates/frontend/collection/create_step2.html:150
 #: templates/frontend/collection/create_step2.html:208
 #: templates/frontend/collection/create_step3.html:133
@@ -444,7 +495,7 @@ msgstr "Tác giả"
 msgid "Contributor"
 msgstr "Đồng biên tập"
 
-#: templates/frontend/profile.html:49 templates/frontend/user_profile.html:45
+#: templates/frontend/profile.html:53 templates/frontend/user_profile.html:45
 #: templates/frontend/collection/create_step2.html:146
 #: templates/frontend/collection/create_step2.html:204
 #: templates/frontend/collection/create_step3.html:129
@@ -455,7 +506,7 @@ msgstr "Đồng biên tập"
 msgid "Editor"
 msgstr "Biên tập viên"
 
-#: templates/frontend/profile.html:53 templates/frontend/user_profile.html:49
+#: templates/frontend/profile.html:57 templates/frontend/user_profile.html:49
 #: templates/frontend/collection/create_step2.html:147
 #: templates/frontend/collection/create_step2.html:205
 #: templates/frontend/collection/create_step3.html:130
@@ -466,7 +517,7 @@ msgstr "Biên tập viên"
 msgid "Licensor"
 msgstr "Người giữ tác quyền"
 
-#: templates/frontend/profile.html:57 templates/frontend/user_profile.html:53
+#: templates/frontend/profile.html:61 templates/frontend/user_profile.html:53
 #: templates/frontend/collection/create_step2.html:148
 #: templates/frontend/collection/create_step2.html:206
 #: templates/frontend/collection/create_step3.html:131
@@ -477,7 +528,7 @@ msgstr "Người giữ tác quyền"
 msgid "Maintainer"
 msgstr "Maintainer"
 
-#: templates/frontend/profile.html:61 templates/frontend/user_profile.html:57
+#: templates/frontend/profile.html:65 templates/frontend/user_profile.html:57
 #: templates/frontend/collection/create_step2.html:149
 #: templates/frontend/collection/create_step2.html:207
 #: templates/frontend/collection/create_step3.html:132
@@ -488,97 +539,97 @@ msgstr "Maintainer"
 msgid "Translator"
 msgstr "Dịch giả"
 
-#: templates/frontend/profile.html:94
+#: templates/frontend/profile.html:98
 msgid "Popular"
 msgstr "Phổ biến"
 
-#: templates/frontend/profile.html:95
+#: templates/frontend/profile.html:99
 msgid "All Creative Fields"
 msgstr ""
 
-#: templates/frontend/profile.html:96
+#: templates/frontend/profile.html:100
 msgid "Architecture"
 msgstr ""
 
-#: templates/frontend/profile.html:97
+#: templates/frontend/profile.html:101
 msgid "Art Direction"
 msgstr ""
 
-#: templates/frontend/profile.html:98
+#: templates/frontend/profile.html:102
 msgid "Branding"
 msgstr ""
 
-#: templates/frontend/profile.html:99
+#: templates/frontend/profile.html:103
 msgid "Fashion"
 msgstr ""
 
-#: templates/frontend/profile.html:100
+#: templates/frontend/profile.html:104
 msgid "Graphic Design"
 msgstr ""
 
-#: templates/frontend/profile.html:101
+#: templates/frontend/profile.html:105
 msgid "Illustration"
 msgstr ""
 
-#: templates/frontend/profile.html:102
+#: templates/frontend/profile.html:106
 msgid "Industrial Design"
 msgstr ""
 
-#: templates/frontend/profile.html:103
+#: templates/frontend/profile.html:107
 msgid "Interaction Design"
 msgstr ""
 
-#: templates/frontend/profile.html:104
+#: templates/frontend/profile.html:108
 msgid "Motion Graphics"
 msgstr ""
 
-#: templates/frontend/profile.html:105
+#: templates/frontend/profile.html:109
 msgid "Photography"
 msgstr ""
 
-#: templates/frontend/profile.html:106
+#: templates/frontend/profile.html:110
 msgid "UI/UX"
 msgstr ""
 
-#: templates/frontend/profile.html:107
+#: templates/frontend/profile.html:111
 msgid "Web Design"
 msgstr ""
 
-#: templates/frontend/profile.html:111 templates/frontend/profile.html:113
+#: templates/frontend/profile.html:115 templates/frontend/profile.html:117
 msgid "Featured"
 msgstr "Tiêu biểu"
 
-#: templates/frontend/profile.html:114
+#: templates/frontend/profile.html:118
 msgid "Most Liked"
 msgstr "Yêu thích nhất"
 
-#: templates/frontend/profile.html:115
+#: templates/frontend/profile.html:119
 msgid "Most Viewed"
 msgstr "Xem nhiều nhất"
 
-#: templates/frontend/profile.html:116
+#: templates/frontend/profile.html:120
 msgid "Most Discussed"
 msgstr "Thảo luận nhiều nhất"
 
-#: templates/frontend/profile.html:117
+#: templates/frontend/profile.html:121
 msgid "Most Recent"
 msgstr "Mới nhất"
 
-#: templates/frontend/profile.html:121
+#: templates/frontend/profile.html:125
 msgid "Sort by"
 msgstr "Sắp xếp theo"
-
-#: templates/frontend/profile.html:166
-msgid "Filter By"
-msgstr "Lọc theo"
 
 #: templates/frontend/search_result.html:6
 msgid "Search result"
 msgstr "Kết quả tìm kiếm"
 
-#: templates/frontend/search_result.html:124
-msgid "No data"
-msgstr "Không có dữ liệu"
+#: templates/frontend/search_result.html:74
+msgid "All"
+msgstr ""
+
+#: templates/frontend/search_result.html:84
+msgid "Material"
+msgstr ""
 
 #: templates/frontend/user_edit_profile.html:12
 #: templates/frontend/user_favorite.html:12
@@ -665,43 +716,17 @@ msgstr "Hủy"
 msgid "User favorite"
 msgstr "Mục yêu thích"
 
-#: templates/frontend/user_unpublish.html:112
-#: templates/frontend/ajax/browse.html:108
-#: templates/frontend/ajax/others.html:38
-#: templates/frontend/ajax/similars.html:43
-#, fuzzy
-msgid "No data."
-msgstr "Không có dữ liệu"
-
-#: templates/frontend/ajax/browse.html:49
-msgid "Add to my favourite"
-msgstr "Yêu thích"
-
-#: templates/frontend/ajax/browse.html:52
-#: templates/frontend/block/left_block_user.html:16
-msgid "My Favorites"
-msgstr "Mục yêu thích"
-
-#: templates/frontend/ajax/browse.html:57
-msgid "Create new"
-msgstr "Tạo mới"
-
-#: templates/frontend/ajax/browse.html:84
-#, fuzzy
-msgid "Other"
-msgstr "Khác"
-
 #: templates/frontend/ajax/others.html:22
-#: templates/frontend/ajax/similars.html:27
+#: templates/frontend/ajax/similars.html:22
 msgid "View more items"
 msgstr "Các tài liệu khác"
 
 #: templates/frontend/ajax/others.html:25
 #: templates/frontend/ajax/others.html:27
-#: templates/frontend/ajax/similars.html:30
-#: templates/frontend/ajax/similars.html:32
+#: templates/frontend/ajax/similars.html:25
+#: templates/frontend/ajax/similars.html:27
 #: templates/frontend/collection/create_step2.html:263
-#: templates/frontend/collection/create_step3.html:291
+#: templates/frontend/collection/create_step3.html:289
 #: templates/frontend/module/create_step2.html:255
 #: templates/frontend/module/create_step3.html:274
 msgid "Back"
@@ -709,14 +734,18 @@ msgstr "Trước"
 
 #: templates/frontend/ajax/others.html:31
 #: templates/frontend/ajax/others.html:33
-#: templates/frontend/ajax/similars.html:36
-#: templates/frontend/ajax/similars.html:38
+#: templates/frontend/ajax/similars.html:31
+#: templates/frontend/ajax/similars.html:33
 #: templates/frontend/collection/create_step1.html:60
 #: templates/frontend/collection/create_step2.html:262
 #: templates/frontend/module/create_step1.html:57
 #: templates/frontend/module/create_step2.html:254
 msgid "Next"
 msgstr "Tiếp"
+
+#: templates/frontend/ajax/search_result.html:82
+msgid "No data"
+msgstr "Không có dữ liệu"
 
 #: templates/frontend/block/left_block_user.html:5
 #: templates/frontend/module/create_step1.html:13
@@ -726,47 +755,48 @@ msgid "Create a new module"
 msgstr "Tạo module mới"
 
 #: templates/frontend/block/left_block_user.html:6
+#: templates/frontend/block/left_block_user.html:7
 #: templates/frontend/collection/create_step1.html:11
 #: templates/frontend/collection/create_step2.html:94
 #: templates/frontend/collection/create_step3.html:71
 msgid "Create a new collection"
 msgstr "Tạo collection mới"
 
-#: templates/frontend/block/left_block_user.html:10
+#: templates/frontend/block/left_block_user.html:11
 msgid "My Items"
 msgstr "Các mục của tôi"
 
-#: templates/frontend/block/left_block_user.html:14
+#: templates/frontend/block/left_block_user.html:15
 msgid "Unpublish"
 msgstr "Chưa công bố"
 
-#: templates/frontend/block/left_block_user.html:15
+#: templates/frontend/block/left_block_user.html:16
 msgid "Saved Items"
 msgstr "Các mục được lưu"
 
-#: templates/frontend/block/left_block_user.html:22
+#: templates/frontend/block/left_block_user.html:23
 msgid "My profile"
 msgstr "Hồ sơ cá nhân"
 
-#: templates/frontend/block/left_block_user.html:26
+#: templates/frontend/block/left_block_user.html:27
 msgid "Profile Information"
 msgstr "Thông tin hồ sơ"
 
-#: templates/frontend/block/left_block_user.html:33
+#: templates/frontend/block/left_block_user.html:34
 msgid "Administration"
 msgstr "Quản trị"
 
-#: templates/frontend/block/left_block_user.html:37
+#: templates/frontend/block/left_block_user.html:38
 #, fuzzy
 msgid "Most viewed"
 msgstr "Xem nhiều nhất"
 
-#: templates/frontend/block/left_block_user.html:38
+#: templates/frontend/block/left_block_user.html:39
 #, fuzzy
 msgid "Most favourite"
 msgstr "Mục yêu thích"
 
-#: templates/frontend/block/left_block_user.html:40
+#: templates/frontend/block/left_block_user.html:41
 msgid "Featured authors"
 msgstr "Tác giả iêu biểu"
 
@@ -938,11 +968,7 @@ msgstr "Tạo mục mới"
 msgid "Create section"
 msgstr "Tạo mục mới"
 
-#: templates/frontend/collection/create_step3.html:283
-msgid "Add Module"
-msgstr "Thêm Module"
-
-#: templates/frontend/collection/create_step3.html:289
+#: templates/frontend/collection/create_step3.html:287
 #: templates/frontend/module/create_step3.html:272
 msgid "Publish"
 msgstr "Công bố"
@@ -978,6 +1004,11 @@ msgstr "Các tài nguyên kèm theo"
 #: templates/frontend/module/create_step3.html:268
 msgid "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
 msgstr "Tải tài liệu với định dạng DOC, DOCX, ODT, PNG, GIF,  JPG, JPEG"
+
+#: templates/registration/login.html:29
+#: templates/registration/registration_form.html:31
+msgid "Show password"
+msgstr "Hiện mật khẩu"
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:8
@@ -1153,21 +1184,13 @@ msgstr "Tên đăng nhập"
 msgid "Your email Address"
 msgstr "Email của bạn"
 
-#: templates/registration/registration_form.html:26
+#: templates/registration/registration_form.html:27
 msgid "Your password"
 msgstr "Mật khẩu của bạn"
 
-#: templates/registration/registration_form.html:27
+#: templates/registration/registration_form.html:35
 msgid "Enter password again"
 msgstr "Nhập lại mật khẩu"
-
-#: templates/registration/registration_form.html:36
-msgid "Show password"
-msgstr "Hiện mật khẩu"
-
-#: templates/registration/registration_form.html:43
-msgid "Register"
-msgstr "Đăng ký"
 
 #: vpw/fields.py:12
 msgid "Invalid captcha"
@@ -1177,9 +1200,21 @@ msgstr "Nhập sai mã xác thực"
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: vpw/views.py:347 vpw/views.py:492
+#: vpw/views.py:380 vpw/views.py:525
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
+
+#~ msgid "Join"
+#~ msgstr "Đăng ký"
+
+#~ msgid "Take the world's best documents, online, for free."
+#~ msgstr "Thư viện Học liệu Mở Việt Nam"
+
+#~ msgid "Discover 21598 modules, 502 collections from 2052 authors"
+#~ msgstr "Khám phá 21.598 modules, 502 tài liệu từ 2.052 tác giả."
+
+#~ msgid "Add Module"
+#~ msgstr "Thêm Module"
 
 #, fuzzy
 #~ msgid "Public"

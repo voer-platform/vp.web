@@ -2,15 +2,18 @@
 {% load i18n %}
 
 <!-- TOP -->
-<div id="top">
-    <div id="header" class="main">
-        <div class="logo">
-            <a href="/">
-                Logo
-            </a>
+<div id="top" class="navbar navbar-default navbar-fixed-top">
+    <div class="container main">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo" href="/">Project name</a>
         </div>
-        <div id="main-menu">
-            <ul class="main-menu-nav">
+        <div id="main-menu" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav main-menu-nav">
                 <li>
                   <a href="/">{% trans 'Home' %}</a>
                 </li>
@@ -24,22 +27,17 @@
                   <a href="/about-us">{% trans 'About Us' %}</a>
                 </li>
             </ul>
-        </div>
-
-        <!--RIGHT TOP-->
-        <div id="right-top-nav" class="right">
-            <div class="block-top-language">
-                <ul class="list-right-top">
-                    {% if not is_home %}
-                    <li>
-                        <form action="{% url 'search' %}" method="GET">
-                          {% csrf_token %}
-                            <input type="text" class="input-search-right-top" name="keyword" value="{{ keyword }}">
-                        </form>
-                    </li>
-                    {% else %}
-                    <li>&nbsp;</li>
-                    {% endif %}
+            <ul class="nav navbar-nav navbar-right list-right-top">
+                {% if not is_home %}
+                <li>
+                    <form action="{% url 'search' %}" method="GET">
+                      {% csrf_token %}
+                        <input type="text" class="input-search-right-top" name="keyword" value="{{ keyword }}">
+                    </form>
+                </li>
+                {% else %}
+                <li>&nbsp;</li>
+                {% endif %}
 
                     <li>
                         <div class="collapse navbar-collapse bs-js-navbar-collapse">
@@ -55,7 +53,7 @@
                                     <form name="setLangEnglish" action="/language/setlang/" method="POST">{% csrf_token %}
                                         <input name="next" type="hidden" value="{{ request.path }}" />
                                         <input type="hidden" name="language" value="en" />
-                                        <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="{{ STATIC_URL }}images/en.jpg" alt="English" title="English" /></a>
+                                        <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="{{ STATIC_URL }}images/us.png" alt="English" title="English" /></a>
                                     </form>
                                 </li>
                             </ul>
@@ -87,10 +85,10 @@
                     </li>
                     {% else %}
                     <li>
-                        <a href="/user/register">{% trans 'Join' %}</a>
+                        <a href="/user/register">{% trans 'Register' %}</a>
                     </li>
                     <li>
-                        <a class="btn-top-login" data-toggle="modal" data-target="#modal-user-login"></a>
+                        <a class="btn-top-login" data-toggle="modal" data-target="#modal-user-login">{% trans 'Login' %}</a>
                     </li>
                     {% endif %}
                 </ul>

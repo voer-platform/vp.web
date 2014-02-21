@@ -5,6 +5,7 @@
 	margin-bottom: 60px;
 	position: relative;
 	background-size: cover;
+	min-width: 1100px;
 }
 #bg_slide1{
 	width: 100%;
@@ -77,7 +78,7 @@
 }
 .slider-content-left{
 	font-weight: bold;
-    margin-top: 125px;
+    margin-top: 80px;
     position: relative;
     width: 630px;
     z-index: 10;
