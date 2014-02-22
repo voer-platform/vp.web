@@ -61,17 +61,19 @@
     {% for material in materials_list %}
     {% if material.material_type == 1 %}
         {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
+        {% trans "Module" as type_name %}
     {% else %}
         {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
+        {% trans "Collection" as type_name %}
     {% endif %}
     <li>
         <div class="icon-hot"></div>
         <div class="collection-mainpage-cover left clear">
-            <a href="{{ material_url }}" title="{{ material.title }}">
+            <a href="{{ material_url }}" title="{{ type_name }}: {{ material.title }}">
             {% if material.categories %}
-		    <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg" alt="{{ material.title }}"/>
+		    <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg" alt="{{ type_name }}: {{ material.title }}"/>
 		    {% else %}
-		    <img src="{{STATIC_URL}}images/cat_other.jpg" alt="{{ material.title }}"/>
+		    <img src="{{STATIC_URL}}images/cat_other.jpg" alt="{{ type_name }}: {{ material.title }}"/>
 		    {% endif %}
             </a>
         </div>
@@ -82,7 +84,7 @@
             </div>
             <div class="collection-details-text left">
                 <div class="title-collection left clear">
-                    <a href='{{ material_url }}' title="{{ material.title }}">{{ material.title }}</a>
+                    <a href='{{ material_url }}' title="{{ type_name }}: {{ material.title }}">{{ material.title }}</a>
                 </div>
                 {% for person in material.author_list %}
                 <div class="author-collection left clear">

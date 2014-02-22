@@ -507,11 +507,21 @@
 	width: 100%;
 	background: #f4f4f4;
 }
+.material-type {
+    color: #ccc;
+    font-size: 70%;
+    text-transform: uppercase;
+    position: absolute;
+    right: 10px;
+}
+.module-title,
 .module-view-name{
 	font-size: 22px;
     font-weight: bold;
     margin-bottom: 11px;
     color: #C10C3E;
+    margin-top: 0px;
+    width: 94%;
 }
 .module-view-category{
 	color: #231f20;

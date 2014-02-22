@@ -134,27 +134,24 @@ msgstr "Lưu lại"
 #: templates/frontend/admin_settings.html:10
 #: templates/frontend/admin_settings.html:28
 #: templates/frontend/block/left_block_user.html:43
-#, fuzzy
 msgid "Settings"
 msgstr "Cài đặt"
 
 #: templates/frontend/admin_settings.html:32
-#, fuzzy
 msgid "Module License"
-msgstr "Bản quyền"
+msgstr "Giấy phép của Tài liệu"
 
 #: templates/frontend/admin_settings.html:35
 msgid "Set license content for module creation."
-msgstr "Xác lập Giấy phép cho module."
+msgstr "Xác lập giấy phép cho module."
 
 #: templates/frontend/admin_settings.html:39
-#, fuzzy
 msgid "Collection License"
-msgstr "Tài liệu"
+msgstr "Giấy phép của Giáo trình"
 
 #: templates/frontend/admin_settings.html:42
 msgid "Set license content for collection creation."
-msgstr "Xác lập Giấy phép cho collection."
+msgstr "Xác lập giấy phép cho collection."
 
 #: templates/frontend/browse.html:49 templates/frontend/profile.html:127
 #: templates/frontend/user_edit_profile.html:129
@@ -242,18 +239,20 @@ msgstr "Lọc theo"
 msgid "All types"
 msgstr "Tất cả"
 
+msgid "Module"
+msgstr "Tài liệu"
+
 #: templates/frontend/browse.html:290
 #: templates/frontend/module_detail.html:124
 #: templates/frontend/profile.html:347
 #: templates/frontend/search_result.html:122
 msgid "Modules"
-msgstr "Module"
+msgstr "Các tài liệu"
 
 #: templates/frontend/browse.html:302 templates/frontend/profile.html:360
 #: templates/frontend/search_result.html:134
-#, fuzzy
 msgid "Collection"
-msgstr "Tài liệu"
+msgstr "Giáo trình"
 
 #: templates/frontend/browse.html:317 templates/frontend/profile.html:376
 #: templates/frontend/search_result.html:150
@@ -266,7 +265,6 @@ msgstr "Tất cả ngôn ngữ"
 #: templates/frontend/collection/create_step3.html:229
 #: templates/frontend/module/create_step2.html:238
 #: templates/frontend/module/create_step3.html:230
-#, fuzzy
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
@@ -312,12 +310,12 @@ msgstr "Tải về"
 #: templates/frontend/collection_detail.html:224
 #, fuzzy
 msgid "PDF Collection"
-msgstr "Tài liệu"
+msgstr "Giáo trình PDF"
 
 #: templates/frontend/collection_detail.html:226
 #, fuzzy
 msgid "PDF Module"
-msgstr "Module"
+msgstr "Tài liệu PDF"
 
 #: templates/frontend/collection_detail.html:258
 #: templates/frontend/module_detail.html:183
@@ -459,9 +457,8 @@ msgid "Edit"
 msgstr "Chỉnh sửa"
 
 #: templates/frontend/module_detail.html:128
-#, fuzzy
 msgid "Collections"
-msgstr "Tài liệu"
+msgstr "Các giáo trình"
 
 #: templates/frontend/profile.html:38
 #, fuzzy
