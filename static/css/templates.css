@@ -169,8 +169,10 @@
 	margin-bottom: 10px !important;
 	position: relative;
 }
-.slider-content-left > div{
+.slider-content-left > h1 {
 	margin-bottom: 25px;
+	font-weight: bold;
+	margin-top: 0px;
 }
 .text-header-slider-left{
 	font-size: 26px;
