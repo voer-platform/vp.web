@@ -579,6 +579,15 @@ div.checkbox-select-items {
 .checkbox .icons, .radio .icons {
     color: #d0d0d0;
 }
+.btn-delete-items {
+    background: url("../images/icon/delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: block;
+    height: 18px;
+    margin-left: 10px;
+    margin-top: 9px;
+    width: 11px;
+}
 .display_none {
     display: none;
 }

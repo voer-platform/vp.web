@@ -1567,18 +1567,14 @@ def ajax_search_result(request):
 
 @login_required
 def delete_unpublish(request):
-    if request.is_ajax():
+    if (request.REQUEST):
         current_user = request.user
-        ids = request.POST['ids']
+        ids = request.POST['material_ids']
         id_list = ids.split(',')
 
-        response_data = {}
         Material.objects.filter(creator_id=current_user.id, material_id='', version=None, id__in=id_list).delete()
-        response_data['status'] = True
-        response_data['message'] = 'Add favorite successful'
+        messages.success(request, 'Delete material successfull.')
 
-        return HttpResponse(json.dumps(response_data), content_type="application/json")
-
+        return HttpResponseRedirect(reverse('get_unpublish'))
     else:
         return HttpResponseRedirect('/')
-

@@ -31,7 +31,6 @@
                 {% if not is_home %}
                 <li>
                     <form action="{% url 'search' %}" method="GET">
-                      {% csrf_token %}
                         <input type="text" class="input-search-right-top" name="keyword" value="{{ keyword }}">
                     </form>
                 </li>
