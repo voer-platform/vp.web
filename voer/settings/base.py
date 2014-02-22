@@ -176,7 +176,8 @@ TINYMCE_DEFAULT_CONFIG = {
     'custom_undo_redo_levels': 10,
     'file_browser_callback': 'mce_filebrowser',
     'width': '730',
-    'height': '400'
+    'height': '400',
+    'convert_urls': False
 }
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
