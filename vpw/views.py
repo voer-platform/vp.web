@@ -213,7 +213,7 @@ def collection_detail(request, title, cid, mid):
 
     # Get collection
     collection = vpr_get_material(cid)
-    if 'text' not in collection:
+    if not collection.get('text', None):
         raise Http404
 
     outline = json.loads(collection['text'])
