@@ -34,8 +34,8 @@ urlpatterns = patterns('',
     url(r'^$', 'vpw.views.home', name='home'),
     url(r'^m/(?P<mid>[0-9a-z]+)(/(?P<version>\d+))?/?$', 'vpw.views.module_detail_old', name='module_detail_old'),
     url(r'^m/(?P<title>[0-9A-Za-z_\-]+)/(?P<mid>[0-9a-z]+)(/(?P<version>\d+))?/?$', 'vpw.views.module_detail', name='module_detail'),
+    url(r'^c/(?P<title>[0-9A-Za-z_\-]+)/(?P<cid>[0-9a-z]{8})(/(?P<mid>[0-9a-z]{8}))?/?$', 'vpw.views.collection_detail', name='collection_detail'),
     url(r'^c/(?P<cid>[0-9a-z]+)(/(?P<mid>[0-9a-z]+))?/?$', 'vpw.views.collection_detail_old', name='collection_detail_old'),
-    url(r'^c/(?P<title>[0-9A-Za-z_\-]+)/(?P<cid>[0-9a-z]+)/(?P<mid>[0-9a-z]+)?/?$', 'vpw.views.collection_detail', name='collection_detail'),
     url(r'^browse/?$', 'vpw.views.browse', name='browse'),
     url(r'^signup/?$', 'vpw.views.signup', name='signup'),
     url(r'^about-us/?$', 'vpw.views.aboutus', name='about-us'),
@@ -90,6 +90,10 @@ urlpatterns = patterns('',
     url(r'^google9c25b243b9e3bacc\.html$', TemplateView.as_view(template_name='frontend/google9c25b243b9e3bacc.html')),
     url(r'^BingSiteAuth\.xml', TemplateView.as_view(template_name='frontend/BingSiteAuth.xml')),
 
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)
+
+if settings.DEBUG:
+    urlpatterns += patterns('', url(r'^media/(?P<path>.*)$',
+                                    'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))
 
 handler500 = "vpw.views.server_error"

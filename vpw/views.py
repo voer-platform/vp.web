@@ -199,6 +199,9 @@ def module_detail(request, title, mid, version):
 
 def collection_detail_old(request, cid, mid):
     collection = vpr_get_material(cid)
+    if 'material_type' not in collection:
+        raise Http404
+
     if collection and collection['material_type'] == COLLECTION_TYPE:
         title = normalize_string(collection['title'])
         if mid is None:
@@ -213,6 +216,9 @@ def collection_detail(request, title, cid, mid):
 
     # Get collection
     collection = vpr_get_material(cid)
+    if 'text' not in collection:
+        raise Http404
+
     outline = json.loads(collection['text'])
 
     cookie_name = 'vnf-view-' + cid
