@@ -1160,3 +1160,6 @@ msgstr ""
 #: vpw/views.py:380 vpw/views.py:525
 msgid "You must agree to the terms and conditions!"
 msgstr ""
+
+msgid "User Guide"
+msgstr ""
