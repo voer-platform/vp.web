@@ -402,11 +402,11 @@
 .footer{
 	width: 100%;
 	border-top: 1px solid #dbdbdb;
-	padding-top: 5px;
+	padding: 5px;
 }
 .footer a{
 	color: #555555;
-	font-size: 14px;
+	font-size: 13px;
 }
 .footer a:hover{
 	text-decoration: underline;

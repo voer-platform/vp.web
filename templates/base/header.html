@@ -21,10 +21,18 @@
                   <a href="/browse">{% trans 'Browse All' %}</a>
                 </li>
                 <li>
-                  <a href="#">{% trans 'Contribute' %}</a>
+                  {% if request.LANGUAGE_CODE == 'vi' %}
+                  <a href="/content/dong-gop">{% trans 'Contribute' %}</a>
+                  {% else %} 
+                  <a href="/content/contribute">{% trans 'Contribute' %}</a>
+                  {% endif %}
                 </li>
                 <li>
-                  <a href="/about-us">{% trans 'About Us' %}</a>
+                  {% if request.LANGUAGE_CODE == 'vi' %}
+                  <a href="/content/gioi-thieu">{% trans 'About Us' %}</a>
+                  {% else %} 
+                  <a href="/content/about-us">{% trans 'About Us' %}</a>
+                  {% endif %}
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right list-right-top">

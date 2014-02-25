@@ -635,14 +635,15 @@ h1.sub-title{
     background-color: #ce204e;
 }
 article.flatpage {
-  padding: 25px;
+  padding: 25px 25px 25px 10px;
   font-size: 14px;
   font-family: Arial;
 }
 .article-title {
   text-transform: uppercase;
   margin: 0 0 15px 0;
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: bold;
   padding-bottom: 10px;
   border-bottom: solid 1px #f1f1f1;
 }
