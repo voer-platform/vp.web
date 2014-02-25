@@ -1201,6 +1201,9 @@ msgstr "Bắt buộc"
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
+msgid "User Guides"
+msgstr "Hướng dẫn sử dụng"
+
 #~ msgid "Join"
 #~ msgstr "Đăng ký"
 
