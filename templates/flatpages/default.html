@@ -1,0 +1,14 @@
+{% extends "base/base-content.html" %}
+
+{% block titleSite %}About Us{% endblock %}
+
+{% block content %}        
+
+<div class="col-lg right-row">
+    <article class="flatpage">
+        <h1 class="article-title">{{ flatpage.title }}</h1>
+        {{ flatpage.content|linebreaks }}
+    </article>
+</div>           
+        
+{% endblock %}

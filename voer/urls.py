@@ -89,7 +89,8 @@ urlpatterns = patterns('',
 
     url(r'^google9c25b243b9e3bacc\.html$', TemplateView.as_view(template_name='frontend/google9c25b243b9e3bacc.html')),
     url(r'^BingSiteAuth\.xml', TemplateView.as_view(template_name='frontend/BingSiteAuth.xml')),
-
+    
+    url(r'^content/', include('django.contrib.flatpages.urls')),
 )
 
 if settings.DEBUG:

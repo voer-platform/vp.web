@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.flatpages',
+    'django.contrib.sites',
     'registration',
     'tinymce',
     'sorl.thumbnail',
@@ -57,6 +59,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware', 
 )
 
 
@@ -80,6 +83,7 @@ ROOT_URLCONF = 'voer.urls'
 
 WSGI_APPLICATION = 'voer.wsgi.application'
 
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
