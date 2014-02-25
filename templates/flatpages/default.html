@@ -11,13 +11,13 @@
             <div class="content">
                 <ul class="hfmenu-common">
                   {% if request.LANGUAGE_CODE == 'vi' %}
-                    <li><a class= "active" id="about-1" href="/content/about-us">{% trans 'About Us' %}<i class="chev-right"></i></a></li>
-                    <li><a id="about-2" href="/content/contribute">{% trans 'Contribute' %}<i class="chev-right"></i></a></li>
-                    <li><a id="about-10" href="/content/guide">{% trans 'User Guides' %}<i class="chev-right"></i></a></li>                            
-                  {% else %}
                     <li><a class= "active" id="about-1" href="/content/gioi-thieu">{% trans 'About Us' %}<i class="chev-right"></i></a></li>
                     <li><a id="about-2" href="/content/dong-gop">{% trans 'Contribute' %}<i class="chev-right"></i></a></li>
                     <li><a id="about-10" href="/content/huong-dan">{% trans 'User Guides' %}<i class="chev-right"></i></a></li>                            
+                  {% else %}
+                    <li><a class= "active" id="about-1" href="/content/about-us">{% trans 'About Us' %}<i class="chev-right"></i></a></li>
+                    <li><a id="about-2" href="/content/contribute">{% trans 'Contribute' %}<i class="chev-right"></i></a></li>
+                    <li><a id="about-10" href="/content/guide">{% trans 'User Guides' %}<i class="chev-right"></i></a></li>                            
                   {% endif %}
                 </ul>
             </div>
