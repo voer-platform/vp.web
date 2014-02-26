@@ -16,13 +16,6 @@
   width: 21px;
 }
 
-.link-other-author-module {
-  display: block;
-  height: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .other-module-author {
   height: auto;
 }
@@ -646,4 +639,13 @@ article.flatpage {
   font-weight: bold;
   padding-bottom: 10px;
   border-bottom: solid 1px #f1f1f1;
+}
+.list-content-extra {
+    margin-top: 5px;
+    width: 100%;
+}
+.list-content-extra li {
+    background: url("../images/arrow-red-list.png") no-repeat scroll left 5px rgba(0, 0, 0, 0);
+    overflow: hidden;
+    padding-left: 12px;
 }

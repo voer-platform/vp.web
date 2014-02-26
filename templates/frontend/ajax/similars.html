@@ -2,27 +2,18 @@
 {% load vpw_filters %}
 
 {% if similar_data %}
+    <ul class="list-content-extra">
     {% for similar in similar_data %}
-    <div class="other-module-author">
-        <div class="other-author-img">
-            {% if similar.image %}
-            {% else %}
-            <img src="{{STATIC_URL}}images/module_view/other3.jpg">
-            {% endif %}
-        </div>
-        <div class="other-author-title left padding-content-5">
-            {% if similar.material_type == 1 %}
-            <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.title|normalize_string similar.material_id %}">{{ similar.title }}</a>
-            {% else %}
-            <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' similar.title|normalize_string similar.material_id %}">{{ similar.title }}</a>
-            {% endif %}
-
-            {% for person in similar.author_list %}
-            <a class="link-other-author-collection left clear" href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
-            {% endfor %}
-        </div>
-    </div>
+    <li>
+        {% if similar.material_type == 1 %}
+        <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'module_detail' similar.title|normalize_string similar.material_id %}">{{ similar.title }}</a>
+        {% else %}
+        <a class="link-other-author-module left clear" alt="{{ similar.title }}" title="{{ similar.title }}" href="{% url 'collection_detail' similar.title|normalize_string similar.material_id %}">{{ similar.title }}</a>
+        {% endif %}
+    </li>
     {% endfor %}
+    </ul>
+
      <div class="hfcontrol clear">
         <div class="left">{% trans 'View more items' %}</div>
         <div class="right" style="margin-right:10px;">

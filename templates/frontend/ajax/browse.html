@@ -75,7 +75,9 @@ $(document).ready(function(){
                 <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
             </div>
             <div class="short-collection">{{ material.description }}</div>
+            {% if 'author' in material %}
             <div class="author-collection"><a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a></div>
+            {% endif %}
         </div>
         <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories.0.0 }}">
             {% if material.categories.0.1 %}
