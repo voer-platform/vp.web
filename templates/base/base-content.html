@@ -3,10 +3,10 @@
 
 {% block meta-description %}
 {% if material %}
-<meta name="description" content="{{ material.description|strip|default:material.title }}">
+<meta name="description" content="{{ material.description|strip|default:material.title }} (giáo trình - tài liệu - học liệu từ VOER)">
 {% endif %}
 {% endblock %}
-{% block keywords %}{{ material.keywords|break_keywords }}{% endblock %}
+{% block keywords %}{% endblock %}
 
 {% block base-content %}
   	<div id="mainpage" class="main mainpage-content">
