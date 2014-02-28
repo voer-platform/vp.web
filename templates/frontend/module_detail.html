@@ -82,14 +82,12 @@
                 <a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'Download' %}</a>
             </div>
         </div>
-        {% if user.is_authenticated %}
         <div class="module-block-header">
             <div class="icon-module icon-checkout"></div>
             <div class="tilte-module">
                 <a href="{% url 'user_module_reuse' material.material_id material.version %}">{% trans 'Reuse' %}</a>
             </div>
         </div>
-        {% endif %}
     </div>
     <div class="clearfix"></div>
     <!-- END DOWNLOAD -->
