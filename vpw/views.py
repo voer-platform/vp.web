@@ -71,7 +71,7 @@ class RecaptchaRegistrationView(RegistrationView):
 def home(request):
     # material_features = ['64b4a7a7', 'fd2f579c', 'f2feed3c', '4dbdd6c5', 'c3ad3533', '0e60bfc6']
     material_features_sample = ['01f46fc2', '022e4f84', '0e60bfc6', '2d2e6a46', '3ec080b8', '45df218a', '4c212f92',
-                                '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'fd2f579c']
+                                '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'fd2f579c', 'be82eba8']
     material_features = random.sample(material_features_sample, 6)
     materials_list = []
     for mid in material_features:
