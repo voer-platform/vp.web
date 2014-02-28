@@ -8,7 +8,7 @@
         <div class="collection-mainpage-cover">
             {% if material.user_id %}
                 {% with y=material.id|stringformat:"s" %}
-                {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y "345x185" crop="center 20%" as im %}
+                {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y "100x100" crop="center 20%" as im %}
                     <img src="{{ im.url }}">
                 {% empty %}
                     <img src="{{ STATIC_URL }}images/author1_detail.jpg">
