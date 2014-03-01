@@ -511,6 +511,14 @@
     position: absolute;
     right: 10px;
 }
+.collection-view-name{
+	font-size: 20px;
+    margin-bottom: 5px;
+    color: #FF7000;
+    margin-top: 0px;
+    width: 94%;
+    text-transform: uppercase;
+}
 .module-title,
 .module-view-name{
 	font-size: 22px;
@@ -520,9 +528,10 @@
     margin-top: 0px;
     width: 94%;
 }
-.module-view-category{
-	color: #231f20;
-	font-size: 15px;
+.module-view-category {
+	color: gray;
+	font-size: 11px;
+	text-transform: uppercase;
 }
 .module-view-author{
 	width: 100%;

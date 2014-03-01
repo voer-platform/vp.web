@@ -477,10 +477,9 @@ button.hfbtn-common{
 }
 #more-download{
     clear: both;
-    border: 1px solid #DFDFDF;
 }
 #more-download ul{
-    padding: 3px 8px;
+    padding: 10px 15px;
 }
 #more-download li{
     padding-left: 35px;
@@ -492,6 +491,9 @@ button.hfbtn-common{
 
 #more-download li.collection{
     background: url("../images/icon/icon-collection.png") no-repeat 0 4px;
+}
+#more-download a {
+  color: #c10c3e;
 }
 
 .error-404-page .big-error {
@@ -662,7 +664,6 @@ article.flatpage {
     overflow: hidden;
     padding-left: 12px;
 }
-<<<<<<< HEAD
 .form-control.textbox {
     width: 40%;
     float: left;
@@ -688,6 +689,18 @@ article.flatpage {
   border-top: solid 5px #B8CEE6;
   border-radius: 0px;
 }
+.collection-view-title {
+  border-top: solid 5px #FFCA90;
+  border-radius: 0px;
+  width: 100%;
+  background: #f4f4f4;
+}
+.collection-view-title h2 {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  border-top: 1px dashed white;
+  padding-top: 10px;
+}
 .attach-list {
   width: 100%;
 }
@@ -699,6 +712,9 @@ article.flatpage {
   margin-top: 0px;
   margin-bottom: 10px;
 }
+.collection-right-side .module-block-header {
+  background-color: #FFAB4F;
+}
 .attach-list ul {
   padding-left: 15px;
 }
@@ -707,6 +723,7 @@ article.flatpage {
 }
 .download-reuse > div:first-child {
   border-right: solid 1px #fff;
+  cursor: pointer;
 }
 .download-reuse a {
   color: white;

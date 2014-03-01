@@ -44,15 +44,15 @@
 <!-- LEFT ROW -->
 <div class="col-lg-1 left-row">
     <!-- TITLE MODULE -->
-    <div class="module-view-title left padding-content-15">
+    <div class="collection-view-title left padding-content-15">
         <div class="material-type">{% trans "Collection" %}</div>
-        <h1 class="module-view-name left clear">{{ collection.title }}</h1>
-        <h2 class="module-view-name sub-title left clear">{{ material.title }}</h2>
+        <h1 class="collection-view-name left clear">{{ collection.title }}</h1>
         <a class="module-view-category left clear" title="{{ category.name }}">{{ category.name }}</a>
+        <h2 class="module-view-name sub-title left clear">{{ material.title }}</h2>
     </div>
     <!-- END TITLE MODULE -->
     <!-- CONTENT MODULE -->
-    <div class="module-view-content left padding-content-15">{{ material.text|safe }}</div>
+    <div class="module-view-content left padding-20">{{ material.text|safe }}</div>
     <!-- END CONTENT MODULE -->
 
 
@@ -105,7 +105,7 @@
 </div>
 <!-- END LEFT ROW -->
 <!-- RIGHT ROW -->
-<div id="material-right-side" class="col-lg-2 right-row">
+<div id="material-right-side" class="collection-right-side col-lg-2 right-row">
     {% include 'frontend/partials/material_actions.html' %}
 
     {% include 'frontend/partials/material_author.html' %}
@@ -201,13 +201,13 @@
     <div class="attach-list padding-content-15">
         <h4>{% trans 'Attachments' %}</h4>
         <div class="attach-content-comment">
-            <ol>
+            <ul>
                 {% for attachment in file_data %}
                 <li>
                     <a href="{% url 'get_attachment' attachment.attachment_id %}" title="{{ attachment.title }}">{{ attachment.title }}</a>
                 </li>
                 {% endfor %}
-            </ol>
+            </ul>
         </div>
     </div>
     <!-- END ATTACHMENT MODULE -->
