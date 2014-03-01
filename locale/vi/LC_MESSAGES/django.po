@@ -262,7 +262,7 @@ msgstr "Tất cả"
 #: templates/frontend/profile.html:347
 #: templates/frontend/search_result.html:122
 msgid "Modules"
-msgstr "Các tài liệu"
+msgstr "Tài liệu"
 
 #: templates/frontend/browse.html:319 templates/frontend/profile.html:376
 #: templates/frontend/search_result.html:150
@@ -466,7 +466,7 @@ msgstr "Chỉnh sửa"
 
 #: templates/frontend/module_detail.html:129
 msgid "Collections"
-msgstr "Các giáo trình"
+msgstr "Giáo trình"
 
 #: templates/frontend/profile.html:38
 #, fuzzy

@@ -15,8 +15,7 @@
     </ul>
 
      <div class="hfcontrol clear">
-        <div class="left">{% trans 'View more items' %}</div>
-        <div class="right" style="margin-right:10px;">
+        <div class="right">
             {% if prev_page %}
             <a class="back ajax-ev" href="javascript:void(0)" data-ajax-url="/ajax/get-similars?mid={{ request.GET.mid }}&version={{ request.GET.version }}&page={{ prev_page }}" role="button" data-ajax-target="#module-similars">{% trans 'Back' %}</a>
             {% else %}

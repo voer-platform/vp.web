@@ -21,25 +21,8 @@
     </div>
     <!-- END TITLE MODULE -->
     <!-- CONTENT MODULE -->
-    <div class="module-view-content left padding-content-15">{{ material.text|safe }}</div>
+    <div class="module-view-content left padding-20">{{ material.text|safe }}</div>
     <!-- END CONTENT MODULE -->
-
-    {% if file_data %}
-    <!-- ATTACHMENT MODULE -->
-    <div class="attach-module-content left padding-content-15">
-        <span class="module-view-name left clear">{% trans 'File Attachments' %}:</span>
-        <div class="attach-content-comment">
-            <ol>
-                {% for attachment in file_data %}
-                <li>
-                    <a href="{% url 'get_attachment' attachment.attachment_id %}">{{ attachment.title }}</a>
-                </li>
-                {% endfor %}
-            </ol>
-        </div>
-    </div>
-    <!-- END ATTACHMENT MODULE -->
-    {% endif %}
 
     <!-- SOCIAL MODULE -->
     <div class="bottom-module-content left padding-content-15">
@@ -89,54 +72,16 @@
 </div>
 <!-- END LEFT ROW -->
 <!-- RIGHT ROW -->
-<div class="col-lg-2 right-row">
-    {% if author %}
-    <!-- AUTHOR NAME -->
-    {% for author_info in author %}
-    <div class="module-view-author arrow-author-collection padding-content-10 left">
-        <a class="module-view-author-avatar left" href="{% url 'view_profile' author_info.id %}" title="{{ author_info.fullname }}">
-            {% with y=author_info.id|stringformat:"s" %}
-            {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y|add:"?l="|add:author_info.avatar "60x60" crop="center 20%" as im %}
-                <img src="{{ im.url }}" width="60" height="60" title="{{ author_info.fullname }}" alt="{{ author_info.fullname }}">
-            {% empty %}
-                <img src="{{ STATIC_URL }}images/author1_detail.jpg" width="60" height="60" title="{{ author_info.fullname }}" alt="{{ author_info.fullname }}">
-            {% endthumbnail %}
-            {% endwith %}
-        </a>
-        <ul class="module-view-author-name left padding-content-10">
-            <li>
-                <a href="{% url 'view_profile' author_info.id %}" title="{{ author_info.fullname }}">{{ author_info.fullname }}</a>
-            </li>
-            <li>
-                <span class="text-italic">{% trans 'View my profile' %}</span>
-            </li>
-        </ul>
-    </div>
-    {% endfor %}
-    <!-- END AUTHOR NAME -->
-    {% endif %}
-
-    {% if author|length == 1 %}
-    <!-- AUTHOR STATUS -->
-    {% for author_info in author %}
-    <div class="module-view-author-status left">
-        <span class="module-view-author-block left padding-content-5">
-            <a class="clear" href="{% url 'view_profile' author_info.id %}?types=1">{{ author_info.author.module }}</a>
-            <label class="clear">{% trans 'Modules' %}</label>
-        </span>
-        <span class="module-view-author-block left padding-content-5">
-            <a class="clear" href="{% url 'view_profile' author_info.id %}?types=2">{{ author_info.author.collection }}</a>
-            <label class="clear">{% trans 'Collections' %}</label>
-        </span>
-    </div>
-    {% endfor %}
-    <!-- END AUTHOR STATUS -->
-    {% endif %}
-
+<div id="material-right-side" class="col-lg-2 right-row">
     {% if material.material_id %}
-    <!-- REUSE -->
-    {% if user.is_authenticated %}
-    <div class="module-block">
+    <!-- DOWNLOAD -->
+    <div class="download-reuse">
+        <div class="module-block-header">
+            <div class="icon-module icon-download"></div>
+            <div class="tilte-module">
+                <a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'Download' %}</a>
+            </div>
+        </div>
         <div class="module-block-header">
             <div class="icon-module icon-checkout"></div>
             <div class="tilte-module">
@@ -144,18 +89,25 @@
             </div>
         </div>
     </div>
+    <div class="clearfix"></div>
+    <!-- END DOWNLOAD -->
     {% endif %}
-    <!-- END REUSE -->
-    <!-- DOWNLOAD -->
-    <div class="module-block">
-        <div class="module-block-header">
-            <div class="icon-module icon-download"></div>
-            <div class="tilte-module">
-                <a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'Download' %}</a>
-            </div>
+
+    {% if file_data %}
+    <!-- ATTACHMENT MODULE -->
+    <div class="attach-list padding-content-15">
+        <h4>{% trans 'Attachments' %}</h4>
+        <div class="attach-content-comment">
+            <ul>
+                {% for attachment in file_data %}
+                <li>
+                    <a href="{% url 'get_attachment' attachment.attachment_id %}">{{ attachment.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-    <!-- END DOWNLOAD -->
+    <!-- END ATTACHMENT MODULE -->
     {% endif %}
 
     {% if tag_data %}
@@ -177,29 +129,25 @@
     <!-- END TAG -->
     {% endif %}
 
+    {% include 'frontend/partials/material_author.html' %}
+
     <!-- OTHER FROM AUTHOR -->
-    <div class="module-block module-simple">
-        <div class="module-block-header">
-            <div class="icon-module"></div>
-            <div class="tilte-module">{% trans 'Others from Author' %}</div>
-        </div>
-        <div class="module-block-content">
+    <div class="module-block module-simple padding-content-15">
+        <h4>{% trans 'By same author' %}</h4>
+        <div class="">
             <div id="module-others" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-others?authors={{ material.author }}">&nbsp;</div>
         </div>
     </div>
     <!-- END OTHER FROM AUTHOR -->
 
-    <!-- OTHER FROM AUTHOR -->
-    <div class="module-block module-simple">
-        <div class="module-block-header">
-            <div class="icon-module"></div>
-            <div class="tilte-module">{% trans 'Similar items' %}</div>
-        </div>
-        <div class="module-block-content">
+    <!-- SIMILAR ITEMS -->
+    <div class="module-block module-simple padding-content-15">
+        <h4>{% trans 'Similar items' %}</h4>
+        <div >
             <div id="module-similars" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-similars?mid={{ material.material_id }}&version={{ material.version }}">&nbsp;</div>
         </div>
     </div>
-    <!-- END OTHER FROM AUTHOR -->
+
 </div>
 <!-- END RIGHT ROW -->
 <div id="fb-root"></div>

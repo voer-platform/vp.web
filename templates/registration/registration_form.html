@@ -6,18 +6,22 @@
 {% block content %}
 <div class="signup-form">
     <div class="header-signup-form">{% trans 'Join VOER. Take Creative Control.' %}</div>
+    <!--
     <div class="social-signup-form">
         <a class="link-fb-signup left"></a>
         <a class="link-tw-signup left"></a>
         <a class="link-gg-signup left"></a>
         <a class="link-in-signup left"></a>
     </div>
+    -->
     <form method="post" action="" class="wide">
     {% csrf_token %}
     <div class="content-signup-form">
+        <!--
         <div class="title-signup-email">
             <span>{% trans 'or sign up using your email' %}</span>
         </div>
+        -->
         {% if form.errors %}
         <p class="errors">{% trans 'Please correct the errors below:' %} {{ form.non_field_errors }}</p>
         {% endif %}
@@ -25,12 +29,14 @@
         <input class="form-control" id="id_email" type="email" name="email" placeholder="{% trans 'Your email Address' %}">
         <div class="form-wrap-password">
             <input class="form-control" id="id_password1" type="password" name="password1" placeholder="{% trans 'Your password' %}">
+            <!--
             <div class="block-showpassword">
                 <label class="checkbox checkbox-user-tool checkbox-showpassword" id="checkbox-showpassword">
                     <input type="checkbox" data-toggle="checkbox" class="chb_show_pass">
                     {% trans 'Show password' %}
                 </label>
             </div>
+            -->
         </div>
         <input class="form-control" id="id_password2" type="password" name="password2" placeholder="{% trans 'Enter password again' %}">
         {{ form.recaptcha }}

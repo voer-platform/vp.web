@@ -67,7 +67,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
     url(r'^admin/settings/?$', 'vpw.views.admin_settings', name='settings'),
-
+    url(r'^admin/featured-authors/?$', 'vpw.views.admin_featured_authors', name='featured-authors'),
     url(r'^admin/featured-materials/?$', 'vpw.views.admin_featured_materials', name='featured-materials'),
 
     url(r'^search/', 'vpw.views.search_result', name='search'),
