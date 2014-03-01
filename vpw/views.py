@@ -324,10 +324,13 @@ def user_collection_detail(request, cid, mid):
         authors = [author]
         category = vpr_get_category(collection.categories)
 
-        outline = json.loads(collection.text)
-        if not mid:
-            # get the first material of collection
-            mid = get_first_material_id(outline['content'])
+        if collection.text:
+            outline = json.loads(collection.text)
+            if not mid:
+                # get the first material of collection
+                mid = get_first_material_id(outline['content'])
+        else:
+            outline = {'content': {}}
 
         # Get material in collection
         if mid:
@@ -1051,8 +1054,10 @@ def edit_profile(request):
             author_data['avatar'] = author['avatar']
 
         return render(request, "frontend/user_edit_profile.html", {'author': author_data, 'form': form})
+    else:
+        form = EditProfileForm(dict(biography=author.get('biography', '')))
 
-    return render(request, "frontend/user_edit_profile.html", {'author': author})
+    return render(request, "frontend/user_edit_profile.html", {'author': author, 'form': form})
 
 
 @login_required
@@ -1098,6 +1103,23 @@ def ajax_search_module(request):
         if result['count'] > 0:
             modules = result['results']
     return HttpResponse(json.dumps(modules), content_type='application/json')
+
+
+def _transform_vpr_to_outline(obj):
+    material_type = obj.get('type', '')
+    result = {'attr': {}}
+    if material_type == 'module':
+        result['data'] = obj.get('title', '')
+        result['attr']['id'] = obj.get('id', '') + '|' + obj.get('version', '')
+        result['attr']['rel'] = 'module'
+    elif material_type == 'subcollection':
+        result['data'] = obj.get('title', '')
+        result['attr']['rel'] = 'bundle'
+        result['children'] = []
+        if 'content' in obj:
+            for item in obj['content']:
+                result['children'].append(_transform_vpr_to_outline(item))
+    return result
 
 
 def _transform_outline_to_vpr(outline):
@@ -1398,9 +1420,7 @@ def user_module_reuse(request, mid, version=1):
                 # Publish content to VPR
                 result = _publish_material(material)
                 if 'material_id' in result:
-                    material.material_id = result['material_id']
-                    material.version = result['version']
-                    material.save()
+                    material.delete()
                     return redirect('module_detail', mid=result['material_id'])
     else:
         form = ModuleCreationForm(dict(body=material['text']))
@@ -1408,10 +1428,62 @@ def user_module_reuse(request, mid, version=1):
               'form': form, 'author': author}
     return render(request, MODULE_TEMPLATES[3], params)
 
+@login_required
+def user_collection_edit(request, cid):
+    material = Material.objects.get(id=cid, creator=request.user, material_type=COLLECTION_TYPE)
+    categories = vpr_get_categories()
+    author = vpr_get_person(request.user.author.author_id)
+    if request.method == "POST":
+        form = CollectionCreationForm(request.POST)
+        action = request.POST.get("action", "")
+        if action == 'save':
+            if form.is_valid():
+                material = _save_material(form, COLLECTION_TYPE, request.user)
+                outline = json.loads(form.cleaned_data['body'])
+                tmp = {'content': []}
+                if "children" in outline[0]:
+                    for item in outline[0]['children']:
+                        tmp['content'].append(_transform_outline_to_vpr(item))
+                outline_format = json.dumps(tmp)
+                material.text = outline_format
+                material.save()
+                return redirect('user_collection_detail', cid=material.id)
+        elif action == 'publish':
+            if form.is_valid():
+                material = _save_material(form, COLLECTION_TYPE, request.user)
+                outline = json.loads(form.cleaned_data['body'])
+                tmp = {'content': []}
+                if "children" in outline[0]:
+                    for item in outline[0]['children']:
+                        tmp['content'].append(_transform_outline_to_vpr(item))
+                outline_format = json.dumps(tmp)
+                material.text = outline_format
+                material.save()
+                # Publish content to VPR
+                result = _publish_material(material)
+                if 'material_id' in result:
+                    material.delete()
+                    return redirect('collection_detail', cid=result['material_id'])
+    else:
+        json_outline = material.text
+        outline = json.loads(json_outline)
+        if outline:
+            result = []
+            for item in outline['content']:
+                result.append(_transform_vpr_to_outline(item))
+            json_outline = json.dumps(result)
+            json_outline = '[{"attr":{"id":"root-outline","rel":"root"},"data":"Outline","state":"open","children": ' + json_outline + '}]'
+        else:
+            json_outline = '[{"attr":{"id":"root-outline","rel":"root"},"data":"Outline","state":"open"}]'
+
+        form = CollectionCreationForm(dict(body=json_outline))
+    params = {'material': material, 'categories': categories,
+              'form': form, 'author': author}
+    return render(request, COLLECTION_TEMPLATES[3], params)
 
 @login_required
 def user_module_edit(request, mid):
-    material = Material.objects.get(id=mid, creator=request.user, material_type=1)
+    material = Material.objects.get(id=mid, creator=request.user, material_type=MODULE_TYPE)
     categories = vpr_get_categories()
     author = vpr_get_person(request.user.author.author_id)
     if request.method == "POST":
@@ -1431,9 +1503,7 @@ def user_module_edit(request, mid):
                 # Publish content to VPR
                 result = _publish_material(material)
                 if 'material_id' in result:
-                    material.material_id = result['material_id']
-                    material.version = result['version']
-                    material.save()
+                    material.delete()
                     return redirect('module_detail', mid=result['material_id'])
     else:
         form = ModuleCreationForm(dict(body=material.text))

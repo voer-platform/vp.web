@@ -63,6 +63,7 @@ urlpatterns = patterns('',
     url(r'^user/unpublish/delete/?$', 'vpw.views.delete_unpublish', name='delete_unpublish'),
     url(r'^user/avatar/(?P<pid>[0-9a-z]+)/?$', 'vpw.views.get_avatar', name='get_avatar'),
     url(r'^user/edit/m/(?P<mid>[0-9a-z]+)/?$', 'vpw.views.user_module_edit', name="user_module_edit"),
+    url(r'^user/edit/c/(?P<cid>[0-9a-z]+)/?$', 'vpw.views.user_collection_edit', name="user_collection_edit"),
 
     url(r'^admin/import-user/?$', 'vpw.views.admin_import_user', name='import-user'),
     url(r'^admin/settings/?$', 'vpw.views.admin_settings', name='settings'),

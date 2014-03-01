@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-20 15:21+0000\n"
+"POT-Creation-Date: 2014-02-28 06:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,58 +37,64 @@ msgstr ""
 msgid "Contact Support"
 msgstr ""
 
-#: templates/base/header.html:15
+#: templates/base/header.html:18
 msgid "Home"
 msgstr ""
 
-#: templates/base/header.html:18 templates/frontend/profile.html:96
+#: templates/base/header.html:21 templates/frontend/profile.html:96
 msgid "Browse All"
 msgstr ""
 
-#: templates/base/header.html:21
+#: templates/base/header.html:25 templates/base/header.html.py:27
+#: templates/flatpages/default.html:15 templates/flatpages/default.html:19
 msgid "Contribute"
 msgstr ""
 
-#: templates/base/header.html:24
+#: templates/base/header.html:32 templates/base/header.html.py:34
+#: templates/flatpages/default.html:14 templates/flatpages/default.html:18
 msgid "About Us"
 msgstr ""
 
-#: templates/base/header.html:77
+#: templates/base/header.html:82
 msgid "Account View"
 msgstr ""
 
-#: templates/base/header.html:80
+#: templates/base/header.html:85
 msgid "Logout"
 msgstr ""
 
-#: templates/base/header.html:90
+#: templates/base/header.html:95
 #: templates/registration/registration_form.html:41
 msgid "Register"
 msgstr ""
 
-#: templates/base/header.html:93 templates/base/header.html.py:132
+#: templates/base/header.html:98 templates/base/header.html.py:137
 #: templates/registration/login.html:34
 msgid "Login"
 msgstr ""
 
-#: templates/base/header.html:110
+#: templates/base/header.html:115
 msgid "Login to VOER"
 msgstr ""
 
-#: templates/base/header.html:125
+#: templates/base/header.html:130
 msgid "Remember me"
 msgstr ""
 
-#: templates/base/header.html:129
+#: templates/base/header.html:134
 msgid "Forgot your password ?"
 msgstr ""
 
-#: templates/base/header.html:135
+#: templates/base/header.html:140
 msgid "Don't have an account? Sign up for VOER"
 msgstr ""
 
-#: templates/base/header.html:138
+#: templates/base/header.html:143
 msgid "The username or password is incorrect."
+msgstr ""
+
+#: templates/flatpages/default.html:16 templates/flatpages/default.html:20
+msgid "User Guide"
 msgstr ""
 
 #: templates/frontend/admin_featured_materials.html:5
@@ -183,74 +189,81 @@ msgstr ""
 #: templates/frontend/browse.html:56 templates/frontend/profile.html:134
 #: templates/frontend/user_favorite.html:25
 #: templates/frontend/user_profile.html:98
-#: templates/frontend/user_unpublish.html:28
+#: templates/frontend/user_unpublish.html:35
 msgid "Gridview"
 msgstr ""
 
 #: templates/frontend/browse.html:57 templates/frontend/profile.html:135
 #: templates/frontend/user_favorite.html:26
 #: templates/frontend/user_profile.html:99
-#: templates/frontend/user_unpublish.html:29
+#: templates/frontend/user_unpublish.html:36
 msgid "Listview"
 msgstr ""
 
-#: templates/frontend/browse.html:133 templates/frontend/profile.html:210
+#: templates/frontend/browse.html:126 templates/frontend/index.html:64
+#: templates/frontend/module_detail.html:13
+msgid "Module"
+msgstr ""
+
+#: templates/frontend/browse.html:129 templates/frontend/browse.html.py:304
+#: templates/frontend/collection_detail.html:48
+#: templates/frontend/index.html:67 templates/frontend/profile.html:360
+#: templates/frontend/search_result.html:134
+msgid "Collection"
+msgstr ""
+
+#: templates/frontend/browse.html:135 templates/frontend/profile.html:210
 #: templates/frontend/ajax/browse.html:49
 msgid "Add to my favourite"
 msgstr ""
 
-#: templates/frontend/browse.html:136 templates/frontend/profile.html:213
+#: templates/frontend/browse.html:138 templates/frontend/profile.html:213
 #: templates/frontend/ajax/browse.html:52
 #: templates/frontend/block/left_block_user.html:17
 msgid "My Favorites"
 msgstr ""
 
-#: templates/frontend/browse.html:141 templates/frontend/profile.html:218
+#: templates/frontend/browse.html:143 templates/frontend/profile.html:218
 #: templates/frontend/ajax/browse.html:57
 msgid "Create new"
 msgstr ""
 
-#: templates/frontend/browse.html:170 templates/frontend/profile.html:245
-#: templates/frontend/ajax/browse.html:84
+#: templates/frontend/browse.html:172 templates/frontend/profile.html:245
+#: templates/frontend/ajax/browse.html:86
 msgid "Other"
 msgstr ""
 
-#: templates/frontend/browse.html:194 templates/frontend/profile.html:269
-#: templates/frontend/user_unpublish.html:112
-#: templates/frontend/ajax/browse.html:108
-#: templates/frontend/ajax/others.html:38
-#: templates/frontend/ajax/similars.html:38
+#: templates/frontend/browse.html:196 templates/frontend/profile.html:269
+#: templates/frontend/user_unpublish.html:134
+#: templates/frontend/ajax/browse.html:110
+#: templates/frontend/ajax/others.html:33
+#: templates/frontend/ajax/similars.html:34
 msgid "No data."
 msgstr ""
 
-#: templates/frontend/browse.html:203 templates/frontend/profile.html:279
+#: templates/frontend/browse.html:205 templates/frontend/profile.html:279
 #: templates/frontend/search_result.html:66
 msgid "Filter By"
 msgstr ""
 
-#: templates/frontend/browse.html:278 templates/frontend/profile.html:334
+#: templates/frontend/browse.html:280 templates/frontend/profile.html:334
 #: templates/frontend/search_result.html:110
 msgid "All types"
 msgstr ""
 
-#: templates/frontend/browse.html:290
-#: templates/frontend/module_detail.html:124
+#: templates/frontend/browse.html:292
+#: templates/frontend/module_detail.html:125
 #: templates/frontend/profile.html:347
 #: templates/frontend/search_result.html:122
 msgid "Modules"
 msgstr ""
 
-#: templates/frontend/browse.html:302 templates/frontend/profile.html:360
-#: templates/frontend/search_result.html:134
-msgid "Collection"
-msgstr ""
-
-#: templates/frontend/browse.html:317 templates/frontend/profile.html:376
+#: templates/frontend/browse.html:319 templates/frontend/profile.html:376
 #: templates/frontend/search_result.html:150
 msgid "All languages"
 msgstr ""
 
-#: templates/frontend/browse.html:329 templates/frontend/profile.html:389
+#: templates/frontend/browse.html:331 templates/frontend/profile.html:389
 #: templates/frontend/search_result.html:162
 #: templates/frontend/collection/create_step2.html:246
 #: templates/frontend/collection/create_step3.html:229
@@ -259,7 +272,7 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: templates/frontend/browse.html:341 templates/frontend/profile.html:402
+#: templates/frontend/browse.html:343 templates/frontend/profile.html:402
 #: templates/frontend/search_result.html:174
 #: templates/frontend/collection/create_step2.html:247
 #: templates/frontend/collection/create_step3.html:231
@@ -268,51 +281,51 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: templates/frontend/browse.html:356 templates/frontend/profile.html:418
+#: templates/frontend/browse.html:358 templates/frontend/profile.html:418
 #: templates/frontend/search_result.html:191
 msgid "All categories"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:60
-#: templates/frontend/module_detail.html:29
+#: templates/frontend/collection_detail.html:61
+#: templates/frontend/module_detail.html:30
 msgid "File Attachments"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:114
-#: templates/frontend/module_detail.html:84
+#: templates/frontend/collection_detail.html:115
+#: templates/frontend/module_detail.html:85
 msgid "Comment"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:140
-#: templates/frontend/module_detail.html:110
+#: templates/frontend/collection_detail.html:141
+#: templates/frontend/module_detail.html:111
 msgid "View my profile"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:208
-#: templates/frontend/module_detail.html:142
+#: templates/frontend/collection_detail.html:211
+#: templates/frontend/module_detail.html:143
 msgid "Reuse"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:219
-#: templates/frontend/module_detail.html:153
+#: templates/frontend/collection_detail.html:222
+#: templates/frontend/module_detail.html:154
 msgid "Download"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:224
+#: templates/frontend/collection_detail.html:227
 msgid "PDF Collection"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:226
+#: templates/frontend/collection_detail.html:229
 msgid "PDF Module"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:258
-#: templates/frontend/module_detail.html:183
+#: templates/frontend/collection_detail.html:261
+#: templates/frontend/module_detail.html:184
 msgid "Others from Author"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:270
-#: templates/frontend/module_detail.html:195
+#: templates/frontend/collection_detail.html:273
+#: templates/frontend/module_detail.html:196
 msgid "Similar items"
 msgstr ""
 
@@ -327,14 +340,13 @@ msgid ""
 "%(person_count)s authors"
 msgstr ""
 
-#: templates/frontend/index.html:100
+#: templates/frontend/index.html:102
 msgid "Browser All"
 msgstr ""
 
 #: templates/frontend/material_stats.html:7 templates/frontend/profile.html:7
 #: templates/frontend/user_edit_profile.html:6
 #: templates/frontend/user_profile.html:7
-#: templates/frontend/user_unpublish.html:7
 msgid "User profile"
 msgstr ""
 
@@ -385,64 +397,64 @@ msgstr ""
 #: templates/frontend/material_stats.html:79
 #: templates/frontend/user_favorite.html:71
 #: templates/frontend/user_profile.html:141
-#: templates/frontend/user_unpublish.html:72
+#: templates/frontend/user_unpublish.html:90
 msgid "Business"
 msgstr ""
 
 #: templates/frontend/material_stats.html:81
 #: templates/frontend/user_favorite.html:73
 #: templates/frontend/user_profile.html:143
-#: templates/frontend/user_unpublish.html:74
+#: templates/frontend/user_unpublish.html:92
 msgid "Social Sciences"
 msgstr ""
 
 #: templates/frontend/material_stats.html:83
 #: templates/frontend/user_favorite.html:75
 #: templates/frontend/user_profile.html:145
-#: templates/frontend/user_unpublish.html:76
+#: templates/frontend/user_unpublish.html:94
 msgid "Science and Technology"
 msgstr ""
 
 #: templates/frontend/material_stats.html:85
 #: templates/frontend/user_favorite.html:77
 #: templates/frontend/user_profile.html:147
-#: templates/frontend/user_unpublish.html:78
+#: templates/frontend/user_unpublish.html:96
 msgid "Humanities"
 msgstr ""
 
 #: templates/frontend/material_stats.html:87
 #: templates/frontend/user_favorite.html:79
 #: templates/frontend/user_profile.html:149
-#: templates/frontend/user_unpublish.html:80
+#: templates/frontend/user_unpublish.html:98
 msgid "Arts"
 msgstr ""
 
 #: templates/frontend/material_stats.html:89
 #: templates/frontend/user_favorite.html:81
 #: templates/frontend/user_profile.html:151
-#: templates/frontend/user_unpublish.html:82
+#: templates/frontend/user_unpublish.html:100
 msgid "Mathematics and Statistics"
 msgstr ""
 
 #: templates/frontend/material_stats.html:91
 #: templates/frontend/user_favorite.html:83
 #: templates/frontend/user_profile.html:153
-#: templates/frontend/user_unpublish.html:84
+#: templates/frontend/user_unpublish.html:102
 msgid "Others"
 msgstr ""
 
 #: templates/frontend/material_stats.html:110
 #: templates/frontend/user_favorite.html:103
 #: templates/frontend/user_profile.html:172
-#: templates/frontend/user_unpublish.html:103
+#: templates/frontend/user_unpublish.html:125
 msgid "Uploaded On:"
 msgstr ""
 
-#: templates/frontend/module_detail.html:17
+#: templates/frontend/module_detail.html:18
 msgid "Edit"
 msgstr ""
 
-#: templates/frontend/module_detail.html:128
+#: templates/frontend/module_detail.html:129
 msgid "Collections"
 msgstr ""
 
@@ -688,15 +700,31 @@ msgstr ""
 msgid "User favorite"
 msgstr ""
 
-#: templates/frontend/ajax/others.html:22
-#: templates/frontend/ajax/similars.html:22
+#: templates/frontend/user_unpublish.html:7
+msgid "Unpublish material"
+msgstr ""
+
+#: templates/frontend/user_unpublish.html:28
+msgid "Delete"
+msgstr ""
+
+#: templates/frontend/user_unpublish.html:110
+msgid "Select/Deselect Item"
+msgstr ""
+
+#: templates/frontend/user_unpublish.html:171
+msgid "Are you sure drop this item(s)?"
+msgstr ""
+
+#: templates/frontend/ajax/others.html:17
+#: templates/frontend/ajax/similars.html:18
 msgid "View more items"
 msgstr ""
 
-#: templates/frontend/ajax/others.html:25
-#: templates/frontend/ajax/others.html:27
-#: templates/frontend/ajax/similars.html:25
-#: templates/frontend/ajax/similars.html:27
+#: templates/frontend/ajax/others.html:20
+#: templates/frontend/ajax/others.html:22
+#: templates/frontend/ajax/similars.html:21
+#: templates/frontend/ajax/similars.html:23
 #: templates/frontend/collection/create_step2.html:263
 #: templates/frontend/collection/create_step3.html:289
 #: templates/frontend/module/create_step2.html:255
@@ -704,10 +732,10 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: templates/frontend/ajax/others.html:31
-#: templates/frontend/ajax/others.html:33
-#: templates/frontend/ajax/similars.html:31
-#: templates/frontend/ajax/similars.html:33
+#: templates/frontend/ajax/others.html:26
+#: templates/frontend/ajax/others.html:28
+#: templates/frontend/ajax/similars.html:27
+#: templates/frontend/ajax/similars.html:29
 #: templates/frontend/collection/create_step1.html:60
 #: templates/frontend/collection/create_step2.html:262
 #: templates/frontend/module/create_step1.html:57
@@ -727,11 +755,14 @@ msgid "Create a new module"
 msgstr ""
 
 #: templates/frontend/block/left_block_user.html:6
-#: templates/frontend/block/left_block_user.html:7
 #: templates/frontend/collection/create_step1.html:11
 #: templates/frontend/collection/create_step2.html:94
 #: templates/frontend/collection/create_step3.html:71
 msgid "Create a new collection"
+msgstr ""
+
+#: templates/frontend/block/left_block_user.html:7
+msgid "Create mass modules"
 msgstr ""
 
 #: templates/frontend/block/left_block_user.html:11
@@ -1157,9 +1188,6 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: vpw/views.py:380 vpw/views.py:525
+#: vpw/views.py:383 vpw/views.py:528
 msgid "You must agree to the terms and conditions!"
-msgstr ""
-
-msgid "User Guide"
 msgstr ""

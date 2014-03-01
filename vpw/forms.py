@@ -61,6 +61,7 @@ class EditProfileForm(forms.Form):
     fullname = forms.CharField(max_length=255)
     homepage = forms.URLField(max_length=255, required=False)
     affiliation_url = forms.URLField(max_length=255, required=False)
+    biography = forms.CharField(widget=TinyMCE(attrs={'rows': 7}), required=False)
 
     def clean(self):
         cleaned_data = self.cleaned_data # individual field's clean methods have already been called

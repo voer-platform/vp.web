@@ -4,6 +4,11 @@
 {% load thumbnail %}
 
 {% block titleSite %}{% trans "User profile" %}{% endblock %}
+{% block js %}
+    {{ form.media }}
+    <script type="text/javascript" src="{{ STATIC_URL }}mce_filebrowser/js/filebrowser_init.js"></script>
+
+{% endblock %}
 
 {% block content %}
 
@@ -27,7 +32,7 @@
                 <div class="hfuser-website">{% if author.affiliation_url %}<a href="{{ author.affiliation_url }}" target="_blank">{{ author.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if author.homepage %}<a href="{{ author.homepage }}" target="_blank">{{ author.homepage }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-national">{% trans 'National' %}: {% if author.national %}{{ author.national }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography }}{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography|safe }}{% else %}{% trans 'Not available' %}{% endif %}</div>
             </div>
         </div>
     </div>
@@ -143,7 +148,8 @@
             </div>
             <div class="form-group">
                 <label for="InputBiography">{% trans 'Biography' %}</label>
-                <textarea rows="4" class="form-control" name="biography">{% if author.biography %}{{ author.biography }}{% endif %}</textarea>
+                {{ form.biography }}
+                <!-- <textarea rows="4" class="form-control" name="biography">{% if author.biography %}{{ author.biography }}{% endif %}</textarea> -->
             </div>
             <div class="form-group">
                 <label for="InputNationality">{% trans 'Nationality' %}</label>
