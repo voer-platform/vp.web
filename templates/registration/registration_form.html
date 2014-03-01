@@ -25,7 +25,6 @@
         {% if form.errors %}
         <p class="errors">{% trans 'Please correct the errors below:' %} {{ form.non_field_errors }}</p>
         {% endif %}
-        <input class="form-control" id="id_fullname" type="text" name="fullname" placeholder="{% trans 'Fullname' %}">
         <input class="form-control" id="id_username" type="text" name="username" maxlength="30" placeholder="{% trans 'Your username' %}">
         <input class="form-control" id="id_email" type="email" name="email" placeholder="{% trans 'Your email Address' %}">
         <div class="form-wrap-password">
