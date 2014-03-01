@@ -55,22 +55,6 @@
     <div class="module-view-content left padding-content-15">{{ material.text|safe }}</div>
     <!-- END CONTENT MODULE -->
 
-    {% if file_data %}
-    <!-- ATTACHMENT MODULE -->
-    <div class="attach-module-content left padding-content-15">
-        <span class="module-view-name left clear">{% trans 'File Attachments' %}:</span>
-        <div class="attach-content-comment">
-            <ol>
-                {% for attachment in file_data %}
-                <li>
-                    <a href="{% url 'get_attachment' attachment.attachment_id %}" title="{{ attachment.title }}">{{ attachment.title }}</a>
-                </li>
-                {% endfor %}
-            </ol>
-        </div>
-    </div>
-    <!-- END ATTACHMENT MODULE -->
-    {% endif %}
 
     <!-- SOCIAL MODULE -->
     <div class="bottom-module-content left padding-content-15">
@@ -193,7 +177,7 @@
     <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host">
         <div class="hffolders">
             <ul id="level-0">
-                <li class="root">
+                <li id="collection-name" class="root">
                     <span><a href="#">{{ collection.title }}</a></span>
                 </li>
                 {{ outline | safe}}
@@ -234,6 +218,25 @@
     <!-- END DOWNLOAD -->
     {% endif %}
 </div>
+
+
+{% if file_data %}
+<!-- ATTACHMENT MODULE -->
+<div class="attach-module-content left padding-content-15">
+    <span class="module-view-name left clear">{% trans 'File Attachments' %}:</span>
+    <div class="attach-content-comment">
+        <ol>
+            {% for attachment in file_data %}
+            <li>
+                <a href="{% url 'get_attachment' attachment.attachment_id %}" title="{{ attachment.title }}">{{ attachment.title }}</a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+<!-- END ATTACHMENT MODULE -->
+{% endif %}
+
 <div id="hfgroupright">
     {% if tag_data %}
     <!-- TAG -->

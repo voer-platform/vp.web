@@ -1409,7 +1409,7 @@ def ajax_get_similars(request):
     mid = request.GET['mid']
     version = request.GET['version']
     page = int(request.GET.get('page', 1))
-    number_record = 6
+    number_record = 12
 
     prev_page = ''
     next_page = ''
@@ -1453,7 +1453,7 @@ def ajax_get_similars(request):
 def ajax_get_others(request):
     author_list = request.GET.get('authors', '')
     page = int(request.GET.get('page', 1))
-    number_record = 6
+    number_record = 6 
 
     real_page = int(math.ceil((page * number_record + 11) / 12))
 

@@ -23,5 +23,6 @@ class PageAdmin(FlatPageAdmin):
     """
     form = PageForm
 
+
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, PageAdmin)

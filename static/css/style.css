@@ -1,3 +1,13 @@
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear:both;
+}
+
 .voer-mol-ico {
   background: url("../images/icon/icon-module.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
   height: 15px;
@@ -110,10 +120,6 @@
     background:url('../images/icon/favourite.png') no-repeat center left transparent;
     padding-left:25px;
 
-}
-.list-menu-footer {
-  margin: 6px 0 0 6px;
-  color: #999;
 }
 
 .voer-mol-ico {
@@ -230,7 +236,7 @@
 }
 .list-menu-footer {
   margin: 6px 0 0 6px;
-  color: #999;
+  color: #555;
 
 }
 .navbar-collapse img {
@@ -656,6 +662,7 @@ article.flatpage {
     overflow: hidden;
     padding-left: 12px;
 }
+<<<<<<< HEAD
 .form-control.textbox {
     width: 40%;
     float: left;
@@ -676,4 +683,32 @@ article.flatpage {
 }
 .hficon.delete{
     border: none;
+}
+.module-view-title {
+  border-top: solid 5px #B8CEE6;
+  border-radius: 0px;
+}
+.attach-list {
+  width: 100%;
+}
+#material-right-side h4 {
+  font-size: 10px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+.attach-list ul {
+  padding-left: 15px;
+}
+.attach-list li {
+  list-style: inherit;
+}
+.download-reuse > div:first-child {
+  border-right: solid 1px #fff;
+}
+#module-others li,
+#module-similars li {
+  margin-bottom: 2px;
 }

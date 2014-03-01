@@ -1,0 +1,38 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load thumbnail %}
+
+{% if author %}
+<!-- AUTHOR NAME -->
+{% for author_info in author %}
+
+<div class="module-view-author padding-content-10 left">
+    <a class="module-view-author-avatar left" href="{% url 'view_profile' author_info.id %}" title="{{ author_info.fullname }}">
+        {% with y=author_info.id|stringformat:"s" %}
+        {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y|add:"?l="|add:author_info.avatar "60x60" crop="center 20%" as im %}
+            <img src="{{ im.url }}" width="60" height="60" title="{{ author_info.fullname }}" alt="{{ author_info.fullname }}">
+        {% empty %}
+            <img src="{{ STATIC_URL }}images/author1_detail.jpg" width="60" height="60" title="{{ author_info.fullname }}" alt="{{ author_info.fullname }}">
+        {% endthumbnail %}
+        {% endwith %}
+    </a>
+    <ul class="module-view-author-name left padding-content-10">
+        <li>
+            <a href="{% url 'view_profile' author_info.id %}" title="{{ author_info.fullname }}">{{ author_info.fullname }}</a>
+        </li>
+        <li class="module-view-author-status">
+            <span>
+                <a class="clear" href="{% url 'view_profile' author_info.id %}?types=2">{{ author_info.author.collection }} {% trans 'Collections' %}</label>
+                </a>
+            </span>
+            <span>&nbsp;|&nbsp;
+                <a class="clear" href="{% url 'view_profile' author_info.id %}?types=1">{{ author_info.author.module }} {% trans 'Modules' %}</label>
+                </a>
+            </span>
+        </li>
+    </ul>
+</div>
+
+{% endfor %}
+<!-- END AUTHOR NAME -->
+{% endif %}
