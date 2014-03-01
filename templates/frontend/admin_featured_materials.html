@@ -2,16 +2,62 @@
 
 {% load i18n %}
 
-{% block titleSite %}{% trans "Import user" %}{% endblock %}
+{% block titleSite %}{% trans "Featured materials" %}{% endblock %}
 
 {% block content %}
 
 {% include 'frontend/block/left_block_user.html' %}
 
-<div class="content">
-    <h1>{% trans 'Featured materials' %}</h1>
-    {% m = MaterialFeature.objects.create(material_id="234356") %}
-    {% m.save() %}
-    id="{{ MaterialFeature.material_id }}"
+<div class="col-lg-1 right-row">
+    <div class="content">
+        {% if messages %}
+        <div class="alert alert-success">
+            <ul>
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <h1>{% trans 'Featured materials' %}</h1>
+        <form method="POST" active="{% url 'featured-materials' %}" id="form-admin-featured-materials" >
+            {% csrf_token %}
+            <div class="form-group clearfix">
+                <input type="text" name="add_material_id" class="form-control textbox" placeholder="{% trans 'Enter ID material' %}" />
+                 <div class="btn-common">
+                    <input class="hfbtn-common hfbtn-active btn-add-material" name="add_material" type="submit" value="{% trans 'Add' %}">
+                </div>
+                <p class="help-block">Cần ít nhất 6 tài liệu tiêu biểu để hiển thị ra trang chủ</p>
+            </div>
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <tr class="success">
+                    <th width="300" class="center">Tên tài liệu</th>
+                    <th width="80" class="center">ID</th>
+                    <th width="50" class="center">{% trans 'Delete' %}</th>
+                </tr>
+                {% for material in materials %}
+                <tr>
+                    <td>{{ material.title }}</td>
+                    <td>{{ material.material_id }}</td>
+                    <td>
+                         <input class="hfbtn-common hficon delete btn-delete-material center" name="delete_material" type="submit" data="{{ material.material_id }}" value="">
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        <input type="hidden" value="" id="delete-material-id" name="delete_material_id"/>
+        </form>
+    </div>
 </div>
+   <script>
+    $(document).ready(function(){
+        $(document).on('click', '.btn-delete-material', function(){
+            var $onclick = confirm('Are you sure?');
+            if ($onclick == true){
+                $('#delete-material-id').val( ($(this).attr('data')) );
+            }
+        })
+    });
+   </script>
 {% endblock %}

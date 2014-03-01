@@ -16,6 +16,13 @@
   width: 21px;
 }
 
+.link-other-author-module {
+  display: block;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .other-module-author {
   height: auto;
 }
@@ -648,4 +655,25 @@ article.flatpage {
     background: url("../images/arrow-red-list.png") no-repeat scroll left 5px rgba(0, 0, 0, 0);
     overflow: hidden;
     padding-left: 12px;
+}
+.form-control.textbox {
+    width: 40%;
+    float: left;
+}
+.btn-add-material, .btn-add-author {
+    line-height: 24px;
+    margin-left: 8px;
+    border: none;
+}
+.right-row {
+    padding: 15px;
+}
+.center {
+    text-align: center;
+}
+.hficon.center{
+    margin: 0 auto;
+}
+.hficon.delete{
+    border: none;
 }

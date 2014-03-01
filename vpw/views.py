@@ -26,7 +26,7 @@ from django.utils.translation import ugettext as _, get_language
 from registration.backends.default.views import RegistrationView
 from django.core.urlresolvers import reverse
 
-from vpw.models import Material, Author, Settings
+from vpw.models import Material, Author, Settings, MaterialFeature, FeaturedAuthor
 from vpw.utils import normalize_string, normalize_filename
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, vpr_get_persons, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
@@ -70,9 +70,21 @@ class RecaptchaRegistrationView(RegistrationView):
 # Create your views here.
 def home(request):
     # material_features = ['64b4a7a7', 'fd2f579c', 'f2feed3c', '4dbdd6c5', 'c3ad3533', '0e60bfc6']
-    material_features_sample = ['01f46fc2', '022e4f84', '0e60bfc6', '2d2e6a46', '3ec080b8', '45df218a', '4c212f92',
-                                '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'fd2f579c', 'be82eba8']
-    material_features = random.sample(material_features_sample, 6)
+    #material_features_sample = ['01f46fc2', '022e4f84', '0e60bfc6', '2d2e6a46', '3ec080b8', '45df218a', '4c212f92',
+    #                            '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'be82eba8']
+    material_features = MaterialFeature.objects.all()
+    material_features_sample = []
+    for material_feature in material_features:
+        material_features_sample.append(material_feature.material_id)
+    if material_features_sample.__len__() <= 0:
+        material_features_sample = ['01f46fc2', '022e4f84', '0e60bfc6', '2d2e6a46', '3ec080b8', '45df218a', '4c212f92',
+                               '4dbdd6c5', 'b14d14a4', 'c3ad3533', 'd4aa7723', 'f2feed3c', 'be82eba8']
+    max_random = 6
+    if material_features_sample.__len__() < 6:
+        max_random = material_features_sample.__len__()
+        
+    material_features = random.sample(material_features_sample, max_random)
+
     materials_list = []
     for mid in material_features:
         material = vpr_get_material(mid)
@@ -92,7 +104,18 @@ def home(request):
         materials_list.append(material)
 
     # Get featured authors
-    person_features = [1233, 214, 702, 1651, 69]
+     #person_features = [1233, 214, 702, 50, 69]
+    featured_authors = FeaturedAuthor.objects.all()
+    person_features_sample = []
+    for featured_author in featured_authors:
+        person_features_sample.append(featured_author.author_id)
+    if person_features_sample.__len__()>0:
+        max_random_author = 5
+        if person_features_sample.__len__() < max_random_author:
+            max_random_author = person_features_sample.__len__()
+        person_features = random.sample(person_features_sample, max_random_author)
+    else:
+        person_features = [1233, 214, 702, 50, 69]
     person_list = []
     for pid in person_features:
         person = vpr_get_person(pid)
@@ -1222,8 +1245,100 @@ def admin_import_user(request):
     return render(request, "frontend/admin_import_user.html", {})
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_featured_materials(request):
-    return render(request, "frontend/admin_featured_materials.html", {})
+    if request.REQUEST:
+        if 'add_material' in request.POST:
+            add_material_id = request.POST['add_material_id']
+            if not add_material_id:
+               messages.error(request, 'ID material null.')
+            else:
+                if MaterialFeature.objects.filter(material_id = add_material_id):
+                    messages.error(request, 'ID featured material exists')
+                else:
+                    material = vpr_get_material(add_material_id)
+                    if 'material_id' in material:
+                        messages.success(request,"Success!!!")
+                        m = MaterialFeature(material_id = add_material_id)
+                        m.save()
+                    else:
+                        messages.error(request, 'ID material not exists')
+        elif 'delete_material' in request.POST:
+            delete_material_id = request.POST['delete_material_id']
+            m = MaterialFeature.objects.get(material_id = delete_material_id).delete()
+            messages.success(request, "Success!!!")
+
+    # import pdb;pdb.set_trace()
+    materialFeatures = MaterialFeature.objects.all()
+    materials = []
+    for materialFeature in materialFeatures:
+        material = vpr_get_material(materialFeature.material_id)
+        materials.append(material)
+    return render(request, "frontend/admin_featured_materials.html", {'materials': materials})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_featured_authors(request):
+    if request.REQUEST:
+        if 'add_author' in request.POST:
+            add_author_id = request.POST['add_author_id']
+            if not add_author_id:
+               messages.error(request, 'ID author null.')
+            else:
+                if FeaturedAuthor.objects.filter(author_id = add_author_id):
+                    messages.error(request, 'ID featured author exists')
+                else:
+                    author = vpr_get_person(add_author_id)
+                    if 'user_id' in author:
+                        messages.success(request,"Success!!!")
+                        m = FeaturedAuthor(author_id = add_author_id)
+                        m.save()
+                    else:
+                        messages.error(request, 'ID author not exists')
+        elif 'delete_author' in request.POST:
+            delete_author_id = request.POST['delete_author_id']
+            m = FeaturedAuthor.objects.get(author_id = delete_author_id).delete()
+            messages.success(request, "Success!!!")
+
+    # import pdb;pdb.set_trace()
+    featuredAuthors = FeaturedAuthor.objects.all()
+    authors = []
+    for featuredAuthor in featuredAuthors:
+        author = {}
+        a = vpr_get_person(featuredAuthor.author_id)
+        author['id'] = a['id']
+        author['user_id'] = a['user_id']
+        name=''
+        if not a['title']== None:
+            if not isinstance(name, unicode):
+                name = name.encode('utf-8')
+            title = a['title']
+            if not isinstance(title, unicode):
+                title = title.encode('utf-8')
+            name = name + ' ' + title
+
+        if a['first_name']!= None:
+            if not isinstance(name, unicode):
+                name = str(name).encode('utf-8')
+            first_name = a['first_name']
+            if not isinstance(a['first_name'], unicode):
+                first_name = str(a['first_name']).encode('utf-8')
+            name = name + ' ' + first_name
+            if a['last_name']!= None:
+                if not isinstance(name, unicode):
+                    name = str(name).encode('utf-8')
+                last_name = a['last_name']
+                if not isinstance(a['last_name'], unicode):
+                    last_name = str(a['last_name']).encode('utf-8')
+                name = name + ' ' + last_name
+        if name == '':
+            if a['fullname'] != None:
+                name = a['fullname']
+            else:
+                name = a['user_id']
+        author['name'] = name
+        authors.append(author)
+    return render(request, "frontend/admin_featured_authors.html", {'authors': authors})
 
 
 def get_favorite(request):
