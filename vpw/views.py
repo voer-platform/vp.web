@@ -1453,7 +1453,7 @@ def ajax_get_similars(request):
 def ajax_get_others(request):
     author_list = request.GET.get('authors', '')
     page = int(request.GET.get('page', 1))
-    number_record = 6 
+    number_record = 10
 
     real_page = int(math.ceil((page * number_record + 11) / 12))
 

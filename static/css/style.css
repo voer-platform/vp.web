@@ -708,7 +708,19 @@ article.flatpage {
 .download-reuse > div:first-child {
   border-right: solid 1px #fff;
 }
+.download-reuse a {
+  color: white;
+}
 #module-others li,
 #module-similars li {
   margin-bottom: 2px;
+}
+#material-bottom-actions {
+  width: 50%;
+}
+#material-bottom-actions .module-block-header {
+  background-color: #f1f1f1;
+}
+#by-same-author {
+  border-top: 1px solid #e8e8e8;
 }

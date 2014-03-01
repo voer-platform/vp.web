@@ -72,6 +72,7 @@
                 <a class="link-in"></a>
             </li>
         </ul>
+        {% comment %}
         <ul class="list-status-module-content right">
             <li>
                 <a class="checkout-icon-view">{% if collection.view_count.view > 0 %}{{ collection.view_count.view }}{% else %}0{% endif %}</a>
@@ -86,6 +87,7 @@
                 <a class="checkout-icon-like">340</a>
             </li>
         </ul>
+        {% endcomment %}
     </div>
     <!-- END SOCIAL MODULE -->
     <!-- COMMENT MODULE -->
@@ -103,7 +105,13 @@
 </div>
 <!-- END LEFT ROW -->
 <!-- RIGHT ROW -->
-<div class="col-lg-2 right-row">
+<div id="material-right-side" class="col-lg-2 right-row">
+    {% include 'frontend/partials/material_actions.html' %}
+
+    {% include 'frontend/partials/material_author.html' %}
+
+
+    {% comment OLD-AUTHOR-SECTION %}
     {% if author %}
     <!-- AUTHOR NAME -->
     {% for author_info in author %}
@@ -146,98 +154,65 @@
     {% endfor %}
     <!-- END AUTHOR STATUS -->
     {% endif %}
+    {% endcomment %}
 
     <script>
-                        $(document).ready(function(){
-                            $('.collspan').click(function(){
-                                var $iditemshow = $(this).attr('metadata');
-                                $(this).toggleClass('exspan');
-                                $('ul[metadata=child-'+$iditemshow+']').toggleClass('collspaned');
-                            });
-                            /*
-                            var wh = $(window).height();
-                            $(window).scroll(function(){
-                                var wh = $(window).height();
-                                var wp = $(window).scrollTop();
-                                var dh = $(document).height();
-                                var visible = Math.round((wp/dh)*100);
-                                if(wp > 150){
-                                    $(".hflistmodule").addClass('extends');
-                                    $("#hfgroupright").addClass('extends');
-                                }else{
-                                    $(".hflistmodule").removeClass('extends');
-                                    $("#hfgroupright").removeClass('extends');
-                                }
+        $(document).ready(function(){
+            $('.collspan').click(function(){
+                var $iditemshow = $(this).attr('metadata');
+                $(this).toggleClass('exspan');
+                $('ul[metadata=child-'+$iditemshow+']').toggleClass('collspaned');
+            });
+            /*
+            var wh = $(window).height();
+            $(window).scroll(function(){
+                var wh = $(window).height();
+                var wp = $(window).scrollTop();
+                var dh = $(document).height();
+                var visible = Math.round((wp/dh)*100);
+                if(wp > 150){
+                    $(".hflistmodule").addClass('extends');
+                    $("#hfgroupright").addClass('extends');
+                }else{
+                    $(".hflistmodule").removeClass('extends');
+                    $("#hfgroupright").removeClass('extends');
+                }
 
-                            });
-                            */
-                        });
-                    </script>
-<div class="hflistmodule">
-    <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host">
-        <div class="hffolders">
-            <ul id="level-0">
-                <li id="collection-name" class="root">
-                    <span><a href="#">{{ collection.title }}</a></span>
+            });
+            */
+        });
+    </script>
+
+    <div class="hflistmodule">
+        <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host">
+            <div class="hffolders">
+                <ul id="level-0">
+                    <li id="collection-name" class="root">
+                        <span><a href="#">{{ collection.title }}</a></span>
+                    </li>
+                    {{ outline | safe}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% if file_data %}
+    <!-- ATTACHMENT MODULE -->
+    <div class="attach-list padding-content-15">
+        <h4>{% trans 'Attachments' %}</h4>
+        <div class="attach-content-comment">
+            <ol>
+                {% for attachment in file_data %}
+                <li>
+                    <a href="{% url 'get_attachment' attachment.attachment_id %}" title="{{ attachment.title }}">{{ attachment.title }}</a>
                 </li>
-                {{ outline | safe}}
-            </ul>
-
+                {% endfor %}
+            </ol>
         </div>
     </div>
-    {% if collection.material_id %}
-    <!-- REUSE -->
-    {% if user.is_authenticated %}
-    <div class="module-block">
-        <div class="module-block-header">
-            <div class="icon-module icon-checkout"></div>
-            <div class="tilte-module">
-                <a>{% trans 'Reuse' %}</a>
-            </div>
-        </div>
-    </div>
+    <!-- END ATTACHMENT MODULE -->
     {% endif %}
-    <!-- END REUSE -->
-    <!-- DOWNLOAD -->
-    <div class="module-block">
-        <div class="module-block-header" id="pdf-download">
-            <div class="icon-module icon-download"></div>
-            <div class="tilte-module">
-                {% trans 'Download' %}
-            </div>
-        </div>
-        <div id="more-download" style="display: none;">
-            <ul>
-                <li class="collection"><a href="{% url 'get_pdf' collection.material_id collection.version %}" title="{{ collection.title }}">{% trans 'PDF Collection' %}</a></li>
-                {% if 'material_id' in material %}
-                <li class="module"><a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'PDF Module' %}</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-    <!-- END DOWNLOAD -->
-    {% endif %}
-</div>
 
-
-{% if file_data %}
-<!-- ATTACHMENT MODULE -->
-<div class="attach-module-content left padding-content-15">
-    <span class="module-view-name left clear">{% trans 'File Attachments' %}:</span>
-    <div class="attach-content-comment">
-        <ol>
-            {% for attachment in file_data %}
-            <li>
-                <a href="{% url 'get_attachment' attachment.attachment_id %}" title="{{ attachment.title }}">{{ attachment.title }}</a>
-            </li>
-            {% endfor %}
-        </ol>
-    </div>
-</div>
-<!-- END ATTACHMENT MODULE -->
-{% endif %}
-
-<div id="hfgroupright">
     {% if tag_data %}
     <!-- TAG -->
     <div class="module-block module-simple">
@@ -258,29 +233,22 @@
     {% endif %}
 
     <!-- OTHER FROM AUTHOR -->
-    <div class="module-block module-simple">
-        <div class="module-block-header">
-            <div class="icon-module"></div>
-            <div class="tilte-module">{% trans 'Others from Author' %}</div>
-        </div>
-        <div class="module-block-content">
+    <div id="by-same-author" class="module-block module-simple padding-content-15">
+        <h4>{% trans 'By same author' %}</h4>
+        <div class="">
             <div id="module-others" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-others?authors={{ collection.author }}">&nbsp;</div>
         </div>
     </div>
     <!-- END OTHER FROM AUTHOR -->
 
-    <!-- OTHER FROM AUTHOR -->
-    <div class="module-block module-simple">
-        <div class="module-block-header">
-            <div class="icon-module"></div>
-           <div class="tilte-module">{% trans 'Similar items' %}</div>
-        </div>
-        <div class="module-block-content">
-            <div id="module-similars" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-similars?mid={{ collection.material_id }}&version={{ collection.version }}">&nbsp;</div>
+    <!-- SIMILAR ITEMS -->
+    <div class="module-block module-simple padding-content-15">
+        <h4>{% trans 'Similar items' %}</h4>
+        <div >
+            <div id="module-similars" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-similars?mid={{ material.material_id }}&version={{ material.version }}">&nbsp;</div>
         </div>
     </div>
-    <!-- END OTHER FROM AUTHOR -->
-</div>
+
 </div>
 <!-- END RIGHT ROW -->
 <div id="fb-root"></div>
