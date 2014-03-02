@@ -26,6 +26,14 @@
 
     <!-- SOCIAL MODULE -->
     <div class="bottom-module-content left padding-content-15">
+
+        {% comment %}
+        <div id="material-bottom-actions" class="left">
+            {% include 'frontend/partials/material_actions.html' %}
+            <div class="clearfix"></div>
+        </div>
+        {% endcomment %}
+
         <ul class="list-social-module left">
             <li>
                 <a class="link-fb"></a>
@@ -40,6 +48,8 @@
                 <a class="link-in"></a>
             </li>
         </ul>
+
+        {% comment %}
         <ul class="list-status-module-content right">
             <li>
                 <a class="checkout-icon-view">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</a>
@@ -54,6 +64,8 @@
                 <a class="checkout-icon-like">340</a>
             </li>
         </ul>
+        {% endcomment %}
+
     </div>
     <!-- END SOCIAL MODULE -->
 
@@ -73,25 +85,8 @@
 <!-- END LEFT ROW -->
 <!-- RIGHT ROW -->
 <div id="material-right-side" class="col-lg-2 right-row">
-    {% if material.material_id %}
-    <!-- DOWNLOAD -->
-    <div class="download-reuse">
-        <div class="module-block-header">
-            <div class="icon-module icon-download"></div>
-            <div class="tilte-module">
-                <a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'Download' %}</a>
-            </div>
-        </div>
-        <div class="module-block-header">
-            <div class="icon-module icon-checkout"></div>
-            <div class="tilte-module">
-                <a href="{% url 'user_module_reuse' material.material_id material.version %}">{% trans 'Reuse' %}</a>
-            </div>
-        </div>
-    </div>
+    {% include 'frontend/partials/material_actions.html' %}
     <div class="clearfix"></div>
-    <!-- END DOWNLOAD -->
-    {% endif %}
 
     {% if file_data %}
     <!-- ATTACHMENT MODULE -->

@@ -70,8 +70,8 @@
 	padding-left: 27px;
 }
 #main-menu .main-menu-nav li:nth-child(3) a{
-	background: url('../images/icon-menu-discover.png') no-repeat left center;
-	padding-left: 21px;
+	background: url('../images/icon-cloud-upload.png') no-repeat left center;
+	padding-left: 30px;
 }
 #main-menu .main-menu-nav li:nth-child(4) a{
 	background: url('../images/icon-menu-about.png') no-repeat left center;
@@ -478,18 +478,11 @@
 	border-right: 1px solid #E8E8E8;
 	margin-bottom: 5px;
 }
-.left-row > div{
-	border-bottom: 1px solid #E8E8E8;
-}
-.left-row > div:last-child{
-}
-.right-row{
-
-}
 .right-row > div{
 	border-bottom: 1px solid #E8E8E8;
 }
-.right-row > div:last-child{
+.right-row > div:first-child,
+.right-row > div:last-child {
 	border-bottom: none;
 }
 .padding-content-5{
@@ -518,6 +511,14 @@
     position: absolute;
     right: 10px;
 }
+.collection-view-name{
+	font-size: 20px;
+    margin-bottom: 5px;
+    color: #FF7000;
+    margin-top: 0px;
+    width: 94%;
+    text-transform: uppercase;
+}
 .module-title,
 .module-view-name{
 	font-size: 22px;
@@ -527,9 +528,10 @@
     margin-top: 0px;
     width: 94%;
 }
-.module-view-category{
-	color: #231f20;
-	font-size: 15px;
+.module-view-category {
+	color: gray;
+	font-size: 11px;
+	text-transform: uppercase;
 }
 .module-view-author{
 	width: 100%;
@@ -597,15 +599,13 @@
 	width: 26px;
 	height: 24px;
 }
-.tilte-module{
+.title-module{
 	float: left;
-	margin-top: 3px;
+	margin-top: 1px;
 	text-transform: uppercase;
 	font-size: 12px;
-	font-weight: normal;
-}
-.tilte-module a{
-	color: #FFFFFF;
+	//font-weight: bold;
+	font-family: verdana;
 }
 .icon-checkout{
 	background: url('/static/images/icon-edit-material.png') center center no-repeat;
@@ -735,15 +735,17 @@
 }
 .bottom-module-content{
 	width: 100%;
+	border-bottom: 1px solid #f1f1f1;
+	padding-top: 0;
 }
 .list-social-module li{
 	display: inline-block;
 }
 .list-social-module li a{
-	float: left;
+	float: right;
 }
 .list-social-module{
-	width: 100%;
+	width: 50%;
 }
 .link-fb{
 	width: 100px;
@@ -1252,6 +1254,9 @@
     right: 0;
     top: 0;
     z-index: 1;
+}
+.hflistmodule {
+  border-bottom: 1px solid #e8e8e8;
 }
 .hflistmodule.extends {
 	position:fixed;
