@@ -486,7 +486,7 @@ def create_module(request):
                 except Material.DoesNotExist:
                     pass
                 params['form'] = form
-                # TODO: nen truyen ca matrial
+                # TODO: nen truyen ca material
             elif action == 'save':
                 #Save to workspace of current user
                 try:
@@ -652,12 +652,18 @@ def _save_material(form, material_type, current_user):
     material.keywords = form.cleaned_data['keywords']
     material.categories = form.cleaned_data['categories']
     material.language = form.cleaned_data['language']
-    material.author = form.cleaned_data['authors']
-    material.editor = form.cleaned_data['editors']
-    material.licensor = form.cleaned_data['licensors']
-    material.maintainer = form.cleaned_data['maintainers']
-    material.translator = form.cleaned_data['translators']
-    material.coeditor = form.cleaned_data['coeditors']
+    if form.cleaned_data['authors']:
+        material.author = form.cleaned_data['authors']
+    if form.cleaned_data['editors']:
+        material.editor = form.cleaned_data['editors']
+    if form.cleaned_data['licensors']:
+        material.licensor = form.cleaned_data['licensors']
+    if form.cleaned_data['maintainers']:
+        material.maintainer = form.cleaned_data['maintainers']
+    if form.cleaned_data['translators']:
+        material.translator = form.cleaned_data['translators']
+    if form.cleaned_data['coeditors']:
+        material.coeditor = form.cleaned_data['coeditors']
     material.version = form.cleaned_data['version']
     material.material_id = form.cleaned_data['material_id']
     # get current user
@@ -1536,7 +1542,7 @@ def user_module_reuse(request, mid, version=1):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
-                    return redirect('module_detail', mid=result['material_id'])
+                    return redirect('module_detail_old', mid=result['material_id'])
     else:
         form = ModuleCreationForm(dict(body=material['text']))
     params = {'material': material, 'categories': categories,
@@ -1578,10 +1584,13 @@ def user_collection_edit(request, cid):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
-                    return redirect('collection_detail', cid=result['material_id'])
+                    return redirect('collection_detail_old', cid=result['material_id'])
     else:
         json_outline = material.text
-        outline = json.loads(json_outline)
+        try:
+            outline = json.loads(json_outline)
+        except ValueError:
+            outline = None
         if outline:
             result = []
             for item in outline['content']:
@@ -1619,7 +1628,7 @@ def user_module_edit(request, mid):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
-                    return redirect('module_detail', mid=result['material_id'])
+                    return redirect('module_detail_old', mid=result['material_id'])
     else:
         form = ModuleCreationForm(dict(body=material.text))
     params = {'material': material, 'categories': categories,

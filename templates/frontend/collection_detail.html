@@ -49,6 +49,12 @@
         <h1 class="collection-view-name left clear">{{ collection.title }}</h1>
         <a class="module-view-category left clear" title="{{ category.name }}">{{ category.name }}</a>
         <h2 class="module-view-name sub-title left clear">{{ material.title }}</h2>
+        {% if collection.id %}
+        {% if collection.version == 0 or collection.version == '0' or collection.version == None %}
+        <a href="{% url 'user_collection_edit' cid=collection.id %}" class="btn btn-primary" style="float: right;">{% trans 'Edit' %}</a>
+        {% endif %}
+        {% endif %}
+
     </div>
     <!-- END TITLE MODULE -->
     <!-- CONTENT MODULE -->
