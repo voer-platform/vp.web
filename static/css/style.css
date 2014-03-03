@@ -741,3 +741,8 @@ article.flatpage {
 #by-same-author {
   border-top: 1px solid #e8e8e8;
 }
+
+.hfbtn-create.mass-module {
+    background: url("../images/icon/btn-module.png") no-repeat scroll 10px 0 #C8293C;
+    margin-top: 7px;
+}

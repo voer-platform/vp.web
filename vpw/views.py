@@ -530,6 +530,65 @@ def create_module(request):
 
 
 @login_required
+def create_mass_modules(request):
+    return render(request, 'frontend/module/create_mass_modules.html')
+
+
+@csrf_exempt
+def import_mass_modules(request):
+    upload_file = request.FILES.get('Filedata', None)
+    if upload_file:
+        upload_filename = normalize_filename(upload_file.name)
+        with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
+            for chunk in upload_file.chunks():
+                destination.write(chunk)
+        # call import vpt
+        result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
+        task_id = result_import['task_id']
+        download_url = vpt_get_url(task_id)
+        response = vpt_download(download_url)
+        # save downloaded file to transforms directory
+        # TODO: transforms dir name should be in settings
+        download_dir = '%s/transforms' % settings.MEDIA_ROOT
+        download_filename = download_url.split('/')[-1]
+        download_filepath = '%s/%s' % (download_dir, download_filename)
+        with open(download_filepath, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=1024):
+                if chunk: # filter out keep-alive new chunks
+                    f.write(chunk)
+                    f.flush()
+
+        # load downloaded zip file
+        zip_archive = zipfile.ZipFile(download_filepath, 'r')
+        # Unzip into a new directory
+        filename, extension = os.path.splitext(download_filename)
+        extract_path = os.path.join(download_dir, filename)
+        os.mkdir(extract_path)
+        zip_archive.extractall(path=extract_path)
+
+        # get transformed html content
+        content = open(extract_path + '/index.html', 'r').read()
+        # fix images' urls
+        images = [f.filename for f in zip_archive.filelist if f.filename != 'index.html']
+        for image in images:
+            old_src = 'src="%s"' % image
+            # TODO: transforms dir name should be in settings
+            new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
+            content = content.replace(old_src, new_src)
+
+        # Save module
+        material = Material()
+        material.creator_id = request.POST.get("uid", 1)
+        # Lay ten file lam ten module
+        material.title = os.path.splitext(upload_file.name)[0]
+        material.text = content
+        material.material_type = MODULE_TYPE
+        material.save()
+        return HttpResponse("1")
+    else:
+        return HttpResponse("0")
+
+@login_required
 def create_collection(request):
     form = CollectionCreationForm(request.POST or None)
     pid = request.user.author.author_id

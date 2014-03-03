@@ -1,0 +1,62 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block titleSite %}Create mass module{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.uploadify.min.js"></script>
+{% endblock %}
+{% block css %}
+    <link href="{{STATIC_URL}}css/uploadify.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}        
+<!-- filter top -->
+<div class="hfcreate">
+    <div class="breakcump left">
+        <span>{% trans 'Import Content' %}</span>
+        <span class="icon"></span>
+        <span class="current">{% trans 'Create mass modules' %}</span>
+    </div>
+    <div class="hfstep">
+        <ul>
+            <li class="active"><a id="hfstep-1"><div class="step">1</div> {% trans 'License' %}</a></li>
+            <li><a id="hfstep-2"><div class="step">2</div>{% trans 'Metadata' %}</a></li>
+            <li><a id="hfstep-3"><div class="step">3</div>Content</a></li>
+        </ul>
+    </div>
+</div>
+{% include "frontend/block/left_block_user.html" %}
+<div class="col-lg-1 right-row">
+    <div class="hfcreate-1">
+        <form>
+            {% if errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{{ errors|escape }}</li>
+                    </ul>
+                </div>
+            {% endif %}
+            <div id="queue"></div>
+            <input id="file_upload" name="file_upload" type="file" multiple="true">
+            <script>
+                $(document).ready(function(){
+                    $('#file_upload').uploadify({
+                        'auto'     : false,
+                        'removeCompleted' : false,
+                        'queueSizeLimit' : 10,
+                        'multi'    : true,
+                        'formData' : {'uid': {{ user.id }}},
+                        'fileTypeDesc' : 'Document Files',
+                        'fileTypeExts' : '*.doc; *.docx',
+                        'swf'      : '{{STATIC_URL}}uploadify.swf',
+                        'uploader' : '/user/create/mass-modules/import/'
+                    });
+                });
+            </script>
+            <button class="btn hfbtn-common hfbtn-active right" onclick="javascript:jQuery('#file_upload').uploadify('upload','*');return false;">{% trans 'Import' %}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
