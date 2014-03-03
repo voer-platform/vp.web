@@ -82,7 +82,7 @@ def home(request):
     max_random = 6
     if material_features_sample.__len__() < 6:
         max_random = material_features_sample.__len__()
-        
+
     material_features = random.sample(material_features_sample, max_random)
 
     materials_list = []
@@ -1081,8 +1081,7 @@ def edit_profile(request):
     pid = current_user.author.author_id
     author = vpr_get_person(pid)
     user = User.objects.get(id=current_user.author.user_id)
-
-    if (request.REQUEST):
+    if request.method == "POST":
         form = EditProfileForm(request.POST)
 
         author_data = {}
@@ -1105,14 +1104,14 @@ def edit_profile(request):
                     user.set_password(request.POST['new_password'])
                     user.save()
 
-                if 'http://' in author_data['homepage'] or 'https://' in author_data['homepage']:
+                if 'http://' in author_data['homepage'] or 'https://' in author_data['homepage'] or author_data['homepage'] == '':
                     pass
                 elif 'http://' not in author_data['homepage']:
                     author_data['homepage'] = 'http://' + author_data['homepage']
                 elif 'https://' not in author_data['homepage']:
                     author_data['homepage'] = 'https://' + author_data['homepage']
 
-                if 'http://' in author_data['affiliation_url'] or 'https://' in author_data['affiliation_url']:
+                if 'http://' in author_data['affiliation_url'] or 'https://' in author_data['affiliation_url'] or author_data['homepage'] == '':
                     pass
                 elif 'http://' not in author_data['affiliation_url']:
                     author_data['affiliation_url'] = 'http://' + author_data['affiliation_url']
@@ -1143,7 +1142,9 @@ def edit_profile(request):
 
         return render(request, "frontend/user_edit_profile.html", {'author': author_data, 'form': form})
     else:
-        form = EditProfileForm(dict(biography=author.get('biography', '')))
+        # hack field password to validate
+        author['current_password'] = '*'
+        form = EditProfileForm(author)
 
     return render(request, "frontend/user_edit_profile.html", {'author': author, 'form': form})
 
