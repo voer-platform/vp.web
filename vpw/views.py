@@ -1829,7 +1829,8 @@ def delete_unpublish(request):
         ids = request.POST['material_ids']
         id_list = ids.split(',')
 
-        Material.objects.filter(creator_id=current_user.id, material_id='', version=None, id__in=id_list).delete()
+        Material.objects.filter(creator_id=current_user.id, material_id='', version=None, id__in=id_list).delete() #delete for old data
+        Material.objects.filter(creator_id=current_user.id, material_id='', version=0, id__in=id_list).delete()
         messages.success(request, 'Delete material successfull.')
 
         return HttpResponseRedirect(reverse('get_unpublish'))
