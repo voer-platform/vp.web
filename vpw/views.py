@@ -416,7 +416,7 @@ def create_module(request):
         elif previous_step == 2:
             # Save metadata
             if form.is_valid():
-                material = _save_material(form, MODULE_TYPE, request.user)
+                material = _save_material(form, MODULE_TYPE, request)
                 params['material'] = material
                 params['categories'] = categories_list
                 params['form'] = form
@@ -622,7 +622,7 @@ def create_collection(request):
                 current_step = 1
             else:
                 if form.is_valid():
-                    material = _save_material(form, COLLECTION_TYPE, request.user)
+                    material = _save_material(form, COLLECTION_TYPE, request)
                     params['form'] = form
                     params['categories'] = categories_list
                     if material.id:
@@ -701,7 +701,7 @@ def _publish_material(material):
     return result
 
 
-def _save_material(form, material_type, current_user):
+def _save_material(form, material_type, request):
     if form.cleaned_data['mid']:
         material = Material.objects.get(id=form.cleaned_data['mid'])
     else:
@@ -712,21 +712,21 @@ def _save_material(form, material_type, current_user):
     material.categories = form.cleaned_data['categories']
     material.language = form.cleaned_data['language']
     if form.cleaned_data['authors']:
-        material.author = form.cleaned_data['authors']
+        material.author = ','.join(request.POST.getlist('authors', ''))
     if form.cleaned_data['editors']:
-        material.editor = form.cleaned_data['editors']
+        material.editor = ','.join(request.POST.getlist('editors', ''))
     if form.cleaned_data['licensors']:
-        material.licensor = form.cleaned_data['licensors']
+        material.licensor = ','.join(request.POST.getlist('licensors', ''))
     if form.cleaned_data['maintainers']:
-        material.maintainer = form.cleaned_data['maintainers']
+        material.maintainer = ','.join(request.POST.getlist('maintainers', ''))
     if form.cleaned_data['translators']:
-        material.translator = form.cleaned_data['translators']
+        material.translator = ','.join(request.POST.getlist('translators', ''))
     if form.cleaned_data['coeditors']:
-        material.coeditor = form.cleaned_data['coeditors']
+        material.coeditor = ','.join(request.POST.getlist('coeditors', ''))
     material.version = form.cleaned_data['version']
     material.material_id = form.cleaned_data['material_id']
     # get current user
-    material.creator = current_user
+    material.creator = request.user
     material.material_type = material_type
     material.save()
     return material
@@ -1589,13 +1589,13 @@ def user_module_reuse(request, mid, version=1):
         action = request.POST.get("action", "")
         if action == 'save':
             if form.is_valid():
-                material = _save_material(form, MODULE_TYPE, request.user)
+                material = _save_material(form, MODULE_TYPE, request)
                 material.text = form.cleaned_data['body']
                 material.save()
                 return redirect('user_module_detail', mid=material.id)
         elif action == 'publish':
             if form.is_valid():
-                material = _save_material(form, MODULE_TYPE, request.user)
+                material = _save_material(form, MODULE_TYPE, request)
                 material.text = form.cleaned_data['body']
                 material.save()
                 # Publish content to VPR
@@ -1623,7 +1623,7 @@ def user_collection_edit(request, cid):
         action = request.POST.get("action", "")
         if action == 'save':
             if form.is_valid():
-                material = _save_material(form, COLLECTION_TYPE, request.user)
+                material = _save_material(form, COLLECTION_TYPE, request)
                 outline = json.loads(form.cleaned_data['body'])
                 tmp = {'content': []}
                 if "children" in outline[0]:
@@ -1635,7 +1635,7 @@ def user_collection_edit(request, cid):
                 return redirect('user_collection_detail', cid=material.id)
         elif action == 'publish':
             if form.is_valid():
-                material = _save_material(form, COLLECTION_TYPE, request.user)
+                material = _save_material(form, COLLECTION_TYPE, request)
                 outline = json.loads(form.cleaned_data['body'])
                 tmp = {'content': []}
                 if "children" in outline[0]:
@@ -1679,13 +1679,13 @@ def user_module_edit(request, mid):
         action = request.POST.get("action", "")
         if action == 'save':
             if form.is_valid():
-                material = _save_material(form, MODULE_TYPE, request.user)
+                material = _save_material(form, MODULE_TYPE, request)
                 material.text = form.cleaned_data['body']
                 material.save()
                 return redirect('user_module_detail', mid=material.id)
         elif action == 'publish':
             if form.is_valid():
-                material = _save_material(form, MODULE_TYPE, request.user)
+                material = _save_material(form, MODULE_TYPE, request)
                 material.text = form.cleaned_data['body']
                 material.save()
                 # Publish content to VPR
