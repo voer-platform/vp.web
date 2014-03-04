@@ -1604,6 +1604,10 @@ def user_module_reuse(request, mid, version=1):
                     material.delete()
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
+        # lay anh trong noi dung
+        list_images = vpr_get_material_images(mid)
+        content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+        material['text'] = content
         form = ModuleCreationForm(dict(body=material['text']))
     params = {'material': material, 'categories': categories,
               'form': form, 'author': author}
