@@ -1468,7 +1468,7 @@ def get_unpublish(request):
     pid = current_user.author.author_id
     author = vpr_get_person(pid)
 
-    sort = request.GET.get('sort', '')
+    sort = request.GET.get('sort', '-modified')
     page = int(request.GET.get('page', 1))
 
     number_record = 12
