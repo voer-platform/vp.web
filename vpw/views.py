@@ -1403,23 +1403,23 @@ def admin_featured_authors(request):
             title = a['title']
             if not isinstance(title, unicode):
                 title = title.encode('utf-8')
-            name = name + ' ' + title
-
-        if a['first_name']!= None:
+            name = name + '' + title
+        if a['last_name']!= None:
             if not isinstance(name, unicode):
                 name = str(name).encode('utf-8')
-            first_name = a['first_name']
-            if not isinstance(a['first_name'], unicode):
-                first_name = str(a['first_name']).encode('utf-8')
-            name = name + ' ' + first_name
-            if a['last_name']!= None:
+            last_name = a['last_name']
+            if not isinstance(a['last_name'], unicode):
+                last_name = str(a['last_name']).encode('utf-8')
+            name = name + ' ' + last_name
+            if a['first_name']!= None:
                 if not isinstance(name, unicode):
                     name = str(name).encode('utf-8')
-                last_name = a['last_name']
-                if not isinstance(a['last_name'], unicode):
-                    last_name = str(a['last_name']).encode('utf-8')
-                name = name + ' ' + last_name
-        if name == '':
+                first_name = a['first_name']
+                if not isinstance(a['first_name'], unicode):
+                    first_name = str(a['first_name']).encode('utf-8')
+                name = name + ' ' + first_name
+
+        if name == '  ':
             if a['fullname'] != None:
                 name = a['fullname']
             else:
