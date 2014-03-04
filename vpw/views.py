@@ -1111,7 +1111,7 @@ def edit_profile(request):
                 elif 'https://' not in author_data['homepage']:
                     author_data['homepage'] = 'https://' + author_data['homepage']
 
-                if 'http://' in author_data['affiliation_url'] or 'https://' in author_data['affiliation_url'] or author_data['homepage'] == '':
+                if 'http://' in author_data['affiliation_url'] or 'https://' in author_data['affiliation_url'] or author_data['affiliation_url'] == '':
                     pass
                 elif 'http://' not in author_data['affiliation_url']:
                     author_data['affiliation_url'] = 'http://' + author_data['affiliation_url']
@@ -1180,7 +1180,10 @@ def ajax_search_author(request):
     authors = []
     if 'count' in result:
         if result['count'] > 0:
-            authors = result['results']
+            authors = []
+            for author in result['results']:
+                author['url_avatar'] = reverse('get_avatar', kwargs={'pid': int(author['id'])})
+                authors.append(author)
     return HttpResponse(json.dumps(authors), content_type='application/json')
 
 

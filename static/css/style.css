@@ -753,3 +753,19 @@ article.flatpage {
     height: 151px;
     width: 200px;
 }
+#listAuthor .hfbtn-author {
+    position: static;
+}
+#listAuthor div.author-information {
+    top: 95%;
+    left: 30px;
+    width: 250px;
+    z-index: 10;
+}
+#listAuthor div.author-information .avatar.left {
+    margin-right: 5px;
+}
+#listAuthor div.author-information .right {
+    float: left;
+    width: 150px;
+}

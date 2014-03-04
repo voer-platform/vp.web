@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-04 15:13+0000\n"
-"PO-Revision-Date: 2014-03-04 22:31+0700\n"
+"POT-Creation-Date: 2014-03-04 17:15+0000\n"
+"PO-Revision-Date: 2014-03-05 00:53+0700\n"
 "Last-Translator: Cuong Nguyen <cuongnguyen@vnfoundation.org>\n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -44,6 +44,9 @@ msgid ""
 "where otherwise noted, content created on this site is licensed under a "
 "Creative Commons Attribution 4.0 License."
 msgstr ""
+"Vận hành trên nền tảng <a href=\"http://www.hanoispring.com\">HanoiSpring</"
+"a>. Các tài liệu đều tuân thủ giấy phép Creative Commons Attribution 4.0 trừ "
+"khi ghi chú rõ ngoại lệ."
 
 #: templates/base/header.html:18
 msgid "Home"
@@ -121,12 +124,12 @@ msgstr "Nhập tên tác giả"
 msgid "Add"
 msgstr ""
 
-#: templates/frontend/admin_featured_authors.html:37
+#: templates/frontend/admin_featured_authors.html:38
 #, fuzzy
 msgid "username"
 msgstr "Tên đăng nhập"
 
-#: templates/frontend/admin_featured_authors.html:39
+#: templates/frontend/admin_featured_authors.html:40
 #: templates/frontend/admin_featured_materials.html:37
 #: templates/frontend/user_unpublish.html:28
 #, fuzzy
@@ -198,7 +201,7 @@ msgid "Set license content for collection creation."
 msgstr "Xác lập giấy phép cho collection."
 
 #: templates/frontend/browse.html:49 templates/frontend/profile.html:127
-#: templates/frontend/user_edit_profile.html:136
+#: templates/frontend/user_edit_profile.html:131
 #: templates/frontend/user_favorite.html:20
 #: templates/frontend/user_profile.html:91
 #: templates/frontend/user_unpublish.html:21
@@ -272,7 +275,6 @@ msgstr "Tạo mới"
 
 #: templates/frontend/browse.html:172 templates/frontend/profile.html:245
 #: templates/frontend/ajax/browse.html:86
-#, fuzzy
 msgid "Other"
 msgstr "Khác"
 
@@ -281,9 +283,8 @@ msgstr "Khác"
 #: templates/frontend/ajax/browse.html:110
 #: templates/frontend/ajax/others.html:32
 #: templates/frontend/ajax/similars.html:33
-#, fuzzy
 msgid "No data."
-msgstr "Không có dữ liệu"
+msgstr "Không có dữ liệu."
 
 #: templates/frontend/browse.html:205 templates/frontend/profile.html:279
 #: templates/frontend/search_result.html:66
@@ -351,9 +352,8 @@ msgstr "Tập tin đính kèm"
 
 #: templates/frontend/collection_detail.html:244
 #: templates/frontend/module_detail.html:133
-#, fuzzy
 msgid "By same author"
-msgstr "Thêm tác giả"
+msgstr "Cùng tác giả"
 
 #: templates/frontend/collection_detail.html:253
 #: templates/frontend/module_detail.html:142
@@ -407,7 +407,7 @@ msgstr "Chưa cập nhật"
 #: templates/frontend/material_stats.html:29
 #: templates/frontend/profile.html:33
 #: templates/frontend/user_edit_profile.html:33
-#: templates/frontend/user_edit_profile.html:140
+#: templates/frontend/user_edit_profile.html:135
 #: templates/frontend/user_profile.html:29
 msgid "Homepage"
 msgstr "Trang chủ"
@@ -422,7 +422,7 @@ msgstr "Quốc gia"
 #: templates/frontend/material_stats.html:31
 #: templates/frontend/profile.html:35
 #: templates/frontend/user_edit_profile.html:35
-#: templates/frontend/user_edit_profile.html:152
+#: templates/frontend/user_edit_profile.html:147
 #: templates/frontend/user_profile.html:31
 msgid "Biography"
 msgstr "Tiểu sử"
@@ -663,22 +663,14 @@ msgid "Account Settings"
 msgstr "Cài đặt"
 
 #: templates/frontend/user_edit_profile.html:71
-msgid "Current password"
-msgstr "Mật khẩu của bạn"
-
-#: templates/frontend/user_edit_profile.html:72
-msgid "Enter Current Password"
-msgstr "Nhập mật khẩu mới"
-
-#: templates/frontend/user_edit_profile.html:76
 msgid "E-mail address"
 msgstr "Địa chỉ email"
 
-#: templates/frontend/user_edit_profile.html:77
+#: templates/frontend/user_edit_profile.html:72
 msgid "Enter Emai Address"
 msgstr "Email của bạn"
 
-#: templates/frontend/user_edit_profile.html:78
+#: templates/frontend/user_edit_profile.html:73
 msgid ""
 "A valid e-mail address. All e-mails from the system will be sent to this "
 "address. The e-mail address is not made public and will only be used if you "
@@ -686,58 +678,106 @@ msgid ""
 "notifications by e-mail."
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:81
+#: templates/frontend/user_edit_profile.html:76
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: templates/frontend/user_edit_profile.html:82
+#: templates/frontend/user_edit_profile.html:77
 msgid "Enter Your Password"
 msgstr "Nhập mật khẩu mới"
 
-#: templates/frontend/user_edit_profile.html:85
+#: templates/frontend/user_edit_profile.html:80
 msgid "Confirm password"
 msgstr "Xác nhận mật khẩu"
 
-#: templates/frontend/user_edit_profile.html:86
+#: templates/frontend/user_edit_profile.html:81
 msgid "Enter Confirm Password"
 msgstr "Xác nhận mật khẩu mới"
 
-#: templates/frontend/user_edit_profile.html:115
+#: templates/frontend/user_edit_profile.html:83
+msgid "To make your password stronger:"
+msgstr "Để mật khẩu của bạn mạnh hơn:"
+
+#: templates/frontend/user_edit_profile.html:84
+msgid "Make it at least 6 characters"
+msgstr "Tối thiểu có 6 kí tự"
+
+#: templates/frontend/user_edit_profile.html:85
+msgid "Add lowercase letters"
+msgstr "Thêm kí tự thường"
+
+#: templates/frontend/user_edit_profile.html:86
+msgid "Add uppercase letters"
+msgstr "Thêm kí tự viết hoa"
+
+#: templates/frontend/user_edit_profile.html:87
+msgid "Add numbers"
+msgstr "Thêm số"
+
+#: templates/frontend/user_edit_profile.html:88
+msgid "Add punctuation"
+msgstr "Thêm dấu '.'"
+
+#: templates/frontend/user_edit_profile.html:89
+msgid ""
+"To change the current user password, enter the new password in both fields."
+msgstr "Để thay đổi mật khẩu hiện tại, hãy nhập mật khẩu mới vào hai trường"
+
+#: templates/frontend/user_edit_profile.html:110
 msgid "Picture"
 msgstr "Ảnh đại diện"
 
-#: templates/frontend/user_edit_profile.html:120
+#: templates/frontend/user_edit_profile.html:115
 msgid ""
 "Your virtual face or picture. Pictures larger than 1024x1024 pixels will be "
 "scaled down."
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:124
+#: templates/frontend/user_edit_profile.html:119
 msgid "Full name"
 msgstr "Họ và tên"
 
-#: templates/frontend/user_edit_profile.html:132
+#: templates/frontend/user_edit_profile.html:123
+msgid "First name"
+msgstr "Tên"
+
+#: templates/frontend/user_edit_profile.html:127
 msgid "Last name"
 msgstr "Họ"
 
-#: templates/frontend/user_edit_profile.html:144
+#: templates/frontend/user_edit_profile.html:139
 msgid "Affiliation"
 msgstr "Cơ quan"
 
-#: templates/frontend/user_edit_profile.html:148
+#: templates/frontend/user_edit_profile.html:143
 msgid "Affiliation URL"
 msgstr "URL cơ quan"
 
-#: templates/frontend/user_edit_profile.html:157
+#: templates/frontend/user_edit_profile.html:152
 msgid "Nationality"
 msgstr "Quốc tịch"
+
+#: templates/frontend/user_edit_profile.html:156
+msgid "Current password"
+msgstr "Mật khẩu hiện tại"
+
+#: templates/frontend/user_edit_profile.html:157
+msgid "Enter Current Password"
+msgstr "Nhập mật khẩu hiện tại"
+
+#: templates/frontend/user_edit_profile.html:158
+msgid ""
+"Enter your current password to change the E-mail address or Password. <a "
+"href=\"/user/password/reset/\">Request new password</a>."
+msgstr ""
+"Nhập mật khẩu hiện tại để thay đổi thông tin. <a href=\"/user/password/reset/"
+"\">Quên mật khẩu </a>."
 
 #: templates/frontend/user_edit_profile.html:162
 msgid "Cancel"
 msgstr "Hủy"
 
 #: templates/frontend/user_favorite.html:6
-#, fuzzy
 msgid "User favorite"
 msgstr "Mục yêu thích"
 
@@ -752,7 +792,7 @@ msgstr ""
 
 #: templates/frontend/user_unpublish.html:171
 msgid "Are you sure drop this item(s)?"
-msgstr ""
+msgstr "Bạn muốn xoá dữ liệu?"
 
 #: templates/frontend/ajax/others.html:19
 #: templates/frontend/ajax/others.html:21
@@ -823,12 +863,10 @@ msgid "Administration"
 msgstr "Quản trị"
 
 #: templates/frontend/block/left_block_user.html:38
-#, fuzzy
 msgid "Most viewed"
 msgstr "Xem nhiều nhất"
 
 #: templates/frontend/block/left_block_user.html:39
-#, fuzzy
 msgid "Most favourite"
 msgstr "Mục yêu thích"
 
@@ -918,7 +956,6 @@ msgstr "Thêm tác giả"
 
 #: templates/frontend/collection/create_step2.html:196
 #: templates/frontend/module/create_step2.html:188
-#, fuzzy
 msgid "Search author"
 msgstr "Nhập tên tác giả"
 
@@ -1007,19 +1044,18 @@ msgid "Publish"
 msgstr "Công bố"
 
 #: templates/frontend/module/create_mass_modules.html:20
-#, fuzzy
 msgid "Create mass modules"
 msgstr "Tạo module"
 
-#: templates/frontend/module/create_mass_modules.html:37
+#: templates/frontend/module/create_mass_modules.html:38
 msgid "Click here"
 msgstr ""
 
-#: templates/frontend/module/create_mass_modules.html:37
+#: templates/frontend/module/create_mass_modules.html:38
 msgid "for view result."
 msgstr ""
 
-#: templates/frontend/module/create_mass_modules.html:74
+#: templates/frontend/module/create_mass_modules.html:78
 #: templates/frontend/module/create_step3.html:252
 msgid "Import"
 msgstr "Nhập"
@@ -1062,12 +1098,10 @@ msgid "Reuse"
 msgstr "Tái sử dụng"
 
 #: templates/frontend/partials/material_actions.html:30
-#, fuzzy
 msgid "PDF Collection"
 msgstr "Giáo trình PDF"
 
 #: templates/frontend/partials/material_actions.html:32
-#, fuzzy
 msgid "PDF Module"
 msgstr "Tài liệu PDF"
 
@@ -1244,7 +1278,7 @@ msgstr ""
 
 #: templates/registration/registration_form.html:26
 msgid "Please correct the errors below:"
-msgstr ""
+msgstr "Hãy sửa lại các lỗi bên dưới:"
 
 #: templates/registration/registration_form.html:28
 msgid "Your username"
