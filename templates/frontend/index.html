@@ -105,7 +105,7 @@
 			{% for material in person_list %}
             <li>
                 <div class="browser-author-img left clear">
-                    <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}"><img src="{{STATIC_URL}}images/authors/{{ material.id }}.jpg" /></a>
+                    <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}"><img src="{% url 'get_avatar' material.id %}" /></a>
                 </div>
                 <div class="browser-author-details left clear">
                     <div class="icon-browser-author"></div>
