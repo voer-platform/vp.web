@@ -746,3 +746,7 @@ article.flatpage {
     background: url("../images/icon/btn-module.png") no-repeat scroll 10px 0 #C8293C;
     margin-top: 7px;
 }
+
+#collection-outline{
+    overflow: auto;
+}
