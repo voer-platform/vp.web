@@ -33,13 +33,15 @@
 
             <table class="table table-bordered table-condensed table-striped table-hover">
                 <tr class="success">
-                    <th width="300" class="center">Tên tác giả</th>
-                    <th width="80" class="center">{% trans 'username' %}</th>
+                    <th width="100" class="center">Ảnh đại diện</th>
+                    <th>Tên tác giả</th>
+                    <th width="120" class="center">{% trans 'username' %}</th>
                     <th width="50" class="center">ID</th>
                     <th width="50" class="center">{% trans 'Delete' %}</th>
                 </tr>
                 {% for author in authors %}
                 <tr>
+                    <td><img src="{% url 'get_avatar' author.id %}" alt="{{ author.name }}" title="{{ author.name }}" width="50" height="50"/></td>
                     <td>{{ author.name }}</td>
                     <td>{{ author.user_id }}</td>
                     <td>{{ author.id }}</td>

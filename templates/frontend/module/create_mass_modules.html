@@ -33,8 +33,10 @@
             {% endif %}
             <div id="queue"></div>
             <input id="file_upload" name="file_upload" type="file" multiple="true" />
-            <ul id="queue-result"></ul>
-            <div id="queue-notes" style="display: none;"><a href="{% url 'get_unpublish' %}">{% trans 'Click here' %}</a> {% trans 'for view result.' %}</li></div>
+            <div id="message-result" class="">
+                <ul id="queue-result"></ul>
+                <div id="queue-notes" style="display: none;"><a href="{% url 'get_unpublish' %}">{% trans 'Click here' %}</a> {% trans 'for view result.' %}</li></div>
+            </div>
             <script>
                 $(document).ready(function(){
                     $('#file_upload').uploadify({
@@ -55,8 +57,10 @@
                         'onUploadComplete' : function(file) {
                             if (file.uploaded){
                                 $('#queue-result').append('<li>' + file.name + ' finished processing.' + '</li>');
+                                $('#message-result').addClass('alert alert-success');
                             }else{
                                 $('#queue-result').append('<li>' + file.name + ' import unsuccessful!.' + '</li>');
+                                $('#message-result').addClass('alert alert-danger');
                             }
                         }
                     });
