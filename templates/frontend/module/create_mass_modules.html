@@ -19,13 +19,6 @@
         <span class="icon"></span>
         <span class="current">{% trans 'Create mass modules' %}</span>
     </div>
-    <div class="hfstep">
-        <ul>
-            <li class="active"><a id="hfstep-1"><div class="step">1</div> {% trans 'License' %}</a></li>
-            <li><a id="hfstep-2"><div class="step">2</div>{% trans 'Metadata' %}</a></li>
-            <li><a id="hfstep-3"><div class="step">3</div>Content</a></li>
-        </ul>
-    </div>
 </div>
 {% include "frontend/block/left_block_user.html" %}
 <div class="col-lg-1 right-row">
@@ -39,7 +32,9 @@
                 </div>
             {% endif %}
             <div id="queue"></div>
-            <input id="file_upload" name="file_upload" type="file" multiple="true">
+            <input id="file_upload" name="file_upload" type="file" multiple="true" />
+            <ul id="queue-result"></ul>
+            <div id="queue-notes" style="display: none;"><a href="{% url 'get_unpublish' %}">{% trans 'Click here' %}</a> {% trans 'for view result.' %}</li></div>
             <script>
                 $(document).ready(function(){
                     $('#file_upload').uploadify({
@@ -51,11 +46,32 @@
                         'fileTypeDesc' : 'Document Files',
                         'fileTypeExts' : '*.doc; *.docx',
                         'swf'      : '{{STATIC_URL}}uploadify.swf',
-                        'uploader' : '/user/create/mass-modules/import/'
+                        'uploader' : '/user/create/mass-modules/import/',
+                        'onQueueComplete': function(queueData){
+                            $('#btn-import').prop('disabled', false);
+                            $('#queue-notes').show();
+{#                            alert(queueData.uploadsSuccessful + ' files were successfully uploaded.');#}
+                        },
+                        'onUploadComplete' : function(file) {
+                            if (file.uploaded){
+                                $('#queue-result').append('<li>' + file.name + ' finished processing.' + '</li>');
+                            }else{
+                                $('#queue-result').append('<li>' + file.name + ' import unsuccessful!.' + '</li>');
+                            }
+                        }
+                    });
+
+                    $('#btn-import').click(function(){
+                        $('#btn-import').prop('disabled', true);
+                        $('#queue-notes').hide();
+                        $('#queue-result').empty();
+                        jQuery('#file_upload').uploadify('upload','*');
+                        return false;
                     });
                 });
+
             </script>
-            <button class="btn hfbtn-common hfbtn-active right" onclick="javascript:jQuery('#file_upload').uploadify('upload','*');return false;">{% trans 'Import' %}</button>
+            <button id="btn-import" class="btn hfbtn-common hfbtn-active right">{% trans 'Import' %}</button>
         </form>
     </div>
 </div>
