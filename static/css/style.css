@@ -771,9 +771,10 @@ article.flatpage {
 }
 .material-brief h5 a {
   color: #DF1E1E; 
-  //text-transform: uppercase;
-  font-weight: bold;
+  text-transform: uppercase;
+  font-weight: normal;
   font-family: verdana, tahoma, arial;
+  font-size: 11px;
 }
 .material-brief p {
   color: gray;
@@ -808,4 +809,31 @@ article.flatpage {
 .brief-published label {
   font-weight: normal;
   padding-right: 5px;
+}
+.hfbtn-create.mass-module {
+    background: url("../images/icon/btn-module.png") no-repeat scroll 10px 0 #C8293C;
+    margin-top: 7px;
+}
+#collection-outline{
+    overflow: auto;
+}
+.browser-author-img img {
+    height: 151px;
+    width: 200px;
+}
+#listAuthor .hfbtn-author {
+    position: static;
+}
+#listAuthor div.author-information {
+    top: 95%;
+    left: 30px;
+    width: 250px;
+    z-index: 10;
+}
+#listAuthor div.author-information .avatar.left {
+    margin-right: 5px;
+}
+#listAuthor div.author-information .right {
+    float: left;
+    width: 150px;
 }

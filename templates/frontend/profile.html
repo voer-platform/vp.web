@@ -32,7 +32,7 @@
                 <div class="hfuser-website">{% if person.affiliation_url %}<a href="{{ person.affiliation_url }}" target="_blank">{{ person.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if person.homepage %}<a href="{{ person.homepage }}" target="_blank">{{ person.homepage }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-national">{% trans 'National' %}: {% if person.national %}{{ person.national }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if person.biography %}{{ person.biography }}{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if person.biography %}{{ person.biography|safe }}{% else %}{% trans 'Not available' %}{% endif %}</div>
 
                 {% if request.user.is_superuser %}
                 <a class="hfbtn-common hfbtn-public right hfbtn-active" href="{% url 'delete_profile' person.id %}" onclick="return confirm('Bạn muốn xóa tác giả này?')">{% trans 'Delete person' %}</a>

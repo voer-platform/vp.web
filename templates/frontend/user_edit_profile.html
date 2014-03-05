@@ -4,6 +4,11 @@
 {% load thumbnail %}
 
 {% block titleSite %}{% trans "User profile" %}{% endblock %}
+{% block js %}
+    {{ form.media }}
+    <script type="text/javascript" src="{{ STATIC_URL }}mce_filebrowser/js/filebrowser_init.js"></script>
+
+{% endblock %}
 
 {% block content %}
 
@@ -27,7 +32,7 @@
                 <div class="hfuser-website">{% if author.affiliation_url %}<a href="{{ author.affiliation_url }}" target="_blank">{{ author.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if author.homepage %}<a href="{{ author.homepage }}" target="_blank">{{ author.homepage }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-national">{% trans 'National' %}: {% if author.national %}{{ author.national }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography }}{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography|safe }}{% else %}{% trans 'Not available' %}{% endif %}</div>
             </div>
         </div>
     </div>
@@ -63,14 +68,9 @@
         <form role="form" method="post" action="{% url 'edit_profile' %}" id="edit-user-profile-form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-                <label for="InputCurrentPassword">{% trans 'Current password' %} <span class="red">*</span></label>
-                <input type="password" class="form-control typetext" id="InputCurrentPassword" placeholder="{% trans 'Enter Current Password' %}" name="current_password">
-                <p class="help-block">Enter your current password to change the E-mail address or Password. <a href="">Request new password</a>.</p>
-            </div>
-            <div class="form-group">
                 <label for="InputEmailAddress">{% trans 'E-mail address' %} <span class="red">*</span></label>
                 <input type="text" class="form-control typetext" id="InputEmailAddress" placeholder="{% trans 'Enter Emai Address' %}" value="{% if  author.email %}{{ author.email }}{% endif %}" name="email">
-                <p class="help-block">A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail.</p>
+                <p class="help-block">{% trans 'A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail.' %}</p>
             </div>
             <div class="form-group">
                 <label for="InputPassword">{% trans 'Password' %}</label>
@@ -80,13 +80,13 @@
                 <label for="InputConfirmPassword">{% trans 'Confirm password' %}</label>
                 <input type="password" class="form-control typetext" id="InputConfirmPassword" placeholder="{% trans 'Enter Confirm Password' %}" name="confirm_password">
                 <p class="help-block">
-                    To make your password stronger:
-                    <br>* Make it at least 6 characters
-                    <br>* Add lowercase letters
-                    <br>* Add uppercase letters
-                    <br>* Add numbers
-                    <br>* Add punctuation
-                    <br>To change the current user password, enter the new password in both fields.
+                    {% trans 'To make your password stronger:' %}
+                    <br>* {% trans 'Make it at least 6 characters' %}
+                    <br>* {% trans 'Add lowercase letters' %}
+                    <br>* {% trans 'Add uppercase letters' %}
+                    <br>* {% trans 'Add numbers' %}
+                    <br>* {% trans 'Add punctuation' %}
+                    <br>{% trans 'To change the current user password, enter the new password in both fields.' %}
                 </p>
             </div>
             <!--
@@ -112,7 +112,7 @@
                 <div class="fakefile">
                     <input type="text" onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile">
                 </div>
-                <p class="help-block">Your virtual face or picture. Pictures larger than 1024x1024 pixels will be scaled down.</p>
+                <p class="help-block">{% trans 'Your virtual face or picture. Pictures larger than 1024x1024 pixels will be scaled down.' %}</p>
             </div>
 
             <div class="form-group">
@@ -120,7 +120,7 @@
                 <input type="text" class="form-control typetext" id="InputFullname" placeholder="Enter Full name" value="{% if author.fullname %}{{ author.fullname|safe }}{% endif %}" name="fullname">
             </div>
             <div class="form-group">
-                <label for="InputFirstname">First name</label>
+                <label for="InputFirstname">{% trans 'First name' %}</label>
                 <input type="text" class="form-control typetext" id="InputFirstname" placeholder="Enter First name" value="{% if author.first_name %}{{ author.first_name|safe }}{% endif %}" name="first_name">
             </div>
             <div class="form-group">
@@ -133,7 +133,7 @@
             </div>
             <div class="form-group">
                 <label for="InputHomepage">{% trans 'Homepage' %}</label>
-                <input type="text" class="form-control typetext" id="InputHomepage" placeholder="Enter Homepage" value="{% if author.homepage %}{{ author.homepage|safe }}{% endif %}" name="homepage">
+                {{ form.homepage }}
             </div>
             <div class="form-group">
                 <label for="InputAffiliation">{% trans 'Affiliation' %}</label>
@@ -141,15 +141,21 @@
             </div>
             <div class="form-group">
                 <label for="InputAffiliationURL">{% trans 'Affiliation URL' %}</label>
-                <input type="text" class="form-control typetext" id="InputAffiliationURL" placeholder="Enter Affiliation URL" value="{% if author.affiliation_url %}{{ author.affiliation_url|safe }}{% endif %}" name="affiliation_url">
+                {{ form.affiliation_url }}
             </div>
             <div class="form-group">
                 <label for="InputBiography">{% trans 'Biography' %}</label>
-                <textarea rows="4" class="form-control" name="biography">{% if author.biography %}{{ author.biography }}{% endif %}</textarea>
+                {{ form.biography }}
+                <!-- <textarea rows="4" class="form-control" name="biography">{% if author.biography %}{{ author.biography }}{% endif %}</textarea> -->
             </div>
             <div class="form-group">
                 <label for="InputNationality">{% trans 'Nationality' %}</label>
                 <input type="text" class="form-control typetext" id="InputNationality" placeholder="Enter Nationality" value="{% if author.national %}{{ author.national|safe }}{% endif %}" name="national">
+            </div>
+            <div class="form-group">
+                <label for="InputCurrentPassword">{% trans 'Current password' %} <span class="red">*</span></label>
+                <input type="password" class="form-control typetext" id="InputCurrentPassword" placeholder="{% trans 'Enter Current Password' %}" name="current_password">
+                <p class="help-block">{% trans 'Enter your current password to change the E-mail address or Password. <a href="/user/password/reset/">Request new password</a>.' %}</p>
             </div>
             <div class="form-group btn-common">
                 <a class="hfbtn-common hfbtn-next right hfbtn-active btn-edit-profile" href="">{% trans 'Save' %}</a>

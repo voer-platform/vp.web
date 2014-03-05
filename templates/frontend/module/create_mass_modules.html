@@ -1,0 +1,82 @@
+{% extends "base/base-content.html" %}
+
+{% load i18n %}
+
+{% block titleSite %}Create mass module{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.uploadify.min.js"></script>
+{% endblock %}
+{% block css %}
+    <link href="{{STATIC_URL}}css/uploadify.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}        
+<!-- filter top -->
+<div class="hfcreate">
+    <div class="breakcump left">
+        <span>{% trans 'Create Content' %}</span>
+        <span class="icon"></span>
+        <span class="current">{% trans 'Create mass modules' %}</span>
+    </div>
+</div>
+{% include "frontend/block/left_block_user.html" %}
+<div class="col-lg-1 right-row">
+    <div class="hfcreate-1">
+        <form>
+            {% if errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{{ errors|escape }}</li>
+                    </ul>
+                </div>
+            {% endif %}
+            <div id="queue"></div>
+            <input id="file_upload" name="file_upload" type="file" multiple="true" />
+            <div id="message-result" class="">
+                <ul id="queue-result"></ul>
+                <div id="queue-notes" style="display: none;"><a href="{% url 'get_unpublish' %}">{% trans 'Click here' %}</a> {% trans 'for view result.' %}</li></div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('#file_upload').uploadify({
+                        'auto'     : false,
+                        'removeCompleted' : false,
+                        'queueSizeLimit' : 10,
+                        'multi'    : true,
+                        'formData' : {'uid': {{ user.id }}},
+                        'fileTypeDesc' : 'Document Files',
+                        'fileTypeExts' : '*.doc; *.docx',
+                        'swf'      : '{{STATIC_URL}}uploadify.swf',
+                        'uploader' : '/user/create/mass-modules/import/',
+                        'onQueueComplete': function(queueData){
+                            $('#btn-import').prop('disabled', false);
+                            $('#queue-notes').show();
+{#                            alert(queueData.uploadsSuccessful + ' files were successfully uploaded.');#}
+                        },
+                        'onUploadComplete' : function(file) {
+                            if (file.uploaded){
+                                $('#queue-result').append('<li>' + file.name + ' finished processing.' + '</li>');
+                                $('#message-result').addClass('alert alert-success');
+                            }else{
+                                $('#queue-result').append('<li>' + file.name + ' import unsuccessful!.' + '</li>');
+                                $('#message-result').addClass('alert alert-danger');
+                            }
+                        }
+                    });
+
+                    $('#btn-import').click(function(){
+                        $('#btn-import').prop('disabled', true);
+                        $('#queue-notes').hide();
+                        $('#queue-result').empty();
+                        jQuery('#file_upload').uploadify('upload','*');
+                        return false;
+                    });
+                });
+
+            </script>
+            <button id="btn-import" class="btn hfbtn-common hfbtn-active right">{% trans 'Import' %}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

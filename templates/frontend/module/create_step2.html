@@ -41,7 +41,7 @@
             '<a class="hfbtn-author" href="#">{% verbatim %}{{fullname}}{% endverbatim %}',
             '<div class="author-information">',
             '<div class="avatar left">',
-            '<img src="images/avatar.jpg" width="70px" height="70px">',
+            '<img src="{% verbatim %}{{ url_avatar }}{% endverbatim %}" width="70px" height="70px">',
             '</div>',
             '<div class="right">',
             '<div class="user-name">{% verbatim %}{{fullname}}{% endverbatim %}</div>',
@@ -76,7 +76,7 @@
     </script>
 {% endblock %}
 
-{% block content %}        
+{% block content %}
 
             <!-- filter top -->
             <div class="hfcreate">
@@ -111,9 +111,9 @@
                     <ul class="nav nav-tabs">
                       <li class="active"><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
                     </ul>
-                    
+
                     <!-- Tab panes -->
-                    <div class="tab-content">                   
+                    <div class="tab-content">
                       <div class="tab-pane active" id="metadata">
                         <div class="content">
     <form role="form" method="post">
@@ -149,7 +149,7 @@
 							<a class="hfbtn-author" href="#" tabindex="-1">{{ author.fullname }}
 								<div class="author-information">
 									<div class="avatar left">
-										<img src="images/avatar.jpg" width="70px" height="70px">
+										<img src="{% url "get_avatar" author.id %}" width="70px" height="70px">
 									</div>
 									<div class="right">
 										<div class="user-name">{{ author.fullname }}</div>

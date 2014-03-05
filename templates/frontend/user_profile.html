@@ -28,7 +28,7 @@
                 <div class="hfuser-website">{% if author.affiliation_url %}<a href="{{ author.affiliation_url }}" target="_blank">{{ author.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if author.homepage %}<a href="{{ author.homepage }}" target="_blank">{{ author.homepage }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
                 <div class="hfuser-national">{% trans 'National' %}: {% if author.national %}{{ author.national }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography }}{% else %}{% trans 'Not available' %}{% endif %}</div>
+                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if author.biography %}{{ author.biography|safe }}{% else %}{% trans 'Not available' %}{% endif %}</div>
             </div>
         </div>
         <!--<div class="hfuser-other right">

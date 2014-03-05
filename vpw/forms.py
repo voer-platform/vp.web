@@ -59,8 +59,9 @@ class EditProfileForm(forms.Form):
     new_password = forms.CharField(max_length=255, required=False)
     confirm_password = forms.CharField(max_length=255, required=False)
     fullname = forms.CharField(max_length=255)
-    homepage = forms.URLField(max_length=255, required=False)
-    affiliation_url = forms.URLField(max_length=255, required=False)
+    homepage = forms.URLField(max_length=255, required=False, widget=forms.TextInput(attrs={'class': 'form-control typetext', 'id': 'InputHomepage', 'placeholder': 'Enter homepage'}))
+    affiliation_url = forms.URLField(max_length=255, required=False, widget=forms.TextInput(attrs={'class': 'form-control typetext', 'id': 'InputAffiliationURL', 'placeholder': 'Enter affiliaton URL'}))
+    biography = forms.CharField(widget=TinyMCE(attrs={'rows': 7}), required=False)
 
     def clean(self):
         cleaned_data = self.cleaned_data # individual field's clean methods have already been called
