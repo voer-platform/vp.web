@@ -1,6 +1,9 @@
 {% extends "base/base-content.html" %}
 {% load i18n %}
 {% load vpw_filters %}
+{% load thumbnail %}
+{% load staticfiles %}
+
 {% block titleSite %}Browse{% endblock %}
 
 {% block js %}
@@ -83,51 +86,11 @@
         </script>
 
         <div class="hfitems active">
-            <div id="materials">
-                <script>
-                $(document).ready(function(){
-                    $('.hfbtn-save').click(function(){
-                        //var $iditem = $(this).attr('metadata');
-                        //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
-                        var btnSave = $(this);
-                        var mid = $(this).attr('mid');
-                        var version = $(this).attr('version');
-                        var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
-
-                        $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
-                            if (data.status) {
-                                btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
-                            }
-                        });
-                    });
-                    $('.collection-save-hover').hover(
-                        function() {
-                        }, function() {
-                          var $iditem = $(this).attr('metadata').replace('col-hover-', '');
-                          var $selectItem = $('div[metadata=iditem-'+$iditem+']');
-
-                          /*if ($selectItem.hasClass('hfvisible')) {
-                            $selectItem.toggleClass('hfvisible');
-                          }*/
-                        }
-                    );
-                    $('.hfbtn-saveto-type').click(function(){
-                        var $iditemCreate = $(this).attr('metadata');
-
-                        $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
-                        //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
-                    });
-                });
-                </script>
-                {% if materials.results %}
-                {% for material in materials.results %}
-                {% if material.material_type == 1 %}
-                    {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
-                    {% trans "Module" as type_name %}
-                {% else %}
-                    {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
-                    {% trans "Collection" as type_name %}
-                {% endif %}
+            <div id="materials" class="material-list">
+                
+                {% include 'frontend/partials/browse-list.html' %}
+                
+                {% comment %}
                 <div class="hfitem">
                    <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
                         {% if user.is_authenticated %}
@@ -191,11 +154,8 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-                {% else %}
-                <p class="no-data">{% trans 'No data.' %}</p>
-                {% endif %}
-                {% include "base/pager.html" %}
+                {% endcomment %}
+
             </div>
         </div>
     </div>

@@ -1,0 +1,106 @@
+{% load i18n %}
+{% load vpw_filters %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+<script>
+$(document).ready(function(){
+    $('.hfbtn-save').click(function(){
+        //var $iditem = $(this).attr('metadata');
+        //$('div[metadata='+$iditem+']').toggleClass('hfvisible');
+        var btnSave = $(this);
+        var mid = $(this).attr('mid');
+        var version = $(this).attr('version');
+        var csrfmiddlewaretoken = Voer.Helper.getCookie('csrftoken');
+
+        $.post('/ajax/add_favorite', {mid: mid, version: version, csrfmiddlewaretoken: csrfmiddlewaretoken}, function(data){
+            if (data.status) {
+                btnSave.parents('.hfitem').find('.hflike').html(data.favorite_count);
+            }
+        });
+    });
+    $('.collection-save-hover').hover(
+        function() {
+        }, function() {
+            var $iditem = $(this).attr('metadata').replace('col-hover-', '');
+            var $selectItem = $('div[metadata=iditem-'+$iditem+']');
+
+            /*if ($selectItem.hasClass('hfvisible')) {
+            $selectItem.toggleClass('hfvisible');
+            }*/
+        }
+    );
+    $('.hfbtn-saveto-type').click(function(){
+        var $iditemCreate = $(this).attr('metadata');
+
+        $('div[metadata='+$iditemCreate+']').addClass('hfvisible');
+        //$('div[metadata='+$iditemCreate+']').hasClass('collection-saveto-type').toggleClass('hfvisible');
+    });
+});
+</script>
+
+{% if materials.results %}
+
+    {% for material in materials.results %}
+    {% if material.material_type == 1 %}
+        {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
+        {% trans "Module" as type_name %}
+    {% else %}
+        {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
+        {% trans "Collection" as type_name %}
+    {% endif %}
+
+    <div class="material-list-entry clearfix">
+        <div class="material-cover left">
+          <a title="{{ type_name }}: {{ material.title }}" alt="{{ type_name }}: {{ material.title }}" href="{{ material_url }}">
+            {% if material.image %}
+                {% thumbnail material.image "50x50" crop="center" as material_image %}
+                    <img src="{{ image.url }}">
+                {% endthumbnail %} 
+            {% elif material.categories.0.0 %}
+                {% static 'images/cat' as catimg_prefix %} 
+                {% with 'http://'|add:request.get_host|add:catimg_prefix|add:material.categories.0.0|add:".jpg" as catimg_url %}
+                    {% thumbnail catimg_url "50x50" crop="center" as mimage %}
+                        <img src="{{ mimage.url }}">
+                    {% endthumbnail %}
+                {% endwith %}
+            {% else %}
+                {% static 'images/' as catimg_prefix %} 
+                {% with 'http://'|add:request.get_host|add:catimg_prefix|add:"cat_other.jpg" as catimg_url %}
+                    {% thumbnail catimg_url "50x50" crop="center" as mimage %}
+                        <img src="{{ mimage.url }}">
+                    {% endthumbnail %}
+                {% endwith %}
+            {% endif %}
+        </div>
+        <div class="material-tiny-icon">
+            <img src="{% if material.material_type == 2 %}{% static 'images/icon-book-24.png' %}{% else %}{% static 'images/icon-puzzle-24.png' %}{% endif %}">
+        </div>
+        <div class="material-brief left">
+            <h5 class="{% if material.material_type == 2 %}collection-title{% else %}module-title{% endif %}">
+                <a title="{{ type_name }}: {{ material.title }}" alt="{{ type_name }}: {{ material.title }}" href="{{ material_url }}"> {{ material.title }} </a>
+            </h5>
+            <p>{{ material.description|truncatewords:28 }}</p>
+            <div class="brief-published"> 
+                {% if material.categories.0.1 %}
+                <a href="{% url 'browse' %}?categories={{ material.categories.0.0 }}">
+                    {% trans material.categories.0.1 %}
+                </a>
+                {% endif %}
+
+                {% if 'author' in material %}
+                <a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a>
+                {% endif %}
+
+                {% if material.modified %}
+                     {{ material.modified|date:"c" }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+{% else %}
+<p class="no-data">{% trans 'No data.' %}</p>
+{% endif %}
+{% include "base/pager.html" %}
