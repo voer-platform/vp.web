@@ -1067,9 +1067,9 @@ def ajax_browse(request):
 
 def get_attachment(request, fid):
     attachment_info = voer_get_attachment_info(fid)
-    target_url = settings.VPR_URL + '/mfiles/' + fid + '/get/'
-    content = urllib.urlopen(target_url).read()
-    response = HttpResponse(content, mimetype=attachment_info['mime_type'])
+
+    r = vpr_get_content_file(fid)
+    response = HttpResponse(r.content, content_type=r.headers['content-type'])
     response['Content-Disposition'] = 'attachment; filename=' + attachment_info['name']
 
     return response
