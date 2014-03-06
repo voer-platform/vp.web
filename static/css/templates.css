@@ -454,7 +454,7 @@
 .logo-user-right-top{
 	width: 31px;
 	height: 31px;
-	background: url('../images/module_view/avatar-user.jpg') no-repeat;
+	background: url('../images/module_view/avatar-user.png') no-repeat;
 	-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;
 	margin: -5px 5px 0 0;
 }

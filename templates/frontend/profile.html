@@ -28,11 +28,25 @@
                 {% endwith %}
                 </div>
                 <div class="hfuser-name">{% if person.fullname %}{% if person.title %}{{ person.title }} {% endif %}{{ person.fullname }} {% else %} {{ person.user_id }} {% endif %}</div>
-                <div class="hfuser-address">{% if person.affiliation %}{{ person.affiliation }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-website">{% if person.affiliation_url %}<a href="{{ person.affiliation_url }}" target="_blank">{{ person.affiliation_url }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-homepage">{% trans 'Homepage' %}: {% if person.homepage %}<a href="{{ person.homepage }}" target="_blank">{{ person.homepage }}</a>{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-national">{% trans 'National' %}: {% if person.national %}{{ person.national }}{% else %}{% trans 'Not available' %}{% endif %}</div>
-                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {% if person.biography %}{{ person.biography|safe }}{% else %}{% trans 'Not available' %}{% endif %}</div>
+                {% if person.affiliation %}
+                <div class="hfuser-address">{{ person.affiliation }}</div>
+                {% endif %}
+
+                {% if person.affiliation_url %}
+                <div class="hfuser-website"><a href="{{ person.affiliation_url }}" target="_blank">{{ person.affiliation_url }}</a></div>
+                {% endif %}
+
+                {% if person.homepage %}
+                <div class="hfuser-homepage">{% trans 'Homepage' %}: <a href="{{ person.homepage }}" target="_blank">{{ person.homepage }}</a></div>
+                {% endif %}
+
+                {% if person.national %}
+                <div class="hfuser-national">{% trans 'National' %}: {{ person.national }}</div>
+                {% endif %}
+
+                {% if person.biography %}
+                <div class="hfuser-biography text-justify">{% trans 'Biography' %}: {{ person.biography|safe }}</div>
+                {% endif %}
 
                 {% if request.user.is_superuser %}
                 <a class="hfbtn-common hfbtn-public right hfbtn-active" href="{% url 'delete_profile' person.id %}" onclick="return confirm('Bạn muốn xóa tác giả này?')">{% trans 'Delete person' %}</a>
@@ -160,7 +174,7 @@
         });
         </script>
         <div class="hfitems">
-            <div id="materials" class="ajax-ev">
+            <div id="materials">
                 <script>
                 $(document).ready(function(){
                     $('.hfbtn-save').click(function(){
