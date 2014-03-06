@@ -837,3 +837,15 @@ article.flatpage {
     float: left;
     width: 150px;
 }
+
+@media screen and (max-width: 420px) {
+    .browser-author-img img{
+        width: 177px;
+        height: 125px;
+    }
+
+    ul.list-author-mainpage li:nth-child(5){
+        display: none;
+    }
+
+}
