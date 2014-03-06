@@ -126,9 +126,15 @@ def home(request):
     person_array = vpr_get_persons()
     module_array = vpr_browse(types=MODULE_TYPE)
     collection_array = vpr_browse(types=COLLECTION_TYPE)
-    material_statistic['module_count'] = module_array['count']
-    material_statistic['collection_count'] = collection_array['count']
-    material_statistic['person_count'] = person_array['count']
+
+    if request.LANGUAGE_CODE == 'vi':
+        delimiter = '.'
+    else:
+        delimiter = ','
+
+    material_statistic['module_count'] = "{:,}".format(module_array['count']).replace(",", delimiter)
+    material_statistic['collection_count'] = "{:,}".format(collection_array['count']).replace(",", delimiter)
+    material_statistic['person_count'] = "{:,}".format(person_array['count']).replace(",", delimiter)
 
     return render(request, "frontend/index.html",
                   {"materials_list": materials_list, "person_list": person_list, 'material_statistic': material_statistic, "is_home": True})

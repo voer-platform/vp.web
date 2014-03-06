@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-04 17:15+0000\n"
+"POT-Creation-Date: 2014-03-06 17:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,9 @@ msgstr ""
 
 #: templates/base/footer.html:19
 msgid ""
-"Powered by <a href=\"http://www.hanoispring.com\">HanoiSpring</a>. Except "
+"The Vietnam Open Educational Resources (VOER) is supported by <a href="
+"\"http://www.vnfoundation.org\">The Vietnam Foundation</a> and powered by <a "
+"href=\"http://www.hanoispring.com\">Hanoi Spring Platform</a>. <br>Except "
 "where otherwise noted, content created on this site is licensed under a "
 "Creative Commons Attribution 4.0 License."
 msgstr ""
@@ -48,7 +50,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: templates/base/header.html:21 templates/frontend/profile.html:96
+#: templates/base/header.html:21 templates/frontend/profile.html:110
 msgid "Browse All"
 msgstr ""
 
@@ -191,7 +193,7 @@ msgstr ""
 msgid "Set license content for collection creation."
 msgstr ""
 
-#: templates/frontend/browse.html:49 templates/frontend/profile.html:127
+#: templates/frontend/browse.html:52 templates/frontend/profile.html:141
 #: templates/frontend/user_edit_profile.html:131
 #: templates/frontend/user_favorite.html:20
 #: templates/frontend/user_profile.html:91
@@ -203,102 +205,55 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: templates/frontend/browse.html:50 templates/frontend/profile.html:128
+#: templates/frontend/browse.html:53 templates/frontend/profile.html:142
 #: templates/frontend/user_profile.html:92
 #: templates/frontend/user_unpublish.html:22
 msgid "Relevance"
 msgstr ""
 
-#: templates/frontend/browse.html:51 templates/frontend/profile.html:129
+#: templates/frontend/browse.html:54 templates/frontend/profile.html:143
 #: templates/frontend/user_profile.html:93
 #: templates/frontend/user_unpublish.html:23
 msgid "Rating"
 msgstr ""
 
-#: templates/frontend/browse.html:52 templates/frontend/profile.html:130
+#: templates/frontend/browse.html:55 templates/frontend/profile.html:144
 #: templates/frontend/user_favorite.html:21
 #: templates/frontend/user_profile.html:94
 #: templates/frontend/user_unpublish.html:24
 msgid "Date"
 msgstr ""
 
-#: templates/frontend/browse.html:56 templates/frontend/profile.html:134
-#: templates/frontend/user_favorite.html:25
-#: templates/frontend/user_profile.html:98
-#: templates/frontend/user_unpublish.html:35
-msgid "Gridview"
-msgstr ""
-
-#: templates/frontend/browse.html:57 templates/frontend/profile.html:135
-#: templates/frontend/user_favorite.html:26
-#: templates/frontend/user_profile.html:99
-#: templates/frontend/user_unpublish.html:36
-msgid "Listview"
-msgstr ""
-
-#: templates/frontend/browse.html:126 templates/frontend/index.html:64
-#: templates/frontend/module_detail.html:13
-msgid "Module"
-msgstr ""
-
-#: templates/frontend/browse.html:129 templates/frontend/browse.html.py:304
-#: templates/frontend/collection_detail.html:48
-#: templates/frontend/index.html:67 templates/frontend/profile.html:360
-#: templates/frontend/search_result.html:134
-msgid "Collection"
-msgstr ""
-
-#: templates/frontend/browse.html:135 templates/frontend/profile.html:210
-#: templates/frontend/ajax/browse.html:49
-msgid "Add to my favourite"
-msgstr ""
-
-#: templates/frontend/browse.html:138 templates/frontend/profile.html:213
-#: templates/frontend/ajax/browse.html:52
-#: templates/frontend/block/left_block_user.html:17
-msgid "My Favorites"
-msgstr ""
-
-#: templates/frontend/browse.html:143 templates/frontend/profile.html:218
-#: templates/frontend/ajax/browse.html:57
-msgid "Create new"
-msgstr ""
-
-#: templates/frontend/browse.html:172 templates/frontend/profile.html:245
-#: templates/frontend/ajax/browse.html:86
-msgid "Other"
-msgstr ""
-
-#: templates/frontend/browse.html:196 templates/frontend/profile.html:269
-#: templates/frontend/user_unpublish.html:134
-#: templates/frontend/ajax/browse.html:110
-#: templates/frontend/ajax/others.html:32
-#: templates/frontend/ajax/similars.html:33
-msgid "No data."
-msgstr ""
-
-#: templates/frontend/browse.html:205 templates/frontend/profile.html:279
+#: templates/frontend/browse.html:169 templates/frontend/profile.html:293
 #: templates/frontend/search_result.html:66
 msgid "Filter By"
 msgstr ""
 
-#: templates/frontend/browse.html:280 templates/frontend/profile.html:334
+#: templates/frontend/browse.html:244 templates/frontend/profile.html:348
 #: templates/frontend/search_result.html:110
 msgid "All types"
 msgstr ""
 
-#: templates/frontend/browse.html:292 templates/frontend/profile.html:347
+#: templates/frontend/browse.html:256 templates/frontend/profile.html:361
 #: templates/frontend/search_result.html:122
 #: templates/frontend/partials/material_author.html:29
 msgid "Modules"
 msgstr ""
 
-#: templates/frontend/browse.html:319 templates/frontend/profile.html:376
+#: templates/frontend/browse.html:268
+#: templates/frontend/collection_detail.html:48
+#: templates/frontend/index.html:67 templates/frontend/profile.html:374
+#: templates/frontend/search_result.html:134
+#: templates/frontend/partials/browse-list.html:50
+msgid "Collection"
+msgstr ""
+
+#: templates/frontend/browse.html:283 templates/frontend/profile.html:390
 #: templates/frontend/search_result.html:150
 msgid "All languages"
 msgstr ""
 
-#: templates/frontend/browse.html:331 templates/frontend/profile.html:389
+#: templates/frontend/browse.html:295 templates/frontend/profile.html:403
 #: templates/frontend/search_result.html:162
 #: templates/frontend/collection/create_step2.html:246
 #: templates/frontend/collection/create_step3.html:228
@@ -307,7 +262,7 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: templates/frontend/browse.html:343 templates/frontend/profile.html:402
+#: templates/frontend/browse.html:307 templates/frontend/profile.html:416
 #: templates/frontend/search_result.html:174
 #: templates/frontend/collection/create_step2.html:247
 #: templates/frontend/collection/create_step3.html:230
@@ -316,7 +271,7 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: templates/frontend/browse.html:358 templates/frontend/profile.html:418
+#: templates/frontend/browse.html:322 templates/frontend/profile.html:432
 #: templates/frontend/search_result.html:191
 msgid "All categories"
 msgstr ""
@@ -361,6 +316,11 @@ msgid ""
 "%(person_count)s authors"
 msgstr ""
 
+#: templates/frontend/index.html:64 templates/frontend/module_detail.html:13
+#: templates/frontend/partials/browse-list.html:47
+msgid "Module"
+msgstr ""
+
 #: templates/frontend/index.html:102
 msgid "Browser All"
 msgstr ""
@@ -376,9 +336,6 @@ msgstr ""
 #: templates/frontend/material_stats.html:29
 #: templates/frontend/material_stats.html:30
 #: templates/frontend/material_stats.html:31
-#: templates/frontend/profile.html:31 templates/frontend/profile.html.py:32
-#: templates/frontend/profile.html:33 templates/frontend/profile.html.py:34
-#: templates/frontend/profile.html:35
 #: templates/frontend/user_edit_profile.html:31
 #: templates/frontend/user_edit_profile.html:32
 #: templates/frontend/user_edit_profile.html:33
@@ -393,7 +350,7 @@ msgid "Not available"
 msgstr ""
 
 #: templates/frontend/material_stats.html:29
-#: templates/frontend/profile.html:33
+#: templates/frontend/profile.html:40
 #: templates/frontend/user_edit_profile.html:33
 #: templates/frontend/user_edit_profile.html:135
 #: templates/frontend/user_profile.html:29
@@ -401,14 +358,14 @@ msgid "Homepage"
 msgstr ""
 
 #: templates/frontend/material_stats.html:30
-#: templates/frontend/profile.html:34
+#: templates/frontend/profile.html:44
 #: templates/frontend/user_edit_profile.html:34
 #: templates/frontend/user_profile.html:30
 msgid "National"
 msgstr ""
 
 #: templates/frontend/material_stats.html:31
-#: templates/frontend/profile.html:35
+#: templates/frontend/profile.html:48
 #: templates/frontend/user_edit_profile.html:35
 #: templates/frontend/user_edit_profile.html:147
 #: templates/frontend/user_profile.html:31
@@ -471,11 +428,11 @@ msgstr ""
 msgid "Uploaded On:"
 msgstr ""
 
-#: templates/frontend/profile.html:38
+#: templates/frontend/profile.html:52
 msgid "Delete person"
 msgstr ""
 
-#: templates/frontend/profile.html:45 templates/frontend/search_result.html:95
+#: templates/frontend/profile.html:59 templates/frontend/search_result.html:95
 #: templates/frontend/user_profile.html:37
 #: templates/frontend/collection/create_step2.html:138
 #: templates/frontend/collection/create_step2.html:145
@@ -491,7 +448,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: templates/frontend/profile.html:49 templates/frontend/user_profile.html:41
+#: templates/frontend/profile.html:63 templates/frontend/user_profile.html:41
 #: templates/frontend/collection/create_step2.html:150
 #: templates/frontend/collection/create_step2.html:208
 #: templates/frontend/collection/create_step3.html:132
@@ -502,7 +459,7 @@ msgstr ""
 msgid "Contributor"
 msgstr ""
 
-#: templates/frontend/profile.html:53 templates/frontend/user_profile.html:45
+#: templates/frontend/profile.html:67 templates/frontend/user_profile.html:45
 #: templates/frontend/collection/create_step2.html:146
 #: templates/frontend/collection/create_step2.html:204
 #: templates/frontend/collection/create_step3.html:128
@@ -513,7 +470,7 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: templates/frontend/profile.html:57 templates/frontend/user_profile.html:49
+#: templates/frontend/profile.html:71 templates/frontend/user_profile.html:49
 #: templates/frontend/collection/create_step2.html:147
 #: templates/frontend/collection/create_step2.html:205
 #: templates/frontend/collection/create_step3.html:129
@@ -524,7 +481,7 @@ msgstr ""
 msgid "Licensor"
 msgstr ""
 
-#: templates/frontend/profile.html:61 templates/frontend/user_profile.html:53
+#: templates/frontend/profile.html:75 templates/frontend/user_profile.html:53
 #: templates/frontend/collection/create_step2.html:148
 #: templates/frontend/collection/create_step2.html:206
 #: templates/frontend/collection/create_step3.html:130
@@ -535,7 +492,7 @@ msgstr ""
 msgid "Maintainer"
 msgstr ""
 
-#: templates/frontend/profile.html:65 templates/frontend/user_profile.html:57
+#: templates/frontend/profile.html:79 templates/frontend/user_profile.html:57
 #: templates/frontend/collection/create_step2.html:149
 #: templates/frontend/collection/create_step2.html:207
 #: templates/frontend/collection/create_step3.html:131
@@ -546,84 +503,123 @@ msgstr ""
 msgid "Translator"
 msgstr ""
 
-#: templates/frontend/profile.html:98
+#: templates/frontend/profile.html:112
 msgid "Popular"
 msgstr ""
 
-#: templates/frontend/profile.html:99
+#: templates/frontend/profile.html:113
 msgid "All Creative Fields"
 msgstr ""
 
-#: templates/frontend/profile.html:100
+#: templates/frontend/profile.html:114
 msgid "Architecture"
 msgstr ""
 
-#: templates/frontend/profile.html:101
+#: templates/frontend/profile.html:115
 msgid "Art Direction"
 msgstr ""
 
-#: templates/frontend/profile.html:102
+#: templates/frontend/profile.html:116
 msgid "Branding"
 msgstr ""
 
-#: templates/frontend/profile.html:103
+#: templates/frontend/profile.html:117
 msgid "Fashion"
 msgstr ""
 
-#: templates/frontend/profile.html:104
+#: templates/frontend/profile.html:118
 msgid "Graphic Design"
 msgstr ""
 
-#: templates/frontend/profile.html:105
+#: templates/frontend/profile.html:119
 msgid "Illustration"
 msgstr ""
 
-#: templates/frontend/profile.html:106
+#: templates/frontend/profile.html:120
 msgid "Industrial Design"
 msgstr ""
 
-#: templates/frontend/profile.html:107
+#: templates/frontend/profile.html:121
 msgid "Interaction Design"
 msgstr ""
 
-#: templates/frontend/profile.html:108
+#: templates/frontend/profile.html:122
 msgid "Motion Graphics"
 msgstr ""
 
-#: templates/frontend/profile.html:109
+#: templates/frontend/profile.html:123
 msgid "Photography"
 msgstr ""
 
-#: templates/frontend/profile.html:110
+#: templates/frontend/profile.html:124
 msgid "UI/UX"
 msgstr ""
 
-#: templates/frontend/profile.html:111
+#: templates/frontend/profile.html:125
 msgid "Web Design"
 msgstr ""
 
-#: templates/frontend/profile.html:115 templates/frontend/profile.html:117
+#: templates/frontend/profile.html:129 templates/frontend/profile.html:131
 msgid "Featured"
 msgstr ""
 
-#: templates/frontend/profile.html:118
+#: templates/frontend/profile.html:132
 msgid "Most Liked"
 msgstr ""
 
-#: templates/frontend/profile.html:119
+#: templates/frontend/profile.html:133
 msgid "Most Viewed"
 msgstr ""
 
-#: templates/frontend/profile.html:120
+#: templates/frontend/profile.html:134
 msgid "Most Discussed"
 msgstr ""
 
-#: templates/frontend/profile.html:121
+#: templates/frontend/profile.html:135
 msgid "Most Recent"
 msgstr ""
 
-#: templates/frontend/profile.html:125
+#: templates/frontend/profile.html:139
 msgid "Sort by"
+msgstr ""
+
+#: templates/frontend/profile.html:148
+#: templates/frontend/user_favorite.html:25
+#: templates/frontend/user_profile.html:98
+#: templates/frontend/user_unpublish.html:35
+msgid "Gridview"
+msgstr ""
+
+#: templates/frontend/profile.html:149
+#: templates/frontend/user_favorite.html:26
+#: templates/frontend/user_profile.html:99
+#: templates/frontend/user_unpublish.html:36
+msgid "Listview"
+msgstr ""
+
+#: templates/frontend/profile.html:224
+msgid "Add to my favourite"
+msgstr ""
+
+#: templates/frontend/profile.html:227
+#: templates/frontend/block/left_block_user.html:17
+msgid "My Favorites"
+msgstr ""
+
+#: templates/frontend/profile.html:232
+msgid "Create new"
+msgstr ""
+
+#: templates/frontend/profile.html:259
+msgid "Other"
+msgstr ""
+
+#: templates/frontend/profile.html:283
+#: templates/frontend/user_unpublish.html:134
+#: templates/frontend/ajax/others.html:32
+#: templates/frontend/ajax/similars.html:33
+#: templates/frontend/partials/browse-list.html:104
+msgid "No data."
 msgstr ""
 
 #: templates/frontend/search_result.html:6

@@ -770,7 +770,7 @@ article.flatpage {
   //wfont-weight: bold;
 }
 .material-brief h5 a {
-  color: #DF1E1E; 
+  color: #DF1E1E;
   text-transform: uppercase;
   font-weight: normal;
   font-family: verdana, tahoma, arial;
@@ -837,7 +837,12 @@ article.flatpage {
     float: left;
     width: 150px;
 }
-
+.logo-footer {
+    height: 108px;
+}
+.footer {
+    background-color: #F4F4F4;
+}
 @media screen and (max-width: 420px) {
     .browser-author-img img{
         width: 177px;
