@@ -23,7 +23,12 @@
         </div>
         -->
         {% if form.errors %}
-        <p class="errors">{% trans 'Please correct the errors below:' %} {{ form.non_field_errors }}</p>
+        <div class="errors">
+        <b>{% trans 'Please correct the errors below:' %}</b>
+        {% for field, error in form.errors.items %}
+            {{ error }}
+        {% endfor %}
+        </div>
         {% endif %}
         <input class="form-control" id="id_username" type="text" name="username" maxlength="30" placeholder="{% trans 'Your username' %}">
         <input class="form-control" id="id_email" type="email" name="email" placeholder="{% trans 'Your email Address' %}">

@@ -854,3 +854,19 @@ article.flatpage {
     }
 
 }
+
+.content-signup-form ul.errorlist{
+    margin-left: 10px;
+
+}
+.content-signup-form ul.errorlist li{
+    list-style: circle inside;
+}
+
+.content-signup-form div.errors{
+    margin-bottom: 15px;
+    background-color: #F2DEDE;
+    border-color: #EBCCD1;
+    color: #A94442;
+    padding: 10px;
+}
