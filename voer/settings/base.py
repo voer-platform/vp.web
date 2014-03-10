@@ -148,13 +148,13 @@ LOGGING = {
 
 ## REGISTER
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
-EMAIL_HOST='email-smtp.us-east-1.amazonaws.com'
+EMAIL_HOST=''
 EMAIL_PORT=25
-EMAIL_HOST_USER='AKIAJYYWT53Z4KQZMHUA'
-EMAIL_HOST_PASSWORD='AhM4gp8514eJB7Fv2kg4Z2Idj4kPEVXtHotO664Ggzc4'
+EMAIL_HOST_USER=''
+EMAIL_HOST_PASSWORD=''
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'info@voer.edu.vn'
-VOER_FACEBOOK_APP_ID = 271167089707244
+DEFAULT_FROM_EMAIL = ''
+VOER_FACEBOOK_APP_ID = ''
 ## END REGISTER
 #
 # Additional locations of static files
