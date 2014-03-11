@@ -870,3 +870,8 @@ article.flatpage {
     color: #A94442;
     padding: 10px;
 }
+.attach-module-content h3 {
+    color: #6171A0;
+    font-size: 18px;
+    text-transform: uppercase;
+}
