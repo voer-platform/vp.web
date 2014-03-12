@@ -853,6 +853,18 @@ article.flatpage {
         display: none;
     }
 
+    .hfuser-information{
+        width: auto;
+    }
+
+    .hfuser-avatar{
+        border-right: none;
+    }
+
+    .hfuser-address, .hfuser-website{
+        margin-left: 0px;
+    }
+
 }
 
 .content-signup-form ul.errorlist{
@@ -869,4 +881,8 @@ article.flatpage {
     border-color: #EBCCD1;
     color: #A94442;
     padding: 10px;
+}
+
+.list-module-name.padding-content-10.left .hffolders{
+    height: auto;
 }
