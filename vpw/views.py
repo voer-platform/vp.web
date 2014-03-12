@@ -151,12 +151,23 @@ def aboutus(request):
 def _get_image(list_images):
     def replace_image(match_object):
         try:
-            result = "<img src='" + list_images[match_object.group(1)] + "'"
+            result = "<img src='" + reverse('get_content_file', kwargs={'fid': list_images[match_object.group(1)]}) + "'"
         except KeyError:
             result = "<img src='" + match_object.group(1) + "'"
         return result
 
     return replace_image
+
+
+def _replace_attachment_link(list_images):
+    def replace_attachment_link(match_object):
+        try:
+            result = "href='" + reverse('get_attachment', kwargs={'fid': list_images[match_object.group(1)]}) + "'"
+        except KeyError:
+            result = "href='" + match_object.group(1) + "'"
+        return result
+
+    return replace_attachment_link
 
 
 def module_detail_old(request, mid, version):
@@ -177,6 +188,7 @@ def module_detail(request, title, mid, version):
     list_images = vpr_get_material_images(mid)
     # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
     content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+    content = re.sub(r'href="([^"]*)"', _replace_attachment_link(list_images), content)
     material['text'] = content
 
     author = []
@@ -216,8 +228,9 @@ def module_detail(request, title, mid, version):
             file_tmp['attachment_id'] = file_attachment_id
             file_data.append(file_tmp)
 
+    voer_facebook_id = settings.VOER_FACEBOOK_APP_ID
     response = render(request, "frontend/module_detail.html",
-                      {"material": material, "author": author, "category": category, 'file_data': file_data})
+                      {"material": material, "author": author, "category": category, 'file_data': file_data, 'voer_fb_id': voer_facebook_id})
 
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
@@ -309,8 +322,10 @@ def collection_detail(request, title, cid, mid):
 
     category = vpr_get_category(collection['categories'])
 
+    voer_facebook_id = settings.VOER_FACEBOOK_APP_ID
+
     response = render(request, "frontend/collection_detail.html", {"collection": collection, "material": material, "author": author,
-                       "category": category, "outline": strOutline, 'file_data': file_data})
+                       "category": category, "outline": strOutline, 'file_data': file_data, 'voer_fb_id': voer_facebook_id})
 
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
@@ -822,7 +837,6 @@ def browse(request):
 def vpw_authenticate(request):
     username = request.POST['username']
     password = request.POST['password']
-    print username + "|" + password
     user = authenticate(username=username, password=password)
 
     response_data = {}

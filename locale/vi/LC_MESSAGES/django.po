@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-06 17:56+0000\n"
-"PO-Revision-Date: 2014-03-07 09:18+0700\n"
+"POT-Creation-Date: 2014-03-11 13:56+0000\n"
+"PO-Revision-Date: 2014-03-11 20:57+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.6.4\n"
 
 #: templates/404.html:10
 msgid ""
@@ -78,7 +78,7 @@ msgid "Logout"
 msgstr "Đăng xuất"
 
 #: templates/base/header.html:95
-#: templates/registration/registration_form.html:47
+#: templates/registration/registration_form.html:52
 msgid "Register"
 msgstr "Đăng ký"
 
@@ -292,7 +292,7 @@ msgid "Edit"
 msgstr "Chỉnh sửa"
 
 #: templates/frontend/collection_detail.html:108
-#: templates/frontend/module_detail.html:82
+#: templates/frontend/module_detail.html:99
 msgid "Comment"
 msgstr "Góp ý"
 
@@ -301,8 +301,7 @@ msgid "View my profile"
 msgstr "Xem hồ sơ"
 
 #: templates/frontend/collection_detail.html:209
-#: templates/frontend/module_detail.html:96
-#, fuzzy
+#: templates/frontend/module_detail.html:30
 msgid "Attachments"
 msgstr "Tập tin đính kèm"
 
@@ -1107,7 +1106,7 @@ msgid "Collections"
 msgstr "Giáo trình"
 
 #: templates/registration/login.html:29
-#: templates/registration/registration_form.html:36
+#: templates/registration/registration_form.html:41
 msgid "Show password"
 msgstr "Hiện mật khẩu"
 
@@ -1273,23 +1272,23 @@ msgstr ""
 msgid "or sign up using your email"
 msgstr ""
 
-#: templates/registration/registration_form.html:26
+#: templates/registration/registration_form.html:27
 msgid "Please correct the errors below:"
 msgstr "Hãy sửa lại các lỗi bên dưới:"
 
-#: templates/registration/registration_form.html:28
+#: templates/registration/registration_form.html:33
 msgid "Your username"
 msgstr "Tên đăng nhập"
 
-#: templates/registration/registration_form.html:29
+#: templates/registration/registration_form.html:34
 msgid "Your email Address"
 msgstr "Email của bạn"
 
-#: templates/registration/registration_form.html:31
+#: templates/registration/registration_form.html:36
 msgid "Your password"
 msgstr "Mật khẩu của bạn"
 
-#: templates/registration/registration_form.html:41
+#: templates/registration/registration_form.html:46
 msgid "Enter password again"
 msgstr "Nhập lại mật khẩu"
 
@@ -1301,7 +1300,7 @@ msgstr "Nhập sai mã xác thực"
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: vpw/views.py:409 vpw/views.py:613
+#: vpw/views.py:427 vpw/views.py:631
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 

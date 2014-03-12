@@ -886,3 +886,9 @@ article.flatpage {
 .list-module-name.padding-content-10.left .hffolders{
     height: auto;
 }
+
+.attach-module-content h3 {
+    color: #6171A0;
+    font-size: 18px;
+    text-transform: uppercase;
+}

@@ -19,55 +19,48 @@
         {% endif %}
         {% endif %}
     </div>
+
+    <div class="left padding-content-15">
+        <div class="addthis_toolbox addthis_default_style ">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_facebook_share" fb:share:layout="button_count"></a>
+            <a class="addthis_button_tweet"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        </div>
+    </div>
+
     <!-- END TITLE MODULE -->
     <!-- CONTENT MODULE -->
     <div class="module-view-content left padding-20">{{ material.text|safe }}</div>
     <!-- END CONTENT MODULE -->
 
-    <!-- SOCIAL MODULE -->
-    <div class="bottom-module-content left padding-content-15">
-
-        {% comment %}
-        <div id="material-bottom-actions" class="left">
-            {% include 'frontend/partials/material_actions.html' %}
-            <div class="clearfix"></div>
+    {% if file_data %}
+    <!-- ATTACHMENT MODULE -->
+    <div class="attach-module-content attach-list left padding-content-15">
+        <h3>{% trans 'Attachments' %}</h3>
+        <div class="attach-content-comment">
+            <ul>
+                {% for attachment in file_data %}
+                <li>
+                    <a href="{% url 'get_attachment' attachment.attachment_id %}">{{ attachment.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-        {% endcomment %}
-
-        <ul class="list-social-module left">
-            <li>
-                <a class="link-fb"></a>
-            </li>
-            <li>
-                <a class="link-tw"></a>
-            </li>
-            <li>
-                <a class="link-gg"></a>
-            </li>
-            <li>
-                <a class="link-in"></a>
-            </li>
-        </ul>
-
-        {% comment %}
-        <ul class="list-status-module-content right">
-            <li>
-                <a class="checkout-icon-view">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</a>
-            </li>
-            <li>
-                <a class="checkout-icon-favourite" data-mid="{{ material.material_id }}" data-version="{{ material.version }}">{% if material.favorite_count.favorite > 0 %}{{ material.favorite_count.favorite }}{% else %}0{% endif %}</a>
-            </li>
-            <li>
-                 <a class="checkout-icon-comment">340</a>
-            </li>
-            <li>
-                <a class="checkout-icon-like">340</a>
-            </li>
-        </ul>
-        {% endcomment %}
-
     </div>
-    <!-- END SOCIAL MODULE -->
+    <!-- END ATTACHMENT MODULE -->
+    {% endif %}
+
+    <div class="bottom-module-content left padding-content-15">
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style ">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_facebook_share" fb:share:layout="button_count"></a>
+            <a class="addthis_button_tweet"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        </div>
+        <!-- AddThis Button END -->
+    </div>
 
     <!-- COMMENT MODULE -->
     <div class="comment-module-content left padding-content-15">
@@ -87,23 +80,6 @@
 <div id="material-right-side" class="col-lg-2 right-row">
     {% include 'frontend/partials/material_actions.html' %}
     <div class="clearfix"></div>
-
-    {% if file_data %}
-    <!-- ATTACHMENT MODULE -->
-    <div class="attach-list padding-content-15">
-        <h4>{% trans 'Attachments' %}</h4>
-        <div class="attach-content-comment">
-            <ul>
-                {% for attachment in file_data %}
-                <li>
-                    <a href="{% url 'get_attachment' attachment.attachment_id %}">{{ attachment.title }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    <!-- END ATTACHMENT MODULE -->
-    {% endif %}
 
     {% if tag_data %}
     <!-- TAG -->
@@ -144,6 +120,8 @@
     </div>
 
 </div>
+
+{% if voer_fb_id %}
 <!-- END RIGHT ROW -->
 <div id="fb-root"></div>
 <script>
@@ -151,10 +129,14 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1&appId={{ VOER_FACEBOOK_APP_ID }}";
+  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1&appId={{ voer_fb_id }}";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
+{% endif %}
+
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-531f211f57a24dfc"></script>
 
 <script>$(function(){ Voer.Materials.run(); });</script>
 {% endblock %}

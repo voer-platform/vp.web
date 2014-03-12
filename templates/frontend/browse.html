@@ -47,7 +47,7 @@
     </div>
     -->
     <div class="dropdown left">
-        <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Sort by</a>
+        <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Sort by' %}</a>
         <ul class="dropdown-menu dropdown-menu-sort" role="menu" aria-labelledby="dLabel">
             <li><a href="javascript:void(0)" rel="title">{% trans 'Title' %}</a></li>
             <!--<li><a>{% trans 'Relevance' %}</a></li>
@@ -70,6 +70,27 @@
         $(document).ready(function(){
             $(document).on('click', '.dropdown-menu-sort a', function(){
                 $('#filter-sort').val($(this).attr('rel'));
+
+                if($(this).attr('rel')=='modified') {
+                    $(this).attr('rel', '-modified');
+                    $(this).html('Ngày z-a');
+                    $('.filter-title').html('Ngày a-z');
+                }
+                else if($(this).attr('rel') == '-modified'){
+                    $(this).attr('rel', 'modified');
+                    $(this).html('Ngày a-z');
+                    $('.filter-title').html('Ngày z-a');
+                }
+                else if($(this).attr('rel')=='title') {
+                    $(this).attr('rel', '-title');
+                    $(this).html('Tiêu đề z-a');
+                    $('.filter-title').html('Tiêu đề a-z');
+                }
+                else if($(this).attr('rel') == '-title'){
+                    $(this).attr('rel', 'title');
+                    $(this).html('Tiêu đề a-z');
+                    $('.filter-title').html('Tiêu đề z-a');
+                }
                 ajaxGetMaterialByCondition();
             });
             $('.hfbtn-save').click(function(){
