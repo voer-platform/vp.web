@@ -162,7 +162,7 @@ def _get_image(list_images):
 def _replace_attachment_link(list_images):
     def replace_attachment_link(match_object):
         try:
-            result = "href='" + reverse('get_attachment', kwargs={'fid': list_images[match_object.group(1)]}) + "'"
+            result = "href='" + reverse('get_attachment', kwargs={'fid': list_images[match_object.group(1).strip()]}) + "'"
         except KeyError:
             result = "href='" + match_object.group(1) + "'"
         return result
