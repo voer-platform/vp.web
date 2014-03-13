@@ -865,6 +865,10 @@ article.flatpage {
         margin-left: 0px;
     }
 
+    .browser-author-details{
+        height: 110px;
+    }
+
 }
 
 .content-signup-form ul.errorlist{
