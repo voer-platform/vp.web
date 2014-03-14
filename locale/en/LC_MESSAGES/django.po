@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-06 17:56+0000\n"
+"POT-Creation-Date: 2014-03-14 04:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgid "Logout"
 msgstr ""
 
 #: templates/base/header.html:95
-#: templates/registration/registration_form.html:47
+#: templates/registration/registration_form.html:52
 msgid "Register"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgstr ""
 #: templates/frontend/admin_settings.html:46
 #: templates/frontend/user_edit_profile.html:161
 #: templates/frontend/collection/create_step3.html:292
-#: templates/frontend/module/create_step3.html:273
+#: templates/frontend/module/create_step3.html:263
 msgid "Save"
 msgstr ""
 
@@ -191,6 +191,10 @@ msgstr ""
 
 #: templates/frontend/admin_settings.html:42
 msgid "Set license content for collection creation."
+msgstr ""
+
+#: templates/frontend/browse.html:50 templates/frontend/profile.html:139
+msgid "Sort by"
 msgstr ""
 
 #: templates/frontend/browse.html:52 templates/frontend/profile.html:141
@@ -224,23 +228,23 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: templates/frontend/browse.html:169 templates/frontend/profile.html:293
+#: templates/frontend/browse.html:190 templates/frontend/profile.html:293
 #: templates/frontend/search_result.html:66
 msgid "Filter By"
 msgstr ""
 
-#: templates/frontend/browse.html:244 templates/frontend/profile.html:348
+#: templates/frontend/browse.html:265 templates/frontend/profile.html:348
 #: templates/frontend/search_result.html:110
 msgid "All types"
 msgstr ""
 
-#: templates/frontend/browse.html:256 templates/frontend/profile.html:361
+#: templates/frontend/browse.html:277 templates/frontend/profile.html:361
 #: templates/frontend/search_result.html:122
 #: templates/frontend/partials/material_author.html:29
 msgid "Modules"
 msgstr ""
 
-#: templates/frontend/browse.html:268
+#: templates/frontend/browse.html:289
 #: templates/frontend/collection_detail.html:48
 #: templates/frontend/index.html:67 templates/frontend/profile.html:374
 #: templates/frontend/search_result.html:134
@@ -248,12 +252,12 @@ msgstr ""
 msgid "Collection"
 msgstr ""
 
-#: templates/frontend/browse.html:283 templates/frontend/profile.html:390
+#: templates/frontend/browse.html:304 templates/frontend/profile.html:390
 #: templates/frontend/search_result.html:150
 msgid "All languages"
 msgstr ""
 
-#: templates/frontend/browse.html:295 templates/frontend/profile.html:403
+#: templates/frontend/browse.html:316 templates/frontend/profile.html:403
 #: templates/frontend/search_result.html:162
 #: templates/frontend/collection/create_step2.html:246
 #: templates/frontend/collection/create_step3.html:228
@@ -262,7 +266,7 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-#: templates/frontend/browse.html:307 templates/frontend/profile.html:416
+#: templates/frontend/browse.html:328 templates/frontend/profile.html:416
 #: templates/frontend/search_result.html:174
 #: templates/frontend/collection/create_step2.html:247
 #: templates/frontend/collection/create_step3.html:230
@@ -271,7 +275,7 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: templates/frontend/browse.html:322 templates/frontend/profile.html:432
+#: templates/frontend/browse.html:343 templates/frontend/profile.html:432
 #: templates/frontend/search_result.html:191
 msgid "All categories"
 msgstr ""
@@ -281,27 +285,27 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:108
-#: templates/frontend/module_detail.html:82
-msgid "Comment"
-msgstr ""
-
-#: templates/frontend/collection_detail.html:140
-msgid "View my profile"
-msgstr ""
-
-#: templates/frontend/collection_detail.html:209
-#: templates/frontend/module_detail.html:96
+#: templates/frontend/collection_detail.html:85
+#: templates/frontend/module_detail.html:40
 msgid "Attachments"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:244
-#: templates/frontend/module_detail.html:133
+#: templates/frontend/collection_detail.html:107
+#: templates/frontend/module_detail.html:73
+msgid "Comment"
+msgstr ""
+
+#: templates/frontend/collection_detail.html:138
+msgid "View my profile"
+msgstr ""
+
+#: templates/frontend/collection_detail.html:225
+#: templates/frontend/module_detail.html:107
 msgid "By same author"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:253
-#: templates/frontend/module_detail.html:142
+#: templates/frontend/collection_detail.html:234
+#: templates/frontend/module_detail.html:116
 msgid "Similar items"
 msgstr ""
 
@@ -579,10 +583,6 @@ msgstr ""
 msgid "Most Recent"
 msgstr ""
 
-#: templates/frontend/profile.html:139
-msgid "Sort by"
-msgstr ""
-
 #: templates/frontend/profile.html:148
 #: templates/frontend/user_favorite.html:25
 #: templates/frontend/user_profile.html:98
@@ -781,7 +781,7 @@ msgstr ""
 #: templates/frontend/collection/create_step2.html:263
 #: templates/frontend/collection/create_step3.html:293
 #: templates/frontend/module/create_step2.html:255
-#: templates/frontend/module/create_step3.html:274
+#: templates/frontend/module/create_step3.html:264
 msgid "Back"
 msgstr ""
 
@@ -1014,7 +1014,7 @@ msgid "Create section"
 msgstr ""
 
 #: templates/frontend/collection/create_step3.html:291
-#: templates/frontend/module/create_step3.html:272
+#: templates/frontend/module/create_step3.html:262
 msgid "Publish"
 msgstr ""
 
@@ -1048,19 +1048,11 @@ msgid "Document for import"
 msgstr ""
 
 #: templates/frontend/module/create_step3.html:254
-msgid "Upload a file, allowed extensions: doc, docx, odt."
+msgid "Upload a document file, the best support extensions: doc"
 msgstr ""
 
 #: templates/frontend/module/create_step3.html:257
 msgid "Body"
-msgstr ""
-
-#: templates/frontend/module/create_step3.html:263
-msgid "Files - Included Resources"
-msgstr ""
-
-#: templates/frontend/module/create_step3.html:268
-msgid "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
 msgstr ""
 
 #: templates/frontend/partials/material_actions.html:11
@@ -1085,7 +1077,7 @@ msgid "Collections"
 msgstr ""
 
 #: templates/registration/login.html:29
-#: templates/registration/registration_form.html:36
+#: templates/registration/registration_form.html:41
 msgid "Show password"
 msgstr ""
 
@@ -1244,23 +1236,23 @@ msgstr ""
 msgid "or sign up using your email"
 msgstr ""
 
-#: templates/registration/registration_form.html:26
+#: templates/registration/registration_form.html:27
 msgid "Please correct the errors below:"
 msgstr ""
 
-#: templates/registration/registration_form.html:28
+#: templates/registration/registration_form.html:33
 msgid "Your username"
 msgstr ""
 
-#: templates/registration/registration_form.html:29
+#: templates/registration/registration_form.html:34
 msgid "Your email Address"
 msgstr ""
 
-#: templates/registration/registration_form.html:31
+#: templates/registration/registration_form.html:36
 msgid "Your password"
 msgstr ""
 
-#: templates/registration/registration_form.html:41
+#: templates/registration/registration_form.html:46
 msgid "Enter password again"
 msgstr ""
 
@@ -1272,6 +1264,6 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: vpw/views.py:409 vpw/views.py:613
+#: vpw/views.py:430 vpw/views.py:634
 msgid "You must agree to the terms and conditions!"
 msgstr ""

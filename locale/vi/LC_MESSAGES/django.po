@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-11 13:56+0000\n"
-"PO-Revision-Date: 2014-03-11 20:57+0700\n"
+"POT-Creation-Date: 2014-03-14 04:08+0000\n"
+"PO-Revision-Date: 2014-03-14 11:11+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.3\n"
 
 #: templates/404.html:10
 msgid ""
@@ -177,7 +177,7 @@ msgstr "Tệp"
 #: templates/frontend/admin_settings.html:46
 #: templates/frontend/user_edit_profile.html:161
 #: templates/frontend/collection/create_step3.html:292
-#: templates/frontend/module/create_step3.html:273
+#: templates/frontend/module/create_step3.html:263
 msgid "Save"
 msgstr "Lưu lại"
 
@@ -202,6 +202,10 @@ msgstr "Giấy phép của Giáo trình"
 #: templates/frontend/admin_settings.html:42
 msgid "Set license content for collection creation."
 msgstr "Xác lập giấy phép cho collection."
+
+#: templates/frontend/browse.html:50 templates/frontend/profile.html:139
+msgid "Sort by"
+msgstr "Sắp xếp theo"
 
 #: templates/frontend/browse.html:52 templates/frontend/profile.html:141
 #: templates/frontend/user_edit_profile.html:131
@@ -234,23 +238,23 @@ msgstr "Đánh giá"
 msgid "Date"
 msgstr "Ngày"
 
-#: templates/frontend/browse.html:169 templates/frontend/profile.html:293
+#: templates/frontend/browse.html:190 templates/frontend/profile.html:293
 #: templates/frontend/search_result.html:66
 msgid "Filter By"
 msgstr "Lọc theo"
 
-#: templates/frontend/browse.html:244 templates/frontend/profile.html:348
+#: templates/frontend/browse.html:265 templates/frontend/profile.html:348
 #: templates/frontend/search_result.html:110
 msgid "All types"
 msgstr "Tất cả"
 
-#: templates/frontend/browse.html:256 templates/frontend/profile.html:361
+#: templates/frontend/browse.html:277 templates/frontend/profile.html:361
 #: templates/frontend/search_result.html:122
 #: templates/frontend/partials/material_author.html:29
 msgid "Modules"
 msgstr "Tài liệu"
 
-#: templates/frontend/browse.html:268
+#: templates/frontend/browse.html:289
 #: templates/frontend/collection_detail.html:48
 #: templates/frontend/index.html:67 templates/frontend/profile.html:374
 #: templates/frontend/search_result.html:134
@@ -258,12 +262,12 @@ msgstr "Tài liệu"
 msgid "Collection"
 msgstr "Giáo trình"
 
-#: templates/frontend/browse.html:283 templates/frontend/profile.html:390
+#: templates/frontend/browse.html:304 templates/frontend/profile.html:390
 #: templates/frontend/search_result.html:150
 msgid "All languages"
 msgstr "Tất cả ngôn ngữ"
 
-#: templates/frontend/browse.html:295 templates/frontend/profile.html:403
+#: templates/frontend/browse.html:316 templates/frontend/profile.html:403
 #: templates/frontend/search_result.html:162
 #: templates/frontend/collection/create_step2.html:246
 #: templates/frontend/collection/create_step3.html:228
@@ -272,7 +276,7 @@ msgstr "Tất cả ngôn ngữ"
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: templates/frontend/browse.html:307 templates/frontend/profile.html:416
+#: templates/frontend/browse.html:328 templates/frontend/profile.html:416
 #: templates/frontend/search_result.html:174
 #: templates/frontend/collection/create_step2.html:247
 #: templates/frontend/collection/create_step3.html:230
@@ -281,7 +285,7 @@ msgstr "Tiếng Việt"
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: templates/frontend/browse.html:322 templates/frontend/profile.html:432
+#: templates/frontend/browse.html:343 templates/frontend/profile.html:432
 #: templates/frontend/search_result.html:191
 msgid "All categories"
 msgstr "Tất cả chủ đề"
@@ -291,27 +295,27 @@ msgstr "Tất cả chủ đề"
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#: templates/frontend/collection_detail.html:108
-#: templates/frontend/module_detail.html:99
-msgid "Comment"
-msgstr "Góp ý"
-
-#: templates/frontend/collection_detail.html:140
-msgid "View my profile"
-msgstr "Xem hồ sơ"
-
-#: templates/frontend/collection_detail.html:209
-#: templates/frontend/module_detail.html:30
+#: templates/frontend/collection_detail.html:85
+#: templates/frontend/module_detail.html:40
 msgid "Attachments"
 msgstr "Tập tin đính kèm"
 
-#: templates/frontend/collection_detail.html:244
-#: templates/frontend/module_detail.html:133
+#: templates/frontend/collection_detail.html:107
+#: templates/frontend/module_detail.html:73
+msgid "Comment"
+msgstr "Góp ý"
+
+#: templates/frontend/collection_detail.html:138
+msgid "View my profile"
+msgstr "Xem hồ sơ"
+
+#: templates/frontend/collection_detail.html:225
+#: templates/frontend/module_detail.html:107
 msgid "By same author"
 msgstr "Cùng tác giả"
 
-#: templates/frontend/collection_detail.html:253
-#: templates/frontend/module_detail.html:142
+#: templates/frontend/collection_detail.html:234
+#: templates/frontend/module_detail.html:116
 msgid "Similar items"
 msgstr "Nội dung tương tự"
 
@@ -592,10 +596,6 @@ msgstr "Thảo luận nhiều nhất"
 msgid "Most Recent"
 msgstr "Mới nhất"
 
-#: templates/frontend/profile.html:139
-msgid "Sort by"
-msgstr "Sắp xếp theo"
-
 #: templates/frontend/profile.html:148
 #: templates/frontend/user_favorite.html:25
 #: templates/frontend/user_profile.html:98
@@ -797,7 +797,7 @@ msgstr "Bạn muốn xoá dữ liệu?"
 #: templates/frontend/collection/create_step2.html:263
 #: templates/frontend/collection/create_step3.html:293
 #: templates/frontend/module/create_step2.html:255
-#: templates/frontend/module/create_step3.html:274
+#: templates/frontend/module/create_step3.html:264
 msgid "Back"
 msgstr "Trước"
 
@@ -1035,7 +1035,7 @@ msgid "Create section"
 msgstr "Tạo mục mới"
 
 #: templates/frontend/collection/create_step3.html:291
-#: templates/frontend/module/create_step3.html:272
+#: templates/frontend/module/create_step3.html:262
 msgid "Publish"
 msgstr "Công bố"
 
@@ -1069,20 +1069,14 @@ msgid "Document for import"
 msgstr "Tải tài liệu"
 
 #: templates/frontend/module/create_step3.html:254
-msgid "Upload a file, allowed extensions: doc, docx, odt."
-msgstr "Tải tài liệu với định dạng DOC, DOCX, ODT"
+msgid "Upload a document file, the best support extensions: doc"
+msgstr ""
+"Hỗ trợ tốt nhất kiểu file Word 2003 (doc), các định dạng khác đang trong "
+"giai đoạn phát triển."
 
 #: templates/frontend/module/create_step3.html:257
 msgid "Body"
 msgstr "Thân"
-
-#: templates/frontend/module/create_step3.html:263
-msgid "Files - Included Resources"
-msgstr "Các tài nguyên kèm theo"
-
-#: templates/frontend/module/create_step3.html:268
-msgid "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
-msgstr "Tải tài liệu với định dạng DOC, DOCX, ODT, PNG, GIF,  JPG, JPEG"
 
 #: templates/frontend/partials/material_actions.html:11
 #: templates/frontend/partials/material_actions.html:17
@@ -1300,9 +1294,16 @@ msgstr "Nhập sai mã xác thực"
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: vpw/views.py:427 vpw/views.py:631
+#: vpw/views.py:430 vpw/views.py:634
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
+
+#~ msgid "Files - Included Resources"
+#~ msgstr "Các tài nguyên kèm theo"
+
+#~ msgid ""
+#~ "Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg."
+#~ msgstr "Tải tài liệu với định dạng DOC, DOCX, ODT, PNG, GIF,  JPG, JPEG"
 
 #~ msgid "Others from Author"
 #~ msgstr "Bài cùng tác giả"
