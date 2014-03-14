@@ -251,23 +251,13 @@
                 <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
                 <button class="btn hfbtn-common hfbtn-active" name="action" value="import">{% trans 'Import' %}</button>
             </div>
-            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt.' %}</p>
+            <p class="help-block">{% trans 'Upload a document file, the best support extensions: doc' %}</p>
         </div>
         <div class="form-group">
             <label for="InputBody">{% trans 'Body' %}</label>
             {{ form.body.errors }}
             {{ form.body }}
         </div>
-        <!--
-        <div class="form-group">
-            <label for="InputFile">{% trans 'Files - Included Resources' %}</label>
-            <input onmouseout="document.getElementById('uploadfilename_2').value = this.value;" onchange="document.getElementById('uploadfilename_2').value = this.value;" class="uploadfile" id="uploadfile_2" name="uploadfile_2" type="file">                      
-            <div class="fakefile">              
-                <input onclick="document.getElementById('uploadfile_2').click();" id="uploadfilename_2" value="" class="form-control typefile" type="text">
-            </div>
-            <p class="help-block">{% trans 'Upload a file, allowed extensions: doc, docx, odt, png, gif, jpg, jpeg.' %}</p>           
-        </div>
-        -->
         <div class="form-group btn-common">
             <button class="btn hfbtn-common hfbtn-public right hfbtn-active" value="publish" name="action">{% trans 'Publish' %}</button>
             <button class="btn hfbtn-common hfbtn-next right hfbtn-active" value="save" name="action">{% trans 'Save' %}</button>
