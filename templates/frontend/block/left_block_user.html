@@ -3,23 +3,23 @@
                 <div class="hfuser-tools">
     <div class="smallbox-common smallbox-button">
         <div class="hfbtn-create module"><a href="{% url 'create_module' %}">{% trans 'Create a new module' %}</a></div>
-        <div class="hfbtn-create collection"><a href="{% url 'create_collection' %}">{% trans 'Create a new collection' %}</a></div>
         <div class="hfbtn-create mass-module"><a href="{% url 'create_mass_modules' %}">{% trans 'Create module in Batch' %}</a></div>
+        <div class="hfbtn-create collection"><a href="{% url 'create_collection' %}">{% trans 'Create a new collection' %}</a></div>
     </div>
     <div class="smallbox-common smallbox-link">
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'get_unpublish' %}">{% trans 'Unpublish' %}</a>
+            <a href="{% url 'get_unpublish' %}">{% trans 'Unpublished items' %}</a>
         </div>
 
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'user_dashboard' %}">{% trans 'Published Items' %}</a>
+            <a href="{% url 'user_dashboard' %}">{% trans 'Published items' %}</a>
         </div>
 
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'get_favorite' %}">{% trans 'My Favorites' %}</a>
+            <a href="{% url 'get_favorite' %}">{% trans 'Favorite items' %}</a>
         </div>
         <!--
         <div class="content">
