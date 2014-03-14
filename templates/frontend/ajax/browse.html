@@ -1,4 +1,6 @@
 {% load i18n %}
 {% load vpw_filters %}
 
-{% include 'frontend/partials/browse-list.html' %}
+{% with material_list=materials.results %} 
+    {% include 'frontend/partials/browse-list.html' %}
+{% endwith %}

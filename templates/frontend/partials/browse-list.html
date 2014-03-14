@@ -39,9 +39,9 @@ $(document).ready(function(){
 });
 </script>
 
-{% if materials.results %}
+{% if material_list %}
 
-    {% for material in materials.results %}
+    {% for material in material_list %}
     {% if material.material_type == 1 %}
         {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
         {% trans "Module" as type_name %}
@@ -51,6 +51,26 @@ $(document).ready(function(){
     {% endif %}
 
     <div class="material-list-entry clearfix">
+      {% if material.user_id %}
+        <div class="material-cover left">
+            {% with y=material.id|stringformat:"s" %}
+            {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y "50x50" crop="center 20%" as im %}
+                <img src="{{ im.url }}">
+            {% empty %}
+                <img src="{{ STATIC_URL }}images/author1_detail.jpg" style="width:60px; height:60px;">
+            {% endthumbnail %}
+            {% endwith %}
+        </div>
+        <div class="material-tiny-icon">
+            <img src="{% static 'images/icon-people-24.png' %}">
+        </div>
+        <div class="material-brief left">
+            <h5 class="">
+                <a alt="{{ material.title }}" title="{{ material.title }}" href="{% url 'view_profile' material.id %}">{{ material.title }}</a>
+            </h5>
+            <p></p>
+        </div>
+      {% else %} 
         <div class="material-cover left">
           <a title="{{ type_name }}: {{ material.title }}" alt="{{ type_name }}: {{ material.title }}" href="{{ material_url }}">
             {% if material.image %}
@@ -82,14 +102,20 @@ $(document).ready(function(){
             </h5>
             <p>{{ material.description|truncatewords:28 }}</p>
             <div class="brief-published"> 
-                {% if material.categories.0.1 %}
-                <a href="{% url 'browse' %}?categories={{ material.categories.0.0 }}">
-                    {% trans material.categories.0.1 %}
-                </a>
+                {% if material.category_list %}
+                    {% for category in material.category_list %}
+                        <a href="{% url 'browse' %}?categories={{ category.cid }}">{% trans category.cname %}</a>
+                    {% endfor %}
+                {% elif material.categories.0.1 %}
+                    <a href="{% url 'browse' %}?categories={{ material.categories.0.0 }}">{% trans material.categories.0.1 %}</a>
                 {% endif %}
 
-                {% if 'author' in material %}
-                <a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a>
+                {% if material.person_list %}
+                    {% for person in material.person_list %}
+                        <a href="{% url 'view_profile' person.pid %}">{{ person.pname }}</a>
+                    {% endfor %}
+                {% elif 'author' in material %}
+                    <a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a>
                 {% endif %}
 
                 {% if material.modified %}
@@ -97,6 +123,7 @@ $(document).ready(function(){
                 {% endif %}
             </div>
         </div>
+      {% endif %}
     </div>
 
     {% endfor %}

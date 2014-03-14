@@ -110,8 +110,10 @@
 
         <div class="hfitems active">
             <div id="materials" class="material-list">
-                
-                {% include 'frontend/partials/browse-list.html' %}
+
+                {% with material_list=materials.results %} 
+                    {% include 'frontend/partials/browse-list.html' %}
+                {% endwith %} 
                 
                 {% comment %}
                 <div class="hfitem">

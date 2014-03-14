@@ -2,6 +2,11 @@
 {% load vpw_filters %}
 {% load thumbnail %}
 
+{% with material_list=search_results %}
+    {% include 'frontend/partials/browse-list.html' %}
+{% endwith %}
+
+{% comment %}
 {% if search_results %}
     {% for material in search_results %}
     <div class="hfitem">
@@ -81,3 +86,5 @@
 {% else %}
     <p class="no-data">{% trans "No data" %}</p>
 {% endif %}
+
+{% endcomment %}
