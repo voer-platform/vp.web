@@ -11,7 +11,6 @@
 {% endblock %}
 
 {% block content %}
-
 <!-- filter top -->
 <div class="hfuser-top">
     <h1>{% if person.fullname %}{% if person.title %}{{ person.title }} {% endif %}{{ person.fullname }} {% else %} {{ person.user_id }} {% endif %}</h1>
@@ -144,13 +143,21 @@
             <li><a href="javascript:void(0)" rel="modified">{% trans 'Date' %}</a></li>
         </ul>
     </div>
+
+    {% comment %}
     <div class="fiterbutton right">
         <a class="gridview left">{% trans 'Gridview' %}</a>
         <a class="listview right">{% trans 'Listview' %}</a>
     </div>
+    {% endcomment %}
 </div>
-<div class="content-wrapper">
+<div id="author-materials" class="content-wrapper">
     <div class="col-lg-1 left-row">
+        <div class="hfitems active">
+            <div id="materials" class="material-list">
+                {% include 'frontend/partials/browse-list.html' %}
+
+        {% comment %}
         <script>
         $(document).ready(function(){
             $(document).on('click', '.dropdown-menu-sort a', function(){
@@ -285,9 +292,12 @@
                 {% include "base/pager.html" %}
             </div>
         </div>
+        {% endcomment %}
+            </div>
+        </div>
     </div>
 
-    <div class="col-lg-2 right-row">
+    <div class="col-lg-2 right-row right">
         <div class="hffilter-right">
             <div class="bigbox-common">
                 <div class="title">{% trans 'Filter By' %}</div>
@@ -352,7 +362,7 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="checkbox-item">
+                        <div class="checkbox-item">
                             <div class="" data-key="types-1">
                                 <div class="grip_column">
                                     <div title="Select/Deselect Item" class="checkbox-custom" data-key="types-1"></div>
@@ -459,5 +469,6 @@
             </div>
         </div>
     </div>
+
 </div>
 {% endblock %}
