@@ -896,4 +896,32 @@ article.flatpage {
     font-size: 18px;
     text-transform: uppercase;
 }
-
+.with-100 {
+    width: 100%;
+}
+.smallbox-link .hfbtn-create {
+    background-color: #C8293C;
+    color: #ffffff;
+    margin-bottom: 7px;
+    padding: 0;
+}
+.smallbox-link .hfbtn-create:last-child {
+    margin-bottom: 0;
+}
+.smallbox-link .hfbtn-create i {
+    border-right: 1px solid #FFFFFF;
+    display: inline-block;
+    margin-right: 3px;
+    width: 42px;
+}
+.smallbox-link .content ul li {
+    border: none;
+}
+.smallbox-button,
+.smallbox-link {
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 15px;
+}
+.smallbox-link:last-child {
+    border: none;
+}
