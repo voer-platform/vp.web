@@ -10,3 +10,6 @@
 ## Install VPW
 	cd vpw
 	pip install -r requirements.txt
+# Notes
+## Missing MySQL-python
+	pip install MySQL-python

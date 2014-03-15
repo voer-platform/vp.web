@@ -1694,7 +1694,51 @@ def user_module_edit(request, mid):
     if request.method == "POST":
         form = ModuleCreationForm(request.POST)
         action = request.POST.get("action", "")
-        if action == 'save':
+        if action == 'import':
+            if 'document_file' in request.FILES:
+                upload_file = request.FILES['document_file']
+                upload_filename = normalize_filename(upload_file.name)
+                with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
+                    for chunk in upload_file.chunks():
+                        destination.write(chunk)
+                # call import vpt
+                result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
+                task_id = result_import['task_id']
+                download_url = vpt_get_url(task_id)
+                response = vpt_download(download_url)
+                # save downloaded file to transforms directory
+                # TODO: transforms dir name should be in settings
+                download_dir = '%s/transforms' % settings.MEDIA_ROOT
+                download_filename = download_url.split('/')[-1]
+                download_filepath = '%s/%s' % (download_dir, download_filename)
+                with open(download_filepath, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=1024):
+                        if chunk: # filter out keep-alive new chunks
+                            f.write(chunk)
+                            f.flush()
+
+                # load downloaded zip file
+                zip_archive = zipfile.ZipFile(download_filepath, 'r')
+                # Unzip into a new directory
+                filename, extension = os.path.splitext(download_filename)
+                extract_path = os.path.join(download_dir, filename)
+                os.mkdir(extract_path)
+                zip_archive.extractall(path=extract_path)
+
+                # get transformed html content
+                content = open(extract_path + '/index.html', 'r').read()
+                # fix images' urls
+                images = [f.filename for f in zip_archive.filelist if f.filename != 'index.html']
+                for image in images:
+                    old_src = 'src="%s"' % image
+                    # TODO: transforms dir name should be in settings
+                    new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
+                    content = content.replace(old_src, new_src)
+
+                form = ModuleCreationForm(request.POST)
+                # set form body
+                form.data['body'] = content
+        elif action == 'save':
             if form.is_valid():
                 material = _save_material(form, MODULE_TYPE, request)
                 material.text = form.cleaned_data['body']
