@@ -1,35 +1,51 @@
 {% load i18n %}
 <div class="col-lg-2 left-row">
                 <div class="hfuser-tools">
-    <div class="smallbox-common">
+    <div class="smallbox-common smallbox-button">
         <div class="hfbtn-create module"><a href="{% url 'create_module' %}">{% trans 'Create a new module' %}</a></div>
-        <div class="hfbtn-create collection"><a href="{% url 'create_collection' %}">{% trans 'Create a new collection' %}</a></div>
         <div class="hfbtn-create mass-module"><a href="{% url 'create_mass_modules' %}">{% trans 'Create module in Batch' %}</a></div>
+        <div class="hfbtn-create collection"><a href="{% url 'create_collection' %}">{% trans 'Create a new collection' %}</a></div>
     </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My Items' %}
+    <div class="smallbox-common smallbox-link">
+        <div class="hfbtn-create">
+            <i class="icon-common">&nbsp;</i>
+            <a href="{% url 'get_unpublish' %}">{% trans 'Unpublished items' %}</a>
         </div>
+
+        <div class="hfbtn-create">
+            <i class="icon-common">&nbsp;</i>
+            <a href="{% url 'user_dashboard' %}">{% trans 'Published items' %}</a>
+        </div>
+
+        <div class="hfbtn-create">
+            <i class="icon-common">&nbsp;</i>
+            <a href="{% url 'get_favorite' %}">{% trans 'Favorite items' %}</a>
+        </div>
+        <!--
         <div class="content">
             <ul>
                 <li><a href="{% url 'get_unpublish' %}">{% trans 'Unpublish' %}</a></li>
-                <!--<li><a>{% trans 'Saved Items' %}</a></li>-->
+                <li><a>{% trans 'Saved Items' %}</a></li>
                 <li><a href="{% url 'get_favorite' %}">{% trans 'My Favorites' %}</a></li>
             </ul>
         </div>
+        -->
     </div>
-    <div class="smallbox-common">
-        <div class="title">
-            {% trans 'My profile' %}
+    <div class="smallbox-common smallbox-link">
+        <div class="hfbtn-create">
+            <i class="icon-common">&nbsp;</i>
+            <a href="{% url 'edit_profile' %}">{% trans 'Profile Information' %}</a>
         </div>
+        <!--
         <div class="content">
-            <ul>        
+            <ul>
                 <li><a href="{% url 'edit_profile' %}">{% trans 'Profile Information' %}</a></li>
             </ul>
-        </div>      
+        </div>
+        -->
     </div>
     {% if request.user.is_superuser %}
-    <div class="smallbox-common">
+    <div class="smallbox-common smallbox-link">
         <div class="title">
             {% trans 'Administration' %}
         </div>

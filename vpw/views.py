@@ -1456,6 +1456,7 @@ def get_favorite(request):
     current_user = request.user
     pid = current_user.author.author_id
     page = int(request.GET.get('page', 1))
+    author = vpr_get_person(pid)
 
     favorites = vpr_get_favorite(pid, page)
 
@@ -1484,7 +1485,7 @@ def get_favorite(request):
 
         favorite_list.append(favorite)
 
-    return render(request, "frontend/user_favorite.html", {'materials': favorite_list, 'pager': pager, 'page_query': page_query})
+    return render(request, "frontend/user_favorite.html", {'materials': favorite_list, 'pager': pager, 'page_query': page_query, 'author': author})
 
 
 def get_unpublish(request):
