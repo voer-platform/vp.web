@@ -208,7 +208,6 @@ def vpr_search(**kwargs):
     if search_type == "m":
         search_string += "&on=m"
     elif search_type == "p":
-        print "fajsfjagf"
         search_string += "&on=p"
 
     if material_type != "":
@@ -227,7 +226,6 @@ def vpr_browse(**kwargs):
     author = kwargs.get("author", "")
     sort = kwargs.get("sort", "title")
     params = ["page=%s" % page]
-    # print "Type : " + types
     if categories and categories != "0":
         params.append("categories=%s&or=categories" % categories)
 
@@ -243,7 +241,6 @@ def vpr_browse(**kwargs):
     params.append("sort_on=%s" % sort)
     params = "&".join(params)
 
-    # print "params: " + params
     result = vpr_request("GET", "materials?names=1&%s" % params)
 
     #Get information facet

@@ -246,7 +246,8 @@ def collection_detail_old(request, cid, mid):
         if mid is None:
             return HttpResponseRedirect(reverse('collection_detail', kwargs={'title': title, 'cid': cid}))
         else:
-            return HttpResponseRedirect(reverse('collection_detail', kwargs={'title': title, 'cid': cid, 'mid': mid}))
+            # return HttpResponseRedirect(reverse('collection_detail', kwargs={'title': title, 'cid': cid, 'mid': mid}))
+            return HttpResponseRedirect('/c/%s/%s/%s' % (title, cid, mid))
     else:
         raise Http404
 
@@ -924,14 +925,6 @@ def search_result(request):
 
 
 def get_pdf(request, mid, version):
-    # material = vpr_get_material(mid, version)
-    # file_name = material['title']
-    # file_name = normalize_string(file_name)
-    # file_name = '%s.pdf' % file_name
-    # # result = vpr_get_pdf(mid, version)
-    # url_download = "%smaterials/%s/%s/pdf" % (settings.VPR_URL, mid, version)
-    # response = HttpResponseRedirect(url_download)
-    # return response
     pass
 
 
