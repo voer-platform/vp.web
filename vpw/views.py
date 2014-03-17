@@ -1079,13 +1079,8 @@ def ajax_browse(request):
 
 
 def get_attachment(request, fid):
-    attachment_info = voer_get_attachment_info(fid)
-
-    r = vpr_get_content_file(fid)
-    response = HttpResponse(r.content, content_type=r.headers['content-type'])
-    response['Content-Disposition'] = 'attachment; filename=' + attachment_info['name']
-
-    return response
+    # Processing by nginx
+    pass
 
 
 @login_required
@@ -1790,10 +1785,8 @@ def admin_settings(request):
 
 
 def get_content_file(request, fid):
-    r = vpr_get_content_file(fid)
-    response = HttpResponse(r.content, content_type=r.headers['content-type'])
-    return response
-
+    # processing by Nginx
+    pass
 
 def get_setting_value(license_type, language='vi'):
     """
@@ -1807,10 +1800,10 @@ def get_setting_value(license_type, language='vi'):
 
 
 def get_avatar(request, pid):
-    r = vpr_get_user_avatar(pid)
-    response = HttpResponse(r.content, content_type=r.headers['content-type'])
-    return response
-
+    # r = vpr_get_user_avatar(pid)
+    # response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    # return response
+    pass
 
 def server_error(request):
     # one of the things 'render' does is add 'STATIC_URL' to
