@@ -120,7 +120,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
-        'console':{
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
@@ -174,10 +174,19 @@ VPW_SESSION_MAX_AGE = 1 # days
 SITE_URL = 'voer.edu.vn' # URL Site
 
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "table,paste,searchreplace",
     'theme': "advanced",
+    'plugins': "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+    'theme_advanced_buttons1': "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontsizeselect,|,code,fullscreen,preview",
+    'theme_advanced_buttons2': "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,|,forecolor,backcolor",
+    'theme_advanced_buttons3': "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr",
+    # 'theme_advanced_buttons4': "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+    'theme_advanced_toolbar_location': "top",
+    'theme_advanced_toolbar_align': "left",
+    'theme_advanced_statusbar_location': "bottom",
+    'theme_advanced_resizing': True,
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
+    'valid_elements': 'a[!href|target<_blank|title],div[align<center?justify?left?right|class],p[align<center?justify?left?right],br,span,em,strong,cite,code,blockquote,ul,ol,li,dl,dt,dd,table,tr,td,th,tbody,caption,h1,h2,h3,h4,h5,h6,b,i,figure,figcaption,img[!src|width|class],maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,semantics,sub,mfrac,sup,annotation',
     'file_browser_callback': 'mce_filebrowser',
     'width': '730',
     'height': '400',
