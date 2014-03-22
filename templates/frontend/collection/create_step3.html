@@ -224,10 +224,156 @@
                                 <div class="hfselectList">
                                     <select name="language" class="select-block">
                                         <option>{% trans 'Choose language' %}</option>
-                                        <option value="vi"
-                                                {% if material.language == "vi" %}selected="selected"{% endif %}>{% trans 'Vietnamese' %}</option>
-                                        <option value="en"
-                                                {% if material.language == "en" %}selected="selected"{% endif %}>{% trans 'English' %}</option>
+                                        <option value="vi" {% if material.language == "vi" %}selected="selected"{% endif %}>Tiếng Việt</option>
+                                        <option value="en" {% if material.language == "en" %}selected="selected"{% endif %}>English</option>
+                                        <option value="af" {% if material.language == "af" %}selected="selected"{% endif %}>Afrikaans</option>
+                                        <option value="ay" {% if material.language == "ay" %}selected="selected"{% endif %}>Aymara</option>
+                                        <option value="az" {% if material.language == "az" %}selected="selected"{% endif %}>Azəri Türkçəsi</option>
+                                        <option value="id" {% if material.language == "id" %}selected="selected"{% endif %}>Bahasa Indonesia</option>
+                                        <option value="ms" {% if material.language == "ms" %}selected="selected"{% endif %}>Bahasa Melayu</option>
+                                        <option value="jw" {% if material.language == "jw" %}selected="selected"{% endif %}>Basa Jawi</option>
+                                        <option value="ba" {% if material.language == "ba" %}selected="selected"{% endif %}>Bashkir</option>
+                                        <option value="bh" {% if material.language == "bh" %}selected="selected"{% endif %}>Bihari</option>
+                                        <option value="bi" {% if material.language == "bi" %}selected="selected"{% endif %}>Bislama</option>
+                                        <option value="bs" {% if material.language == "bs" %}selected="selected"{% endif %}>Bosanski</option>
+                                        <option value="br" {% if material.language == "br" %}selected="selected"{% endif %}>Brezhoneg</option>
+                                        <option value="my" {% if material.language == "my" %}selected="selected"{% endif %}>Burmese</option>
+                                        <option value="ca" {% if material.language == "ca" %}selected="selected"{% endif %}>Català</option>
+                                        <option value="ch" {% if material.language == "ch" %}selected="selected"{% endif %}>Chamoru</option>
+                                        <option value="co" {% if material.language == "co" %}selected="selected"{% endif %}>Corsu</option>
+                                        <option value="cy" {% if material.language == "cy" %}selected="selected"{% endif %}>Cymraeg</option>
+                                        <option value="da" {% if material.language == "da" %}selected="selected"{% endif %}>Dansk</option>
+                                        <option value="de" {% if material.language == "de" %}selected="selected"{% endif %}>Deutsch</option>
+                                        <option value="et" {% if material.language == "et" %}selected="selected"{% endif %}>Eesti</option>
+                                        <option value="es" {% if material.language == "es" %}selected="selected"{% endif %}>Español</option>
+                                        <option value="eo" {% if material.language == "eo" %}selected="selected"{% endif %}>Esperanto</option>
+                                        <option value="eu" {% if material.language == "eu" %}selected="selected"{% endif %}>Euskara</option>
+                                        <option value="fj" {% if material.language == "fj" %}selected="selected"{% endif %}>Fiji</option>
+                                        <option value="fr" {% if material.language == "fr" %}selected="selected"{% endif %}>Français</option>
+                                        <option value="fy" {% if material.language == "fy" %}selected="selected"{% endif %}>Frysk</option>
+                                        <option value="fo" {% if material.language == "fo" %}selected="selected"{% endif %}>Føroyska</option>
+                                        <option value="ga" {% if material.language == "ga" %}selected="selected"{% endif %}>Gaeilge</option>
+                                        <option value="gv" {% if material.language == "gv" %}selected="selected"{% endif %}>Gaelg</option>
+                                        <option value="gl" {% if material.language == "gl" %}selected="selected"{% endif %}>Galego</option>
+                                        <option value="kl" {% if material.language == "kl" %}selected="selected"{% endif %}>Greenlandic</option>
+                                        <option value="gn" {% if material.language == "gn" %}selected="selected"{% endif %}>Guarani</option>
+                                        <option value="gd" {% if material.language == "gd" %}selected="selected"{% endif %}>Gàidhlig</option>
+                                        <option value="hr" {% if material.language == "hr" %}selected="selected"{% endif %}>Hrvatski</option>
+                                        <option value="ia" {% if material.language == "ia" %}selected="selected"{% endif %}>Interlingua</option>
+                                        <option value="ie" {% if material.language == "ie" %}selected="selected"{% endif %}>Interlingue</option>
+                                        <option value="ik" {% if material.language == "ik" %}selected="selected"{% endif %}>Inupiak</option>
+                                        <option value="it" {% if material.language == "it" %}selected="selected"{% endif %}>Italiano</option>
+                                        <option value="kw" {% if material.language == "kw" %}selected="selected"{% endif %}>Kernewek</option>
+                                        <option value="rn" {% if material.language == "rn" %}selected="selected"{% endif %}>Kirundi</option>
+                                        <option value="sw" {% if material.language == "sw" %}selected="selected"{% endif %}>Kiswahili</option>
+                                        <option value="rw" {% if material.language == "rw" %}selected="selected"{% endif %}>Kiyarwanda</option>
+                                        <option value="ku" {% if material.language == "ku" %}selected="selected"{% endif %}>Kurdí</option>
+                                        <option value="oc" {% if material.language == "oc" %}selected="selected"{% endif %}>Languedoc</option>
+                                        <option value="la" {% if material.language == "la" %}selected="selected"{% endif %}>Latin</option>
+                                        <option value="lv" {% if material.language == "lv" %}selected="selected"{% endif %}>Latviešu</option>
+                                        <option value="to" {% if material.language == "to" %}selected="selected"{% endif %}>Lea faka-Tonga</option>
+                                        <option value="lt" {% if material.language == "lt" %}selected="selected"{% endif %}>Lietuviskai</option>
+                                        <option value="li" {% if material.language == "li" %}selected="selected"{% endif %}>Limburgs</option>
+                                        <option value="ln" {% if material.language == "ln" %}selected="selected"{% endif %}>Lingala</option>
+                                        <option value="lb" {% if material.language == "lb" %}selected="selected"{% endif %}>Lëtzebuergesch</option>
+                                        <option value="hu" {% if material.language == "hu" %}selected="selected"{% endif %}>Magyar</option>
+                                        <option value="mg" {% if material.language == "mg" %}selected="selected"{% endif %}>Malagasy</option>
+                                        <option value="mt" {% if material.language == "mt" %}selected="selected"{% endif %}>Malti</option>
+                                        <option value="mi" {% if material.language == "mi" %}selected="selected"{% endif %}>Maori</option>
+                                        <option value="mo" {% if material.language == "mo" %}selected="selected"{% endif %}>Moldavian</option>
+                                        <option value="na" {% if material.language == "na" %}selected="selected"{% endif %}>Nauru</option>
+                                        <option value="nl" {% if material.language == "nl" %}selected="selected"{% endif %}>Nederlands</option>
+                                        <option value="no" {% if material.language == "no" %}selected="selected"{% endif %}>Norsk</option>
+                                        <option value="se" {% if material.language == "se" %}selected="selected"{% endif %}>Northern Sámi</option>
+                                        <option value="nn" {% if material.language == "nn" %}selected="selected"{% endif %}>Nynorsk</option>
+                                        <option value="om" {% if material.language == "om" %}selected="selected"{% endif %}>Oromo</option>
+                                        <option value="pl" {% if material.language == "pl" %}selected="selected"{% endif %}>Polski</option>
+                                        <option value="pt" {% if material.language == "pt" %}selected="selected"{% endif %}>Português</option>
+                                        <option value="qu" {% if material.language == "qu" %}selected="selected"{% endif %}>Quechua</option>
+                                        <option value="ro" {% if material.language == "ro" %}selected="selected"{% endif %}>Română</option>
+                                        <option value="rm" {% if material.language == "rm" %}selected="selected"{% endif %}>Rumantsch</option>
+                                        <option value="sm" {% if material.language == "sm" %}selected="selected"{% endif %}>Samoan</option>
+                                        <option value="sg" {% if material.language == "sg" %}selected="selected"{% endif %}>Sangho</option>
+                                        <option value="sh" {% if material.language == "sh" %}selected="selected"{% endif %}>Serbo-Croatian</option>
+                                        <option value="st" {% if material.language == "st" %}selected="selected"{% endif %}>Sesotho</option>
+                                        <option value="tn" {% if material.language == "tn" %}selected="selected"{% endif %}>Setswana</option>
+                                        <option value="sn" {% if material.language == "sn" %}selected="selected"{% endif %}>Shona</option>
+                                        <option value="sq" {% if material.language == "sq" %}selected="selected"{% endif %}>Shqip</option>
+                                        <option value="sd" {% if material.language == "sd" %}selected="selected"{% endif %}>Sindhi</option>
+                                        <option value="si" {% if material.language == "si" %}selected="selected"{% endif %}>Singhalese</option>
+                                        <option value="ss" {% if material.language == "ss" %}selected="selected"{% endif %}>Siswati</option>
+                                        <option value="sk" {% if material.language == "sk" %}selected="selected"{% endif %}>Slovenčina</option>
+                                        <option value="sl" {% if material.language == "sl" %}selected="selected"{% endif %}>Slovenščina</option>
+                                        <option value="so" {% if material.language == "so" %}selected="selected"{% endif %}>Somali</option>
+                                        <option value="su" {% if material.language == "su" %}selected="selected"{% endif %}>Sudanese</option>
+                                        <option value="fi" {% if material.language == "fi" %}selected="selected"{% endif %}>Suomi</option>
+                                        <option value="sv" {% if material.language == "sv" %}selected="selected"{% endif %}>Svenska</option>
+                                        <option value="tl" {% if material.language == "tl" %}selected="selected"{% endif %}>Tagalog</option>
+                                        <option value="ts" {% if material.language == "ts" %}selected="selected"{% endif %}>Tsonga</option>
+                                        <option value="tw" {% if material.language == "tw" %}selected="selected"{% endif %}>Twi</option>
+                                        <option value="tr" {% if material.language == "tr" %}selected="selected"{% endif %}>Türkçe</option>
+                                        <option value="ug" {% if material.language == "ug" %}selected="selected"{% endif %}>Uigur</option>
+                                        <option value="vo" {% if material.language == "vo" %}selected="selected"{% endif %}>Volapük</option>
+                                        <option value="wa" {% if material.language == "wa" %}selected="selected"{% endif %}>Walon</option>
+                                        <option value="wo" {% if material.language == "wo" %}selected="selected"{% endif %}>Wolof</option>
+                                        <option value="yo" {% if material.language == "yo" %}selected="selected"{% endif %}>Yorùbá</option>
+                                        <option value="za" {% if material.language == "za" %}selected="selected"{% endif %}>Zhuang</option>
+                                        <option value="xh" {% if material.language == "xh" %}selected="selected"{% endif %}>isiXhosa</option>
+                                        <option value="zu" {% if material.language == "zu" %}selected="selected"{% endif %}>isiZulu</option>
+                                        <option value="jbo" {% if material.language == "jbo" %}selected="selected"{% endif %}>lojban</option>
+                                        <option value="is" {% if material.language == "is" %}selected="selected"{% endif %}>Íslenska</option>
+                                        <option value="cs" {% if material.language == "cs" %}selected="selected"{% endif %}>Čeština</option>
+                                        <option value="el" {% if material.language == "el" %}selected="selected"{% endif %}>Ελληνικά</option>
+                                        <option value="uz" {% if material.language == "uz" %}selected="selected"{% endif %}>Ўзбекча</option>
+                                        <option value="be" {% if material.language == "be" %}selected="selected"{% endif %}>Беларускі</option>
+                                        <option value="bg" {% if material.language == "bg" %}selected="selected"{% endif %}>Български</option>
+                                        <option value="ky" {% if material.language == "ky" %}selected="selected"{% endif %}>Кыргыз</option>
+                                        <option value="mk" {% if material.language == "mk" %}selected="selected"{% endif %}>Македонски</option>
+                                        <option value="mn" {% if material.language == "mn" %}selected="selected"{% endif %}>Монгол</option>
+                                        <option value="ru" {% if material.language == "ru" %}selected="selected"{% endif %}>Русский</option>
+                                        <option value="tg" {% if material.language == "tg" %}selected="selected"{% endif %}>Тоҷики</option>
+                                        <option value="uk" {% if material.language == "uk" %}selected="selected"{% endif %}>Українська</option>
+                                        <option value="ab" {% if material.language == "ab" %}selected="selected"{% endif %}>бызшәа</option>
+                                        <option value="aa" {% if material.language == "aa" %}selected="selected"{% endif %}>магIарул мацI</option>
+                                        <option value="sr" {% if material.language == "sr" %}selected="selected"{% endif %}>српски</option>
+                                        <option value="tt" {% if material.language == "tt" %}selected="selected"{% endif %}>татарча</option>
+                                        <option value="tk" {% if material.language == "tk" %}selected="selected"{% endif %}>түркmенче</option>
+                                        <option value="hy" {% if material.language == "hy" %}selected="selected"{% endif %}>Հայերէն</option>
+                                        <option value="he" {% if material.language == "he" %}selected="selected"{% endif %}>עברית</option>
+                                        <option value="yi" {% if material.language == "yi" %}selected="selected"{% endif %}>ײִדיש</option>
+                                        <option value="ur" {% if material.language == "ur" %}selected="selected"{% endif %}>اردو</option>
+                                        <option value="ar" {% if material.language == "ar" %}selected="selected"{% endif %}>العربية</option>
+                                        <option value="fa" {% if material.language == "fa" %}selected="selected"{% endif %}>فارسی</option>
+                                        <option value="ha" {% if material.language == "ha" %}selected="selected"{% endif %}>هَوُس</option>
+                                        <option value="ps" {% if material.language == "ps" %}selected="selected"{% endif %}>پښتو</option>
+                                        <option value="ks" {% if material.language == "ks" %}selected="selected"{% endif %}>काऽशुर</option>
+                                        <option value="ne" {% if material.language == "ne" %}selected="selected"{% endif %}>नेपाली</option>
+                                        <option value="mr" {% if material.language == "mr" %}selected="selected"{% endif %}>मराठी</option>
+                                        <option value="sa" {% if material.language == "sa" %}selected="selected"{% endif %}>संस्कृत</option>
+                                        <option value="hi" {% if material.language == "hi" %}selected="selected"{% endif %}>हिंदी</option>
+                                        <option value="as" {% if material.language == "as" %}selected="selected"{% endif %}>অসমিয়া</option>
+                                        <option value="bn" {% if material.language == "bn" %}selected="selected"{% endif %}>বাংলা</option>
+                                        <option value="pa" {% if material.language == "pa" %}selected="selected"{% endif %}>ਪੰਜਾਬੀ</option>
+                                        <option value="gu" {% if material.language == "gu" %}selected="selected"{% endif %}>ગુજરાતી</option>
+                                        <option value="or" {% if material.language == "or" %}selected="selected"{% endif %}>ଓଡ଼ିଆ</option>
+                                        <option value="ta" {% if material.language == "ta" %}selected="selected"{% endif %}>தமிழ</option>
+                                        <option value="te" {% if material.language == "te" %}selected="selected"{% endif %}>తెలుగు</option>
+                                        <option value="kn" {% if material.language == "kn" %}selected="selected"{% endif %}>ಕನ್ನಡ</option>
+                                        <option value="ml" {% if material.language == "ml" %}selected="selected"{% endif %}>മലയാളം</option>
+                                        <option value="th" {% if material.language == "th" %}selected="selected"{% endif %}>ไทย</option>
+                                        <option value="lo" {% if material.language == "lo" %}selected="selected"{% endif %}>ພາສາລາວ</option>
+                                        <option value="bo" {% if material.language == "bo" %}selected="selected"{% endif %}>བོད་སྐད་</option>
+                                        <option value="dz" {% if material.language == "dz" %}selected="selected"{% endif %}>རྫོང་ཁ</option>
+                                        <option value="ka" {% if material.language == "ka" %}selected="selected"{% endif %}>ქართული</option>
+                                        <option value="ti" {% if material.language == "ti" %}selected="selected"{% endif %}>ትግርኛ</option>
+                                        <option value="am" {% if material.language == "am" %}selected="selected"{% endif %}>አማርኛ</option>
+                                        <option value="iu" {% if material.language == "iu" %}selected="selected"{% endif %}>ᐃᓄᒃᑎᑐᑦ</option>
+                                        <option value="km" {% if material.language == "km" %}selected="selected"{% endif %}>ខ្មែរ</option>
+                                        <option value="zh" {% if material.language == "zh" %}selected="selected"{% endif %}>中文</option>
+                                        <option value="ja" {% if material.language == "ja" %}selected="selected"{% endif %}>日本語</option>
+                                        <option value="ko" {% if material.language == "ko" %}selected="selected"{% endif %}>한국어</option>
+                                        <option value="kk" {% if material.language == "kk" %}selected="selected"{% endif %}>ﻗﺎﺯﺍﻗﺸﺎ</option>
+
                                     </select>
                                 </div>
                             </div>
