@@ -36,40 +36,34 @@ def strip(value):
 @register.filter
 @stringfilter
 def get_unpublished_count(uid):
-    stats_count = ''
-
     materials = Material.objects.filter(Q(creator_id=uid) & (Q(version=None) | Q(version=0)))
     stats_count = len(materials)
 
-    if stats_count:
-        return ' (%s)' % stats_count
+    if stats_count is None:
+        stats_count = 0
 
-    return
+    return ' (%s)' % stats_count
 
 
 @register.filter
 @stringfilter
 def get_published_count(pid):
-    stats_count = ''
-
     published_items = vpr_materials_by_author(pid)
     stats_count = published_items['count']
 
-    if stats_count:
-        return ' (%s)' % stats_count
+    if stats_count is None:
+        stats_count = 0
 
-    return
+    return ' (%s)' % stats_count
 
 
 @register.filter
 @stringfilter
 def get_favorites_count(pid):
-    stats_count = ''
-
     favorites = vpr_get_favorite(pid)
     stats_count = favorites['count']
 
-    if stats_count:
-        return ' (%s)' % stats_count
+    if stats_count is None:
+        stats_count = 0
 
-    return
+    return ' (%s)' % stats_count
