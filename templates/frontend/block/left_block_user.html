@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load vpw_filters %}
+
 <div class="col-lg-2 left-row">
                 <div class="hfuser-tools">
     <div class="smallbox-common smallbox-button">
@@ -9,17 +11,17 @@
     <div class="smallbox-common smallbox-link">
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'get_unpublish' %}">{% trans 'Unpublished items' %}</a>
+            <a href="{% url 'get_unpublish' %}">{% trans 'Unpublished items' %}{{ user.author.user_id|get_unpublished_count }}</a>
         </div>
 
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'user_dashboard' %}">{% trans 'Published items' %}</a>
+            <a href="{% url 'user_dashboard' %}">{% trans 'Published items' %}{{ user.author.author_id|get_published_count }}</a>
         </div>
 
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'get_favorite' %}">{% trans 'Favorite items' %}</a>
+            <a href="{% url 'get_favorite' %}">{% trans 'Favorite items' %}{{ user.author.author_id|get_favorites_count }}</a>
         </div>
         <!--
         <div class="content">

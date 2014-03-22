@@ -952,3 +952,13 @@ article.flatpage {
 .module-view-content div.math table td{
     border: none;
 }
+#drop-top-language {
+    padding: 13px;
+}
+#drop-top-language img {
+    height: auto;
+    margin-top: -6px;
+    max-height: 32px;
+    max-width: 32px;
+    width: auto;
+}

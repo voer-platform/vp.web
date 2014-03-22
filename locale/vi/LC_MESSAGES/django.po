@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-14 19:24+0000\n"
-"PO-Revision-Date: 2014-03-15 02:12+0700\n"
+"POT-Creation-Date: 2014-03-22 08:46+0000\n"
+"PO-Revision-Date: 2014-03-22 15:47+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -44,12 +44,12 @@ msgid ""
 "\"http://www.vnfoundation.org\">The Vietnam Foundation</a> and powered by <a "
 "href=\"http://www.hanoispring.com\">Hanoi Spring Platform</a>. <br>Except "
 "where otherwise noted, content created on this site is licensed under a "
-"Creative Commons Attribution 4.0 License."
+"Creative Commons Attribution 3.0 License."
 msgstr ""
 "Thư viện Học liệu Mở Việt Nam (VOER) được tài trợ bởi <a href=\"http://www."
 "vnfoundation.org\">Vietnam Foundation</a> và vận hành trên nền tảng <a href="
 "\"http://www.hanoispring.com\">Hanoi Spring</a>. <br>Các tài liệu đều tuân "
-"thủ giấy phép Creative Commons Attribution 4.0 trừ khi ghi chú rõ ngoại lệ."
+"thủ giấy phép Creative Commons Attribution 3.0 trừ khi ghi chú rõ ngoại lệ."
 
 #: templates/base/header.html:18
 msgid "Home"
@@ -69,41 +69,41 @@ msgstr "Đóng góp"
 msgid "About Us"
 msgstr "Giới thiệu"
 
-#: templates/base/header.html:82
+#: templates/base/header.html:90
 msgid "Account View"
 msgstr "Xem tài khoản"
 
-#: templates/base/header.html:85
+#: templates/base/header.html:93
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: templates/base/header.html:95
+#: templates/base/header.html:103
 #: templates/registration/registration_form.html:52
 msgid "Register"
 msgstr "Đăng ký"
 
-#: templates/base/header.html:98 templates/base/header.html.py:137
+#: templates/base/header.html:106 templates/base/header.html.py:145
 #: templates/registration/login.html:34
 msgid "Login"
 msgstr "Đăng nhập"
 
-#: templates/base/header.html:115
+#: templates/base/header.html:123
 msgid "Login to VOER"
 msgstr "Đăng nhập"
 
-#: templates/base/header.html:130
+#: templates/base/header.html:138
 msgid "Remember me"
 msgstr "Ghi nhớ"
 
-#: templates/base/header.html:134
+#: templates/base/header.html:142
 msgid "Forgot your password ?"
 msgstr "Quên mật khẩu?"
 
-#: templates/base/header.html:140
+#: templates/base/header.html:148
 msgid "Don't have an account? Sign up for VOER"
 msgstr "Bạn chưa có tài khoản? Hãy đăng ký."
 
-#: templates/base/header.html:143
+#: templates/base/header.html:151
 msgid "The username or password is incorrect."
 msgstr "Tên đăng nhập hoặc mật khẩu chưa đúng"
 
@@ -113,7 +113,7 @@ msgstr "Hướng dẫn sử dụng"
 
 #: templates/frontend/admin_featured_authors.html:5
 #: templates/frontend/admin_featured_authors.html:23
-#: templates/frontend/block/left_block_user.html:57
+#: templates/frontend/block/left_block_user.html:59
 msgid "Featured authors"
 msgstr "Tác giả tiêu biểu"
 
@@ -141,7 +141,7 @@ msgstr "Xóa tài khoản"
 
 #: templates/frontend/admin_featured_materials.html:5
 #: templates/frontend/admin_featured_materials.html:23
-#: templates/frontend/block/left_block_user.html:56
+#: templates/frontend/block/left_block_user.html:58
 msgid "Featured materials"
 msgstr "Nội dung tiêu biểu"
 
@@ -152,7 +152,7 @@ msgstr "Nhập tiêu đề"
 
 #: templates/frontend/admin_import_user.html:5
 #: templates/frontend/admin_import_user.html:23
-#: templates/frontend/block/left_block_user.html:58
+#: templates/frontend/block/left_block_user.html:60
 #, fuzzy
 msgid "Import user"
 msgstr "Nhập"
@@ -183,7 +183,7 @@ msgstr "Lưu lại"
 
 #: templates/frontend/admin_settings.html:10
 #: templates/frontend/admin_settings.html:28
-#: templates/frontend/block/left_block_user.html:59
+#: templates/frontend/block/left_block_user.html:61
 msgid "Settings"
 msgstr "Cài đặt"
 
@@ -782,62 +782,62 @@ msgstr "Trước"
 msgid "Next"
 msgstr "Tiếp"
 
-#: templates/frontend/block/left_block_user.html:5
+#: templates/frontend/block/left_block_user.html:7
 #: templates/frontend/module/create_step1.html:13
 #: templates/frontend/module/create_step2.html:86
 #: templates/frontend/module/create_step3.html:85
 msgid "Create a new module"
 msgstr "Tạo module mới"
 
-#: templates/frontend/block/left_block_user.html:6
+#: templates/frontend/block/left_block_user.html:8
 msgid "Create module in Batch"
 msgstr "Tạo nhiều module"
 
-#: templates/frontend/block/left_block_user.html:7
+#: templates/frontend/block/left_block_user.html:9
 #: templates/frontend/collection/create_step1.html:11
 #: templates/frontend/collection/create_step2.html:94
 #: templates/frontend/collection/create_step3.html:71
 msgid "Create a new collection"
 msgstr "Tạo collection mới"
 
-#: templates/frontend/block/left_block_user.html:12
+#: templates/frontend/block/left_block_user.html:14
 msgid "Unpublished items"
 msgstr "Tài liệu chưa công bố"
 
-#: templates/frontend/block/left_block_user.html:17
+#: templates/frontend/block/left_block_user.html:19
 msgid "Published items"
 msgstr "Tài liệu đã công bố"
 
-#: templates/frontend/block/left_block_user.html:22
+#: templates/frontend/block/left_block_user.html:24
 msgid "Favorite items"
 msgstr "Tài liệu yêu thích"
 
-#: templates/frontend/block/left_block_user.html:27
+#: templates/frontend/block/left_block_user.html:29
 msgid "Unpublish"
 msgstr "Chưa công bố"
 
-#: templates/frontend/block/left_block_user.html:28
+#: templates/frontend/block/left_block_user.html:30
 msgid "Saved Items"
 msgstr "Các mục được lưu"
 
-#: templates/frontend/block/left_block_user.html:29
+#: templates/frontend/block/left_block_user.html:31
 msgid "My Favorites"
 msgstr "Mục yêu thích"
 
-#: templates/frontend/block/left_block_user.html:37
-#: templates/frontend/block/left_block_user.html:42
+#: templates/frontend/block/left_block_user.html:39
+#: templates/frontend/block/left_block_user.html:44
 msgid "Profile Information"
 msgstr "Thông tin hồ sơ"
 
-#: templates/frontend/block/left_block_user.html:50
+#: templates/frontend/block/left_block_user.html:52
 msgid "Administration"
 msgstr "Quản trị"
 
-#: templates/frontend/block/left_block_user.html:54
+#: templates/frontend/block/left_block_user.html:56
 msgid "Most viewed"
 msgstr "Xem nhiều nhất"
 
-#: templates/frontend/block/left_block_user.html:55
+#: templates/frontend/block/left_block_user.html:57
 msgid "Most favourite"
 msgstr "Mục yêu thích"
 

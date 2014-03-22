@@ -1,5 +1,5 @@
-
 {% load i18n %}
+{% load thumbnail %}
 
 <!-- TOP -->
 <div id="top" class="navbar navbar-default navbar-fixed-top">
@@ -23,14 +23,14 @@
                 <li>
                   {% if request.LANGUAGE_CODE == 'vi' %}
                   <a href="/content/dong-gop">{% trans 'Contribute' %}</a>
-                  {% else %} 
+                  {% else %}
                   <a href="/content/contribute">{% trans 'Contribute' %}</a>
                   {% endif %}
                 </li>
                 <li>
                   {% if request.LANGUAGE_CODE == 'vi' %}
                   <a href="/content/gioi-thieu">{% trans 'About Us' %}</a>
-                  {% else %} 
+                  {% else %}
                   <a href="/content/about-us">{% trans 'About Us' %}</a>
                   {% endif %}
                 </li>
@@ -73,7 +73,15 @@
                             <ul class="nav navbar-nav">
                                 <li class="dropdown loged-top-user">
                                     <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop-top-language">
-                                        <span class="logo-user-right-top left"></span>{{ user.username }}
+                                        {% with y=user.author.author_id|stringformat:"s" %}
+                                        {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y "32x32" as im %}
+                                            <img src="{{ im.url }}">
+                                        {% empty %}
+                                            <span class="logo-user-right-top left"></span>
+                                        {% endthumbnail %}
+                                        {% endwith %}
+
+                                        {{ user.username }}
                                         <span class="caret"></span>
                                     </a>
                                     <div aria-labelledby="drop-category-pd" role="menu" class="dropdown-menu">
