@@ -962,3 +962,36 @@ article.flatpage {
     max-width: 32px;
     width: auto;
 }
+@media (max-width: 768px){
+    #input-search-right-top {display: none;}
+}
+.navbar-toggle.btn-search {right: 60px; padding: 7px 13px;}
+.icon-search {
+    background: url(../images/icon-search-top-while.png)no-repeat;
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+@media (min-width: 768px){
+    .btn-search, .search-collapse {
+        display: none;
+    }
+
+}
+@media (min-width: 420px) {
+    .hidden-home {display: none;}
+}
+.search-collapse .div-input-search, .search-collapse .input-search-top {
+    width: 100%;
+    max-width: 463px;
+}
+.search-collapse .input-search-top {
+    height: 38px;
+    background: url('../images/icon-search-top.png') no-repeat right center #FFFFFF;
+    padding-right: 30px;
+}
+.hfbtn-common.search-index {padding: 10px}
+.search-collapse .hfbtn-common.search-index {
+    height: 54px;
+    width: 50px;
+}

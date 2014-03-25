@@ -5,12 +5,24 @@
 <div id="top" class="navbar navbar-default navbar-fixed-top">
     <div class="container main">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle btn-search {% if is_home %} hidden-home {% endif %}" data-toggle="collapse" data-target=".search-collapse">
+                <span class="icon-search"></span>
+            </button>
+
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand logo" href="/">Project name</a>
+        </div>
+        <div class="search-collapse collapse {% if is_home %} hidden-home {% endif %}">
+            <div class="div-input-search left clear">
+                <form action="/search/" method="GET">
+                    <input type="text" class="input-search-top" name="keyword" value="{{ keyword }}">
+                    <input type="submit" class="hfbtn-common search-index" value="search">
+                </form>
+            </div>
         </div>
         <div id="main-menu" class="navbar-collapse collapse">
             <ul class="nav navbar-nav main-menu-nav">
