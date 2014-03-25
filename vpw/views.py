@@ -444,6 +444,12 @@ def create_module(request):
                 params['form'] = form
                 if material.id:
                     current_step = 3
+                    material_categories = get_categories_of_material(material)
+                    authors = get_author_of_material(material)
+                    roles = get_roles_material(material)
+                    params['authors'] = authors
+                    params['material_categories'] = material_categories
+                    params['roles'] = roles
                 else:
                     # Save khong thanh cong
                     current_step = 2
@@ -505,6 +511,12 @@ def create_module(request):
                 try:
                     material = Material.objects.get(id=mid)
                     params['material'] = material
+                    material_categories = get_categories_of_material(material)
+                    authors = get_author_of_material(material)
+                    roles = get_roles_material(material)
+                    params['authors'] = authors
+                    params['material_categories'] = material_categories
+                    params['roles'] = roles
                 except Material.DoesNotExist:
                     pass
                 params['form'] = form
@@ -517,7 +529,7 @@ def create_module(request):
                     mid = 0
                 try:
                     if form.is_valid():
-                        material = Material.objects.get(id=mid)
+                        material = _save_material(form, MODULE_TYPE, request)
                         material.text = form.cleaned_data['body']
                         material.save()
                         return redirect('user_module_detail', mid=mid)
@@ -532,7 +544,7 @@ def create_module(request):
                     mid = 0
                 try:
                     if form.is_valid():
-                        material = Material.objects.get(id=mid)
+                        material = _save_material(form, MODULE_TYPE, request)
                         material.text = form.cleaned_data['body']
                         # save_post_to_object(request, material)
                         material.save()
@@ -650,6 +662,12 @@ def create_collection(request):
                     if material.id:
                         params['material'] = material
                         current_step = 3
+                        material_categories = get_categories_of_material(material)
+                        authors = get_author_of_material(material)
+                        roles = get_roles_material(material)
+                        params['authors'] = authors
+                        params['material_categories'] = material_categories
+                        params['roles'] = roles
                     else:
                         # Save khong thanh cong
                         params['author'] = author
@@ -666,7 +684,7 @@ def create_collection(request):
                 current_step = 1
             if action == "save":
                 if form.is_valid():
-                    material = Material.objects.get(id=mid)
+                    material = _save_material(form, COLLECTION_TYPE, request)
                     outline = json.loads(form.cleaned_data['body'])
                     tmp = {'content': []}
                     if "children" in outline[0]:
@@ -678,9 +696,11 @@ def create_collection(request):
                     return redirect('user_collection_detail', cid=mid)
                 else:
                     current_step = 2
+                    params['author'] = author
+                    params['categories'] = categories_list
             elif action == "publish":
                 if form.is_valid():
-                    material = Material.objects.get(id=mid)
+                    material = _save_material(form, COLLECTION_TYPE, request)
                     outline = json.loads(form.cleaned_data['body'])
                     tmp = {'content': []}
                     if "children" in outline[0]:
@@ -731,7 +751,9 @@ def _save_material(form, material_type, request):
     material.title = form.cleaned_data['title']
     material.description = form.cleaned_data['description']
     material.keywords = form.cleaned_data['keywords']
-    material.categories = form.cleaned_data['categories']
+    if form.cleaned_data['categories']:
+        material.categories = ','.join(request.POST.getlist('categories', ''))
+
     material.language = form.cleaned_data['language']
     if form.cleaned_data['authors']:
         material.author = ','.join(request.POST.getlist('authors', ''))
@@ -1079,8 +1101,13 @@ def ajax_browse(request):
 
 
 def get_attachment(request, fid):
-    # Processing by nginx
-    pass
+    # Processing by nginx when deploy prod
+    attachment_info = voer_get_attachment_info(fid)
+
+    r = vpr_get_content_file(fid)
+    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    response['Content-Disposition'] = 'attachment; filename=' + attachment_info['name']
+    return response
 
 
 @login_required
@@ -1630,6 +1657,10 @@ def user_collection_edit(request, cid):
     material = Material.objects.get(id=cid, creator=request.user, material_type=COLLECTION_TYPE)
     categories = vpr_get_categories()
     author = vpr_get_person(request.user.author.author_id)
+    material_categories = get_categories_of_material(material)
+    authors = get_author_of_material(material)
+    roles = get_roles_material(material)
+
     if request.method == "POST":
         form = CollectionCreationForm(request.POST)
         action = request.POST.get("action", "")
@@ -1677,15 +1708,66 @@ def user_collection_edit(request, cid):
             json_outline = '[{"attr":{"id":"root-outline","rel":"root"},"data":"Outline","state":"open"}]'
 
         form = CollectionCreationForm(dict(body=json_outline))
-    params = {'material': material, 'categories': categories,
-              'form': form, 'author': author}
-    return render(request, COLLECTION_TEMPLATES[3], params)
+
+    params = {'material': material, 'categories': categories, 'material_categories': material_categories,
+              'form': form, 'authors': authors, 'roles': roles}
+    return render(request, 'frontend/collection/edit_collection.html', params)
+
+
+def get_author_of_material(material):
+    #get author
+    str_persons = getattr(material, "author", "") + "," + getattr(material, "editor", "") \
+                  + "," + getattr(material, "licensor", "") + "," + getattr(material, "maintainer", "") \
+                  + "," + getattr(material, "translator", "") + "," + getattr(material, "coeditor", "")
+
+    list_persons = str_persons.split(",")
+    #Remove '' in list
+    while '' in list_persons:
+        list_persons.remove('')
+    #Get unique list
+    list_persons = list(set(list_persons))
+    authors = []
+    for pid in list_persons:
+        author = vpr_get_person(pid)
+        authors.append(author)
+    return authors
+
+
+def get_categories_of_material(material):
+    str_categories = getattr(material, "categories", "")
+    list_categories = str_categories.split(",")
+    #Remove '' in list
+    while '' in list_categories:
+        list_categories.remove('')
+    list_categories = list(set(list_categories))
+    return list_categories
+
+
+def get_roles_of_material(material, role):
+    str_roles = getattr(material, role, "")
+    list_roles = str_roles.split(",")
+    #Remove '' in list
+    while '' in list_roles:
+        list_roles.remove('')
+    list_roles = list(set(list_roles))
+    return list_roles
+
+
+def get_roles_material(material):
+    roles = dict()
+    for x in ("author", "editor", "licensor", "maintainer", "translator", "coeditor"):
+        roles[x] = get_roles_of_material(material, x)
+    return roles
 
 @login_required
 def user_module_edit(request, mid):
     material = Material.objects.get(id=mid, creator=request.user, material_type=MODULE_TYPE)
     categories = vpr_get_categories()
-    author = vpr_get_person(request.user.author.author_id)
+    # author = vpr_get_person(request.user.author.author_id)
+    material_categories = get_categories_of_material(material)
+    authors = get_author_of_material(material)
+    roles = get_roles_material(material)
+
     if request.method == "POST":
         form = ModuleCreationForm(request.POST)
         action = request.POST.get("action", "")
@@ -1751,9 +1833,9 @@ def user_module_edit(request, mid):
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
         form = ModuleCreationForm(dict(body=material.text))
-    params = {'material': material, 'categories': categories,
-              'form': form, 'author': author}
-    return render(request, MODULE_TEMPLATES[3], params)
+    params = {'material': material, 'categories': categories, 'material_categories': material_categories,
+              'form': form, 'authors': authors, 'roles': roles}
+    return render(request, 'frontend/module/edit_module.html', params)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -1785,8 +1867,11 @@ def admin_settings(request):
 
 
 def get_content_file(request, fid):
-    # processing by Nginx
-    pass
+    # processing by Nginx when deploy prod
+    r = vpr_get_content_file(fid)
+    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    return response
+
 
 def get_setting_value(license_type, language='vi'):
     """
@@ -1800,10 +1885,11 @@ def get_setting_value(license_type, language='vi'):
 
 
 def get_avatar(request, pid):
-    # r = vpr_get_user_avatar(pid)
-    # response = HttpResponse(r.content, content_type=r.headers['content-type'])
-    # return response
-    pass
+    # Processing by Nginx when deploy on prod
+    r = vpr_get_user_avatar(pid)
+    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+    return response
+
 
 def server_error(request):
     # one of the things 'render' does is add 'STATIC_URL' to
