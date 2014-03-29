@@ -984,6 +984,10 @@ article.flatpage {
     max-width: 32px;
     width: auto;
 }
+.search-collapse {
+    overflow: hidden;
+    display: block;
+}
 @media (max-width: 768px){
     #input-search-right-top {display: none;}
 }
@@ -1025,4 +1029,3 @@ article.flatpage {
     font-family: verdana;
     font-weight: bold;
 }
-
