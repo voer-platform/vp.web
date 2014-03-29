@@ -189,7 +189,7 @@
     </script>
 
     <div class="hflistmodule">
-        <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host">
+        <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host material-outline-scrool">
             <div class="hffolders">
                 <ul id="level-0">
                     <li id="collection-name" class="root">
@@ -220,6 +220,8 @@
     <!-- END TAG -->
     {% endif %}
 
+    {% include 'frontend/partials/material_list.html' with links=material.links %}
+
     <!-- OTHER FROM AUTHOR -->
     <div id="by-same-author" class="module-block module-simple padding-content-15">
         <h4>{% trans 'By same author' %}</h4>
@@ -238,23 +240,6 @@
     </div>
 
 </div>
-
-{% if voer_fb_id %}
-<!-- END RIGHT ROW -->
-<div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1&appId={{ voer_fb_id }}";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-{% endif %}
-
-<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-531f211f57a24dfc"></script>
 
 <script>$(function(){ Voer.Materials.run(); });</script>
 {% endblock %}

@@ -234,7 +234,6 @@ def module_detail(request, title, mid, version):
 
     rate_data = vpr_get_statistic_data(mid, version, 'rates')
     material['rates'] = _calculate_rate_data(rate_data)
-    print material['rates']
 
     link_data = vpr_get_statistic_data(mid, version, 'links')
     material['links'] = link_data
@@ -313,6 +312,15 @@ def collection_detail(request, title, cid, mid):
                     file_data.append(file_tmp)
         else:
             file_data = []
+
+        link_data = vpr_get_statistic_data(mid, material['version'], 'links')
+        new_links = []
+        for link in link_data:
+            if link['material_id'] != cid:
+                new_links.append(link)
+
+        material['links'] = new_links
+
     else:
         material = {}
         file_data = []

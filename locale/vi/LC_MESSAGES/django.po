@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-29 03:20+0000\n"
-"PO-Revision-Date: 2014-03-29 10:21+0700\n"
+"PO-Revision-Date: 2014-03-29 15:51+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -423,9 +423,8 @@ msgid "Uploaded On:"
 msgstr "Tải lên ngày:"
 
 #: templates/frontend/module_detail.html:108
-#, fuzzy
 msgid "Rating:"
-msgstr "Đánh giá"
+msgstr "Đánh giá:"
 
 #: templates/frontend/profile.html:51
 #, fuzzy

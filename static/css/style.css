@@ -753,8 +753,8 @@ article.flatpage {
 #material-bottom-actions .module-block-header {
   background-color: #f1f1f1;
 }
-#by-same-author {
-  border-top: 1px solid #e8e8e8;
+.material-outline-scrool {
+  border-bottom: 1px solid #e8e8e8;
 }
 .material-list {
   min-height: 40px;
