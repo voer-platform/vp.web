@@ -154,12 +154,10 @@
 
 <script>$(function(){ Voer.Materials.run(); });</script>
 
-{% if user.is_authenticated %}
 <script type="text/javascript">
 $(document).ready(function(){
     Voer.Helper.rating('.material-rating-average');
 });
 </script>
-{% endif %}
 {% endblock %}
 {% endblock %}
