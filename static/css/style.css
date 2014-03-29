@@ -121,7 +121,21 @@
     padding-left:25px;
 
 }
-
+/*************************** ICON *************************/
+.icon {
+    background: url("../images/icon-sprite.png") no-repeat center left transparent;
+    display: inline-block;
+    float: left;
+    width: 16px;
+    height: 16px;
+}
+.icon-favorite {
+    background-position: 0 0;
+}
+.icon-view {
+    background-position: 0 -16px;
+}
+/*************************** END ICON *************************/
 .voer-mol-ico {
   background: url("../images/icon/icon-module.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
   height: 15px;
@@ -796,9 +810,13 @@ article.flatpage {
   margin-top: 3px;
 }
 .brief-published a {
-  color: lightgray;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #CCCCCC;
+  color: #D3D3D3;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
   padding: 0 5px 0 7px;
+  vertical-align: middle;
 }
 .brief-published a:first-child {
   border-left: none;
@@ -809,6 +827,10 @@ article.flatpage {
 .brief-published label {
   font-weight: normal;
   padding-right: 5px;
+}
+.brief-published .stats-count {
+  margin-left: 4px;
+  margin-top: 1px;
 }
 .hfbtn-create.mass-module {
     background: url("../images/icon/btn-module.png") no-repeat scroll 10px 0 #C8293C;
@@ -995,3 +1017,12 @@ article.flatpage {
     height: 54px;
     width: 50px;
 }
+.material-rating-title {
+    display: block;
+    background: none repeat scroll 0 0 #F4C239;
+    padding: 10px; color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    font-family: verdana;
+    font-weight: bold;
+}
+

@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load vpw_filters %}
+
+{% if links %}
+<div class="module-block module-simple padding-content-15">
+    <h4>{% trans 'Collections using this module' %}</h4>
+    <ul class="list-content-extra">
+    {% for link in links %}
+    <li>
+        {% if link.material_type == 1 %}
+        <a class="link-other-author-module left clear" alt="{{ link.title }}" title="{{ link.title }}" href="{% url 'module_detail' link.title|normalize_string link.material_id %}">{{ link.title }}</a>
+        {% else %}
+        <a class="link-other-author-module left clear" alt="{{ link.title }}" title="{{ link.title }}" href="{% url 'collection_detail' link.title|normalize_string link.material_id %}">{{ link.title }}</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}

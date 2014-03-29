@@ -86,6 +86,7 @@ urlpatterns = patterns('',
     url(r'^ajax/get-others$', 'vpw.views.ajax_get_others', name='ajax_get_others'),
     url(r'^ajax/get-similars', 'vpw.views.ajax_get_similars', name='ajax_get_similars'),
     url(r'^ajax/search-result$', 'vpw.views.ajax_search_result', name='ajax_search_result'),
+    url(r'^ajax/user-rate$', 'vpw.views.ajax_user_rate', name='ajax_user_rate'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
@@ -93,7 +94,7 @@ urlpatterns = patterns('',
 
     url(r'^google9c25b243b9e3bacc\.html$', TemplateView.as_view(template_name='frontend/google9c25b243b9e3bacc.html')),
     url(r'^BingSiteAuth\.xml', TemplateView.as_view(template_name='frontend/BingSiteAuth.xml')),
-    
+
     url(r'^content/', include('django.contrib.flatpages.urls')),
 )
 

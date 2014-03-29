@@ -70,22 +70,22 @@ $(document).ready(function(){
             </h5>
             <p></p>
         </div>
-      {% else %} 
+      {% else %}
         <div class="material-cover left">
           <a title="{{ type_name }}: {{ material.title }}" alt="{{ type_name }}: {{ material.title }}" href="{{ material_url }}">
             {% if material.image %}
                 {% thumbnail material.image "50x50" crop="center" as material_image %}
                     <img src="{{ image.url }}">
-                {% endthumbnail %} 
+                {% endthumbnail %}
             {% elif material.categories.0.0 %}
-                {% static 'images/cat' as catimg_prefix %} 
+                {% static 'images/cat' as catimg_prefix %}
                 {% with 'http://'|add:request.get_host|add:catimg_prefix|add:material.categories.0.0|add:".jpg" as catimg_url %}
                     {% thumbnail catimg_url "50x50" crop="center" as mimage %}
                         <img src="{{ mimage.url }}">
                     {% endthumbnail %}
                 {% endwith %}
             {% else %}
-                {% static 'images/' as catimg_prefix %} 
+                {% static 'images/' as catimg_prefix %}
                 {% with 'http://'|add:request.get_host|add:catimg_prefix|add:"cat_other.jpg" as catimg_url %}
                     {% thumbnail catimg_url "50x50" crop="center" as mimage %}
                         <img src="{{ mimage.url }}">
@@ -101,7 +101,21 @@ $(document).ready(function(){
                 <a title="{{ type_name }}: {{ material.title }}" alt="{{ type_name }}: {{ material.title }}" href="{{ material_url }}"> {{ material.title }} </a>
             </h5>
             <p>{{ material.description|truncatewords:28 }}</p>
-            <div class="brief-published"> 
+            <div class="brief-published">
+                {% if material.view_count %}
+                    <a href="javascript:void(0)" title="{% trans 'View count' %}">
+                        <i class="icon icon-view"></i>
+                        <span class="stats-count">{{ material.view_count.view }}</span>
+                    </a>
+                {% endif %}
+
+                {% if material.favorite_count %}
+                    <a href="javascript:void(0)" title="{% trans 'Favorite count' %}">
+                        <i class="icon icon-favorite"></i>
+                        <span class="stats-count">{{ material.favorite_count.favorite }}</span>
+                    </a>
+                {% endif %}
+
                 {% if material.category_list %}
                     {% for category in material.category_list %}
                         <a href="{% url 'browse' %}?categories={{ category.cid }}">{% trans category.cname %}</a>

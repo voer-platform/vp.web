@@ -275,9 +275,9 @@ def vpr_create_person(**kwargs):
 
 def vpr_get_statistic_data(mid, version, field_name):
     if not version:
-        result = vpr_request('GET', "materials/%s/%s/" % (mid, field_name))
+        result = vpr_request('GET', "materials/%s/%s" % (mid, field_name))
     else:
-        result = vpr_request('GET', "materials/%s/%s/%s/" % (mid, version, field_name))
+        result = vpr_request('GET', "materials/%s/%s/%s" % (mid, version, field_name))
 
     return result
 
@@ -367,3 +367,24 @@ def vpr_get_user_avatar(pid):
     url = settings.VPR_URL + "persons/%s/avatar" % pid
     r = requests.request("GET", url)
     return r
+
+
+def vpr_user_add_rate(pid, rate, mid, version=''):
+    if version == '' or version == 0:
+        result = vpr_request('POST', "materials/%s/rates" % mid, {'person': pid, 'rate': rate})
+    else:
+        result = vpr_request('POST', "materials/%s/%s/rates" % (mid, version), {'person': pid, 'rate': rate})
+    return result
+
+
+def vpr_user_delete_rate(pid, mid, version=''):
+    if version == '' or version == 0:
+        url = settings.VPR_URL + 'materials/%s/rates?person=%s' % (mid, pid)
+    else:
+        url = settings.VPR_URL + 'materials/%s/%s/rates?person=%s' % (mid, version, pid)
+
+    r = requests.request('DELETE', url)
+
+    result = json.loads(r.content)
+
+    return result

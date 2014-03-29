@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-22 08:46+0000\n"
-"PO-Revision-Date: 2014-03-22 15:47+0700\n"
+"POT-Creation-Date: 2014-03-29 03:20+0000\n"
+"PO-Revision-Date: 2014-03-29 10:21+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -51,59 +51,60 @@ msgstr ""
 "\"http://www.hanoispring.com\">Hanoi Spring</a>. <br>Các tài liệu đều tuân "
 "thủ giấy phép Creative Commons Attribution 3.0 trừ khi ghi chú rõ ngoại lệ."
 
-#: templates/base/header.html:18
+#: templates/base/header.html:30
 msgid "Home"
 msgstr "Trang chủ"
 
-#: templates/base/header.html:21 templates/frontend/profile.html:109
+#: templates/base/header.html:33 templates/frontend/index.html:102
+#: templates/frontend/profile.html:109
 msgid "Browse All"
 msgstr "Duyệt tài liệu"
 
-#: templates/base/header.html:25 templates/base/header.html.py:27
+#: templates/base/header.html:37 templates/base/header.html.py:39
 #: templates/flatpages/default.html:15 templates/flatpages/default.html:19
 msgid "Contribute"
 msgstr "Đóng góp"
 
-#: templates/base/header.html:32 templates/base/header.html.py:34
+#: templates/base/header.html:44 templates/base/header.html.py:46
 #: templates/flatpages/default.html:14 templates/flatpages/default.html:18
 msgid "About Us"
 msgstr "Giới thiệu"
 
-#: templates/base/header.html:90
+#: templates/base/header.html:102
 msgid "Account View"
 msgstr "Xem tài khoản"
 
-#: templates/base/header.html:93
+#: templates/base/header.html:105
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: templates/base/header.html:103
-#: templates/registration/registration_form.html:52
+#: templates/base/header.html:115
+#: templates/registration/registration_form.html:44
 msgid "Register"
 msgstr "Đăng ký"
 
-#: templates/base/header.html:106 templates/base/header.html.py:145
+#: templates/base/header.html:118 templates/base/header.html.py:157
 #: templates/registration/login.html:34
 msgid "Login"
 msgstr "Đăng nhập"
 
-#: templates/base/header.html:123
+#: templates/base/header.html:135
 msgid "Login to VOER"
 msgstr "Đăng nhập"
 
-#: templates/base/header.html:138
+#: templates/base/header.html:150
 msgid "Remember me"
 msgstr "Ghi nhớ"
 
-#: templates/base/header.html:142
+#: templates/base/header.html:154
 msgid "Forgot your password ?"
 msgstr "Quên mật khẩu?"
 
-#: templates/base/header.html:148
+#: templates/base/header.html:160
 msgid "Don't have an account? Sign up for VOER"
 msgstr "Bạn chưa có tài khoản? Hãy đăng ký."
 
-#: templates/base/header.html:151
+#: templates/base/header.html:163
 msgid "The username or password is incorrect."
 msgstr "Tên đăng nhập hoặc mật khẩu chưa đúng"
 
@@ -176,8 +177,10 @@ msgstr "Tệp"
 #: templates/frontend/admin_import_user.html:41
 #: templates/frontend/admin_settings.html:46
 #: templates/frontend/user_edit_profile.html:141
-#: templates/frontend/collection/create_step3.html:292
-#: templates/frontend/module/create_step3.html:263
+#: templates/frontend/collection/create_step3.html:500
+#: templates/frontend/collection/edit_collection.html:500
+#: templates/frontend/module/create_step3.html:413
+#: templates/frontend/module/edit_module.html:413
 msgid "Save"
 msgstr "Lưu lại"
 
@@ -213,9 +216,11 @@ msgstr "Sắp xếp theo"
 #: templates/frontend/user_profile.html:22
 #: templates/frontend/user_unpublish.html:22
 #: templates/frontend/collection/create_step2.html:130
-#: templates/frontend/collection/create_step3.html:106
+#: templates/frontend/collection/create_step3.html:162
+#: templates/frontend/collection/edit_collection.html:162
 #: templates/frontend/module/create_step2.html:122
 #: templates/frontend/module/create_step3.html:115
+#: templates/frontend/module/edit_module.html:115
 msgid "Title"
 msgstr "Tiêu đề"
 
@@ -264,18 +269,10 @@ msgid "All languages"
 msgstr "Tất cả ngôn ngữ"
 
 #: templates/frontend/browse.html:318 templates/frontend/profile.html:417
-#: templates/frontend/collection/create_step2.html:246
-#: templates/frontend/collection/create_step3.html:228
-#: templates/frontend/module/create_step2.html:238
-#: templates/frontend/module/create_step3.html:230
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
 #: templates/frontend/browse.html:330 templates/frontend/profile.html:430
-#: templates/frontend/collection/create_step2.html:247
-#: templates/frontend/collection/create_step3.html:230
-#: templates/frontend/module/create_step2.html:239
-#: templates/frontend/module/create_step3.html:231
 msgid "English"
 msgstr "Tiếng Anh"
 
@@ -284,17 +281,17 @@ msgid "All categories"
 msgstr "Tất cả chủ đề"
 
 #: templates/frontend/collection_detail.html:54
-#: templates/frontend/module_detail.html:18
+#: templates/frontend/module_detail.html:19
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
 #: templates/frontend/collection_detail.html:85
-#: templates/frontend/module_detail.html:40
+#: templates/frontend/module_detail.html:41
 msgid "Attachments"
 msgstr "Tập tin đính kèm"
 
 #: templates/frontend/collection_detail.html:107
-#: templates/frontend/module_detail.html:73
+#: templates/frontend/module_detail.html:74
 msgid "Comment"
 msgstr "Góp ý"
 
@@ -303,12 +300,12 @@ msgid "View my profile"
 msgstr "Xem hồ sơ"
 
 #: templates/frontend/collection_detail.html:225
-#: templates/frontend/module_detail.html:107
+#: templates/frontend/module_detail.html:119
 msgid "By same author"
 msgstr "Cùng tác giả"
 
 #: templates/frontend/collection_detail.html:234
-#: templates/frontend/module_detail.html:116
+#: templates/frontend/module_detail.html:128
 msgid "Similar items"
 msgstr "Nội dung tương tự"
 
@@ -325,14 +322,10 @@ msgstr ""
 "Khám phá %(module_count)s tài liệu, %(collection_count)s tuyển tập từ "
 "%(person_count)s tác giả"
 
-#: templates/frontend/index.html:64 templates/frontend/module_detail.html:13
+#: templates/frontend/index.html:64 templates/frontend/module_detail.html:14
 #: templates/frontend/partials/browse-list.html:47
 msgid "Module"
 msgstr "Tài liệu"
-
-#: templates/frontend/index.html:102
-msgid "Browser All"
-msgstr "Duyệt tài liệu"
 
 #: templates/frontend/material_stats.html:7 templates/frontend/profile.html:7
 #: templates/frontend/user_edit_profile.html:6
@@ -429,6 +422,11 @@ msgstr "Khác"
 msgid "Uploaded On:"
 msgstr "Tải lên ngày:"
 
+#: templates/frontend/module_detail.html:108
+#, fuzzy
+msgid "Rating:"
+msgstr "Đánh giá"
+
 #: templates/frontend/profile.html:51
 #, fuzzy
 msgid "Delete person"
@@ -438,14 +436,21 @@ msgstr "Xóa tài khoản"
 #: templates/frontend/collection/create_step2.html:138
 #: templates/frontend/collection/create_step2.html:145
 #: templates/frontend/collection/create_step2.html:203
-#: templates/frontend/collection/create_step3.html:117
-#: templates/frontend/collection/create_step3.html:127
+#: templates/frontend/collection/create_step3.html:172
+#: templates/frontend/collection/create_step3.html:179
+#: templates/frontend/collection/create_step3.html:238
+#: templates/frontend/collection/edit_collection.html:172
+#: templates/frontend/collection/edit_collection.html:179
+#: templates/frontend/collection/edit_collection.html:238
 #: templates/frontend/module/create_step2.html:130
 #: templates/frontend/module/create_step2.html:137
 #: templates/frontend/module/create_step2.html:195
 #: templates/frontend/module/create_step3.html:123
 #: templates/frontend/module/create_step3.html:130
-#: templates/frontend/module/create_step3.html:187
+#: templates/frontend/module/create_step3.html:189
+#: templates/frontend/module/edit_module.html:123
+#: templates/frontend/module/edit_module.html:130
+#: templates/frontend/module/edit_module.html:189
 #: templates/frontend/partials/author_info.html:28
 msgid "Author"
 msgstr "Tác giả"
@@ -453,11 +458,16 @@ msgstr "Tác giả"
 #: templates/frontend/profile.html:62
 #: templates/frontend/collection/create_step2.html:150
 #: templates/frontend/collection/create_step2.html:208
-#: templates/frontend/collection/create_step3.html:132
+#: templates/frontend/collection/create_step3.html:184
+#: templates/frontend/collection/create_step3.html:243
+#: templates/frontend/collection/edit_collection.html:184
+#: templates/frontend/collection/edit_collection.html:243
 #: templates/frontend/module/create_step2.html:142
 #: templates/frontend/module/create_step2.html:200
 #: templates/frontend/module/create_step3.html:135
-#: templates/frontend/module/create_step3.html:192
+#: templates/frontend/module/create_step3.html:194
+#: templates/frontend/module/edit_module.html:135
+#: templates/frontend/module/edit_module.html:194
 #: templates/frontend/partials/author_info.html:32
 msgid "Contributor"
 msgstr "Đồng biên tập"
@@ -465,11 +475,16 @@ msgstr "Đồng biên tập"
 #: templates/frontend/profile.html:66
 #: templates/frontend/collection/create_step2.html:146
 #: templates/frontend/collection/create_step2.html:204
-#: templates/frontend/collection/create_step3.html:128
+#: templates/frontend/collection/create_step3.html:180
+#: templates/frontend/collection/create_step3.html:239
+#: templates/frontend/collection/edit_collection.html:180
+#: templates/frontend/collection/edit_collection.html:239
 #: templates/frontend/module/create_step2.html:138
 #: templates/frontend/module/create_step2.html:196
 #: templates/frontend/module/create_step3.html:131
-#: templates/frontend/module/create_step3.html:188
+#: templates/frontend/module/create_step3.html:190
+#: templates/frontend/module/edit_module.html:131
+#: templates/frontend/module/edit_module.html:190
 #: templates/frontend/partials/author_info.html:36
 msgid "Editor"
 msgstr "Biên tập viên"
@@ -477,11 +492,16 @@ msgstr "Biên tập viên"
 #: templates/frontend/profile.html:70
 #: templates/frontend/collection/create_step2.html:147
 #: templates/frontend/collection/create_step2.html:205
-#: templates/frontend/collection/create_step3.html:129
+#: templates/frontend/collection/create_step3.html:181
+#: templates/frontend/collection/create_step3.html:240
+#: templates/frontend/collection/edit_collection.html:181
+#: templates/frontend/collection/edit_collection.html:240
 #: templates/frontend/module/create_step2.html:139
 #: templates/frontend/module/create_step2.html:197
 #: templates/frontend/module/create_step3.html:132
-#: templates/frontend/module/create_step3.html:189
+#: templates/frontend/module/create_step3.html:191
+#: templates/frontend/module/edit_module.html:132
+#: templates/frontend/module/edit_module.html:191
 #: templates/frontend/partials/author_info.html:40
 msgid "Licensor"
 msgstr "Người giữ tác quyền"
@@ -489,11 +509,16 @@ msgstr "Người giữ tác quyền"
 #: templates/frontend/profile.html:74
 #: templates/frontend/collection/create_step2.html:148
 #: templates/frontend/collection/create_step2.html:206
-#: templates/frontend/collection/create_step3.html:130
+#: templates/frontend/collection/create_step3.html:182
+#: templates/frontend/collection/create_step3.html:241
+#: templates/frontend/collection/edit_collection.html:182
+#: templates/frontend/collection/edit_collection.html:241
 #: templates/frontend/module/create_step2.html:140
 #: templates/frontend/module/create_step2.html:198
 #: templates/frontend/module/create_step3.html:133
-#: templates/frontend/module/create_step3.html:190
+#: templates/frontend/module/create_step3.html:192
+#: templates/frontend/module/edit_module.html:133
+#: templates/frontend/module/edit_module.html:192
 #: templates/frontend/partials/author_info.html:44
 msgid "Maintainer"
 msgstr "Maintainer"
@@ -501,11 +526,16 @@ msgstr "Maintainer"
 #: templates/frontend/profile.html:78
 #: templates/frontend/collection/create_step2.html:149
 #: templates/frontend/collection/create_step2.html:207
-#: templates/frontend/collection/create_step3.html:131
+#: templates/frontend/collection/create_step3.html:183
+#: templates/frontend/collection/create_step3.html:242
+#: templates/frontend/collection/edit_collection.html:183
+#: templates/frontend/collection/edit_collection.html:242
 #: templates/frontend/module/create_step2.html:141
 #: templates/frontend/module/create_step2.html:199
 #: templates/frontend/module/create_step3.html:134
-#: templates/frontend/module/create_step3.html:191
+#: templates/frontend/module/create_step3.html:193
+#: templates/frontend/module/edit_module.html:134
+#: templates/frontend/module/edit_module.html:193
 #: templates/frontend/partials/author_info.html:48
 msgid "Translator"
 msgstr "Dịch giả"
@@ -752,7 +782,7 @@ msgstr ""
 #: templates/frontend/user_unpublish.html:135
 #: templates/frontend/ajax/others.html:32
 #: templates/frontend/ajax/similars.html:33
-#: templates/frontend/partials/browse-list.html:131
+#: templates/frontend/partials/browse-list.html:145
 msgid "No data."
 msgstr "Không có dữ liệu."
 
@@ -764,10 +794,12 @@ msgstr "Bạn muốn xoá dữ liệu?"
 #: templates/frontend/ajax/others.html:21
 #: templates/frontend/ajax/similars.html:20
 #: templates/frontend/ajax/similars.html:22
-#: templates/frontend/collection/create_step2.html:263
-#: templates/frontend/collection/create_step3.html:293
-#: templates/frontend/module/create_step2.html:255
-#: templates/frontend/module/create_step3.html:264
+#: templates/frontend/collection/create_step2.html:411
+#: templates/frontend/collection/create_step3.html:501
+#: templates/frontend/collection/edit_collection.html:501
+#: templates/frontend/module/create_step2.html:403
+#: templates/frontend/module/create_step3.html:414
+#: templates/frontend/module/edit_module.html:414
 msgid "Back"
 msgstr "Trước"
 
@@ -776,9 +808,9 @@ msgstr "Trước"
 #: templates/frontend/ajax/similars.html:26
 #: templates/frontend/ajax/similars.html:28
 #: templates/frontend/collection/create_step1.html:60
-#: templates/frontend/collection/create_step2.html:262
+#: templates/frontend/collection/create_step2.html:410
 #: templates/frontend/module/create_step1.html:57
-#: templates/frontend/module/create_step2.html:254
+#: templates/frontend/module/create_step2.html:402
 msgid "Next"
 msgstr "Tiếp"
 
@@ -786,6 +818,7 @@ msgstr "Tiếp"
 #: templates/frontend/module/create_step1.html:13
 #: templates/frontend/module/create_step2.html:86
 #: templates/frontend/module/create_step3.html:85
+#: templates/frontend/module/edit_module.html:85
 msgid "Create a new module"
 msgstr "Tạo module mới"
 
@@ -796,7 +829,8 @@ msgstr "Tạo nhiều module"
 #: templates/frontend/block/left_block_user.html:9
 #: templates/frontend/collection/create_step1.html:11
 #: templates/frontend/collection/create_step2.html:94
-#: templates/frontend/collection/create_step3.html:71
+#: templates/frontend/collection/create_step3.html:127
+#: templates/frontend/collection/edit_collection.html:127
 msgid "Create a new collection"
 msgstr "Tạo collection mới"
 
@@ -843,7 +877,8 @@ msgstr "Mục yêu thích"
 
 #: templates/frontend/collection/create_step1.html:3
 #: templates/frontend/collection/create_step2.html:5
-#: templates/frontend/collection/create_step3.html:62
+#: templates/frontend/collection/create_step3.html:118
+#: templates/frontend/collection/edit_collection.html:118
 msgid "Create collection"
 msgstr "Tạo collection mới"
 
@@ -861,40 +896,52 @@ msgstr ""
 "điều khoản có trong giấy phép."
 
 #: templates/frontend/collection/create_step2.html:92
-#: templates/frontend/collection/create_step3.html:69
+#: templates/frontend/collection/create_step3.html:125
+#: templates/frontend/collection/edit_collection.html:125
 #: templates/frontend/module/create_mass_modules.html:18
 #: templates/frontend/module/create_step1.html:11
 #: templates/frontend/module/create_step2.html:84
 #: templates/frontend/module/create_step3.html:83
+#: templates/frontend/module/edit_module.html:83
 msgid "Create Content"
 msgstr "Đóng góp nội dung"
 
 #: templates/frontend/collection/create_step2.html:98
-#: templates/frontend/collection/create_step3.html:77
+#: templates/frontend/collection/create_step3.html:133
+#: templates/frontend/collection/edit_collection.html:133
 #: templates/frontend/module/create_step1.html:17
 #: templates/frontend/module/create_step2.html:90
 #: templates/frontend/module/create_step3.html:89
+#: templates/frontend/module/edit_module.html:89
 msgid "License"
 msgstr "Bản quyền"
 
 #: templates/frontend/collection/create_step2.html:99
 #: templates/frontend/collection/create_step2.html:120
-#: templates/frontend/collection/create_step3.html:80
-#: templates/frontend/collection/create_step3.html:97
+#: templates/frontend/collection/create_step3.html:136
+#: templates/frontend/collection/create_step3.html:153
+#: templates/frontend/collection/edit_collection.html:136
+#: templates/frontend/collection/edit_collection.html:153
 #: templates/frontend/module/create_step1.html:18
 #: templates/frontend/module/create_step2.html:91
 #: templates/frontend/module/create_step2.html:112
 #: templates/frontend/module/create_step3.html:90
 #: templates/frontend/module/create_step3.html:106
+#: templates/frontend/module/edit_module.html:90
+#: templates/frontend/module/edit_module.html:106
 msgid "Metadata"
 msgstr "Thông tin bổ sung"
 
 #: templates/frontend/collection/create_step2.html:100
-#: templates/frontend/collection/create_step3.html:83
-#: templates/frontend/collection/create_step3.html:98
+#: templates/frontend/collection/create_step3.html:139
+#: templates/frontend/collection/create_step3.html:154
+#: templates/frontend/collection/edit_collection.html:139
+#: templates/frontend/collection/edit_collection.html:154
 #: templates/frontend/module/create_step2.html:92
 #: templates/frontend/module/create_step3.html:91
 #: templates/frontend/module/create_step3.html:107
+#: templates/frontend/module/edit_module.html:91
+#: templates/frontend/module/edit_module.html:107
 msgid "Content"
 msgstr "Nội dung"
 
@@ -904,19 +951,26 @@ msgid "Enter title"
 msgstr "Nhập tiêu đề"
 
 #: templates/frontend/collection/create_step2.html:134
-#: templates/frontend/collection/create_step3.html:111
+#: templates/frontend/collection/create_step3.html:167
+#: templates/frontend/collection/edit_collection.html:167
 #: templates/frontend/module/create_step2.html:126
 #: templates/frontend/module/create_step3.html:119
+#: templates/frontend/module/edit_module.html:119
 msgid "Description"
 msgstr "Mô tả"
 
 #: templates/frontend/collection/create_step2.html:144
 #: templates/frontend/collection/create_step2.html:202
-#: templates/frontend/collection/create_step3.html:126
+#: templates/frontend/collection/create_step3.html:178
+#: templates/frontend/collection/create_step3.html:237
+#: templates/frontend/collection/edit_collection.html:178
+#: templates/frontend/collection/edit_collection.html:237
 #: templates/frontend/module/create_step2.html:136
 #: templates/frontend/module/create_step2.html:194
 #: templates/frontend/module/create_step3.html:129
-#: templates/frontend/module/create_step3.html:186
+#: templates/frontend/module/create_step3.html:188
+#: templates/frontend/module/edit_module.html:129
+#: templates/frontend/module/edit_module.html:188
 msgid "Name"
 msgstr "Tên"
 
@@ -931,86 +985,96 @@ msgid "Search author"
 msgstr "Nhập tên tác giả"
 
 #: templates/frontend/collection/create_step2.html:217
-#: templates/frontend/collection/create_step3.html:191
+#: templates/frontend/collection/create_step3.html:253
+#: templates/frontend/collection/edit_collection.html:253
 #: templates/frontend/module/create_step2.html:209
-#: templates/frontend/module/create_step3.html:201
+#: templates/frontend/module/create_step3.html:203
+#: templates/frontend/module/edit_module.html:203
 msgid "Categories"
 msgstr "Phân loại"
 
 #: templates/frontend/collection/create_step2.html:234
-#: templates/frontend/collection/create_step3.html:210
+#: templates/frontend/collection/create_step3.html:272
+#: templates/frontend/collection/edit_collection.html:272
 #: templates/frontend/module/create_step2.html:226
-#: templates/frontend/module/create_step3.html:218
+#: templates/frontend/module/create_step3.html:220
+#: templates/frontend/module/edit_module.html:220
 msgid "Image"
 msgstr "Ảnh"
 
 #: templates/frontend/collection/create_step2.html:242
-#: templates/frontend/collection/create_step3.html:222
+#: templates/frontend/collection/create_step3.html:284
+#: templates/frontend/collection/edit_collection.html:284
 #: templates/frontend/module/create_step2.html:234
-#: templates/frontend/module/create_step3.html:226
+#: templates/frontend/module/create_step3.html:228
+#: templates/frontend/module/edit_module.html:228
 msgid "Language"
 msgstr "Ngôn ngữ"
 
 #: templates/frontend/collection/create_step2.html:245
-#: templates/frontend/collection/create_step3.html:226
+#: templates/frontend/collection/create_step3.html:288
+#: templates/frontend/collection/edit_collection.html:288
 #: templates/frontend/module/create_step2.html:237
-#: templates/frontend/module/create_step3.html:229
+#: templates/frontend/module/create_step3.html:231
+#: templates/frontend/module/edit_module.html:231
 msgid "Choose language"
 msgstr "Chọn Ngôn ngữ"
 
-#: templates/frontend/collection/create_step2.html:252
-#: templates/frontend/collection/create_step3.html:235
-#: templates/frontend/module/create_step2.html:244
-#: templates/frontend/module/create_step3.html:236
+#: templates/frontend/collection/create_step2.html:400
+#: templates/frontend/collection/create_step3.html:443
+#: templates/frontend/collection/edit_collection.html:443
+#: templates/frontend/module/create_step2.html:392
+#: templates/frontend/module/create_step3.html:386
+#: templates/frontend/module/edit_module.html:386
 msgid "Keywords"
 msgstr "Các từ khóa"
 
-#: templates/frontend/collection/create_step2.html:256
-#: templates/frontend/collection/create_step3.html:239
-#: templates/frontend/module/create_step2.html:248
-#: templates/frontend/module/create_step3.html:240
+#: templates/frontend/collection/create_step2.html:404
+#: templates/frontend/collection/create_step3.html:447
+#: templates/frontend/collection/edit_collection.html:447
+#: templates/frontend/module/create_step2.html:396
+#: templates/frontend/module/create_step3.html:390
+#: templates/frontend/module/edit_module.html:390
 msgid "Tags"
 msgstr "Các Tag"
 
-#: templates/frontend/collection/create_step2.html:258
-#: templates/frontend/module/create_step2.html:250
+#: templates/frontend/collection/create_step2.html:406
+#: templates/frontend/module/create_step2.html:398
 msgid "Enter tags"
 msgstr "Thêm tag"
 
-#: templates/frontend/collection/create_step3.html:120
-msgid "Add new Author"
+#: templates/frontend/collection/create_step3.html:230
+#: templates/frontend/collection/edit_collection.html:230
+#: templates/frontend/module/create_step3.html:181
+#: templates/frontend/module/edit_module.html:181
+msgid "Add new author"
 msgstr "Thêm tác giả"
 
-#: templates/frontend/collection/create_step3.html:139
-msgid "HiFlyer JSC"
-msgstr ""
-
-#: templates/frontend/collection/create_step3.html:145
-msgid "Nguyen Lan Dung"
-msgstr ""
-
-#: templates/frontend/collection/create_step3.html:146
-msgid "R 405, 87 Lang Ha, Dong Da, Ha Noi, Viet Nam"
-msgstr ""
-
-#: templates/frontend/collection/create_step3.html:219
-#: templates/frontend/module/create_step3.html:223
+#: templates/frontend/collection/create_step3.html:281
+#: templates/frontend/collection/edit_collection.html:281
+#: templates/frontend/module/create_step3.html:225
+#: templates/frontend/module/edit_module.html:225
 msgid "Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg."
 msgstr ""
 "Kích thước tài liệu không vượt quá 50MB. <br>Hệ thống chấp nhận các định "
 "dạng: png gif jpg jpeg."
 
-#: templates/frontend/collection/create_step3.html:259
+#: templates/frontend/collection/create_step3.html:467
+#: templates/frontend/collection/edit_collection.html:467
 msgid "Create Section"
 msgstr "Tạo mục mới"
 
-#: templates/frontend/collection/create_step3.html:269
-#: templates/frontend/collection/create_step3.html:276
+#: templates/frontend/collection/create_step3.html:477
+#: templates/frontend/collection/create_step3.html:484
+#: templates/frontend/collection/edit_collection.html:477
+#: templates/frontend/collection/edit_collection.html:484
 msgid "Create section"
 msgstr "Tạo mục mới"
 
-#: templates/frontend/collection/create_step3.html:291
-#: templates/frontend/module/create_step3.html:262
+#: templates/frontend/collection/create_step3.html:499
+#: templates/frontend/collection/edit_collection.html:499
+#: templates/frontend/module/create_step3.html:412
+#: templates/frontend/module/edit_module.html:412
 msgid "Publish"
 msgstr "Công bố"
 
@@ -1027,7 +1091,8 @@ msgid "for view result."
 msgstr ""
 
 #: templates/frontend/module/create_mass_modules.html:78
-#: templates/frontend/module/create_step3.html:252
+#: templates/frontend/module/create_step3.html:402
+#: templates/frontend/module/edit_module.html:402
 msgid "Import"
 msgstr "Nhập"
 
@@ -1035,23 +1100,31 @@ msgstr "Nhập"
 msgid "Create module"
 msgstr "Tạo module"
 
-#: templates/frontend/module/create_step3.html:179
-msgid "Add new author"
-msgstr "Thêm tác giả"
-
-#: templates/frontend/module/create_step3.html:248
+#: templates/frontend/module/create_step3.html:398
+#: templates/frontend/module/edit_module.html:398
 msgid "Document for import"
 msgstr "Tải tài liệu"
 
-#: templates/frontend/module/create_step3.html:254
+#: templates/frontend/module/create_step3.html:404
+#: templates/frontend/module/edit_module.html:404
 msgid "Upload a document file, the best support extensions: doc"
 msgstr ""
 "Hỗ trợ tốt nhất kiểu file Word 2003 (doc), các định dạng khác đang trong "
 "giai đoạn phát triển."
 
-#: templates/frontend/module/create_step3.html:257
+#: templates/frontend/module/create_step3.html:407
+#: templates/frontend/module/edit_module.html:407
 msgid "Body"
 msgstr "Thân"
+
+#: templates/frontend/partials/browse-list.html:106
+msgid "View count"
+msgstr ""
+
+#: templates/frontend/partials/browse-list.html:113
+#, fuzzy
+msgid "Favorite count"
+msgstr "Tài liệu yêu thích"
 
 #: templates/frontend/partials/material_actions.html:11
 #: templates/frontend/partials/material_actions.html:17
@@ -1074,8 +1147,11 @@ msgstr "Tài liệu PDF"
 msgid "Collections"
 msgstr "Giáo trình"
 
+#: templates/frontend/partials/material_list.html:6
+msgid "Collections using this module"
+msgstr "Tuyển tập sử dụng module này"
+
 #: templates/registration/login.html:29
-#: templates/registration/registration_form.html:41
 msgid "Show password"
 msgstr "Hiện mật khẩu"
 
@@ -1257,7 +1333,7 @@ msgstr "Email của bạn"
 msgid "Your password"
 msgstr "Mật khẩu của bạn"
 
-#: templates/registration/registration_form.html:46
+#: templates/registration/registration_form.html:38
 msgid "Enter password again"
 msgstr "Nhập lại mật khẩu"
 
@@ -1269,9 +1345,15 @@ msgstr "Nhập sai mã xác thực"
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: vpw/views.py:430 vpw/views.py:634
+#: vpw/views.py:442 vpw/views.py:658
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
+
+#~ msgid "Browser All"
+#~ msgstr "Duyệt tài liệu"
+
+#~ msgid "Add new Author"
+#~ msgstr "Thêm tác giả"
 
 #~ msgid "Add to my favourite"
 #~ msgstr "Yêu thích"

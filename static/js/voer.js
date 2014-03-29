@@ -174,6 +174,55 @@ function ajaxGetMaterialByCondition() {
           }
 
           $(element + '-loading').remove();
+        },
+        rating: function (element) {
+            var isDisabled = false;
+            var is_authenticated = false;
+
+            if (Voer.Helper.hasAttr(element, 'data-rated-flag') && !Voer.Helper.hasAttr(element, 'data-user-authenticated')) {
+                isDisabled = true;
+            }
+
+            $(element).jRating({
+                bigStarsPath: '/static/css/jquery/jRating/icons/stars.png',
+                smallStarsPath: '/static/css/jquery/jRating/icons/small.png',
+                rateMax: 5,
+                isDisabled: isDisabled,
+                sendRequest: false,
+                onClick: function(element, rate) {
+                    var mid = $(element).attr('data-material-id');
+                    var version = $(element).attr('data-material-version');
+                    var params = {};
+                    params.mid = mid;
+                    params.version = version;
+
+                    if (rate === undefined) {
+                        params.rate = '';
+                        params.type = 'delete';
+                    }
+
+                    $.ajax({
+                        type: 'get',
+                        url: '/ajax/user-rate',
+                        data: params,
+                        success: function(data) {
+                            $(element).find('.current-rating').html(data.rate_fake);
+                            $(element).find('.count-rating').html(data.count);
+                        }
+                    });
+                }
+            });
+        },
+        hasAttr: function(element, field_name) {
+            var has_attr = true;
+            var attr = $(element).attr('name');
+
+            // For some browsers, `attr` is undefined; for others, `attr` is false.  Check for both.
+            if (typeof attr !== 'undefined' && attr !== false) {
+                has_attr = false;
+            }
+
+            return has_attr;
         }
       };
     })();

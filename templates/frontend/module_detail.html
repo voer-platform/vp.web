@@ -102,6 +102,19 @@
 
     {% include 'frontend/partials/material_author.html' %}
 
+    {% if material.rates %}
+    <div class="module-view-author left">
+        <div class="material-rating-title">{% trans 'Rating:' %}</div>
+        <div class="material-rating-content padding-content-10">
+            <div class="material-rating-average" data-average="{{ material.rates.rate_fake }}" data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}" {% if user.is_authenticated %} data-user-authenticated="true"{% endif %} {% if material.is_rated %} data-rated-flag="true"{% endif %}></div>
+            <div class="current-rating">{{ material.rates.rate_fake }}</div>
+            <div class="count-rating">{{ material.rates.count }}</div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% include 'frontend/partials/material_list.html' with links=material.links %}
+
     <!-- OTHER FROM AUTHOR -->
     <div class="module-block module-simple padding-content-15">
         <h4>{% trans 'By same author' %}</h4>
@@ -121,6 +134,7 @@
 
 </div>
 
+{% block js %}
 {% if voer_fb_id %}
 <!-- END RIGHT ROW -->
 <div id="fb-root"></div>
@@ -139,4 +153,13 @@
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-531f211f57a24dfc"></script>
 
 <script>$(function(){ Voer.Materials.run(); });</script>
+
+{% if user.is_authenticated %}
+<script type="text/javascript">
+$(document).ready(function(){
+    Voer.Helper.rating('.material-rating-average');
+});
+</script>
+{% endif %}
+{% endblock %}
 {% endblock %}

@@ -31,7 +31,7 @@ from vpw.utils import normalize_string, normalize_filename
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, vpr_get_persons, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
-    voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite
+    voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite, vpr_user_add_rate, vpr_user_delete_rate
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm, RecaptchaRegistrationForm
 
@@ -56,6 +56,10 @@ COLLECTION_TEMPLATES = [
 # Material type
 MODULE_TYPE = 1
 COLLECTION_TYPE = 2
+
+#Vote type
+VOTE_TYPE_INSERT = 'insert'
+VOTE_TYPE_DELETE = 'delete'
 
 EXPORT_PDF_DIR = '%s/pdf_export/' % settings.MEDIA_ROOT
 
@@ -227,6 +231,13 @@ def module_detail(request, title, mid, version):
             file_tmp['title'] = attachment_info['name']
             file_tmp['attachment_id'] = file_attachment_id
             file_data.append(file_tmp)
+
+    rate_data = vpr_get_statistic_data(mid, version, 'rates')
+    material['rates'] = _calculate_rate_data(rate_data)
+    print material['rates']
+
+    link_data = vpr_get_statistic_data(mid, version, 'links')
+    material['links'] = link_data
 
     voer_facebook_id = settings.VOER_FACEBOOK_APP_ID
     response = render(request, "frontend/module_detail.html",
@@ -1980,3 +1991,39 @@ def delete_unpublish(request):
         return HttpResponseRedirect(reverse('get_unpublish'))
     else:
         return HttpResponseRedirect('/')
+
+
+@login_required
+def ajax_user_rate(request):
+    current_user = request.user
+    pid = current_user.author.author_id
+
+    vote_type = request.GET.get('type', VOTE_TYPE_INSERT)
+    rate = request.GET.get('rate', 1)
+    mid = request.GET.get('mid', None)
+    version = request.GET.get('version', 0)
+
+    response_data = {}
+
+    if mid is not None:
+        if vote_type == VOTE_TYPE_INSERT:
+            result = vpr_user_add_rate(pid, rate, mid, version)
+        elif vote_type == VOTE_TYPE_DELETE:
+            result = vpr_user_delete_rate(pid, mid, version)
+
+        rate_data = _calculate_rate_data(result)
+        response_data = rate_data
+
+    if request.is_ajax():
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+    else:
+        return HttpResponseRedirect('/')
+
+
+def _calculate_rate_data(rate_data):
+    if rate_data['rate'] is None:
+        rate_data['rate_fake'] = 0
+    else:
+        rate_data['rate_fake'] = round(rate_data['rate'], 1)
+
+    return rate_data
