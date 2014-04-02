@@ -132,6 +132,9 @@
 .icon-favorite {
     background-position: 0 0;
 }
+.icon-favorite.active {
+    background-position: -16px 0px;
+}
 .icon-view {
     background-position: 0 -16px;
 }

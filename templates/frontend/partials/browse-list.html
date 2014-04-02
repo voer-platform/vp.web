@@ -111,7 +111,7 @@ $(document).ready(function(){
 
                 {% if material.favorite_count %}
                     <a href="javascript:void(0)" title="{% trans 'Favorite count' %}">
-                        <i class="icon icon-favorite"></i>
+                        <i class="icon icon-favorite {% if material.is_favorited %}active{% endif %}" {% if material.is_favorited %}data-added-favorite="true"{% endif %} data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}"></i>
                         <span class="stats-count">{{ material.favorite_count.favorite }}</span>
                     </a>
                 {% endif %}

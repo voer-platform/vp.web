@@ -111,10 +111,10 @@
         <div class="hfitems active">
             <div id="materials" class="material-list">
 
-                {% with material_list=materials.results %} 
+                {% with material_list=materials.results %}
                     {% include 'frontend/partials/browse-list.html' %}
-                {% endwith %} 
-                
+                {% endwith %}
+
                 {% comment %}
                 <div class="hfitem">
                    <div class="collection-save-hover" metadata="col-hover-{{ material.material_id }}">
@@ -369,4 +369,6 @@
     </div>
 </div>
 </div>
+
+<script type="text/javascript">$(function(){ Voer.Materials.run(); });</script>
 {% endblock %}

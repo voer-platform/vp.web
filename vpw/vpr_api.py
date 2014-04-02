@@ -321,7 +321,7 @@ def voer_update_author(author):
     return result
 
 
-def voer_add_favorite(mid, version, pid):
+def voer_add_favorite(pid, mid, version):
     if not version:
         result = vpr_request('POST', "materials/%s/favorites" % mid, {'person': pid})
     else:
@@ -403,3 +403,31 @@ def is_material_rated(mid, version, pid):
             is_rated = True
 
     return is_rated
+
+
+def vpr_is_favorited(mid, version, pid):
+    is_favorited = False
+
+    if pid:
+        if version == '' or version == 0 or version is None:
+            result = vpr_request('GET', "materials/%s/favorites?person=%s" % (mid, pid))
+        else:
+            result = vpr_request('GET', "materials/%s/%s/favorites?person=%s" % (mid, version, pid))
+
+        if result['favorite'] == 1:
+            is_favorited = True
+
+    return is_favorited
+
+
+def vpr_delete_favorite(pid, mid, version=''):
+    if not version:
+        url = settings.VPR_URL + 'materials/%s/favorites?person=%s' % (mid, pid)
+    else:
+        url = settings.VPR_URL + 'materials/%s/%s/favorites?person=%s' % (mid, version, pid)
+
+    r = requests.request('DELETE', url)
+
+    result = json.loads(r.content)
+
+    return result
