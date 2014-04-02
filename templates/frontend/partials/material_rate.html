@@ -1,0 +1,16 @@
+{% load i18n %}
+
+{% if material.rates %}
+<div class="module-view-author left">
+    <div class="material-rating-title">{% trans 'Rating:' %}</div>
+    <div class="material-rating-content padding-content-10" data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}">
+        <div class="material-rating-average" data-average="{{ material.rates.rate_fake }}" {% if user.is_authenticated %} data-user-authenticated="true"{% endif %} {% if material.is_rated %} data-rated-flag="true"{% endif %}></div>
+        <span class="current-rating">{{ material.rates.rate_fake }}</span> {% trans 'based on' %}
+        <span class="count-rating">{{ material.rates.count }}</span> {% trans 'rating' %}
+
+        {% if material.is_rated %}
+        <div class="icon icon-delete-rate"></div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

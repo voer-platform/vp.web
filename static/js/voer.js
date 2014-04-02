@@ -177,9 +177,8 @@ function ajaxGetMaterialByCondition() {
         },
         rating: function (element) {
             var isDisabled = false;
-            var is_authenticated = false;
 
-            if (Voer.Helper.hasAttr(element, 'data-rated-flag') && !Voer.Helper.hasAttr(element, 'data-user-authenticated')) {
+            if (Voer.Helper.hasAttr(element, 'data-rated-flag') || !Voer.Helper.hasAttr(element, 'data-user-authenticated')) {
                 isDisabled = true;
             }
 
@@ -189,37 +188,19 @@ function ajaxGetMaterialByCondition() {
                 rateMax: 5,
                 isDisabled: isDisabled,
                 sendRequest: false,
+                step: true,
                 onClick: function(element, rate) {
-                    var mid = $(element).attr('data-material-id');
-                    var version = $(element).attr('data-material-version');
-                    var params = {};
-                    params.mid = mid;
-                    params.version = version;
-
-                    if (rate === undefined) {
-                        params.rate = '';
-                        params.type = 'delete';
-                    }
-
-                    $.ajax({
-                        type: 'get',
-                        url: '/ajax/user-rate',
-                        data: params,
-                        success: function(data) {
-                            $(element).find('.current-rating').html(data.rate_fake);
-                            $(element).find('.count-rating').html(data.count);
-                        }
-                    });
+                    Voer.Materials.materialRate(element, rate);
                 }
             });
         },
         hasAttr: function(element, field_name) {
-            var has_attr = true;
-            var attr = $(element).attr('name');
+            var has_attr = false;
+            var attr = $(element).attr(field_name);
 
             // For some browsers, `attr` is undefined; for others, `attr` is false.  Check for both.
             if (typeof attr !== 'undefined' && attr !== false) {
-                has_attr = false;
+                has_attr = true;
             }
 
             return has_attr;

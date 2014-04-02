@@ -135,6 +135,12 @@
 .icon-view {
     background-position: 0 -16px;
 }
+.icon-delete-rate {
+    background: url("../images/icon-delete.gif") no-repeat 0 0 transparent;
+}
+.icon-delete-rate:hover {
+    background-position: 0 -16px;
+}
 /*************************** END ICON *************************/
 .voer-mol-ico {
   background: url("../images/icon/icon-module.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -1028,4 +1034,16 @@ article.flatpage {
     text-transform: uppercase;
     font-family: verdana;
     font-weight: bold;
+}
+.material-rating-content {
+    position: relative;
+}
+.material-rating-average {
+    display: inline-block;
+}
+.material-rating-content .icon-delete-rate {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    cursor: pointer;
 }

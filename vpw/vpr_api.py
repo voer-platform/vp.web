@@ -378,7 +378,7 @@ def vpr_user_add_rate(pid, rate, mid, version=''):
 
 
 def vpr_user_delete_rate(pid, mid, version=''):
-    if version == '' or version == 0:
+    if version == '' or version == 0 or version is None:
         url = settings.VPR_URL + 'materials/%s/rates?person=%s' % (mid, pid)
     else:
         url = settings.VPR_URL + 'materials/%s/%s/rates?person=%s' % (mid, version, pid)
@@ -388,3 +388,18 @@ def vpr_user_delete_rate(pid, mid, version=''):
     result = json.loads(r.content)
 
     return result
+
+
+def is_material_rated(mid, version, pid):
+    is_rated = False
+
+    if pid:
+        if version == '' or version == 0 or version is None:
+            result = vpr_request('GET', "materials/%s/rates?person=%s" % (mid, pid))
+        else:
+            result = vpr_request('GET', "materials/%s/%s/rates?person=%s" % (mid, version, pid))
+
+        if result['rate']:
+            is_rated = True
+
+    return is_rated

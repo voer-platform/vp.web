@@ -19,6 +19,31 @@
                         window.location.href = '/user/login/?next=' + currentUrl;
                     }
                 });
+            },
+            materialRate: function(element, rate) {
+                var parent_ele = $(element).parent();
+                var mid = parent_ele.attr('data-material-id');
+                var version = parent_ele.attr('data-material-version');
+
+                var params = {};
+                params.mid = mid;
+                params.version = version;
+
+                if (rate === undefined || rate == 0) {
+                    params.rate = '';
+                    params.type = 'delete';
+                } else {
+                    params.rate = rate;
+                }
+
+                $.ajax({
+                    type: 'get',
+                    url: '/ajax/user-rate',
+                    data: params,
+                    success: function(data) {
+                        $('#material-rating').html(data);
+                    }
+                });
             }
         };
     })();
