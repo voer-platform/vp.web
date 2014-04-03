@@ -220,6 +220,10 @@
     <!-- END TAG -->
     {% endif %}
 
+    <div id="material-rating">
+    {% include 'frontend/partials/material_rate.html' with material=collection %}
+    </div>
+
     {% include 'frontend/partials/material_list.html' with links=material.links %}
 
     <!-- OTHER FROM AUTHOR -->
@@ -241,5 +245,15 @@
 
 </div>
 
-<script>$(function(){ Voer.Materials.run(); });</script>
+<script>
+$(function(){ Voer.Materials.run(); });
+
+$(document).ready(function(){
+    Voer.Helper.rating('.material-rating-average');
+
+    $(document).on('click', '.icon-delete-rate', function(){
+        Voer.Materials.materialRate(this);
+    });
+});
+</script>
 {% endblock %}

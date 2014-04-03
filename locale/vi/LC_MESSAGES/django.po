@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-29 03:20+0000\n"
-"PO-Revision-Date: 2014-03-29 15:51+0700\n"
+"POT-Creation-Date: 2014-04-02 17:09+0000\n"
+"PO-Revision-Date: 2014-04-03 00:10+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -281,17 +281,17 @@ msgid "All categories"
 msgstr "Tất cả chủ đề"
 
 #: templates/frontend/collection_detail.html:54
-#: templates/frontend/module_detail.html:19
+#: templates/frontend/module_detail.html:18
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
 #: templates/frontend/collection_detail.html:85
-#: templates/frontend/module_detail.html:41
+#: templates/frontend/module_detail.html:40
 msgid "Attachments"
 msgstr "Tập tin đính kèm"
 
 #: templates/frontend/collection_detail.html:107
-#: templates/frontend/module_detail.html:74
+#: templates/frontend/module_detail.html:73
 msgid "Comment"
 msgstr "Góp ý"
 
@@ -299,13 +299,13 @@ msgstr "Góp ý"
 msgid "View my profile"
 msgstr "Xem hồ sơ"
 
-#: templates/frontend/collection_detail.html:225
-#: templates/frontend/module_detail.html:119
+#: templates/frontend/collection_detail.html:231
+#: templates/frontend/module_detail.html:113
 msgid "By same author"
 msgstr "Cùng tác giả"
 
-#: templates/frontend/collection_detail.html:234
-#: templates/frontend/module_detail.html:128
+#: templates/frontend/collection_detail.html:240
+#: templates/frontend/module_detail.html:122
 msgid "Similar items"
 msgstr "Nội dung tương tự"
 
@@ -322,7 +322,7 @@ msgstr ""
 "Khám phá %(module_count)s tài liệu, %(collection_count)s tuyển tập từ "
 "%(person_count)s tác giả"
 
-#: templates/frontend/index.html:64 templates/frontend/module_detail.html:14
+#: templates/frontend/index.html:64 templates/frontend/module_detail.html:13
 #: templates/frontend/partials/browse-list.html:47
 msgid "Module"
 msgstr "Tài liệu"
@@ -421,10 +421,6 @@ msgstr "Khác"
 #: templates/frontend/user_unpublish.html:126
 msgid "Uploaded On:"
 msgstr "Tải lên ngày:"
-
-#: templates/frontend/module_detail.html:108
-msgid "Rating:"
-msgstr "Đánh giá:"
 
 #: templates/frontend/profile.html:51
 #, fuzzy
@@ -1150,6 +1146,18 @@ msgstr "Giáo trình"
 msgid "Collections using this module"
 msgstr "Tuyển tập sử dụng module này"
 
+#: templates/frontend/partials/material_rate.html:5
+msgid "Rating:"
+msgstr "Đánh giá:"
+
+#: templates/frontend/partials/material_rate.html:8
+msgid "based on"
+msgstr "dựa trên"
+
+#: templates/frontend/partials/material_rate.html:9
+msgid "rating"
+msgstr "đánh giá"
+
 #: templates/registration/login.html:29
 msgid "Show password"
 msgstr "Hiện mật khẩu"
@@ -1344,7 +1352,7 @@ msgstr "Nhập sai mã xác thực"
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: vpw/views.py:442 vpw/views.py:658
+#: vpw/views.py:466 vpw/views.py:682
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 

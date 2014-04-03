@@ -1,2 +1,8 @@
 *.log
 *.pyc
+.DS_Store
+.project
+.pydevproject
+media/cache/*
+.idea
+.idea/*

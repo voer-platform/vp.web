@@ -102,18 +102,9 @@
 
     {% include 'frontend/partials/material_author.html' %}
 
-    <!--
-    {% if material.rates %}
-    <div class="module-view-author left">
-        <div class="material-rating-title">{% trans 'Rating:' %}</div>
-        <div class="material-rating-content padding-content-10">
-            <div class="material-rating-average" data-average="{{ material.rates.rate_fake }}" data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}" {% if user.is_authenticated %} data-user-authenticated="true"{% endif %} {% if material.is_rated %} data-rated-flag="true"{% endif %}></div>
-            <div class="current-rating">{{ material.rates.rate_fake }}</div>
-            <div class="count-rating">{{ material.rates.count }}</div>
-        </div>
+    <div id="material-rating">
+    {% include 'frontend/partials/material_rate.html' with material=material %}
     </div>
-    {% endif %}
-    -->
 
     {% include 'frontend/partials/material_list.html' with links=material.links %}
 
@@ -141,6 +132,10 @@ $(function(){ Voer.Materials.run(); });
 
 $(document).ready(function(){
     Voer.Helper.rating('.material-rating-average');
+
+    $(document).on('click', '.icon-delete-rate', function(){
+        Voer.Materials.materialRate(this);
+    });
 });
 </script>
 {% endblock %}

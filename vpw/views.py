@@ -31,7 +31,7 @@ from vpw.utils import normalize_string, normalize_filename
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, vpr_get_persons, \
     vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
-    voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite, vpr_user_add_rate, vpr_user_delete_rate
+    voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite, vpr_delete_favorite,vpr_user_add_rate, vpr_user_delete_rate, is_material_rated, vpr_is_favorited
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm, RecaptchaRegistrationForm
 
@@ -60,6 +60,10 @@ COLLECTION_TYPE = 2
 #Vote type
 VOTE_TYPE_INSERT = 'insert'
 VOTE_TYPE_DELETE = 'delete'
+
+#Favorite type
+FAVORITE_TYPE_INSERT = 'insert'
+FAVORITE_TYPE_DELETE = 'delete'
 
 EXPORT_PDF_DIR = '%s/pdf_export/' % settings.MEDIA_ROOT
 
@@ -185,6 +189,12 @@ def module_detail_old(request, mid, version):
 
 def module_detail(request, title, mid, version):
     material = vpr_get_material(mid)
+    current_user = request.user
+    if current_user.is_authenticated():
+        person_id = current_user.author.author_id
+    else:
+        person_id = ''
+
     if 'material_type' not in material or material['material_type'] != MODULE_TYPE:
         raise Http404
 
@@ -234,6 +244,7 @@ def module_detail(request, title, mid, version):
 
     rate_data = vpr_get_statistic_data(mid, version, 'rates')
     material['rates'] = _calculate_rate_data(rate_data)
+    material['is_rated'] = is_material_rated(mid, version, person_id)
 
     link_data = vpr_get_statistic_data(mid, version, 'links')
     material['links'] = link_data
@@ -263,6 +274,11 @@ def collection_detail_old(request, cid, mid):
 
 
 def collection_detail(request, title, cid, mid):
+    current_user = request.user
+    if current_user.is_authenticated():
+        person_id = current_user.author.author_id
+    else:
+        person_id = ''
 
     # Get collection
     collection = vpr_get_material(cid)
@@ -324,6 +340,10 @@ def collection_detail(request, title, cid, mid):
     else:
         material = {}
         file_data = []
+
+    rate_data = vpr_get_statistic_data(cid, '', 'rates')
+    collection['rates'] = _calculate_rate_data(rate_data)
+    collection['is_rated'] = is_material_rated(cid, '', person_id)
 
     # Generate outline html
     strOutline = "<ul id='outline-collection' class='list-module-name-content'>%s</ul>" % get_outline(cid, outline[
@@ -796,6 +816,12 @@ def _save_material(form, material_type, request):
 
 
 def view_profile(request, pid):
+    current_user = request.user
+    if current_user.is_authenticated():
+        person_id = current_user.author.author_id
+    else:
+        person_id = ''
+
     current_person = vpr_get_person(pid, True)
     categories = vpr_get_categories()
 
@@ -814,6 +840,9 @@ def view_profile(request, pid):
 
         favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
         material['favorite_count'] = favorite_count
+
+        material['is_favorited'] = vpr_is_favorited(material['material_id'], material['version'], person_id)
+
         material_result.append(material)
 
     page_query = {}
@@ -847,6 +876,12 @@ Browse page
 
 
 def browse(request):
+    current_user = request.user
+    if current_user.is_authenticated():
+        person_id = current_user.author.author_id
+    else:
+        person_id = ''
+
     page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
 
@@ -864,6 +899,9 @@ def browse(request):
 
         favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
         material['favorite_count'] = favorite_count
+
+        material['is_favorited'] = vpr_is_favorited(material['material_id'], material['version'], person_id)
+
         material_result.append(material)
 
     if 'count' in materials:
@@ -1090,6 +1128,12 @@ def get_page_query(request):
 
 ## Browse material
 def ajax_browse(request):
+    current_user = request.user
+    if current_user.is_authenticated():
+        person_id = current_user.author.author_id
+    else:
+        person_id = ''
+
     page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
 
@@ -1107,6 +1151,8 @@ def ajax_browse(request):
 
         favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
         material['favorite_count'] = favorite_count
+
+        material['is_favorited'] = vpr_is_favorited(material['material_id'], material['version'], person_id)
         material_result.append(material)
 
     if 'count' in materials:
@@ -1207,20 +1253,30 @@ def edit_profile(request):
 def ajax_add_favorite(request):
     if request.is_ajax():
         current_user = request.user
-        pid = current_user.author.author_id
-
-        mid = request.POST['mid']
-        version = request.POST['version']
 
         response_data = {}
         response_data['status'] = False
         response_data['message'] = 'Oops!.'
 
-        result = voer_add_favorite(mid, version, pid)
-        if 'favorite' in result:
-            response_data['status'] = True
-            response_data['message'] = 'Add favorite successful'
-            response_data['favorite_count'] = result['favorite']
+        if current_user.is_authenticated():
+            pid = current_user.author.author_id
+
+            favorite_type = request.POST.get('type', FAVORITE_TYPE_INSERT)
+            mid = request.POST['mid']
+            version = request.POST['version']
+
+            if favorite_type == FAVORITE_TYPE_INSERT:
+                result = voer_add_favorite(pid, mid, version)
+                result['is_favorited'] = True
+            elif favorite_type == FAVORITE_TYPE_DELETE:
+                result = vpr_delete_favorite(pid, mid, version)
+                result['is_favorited'] = False
+
+            if 'favorite' in result:
+                response_data['status'] = True
+                response_data['message'] = _('Add favorite successful')
+                response_data['favorite_count'] = result['favorite']
+                response_data['is_favorited'] = result['is_favorited']
 
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
@@ -1919,6 +1975,12 @@ def server_error(request):
 
 
 def ajax_search_result(request):
+    current_user = request.user
+    if current_user.is_authenticated():
+        person_id = current_user.author.author_id
+    else:
+        person_id = ''
+
     if request.is_ajax():
         keyword = request.REQUEST.get('keyword', '')
         search_type = request.REQUEST.get('search_type', '')
@@ -1976,6 +2038,8 @@ def ajax_search_result(request):
                 favorite_count = vpr_get_statistic_data(result['material_id'], result['version'], 'favorites')
                 result['favorite_count'] = favorite_count
 
+                result['is_favorited'] = vpr_is_favorited(result['material_id'], result['version'], person_id)
+
             result_array.append(result)
 
         return render(request, "frontend/ajax/search_result.html",
@@ -2011,19 +2075,22 @@ def ajax_user_rate(request):
     mid = request.GET.get('mid', None)
     version = request.GET.get('version', 0)
 
-    response_data = {}
+    material = {}
+    material['material_id'] = mid
+    material['version'] = version
 
     if mid is not None:
         if vote_type == VOTE_TYPE_INSERT:
             result = vpr_user_add_rate(pid, rate, mid, version)
+            material['is_rated'] = True
         elif vote_type == VOTE_TYPE_DELETE:
             result = vpr_user_delete_rate(pid, mid, version)
+            result['is_rated'] = False
 
-        rate_data = _calculate_rate_data(result)
-        response_data = rate_data
+        material['rates'] = _calculate_rate_data(result)
 
     if request.is_ajax():
-        return HttpResponse(json.dumps(response_data), content_type="application/json")
+        return render(request, "frontend/ajax/material_rate.html", {'material': material})
     else:
         return HttpResponseRedirect('/')
 
@@ -2033,5 +2100,6 @@ def _calculate_rate_data(rate_data):
         rate_data['rate_fake'] = 0
     else:
         rate_data['rate_fake'] = round(rate_data['rate'], 1)
+        rate_data['rate_fake'] = format(rate_data['rate_fake']).replace(',', '.')
 
     return rate_data
