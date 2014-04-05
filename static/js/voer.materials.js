@@ -45,7 +45,12 @@
                     url: '/ajax/user-rate',
                     data: params,
                     success: function(data) {
-                        $('#material-rating').html(data);
+                        if (data.success === false) {
+                            var currentUrl = window.location.pathname;
+                            window.location.href = '/user/login/?next=' + currentUrl;
+                        } else {
+                            $('#material-rating').html(data);
+                        }
                     }
                 });
             }

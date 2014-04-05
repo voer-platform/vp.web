@@ -2065,34 +2065,49 @@ def delete_unpublish(request):
         return HttpResponseRedirect('/')
 
 
-@login_required
 def ajax_user_rate(request):
     current_user = request.user
-    pid = current_user.author.author_id
 
-    vote_type = request.GET.get('type', VOTE_TYPE_INSERT)
-    rate = request.GET.get('rate', 1)
-    mid = request.GET.get('mid', None)
-    version = request.GET.get('version', 0)
+    if current_user.is_authenticated():
+        pid = current_user.author.author_id
 
-    material = {}
-    material['material_id'] = mid
-    material['version'] = version
+        vote_type = request.GET.get('type', VOTE_TYPE_INSERT)
+        rate = request.GET.get('rate', 1)
+        mid = request.GET.get('mid', None)
+        version = request.GET.get('version', 0)
 
-    if mid is not None:
-        if vote_type == VOTE_TYPE_INSERT:
-            result = vpr_user_add_rate(pid, rate, mid, version)
-            material['is_rated'] = True
-        elif vote_type == VOTE_TYPE_DELETE:
-            result = vpr_user_delete_rate(pid, mid, version)
-            result['is_rated'] = False
+        if rate < 1:
+            rate = 1
+        elif rate > 5:
+            rate = 5
 
-        material['rates'] = _calculate_rate_data(result)
+        material = {}
+        material['material_id'] = mid
+        material['version'] = version
 
-    if request.is_ajax():
-        return render(request, "frontend/ajax/material_rate.html", {'material': material})
+        if mid is not None:
+            if vote_type == VOTE_TYPE_INSERT:
+                result = vpr_user_add_rate(pid, rate, mid, version)
+                material['is_rated'] = True
+            elif vote_type == VOTE_TYPE_DELETE:
+                result = vpr_user_delete_rate(pid, mid, version)
+                result['is_rated'] = False
+
+            material['rates'] = _calculate_rate_data(result)
+
+        if request.is_ajax():
+            return render(request, "frontend/ajax/material_rate.html", {'material': material})
+        else:
+            return HttpResponseRedirect('/')
     else:
-        return HttpResponseRedirect('/')
+        if request.is_ajax():
+            result = {}
+            result['success'] = False
+            result['message'] = _('Please login')
+
+            return HttpResponse(json.dumps(result), content_type='application/json')
+        else:
+            return HttpResponseRedirect('/')
 
 
 def _calculate_rate_data(rate_data):

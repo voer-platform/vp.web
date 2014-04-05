@@ -178,7 +178,7 @@ function ajaxGetMaterialByCondition() {
         rating: function (element) {
             var isDisabled = false;
 
-            if (Voer.Helper.hasAttr(element, 'data-rated-flag') || !Voer.Helper.hasAttr(element, 'data-user-authenticated')) {
+            if (Voer.Helper.hasAttr(element, 'data-rated-flag')) {
                 isDisabled = true;
             }
 
@@ -189,8 +189,8 @@ function ajaxGetMaterialByCondition() {
                 isDisabled: isDisabled,
                 sendRequest: false,
                 step: true,
-                onClick: function(element, rate) {
-                    Voer.Materials.materialRate(element, rate);
+                onClick: function(obj, rate) {
+                    Voer.Materials.materialRate(obj, rate);
                 }
             });
         },
