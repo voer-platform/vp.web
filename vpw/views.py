@@ -1696,8 +1696,15 @@ def user_module_reuse(request, mid, version=1):
     if version is None:
         version = 1
     material = vpr_get_material(mid, version)
+    # Ep material version ve 0
+    material["version"] = 0
+
     categories = vpr_get_categories()
-    author = vpr_get_person(request.user.author.author_id)
+
+    material_categories = get_categories_of_material(material)
+    authors = get_author_of_material(material)
+    roles = get_roles_material(material)
+
     if request.method == "POST":
         form = ModuleCreationForm(request.POST)
         action = request.POST.get("action", "")
@@ -1723,8 +1730,8 @@ def user_module_reuse(request, mid, version=1):
         content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
         material['text'] = content
         form = ModuleCreationForm(dict(body=material['text']))
-    params = {'material': material, 'categories': categories,
-              'form': form, 'author': author}
+    params = {'material': material, 'categories': categories, "material_categories": material_categories,
+              'form': form, 'authors': authors, "roles": roles}
     return render(request, MODULE_TEMPLATES[3], params)
 
 @login_required
@@ -1786,14 +1793,21 @@ def user_collection_edit(request, cid):
 
     params = {'material': material, 'categories': categories, 'material_categories': material_categories,
               'form': form, 'authors': authors, 'roles': roles}
-    return render(request, 'frontend/collection/edit_collection.html', params)
+    return render(request, 'frontend/collection/create_step3.html', params)
+
+
+def get_prop(obj, property):
+    if isinstance(obj, dict):
+        return obj.get(property, "")
+    else:
+        return getattr(obj, property, "")
 
 
 def get_author_of_material(material):
     #get author
-    str_persons = getattr(material, "author", "") + "," + getattr(material, "editor", "") \
-                  + "," + getattr(material, "licensor", "") + "," + getattr(material, "maintainer", "") \
-                  + "," + getattr(material, "translator", "") + "," + getattr(material, "coeditor", "")
+    str_persons = get_prop(material, "author") + "," + get_prop(material, "editor") \
+                  + "," + get_prop(material, "licensor") + "," + get_prop(material, "maintainer") \
+                  + "," + get_prop(material, "translator") + "," + get_prop(material, "coeditor")
 
     list_persons = str_persons.split(",")
     #Remove '' in list
@@ -1809,7 +1823,7 @@ def get_author_of_material(material):
 
 
 def get_categories_of_material(material):
-    str_categories = getattr(material, "categories", "")
+    str_categories = get_prop(material, "categories")
     list_categories = str_categories.split(",")
     #Remove '' in list
     while '' in list_categories:
@@ -1819,7 +1833,7 @@ def get_categories_of_material(material):
 
 
 def get_roles_of_material(material, role):
-    str_roles = getattr(material, role, "")
+    str_roles = get_prop(material, role)
     list_roles = str_roles.split(",")
     #Remove '' in list
     while '' in list_roles:
@@ -1910,7 +1924,7 @@ def user_module_edit(request, mid):
         form = ModuleCreationForm(dict(body=material.text))
     params = {'material': material, 'categories': categories, 'material_categories': material_categories,
               'form': form, 'authors': authors, 'roles': roles}
-    return render(request, 'frontend/module/edit_module.html', params)
+    return render(request, 'frontend/module/create_step3.html', params)
 
 
 @user_passes_test(lambda u: u.is_superuser)
