@@ -781,10 +781,14 @@ article.flatpage {
   width: 10%;
   overflow: hidden;
   background-repeat: no-repeat;
+  width: 74px;
+  height: 60px;
 }
 .material-cover img {
   border: 1px solid #d1d1d1;
   padding: 4px;
+  width: 60px;
+  height: 60px;
 }
 .material-brief {
   width: 90%;

@@ -71,11 +71,14 @@ $(document).ready(function(){
             <p></p>
         </div>
       {% else %}
+      {% with title=material.title|safe %}
         <div class="material-cover left">
-          <a title="{{ type_name }}: {{ material.title }}" alt="{{ type_name }}: {{ material.title }}" href="{{ material_url }}">
+          <a title="{{ type_name }}: {{ title }}" alt="{{ type_name }}: {{ title }}" href="{{ material_url }}">
             {% if material.image %}
                 {% thumbnail material.image "50x50" crop="center" as material_image %}
                     <img src="{{ image.url }}">
+                {% empty %}
+                    <img src="{% static 'images/white.jpg' %}">
                 {% endthumbnail %}
             {% elif material.categories.0.0 %}
                 {% static 'images/cat' as catimg_prefix %}
@@ -98,9 +101,9 @@ $(document).ready(function(){
         </div>
         <div class="material-brief left">
             <h5 class="{% if material.material_type == 2 %}collection-title{% else %}module-title{% endif %}">
-                <a title="{{ type_name }}: {{ material.title }}" alt="{{ type_name }}: {{ material.title }}" href="{{ material_url }}"> {{ material.title }} </a>
+                <a title="{{ type_name }}: {{ title }}" alt="{{ type_name }}: {{ title }}" href="{{ material_url }}"> {{ title }} </a>
             </h5>
-            <p>{{ material.description|truncatewords:28 }}</p>
+            <p>{{ material.description|safe|truncatewords:28 }}</p>
             <div class="brief-published">
                 {% if material.view_count %}
                     <a href="javascript:void(0)" title="{% trans 'View count' %}">
@@ -137,6 +140,7 @@ $(document).ready(function(){
                 {% endif %}
             </div>
         </div>
+      {% endwith %}
       {% endif %}
     </div>
 
