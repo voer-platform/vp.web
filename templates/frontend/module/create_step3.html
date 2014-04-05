@@ -99,6 +99,7 @@
         <input type="hidden" name="mid" value="{{ material.id}}" />
         <input type="hidden" name="material_id" value="{{ material.material_id }}" />
         <input type="hidden" name="version" value="{{ material.version }}" />
+        <input type="hidden" name="derived_from" value="{{ material.material_id }}@{{ material.version }}" />
             <div class="col-lg-1 right-row">
                 <div class="hfcreate-1">
                     <!-- Nav tabs -->
@@ -218,11 +219,8 @@
         </div>
         <div class="form-group">
             <label for="InputFile">{% trans 'Image' %}</label>
-            <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">                      
-            <div class="fakefile">              
-                <input onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile" type="text">
-            </div>
-            <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>           
+            <input id="uploadfile_0" name="uploadfile_0" type="file">
+            <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>
         </div>  
         <div class="form-group">
             <label for="InputLanguage">{% trans 'Language' %}</label> 
@@ -396,12 +394,9 @@
                         <div class="content">
         <div class="form-group">
             <label for="InputFile">{% trans 'Document for import' %} </label>
-            <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="document_file" type="file">
-            <div class="fakefile">              
-                <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
-                <button class="btn hfbtn-common hfbtn-active" name="action" value="import">{% trans 'Import' %}</button>
-            </div>
-            <p class="help-block">{% trans 'Upload a document file, the best support extensions: doc' %}</p>
+            <input class="" id="uploadfile_1" name="document_file" type="file">
+            <button class="btn hfbtn-common hfbtn-active btn-upload" name="action" value="import">{% trans 'Import' %}</button>
+            <p class="help-block">{% trans 'Upload a document file, the best support extensions: .DOC' %}</p>
         </div>
         <div class="form-group">
             <label for="InputBody">{% trans 'Body' %}</label>
