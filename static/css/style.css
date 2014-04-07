@@ -333,6 +333,10 @@ button.hfbtn-common{
     margin-left: 10px;
 }
 
+button.btn-upload{
+    margin-left: 0px;
+}
+
 .list-module-name-content{
     height: 230px;
 }

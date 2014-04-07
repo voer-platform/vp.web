@@ -186,7 +186,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_resizing': True,
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 10,
-    'valid_elements': 'a[!href|target<_blank|title],div[align<center?justify?left?right|class],p[align<center?justify?left?right],br,span,em,strong,cite,code,blockquote,ul,ol,li,dl,dt,dd,table,tr,td,th,tbody,caption,h1,h2,h3,h4,h5,h6,b,i,figure,figcaption,img[!src|width|class],maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,semantics,sub,mfrac,sup,annotation',
+    'valid_elements': 'a[!href|target<_blank|title],div[align<center?justify?left?right|class],p[align<center?justify?left?right],br,span,em,strong,cite,code,blockquote,ul,ol,li,dl,dt,dd,table,tr,td,th,tbody,caption,h1,h2,h3,h4,h5,h6,b,i,figure,figcaption,img[!src|width|class|alt],maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,semantics,sub,mfrac,sup,annotation',
     'file_browser_callback': 'mce_filebrowser',
     'width': '730',
     'height': '400',
