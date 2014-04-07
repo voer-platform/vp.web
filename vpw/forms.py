@@ -21,6 +21,7 @@ class MaterialCreationForm(forms.Form):
     version = forms.IntegerField(initial=0, required=False)
     material_id = forms.CharField(max_length=64, required=False)
     mid = forms.IntegerField(required=False)
+    derived_from = forms.CharField(max_length=64, required=False)
 
     def clean_title(self):
         if self.cleaned_data.get('title', '') == '':

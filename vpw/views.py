@@ -8,10 +8,14 @@ import urllib
 import random
 import csv
 import time
+from django import forms
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import EmptyPage
 from django.db.models.query_utils import Q
+from django.forms.forms import NON_FIELD_ERRORS
+from django.forms.util import ErrorList
+from django.template.defaultfilters import filesizeformat
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
@@ -811,6 +815,7 @@ def _save_material(form, material_type, request):
     # get current user
     material.creator = request.user
     material.material_type = material_type
+    material.derived_from = form.cleaned_data['derived_from']
     material.save()
     return material
 
@@ -1702,7 +1707,8 @@ def user_module_reuse(request, mid, version=1):
     categories = vpr_get_categories()
 
     material_categories = get_categories_of_material(material)
-    authors = get_author_of_material(material)
+    author = vpr_get_person(request.user.author.author_id)
+    authors = [author]
     roles = get_roles_material(material)
 
     if request.method == "POST":
@@ -1863,47 +1869,50 @@ def user_module_edit(request, mid):
         if action == 'import':
             if 'document_file' in request.FILES:
                 upload_file = request.FILES['document_file']
-                upload_filename = normalize_filename(upload_file.name)
-                with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
-                    for chunk in upload_file.chunks():
-                        destination.write(chunk)
-                # call import vpt
-                result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
-                task_id = result_import['task_id']
-                download_url = vpt_get_url(task_id)
-                response = vpt_download(download_url)
-                # save downloaded file to transforms directory
-                # TODO: transforms dir name should be in settings
-                download_dir = '%s/transforms' % settings.MEDIA_ROOT
-                download_filename = download_url.split('/')[-1]
-                download_filepath = '%s/%s' % (download_dir, download_filename)
-                with open(download_filepath, 'wb') as f:
-                    for chunk in response.iter_content(chunk_size=1024):
-                        if chunk: # filter out keep-alive new chunks
-                            f.write(chunk)
-                            f.flush()
-
-                # load downloaded zip file
-                zip_archive = zipfile.ZipFile(download_filepath, 'r')
-                # Unzip into a new directory
-                filename, extension = os.path.splitext(download_filename)
-                extract_path = os.path.join(download_dir, filename)
-                os.mkdir(extract_path)
-                zip_archive.extractall(path=extract_path)
-
-                # get transformed html content
-                content = open(extract_path + '/index.html', 'r').read()
-                # fix images' urls
-                images = [f.filename for f in zip_archive.filelist if f.filename != 'index.html']
-                for image in images:
-                    old_src = 'src="%s"' % image
+                if upload_file.size > int(settings.MAX_UPLOAD_SIZE):
+                    form._errors[NON_FIELD_ERRORS] = ErrorList([_(u'Please keep file size under %s. Current filesize %s') % (filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(upload_file.size))])
+                else:
+                    upload_filename = normalize_filename(upload_file.name)
+                    with open(settings.MEDIA_ROOT + '/' + upload_filename, 'wb+') as destination:
+                        for chunk in upload_file.chunks():
+                            destination.write(chunk)
+                    # call import vpt
+                    result_import = vpt_import(settings.MEDIA_ROOT + '/' + upload_filename)
+                    task_id = result_import['task_id']
+                    download_url = vpt_get_url(task_id)
+                    response = vpt_download(download_url)
+                    # save downloaded file to transforms directory
                     # TODO: transforms dir name should be in settings
-                    new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
-                    content = content.replace(old_src, new_src)
+                    download_dir = '%s/transforms' % settings.MEDIA_ROOT
+                    download_filename = download_url.split('/')[-1]
+                    download_filepath = '%s/%s' % (download_dir, download_filename)
+                    with open(download_filepath, 'wb') as f:
+                        for chunk in response.iter_content(chunk_size=1024):
+                            if chunk: # filter out keep-alive new chunks
+                                f.write(chunk)
+                                f.flush()
 
-                form = ModuleCreationForm(request.POST)
-                # set form body
-                form.data['body'] = content
+                    # load downloaded zip file
+                    zip_archive = zipfile.ZipFile(download_filepath, 'r')
+                    # Unzip into a new directory
+                    filename, extension = os.path.splitext(download_filename)
+                    extract_path = os.path.join(download_dir, filename)
+                    os.mkdir(extract_path)
+                    zip_archive.extractall(path=extract_path)
+
+                    # get transformed html content
+                    content = open(extract_path + '/index.html', 'r').read()
+                    # fix images' urls
+                    images = [f.filename for f in zip_archive.filelist if f.filename != 'index.html']
+                    for image in images:
+                        old_src = 'src="%s"' % image
+                        # TODO: transforms dir name should be in settings
+                        new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
+                        content = content.replace(old_src, new_src)
+
+                    form = ModuleCreationForm(request.POST)
+                    # set form body
+                    form.data['body'] = content
         elif action == 'save':
             if form.is_valid():
                 material = _save_material(form, MODULE_TYPE, request)
@@ -1921,7 +1930,10 @@ def user_module_edit(request, mid):
                     material.delete()
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
-        form = ModuleCreationForm(dict(body=material.text))
+        form = ModuleCreationForm(dict(body=material.text,
+                                       title=material.title,
+                                       language=material.language,
+                                       categories=material.categories))
     params = {'material': material, 'categories': categories, 'material_categories': material_categories,
               'form': form, 'authors': authors, 'roles': roles}
     return render(request, 'frontend/module/create_step3.html', params)
