@@ -29,12 +29,17 @@
                 var mid = parent_ele.attr('data-material-id');
                 var version = parent_ele.attr('data-material-version');
 
+                if (rate === undefined) {
+                    rate = 0;
+                }
+
                 var params = {};
+
                 params.mid = mid;
                 params.version = version;
 
                 if (rate === undefined || rate == 0) {
-                    params.rate = '';
+                    params.rate = rate;
                     params.type = 'delete';
                 } else {
                     params.rate = rate;
@@ -46,6 +51,9 @@
                     data: params,
                     success: function(data) {
                         if (data.success === false) {
+                            var rating_material = mid + '-' + version + '-' + rate;
+                            Voer.Helper.createCookie('rating_material', rating_material);
+
                             var currentUrl = window.location.pathname;
                             window.location.href = '/user/login/?next=' + currentUrl;
                         } else {

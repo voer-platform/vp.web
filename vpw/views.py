@@ -225,6 +225,21 @@ def module_detail(request, title, mid, version):
     else:
         view_count = voer_add_view_count(mid, material['version'])
 
+    rating_name_cookie = 'rating_material'
+    delete_cookie = False
+    if rating_name_cookie in request.COOKIES and request.COOKIES[rating_name_cookie]:
+        rated_data = request.COOKIES[rating_name_cookie].split('-')
+        rate_mid = rated_data[0]
+        rate_version = rated_data[1]
+        rate_value = rated_data[2]
+
+        is_rated = is_material_rated(mid, material['version'], person_id)
+        if person_id and mid == rate_mid and material['version'] == int(rate_version) and not is_rated:  # user was logged in and was not rated
+            vpr_user_add_rate(person_id, rate_value, mid, material['version'])
+            delete_cookie = True
+        elif person_id and is_rated:  # user logged in and has been rated
+            delete_cookie = True
+
     material['view_count'] = view_count
 
     favorite_count = vpr_get_statistic_data(mid, material['version'], 'favorites')
@@ -256,6 +271,9 @@ def module_detail(request, title, mid, version):
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
         response.set_cookie(cookie_name, True, max_age)
+
+    if delete_cookie:
+        response.delete_cookie(key=rating_name_cookie)
 
     return response
 
@@ -294,6 +312,21 @@ def collection_detail(request, title, cid, mid):
         view_count = vpr_get_statistic_data(cid, collection['version'], 'counter')
     else:
         view_count = voer_add_view_count(cid, collection['version'])
+
+    rating_name_cookie = 'rating_material'
+    delete_cookie = False
+    if rating_name_cookie in request.COOKIES and request.COOKIES[rating_name_cookie]:
+        rated_data = request.COOKIES[rating_name_cookie].split('-')
+        rate_cid = rated_data[0]
+        rate_version = rated_data[1]
+        rate_value = rated_data[2]
+
+        is_rated = is_material_rated(cid, collection['version'], person_id)
+        if person_id and cid == rate_cid and collection['version'] == int(rate_version) and not is_rated:  # user was logged in and was not rated
+            vpr_user_add_rate(person_id, rate_value, cid, collection['version'])
+            delete_cookie = True
+        elif person_id and is_rated:  # user logged in and has been rated
+            delete_cookie = True
 
     collection['view_count'] = view_count
 
@@ -370,6 +403,9 @@ def collection_detail(request, title, cid, mid):
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
         response.set_cookie(cookie_name, True, max_age)
+
+    if delete_cookie:
+        response.delete_cookie(key=rating_name_cookie)
 
     return response
 
@@ -2086,7 +2122,7 @@ def ajax_user_rate(request):
         pid = current_user.author.author_id
 
         vote_type = request.GET.get('type', VOTE_TYPE_INSERT)
-        rate = request.GET.get('rate', 1)
+        rate = int(request.GET.get('rate', 1))
         mid = request.GET.get('mid', None)
         version = request.GET.get('version', 0)
 
