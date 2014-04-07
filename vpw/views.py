@@ -225,6 +225,21 @@ def module_detail(request, title, mid, version):
     else:
         view_count = voer_add_view_count(mid, material['version'])
 
+    rating_name_cookie = 'rating_material'
+    delete_cookie = False
+    if rating_name_cookie in request.COOKIES and request.COOKIES[rating_name_cookie]:
+        rated_data = request.COOKIES[rating_name_cookie].split('-')
+        rate_mid = rated_data[0]
+        rate_version = rated_data[1]
+        rate_value = rated_data[2]
+
+        is_rated = is_material_rated(mid, material['version'], person_id)
+        if person_id and mid == rate_mid and material['version'] == int(rate_version) and not is_rated:  # user was logged in and was not rated
+            vpr_user_add_rate(person_id, rate_value, mid, material['version'])
+            delete_cookie = True
+        elif person_id and is_rated:  # user logged in and has been rated
+            delete_cookie = True
+
     material['view_count'] = view_count
 
     favorite_count = vpr_get_statistic_data(mid, material['version'], 'favorites')
@@ -256,6 +271,9 @@ def module_detail(request, title, mid, version):
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
         response.set_cookie(cookie_name, True, max_age)
+
+    if delete_cookie:
+        response.delete_cookie(key=rating_name_cookie)
 
     return response
 
@@ -294,6 +312,21 @@ def collection_detail(request, title, cid, mid):
         view_count = vpr_get_statistic_data(cid, collection['version'], 'counter')
     else:
         view_count = voer_add_view_count(cid, collection['version'])
+
+    rating_name_cookie = 'rating_material'
+    delete_cookie = False
+    if rating_name_cookie in request.COOKIES and request.COOKIES[rating_name_cookie]:
+        rated_data = request.COOKIES[rating_name_cookie].split('-')
+        rate_cid = rated_data[0]
+        rate_version = rated_data[1]
+        rate_value = rated_data[2]
+
+        is_rated = is_material_rated(cid, collection['version'], person_id)
+        if person_id and cid == rate_cid and collection['version'] == int(rate_version) and not is_rated:  # user was logged in and was not rated
+            vpr_user_add_rate(person_id, rate_value, cid, collection['version'])
+            delete_cookie = True
+        elif person_id and is_rated:  # user logged in and has been rated
+            delete_cookie = True
 
     collection['view_count'] = view_count
 
@@ -370,6 +403,9 @@ def collection_detail(request, title, cid, mid):
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
         response.set_cookie(cookie_name, True, max_age)
+
+    if delete_cookie:
+        response.delete_cookie(key=rating_name_cookie)
 
     return response
 
@@ -2079,34 +2115,49 @@ def delete_unpublish(request):
         return HttpResponseRedirect('/')
 
 
-@login_required
 def ajax_user_rate(request):
     current_user = request.user
-    pid = current_user.author.author_id
 
-    vote_type = request.GET.get('type', VOTE_TYPE_INSERT)
-    rate = request.GET.get('rate', 1)
-    mid = request.GET.get('mid', None)
-    version = request.GET.get('version', 0)
+    if current_user.is_authenticated():
+        pid = current_user.author.author_id
 
-    material = {}
-    material['material_id'] = mid
-    material['version'] = version
+        vote_type = request.GET.get('type', VOTE_TYPE_INSERT)
+        rate = int(request.GET.get('rate', 1))
+        mid = request.GET.get('mid', None)
+        version = request.GET.get('version', 0)
 
-    if mid is not None:
-        if vote_type == VOTE_TYPE_INSERT:
-            result = vpr_user_add_rate(pid, rate, mid, version)
-            material['is_rated'] = True
-        elif vote_type == VOTE_TYPE_DELETE:
-            result = vpr_user_delete_rate(pid, mid, version)
-            result['is_rated'] = False
+        if rate < 1:
+            rate = 1
+        elif rate > 5:
+            rate = 5
 
-        material['rates'] = _calculate_rate_data(result)
+        material = {}
+        material['material_id'] = mid
+        material['version'] = version
 
-    if request.is_ajax():
-        return render(request, "frontend/ajax/material_rate.html", {'material': material})
+        if mid is not None:
+            if vote_type == VOTE_TYPE_INSERT:
+                result = vpr_user_add_rate(pid, rate, mid, version)
+                material['is_rated'] = True
+            elif vote_type == VOTE_TYPE_DELETE:
+                result = vpr_user_delete_rate(pid, mid, version)
+                result['is_rated'] = False
+
+            material['rates'] = _calculate_rate_data(result)
+
+        if request.is_ajax():
+            return render(request, "frontend/ajax/material_rate.html", {'material': material})
+        else:
+            return HttpResponseRedirect('/')
     else:
-        return HttpResponseRedirect('/')
+        if request.is_ajax():
+            result = {}
+            result['success'] = False
+            result['message'] = _('Please login')
+
+            return HttpResponse(json.dumps(result), content_type='application/json')
+        else:
+            return HttpResponseRedirect('/')
 
 
 def _calculate_rate_data(rate_data):
