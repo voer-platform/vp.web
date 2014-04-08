@@ -640,7 +640,12 @@ def create_module(request):
 
 @login_required
 def create_mass_modules(request):
-    return render(request, 'frontend/module/create_mass_modules.html')
+    language = get_language()
+
+    params = {}
+    params['license'] = get_setting_value('module_license', language)
+
+    return render(request, 'frontend/module/create_mass_modules.html', params)
 
 
 @csrf_exempt

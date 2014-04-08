@@ -75,7 +75,7 @@
 
 {% block titleSite %}Create module{% endblock %}
 
-{% block content %}        
+{% block content %}
 
             <!-- filter top -->
             <div class="hfcreate">
@@ -106,9 +106,9 @@
                       <li><a href="#metadata" data-toggle="tab">{% trans 'Metadata' %}</a></li>
                       <li class="active"><a href="#content" data-toggle="tab">{% trans 'Content' %}</a></li>
                     </ul>
-                    
+
                     <!-- Tab panes -->
-                    <div class="tab-content">                   
+                    <div class="tab-content">
                       <div class="tab-pane" id="metadata">
                         <div class="content">
         <div class="form-group">
@@ -211,21 +211,21 @@
                         </span>
                         <input data-toggle="checkbox" type="checkbox" name="categories" value="{{ category.id }}" {% if category.id|stringformat:"s" in material_categories %}checked{% endif %}>
                         {{ category.name }}
-                    </label>                
+                    </label>
                 </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="form-group">
             <label for="InputFile">{% trans 'Image' %}</label>
-            <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">                      
-            <div class="fakefile">              
+            <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">
+            <div class="fakefile">
                 <input onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile" type="text">
             </div>
-            <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>           
-        </div>  
+            <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>
+        </div>
         <div class="form-group">
-            <label for="InputLanguage">{% trans 'Language' %}</label> 
+            <label for="InputLanguage">{% trans 'Language' %}</label>
             <div class="hfselectList">
                 <select name="language" class="select-block">
                     <option>{% trans 'Choose language' %}</option>
@@ -385,11 +385,14 @@
         <div class="form-group">
             <label for="InputKeywords">{% trans 'Keywords' %}</label>
             <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
+            <p class="help-block">{% trans 'Enter each keyword on its own line.' %}</p>
         </div>
+        <!--
         <div class="form-group">
             <label for="InputTags">{% trans 'Tags' %}</label>
             <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
-        </div>  
+        </div>
+        -->
 </div>
                       </div>
                       <div class="tab-pane active" id="content">
@@ -397,7 +400,7 @@
         <div class="form-group">
             <label for="InputFile">{% trans 'Document for import' %} </label>
             <input onmouseout="document.getElementById('uploadfilename_1').value = this.value;" onchange="document.getElementById('uploadfilename_1').value = this.value;" class="uploadfile" id="uploadfile_1" name="document_file" type="file">
-            <div class="fakefile">              
+            <div class="fakefile">
                 <input onclick="document.getElementById('uploadfile_1').click();" id="uploadfilename_1" value="" class="form-control typefile" type="text">
                 <button class="btn hfbtn-common hfbtn-active" name="action" value="import">{% trans 'Import' %}</button>
             </div>
@@ -412,7 +415,7 @@
             <button class="btn hfbtn-common hfbtn-public right hfbtn-active" value="publish" name="action">{% trans 'Publish' %}</button>
             <button class="btn hfbtn-common hfbtn-next right hfbtn-active" value="save" name="action">{% trans 'Save' %}</button>
             <button class="btn HFBTN-common hfbtn-back right hfbtn-active" value="back" name="action">{% trans 'Back' %}</button>
-        </div>          
+        </div>
 </div>                    </div>
                     </div>
 

@@ -11,27 +11,18 @@
     <div class="smallbox-common smallbox-link">
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'get_unpublish' %}">{% trans 'Unpublished items' %}{{ user.author.user_id|get_unpublished_count }}</a>
+            <a href="{% url 'user_dashboard' %}">{% trans 'Published items' %}{{ user.author.author_id|get_published_count }}</a>
         </div>
 
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
-            <a href="{% url 'user_dashboard' %}">{% trans 'Published items' %}{{ user.author.author_id|get_published_count }}</a>
+            <a href="{% url 'get_unpublish' %}">{% trans 'Unpublished items' %}{{ user.author.user_id|get_unpublished_count }}</a>
         </div>
 
         <div class="hfbtn-create">
             <i class="icon-common">&nbsp;</i>
             <a href="{% url 'get_favorite' %}">{% trans 'Favorite items' %}{{ user.author.author_id|get_favorites_count }}</a>
         </div>
-        <!--
-        <div class="content">
-            <ul>
-                <li><a href="{% url 'get_unpublish' %}">{% trans 'Unpublish' %}</a></li>
-                <li><a>{% trans 'Saved Items' %}</a></li>
-                <li><a href="{% url 'get_favorite' %}">{% trans 'My Favorites' %}</a></li>
-            </ul>
-        </div>
-        -->
     </div>
     <div class="smallbox-common smallbox-link">
         <div class="hfbtn-create">

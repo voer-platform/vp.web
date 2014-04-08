@@ -51,9 +51,8 @@
             }else{
                 $("#collection-outline").jstree("create", parentNode, "last", { "data": title, "attr" : { "id": id, "rel" : "module" } });
                 $("#collection-outline").find('input.jstree-rename-input').blur();
+                $(this).val('');
             }
-
-
         });
 
         $('.search-author').typeahead({
@@ -196,7 +195,7 @@
                                                         </div>
                                                         <div class="right">
                                                             <div class="user-name">{{ author.fullname }}</div>
-                                                            <div class="user-address">{{ author.email }}</div>
+{#                                                            <div class="user-address">{{ author.email }}</div>#}
                                                             <div class="user-website">{{ author.homepage }}</div>
                                                         </div>
                                                     </div>
@@ -442,12 +441,15 @@
                             <div class="form-group">
                                 <label for="InputKeywords">{% trans 'Keywords' %}</label>
                                 <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
+                                <p class="help-block">{% trans 'Enter each keyword on its own line.' %}</p>
                             </div>
+                            <!--
                             <div class="form-group">
                                 <label for="InputTags">{% trans 'Tags' %}</label>
                                 <input class="form-control typetext" id="InputTags" placeholder="Enter Tags"
                                        type="text">
                             </div>
+                            -->
                         </div>
                     </div>
                     <div class="tab-pane active" id="content">

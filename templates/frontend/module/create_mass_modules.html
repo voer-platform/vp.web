@@ -11,7 +11,7 @@
     <link href="{{STATIC_URL}}css/uploadify.css" rel="stylesheet">
 {% endblock %}
 
-{% block content %}        
+{% block content %}
 <!-- filter top -->
 <div class="hfcreate">
     <div class="breakcump left">
@@ -31,11 +31,16 @@
                     </ul>
                 </div>
             {% endif %}
+            <div class="content">
+                {{ license | safe }}
+            </div>
+            <br>
+
             <div id="queue"></div>
             <input id="file_upload" name="file_upload" type="file" multiple="true" />
             <div id="message-result" class="">
                 <ul id="queue-result"></ul>
-                <div id="queue-notes" style="display: none;"><a href="{% url 'get_unpublish' %}">{% trans 'Click here' %}</a> {% trans 'for view result.' %}</li></div>
+{#                <div id="queue-notes" style="display: none;"><a href="{% url 'get_unpublish' %}">{% trans 'Click here' %}</a> {% trans 'for view result.' %}</li></div>#}
             </div>
             <script>
                 $(document).ready(function(){
@@ -50,8 +55,8 @@
                         'swf'      : '{{STATIC_URL}}uploadify.swf',
                         'uploader' : '/user/create/mass-modules/import/',
                         'onQueueComplete': function(queueData){
-                            $('#btn-import').prop('disabled', false);
-                            $('#queue-notes').show();
+                            $('#btn-import').prop('disabled', false).hide();
+                            $('#btn-import-done').show();
 {#                            alert(queueData.uploadsSuccessful + ' files were successfully uploaded.');#}
                         },
                         'onUploadComplete' : function(file) {
@@ -76,6 +81,7 @@
 
             </script>
             <button id="btn-import" class="btn hfbtn-common hfbtn-active right">{% trans 'Import' %}</button>
+            <a id="btn-import-done" class="btn hfbtn-common hfbtn-active right" href="{% url 'get_unpublish' %}" style="display: none;">{% trans 'Done' %}</a>
         </form>
     </div>
 </div>
