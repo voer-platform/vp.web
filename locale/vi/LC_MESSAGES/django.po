@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-08 14:02+0000\n"
-"PO-Revision-Date: 2014-04-08 21:03+0700\n"
+"POT-Creation-Date: 2014-04-08 15:02+0000\n"
+"PO-Revision-Date: 2014-04-08 22:03+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -1018,8 +1018,8 @@ msgstr "Các từ khóa"
 #: templates/frontend/module/create_step2.html:391
 #: templates/frontend/module/create_step3.html:386
 #: templates/frontend/module/edit_module.html:388
-msgid "Enter each keyword on its own line."
-msgstr "Nhập mỗi từ khoá trên 1 dòng."
+msgid "Each keyword per line"
+msgstr "Nhập mỗi từ khoá trên 1 dòng"
 
 #: templates/frontend/collection/create_step2.html:406
 #: templates/frontend/collection/create_step3.html:448
@@ -1074,13 +1074,13 @@ msgstr "Công bố"
 msgid "Create mass modules"
 msgstr "Tạo module"
 
-#: templates/frontend/module/create_mass_modules.html:84
+#: templates/frontend/module/create_mass_modules.html:83
 #: templates/frontend/module/create_step3.html:401
 #: templates/frontend/module/edit_module.html:405
 msgid "Import"
 msgstr "Nhập"
 
-#: templates/frontend/module/create_mass_modules.html:85
+#: templates/frontend/module/create_mass_modules.html:84
 msgid "Done"
 msgstr "Hoàn tất"
 
@@ -1360,7 +1360,7 @@ msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 msgid "Add favorite successful"
 msgstr "Đặt lại mật khẩu thành công."
 
-#: vpw/views.py:2162
+#: vpw/views.py:2161
 msgid "Please login"
 msgstr ""
 
