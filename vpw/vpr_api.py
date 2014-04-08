@@ -243,6 +243,15 @@ def vpr_browse(**kwargs):
 
     result = vpr_request("GET", "materials?names=1&%s" % params)
 
+    # update image url
+    items = []
+    for material in result['results']:
+        if material['image']:
+            material['image'] = os.path.join(settings.VPR_URL, 'materials',
+                material['material_id'], str(material['version']), 'image')
+        items.append(material)
+    result['results'] = items
+
     #Get information facet
     facet = vpr_request("GET", "facet?%s" % params)
     result['facet'] = facet
