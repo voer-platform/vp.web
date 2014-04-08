@@ -18,7 +18,7 @@
             remote: "{% url 'ajax_search_author' %}?keyword=%QUERY",
             template: [
                 '<p class="item-fullname">{% verbatim %}{{fullname}}{% endverbatim %}</p>',
-                '<p class="item-email">{% verbatim %}{{email}}{% endverbatim %}</p>',
+{#                '<p class="item-email">{% verbatim %}{{email}}{% endverbatim %}</p>',#}
             ].join(''),
             engine: Hogan,
             limit: 10
@@ -45,7 +45,7 @@
             '</div>',
             '<div class="right">',
             '<div class="user-name">{% verbatim %}{{fullname}}{% endverbatim %}</div>',
-            '<div class="user-address">{% verbatim %}{{email}}{% endverbatim %}</div>',
+{#            '<div class="user-address">{% verbatim %}{{email}}{% endverbatim %}</div>',#}
             '<div class="user-website">{% verbatim %}{{homepage}}{% endverbatim %}</div>',
             '</div>',
             '</div>',
@@ -153,7 +153,7 @@
 									</div>
 									<div class="right">
 										<div class="user-name">{{ author.fullname }}</div>
-										<div class="user-address">{{ author.email }}</div>
+{#										<div class="user-address">{{ author.email }}</div>#}
 										<div class="user-website">{{ author.homepage }}</div>
 									</div>
 								</div>
@@ -388,12 +388,15 @@
 		<div class="form-group">
 			<label for="InputKeywords">{% trans 'Keywords' %}</label>
             <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
+            <p class="help-block">{% trans 'Enter each keyword on its own line.' %}</p>
 		</div>
+        <!--
 		<div class="form-group">
 			<label for="InputTags">{% trans 'Tags' %}</label>
 			<input type="text" class="form-control typetext" id="InputTags"
                    placeholder="{% trans 'Enter tags' %}" name="tags" value="{{ form.tags.value }}">
 		</div>
+		-->
 		<div class="form-group btn-common">
             <input type="hidden" name="step" value="2" />
 			<button class="btn hfbtn-common hfbtn-next right hfbtn-active" value="next" name="action">{% trans 'Next' %}</button>
