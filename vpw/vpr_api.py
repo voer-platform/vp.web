@@ -174,9 +174,35 @@ def vpr_create_material(**kwargs):
         "attach02_name": kwargs.get("attach02_name"),
         "attach02_description": kwargs.get("attach02_description"),
         "language": kwargs.get("language"),
-        "license_id": kwargs.get("license_id", 1)
+        "license_id": kwargs.get("license_id", 1),
+        "derived_from": kwargs.get("derived_from", "")
     })
+    return result
 
+
+def vpr_checkin_material(**kwargs):
+    result = vpr_request("PUT", "materials/%s/%s" % (kwargs.get("material_id", ""), kwargs.get("version", "latest")), {
+        "material_type": kwargs.get("material_type", 1),
+        "text": kwargs.get("text"),
+        # "version": kwargs.get("version"),
+        "title": kwargs.get("title"),
+        "description": kwargs.get("description"),
+        "categories": kwargs.get("categories"),
+        "author": kwargs.get("author"),
+        "editor": kwargs.get("editor"),
+        "licensor": kwargs.get("licensor"),
+        "keywords": kwargs.get("keywords"),
+        "image": kwargs.get("image"),
+        "attach01": kwargs.get("attach01"),
+        "attach01_name": kwargs.get("attach01_name"),
+        "attach01_description": kwargs.get("attach01_description"),
+        "attach02": kwargs.get("attach02"),
+        "attach02_name": kwargs.get("attach02_name"),
+        "attach02_description": kwargs.get("attach02_description"),
+        "language": kwargs.get("language"),
+        "license_id": kwargs.get("license_id", 1),
+        # "derived_from": kwargs.get("derived_from", "")
+    })
     return result
 
 

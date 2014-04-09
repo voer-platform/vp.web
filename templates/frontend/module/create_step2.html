@@ -52,22 +52,22 @@
             '</a>',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="authors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="author">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainers">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainer">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translators">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translator">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditor">',
             '</td>',
             '<td><div class="hfbtn-delete" onclick="delete_row_author(this)"></div></td>',
             '</tr>'].join('\n');
@@ -160,22 +160,22 @@
 							</a>
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="authors" checked />
+                            <input type="checkbox" value="{{ author.id }}" name="author" checked />
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="editors" checked />
+                            <input type="checkbox" value="{{ author.id }}" name="editor" checked />
 						</td>
 						<td>
-                            <input type="checkbox" name="{{ author.id }}" name="licensors">
+                            <input type="checkbox" value="{{ author.id }}" name="licensor">
 						</td>
 						<td>
-                            <input type="checkbox" name="{{ author.id }}" name="maintainers">
+                            <input type="checkbox" value="{{ author.id }}" name="maintainer">
 						</td>
 						<td>
-                            <input type="checkbox" name="{{ author.id }}" name="translators">
+                            <input type="checkbox" value="{{ author.id }}" name="translator">
 						</td>
 						<td>
-                            <input type="checkbox" name="{{ author.id }}" name="coeditors">
+                            <input type="checkbox" value="{{ author.id }}" name="coeditor">
 						</td>
 						<td style="width:25px;">&nbsp;</td>
 					</tr>
@@ -223,15 +223,10 @@
 			</ul>
 		</div>
 		<div class="form-group">
-			<label for="InputFile">{% trans 'Image' %}</label>
-			<input type="file" id="uploadfile_0" name="uploadfile_0">
-		    <p class="help-block">Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.</p>
-		</div>
-		<div class="form-group">
 			<label for="InputLanguage">{% trans 'Language' %}</label>
 			<div class="hfselectList">
 				<select class="select-block" name="language">
-					<option value="00">{% trans 'Choose language' %}</option>
+					<option value="">{% trans 'Choose language' %}</option>
                     <option value="vi" {% if material.language == "vi" %}selected="selected"{% endif %}>Tiếng Việt</option>
                     <option value="en" {% if material.language == "en" %}selected="selected"{% endif %}>English</option>
                     <option value="af" {% if material.language == "af" %}selected="selected"{% endif %}>Afrikaans</option>
@@ -388,11 +383,6 @@
 		<div class="form-group">
 			<label for="InputKeywords">{% trans 'Keywords' %}</label>
             <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
-		</div>
-		<div class="form-group">
-			<label for="InputTags">{% trans 'Tags' %}</label>
-			<input type="text" class="form-control typetext" id="InputTags"
-                   placeholder="{% trans 'Enter tags' %}" name="tags" value="{{ form.tags.value }}">
 		</div>
 		<div class="form-group btn-common">
             <input type="hidden" name="step" value="2" />

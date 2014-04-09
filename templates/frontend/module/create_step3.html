@@ -49,22 +49,22 @@
             '</a>',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="authors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="author">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainers">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainer">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translators">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translator">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditor">',
             '</td>',
             '<td><div class="hfbtn-delete" onclick="delete_row_author(this)"></div></td>',
             '</tr>'].join('\n');
@@ -126,11 +126,11 @@
                         <div class="content">
         <div class="form-group">
             <label for="InputEmail1">{% trans 'Title' %}</label>
-            <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text" name="title" value="{{ material.title }}">
+            <input class="form-control typetext" id="InputText" placeholder="Enter Title" type="text" name="title" value="{{ form.title.value }}">
         </div>
         <div class="form-group">
             <label for="InputDescription">{% trans 'Description' %}</label>
-            <textarea rows="4" class="form-control" name="description">{{ material.description }}</textarea>
+            <textarea rows="4" class="form-control" name="description">{{ form.description.value }}</textarea>
         </div>
         <div class="form-group">
             <label for="InputAuthor">{% trans 'Author' %}</label>
@@ -167,22 +167,22 @@
 							</a>
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="authors" {% if author.id|stringformat:"s" in roles.author %}checked{% endif %} />
+                            <input type="checkbox" value="{{ author.id }}" name="author" {% if author.id|stringformat:"s" in roles.author %}checked{% endif %} />
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="editors" {% if author.id|stringformat:"s" in roles.editor %}checked{% endif %}/>
+                            <input type="checkbox" value="{{ author.id }}" name="editor" {% if author.id|stringformat:"s" in roles.editor %}checked{% endif %}/>
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="licensors" {% if author.id|stringformat:"s" in roles.licensor %}checked{% endif %} />
+                            <input type="checkbox" value="{{ author.id }}" name="licensor" {% if author.id|stringformat:"s" in roles.licensor %}checked{% endif %} />
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="maintainers" {% if author.id|stringformat:"s" in roles.maintainer %}checked{% endif %} />
+                            <input type="checkbox" value="{{ author.id }}" name="maintainer" {% if author.id|stringformat:"s" in roles.maintainer %}checked{% endif %} />
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="translators" {% if author.id|stringformat:"s" in roles.translator %}checked{% endif %} />
+                            <input type="checkbox" value="{{ author.id }}" name="translator" {% if author.id|stringformat:"s" in roles.translator %}checked{% endif %} />
 						</td>
 						<td>
-                            <input type="checkbox" value="{{ author.id }}" name="coeditors" {% if author.id|stringformat:"s" in roles.coeditor %}checked{% endif %} />
+                            <input type="checkbox" value="{{ author.id }}" name="coeditor" {% if author.id|stringformat:"s" in roles.coeditor %}checked{% endif %} />
 						</td>
 						<td style="width:25px;">&nbsp;</td>
 					</tr>
@@ -389,16 +389,12 @@
         </div>
         <div class="form-group">
             <label for="InputKeywords">{% trans 'Keywords' %}</label>
-            <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
+            <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ form.keywords.value }}</textarea>
         </div>
-        <div class="form-group">
-            <label for="InputTags">{% trans 'Tags' %}</label>
-            <input class="form-control typetext" id="InputTags" placeholder="Enter Tags" type="text">
-        </div>  
+    </div>
 </div>
-                      </div>
-                      <div class="tab-pane active" id="content">
-                        <div class="content">
+<div class="tab-pane active" id="content">
+    <div class="content">
         <div class="form-group">
             <label for="InputFile">{% trans 'Document for import' %} </label>
             <input class="" id="uploadfile_1" name="document_file" type="file">
@@ -414,8 +410,7 @@
         <div class="form-group btn-common">
             <button class="btn hfbtn-common hfbtn-public right hfbtn-active" value="publish" name="action">{% trans 'Publish' %}</button>
             <button class="btn hfbtn-common hfbtn-next right hfbtn-active" value="save" name="action">{% trans 'Save' %}</button>
-            <button class="btn HFBTN-common hfbtn-back right hfbtn-active" value="back" name="action">{% trans 'Back' %}</button>
-        </div>          
+        </div>
 </div>                    </div>
                     </div>
 

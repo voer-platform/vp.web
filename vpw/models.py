@@ -4,7 +4,7 @@ from django.db.models.fields import IntegerField, TextField, DateTimeField,\
     CharField
 from registration.signals import user_activated
 from vpw.vpr_api import vpr_create_person
-
+from django.utils.translation import ugettext as _
 
 # Create your models here.
 
@@ -38,11 +38,11 @@ class Material(models.Model):
     material_type = IntegerField(default=1)
     text = TextField(blank=True, default='')
     version = IntegerField(null=True, blank=True, default=0)
-    title = CharField(max_length=255)
-    description = TextField(blank=True, default="")
-    categories = CharField(max_length=256, blank=True)
+    title = CharField(max_length=255, verbose_name=_("Title"))
+    description = TextField(blank=True)
+    categories = CharField(max_length=256, blank=True, verbose_name=_("Categories"))
     keywords = TextField(blank=True, default="")
-    language = CharField(max_length=2, blank=True, default="vi")
+    language = CharField(max_length=2, blank=True, default="vi", verbose_name=_("Language"))
     license_id = IntegerField(null=True, default=1)
     modified = DateTimeField(auto_now=True, blank=True)
     derived_from = CharField(max_length=64, blank=True)

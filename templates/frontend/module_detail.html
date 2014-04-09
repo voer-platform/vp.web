@@ -1,6 +1,7 @@
 {% extends "base/base-content.html" %}
 
 {% load i18n %}
+{% load vpw_filters %}
 {% load thumbnail %}
 
 {% block titleSite %}{{ material.title }} - VOER{% endblock %}
@@ -14,7 +15,7 @@
         <h1 class="module-title left clear">{{ material.title }}</h1>
         <a class="module-view-category left clear" title="{{ category.name }}">{{ category.name }}</a>
         {% if material.id %}
-        {% if material.version == 0 or material.version == '0' or material.version == None %}
+        {% if unpublished %}
         <a href="{% url 'user_module_edit' mid=material.id %}" class="btn btn-primary" style="float: right;">{% trans 'Edit' %}</a>
         {% endif %}
         {% endif %}
@@ -31,8 +32,26 @@
 
     <!-- END TITLE MODULE -->
     <!-- CONTENT MODULE -->
-    <div class="module-view-content left padding-20">{{ material.text|safe }}</div>
+    <div class="module-view-content left padding-20">
+        {{ material.text|safe }}
+        {% if origin_material %}
+            <div class="bs-callout bs-callout-info origin-information">
+                {% trans 'This document is derived from' %} <a href="{% url 'module_detail' title=origin_material.title|normalize_string mid=origin_material.material_id  %}">{{ origin_material.title }}</a>
+                {% if origin_authors %}
+                    {% trans "of" %}
+                    {% for origin_author in origin_authors %}
+                        {% if origin_author.fullname %}
+                            <a href="{% url "view_profile" origin_author.id %}">{{ origin_author.fullname }}</a>{% if not forloop.last %}, {% endif %}
+                        {% else %}
+                            <a href="{% url "view_profile" origin_author.id %}">{{ origin_author.user_id }}</a>{% if not forloop.last %}, {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
     <!-- END CONTENT MODULE -->
+
 
     {% if file_data %}
     <!-- ATTACHMENT MODULE -->

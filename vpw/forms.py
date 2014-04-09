@@ -1,37 +1,40 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms.models import ModelForm
 from registration.forms import RegistrationForm
 from vpw.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
 from django.utils.translation import ugettext as _
+from vpw.models import Material
 
 
-class MaterialCreationForm(forms.Form):
-    title = forms.CharField(max_length=255)
-    description = forms.CharField(max_length=1000, required=False)
-    keywords = forms.CharField(max_length=200, required=False)
-    language = forms.CharField(max_length=2)
-    categories = forms.CharField(max_length=3)
-    authors = forms.CharField(max_length=100, required=False)
-    editors = forms.CharField(max_length=100, required=False)
-    licensors = forms.CharField(max_length=100, required=False)
-    maintainers = forms.CharField(max_length=100, required=False)
-    translators = forms.CharField(max_length=100, required=False)
-    coeditors = forms.CharField(max_length=100, required=False)
-    version = forms.IntegerField(initial=0, required=False)
-    material_id = forms.CharField(max_length=64, required=False)
+class MaterialForm(ModelForm):
+    # title = forms.CharField(max_length=255)
+    # description = forms.CharField(max_length=1000, required=False)
+    # keywords = forms.CharField(max_length=200, required=False)
+    # language = forms.CharField(max_length=2)
+    # categories = forms.CharField(max_length=3)
+    # authors = forms.CharField(max_length=100, required=False)
+    # editors = forms.CharField(max_length=100, required=False)
+    # licensors = forms.CharField(max_length=100, required=False)
+    # maintainers = forms.CharField(max_length=100, required=False)
+    # translators = forms.CharField(max_length=100, required=False)
+    # coeditors = forms.CharField(max_length=100, required=False)
+    # version = forms.IntegerField(initial=0, required=False)
+    # material_id = forms.CharField(max_length=64, required=False)
     mid = forms.IntegerField(required=False)
-    derived_from = forms.CharField(max_length=64, required=False)
+    # derived_from = forms.CharField(max_length=64, required=False)
+    def __init__(self, *args, **kwargs):
+        super(MaterialForm, self).__init__(*args, **kwargs)
+        # Making name required
+        self.fields['title'].required = True
+        self.fields['categories'].required = True
+        self.fields['language'].required = True
 
-    def clean_title(self):
-        if self.cleaned_data.get('title', '') == '':
-            raise ValidationError(_('Required'))
-        return self.cleaned_data.get('title', '')
-
-    def clean_categories(self):
-        if self.cleaned_data.get('categories', '') == '':
-            raise ValidationError(_('Required'))
-        return self.cleaned_data.get('categories', '')
+    class Meta:
+        model = Material
+        fields = ['title', 'description', 'categories', 'keywords', 'language', 'derived_from',
+                  'author', 'editor', 'licensor', 'maintainer', 'translator', 'coeditor', 'text']
 
     def clean_language(self):
         if self.cleaned_data.get('language', '00') == '00':
@@ -46,11 +49,17 @@ class MaterialCreationForm(forms.Form):
                 raise ValidationError("Invalid number")
         return 0
 
-class ModuleCreationForm(MaterialCreationForm):
+
+class ModuleForm(MaterialForm):
     body = forms.CharField(widget=TinyMCE(attrs={'rows': 7}), required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(ModuleForm, self).__init__(*args, **kwargs)
+        if kwargs.get('instance'):
+            self.fields['body'].initial = kwargs['instance'].text
 
-class CollectionCreationForm(MaterialCreationForm):
+
+class CollectionForm(MaterialForm):
     body = forms.CharField(required=False)
 
 

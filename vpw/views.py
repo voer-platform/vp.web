@@ -37,7 +37,7 @@ from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, vpr_
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
     voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite, vpr_delete_favorite,vpr_user_add_rate, vpr_user_delete_rate, is_material_rated, vpr_is_favorited
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
-from vpw.forms import ModuleCreationForm, EditProfileForm, CollectionCreationForm, SettingsForm, RecaptchaRegistrationForm
+from vpw.forms import ModuleForm, EditProfileForm, CollectionForm, SettingsForm, RecaptchaRegistrationForm
 
 
 
@@ -191,6 +191,19 @@ def module_detail_old(request, mid, version):
         raise Http404
 
 
+# Get author list of material
+def _get_author(material):
+    authors = []
+    str_authors = get_prop(material, "author")
+    author_id_list = str_authors.split(',')
+    for pid in author_id_list:
+        pid = pid.strip()
+        person = vpr_get_person(pid, True)
+        if person:
+            authors.append(person)
+    return authors
+
+
 def module_detail(request, title, mid, version):
     material = vpr_get_material(mid)
     current_user = request.user
@@ -209,15 +222,7 @@ def module_detail(request, title, mid, version):
     content = re.sub(r'href="([^"]*)"', _replace_attachment_link(list_images), content)
     material['text'] = content
 
-    author = []
-    if 'author' in material and material['author']:
-        author_id_list = material['author'].split(',')
-
-        for pid in author_id_list:
-            pid = pid.strip()
-            person = vpr_get_person(pid, True)
-            if person:
-                author.append(person)
+    author = _get_author(material)
 
     category = vpr_get_category(material['categories'])
 
@@ -253,9 +258,25 @@ def module_detail(request, title, mid, version):
     link_data = vpr_get_statistic_data(mid, version, 'links')
     material['links'] = link_data
 
+    # get origin material
+    derived_from = material.get("derived_from", "")
+
+    if derived_from:
+        try:
+            origin_mid, origin_version = derived_from.split("@")
+        except ValueError:
+            origin_mid = ""
+        origin_material = vpr_get_material(origin_mid, origin_version)
+        origin_authors = _get_author(origin_material)
+    else:
+        origin_material = None
+        origin_authors = None
+
     voer_facebook_id = settings.VOER_FACEBOOK_APP_ID
     response = render(request, "frontend/module_detail.html",
-                      {"material": material, "author": author, "category": category, 'file_data': file_data, 'voer_fb_id': voer_facebook_id})
+                      {"material": material, "author": author, "category": category,
+                       'file_data': file_data, 'voer_fb_id': voer_facebook_id,
+                       "origin_material": origin_material, "origin_authors": origin_authors})
 
     if cookie_name not in request.COOKIES:
         max_age = settings.VPW_SESSION_MAX_AGE * 24 * 60 * 60
@@ -389,9 +410,22 @@ def user_module_detail(request, mid):
         author = vpr_get_person(author_id, True)
         authors = [author]
         category = vpr_get_category(material.categories)
+
+        # get origin material
+        origin_mid = getattr(material, "material_id", "")
+        origin_version = getattr(material, "version", "")
+        if origin_mid:
+            origin_material = vpr_get_material(origin_mid, origin_version)
+            origin_authors = _get_author(origin_material)
+        else:
+            origin_material = None
+            origin_authors = None
+
         if material.material_type == MODULE_TYPE:
             return render(request, "frontend/module_detail.html", {
-                "material": material, "author": authors, "category": category
+                "material": material, "author": authors,
+                "category": category, "unpublished": True,
+                "origin_material": origin_material, "origin_authors": origin_authors,
             })
         else:
             raise PermissionDenied
@@ -452,7 +486,7 @@ def user_collection_detail(request, cid, mid):
 
 @login_required
 def create_module(request):
-    form = ModuleCreationForm(request.POST or None)
+    form = ModuleForm(request.POST or None)
     pid = request.user.author.author_id
     author = vpr_get_person(pid)
     language = get_language()
@@ -544,7 +578,7 @@ def create_module(request):
                         new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
                         content = content.replace(old_src, new_src)
 
-                    form = ModuleCreationForm(request.POST)
+                    form = ModuleForm(request.POST)
                     # set form body
                     form.data['body'] = content
 
@@ -667,7 +701,7 @@ def import_mass_modules(request):
 
 @login_required
 def create_collection(request):
-    form = CollectionCreationForm(request.POST or None)
+    form = CollectionForm(request.POST or None)
     pid = request.user.author.author_id
     author = vpr_get_person(pid)
     language = get_language()
@@ -769,6 +803,11 @@ def create_collection(request):
 
 
 def _publish_material(material):
+    if material.material_id:
+        derived_from = "%s@%s" % (material.material_id, material.version)
+    else:
+        derived_from = ""
+
     result = vpr_create_material(
         material_type=material.material_type,
         text=material.text,
@@ -781,6 +820,7 @@ def _publish_material(material):
         licensor=material.licensor,
         keywords=material.keywords,
         language=material.language,
+        derived_from=derived_from,
         license_id=1
     )
     return result
@@ -798,24 +838,28 @@ def _save_material(form, material_type, request):
         material.categories = ','.join(request.POST.getlist('categories', ''))
 
     material.language = form.cleaned_data['language']
-    if form.cleaned_data['authors']:
-        material.author = ','.join(request.POST.getlist('authors', ''))
-    if form.cleaned_data['editors']:
-        material.editor = ','.join(request.POST.getlist('editors', ''))
-    if form.cleaned_data['licensors']:
-        material.licensor = ','.join(request.POST.getlist('licensors', ''))
-    if form.cleaned_data['maintainers']:
-        material.maintainer = ','.join(request.POST.getlist('maintainers', ''))
-    if form.cleaned_data['translators']:
-        material.translator = ','.join(request.POST.getlist('translators', ''))
-    if form.cleaned_data['coeditors']:
-        material.coeditor = ','.join(request.POST.getlist('coeditors', ''))
-    material.version = form.cleaned_data['version']
-    material.material_id = form.cleaned_data['material_id']
+    if form.cleaned_data['author']:
+        material.author = ','.join(request.POST.getlist('author', ''))
+    if form.cleaned_data['editor']:
+        material.editor = ','.join(request.POST.getlist('editor', ''))
+    if form.cleaned_data['licensor']:
+        material.licensor = ','.join(request.POST.getlist('licensor', ''))
+    if form.cleaned_data['maintainer']:
+        material.maintainer = ','.join(request.POST.getlist('maintainer', ''))
+    if form.cleaned_data['translator']:
+        material.translator = ','.join(request.POST.getlist('translator', ''))
+    if form.cleaned_data['coeditor']:
+        material.coeditor = ','.join(request.POST.getlist('coeditor', ''))
+    if "version" in form.cleaned_data:
+        material.version = form.cleaned_data['version']
+    else:
+        material.version = 0
+    if "material_id" in form.cleaned_data:
+        material.material_id = form.cleaned_data['material_id']
     # get current user
     material.creator = request.user
     material.material_type = material_type
-    material.derived_from = form.cleaned_data['derived_from']
+    # material.derived_from = form.cleaned_data['derived_from']
     material.save()
     return material
 
@@ -1596,7 +1640,7 @@ def get_unpublish(request):
     offset_limit = offset + number_record
 
     try:
-        materials = Material.objects.filter(Q(creator_id=current_user.id) & (Q(version=None) | Q(version=0)))
+        materials = Material.objects.filter(Q(creator_id=current_user.id))
         material_count = len(materials)
 
         if sort:
@@ -1700,29 +1744,29 @@ def ajax_get_others(request):
 def user_module_reuse(request, mid, version=1):
     if version is None:
         version = 1
-    material = vpr_get_material(mid, version)
-    # Ep material version ve 0
-    material["version"] = 0
-
+    material_origin = vpr_get_material(mid, version)
     categories = vpr_get_categories()
-
-    material_categories = get_categories_of_material(material)
+    material_categories = get_categories_of_material(material_origin)
     author = vpr_get_person(request.user.author.author_id)
     authors = [author]
-    roles = get_roles_material(material)
+    roles = get_roles_material(material_origin)
 
     if request.method == "POST":
-        form = ModuleCreationForm(request.POST)
+        form = ModuleForm(request.POST)
         action = request.POST.get("action", "")
         if action == 'save':
             if form.is_valid():
                 material = _save_material(form, MODULE_TYPE, request)
+                material.material_id = material_origin.get("material_id", "")
+                material.version = material_origin.get("version", "")
                 material.text = form.cleaned_data['body']
                 material.save()
                 return redirect('user_module_detail', mid=material.id)
         elif action == 'publish':
             if form.is_valid():
                 material = _save_material(form, MODULE_TYPE, request)
+                material.material_id = material_origin.get("material_id", "")
+                material.version = material_origin.get("version", "")
                 material.text = form.cleaned_data['body']
                 material.save()
                 # Publish content to VPR
@@ -1733,10 +1777,15 @@ def user_module_reuse(request, mid, version=1):
     else:
         # lay anh trong noi dung
         list_images = vpr_get_material_images(mid)
-        content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-        material['text'] = content
-        form = ModuleCreationForm(dict(body=material['text']))
-    params = {'material': material, 'categories': categories, "material_categories": material_categories,
+        content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material_origin['text'])
+        material_origin['text'] = content
+        form = ModuleForm(dict(body=content,
+                               title=material_origin.get('title', ''),
+                               language=material_origin.get('language', ''),
+                               description=material_origin.get('description', ''),
+                               keywords=material_origin.get('keywords', ''),
+                               categories=material_origin.get('categories', '')))
+    params = {'material': material_origin, 'categories': categories, "material_categories": material_categories,
               'form': form, 'authors': authors, "roles": roles}
     return render(request, MODULE_TEMPLATES[3], params)
 
@@ -1750,7 +1799,7 @@ def user_collection_edit(request, cid):
     roles = get_roles_material(material)
 
     if request.method == "POST":
-        form = CollectionCreationForm(request.POST)
+        form = CollectionForm(request.POST)
         action = request.POST.get("action", "")
         if action == 'save':
             if form.is_valid():
@@ -1795,7 +1844,7 @@ def user_collection_edit(request, cid):
         else:
             json_outline = '[{"attr":{"id":"root-outline","rel":"root"},"data":"Outline","state":"open"}]'
 
-        form = CollectionCreationForm(dict(body=json_outline))
+        form = CollectionForm(dict(body=json_outline))
 
     params = {'material': material, 'categories': categories, 'material_categories': material_categories,
               'form': form, 'authors': authors, 'roles': roles}
@@ -1856,15 +1905,15 @@ def get_roles_material(material):
 
 @login_required
 def user_module_edit(request, mid):
-    material = Material.objects.get(id=mid, creator=request.user, material_type=MODULE_TYPE)
+    material_edit = Material.objects.get(id=mid, creator=request.user, material_type=MODULE_TYPE)
     categories = vpr_get_categories()
     # author = vpr_get_person(request.user.author.author_id)
-    material_categories = get_categories_of_material(material)
-    authors = get_author_of_material(material)
-    roles = get_roles_material(material)
+    material_categories = get_categories_of_material(material_edit)
+    authors = get_author_of_material(material_edit)
+    roles = get_roles_material(material_edit)
 
     if request.method == "POST":
-        form = ModuleCreationForm(request.POST)
+        form = ModuleForm(request.POST)
         action = request.POST.get("action", "")
         if action == 'import':
             if 'document_file' in request.FILES:
@@ -1910,18 +1959,22 @@ def user_module_edit(request, mid):
                         new_src = 'src="%stransforms/%s/%s"' % (settings.MEDIA_URL, filename, image)
                         content = content.replace(old_src, new_src)
 
-                    form = ModuleCreationForm(request.POST)
+                    form = ModuleForm(request.POST)
                     # set form body
                     form.data['body'] = content
         elif action == 'save':
             if form.is_valid():
                 material = _save_material(form, MODULE_TYPE, request)
+                material.material_id = material_edit.material_id
+                material.version = material_edit.version
                 material.text = form.cleaned_data['body']
                 material.save()
                 return redirect('user_module_detail', mid=material.id)
         elif action == 'publish':
             if form.is_valid():
                 material = _save_material(form, MODULE_TYPE, request)
+                material.material_id = material_edit.material_id
+                material.version = material_edit.version
                 material.text = form.cleaned_data['body']
                 material.save()
                 # Publish content to VPR
@@ -1930,11 +1983,8 @@ def user_module_edit(request, mid):
                     material.delete()
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
-        form = ModuleCreationForm(dict(body=material.text,
-                                       title=material.title,
-                                       language=material.language,
-                                       categories=material.categories))
-    params = {'material': material, 'categories': categories, 'material_categories': material_categories,
+        form = ModuleForm(instance=material_edit)
+    params = {'material': material_edit, 'categories': categories, 'material_categories': material_categories,
               'form': form, 'authors': authors, 'roles': roles}
     return render(request, 'frontend/module/create_step3.html', params)
 
