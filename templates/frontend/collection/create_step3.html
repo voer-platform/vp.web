@@ -91,22 +91,22 @@
             '</a>',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="authors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="author">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainers">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainer">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translators">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translator">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditor">',
             '</td>',
             '<td><div class="hfbtn-delete" onclick="delete_row_author(this)"></div></td>',
             '</tr>'].join('\n');
@@ -202,22 +202,22 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <input type="checkbox" value="{{ author.id }}" name="authors" {% if author.id|stringformat:"s" in roles.author %}checked{% endif %} />
+                                                <input type="checkbox" value="{{ author.id }}" name="author" {% if author.id|stringformat:"s" in roles.author %}checked{% endif %} />
                                             </td>
                                             <td>
-                                                <input type="checkbox" value="{{ author.id }}" name="editors" {% if author.id|stringformat:"s" in roles.editor %}checked{% endif %}/>
+                                                <input type="checkbox" value="{{ author.id }}" name="editor" {% if author.id|stringformat:"s" in roles.editor %}checked{% endif %}/>
                                             </td>
                                             <td>
-                                                <input type="checkbox" value="{{ author.id }}" name="licensors" {% if author.id|stringformat:"s" in roles.licensor %}checked{% endif %} />
+                                                <input type="checkbox" value="{{ author.id }}" name="licensor" {% if author.id|stringformat:"s" in roles.licensor %}checked{% endif %} />
                                             </td>
                                             <td>
-                                                <input type="checkbox" value="{{ author.id }}" name="maintainers" {% if author.id|stringformat:"s" in roles.maintainer %}checked{% endif %} />
+                                                <input type="checkbox" value="{{ author.id }}" name="maintainer" {% if author.id|stringformat:"s" in roles.maintainer %}checked{% endif %} />
                                             </td>
                                             <td>
-                                                <input type="checkbox" value="{{ author.id }}" name="translators" {% if author.id|stringformat:"s" in roles.translator %}checked{% endif %} />
+                                                <input type="checkbox" value="{{ author.id }}" name="translator" {% if author.id|stringformat:"s" in roles.translator %}checked{% endif %} />
                                             </td>
                                             <td>
-                                                <input type="checkbox" value="{{ author.id }}" name="coeditors" {% if author.id|stringformat:"s" in roles.coeditor %}checked{% endif %} />
+                                                <input type="checkbox" value="{{ author.id }}" name="coeditor" {% if author.id|stringformat:"s" in roles.coeditor %}checked{% endif %} />
                                             </td>
                                             <td style="width:25px;">&nbsp;</td>
                                         </tr>
@@ -266,18 +266,6 @@
                                         </li>
                                     {% endfor %}
                                 </ul>
-                            </div>
-                            <div class="form-group">
-                                <label for="InputFile">{% trans 'Image' %}</label>
-                                <input onmouseout="document.getElementById('uploadfilename_0').value = this.value;"
-                                       onchange="document.getElementById('uploadfilename_0').value = this.value;"
-                                       class="uploadfile" id="uploadfile_0" name="uploadfile_0" type="file">
-
-                                <div class="fakefile">
-                                    <input onclick="document.getElementById('uploadfile_0').click();"
-                                           id="uploadfilename_0" value="" class="form-control typefile" type="text">
-                                </div>
-                                <p class="help-block">{% trans 'Files must be less than 2 MB. <br>Allowed file types: png gif jpg jpeg.' %}</p>
                             </div>
                             <div class="form-group">
                                 <label for="InputLanguage">{% trans 'Language' %}</label>
@@ -443,13 +431,6 @@
                                 <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
                                 <p class="help-block">{% trans 'Each keyword per line' %}</p>
                             </div>
-                            <!--
-                            <div class="form-group">
-                                <label for="InputTags">{% trans 'Tags' %}</label>
-                                <input class="form-control typetext" id="InputTags" placeholder="Enter Tags"
-                                       type="text">
-                            </div>
-                            -->
                         </div>
                     </div>
                     <div class="tab-pane active" id="content">
@@ -500,7 +481,6 @@
                             <div class="form-group btn-common">
                                 <button class="btn hfbtn-common hfbtn-public right hfbtn-active" name="action" value="publish">{% trans 'Publish' %}</button>
                                 <button class="btn hfbtn-common hfbtn-next right hfbtn-active" name="action" value="save">{% trans 'Save' %}</button>
-                                <button class="btn hfbtn-common hfbtn-back right hfbtn-active" name="action" value="back">{% trans 'Back' %}</button>
                             </div>
                         </div>
                     </div>
