@@ -136,6 +136,8 @@ def vpr_delete_person(pid):
 
 
 def vpr_get_person(pid, is_count=False):
+    if not pid:
+        return None
     if is_count:
         result = vpr_request("GET", "persons/%s?count=1" % pid)
     else:

@@ -17,6 +17,7 @@
         {% if material.id %}
         {% if unpublished %}
         <a href="{% url 'user_module_edit' mid=material.id %}" class="btn btn-primary" style="float: right;">{% trans 'Edit' %}</a>
+        <a href="{% url 'user_publish_material' mid=material.id %}" class="btn btn-primary" style="float: right; margin-right: 10px;">{% trans 'Publish' %}</a>
         {% endif %}
         {% endif %}
     </div>

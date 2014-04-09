@@ -1944,6 +1944,20 @@ def get_roles_material(material):
         roles[x] = get_roles_of_material(material, x)
     return roles
 
+
+@login_required
+def user_publish_material(request, mid):
+    material = Material.objects.get(id=mid, creator=request.user, material_type=MODULE_TYPE)
+    # Publish content to VPR
+    result = _publish_material(material)
+    if 'material_id' in result:
+        material.delete()
+        return redirect('module_detail_old', mid=result['material_id'])
+    else:
+        #publish is failed
+        return redirect('user_module_detail', mid=material.id)
+
+
 @login_required
 def user_module_edit(request, mid):
     material_edit = Material.objects.get(id=mid, creator=request.user, material_type=MODULE_TYPE)

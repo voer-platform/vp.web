@@ -36,7 +36,7 @@ def strip(value):
 @register.filter
 @stringfilter
 def get_unpublished_count(uid):
-    materials = Material.objects.filter(Q(creator_id=uid) & (Q(version=None) | Q(version=0)))
+    materials = Material.objects.filter(Q(creator_id=uid))
     stats_count = len(materials)
 
     if stats_count is None:
