@@ -76,7 +76,7 @@ $(document).ready(function(){
           <a title="{{ type_name }}: {{ title }}" alt="{{ type_name }}: {{ title }}" href="{{ material_url }}">
             {% if material.image %}
                 {% thumbnail material.image "50x50" crop="center" as material_image %}
-                    <img src="{{ image.url }}">
+                    <img src="{{ material_image.url }}">
                 {% empty %}
                     <img src="{% static 'images/white.jpg' %}">
                 {% endthumbnail %}
