@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-09 19:19+0000\n"
-"PO-Revision-Date: 2014-04-10 02:28+0700\n"
+"POT-Creation-Date: 2014-04-10 16:37+0000\n"
+"PO-Revision-Date: 2014-04-10 23:49+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -205,6 +205,9 @@ msgid "Set license content for collection creation."
 msgstr "Xác lập giấy phép cho collection."
 
 #: templates/frontend/browse.html:50 templates/frontend/profile.html:138
+#: templates/frontend/user_favorite.html:19
+#: templates/frontend/user_profile.html:20
+#: templates/frontend/user_unpublish.html:20
 msgid "Sort by"
 msgstr "Sắp xếp theo"
 
@@ -256,7 +259,8 @@ msgstr "Tài liệu"
 #: templates/frontend/browse.html:291
 #: templates/frontend/collection_detail.html:48
 #: templates/frontend/index.html:67 templates/frontend/profile.html:388
-#: templates/frontend/partials/browse-list.html:50
+#: templates/frontend/partials/browse-list.html:51
+#: templates/frontend/partials/browse-list.html:59
 msgid "Collection"
 msgstr "Giáo trình"
 
@@ -319,7 +323,8 @@ msgstr ""
 "%(person_count)s tác giả"
 
 #: templates/frontend/index.html:64 templates/frontend/module_detail.html:14
-#: templates/frontend/partials/browse-list.html:47
+#: templates/frontend/partials/browse-list.html:48
+#: templates/frontend/partials/browse-list.html:56
 msgid "Module"
 msgstr "Tài liệu"
 
@@ -363,58 +368,34 @@ msgid "Biography"
 msgstr "Tiểu sử"
 
 #: templates/frontend/material_stats.html:79
-#: templates/frontend/user_favorite.html:72
-#: templates/frontend/user_profile.html:72
-#: templates/frontend/user_unpublish.html:91
 msgid "Business"
 msgstr "Kinh tế"
 
 #: templates/frontend/material_stats.html:81
-#: templates/frontend/user_favorite.html:74
-#: templates/frontend/user_profile.html:74
-#: templates/frontend/user_unpublish.html:93
 msgid "Social Sciences"
 msgstr "Khoa học xã hội"
 
 #: templates/frontend/material_stats.html:83
-#: templates/frontend/user_favorite.html:76
-#: templates/frontend/user_profile.html:76
-#: templates/frontend/user_unpublish.html:95
 msgid "Science and Technology"
 msgstr "Khoa học và công nghệ"
 
 #: templates/frontend/material_stats.html:85
-#: templates/frontend/user_favorite.html:78
-#: templates/frontend/user_profile.html:78
-#: templates/frontend/user_unpublish.html:97
 msgid "Humanities"
 msgstr "Nhân văn"
 
 #: templates/frontend/material_stats.html:87
-#: templates/frontend/user_favorite.html:80
-#: templates/frontend/user_profile.html:80
-#: templates/frontend/user_unpublish.html:99
 msgid "Arts"
 msgstr "Nghệ thuật"
 
 #: templates/frontend/material_stats.html:89
-#: templates/frontend/user_favorite.html:82
-#: templates/frontend/user_profile.html:82
-#: templates/frontend/user_unpublish.html:101
 msgid "Mathematics and Statistics"
 msgstr "Toán học và thống kê"
 
 #: templates/frontend/material_stats.html:91
-#: templates/frontend/user_favorite.html:84
-#: templates/frontend/user_profile.html:84
-#: templates/frontend/user_unpublish.html:103
 msgid "Others"
 msgstr "Khác"
 
 #: templates/frontend/material_stats.html:110
-#: templates/frontend/user_favorite.html:104
-#: templates/frontend/user_profile.html:103
-#: templates/frontend/user_unpublish.html:126
 msgid "Uploaded On:"
 msgstr "Tải lên ngày:"
 
@@ -737,15 +718,13 @@ msgstr "Hủy"
 msgid "User favorite"
 msgstr "Mục yêu thích"
 
-#: templates/frontend/user_favorite.html:26
-#: templates/frontend/user_profile.html:29
-#: templates/frontend/user_unpublish.html:36
+#: templates/frontend/user_favorite.html:27
+#: templates/frontend/user_profile.html:30
 msgid "Gridview"
 msgstr "Xem dạng lưới"
 
-#: templates/frontend/user_favorite.html:27
-#: templates/frontend/user_profile.html:30
-#: templates/frontend/user_unpublish.html:37
+#: templates/frontend/user_favorite.html:28
+#: templates/frontend/user_profile.html:31
 msgid "Listview"
 msgstr "Xem dạng danh sách"
 
@@ -754,18 +733,7 @@ msgstr "Xem dạng danh sách"
 msgid "Unpublish material"
 msgstr "Chưa công bố"
 
-#: templates/frontend/user_unpublish.html:111
-msgid "Select/Deselect Item"
-msgstr ""
-
-#: templates/frontend/user_unpublish.html:135
-#: templates/frontend/ajax/others.html:32
-#: templates/frontend/ajax/similars.html:33
-#: templates/frontend/partials/browse-list.html:149
-msgid "No data."
-msgstr "Không có dữ liệu."
-
-#: templates/frontend/user_unpublish.html:172
+#: templates/frontend/user_unpublish.html:88
 msgid "Are you sure drop this item(s)?"
 msgstr "Bạn muốn xoá dữ liệu?"
 
@@ -788,6 +756,12 @@ msgstr "Trước"
 #: templates/frontend/module/create_step2.html:397
 msgid "Next"
 msgstr "Tiếp"
+
+#: templates/frontend/ajax/others.html:32
+#: templates/frontend/ajax/similars.html:33
+#: templates/frontend/partials/browse-list.html:171
+msgid "No data."
+msgstr "Không có dữ liệu."
 
 #: templates/frontend/block/left_block_user.html:7
 #: templates/frontend/module/create_step1.html:13
@@ -1018,14 +992,17 @@ msgstr ""
 msgid "Body"
 msgstr "Thân"
 
-#: templates/frontend/partials/browse-list.html:109
-msgid "View count"
-msgstr ""
+#: templates/frontend/partials/browse-list.html:66
+msgid "Select/Deselect Item"
+msgstr "Chọn/bỏ chọn đối tượng"
 
-#: templates/frontend/partials/browse-list.html:116
-#, fuzzy
+#: templates/frontend/partials/browse-list.html:131
+msgid "View count"
+msgstr "Lượt xem"
+
+#: templates/frontend/partials/browse-list.html:138
 msgid "Favorite count"
-msgstr "Tài liệu yêu thích"
+msgstr "Lượt ưa thích"
 
 #: templates/frontend/partials/material_actions.html:11
 #: templates/frontend/partials/material_actions.html:17
@@ -1262,17 +1239,20 @@ msgstr "Bắt buộc"
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:1367
-#, fuzzy
+#: vpw/views.py:1391
 msgid "Add favorite successful"
-msgstr "Đặt lại mật khẩu thành công."
+msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1977
+#: vpw/views.py:2049
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2237
+#: vpw/views.py:2264
+msgid "Delete material successfull."
+msgstr "Xoá tài liệu thành công."
+
+#: vpw/views.py:2309
 msgid "Please login"
 msgstr ""
 

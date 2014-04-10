@@ -17,7 +17,7 @@
 <div class="col-lg-1 right-row">
     <div id="fitertop-browserall" class="hffitertop">
         <div class="dropdown left">
-            <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Sort by</a>
+            <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Sort by' %}</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <li><a href="{{ request.path }}?sort=title">{% trans 'Title' %}</a></li>
                 <!--<li><a>{% trans 'Relevance' %}</a></li>
@@ -25,89 +25,18 @@
                 <li><a href="{{ request.path }}?sort=modified">{% trans 'Date' %}</a></li>
             </ul>
         </div>
+        <!--
         <div class="fiterbutton right">
             <a class="gridview left">{% trans 'Gridview' %}</a>
             <a class="listview right">{% trans 'Listview' %}</a>
         </div>
+        -->
     </div>
 
     <div class="hfitems">
-    {% for material in materials %}
-    {% if material.material_type == 1 %}
-        {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
-    {% else %}
-        {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
-    {% endif %}
-    <div class="hfitem">
-    <div class="collection-save-hover">
-    </div>
-    <div class="collection-mainpage-cover">
-		{% if material.categories %}
-	   <img src="{{STATIC_URL}}images/cat{{material.categories}}.jpg"/>
-	   {% else %}
-	   <img src="{{STATIC_URL}}images/cat_other.jpg"/>
-	   {% endif %}
-    </div>
-    <div class="collection-mainpage-details">
-        <div class="info-collection">
-            <div class="title-collection">
-                <a title="{{ material.title }}" alt="{{ material.title }}" href="{{ material_url }}">{{ material.title }}</a>
-            </div>
-
-            <div class="short-collection">
-            {% if material.description %}
-                {% ifequal material.description '-' %}
-                    <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
-                {% else %}
-                    {{ material.description }}
-                {% endifequal %}
-            {% else %}
-                <span>Tài liệu này của Thư viện Học liệu mở Việt Nam tuân thủ giấy phép Creative Commons Attribution License có tại <a target="_blank" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></span>
-            {% endif %}
-            </div>
-
-            <div class="author-collection"><a href="{% url 'view_profile' author.id %}">{{ author.fullname }}</a></div>
-            <div class="category-collection"><a href="{% url 'browse' %}?categories={{ material.categories }}">
-                {% if material.categories == '1' %}
-                    {% trans 'Business' %}
-                {% elif  material.categories == '2' %}
-                    {% trans 'Social Sciences' %}
-                {% elif  material.categories == '3' %}
-                    {% trans 'Science and Technology' %}
-                {% elif  material.categories == '4' %}
-                    {% trans 'Humanities' %}
-                {% elif  material.categories == '5' %}
-                    {% trans 'Arts' %}
-                {% elif  material.categories == '6' %}
-                    {% trans 'Mathematics and Statistics' %}
-                {% else %}
-                    {% trans 'Others' %}
-                {% endif %}
-            </a></div>
-        </div>
-
-    </div>
-    <div class="collection-mainpage-other">
-        {% if material.material_type == 1 %}
-        <div class="voer-mol-ico left">&nbsp;</div>
-        {% elif material.material_type == 2 %}
-        <div class="voer-col-ico left">&nbsp;</div>
-        {% endif %}
-
-        <div class="hflike left">{% if material.favorite_count.favorite %} {{ material.favorite_count.favorite }}{% else %}0{% endif %}</div>
-        <div class="hfview left">{% if material.view_count.view > 0 %}{{ material.view_count.view }}{% else %}0{% endif %}</div>
-
-        <div class="hfother right tooltipi-container">
-            <img src="{{ STATIC_URL }}images/icon/information.png">
-            <div class="hftooltipi">
-               {% trans 'Uploaded On:' %} <strong>{{ material.modified }}</strong>
-            </div>
-        </div>
-    </div>
-    </div>
-    {% endfor %}
-
-    {% include "base/pager.html" %}
+    {% with material_list=materials %}
+        {% include 'frontend/partials/browse-list.html' %}
+    {% endwith %}
     </div>
  </div>
 {% endblock %}
