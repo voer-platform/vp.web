@@ -57,8 +57,9 @@ class Material(models.Model):
 
     def to_dict(self):
         material = dict()
+        material['id'] = self.id
         material['material_id'] = self.material_id
-        material['material_type'] = self.material_type
+        material['material_type'] = int(self.material_type)
         material['text'] = self.text
         material['version'] = self.version
         material['title'] = self.title

@@ -15,13 +15,14 @@
 {% include 'frontend/block/left_block_user.html' %}
 <div class="col-lg-1 right-row">
     <div id="fitertop-browserall" class="hffitertop">
-        <!--<div class="dropdown left">
-            <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Sort by</a>
+        <div class="dropdown left">
+            <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Sort by' %}</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <li><a href="{{ request.path }}?sort=title">{% trans 'Title' %}</a></li>
                 <li><a href="{{ request.path }}?sort=modified">{% trans 'Date' %}</a></li>
             </ul>
         </div>
+        <!--
         <div class="fiterbutton right">
             <a class="gridview left">{% trans 'Gridview' %}</a>
             <a class="listview right">{% trans 'Listview' %}</a>

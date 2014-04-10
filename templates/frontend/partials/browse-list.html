@@ -42,12 +42,22 @@ $(document).ready(function(){
 {% if material_list %}
 
     {% for material in material_list %}
-    {% if material.material_type == 1 %}
-        {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
-        {% trans "Module" as type_name %}
+    {% if not material.status %}
+        {% if material.material_type == 1 %}
+            {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
+            {% trans "Module" as type_name %}
+        {% else %}
+            {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
+            {% trans "Collection" as type_name %}
+        {% endif %}
     {% else %}
-        {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
-        {% trans "Collection" as type_name %}
+        {% if material.material_type == 1 %}
+            {% url 'user_module_detail' mid=material.id as material_url %}
+            {% trans "Module" as type_name %}
+        {% else %}
+            {% url 'user_collection_detail' cid=material.id as material_url %}
+            {% trans "Collection" as type_name %}
+        {% endif %}
     {% endif %}
 
     <div class="material-list-entry clearfix">
