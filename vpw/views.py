@@ -1041,6 +1041,11 @@ def user_dashboard(request):
     page_query = get_page_query(request)
     pager = pager_default_initialize(materials['count'], 12, page)
 
+    categories = vpr_get_categories()
+    category_dict = {}
+    for category in categories:
+        category_dict[category['id']] = category['name']
+
     person_materials = []
     for material in materials['results']:
         view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
@@ -1048,6 +1053,25 @@ def user_dashboard(request):
 
         favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
         material['favorite_count'] = favorite_count
+
+        person_list = []
+
+        if author['fullname']:
+            person_list.append({'pid': pid, 'pname': author['fullname']})
+        else:
+            person_list.append({'pid': pid, 'pname': author['user_id']})
+
+        material['person_list'] = person_list
+
+        if 'categories' in material and material['categories']:
+            category_array = material['categories'].split(',')
+            category_list = []
+            for cid in category_array:
+                cid = cid.strip()
+                category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
+
+            material['category_list'] = category_list
+            material['category_first'] = category_array[0]
 
         person_materials.append(material)
 
@@ -1638,6 +1662,11 @@ def get_favorite(request):
     page = int(request.GET.get('page', 1))
     author = vpr_get_person(pid)
 
+    categories = vpr_get_categories()
+    category_dict = {}
+    for category in categories:
+        category_dict[category['id']] = category['name']
+
     favorites = vpr_get_favorite(pid, page)
 
     pager = pager_default_initialize(favorites['count'], 12, page)
@@ -1663,6 +1692,14 @@ def get_favorite(request):
         favorite_count = vpr_get_statistic_data(favorite['material_id'], favorite['version'], 'favorites')
         favorite['favorite_count'] = favorite_count
 
+        if 'categories' in favorite and favorite['categories']:
+            category_list = []
+            for cid in favorite['categories']:
+                category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
+
+            favorite['category_list'] = category_list
+            favorite['category_first'] = favorite['categories'][0]
+
         favorite_list.append(favorite)
 
     return render(request, "frontend/user_favorite.html", {'materials': favorite_list, 'pager': pager, 'page_query': page_query, 'author': author})
@@ -1680,6 +1717,11 @@ def get_unpublish(request):
     offset = (page - 1) * number_record
     offset_limit = offset + number_record
 
+    categories = vpr_get_categories()
+    category_dict = {}
+    for category in categories:
+        category_dict[category['id']] = category['name']
+
     try:
         materials = Material.objects.filter(Q(creator_id=current_user.id))
         material_count = len(materials)
@@ -1688,10 +1730,40 @@ def get_unpublish(request):
             materials = materials.order_by(sort)
 
         materials = materials[offset: offset_limit]
+
+        material_list = []
+        for material in materials:
+            material = material.to_dict()
+
+            if 'categories' in material and material['categories']:
+                category_array = material['categories'].split(',')
+                category_list = []
+                for cid in category_array:
+                    cid = cid.strip()
+                    category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
+
+                material['category_list'] = category_list
+                material['category_first'] = category_array[0]
+
+            if 'author' in material and material['author']:
+                author_array = material['author'].split(',')
+                person_list = []
+
+                author_info = vpr_get_person(author_array[0])  # get only first author
+                if author_info['fullname']:
+                    person_list.append({'pid': pid, 'pname': author_info['fullname']})
+                else:
+                    person_list.append({'pid': pid, 'pname': author_info['user_id']})
+
+                material['person_list'] = person_list
+
+            material_list.append(material)
+
+
         pager = pager_default_initialize(material_count, number_record, page)
         page_query = get_page_query(request)
 
-        return render(request, "frontend/user_unpublish.html", {'materials': materials, 'author': author,'pager': pager, 'page_query': page_query})
+        return render(request, "frontend/user_unpublish.html", {'materials': material_list, 'author': author,'pager': pager, 'page_query': page_query})
 
     except Material.DoesNotExist:
         return HttpResponseRedirect('/')
@@ -2168,14 +2240,14 @@ def ajax_search_result(request):
 
 @login_required
 def delete_unpublish(request):
-    if (request.REQUEST):
+    if request.REQUEST:
         current_user = request.user
         ids = request.POST['material_ids']
         id_list = ids.split(',')
 
         Material.objects.filter(creator_id=current_user.id, material_id='', version=None, id__in=id_list).delete() #delete for old data
         Material.objects.filter(creator_id=current_user.id, material_id='', version=0, id__in=id_list).delete()
-        messages.success(request, 'Delete material successfull.')
+        messages.success(request, _('Delete material successfull.'))
 
         return HttpResponseRedirect(reverse('get_unpublish'))
     else:

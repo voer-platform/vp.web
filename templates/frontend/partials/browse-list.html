@@ -51,8 +51,15 @@ $(document).ready(function(){
     {% endif %}
 
     <div class="material-list-entry clearfix">
+      {% if has_actions %}
+      <div class="checkbox-select-items left" style="margin-right: 10px;">
+        <input type="checkbox" title="{% trans 'Select/Deselect Item' %}" value="{{ material.id }}" />
+      </div>
+      {% endif %}
+
       {% if material.user_id %}
-        <div class="material-cover left">
+        <div class="material-cover-wrapper left">
+          <div class="material-cover left">
             {% with y=material.id|stringformat:"s" %}
             {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y "50x50" crop="center 20%" as im %}
                 <img src="{{ im.url }}">
@@ -60,9 +67,10 @@ $(document).ready(function(){
                 <img src="{{ STATIC_URL }}images/author1_detail.jpg" style="width:60px; height:60px;">
             {% endthumbnail %}
             {% endwith %}
-        </div>
-        <div class="material-tiny-icon">
+          </div>
+          <div class="material-tiny-icon">
             <img src="{% static 'images/icon-people-24.png' %}">
+          </div>
         </div>
         <div class="material-brief left">
             <h5 class="">
@@ -72,6 +80,7 @@ $(document).ready(function(){
         </div>
       {% else %}
       {% with title=material.title|safe %}
+      <div class="material-cover-wrapper left">
         <div class="material-cover left">
           <a title="{{ type_name }}: {{ title }}" alt="{{ type_name }}: {{ title }}" href="{{ material_url }}">
             {% if material.image %}
@@ -95,10 +104,13 @@ $(document).ready(function(){
                     {% endthumbnail %}
                 {% endwith %}
             {% endif %}
+          </a>
         </div>
+
         <div class="material-tiny-icon">
             <img src="{% if material.material_type == 2 %}{% static 'images/icon-book-24.png' %}{% else %}{% static 'images/icon-puzzle-24.png' %}{% endif %}">
         </div>
+      </div>
         <div class="material-brief left">
             <h5 class="{% if material.material_type == 2 %}collection-title{% else %}module-title{% endif %}">
                 <a title="{{ type_name }}: {{ title }}" alt="{{ type_name }}: {{ title }}" href="{{ material_url }}"> {{ title }} </a>

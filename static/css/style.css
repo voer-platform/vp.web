@@ -1092,4 +1092,11 @@ border-color: #f1e7bc;
 .bs-callout-info {
 background-color: #f0f7fd;
 border-color: #d0e3f0;
+}.material-unpublished-items .material-brief {
+    width: 85%;
 }
+.material-unpublished-items .material-cover-wrapper {
+    float: left;
+    position: relative;
+}
+
