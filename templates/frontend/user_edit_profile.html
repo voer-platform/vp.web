@@ -74,9 +74,9 @@
                 <input type="file" id="uploadfile_0" name="avatar_file">
                 <p class="help-block">{% trans 'Your virtual face or picture. Pictures larger than 1024x1024 pixels will be scaled down.' %}</p>
 
-{#                {% if author.avatar %}#}
+                {% if author.avatar %}
                 <a href="javascript:void(0)" class="hfbtn-common hfbtn-active btn-input-delete-avatar">{% trans 'Remove avatar' %}</a>
-{#                {% endif %}#}
+                {% endif %}
             </div>
 
             <div class="form-group">
@@ -141,6 +141,7 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '.btn-input-delete-avatar', function(){
+        var btn_delete_avatar = $(this);
         if (confirm('Do you want to remove avatar?')) {
             $.ajax({
                 type: 'get',
@@ -149,6 +150,7 @@ $(document).ready(function(){
                     if (data.success === true) {
                         $('.hfuser-avatar img').attr('src', '/static/images/author1_detail.jpg');
                         $('#drop-top-language img').before('<span class="logo-user-right-top left"></span>').remove();
+                        btn_delete_avatar.hide();
                     } else {
                         console.log('Has something wrong');
                     }
