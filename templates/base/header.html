@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load thumbnail %}
+{% load vpw_filters %}
 
 <!-- TOP -->
 <div id="top" class="navbar navbar-default navbar-fixed-top">
@@ -85,12 +86,16 @@
                             <ul class="nav navbar-nav">
                                 <li class="dropdown loged-top-user">
                                     <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop-top-language">
-                                        {% with y=user.author.author_id|stringformat:"s" %}
-                                        {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y "32x32" as im %}
-                                            <img src="{{ im.url }}">
-                                        {% empty %}
+                                        {% with y=user.author.author_id|stringformat:"s" avatar=user.author.author_id|get_author_avatar %}
+                                        {% if avatar %}
+                                            {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y|add:"?l="|add:avatar "32x32" as im %}
+                                                <img src="{{ im.url }}">
+                                            {% empty %}
+                                                <span class="logo-user-right-top left"></span>
+                                            {% endthumbnail %}
+                                        {% else %}
                                             <span class="logo-user-right-top left"></span>
-                                        {% endthumbnail %}
+                                        {% endif %}
                                         {% endwith %}
 
                                         {{ user.username }}

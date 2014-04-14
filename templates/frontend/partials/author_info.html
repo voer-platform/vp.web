@@ -6,6 +6,7 @@
     <div class="hfuser-information left">
         <div class="hfuser-info ">
             <div class="hfuser-avatar left">
+        {% if author.avatar %}
             {% with y=author.id|stringformat:"s" %}
             {% thumbnail "http://"|add:request.META.HTTP_HOST|add:"/user/avatar/"|add:y|add:"?l="|add:author.avatar "150x150" crop="center 20%" as im %}
                 <img src="{{ im.url }}">
@@ -13,6 +14,10 @@
                 <img src="{{ STATIC_URL }}images/author1_detail.jpg">
             {% endthumbnail %}
             {% endwith %}
+        {% else %}
+            <img src="{{ STATIC_URL }}images/author1_detail.jpg">
+        {% endif %}
+
             </div>
             <div class="hfuser-name">{% if author.fullname %} {% if author.title %}{{ author.title }} {% endif %}{{ author.fullname }} {% else %} {{ user.username }} {% endif %}</div>
             <div class="hfuser-address">{% if author.affiliation %}{{ author.affiliation }}{% else %}{% trans 'Not available' %}{% endif %}</div>

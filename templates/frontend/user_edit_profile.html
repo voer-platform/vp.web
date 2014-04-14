@@ -69,30 +69,14 @@
                     <br>{% trans 'To change the current user password, enter the new password in both fields.' %}
                 </p>
             </div>
-            <!--
-            <div class="form-group">
-                <label for=InputLocaleSettings>Locale settings / Time zone </label>
-                <div class="hfselectList">
-                    <select name="selectlist" class="select-block">
-                        <option>Africa/Abidjan: Tuesday, December 24, 2013 - 07:15 +0000</option>
-                        <option>Africa/Accra: Tuesday, December 24, 2013 - 07:15 +0000</option>
-                        <option>Africa/Addis Ababa: Tuesday, December 24, 2013 - 10:15 +0300</option>
-                        <option>Africa/Algiers: Tuesday, December 24, 2013 - 08:15 +0100</option>
-                        <option>Africa/Bangui: Tuesday, December 24, 2013 - 08:15 +0100</option>
-                        <option>Africa/Blantyre: Tuesday, December 24, 2013 - 09:15 +0200</option>
-                        <option>Africa/Bujumbura: Tuesday, December 24, 2013 - 09:15 +0200</option>
-                        <option>Africa/Cairo: Tuesday, December 24, 2013 - 09:15 +0200</option>
-                    </select>
-                </div>
-            </div>
-            -->
             <div class="form-group">
                 <label for="InputPicture">{% trans 'Picture' %}</label>
-                <input type="file" onmouseout="document.getElementById('uploadfilename_0').value = this.value;" onchange="document.getElementById('uploadfilename_0').value = this.value;" class="uploadfile" id="uploadfile_0" name="avatar_file">
-                <div class="fakefile">
-                    <input type="text" onclick="document.getElementById('uploadfile_0').click();" id="uploadfilename_0" value="" class="form-control typefile">
-                </div>
+                <input type="file" id="uploadfile_0" name="avatar_file">
                 <p class="help-block">{% trans 'Your virtual face or picture. Pictures larger than 1024x1024 pixels will be scaled down.' %}</p>
+
+{#                {% if author.avatar %}#}
+                <a href="javascript:void(0)" class="hfbtn-common hfbtn-active btn-input-delete-avatar">{% trans 'Remove avatar' %}</a>
+{#                {% endif %}#}
             </div>
 
             <div class="form-group">
@@ -126,7 +110,6 @@
             <div class="form-group">
                 <label for="InputBiography">{% trans 'Biography' %}</label>
                 {{ form.biography }}
-                <!-- <textarea rows="4" class="form-control" name="biography">{% if author.biography %}{{ author.biography }}{% endif %}</textarea> -->
             </div>
             <div class="form-group">
                 <label for="InputNationality">{% trans 'Nationality' %}</label>
@@ -154,6 +137,24 @@ $(document).ready(function(){
 
     $(document).on('click', '.btn-edit-profile-reset', function(){
         $('#edit-user-profile-form')[0].reset();
+        return false;
+    });
+
+    $(document).on('click', '.btn-input-delete-avatar', function(){
+        if (confirm('Do you want to remove avatar?')) {
+            $.ajax({
+                type: 'get',
+                url: '/ajax/remove-avatar',
+                success: function(data) {
+                    if (data.success === true) {
+                        $('.hfuser-avatar img').attr('src', '/static/images/author1_detail.jpg');
+                        $('#drop-top-language img').before('<span class="logo-user-right-top left"></span>').remove();
+                    } else {
+                        console.log('Has something wrong');
+                    }
+                }
+            });
+        }
         return false;
     });
 });

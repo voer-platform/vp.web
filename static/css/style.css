@@ -1099,4 +1099,9 @@ border-color: #d0e3f0;
     float: left;
     position: relative;
 }
+.btn-input-delete-avatar {
+    position: absolute;
+    right: 150px;
+    top: 5px;
+}
 
