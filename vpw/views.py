@@ -1105,7 +1105,7 @@ def mostFavedView(request):
     return render(request, template,
         {"materials": materials,
          "author": author,
-         "title": "Top 12 Most Favorited Documents",
+         "title": _("Top 12 Most Favorited Documents"),
         })
 
 
@@ -1348,7 +1348,7 @@ def edit_profile(request):
                     author_data['avatar'] = author['avatar']
 
                 # messages.add_message(request, messages.SUCCESS, 'Profile details updated.')
-                messages.success(request, 'Profile details updated.')
+                messages.success(request, _('Profile details updated.'))
             else:
                 form._errors['current_password'] = form.error_class(['Current password is incorrect'])
         else:
@@ -1466,9 +1466,9 @@ def admin_import_user(request):
         default_password = request.POST['default_password']
 
         if not default_password:
-            messages.error(request, 'Please enter default password.')
+            messages.error(request, _('Please enter default password.'))
         elif 'user_list' not in request.FILES:
-            messages.error(request, 'Please select file')
+            messages.error(request, _('Please select file'))
         else:
             current_user_id_list = []
             current_author_id_list = []
@@ -1540,7 +1540,7 @@ def admin_import_user(request):
                 if csv_data:
                     backup_data.append(csv_data)
 
-            messages.success(request, 'Import user successful.')
+            messages.success(request, _('Import user successful.'))
 
             if (user_created_count > 0):
                 messages.success(request, '%s user(s) was created.' % user_created_count)
@@ -2134,9 +2134,9 @@ def admin_settings(request):
             # save collection_license's change
             collection_license.value = form.cleaned_data['collection_license']
             collection_license.save()
-            messages.success(request, 'Settings updated successfully.')
+            messages.success(request, _('Settings updated successfully.'))
         else:
-            messages.error(request, 'Error while updating settings.')
+            messages.error(request, _('Error while updating settings.'))
     else:
         form = SettingsForm(dict(module_license=module_license.value,
                                  collection_license=collection_license.value))
@@ -2165,7 +2165,11 @@ def get_setting_value(license_type, language='vi'):
 def get_avatar(request, pid):
     # Processing by Nginx when deploy on prod
     r = vpr_get_user_avatar(pid)
-    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+
+    response = HttpResponse()
+    if r:
+        response = HttpResponse(r.content, content_type=r.headers['content-type'])
+
     return response
 
 
@@ -2321,3 +2325,21 @@ def _calculate_rate_data(rate_data):
         rate_data['rate_fake'] = format(rate_data['rate_fake']).replace(',', '.')
 
     return rate_data
+
+
+@login_required
+@csrf_exempt
+def ajax_user_remove_avatar(request):
+    if request.is_ajax():
+        current_user = request.user
+        pid = current_user.author.author_id
+
+        vpr_get_user_avatar(pid, True)
+
+        result = dict()
+        result['success'] = True
+        result['message'] = _('Delete avatar successfull')
+
+        return HttpResponse(json.dumps(result), content_type='application/json')
+    else:
+        return HttpResponseRedirect('/')

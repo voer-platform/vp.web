@@ -61,7 +61,7 @@
             remote: "{% url 'ajax_search_author' %}?keyword=%QUERY",
             template: [
                 '<p class="item-fullname">{% verbatim %}{{fullname}}{% endverbatim %}</p>',
-                '<p class="item-email">{% verbatim %}{{email}}{% endverbatim %}</p>',
+                '<p class="item-email">{% verbatim %}{{affiliation}}{% endverbatim %}</p>',
             ].join(''),
             engine: Hogan,
             limit: 10
@@ -84,7 +84,7 @@
             '</div>',
             '<div class="right">',
             '<div class="user-name">{% verbatim %}{{fullname}}{% endverbatim %}</div>',
-            '<div class="user-address">{% verbatim %}{{email}}{% endverbatim %}</div>',
+            '<div class="user-address">{% verbatim %}{{affiliation}}{% endverbatim %}</div>',
             '<div class="user-website">{% verbatim %}{{homepage}}{% endverbatim %}</div>',
             '</div>',
             '</div>',
@@ -195,7 +195,7 @@
                                                         </div>
                                                         <div class="right">
                                                             <div class="user-name">{{ author.fullname }}</div>
-{#                                                            <div class="user-address">{{ author.email }}</div>#}
+                                                            <div class="user-address">{{ author.affiliation }}</div>
                                                             <div class="user-website">{{ author.homepage }}</div>
                                                         </div>
                                                     </div>
