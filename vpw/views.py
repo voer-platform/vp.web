@@ -2,23 +2,20 @@ import json
 import math
 import os
 from string import lower
+import urllib
 import zipfile
 import re
-import urllib
 import random
 import csv
 import time
-from django import forms
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
-from django.core.paginator import EmptyPage
 from django.db.models.query_utils import Q
 from django.forms.forms import NON_FIELD_ERRORS
 from django.forms.util import ErrorList
 from django.template.defaultfilters import filesizeformat
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, render_to_response, redirect
-from django.template import RequestContext
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -31,13 +28,14 @@ from registration.backends.default.views import RegistrationView
 from django.core.urlresolvers import reverse
 
 from vpw.models import Material, Author, Settings, MaterialFeature, FeaturedAuthor
-from vpw.utils import normalize_string, normalize_filename
+from vpw.utils import normalize_string, normalize_filename, extract_images
 from vpw.vpr_api import vpr_get_material, vpr_get_category, vpr_get_person, vpr_get_persons, \
-    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_get_pdf, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
+    vpr_get_categories, vpr_browse, vpr_materials_by_author, vpr_search, vpr_delete_person, vpr_get_statistic_data, \
     voer_get_attachment_info, vpr_create_material, vpr_get_material_images, voer_update_author, voer_add_favorite, vpr_search_author, vpr_search_module, \
     voer_add_view_count, vpr_get_content_file, vpr_get_user_avatar, vpr_get_favorite, vpr_delete_favorite,vpr_user_add_rate, vpr_user_delete_rate, is_material_rated, vpr_is_favorited
 from vpw.vpr_api import vpt_import, vpt_get_url, vpt_download, vpr_request
 from vpw.forms import ModuleForm, EditProfileForm, CollectionForm, SettingsForm, RecaptchaRegistrationForm
+
 
 
 
@@ -731,6 +729,9 @@ def import_mass_modules(request):
         # Save module
         material = Material()
         material.creator_id = request.POST.get("uid", 1)
+        current_user = User.objects.get(id=material.creator_id)
+        material.author = current_user.author.author_id
+        material.editor = current_user.author.author_id
         # Lay ten file lam ten module
         material.title = os.path.splitext(upload_file.name)[0]
         material.text = content
@@ -849,21 +850,63 @@ def _publish_material(material):
     else:
         derived_from = ""
 
-    result = vpr_create_material(
-        material_type=material.material_type,
-        text=material.text,
-        version=1,
-        title=material.title,
-        description=material.description,
-        categories=material.categories,
-        author=material.author,
-        editor=material.editor,
-        licensor=material.licensor,
-        keywords=material.keywords,
-        language=material.language,
-        derived_from=derived_from,
-        license_id=1
-    )
+    if material.material_type == MODULE_TYPE:
+        # Extract images from content
+        content = material.text
+        imgs = extract_images(content)
+        upload_images = []
+        i = 0
+        for img in imgs:
+            i += 1
+            upid = "%s_%s" % (material.id, i)
+            if img.startswith("http://") or img.startswith("https://"):
+                # get from internet
+                file_name, file_extension = os.path.splitext(img)
+                path_save_file = settings.MEDIA_ROOT + "/" + upid + file_extension
+                resource = urllib.urlopen(img)
+                output = open(path_save_file, "wb")
+                output.write(resource.read())
+                output.close()
+            elif img.startswith("/file/"):
+                # get from vpr
+                pass
+            elif img.startswith("/media/"):
+                # get from vpw
+                path_save_file = settings.MEDIA_ROOT + img.replace("/media", "")
+
+            image_info = {'old_path': img, 'name': upid, "path": path_save_file}
+            upload_images.append(image_info)
+            content = content.replace("src=\"%s\"" % img, "src=\"%s\"" % upid)
+
+        material.text = content
+
+    new_material = {
+        'material_type': material.material_type,
+        'text': material.text,
+        'version': 1,
+        'title': material.title,
+        'description': material.description,
+        'categories': material.categories,
+        'author': material.author,
+        'editor': material.editor,
+        'licensor': material.licensor,
+        'keywords': material.keywords,
+        'language': material.language,
+        'derived_from': derived_from,
+        'license_id': 1
+    }
+
+    # attach file
+    if upload_images:
+        i = 0
+        for img in upload_images:
+            i += 1
+            new_material['attach0%s' % i] = {'file': open(img.get("path"), 'rb')}
+            new_material['attach0%s_name' % i] = img.get("name")
+            new_material['attach0%s_description' % i] = ""
+
+    result = vpr_create_material(new_material)
+
     return result
 
 
@@ -2187,8 +2230,7 @@ def delete_unpublish(request):
         ids = request.POST['material_ids']
         id_list = ids.split(',')
 
-        Material.objects.filter(creator_id=current_user.id, material_id='', version=None, id__in=id_list).delete() #delete for old data
-        Material.objects.filter(creator_id=current_user.id, material_id='', version=0, id__in=id_list).delete()
+        Material.objects.filter(creator_id=current_user.id, material_id='', id__in=id_list).delete() #delete for old data
         messages.success(request, 'Delete material successfull.')
 
         return HttpResponseRedirect(reverse('get_unpublish'))
