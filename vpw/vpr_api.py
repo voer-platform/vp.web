@@ -319,7 +319,6 @@ def voer_update_author(author):
     files = {}
     if 'avatar' in author:
         file_path = author['avatar']
-        del author['avatar']
 
         file_name = os.path.basename(file_path)
         file_data = open(file_path, 'rb').read()
@@ -379,10 +378,16 @@ def vpr_get_content_file(fid):
     return r
 
 
-def vpr_get_user_avatar(pid):
-    url = settings.VPR_URL + "persons/%s/avatar" % pid
+def vpr_get_user_avatar(pid, detele_flag=False):
+    if detele_flag:
+        url = settings.VPR_URL + "persons/%s/avatar?delete=1" % pid
+    else:
+        url = settings.VPR_URL + "persons/%s/avatar" % pid
+
     r = requests.request("GET", url)
-    return r
+
+    if r.status_code == 200:
+        return r
 
 
 def vpr_user_add_rate(pid, rate, mid, version=''):

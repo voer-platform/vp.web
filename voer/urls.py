@@ -88,6 +88,7 @@ urlpatterns = patterns('',
     url(r'^ajax/get-similars', 'vpw.views.ajax_get_similars', name='ajax_get_similars'),
     url(r'^ajax/search-result$', 'vpw.views.ajax_search_result', name='ajax_search_result'),
     url(r'^ajax/user-rate$', 'vpw.views.ajax_user_rate', name='ajax_user_rate'),
+    url(r'^ajax/remove-avatar$', 'vpw.views.ajax_user_remove_avatar', name='ajax_user_remove_avatar'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),

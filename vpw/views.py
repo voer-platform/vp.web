@@ -665,6 +665,7 @@ def create_module(request):
                             material.material_id = result['material_id']
                             material.version = result['version']
                             material.save()
+                            messages.success(request, _('The content is successfully published.'))
                             return redirect('module_detail', title=normalize_string(material.title),
                                             mid=result['material_id'])
                 except Material.DoesNotExist:
@@ -833,6 +834,8 @@ def create_collection(request):
                         material.material_id = result['material_id']
                         material.version = result['version']
                         material.save()
+
+                        messages.success(request, _('The content is successfully published.'))
                         return redirect('collection_detail', title=normalize_string(material.title),
                                         cid=result['material_id'])
 
@@ -1084,6 +1087,11 @@ def user_dashboard(request):
     page_query = get_page_query(request)
     pager = pager_default_initialize(materials['count'], 12, page)
 
+    categories = vpr_get_categories()
+    category_dict = {}
+    for category in categories:
+        category_dict[category['id']] = category['name']
+
     person_materials = []
     for material in materials['results']:
         view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
@@ -1091,6 +1099,25 @@ def user_dashboard(request):
 
         favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
         material['favorite_count'] = favorite_count
+
+        person_list = []
+
+        if author['fullname']:
+            person_list.append({'pid': pid, 'pname': author['fullname']})
+        else:
+            person_list.append({'pid': pid, 'pname': author['user_id']})
+
+        material['person_list'] = person_list
+
+        if 'categories' in material and material['categories']:
+            category_array = material['categories'].split(',')
+            category_list = []
+            for cid in category_array:
+                cid = cid.strip()
+                category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
+
+            material['category_list'] = category_list
+            material['category_first'] = category_array[0]
 
         person_materials.append(material)
 
@@ -1124,7 +1151,7 @@ def mostFavedView(request):
     return render(request, template,
         {"materials": materials,
          "author": author,
-         "title": "Top 12 Most Favorited Documents",
+         "title": _("Top 12 Most Favorited Documents"),
         })
 
 
@@ -1367,7 +1394,7 @@ def edit_profile(request):
                     author_data['avatar'] = author['avatar']
 
                 # messages.add_message(request, messages.SUCCESS, 'Profile details updated.')
-                messages.success(request, 'Profile details updated.')
+                messages.success(request, _('Profile details updated.'))
             else:
                 form._errors['current_password'] = form.error_class(['Current password is incorrect'])
         else:
@@ -1485,9 +1512,9 @@ def admin_import_user(request):
         default_password = request.POST['default_password']
 
         if not default_password:
-            messages.error(request, 'Please enter default password.')
+            messages.error(request, _('Please enter default password.'))
         elif 'user_list' not in request.FILES:
-            messages.error(request, 'Please select file')
+            messages.error(request, _('Please select file'))
         else:
             current_user_id_list = []
             current_author_id_list = []
@@ -1559,7 +1586,7 @@ def admin_import_user(request):
                 if csv_data:
                     backup_data.append(csv_data)
 
-            messages.success(request, 'Import user successful.')
+            messages.success(request, _('Import user successful.'))
 
             if (user_created_count > 0):
                 messages.success(request, '%s user(s) was created.' % user_created_count)
@@ -1681,6 +1708,11 @@ def get_favorite(request):
     page = int(request.GET.get('page', 1))
     author = vpr_get_person(pid)
 
+    categories = vpr_get_categories()
+    category_dict = {}
+    for category in categories:
+        category_dict[category['id']] = category['name']
+
     favorites = vpr_get_favorite(pid, page)
 
     pager = pager_default_initialize(favorites['count'], 12, page)
@@ -1706,6 +1738,14 @@ def get_favorite(request):
         favorite_count = vpr_get_statistic_data(favorite['material_id'], favorite['version'], 'favorites')
         favorite['favorite_count'] = favorite_count
 
+        if 'categories' in favorite and favorite['categories']:
+            category_list = []
+            for cid in favorite['categories']:
+                category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
+
+            favorite['category_list'] = category_list
+            favorite['category_first'] = favorite['categories'][0]
+
         favorite_list.append(favorite)
 
     return render(request, "frontend/user_favorite.html", {'materials': favorite_list, 'pager': pager, 'page_query': page_query, 'author': author})
@@ -1723,6 +1763,11 @@ def get_unpublish(request):
     offset = (page - 1) * number_record
     offset_limit = offset + number_record
 
+    categories = vpr_get_categories()
+    category_dict = {}
+    for category in categories:
+        category_dict[category['id']] = category['name']
+
     try:
         materials = Material.objects.filter(Q(creator_id=current_user.id))
         material_count = len(materials)
@@ -1731,10 +1776,40 @@ def get_unpublish(request):
             materials = materials.order_by(sort)
 
         materials = materials[offset: offset_limit]
+
+        material_list = []
+        for material in materials:
+            material = material.to_dict()
+
+            if 'categories' in material and material['categories']:
+                category_array = material['categories'].split(',')
+                category_list = []
+                for cid in category_array:
+                    cid = cid.strip()
+                    category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
+
+                material['category_list'] = category_list
+                material['category_first'] = category_array[0]
+
+            if 'author' in material and material['author']:
+                author_array = material['author'].split(',')
+                person_list = []
+
+                author_info = vpr_get_person(author_array[0])  # get only first author
+                if author_info['fullname']:
+                    person_list.append({'pid': pid, 'pname': author_info['fullname']})
+                else:
+                    person_list.append({'pid': pid, 'pname': author_info['user_id']})
+
+                material['person_list'] = person_list
+
+            material_list.append(material)
+
+
         pager = pager_default_initialize(material_count, number_record, page)
         page_query = get_page_query(request)
 
-        return render(request, "frontend/user_unpublish.html", {'materials': materials, 'author': author,'pager': pager, 'page_query': page_query})
+        return render(request, "frontend/user_unpublish.html", {'materials': material_list, 'author': author,'pager': pager, 'page_query': page_query})
 
     except Material.DoesNotExist:
         return HttpResponseRedirect('/')
@@ -1857,6 +1932,7 @@ def user_module_reuse(request, mid, version=1):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
+                    messages.success(request, _('The content is successfully published.'))
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
         # lay anh trong noi dung
@@ -1912,6 +1988,7 @@ def user_collection_edit(request, cid):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
+                    messages.success(request, _('The content is successfully published.'))
                     return redirect('collection_detail_old', cid=result['material_id'])
     else:
         json_outline = material.text
@@ -1995,6 +2072,7 @@ def user_publish_material(request, mid):
     result = _publish_material(material)
     if 'material_id' in result:
         material.delete()
+        messages.success(request, _('The content is successfully published.'))
         return redirect('module_detail_old', mid=result['material_id'])
     else:
         #publish is failed
@@ -2079,6 +2157,7 @@ def user_module_edit(request, mid):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
+                    messages.success(request, _('The content is successfully published.'))
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
         form = ModuleForm(instance=material_edit)
@@ -2105,9 +2184,9 @@ def admin_settings(request):
             # save collection_license's change
             collection_license.value = form.cleaned_data['collection_license']
             collection_license.save()
-            messages.success(request, 'Settings updated successfully.')
+            messages.success(request, _('Settings updated successfully.'))
         else:
-            messages.error(request, 'Error while updating settings.')
+            messages.error(request, _('Error while updating settings.'))
     else:
         form = SettingsForm(dict(module_license=module_license.value,
                                  collection_license=collection_license.value))
@@ -2136,7 +2215,11 @@ def get_setting_value(license_type, language='vi'):
 def get_avatar(request, pid):
     # Processing by Nginx when deploy on prod
     r = vpr_get_user_avatar(pid)
-    response = HttpResponse(r.content, content_type=r.headers['content-type'])
+
+    response = HttpResponse()
+    if r:
+        response = HttpResponse(r.content, content_type=r.headers['content-type'])
+
     return response
 
 
@@ -2225,12 +2308,12 @@ def ajax_search_result(request):
 
 @login_required
 def delete_unpublish(request):
-    if (request.REQUEST):
+    if request.REQUEST:
         current_user = request.user
         ids = request.POST['material_ids']
         id_list = ids.split(',')
 
-        Material.objects.filter(creator_id=current_user.id, material_id='', id__in=id_list).delete() #delete for old data
+        Material.objects.filter(creator_id=current_user.id, id__in=id_list).delete() #delete for old data
         messages.success(request, 'Delete material successfull.')
 
         return HttpResponseRedirect(reverse('get_unpublish'))
@@ -2291,3 +2374,21 @@ def _calculate_rate_data(rate_data):
         rate_data['rate_fake'] = format(rate_data['rate_fake']).replace(',', '.')
 
     return rate_data
+
+
+@login_required
+@csrf_exempt
+def ajax_user_remove_avatar(request):
+    if request.is_ajax():
+        current_user = request.user
+        pid = current_user.author.author_id
+
+        vpr_get_user_avatar(pid, True)
+
+        result = dict()
+        result['success'] = True
+        result['message'] = _('Delete avatar successfull')
+
+        return HttpResponse(json.dumps(result), content_type='application/json')
+    else:
+        return HttpResponseRedirect('/')

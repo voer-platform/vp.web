@@ -2,7 +2,7 @@ from django import template
 from django.db.models.query_utils import Q
 from django.template.defaultfilters import stringfilter
 from vpw.models import Material
-from vpw.vpr_api import vpr_materials_by_author, vpr_get_favorite
+from vpw.vpr_api import vpr_materials_by_author, vpr_get_favorite, vpr_get_person
 
 register = template.Library()
 
@@ -67,3 +67,12 @@ def get_favorites_count(pid):
         stats_count = 0
 
     return ' (%s)' % stats_count
+
+
+@register.filter
+@stringfilter
+def get_author_avatar(pid):
+    print pid
+    author = vpr_get_person(pid)
+
+    return author['avatar']

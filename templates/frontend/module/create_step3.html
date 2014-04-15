@@ -19,7 +19,7 @@
             remote: "{% url 'ajax_search_author' %}?keyword=%QUERY",
             template: [
                 '<p class="item-fullname">{% verbatim %}{{fullname}}{% endverbatim %}</p>',
-{#                '<p class="item-email">{% verbatim %}{{email}}{% endverbatim %}</p>',#}
+                '<p class="item-email">{% verbatim %}{{affiliation}}{% endverbatim %}</p>',
             ].join(''),
             engine: Hogan,
             limit: 10
@@ -42,7 +42,7 @@
             '</div>',
             '<div class="right">',
             '<div class="user-name">{% verbatim %}{{fullname}}{% endverbatim %}</div>',
-{#            '<div class="user-address">{% verbatim %}{{email}}{% endverbatim %}</div>',#}
+            '<div class="user-address">{% verbatim %}{{affiliation}}{% endverbatim %}</div>',
             '<div class="user-website">{% verbatim %}{{homepage}}{% endverbatim %}</div>',
             '</div>',
             '</div>',
@@ -160,7 +160,7 @@
 									</div>
 									<div class="right">
 										<div class="user-name">{{ author.fullname }}</div>
-{#										<div class="user-address">{{ author.email }}</div>#}
+										<div class="user-address">{{ author.affiliation }}</div>
 										<div class="user-website">{{ author.homepage }}</div>
 									</div>
 								</div>
@@ -230,7 +230,7 @@
             </ul>
         </div>
         <div class="form-group">
-            <label for="InputLanguage">{% trans 'Language' %}</label> 
+            <label for="InputLanguage">{% trans 'Language' %}</label>
             <div class="hfselectList">
                 <select name="language" class="select-block">
                     <option>{% trans 'Choose language' %}</option>
@@ -400,8 +400,8 @@
             <label for="InputFile">{% trans 'Document for import' %} </label>
             <input class="" id="uploadfile_1" name="document_file" type="file">
             <button class="btn hfbtn-common hfbtn-active btn-upload" name="action" value="import">{% trans 'Import' %}</button>
-            <p class="help-block">{% trans 'Files must be less than 20 MB' %}</p>
             <p class="help-block">{% trans 'Upload a document file, the best support extensions: .DOC' %}</p>
+            <p class="help-block">{% trans 'File size must be less than 20 MB' %}</p>
         </div>
         <div class="form-group">
             <label for="InputBody">{% trans 'Body' %}</label>

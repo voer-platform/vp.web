@@ -55,6 +55,23 @@ class Material(models.Model):
     translator = CharField(max_length=100, blank=True, default="")
     coeditor = CharField(max_length=100, blank=True, default="")
 
+    def to_dict(self):
+        material = dict()
+        material['id'] = self.id
+        material['material_id'] = self.material_id
+        material['material_type'] = int(self.material_type)
+        material['text'] = self.text
+        material['version'] = self.version
+        material['title'] = self.title
+        material['description'] = self.description
+        material['categories'] = self.categories
+        material['status'] = self.status
+
+        if self.author:
+            material['author'] = self.author
+
+        return material
+
 
 # Declare Signs
 def user_activated_callback(sender, user, request, **kwargs):
