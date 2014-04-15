@@ -2068,6 +2068,19 @@ def get_roles_material(material):
 @login_required
 def user_publish_material(request, mid):
     material = Material.objects.get(id=mid, creator=request.user, material_type=MODULE_TYPE)
+    is_valid = True
+    if not material.categories or not material.categories.strip():
+        is_valid = False
+        messages.error(request, _('Please choose a category for this module'))
+    if not material.author or not material.author.strip():
+        is_valid = False
+        messages.error(request, _('Please add an author for this module'))
+    if not material.language or not material.language.strip():
+        is_valid = False
+        messages.error(request, _('Please choose a language for this module'))
+    if not is_valid:
+        return redirect('user_module_detail', mid=material.id)
+
     # Publish content to VPR
     result = _publish_material(material)
     if 'material_id' in result:
