@@ -56,18 +56,30 @@
         {% endif %}
     </div>
 
-    <div class="left padding-content-15 with-100">
-        <div class="addthis_toolbox addthis_default_style ">
-            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-            <a class="addthis_button_facebook_share" fb:share:layout="button_count"></a>
-            <a class="addthis_button_tweet"></a>
-            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        </div>
-    </div>
-
     <!-- END TITLE MODULE -->
     <!-- CONTENT MODULE -->
-    <div class="module-view-content left padding-20">{{ material.text|safe }}</div>
+    <div class="module-view-content left padding-20">
+        {% if messages %}
+        <div class="alert alert-success">
+            <ul>
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="padding-bottom-10">
+            <div class="addthis_toolbox addthis_default_style ">
+                <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                <a class="addthis_button_facebook_share" fb:share:layout="button_count"></a>
+                <a class="addthis_button_tweet"></a>
+                <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+            </div>
+        </div>
+
+        {{ material.text|safe }}
+    </div>
     <!-- END CONTENT MODULE -->
 
     <div class="left padding-content-15 with-100">

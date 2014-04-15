@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-14 20:28+0000\n"
-"PO-Revision-Date: 2014-04-15 03:29+0700\n"
+"POT-Creation-Date: 2014-04-15 15:11+0000\n"
+"PO-Revision-Date: 2014-04-15 22:11+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -285,27 +285,27 @@ msgstr "Tất cả chủ đề"
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#: templates/frontend/collection_detail.html:85
-#: templates/frontend/module_detail.html:60
+#: templates/frontend/collection_detail.html:97
+#: templates/frontend/module_detail.html:70
 msgid "Attachments"
 msgstr "Tập tin đính kèm"
 
-#: templates/frontend/collection_detail.html:107
-#: templates/frontend/module_detail.html:93
+#: templates/frontend/collection_detail.html:119
+#: templates/frontend/module_detail.html:103
 msgid "Comment"
 msgstr "Góp ý"
 
-#: templates/frontend/collection_detail.html:138
+#: templates/frontend/collection_detail.html:150
 msgid "View my profile"
 msgstr "Xem hồ sơ"
 
-#: templates/frontend/collection_detail.html:231
-#: templates/frontend/module_detail.html:133
+#: templates/frontend/collection_detail.html:243
+#: templates/frontend/module_detail.html:143
 msgid "By same author"
 msgstr "Cùng tác giả"
 
-#: templates/frontend/collection_detail.html:240
-#: templates/frontend/module_detail.html:142
+#: templates/frontend/collection_detail.html:252
+#: templates/frontend/module_detail.html:152
 msgid "Similar items"
 msgstr "Nội dung tương tự"
 
@@ -405,11 +405,11 @@ msgstr "Tải lên ngày:"
 msgid "Publish"
 msgstr "Công bố"
 
-#: templates/frontend/module_detail.html:40
+#: templates/frontend/module_detail.html:50
 msgid "This document is derived from"
-msgstr "Tài liệu này được kết thừa từ"
+msgstr "Tài liệu này được kế thừa từ"
 
-#: templates/frontend/module_detail.html:42
+#: templates/frontend/module_detail.html:52
 msgid "of"
 msgstr "của"
 
@@ -983,14 +983,14 @@ msgid "Document for import"
 msgstr "Tải tài liệu"
 
 #: templates/frontend/module/create_step3.html:403
-msgid "Files must be less than 20 MB"
-msgstr "File tải lên phải nhỏ hơn 20MB"
-
-#: templates/frontend/module/create_step3.html:404
 msgid "Upload a document file, the best support extensions: .DOC"
 msgstr ""
-"Hỗ trợ tốt nhất kiểu file Word 2003 (.doc), các định dạng khác đang trong "
+"Hỗ trợ tốt nhất định dạng MS Word 2003 (.DOC), các định dạng khác đang trong "
 "giai đoạn phát triển."
+
+#: templates/frontend/module/create_step3.html:404
+msgid "File size must be less than 20 MB"
+msgstr "Kích thước tệp tin tải lên phải nhỏ hơn 20MB"
 
 #: templates/frontend/module/create_step3.html:407
 msgid "Body"
@@ -1239,59 +1239,64 @@ msgstr "Nhập sai mã xác thực"
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: vpw/views.py:544 vpw/views.py:765
+#: vpw/views.py:544 vpw/views.py:766
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:1108
+#: vpw/views.py:670 vpw/views.py:837 vpw/views.py:1892 vpw/views.py:1948
+#: vpw/views.py:2032 vpw/views.py:2117
+msgid "The content is successfully published."
+msgstr "Nội dung đã được xuất bản thành công."
+
+#: vpw/views.py:1111
 msgid "Top 12 Most Favorited Documents"
 msgstr ""
 
-#: vpw/views.py:1351
+#: vpw/views.py:1354
 msgid "Profile details updated."
 msgstr "Cập nhật thông tin hồ sơ thành công."
 
-#: vpw/views.py:1391
+#: vpw/views.py:1394
 msgid "Add favorite successful"
 msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1469
+#: vpw/views.py:1472
 #, fuzzy
 msgid "Please enter default password."
 msgstr "Nhập mật khẩu mới"
 
-#: vpw/views.py:1471
+#: vpw/views.py:1474
 msgid "Please select file"
 msgstr ""
 
-#: vpw/views.py:1543
+#: vpw/views.py:1546
 #, fuzzy
 msgid "Import user successful."
 msgstr "Đặt lại mật khẩu thành công."
 
-#: vpw/views.py:2049
+#: vpw/views.py:2055
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2137
+#: vpw/views.py:2144
 #, fuzzy
 msgid "Settings updated successfully."
 msgstr "Xoá tài liệu thành công."
 
-#: vpw/views.py:2139
+#: vpw/views.py:2146
 msgid "Error while updating settings."
 msgstr ""
 
-#: vpw/views.py:2268
+#: vpw/views.py:2275
 msgid "Delete material successfull."
 msgstr "Xoá tài liệu thành công."
 
-#: vpw/views.py:2313
+#: vpw/views.py:2320
 msgid "Please login"
 msgstr ""
 
-#: vpw/views.py:2341
+#: vpw/views.py:2348
 #, fuzzy
 msgid "Delete avatar successfull"
 msgstr "Xoá tài liệu thành công."

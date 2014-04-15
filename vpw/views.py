@@ -667,6 +667,7 @@ def create_module(request):
                             material.material_id = result['material_id']
                             material.version = result['version']
                             material.save()
+                            messages.success(request, _('The content is successfully published.'))
                             return redirect('module_detail', title=normalize_string(material.title),
                                             mid=result['material_id'])
                 except Material.DoesNotExist:
@@ -832,6 +833,8 @@ def create_collection(request):
                         material.material_id = result['material_id']
                         material.version = result['version']
                         material.save()
+
+                        messages.success(request, _('The content is successfully published.'))
                         return redirect('collection_detail', title=normalize_string(material.title),
                                         cid=result['material_id'])
 
@@ -1886,6 +1889,7 @@ def user_module_reuse(request, mid, version=1):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
+                    messages.success(request, _('The content is successfully published.'))
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
         # lay anh trong noi dung
@@ -1941,6 +1945,7 @@ def user_collection_edit(request, cid):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
+                    messages.success(request, _('The content is successfully published.'))
                     return redirect('collection_detail_old', cid=result['material_id'])
     else:
         json_outline = material.text
@@ -2024,6 +2029,7 @@ def user_publish_material(request, mid):
     result = _publish_material(material)
     if 'material_id' in result:
         material.delete()
+        messages.success(request, _('The content is successfully published.'))
         return redirect('module_detail_old', mid=result['material_id'])
     else:
         #publish is failed
@@ -2108,6 +2114,7 @@ def user_module_edit(request, mid):
                 result = _publish_material(material)
                 if 'material_id' in result:
                     material.delete()
+                    messages.success(request, _('The content is successfully published.'))
                     return redirect('module_detail_old', mid=result['material_id'])
     else:
         form = ModuleForm(instance=material_edit)
