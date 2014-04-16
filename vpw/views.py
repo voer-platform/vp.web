@@ -857,6 +857,8 @@ def _publish_material(material):
     else:
         derived_from = ""
 
+    upload_images = None
+
     if material.material_type == MODULE_TYPE:
         # Extract images from content
         content = material.text
