@@ -514,7 +514,8 @@ def user_collection_detail(request, cid, mid):
                 "collection": collection,
                 "author": authors,
                 "category": category,
-                "outline": str_outline
+                "outline": str_outline,
+                "unpublished": True
             })
         else:
             raise PermissionDenied
