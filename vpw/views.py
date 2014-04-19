@@ -251,6 +251,8 @@ def module_detail(request, title, mid, version):
 
     favorite_count = vpr_get_statistic_data(mid, material['version'], 'favorites')
     material['favorite_count'] = favorite_count
+    material['is_favorited'] = vpr_is_favorited(mid, material['version'], person_id)
+    material['is_multiple'] = True
 
     file_data = []
     file_attachments = vpr_get_statistic_data(mid, material['version'], 'mfiles')
@@ -359,6 +361,8 @@ def collection_detail(request, title, cid, mid):
 
     favorite_count = vpr_get_statistic_data(cid, collection['version'], 'favorites')
     collection['favorite_count'] = favorite_count
+    collection['is_favorited'] = vpr_is_favorited(cid, collection['version'], person_id)
+    collection['is_multiple'] = True
 
     if not mid:
         # get the first material of collection
@@ -1442,13 +1446,14 @@ def ajax_add_favorite(request):
             if favorite_type == FAVORITE_TYPE_INSERT:
                 result = voer_add_favorite(pid, mid, version)
                 result['is_favorited'] = True
+                response_data['message'] = _('Add favorite successful')
             elif favorite_type == FAVORITE_TYPE_DELETE:
                 result = vpr_delete_favorite(pid, mid, version)
                 result['is_favorited'] = False
+                response_data['message'] = _('Delete favorite successful')
 
             if 'favorite' in result:
                 response_data['status'] = True
-                response_data['message'] = _('Add favorite successful')
                 response_data['favorite_count'] = result['favorite']
                 response_data['is_favorited'] = result['is_favorited']
 

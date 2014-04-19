@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<div class="addthis_toolbox addthis_default_style toolbar">
+    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    <a class="addthis_button_facebook_share" fb:share:layout="button_count"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+
+    {% if material %}
+    <a class="stats-favorited" href="javascript:void(0)">
+        <i class="icon icon22 icon-favorite {% if material.is_favorited %}active{% endif %}" {% if material.is_multiple %}data-is-multiple="true"{% endif %} {% if material.is_favorited %}data-added-favorite="true"{% endif %} data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}" title="{% trans 'Add to favorite' %}"></i>
+        <span class="stats-count" title="{% trans 'Favorite count' %}">{{ material.favorite_count.favorite }}</span>
+    </a>
+    {% endif %}
+</div>
