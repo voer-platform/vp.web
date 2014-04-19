@@ -81,15 +81,15 @@
 
             <div class="form-group">
                 <label for="InputFullname">{% trans 'Full name' %} <span class="red">*</span></label>
-                <input type="text" class="form-control typetext" id="InputFullname" placeholder="Enter Full name" value="{% if author.fullname %}{{ author.fullname|safe }}{% endif %}" name="fullname">
+                <input type="text" class="form-control typetext" id="InputFullname" placeholder="{% trans 'Enter fullname' %}" value="{% if author.fullname %}{{ author.fullname|safe }}{% endif %}" name="fullname">
             </div>
             <div class="form-group">
                 <label for="InputFirstname">{% trans 'First name' %}</label>
-                <input type="text" class="form-control typetext" id="InputFirstname" placeholder="Enter First name" value="{% if author.first_name %}{{ author.first_name|safe }}{% endif %}" name="first_name">
+                <input type="text" class="form-control typetext" id="InputFirstname" placeholder="{% trans 'Enter first name' %}" value="{% if author.first_name %}{{ author.first_name|safe }}{% endif %}" name="first_name">
             </div>
             <div class="form-group">
                 <label for="InputLastname">{% trans 'Last name' %}</label>
-                <input type="text" class="form-control typetext" id="InputLastname" placeholder="Enter Last name" value="{% if author.last_name %}{{ author.last_name|safe }}{% endif %}" name="last_name">
+                <input type="text" class="form-control typetext" id="InputLastname" placeholder="{% trans 'Enter last name' %}" value="{% if author.last_name %}{{ author.last_name|safe }}{% endif %}" name="last_name">
             </div>
             <div class="form-group">
                 <label for="InputTitle">{% trans 'Title' %}</label>
@@ -101,7 +101,7 @@
             </div>
             <div class="form-group">
                 <label for="InputAffiliation">{% trans 'Affiliation' %}</label>
-                <input type="text" class="form-control typetext" id="InputAffiliation" placeholder="Enter Affiliation" value="{% if author.affiliation %}{{ author.affiliation|safe }}{% endif %}" name="affiliation">
+                <input type="text" class="form-control typetext" id="InputAffiliation" placeholder="{% trans 'Enter affiliation' %}" value="{% if author.affiliation %}{{ author.affiliation|safe }}{% endif %}" name="affiliation">
             </div>
             <div class="form-group">
                 <label for="InputAffiliationURL">{% trans 'Affiliation URL' %}</label>
@@ -113,7 +113,7 @@
             </div>
             <div class="form-group">
                 <label for="InputNationality">{% trans 'Nationality' %}</label>
-                <input type="text" class="form-control typetext" id="InputNationality" placeholder="Enter Nationality" value="{% if author.national %}{{ author.national|safe }}{% endif %}" name="national">
+                <input type="text" class="form-control typetext" id="InputNationality" placeholder="{% trans 'Enter nationality' %}" value="{% if author.national %}{{ author.national|safe }}{% endif %}" name="national">
             </div>
             <div class="form-group">
                 <label for="InputCurrentPassword">{% trans 'Current password' %} <span class="red">*</span></label>
@@ -142,7 +142,7 @@ $(document).ready(function(){
 
     $(document).on('click', '.btn-input-delete-avatar', function(){
         var btn_delete_avatar = $(this);
-        if (confirm('Do you want to remove avatar?')) {
+        if (confirm('{% trans 'Do you want to remove avatar?' %}')) {
             $.ajax({
                 type: 'get',
                 url: '/ajax/remove-avatar',
@@ -151,6 +151,8 @@ $(document).ready(function(){
                         $('.hfuser-avatar img').attr('src', '/static/images/author1_detail.jpg');
                         $('#drop-top-language img').before('<span class="logo-user-right-top left"></span>').remove();
                         btn_delete_avatar.hide();
+
+                        Voer.Helper.showMessagePopup(data.message);
                     } else {
                         console.log('Has something wrong');
                     }

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-15 15:11+0000\n"
-"PO-Revision-Date: 2014-04-15 22:11+0700\n"
+"POT-Creation-Date: 2014-04-19 09:47+0000\n"
+"PO-Revision-Date: 2014-04-19 16:41+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid ""
 "The page you were looking for was not found.<br>Would you like to try "
 "searching instead?"
-msgstr ""
+msgstr "Không tìm thấy trang bạn đang tìm kiếm. <br> Bạn muốn thử tìm kiếm?"
 
 #: templates/500.html:8
 msgid "Looks like something went wrong!"
@@ -119,9 +119,8 @@ msgid "Featured authors"
 msgstr "Tác giả tiêu biểu"
 
 #: templates/frontend/admin_featured_authors.html:27
-#, fuzzy
 msgid "Enter ID author"
-msgstr "Nhập tên tác giả"
+msgstr "Nhập mã của tác giả"
 
 #: templates/frontend/admin_featured_authors.html:29
 #: templates/frontend/admin_featured_materials.html:29
@@ -129,16 +128,14 @@ msgid "Add"
 msgstr ""
 
 #: templates/frontend/admin_featured_authors.html:38
-#, fuzzy
 msgid "username"
 msgstr "Tên đăng nhập"
 
 #: templates/frontend/admin_featured_authors.html:40
 #: templates/frontend/admin_featured_materials.html:37
 #: templates/frontend/user_unpublish.html:29
-#, fuzzy
 msgid "Delete"
-msgstr "Xóa tài khoản"
+msgstr "Xóa"
 
 #: templates/frontend/admin_featured_materials.html:5
 #: templates/frontend/admin_featured_materials.html:23
@@ -147,9 +144,8 @@ msgid "Featured materials"
 msgstr "Nội dung tiêu biểu"
 
 #: templates/frontend/admin_featured_materials.html:27
-#, fuzzy
 msgid "Enter ID material"
-msgstr "Nhập tiêu đề"
+msgstr "Nhập mã của tài liệu"
 
 #: templates/frontend/admin_import_user.html:5
 #: templates/frontend/admin_import_user.html:23
@@ -285,27 +281,27 @@ msgstr "Tất cả chủ đề"
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#: templates/frontend/collection_detail.html:97
-#: templates/frontend/module_detail.html:70
+#: templates/frontend/collection_detail.html:87
+#: templates/frontend/module_detail.html:65
 msgid "Attachments"
 msgstr "Tập tin đính kèm"
 
-#: templates/frontend/collection_detail.html:119
-#: templates/frontend/module_detail.html:103
+#: templates/frontend/collection_detail.html:109
+#: templates/frontend/module_detail.html:91
 msgid "Comment"
 msgstr "Góp ý"
 
-#: templates/frontend/collection_detail.html:150
+#: templates/frontend/collection_detail.html:140
 msgid "View my profile"
 msgstr "Xem hồ sơ"
 
-#: templates/frontend/collection_detail.html:243
-#: templates/frontend/module_detail.html:143
+#: templates/frontend/collection_detail.html:233
+#: templates/frontend/module_detail.html:131
 msgid "By same author"
 msgstr "Cùng tác giả"
 
-#: templates/frontend/collection_detail.html:252
-#: templates/frontend/module_detail.html:152
+#: templates/frontend/collection_detail.html:242
+#: templates/frontend/module_detail.html:140
 msgid "Similar items"
 msgstr "Nội dung tương tự"
 
@@ -405,18 +401,17 @@ msgstr "Tải lên ngày:"
 msgid "Publish"
 msgstr "Công bố"
 
-#: templates/frontend/module_detail.html:50
+#: templates/frontend/module_detail.html:45
 msgid "This document is derived from"
 msgstr "Tài liệu này được kế thừa từ"
 
-#: templates/frontend/module_detail.html:52
+#: templates/frontend/module_detail.html:47
 msgid "of"
 msgstr "của"
 
 #: templates/frontend/profile.html:51
-#, fuzzy
 msgid "Delete person"
-msgstr "Xóa tài khoản"
+msgstr "Xóa người dùng"
 
 #: templates/frontend/profile.html:58 templates/frontend/search_result.html:51
 #: templates/frontend/collection/create_step2.html:138
@@ -614,6 +609,9 @@ msgid ""
 "wish to receive a new password or wish to receive certain news or "
 "notifications by e-mail."
 msgstr ""
+"Một địa chỉ email hợp lệ. Tất cả email của hệ thống sẽ gửi đến địa chỉ này. "
+"Địa chỉ email sẽ không công khai và chỉ sử dụng khi bạn muốn nhận mật khẩu "
+"mới, nhận tin tức hoặc thông báo qua email."
 
 #: templates/frontend/user_edit_profile.html:56
 msgid "Password"
@@ -669,26 +667,44 @@ msgid ""
 "Your virtual face or picture. Pictures larger than 1024x1024 pixels will be "
 "scaled down."
 msgstr ""
+"Ảnh chứa khuôn mặt thật của bạn. Ảnh có kích thước lớn hơn 1024x1024 sẽ được "
+"thu nhỏ lại."
 
 #: templates/frontend/user_edit_profile.html:78
 msgid "Remove avatar"
-msgstr ""
+msgstr "Xoá ảnh đại diện"
 
 #: templates/frontend/user_edit_profile.html:83
 msgid "Full name"
 msgstr "Họ và tên"
 
+#: templates/frontend/user_edit_profile.html:84
+msgid "Enter fullname"
+msgstr "Nhập tên đầy đủ"
+
 #: templates/frontend/user_edit_profile.html:87
 msgid "First name"
 msgstr "Tên"
+
+#: templates/frontend/user_edit_profile.html:88
+msgid "Enter first name"
+msgstr "Nhập tên"
 
 #: templates/frontend/user_edit_profile.html:91
 msgid "Last name"
 msgstr "Họ"
 
+#: templates/frontend/user_edit_profile.html:92
+msgid "Enter last name"
+msgstr "Nhập họ"
+
 #: templates/frontend/user_edit_profile.html:103
 msgid "Affiliation"
 msgstr "Cơ quan"
+
+#: templates/frontend/user_edit_profile.html:104
+msgid "Enter affiliation"
+msgstr "Nhập tên cơ quan"
 
 #: templates/frontend/user_edit_profile.html:107
 msgid "Affiliation URL"
@@ -697,6 +713,10 @@ msgstr "URL cơ quan"
 #: templates/frontend/user_edit_profile.html:115
 msgid "Nationality"
 msgstr "Quốc tịch"
+
+#: templates/frontend/user_edit_profile.html:116
+msgid "Enter nationality"
+msgstr "Nhập quốc tịch"
 
 #: templates/frontend/user_edit_profile.html:119
 msgid "Current password"
@@ -718,6 +738,10 @@ msgstr ""
 msgid "Cancel"
 msgstr "Hủy"
 
+#: templates/frontend/user_edit_profile.html:145
+msgid "Do you want to remove avatar?"
+msgstr "Bạn muốn xoá ảnh đại diện?"
+
 #: templates/frontend/user_favorite.html:6
 msgid "User favorite"
 msgstr "Mục yêu thích"
@@ -733,9 +757,8 @@ msgid "Listview"
 msgstr "Xem dạng danh sách"
 
 #: templates/frontend/user_unpublish.html:7
-#, fuzzy
 msgid "Unpublish material"
-msgstr "Chưa công bố"
+msgstr "Tài liệu chưa công bố"
 
 #: templates/frontend/user_unpublish.html:88
 msgid "Are you sure drop this item(s)?"
@@ -821,9 +844,8 @@ msgid "Create collection"
 msgstr "Tạo collection mới"
 
 #: templates/frontend/collection/create_step1.html:9
-#, fuzzy
 msgid "Create content"
-msgstr "Đóng góp nội dung"
+msgstr "Tạo nội dung"
 
 #: templates/frontend/collection/create_step1.html:49
 #: templates/frontend/module/create_step1.html:45
@@ -1005,6 +1027,7 @@ msgid "View count"
 msgstr "Lượt xem"
 
 #: templates/frontend/partials/browse-list.html:138
+#: templates/frontend/partials/material_tools.html:12
 msgid "Favorite count"
 msgstr "Lượt ưa thích"
 
@@ -1044,6 +1067,10 @@ msgstr "dựa trên"
 #: templates/frontend/partials/material_rate.html:9
 msgid "rating"
 msgstr "đánh giá"
+
+#: templates/frontend/partials/material_tools.html:11
+msgid "Add to favorite"
+msgstr "Thêm vào tài liệu yêu thích"
 
 #: templates/registration/login.html:29
 msgid "Show password"
@@ -1191,13 +1218,15 @@ msgstr "Quá trình đăng ký đã hoàn tất"
 
 #: templates/registration/registration_complete.html:7
 msgid "Check your email"
-msgstr ""
+msgstr "Hãy kiểm tra email của bạn"
 
 #: templates/registration/registration_complete.html:8
 msgid ""
 "An activation link has been sent to the email address you supplied, along "
 "with instructions for activating your account."
 msgstr ""
+"Một link kích hoạt đã được gửi đến email của bạn, hãy làm theo chỉ dẫn để "
+"kích hoạt tài khoản."
 
 #: templates/registration/registration_form.html:4
 msgid "Sign up"
@@ -1239,67 +1268,90 @@ msgstr "Nhập sai mã xác thực"
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: vpw/views.py:544 vpw/views.py:766
+#: vpw/forms.py:72
+msgid "Enter homepage"
+msgstr "Nhập địa chỉ trang chủ"
+
+#: vpw/forms.py:73
+msgid "Enter affiliaton URL"
+msgstr "Nhập URL cơ quan"
+
+#: vpw/forms.py:92
+msgid "I'm a human"
+msgstr ""
+
+#: vpw/views.py:546 vpw/views.py:771
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:670 vpw/views.py:837 vpw/views.py:1892 vpw/views.py:1948
-#: vpw/views.py:2032 vpw/views.py:2117
+#: vpw/views.py:672 vpw/views.py:842 vpw/views.py:1940 vpw/views.py:1996
+#: vpw/views.py:2093 vpw/views.py:2178
 msgid "The content is successfully published."
 msgstr "Nội dung đã được xuất bản thành công."
 
-#: vpw/views.py:1111
+#: vpw/views.py:1158
 msgid "Top 12 Most Favorited Documents"
-msgstr ""
+msgstr "Danh sách 12 tài liệu được ưa thích nhất"
 
-#: vpw/views.py:1354
+#: vpw/views.py:1401
 msgid "Profile details updated."
 msgstr "Cập nhật thông tin hồ sơ thành công."
 
-#: vpw/views.py:1394
+#: vpw/views.py:1435
 msgid "Add favorite successful"
 msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1472
-#, fuzzy
+#: vpw/views.py:1439
+msgid "Delete favorite successful"
+msgstr "Xoá tài liệu ưa thích thành công."
+
+#: vpw/views.py:1520
 msgid "Please enter default password."
-msgstr "Nhập mật khẩu mới"
+msgstr "Nhập mật khẩu mặc định"
 
-#: vpw/views.py:1474
+#: vpw/views.py:1522
 msgid "Please select file"
-msgstr ""
+msgstr "Hãy chọn tập tin"
 
-#: vpw/views.py:1546
-#, fuzzy
+#: vpw/views.py:1594
 msgid "Import user successful."
-msgstr "Đặt lại mật khẩu thành công."
+msgstr "Thêm người dùng thành công."
 
-#: vpw/views.py:2055
+#: vpw/views.py:2079
+msgid "Please choose a category for this module"
+msgstr "Hãy chọn 1 danh mục cho tài liệu"
+
+#: vpw/views.py:2082
+msgid "Please add an author for this module"
+msgstr "Hãy thêm tác giả cho tài liệu"
+
+#: vpw/views.py:2085
+msgid "Please choose a language for this module"
+msgstr "Hãy chọn ngôn ngữ cho tài liệu"
+
+#: vpw/views.py:2116
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2144
-#, fuzzy
+#: vpw/views.py:2205
 msgid "Settings updated successfully."
-msgstr "Xoá tài liệu thành công."
+msgstr "Lưu cài đặt thành công."
 
-#: vpw/views.py:2146
+#: vpw/views.py:2207
 msgid "Error while updating settings."
-msgstr ""
+msgstr "Có lỗi khi lưu cài đặt."
 
-#: vpw/views.py:2275
-msgid "Delete material successfull."
-msgstr "Xoá tài liệu thành công."
-
-#: vpw/views.py:2320
+#: vpw/views.py:2380
 msgid "Please login"
-msgstr ""
+msgstr "Hãy đăng nhập"
 
-#: vpw/views.py:2348
-#, fuzzy
+#: vpw/views.py:2408
 msgid "Delete avatar successfull"
-msgstr "Xoá tài liệu thành công."
+msgstr "Xoá ảnh đại diện thành công."
+
+#~ msgid "Delete material successfull."
+#~ msgstr "Xoá tài liệu thành công."
 
 #~ msgid "Image"
 #~ msgstr "Ảnh"
@@ -1335,9 +1387,6 @@ msgstr "Xoá tài liệu thành công."
 
 #~ msgid "Add new Author"
 #~ msgstr "Thêm tác giả"
-
-#~ msgid "Add to my favourite"
-#~ msgstr "Yêu thích"
 
 #~ msgid "Create new"
 #~ msgstr "Tạo mới"

@@ -69,8 +69,8 @@ class EditProfileForm(forms.Form):
     new_password = forms.CharField(max_length=255, required=False)
     confirm_password = forms.CharField(max_length=255, required=False)
     fullname = forms.CharField(max_length=255)
-    homepage = forms.URLField(max_length=255, required=False, widget=forms.TextInput(attrs={'class': 'form-control typetext', 'id': 'InputHomepage', 'placeholder': 'Enter homepage'}))
-    affiliation_url = forms.URLField(max_length=255, required=False, widget=forms.TextInput(attrs={'class': 'form-control typetext', 'id': 'InputAffiliationURL', 'placeholder': 'Enter affiliaton URL'}))
+    homepage = forms.URLField(max_length=255, required=False, widget=forms.TextInput(attrs={'class': 'form-control typetext', 'id': 'InputHomepage', 'placeholder': _('Enter homepage')}))
+    affiliation_url = forms.URLField(max_length=255, required=False, widget=forms.TextInput(attrs={'class': 'form-control typetext', 'id': 'InputAffiliationURL', 'placeholder': _('Enter affiliaton URL')}))
     biography = forms.CharField(widget=TinyMCE(attrs={'rows': 7}), required=False)
 
     def clean(self):
@@ -89,5 +89,5 @@ class SettingsForm(forms.Form):
 
 
 class RecaptchaRegistrationForm(RegistrationForm):
-    recaptcha = ReCaptchaField(label="I'm a human")
+    recaptcha = ReCaptchaField(label=_("I'm a human"))
 
