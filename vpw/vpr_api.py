@@ -156,8 +156,20 @@ def vpr_get_material(mid, version=1):
     return result
 
 
-def vpr_create_material(material):
-    result = vpr_request("POST", "materials", material)
+def vpr_create_material(material, files=None):
+    # result = vpr_request("POST", "materials", material)
+    # return result
+    url = settings.VPR_URL + "materials"
+    if not files:
+        r = requests.post(url, data=material)
+    else:
+        r = requests.post(url, files=files, data=material)
+
+    try:
+        result = json.loads(r.text)
+    except:
+        result = r
+
     return result
 
 

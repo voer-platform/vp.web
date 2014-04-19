@@ -282,7 +282,11 @@ def module_detail(request, title, mid, version):
         except ValueError:
             origin_mid = ""
         origin_material = vpr_get_material(origin_mid, origin_version)
-        origin_authors = _get_author(origin_material)
+        if not "detail" in origin_material:
+            origin_authors = _get_author(origin_material)
+        else:
+            origin_material = None
+            origin_authors = None
     else:
         origin_material = None
         origin_authors = None
@@ -514,7 +518,8 @@ def user_collection_detail(request, cid, mid):
                 "collection": collection,
                 "author": authors,
                 "category": category,
-                "outline": str_outline
+                "outline": str_outline,
+                "unpublished": True
             })
         else:
             raise PermissionDenied
@@ -857,6 +862,8 @@ def _publish_material(material):
     else:
         derived_from = ""
 
+    upload_images = None
+
     if material.material_type == MODULE_TYPE:
         # Extract images from content
         content = material.text
@@ -876,6 +883,12 @@ def _publish_material(material):
                 output.close()
             elif img.startswith("/file/"):
                 # get from vpr
+                path_save_file = settings.MEDIA_ROOT + "/" + upid
+                file_url = settings.SITE_URL + img
+                resource = urllib.urlopen(file_url)
+                output = open(path_save_file, "wb")
+                output.write(resource.read())
+                output.close()
                 pass
             elif img.startswith("/media/"):
                 # get from vpw
@@ -904,15 +917,16 @@ def _publish_material(material):
     }
 
     # attach file
+    files = {}
     if upload_images:
         i = 0
         for img in upload_images:
             i += 1
-            new_material['attach0%s' % i] = {'file': open(img.get("path"), 'rb')}
-            new_material['attach0%s_name' % i] = img.get("name")
-            new_material['attach0%s_description' % i] = ""
+            files['file%s' % i] = (img.get("name"), open(img.get("path"), 'rb'))
+            # upload_file = {'file%s' % i: (img.get("name"), open(img.get("path"), 'rb'))}
+            # files.append(upload_file)
 
-    result = vpr_create_material(new_material)
+    result = vpr_create_material(new_material, files)
 
     return result
 
