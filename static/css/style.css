@@ -129,6 +129,10 @@
     width: 16px;
     height: 16px;
 }
+.icon22 {
+    height: 22px;
+    width: 22px;
+}
 .icon-favorite {
     background-position: 0 0;
 }
@@ -143,6 +147,12 @@
 }
 .icon-delete-rate:hover {
     background-position: 0 -16px;
+}
+.icon22.icon-favorite {
+    background-position: 0 -32px;
+}
+.icon22.icon-favorite.active {
+    background-position: -22px -32px;
 }
 /*************************** END ICON *************************/
 .voer-mol-ico {
@@ -1107,4 +1117,10 @@ border-color: #d0e3f0;
 
 .padding-bottom-10 {
     padding-bottom: 10px;
+}
+.stats-favorited {
+    color: #555555;
+}
+.stats-favorited .icon {
+    margin-right: 5px;
 }

@@ -70,12 +70,7 @@
         {% endif %}
 
         <div class="padding-bottom-10">
-            <div class="addthis_toolbox addthis_default_style ">
-                <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                <a class="addthis_button_facebook_share" fb:share:layout="button_count"></a>
-                <a class="addthis_button_tweet"></a>
-                <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-            </div>
+            {% include 'frontend/partials/material_tools.html' with material=collection %}
         </div>
 
         {{ material.text|safe }}
@@ -83,12 +78,7 @@
     <!-- END CONTENT MODULE -->
 
     <div class="left padding-content-15 with-100">
-        <div class="addthis_toolbox addthis_default_style ">
-            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-            <a class="addthis_button_facebook_share" fb:share:layout="button_count"></a>
-            <a class="addthis_button_tweet"></a>
-            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        </div>
+        {% include 'frontend/partials/material_tools.html' with material=collection %}
     </div>
 
     {% if file_data %}

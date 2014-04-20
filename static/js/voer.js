@@ -230,6 +230,21 @@ function ajaxGetMaterialByCondition() {
         },
         eraseCookie: function(name) {
           this.createCookie(name, "", -1);
+        },
+        showMessagePopup: function(message, params) {
+          var setting_default = {
+            ele: 'body', // which element to append to
+            type: 'success', // (null, 'info', 'danger', 'success')
+            offset: {from: 'top', amount: 70}, // 'top', or 'bottom'
+            align: 'center', // ('left', 'right', or 'center')
+            width: 'auto', // (integer, or 'auto')
+            delay: 3000 // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+          };
+
+          var settings = $.extend({}, setting_default, params);
+
+          $('.bootstrap-growl').remove();
+          $.bootstrapGrowl(message, settings);
         }
       };
     })();
