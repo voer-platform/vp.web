@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-19 09:47+0000\n"
-"PO-Revision-Date: 2014-04-19 16:41+0700\n"
+"POT-Creation-Date: 2014-04-20 15:56+0000\n"
+"PO-Revision-Date: 2014-04-20 22:58+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.3\n"
 
 #: templates/404.html:10
 msgid ""
@@ -173,7 +173,7 @@ msgstr "Tệp"
 #: templates/frontend/admin_import_user.html:41
 #: templates/frontend/admin_settings.html:46
 #: templates/frontend/user_edit_profile.html:124
-#: templates/frontend/collection/create_step3.html:483
+#: templates/frontend/collection/create_step3.html:484
 #: templates/frontend/module/create_step3.html:413
 msgid "Save"
 msgstr "Lưu lại"
@@ -396,7 +396,7 @@ msgid "Uploaded On:"
 msgstr "Tải lên ngày:"
 
 #: templates/frontend/module_detail.html:20
-#: templates/frontend/collection/create_step3.html:482
+#: templates/frontend/collection/create_step3.html:483
 #: templates/frontend/module/create_step3.html:412
 msgid "Publish"
 msgstr "Công bố"
@@ -769,7 +769,7 @@ msgstr "Bạn muốn xoá dữ liệu?"
 #: templates/frontend/ajax/similars.html:20
 #: templates/frontend/ajax/similars.html:22
 #: templates/frontend/collection/create_step2.html:400
-#: templates/frontend/module/create_step2.html:398
+#: templates/frontend/module/create_step2.html:391
 msgid "Back"
 msgstr "Trước"
 
@@ -780,7 +780,7 @@ msgstr "Trước"
 #: templates/frontend/collection/create_step1.html:60
 #: templates/frontend/collection/create_step2.html:399
 #: templates/frontend/module/create_step1.html:57
-#: templates/frontend/module/create_step2.html:397
+#: templates/frontend/module/create_step2.html:390
 msgid "Next"
 msgstr "Tiếp"
 
@@ -971,9 +971,13 @@ msgid "Create Section"
 msgstr "Tạo mục mới"
 
 #: templates/frontend/collection/create_step3.html:460
-#: templates/frontend/collection/create_step3.html:467
+#: templates/frontend/collection/create_step3.html:468
 msgid "Create section"
 msgstr "Tạo mục mới"
+
+#: templates/frontend/collection/create_step3.html:464
+msgid "Each section for a line"
+msgstr "Nhập mỗi mục trên một dòng"
 
 #: templates/frontend/module/create_mass_modules.html:20
 msgid "Create mass modules"
@@ -991,14 +995,6 @@ msgstr "Hoàn tất"
 #: templates/frontend/module/create_step2.html:5
 msgid "Create module"
 msgstr "Tạo module"
-
-#: templates/frontend/module/create_step2.html:390
-msgid "Tags"
-msgstr "Các Tag"
-
-#: templates/frontend/module/create_step2.html:392
-msgid "Enter tags"
-msgstr "Thêm tag"
 
 #: templates/frontend/module/create_step3.html:400
 msgid "Document for import"
@@ -1280,75 +1276,81 @@ msgstr "Nhập URL cơ quan"
 msgid "I'm a human"
 msgstr ""
 
-#: vpw/views.py:546 vpw/views.py:771
+#: vpw/views.py:551 vpw/views.py:776
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:672 vpw/views.py:842 vpw/views.py:1940 vpw/views.py:1996
-#: vpw/views.py:2093 vpw/views.py:2178
+#: vpw/views.py:677 vpw/views.py:847 vpw/views.py:1957 vpw/views.py:2013
+#: vpw/views.py:2110 vpw/views.py:2195
 msgid "The content is successfully published."
 msgstr "Nội dung đã được xuất bản thành công."
 
-#: vpw/views.py:1158
+#: vpw/views.py:1175
 msgid "Top 12 Most Favorited Documents"
 msgstr "Danh sách 12 tài liệu được ưa thích nhất"
 
-#: vpw/views.py:1401
+#: vpw/views.py:1418
 msgid "Profile details updated."
 msgstr "Cập nhật thông tin hồ sơ thành công."
 
-#: vpw/views.py:1435
+#: vpw/views.py:1452
 msgid "Add favorite successful"
 msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1439
+#: vpw/views.py:1456
 msgid "Delete favorite successful"
 msgstr "Xoá tài liệu ưa thích thành công."
 
-#: vpw/views.py:1520
+#: vpw/views.py:1537
 msgid "Please enter default password."
 msgstr "Nhập mật khẩu mặc định"
 
-#: vpw/views.py:1522
+#: vpw/views.py:1539
 msgid "Please select file"
 msgstr "Hãy chọn tập tin"
 
-#: vpw/views.py:1594
+#: vpw/views.py:1611
 msgid "Import user successful."
 msgstr "Thêm người dùng thành công."
 
-#: vpw/views.py:2079
+#: vpw/views.py:2096
 msgid "Please choose a category for this module"
 msgstr "Hãy chọn 1 danh mục cho tài liệu"
 
-#: vpw/views.py:2082
+#: vpw/views.py:2099
 msgid "Please add an author for this module"
 msgstr "Hãy thêm tác giả cho tài liệu"
 
-#: vpw/views.py:2085
+#: vpw/views.py:2102
 msgid "Please choose a language for this module"
 msgstr "Hãy chọn ngôn ngữ cho tài liệu"
 
-#: vpw/views.py:2116
+#: vpw/views.py:2133
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2205
+#: vpw/views.py:2222
 msgid "Settings updated successfully."
 msgstr "Lưu cài đặt thành công."
 
-#: vpw/views.py:2207
+#: vpw/views.py:2224
 msgid "Error while updating settings."
 msgstr "Có lỗi khi lưu cài đặt."
 
-#: vpw/views.py:2380
+#: vpw/views.py:2397
 msgid "Please login"
 msgstr "Hãy đăng nhập"
 
-#: vpw/views.py:2408
+#: vpw/views.py:2425
 msgid "Delete avatar successfull"
 msgstr "Xoá ảnh đại diện thành công."
+
+#~ msgid "Tags"
+#~ msgstr "Các Tag"
+
+#~ msgid "Enter tags"
+#~ msgstr "Thêm tag"
 
 #~ msgid "Delete material successfull."
 #~ msgstr "Xoá tài liệu thành công."
