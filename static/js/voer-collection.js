@@ -4,7 +4,7 @@
 $(document).ready(function(){
     $("#collection-outline").jstree({
         "plugins" : [
-            "themes","json_data","ui","crrm","cookies","dnd","search","types","hotkeys"//"contextmenu"
+            "themes","json_data","ui","crrm","cookies","dnd","search","types","hotkeys", "contextmenu"
         ],
         "json_data" : {
             "data" : $('#voer-outline-text').val() ? jQuery.parseJSON($('#voer-outline-text').val()) : []

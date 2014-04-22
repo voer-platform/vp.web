@@ -60,22 +60,22 @@
             '</a>',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="authors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="author">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="editor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="licensor">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainers">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="maintainer">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translators">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="translator">',
             '</td>',
             '<td>',
-            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditors">',
+            '<input type="checkbox" value="{% verbatim %}{{id}}{% endverbatim %}" name="coeditor">',
             '</td>',
             '<td><div class="hfbtn-delete" onclick="delete_row_author(this)"></div></td>',
             '</tr>'].join('\n');
@@ -390,7 +390,7 @@
 		</div>
 		<div class="form-group">
 			<label for="InputKeywords">{% trans 'Keywords' %}</label>
-            <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ material.keywords }}</textarea>
+            <textarea rows="4" name="keywords" class="form-control" id="InputKeywords">{{ form.keywords.value }}</textarea>
             <p class="help-block">{% trans 'Each keyword per line' %}</p>
 		</div>
 
