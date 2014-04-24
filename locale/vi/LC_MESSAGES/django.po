@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-20 15:56+0000\n"
-"PO-Revision-Date: 2014-04-20 22:58+0700\n"
+"POT-Creation-Date: 2014-04-24 13:36+0000\n"
+"PO-Revision-Date: 2014-04-24 20:37+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -306,7 +306,7 @@ msgid "Similar items"
 msgstr "Nội dung tương tự"
 
 #: templates/frontend/index.html:11
-msgid "Vietnam Open Education Resources"
+msgid "Vietnam Open Educational Resources"
 msgstr "Thư Viện Học Liệu Mở Việt Nam"
 
 #: templates/frontend/index.html:19
