@@ -142,8 +142,8 @@
       <form action="{% url 'authenticate' %}" method="POST" id="login-form">
         <div class="modal-body padding-content-15">
           {% csrf_token %}
-          <input type="text" class="form-control" placeholder="Username" name="username">
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <input type="text" class="form-control" placeholder="{% trans 'Username' %}" name="username">
+          <input type="password" class="form-control" placeholder="{% trans 'Password' %}" name="password">
           <ul class="list-user-login-tools">
               <li>
                   <label class="checkbox checkbox-user-tool">
