@@ -75,7 +75,7 @@ def get_favorites_count(pid):
 @stringfilter
 def get_author_avatar(pid):
     author = vpr_get_person(pid)
-    is_image_exists = image_exists('', reverse('get_avatar', kwargs={'pid': 1322}))
+    is_image_exists = image_exists('', reverse('get_avatar', kwargs={'pid': pid}))
 
     if is_image_exists:
         return author['avatar']
