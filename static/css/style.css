@@ -1124,3 +1124,7 @@ border-color: #d0e3f0;
 .stats-favorited .icon {
     margin-right: 5px;
 }
+
+div.equation{
+    text-align: center;
+}
