@@ -51,7 +51,7 @@ def extract_images(content):
 
 def image_exists(site, path):
     if site == '':
-        site = 'http://' + settings.SITE_URL
+        site = settings.SITE_URL
 
     url = site + path
     try:
