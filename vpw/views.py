@@ -1485,7 +1485,15 @@ def ajax_search_module(request):
     modules = []
     if 'count' in result:
         if result['count'] > 0:
-            modules = result['results']
+            modules = []
+            for mod_info in result['results']:
+                author_array = mod_info['author'].split(',')
+                first_person_id = author_array[0].strip()
+
+                person = vpr_get_person(first_person_id)
+                mod_info['fullname'] = _format_person_name(person)
+                modules.append(mod_info)
+
     return HttpResponse(json.dumps(modules), content_type='application/json')
 
 
@@ -2427,3 +2435,19 @@ def ajax_user_remove_avatar(request):
         return HttpResponse(json.dumps(result), content_type='application/json')
     else:
         return HttpResponseRedirect('/')
+
+
+def _format_person_name(person):
+    fullname = ''
+
+    if person['fullname']:
+        fullname = person['fullname']
+    elif person['first_name']:
+        fullname = person['first_name']
+
+        if person['last_name']:
+            fullname = person['last_name'] + ' ' + fullname
+    else:
+        fullname = person['user_id']
+
+    return fullname

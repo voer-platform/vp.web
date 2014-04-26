@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from HTMLParser import HTMLParser
-import formatter
+import urllib
 
 from django.utils.safestring import mark_safe
 import re
 import unicodedata
+from django.conf import settings
 
 
 def normalize_string(value):
@@ -46,3 +47,24 @@ def extract_images(content):
     image_parse = ImageParse()
     image_parse.feed(content)
     return image_parse.url_images
+
+
+def image_exists(site, path):
+    if site == '':
+        site = 'http://' + settings.SITE_URL
+
+    url = site + path
+    try:
+        res = urllib.urlopen(url)
+        http_message = res.info()
+        mimetype = str(http_message.type)
+        maintype = http_message.maintype
+
+        if res.getcode() == 200 and maintype == 'image' and mimetype.startswith('image'):
+            image_found = True
+        else:
+            image_found = False
+    except:
+        image_found = False
+
+    return image_found

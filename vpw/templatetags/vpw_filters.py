@@ -1,7 +1,9 @@
 from django import template
+from django.core.urlresolvers import reverse
 from django.db.models.query_utils import Q
 from django.template.defaultfilters import stringfilter
 from vpw.models import Material
+from vpw.utils import image_exists
 from vpw.vpr_api import vpr_materials_by_author, vpr_get_favorite, vpr_get_person
 
 register = template.Library()
@@ -72,7 +74,10 @@ def get_favorites_count(pid):
 @register.filter
 @stringfilter
 def get_author_avatar(pid):
-    print pid
     author = vpr_get_person(pid)
+    is_image_exists = image_exists('', reverse('get_avatar', kwargs={'pid': pid}))
 
-    return author['avatar']
+    if is_image_exists:
+        return author['avatar']
+
+    return ''

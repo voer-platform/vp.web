@@ -20,7 +20,7 @@
             remote: "{% url 'ajax_search_module' %}?keyword=%QUERY",
             template: [
                 '<p class="item-fullname">{% verbatim %}{{title}}{% endverbatim %}</p>',
-                '<p class="item-email">{% verbatim %}{{fullname}}{% endverbatim %}</p>',
+                '<p class="item-email">{% verbatim %}{{fullname}}{% endverbatim %} - {% verbatim %}{{modified}}{% endverbatim %}</p>',
             ].join(''),
             engine: Hogan,
             limit: 10
@@ -261,7 +261,7 @@
                                                 <input data-toggle="checkbox" type="checkbox" name="categories"
                                                        value="{{ category.id }}"
                                                        {% if category.id|stringformat:"s" in material_categories %}checked{% endif %}>
-                                                {{ category.name }}
+                                                {% trans category.name %}
                                             </label>
                                         </li>
                                     {% endfor %}

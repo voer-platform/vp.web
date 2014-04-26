@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-24 13:36+0000\n"
-"PO-Revision-Date: 2014-04-24 20:37+0700\n"
+"POT-Creation-Date: 2014-04-24 19:32+0000\n"
+"PO-Revision-Date: 2014-04-25 02:31+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -84,13 +84,23 @@ msgid "Register"
 msgstr "Đăng ký"
 
 #: templates/base/header.html:123 templates/base/header.html.py:162
-#: templates/registration/login.html:34
+#: templates/registration/login.html:3 templates/registration/login.html:34
 msgid "Login"
 msgstr "Đăng nhập"
 
 #: templates/base/header.html:140
 msgid "Login to VOER"
 msgstr "Đăng nhập"
+
+#: templates/base/header.html:145 templates/registration/login.html:23
+#, fuzzy
+msgid "Username"
+msgstr "Tên đăng nhập"
+
+#: templates/base/header.html:146 templates/frontend/user_edit_profile.html:56
+#: templates/registration/login.html:25
+msgid "Password"
+msgstr "Mật khẩu"
 
 #: templates/base/header.html:155
 msgid "Remember me"
@@ -335,31 +345,31 @@ msgstr "Hồ sơ cá nhân"
 #: templates/frontend/material_stats.html:29
 #: templates/frontend/material_stats.html:30
 #: templates/frontend/material_stats.html:31
-#: templates/frontend/partials/author_info.html:23
 #: templates/frontend/partials/author_info.html:24
 #: templates/frontend/partials/author_info.html:25
 #: templates/frontend/partials/author_info.html:26
 #: templates/frontend/partials/author_info.html:27
+#: templates/frontend/partials/author_info.html:28
 msgid "Not available"
 msgstr "Chưa cập nhật"
 
 #: templates/frontend/material_stats.html:29
 #: templates/frontend/profile.html:39
 #: templates/frontend/user_edit_profile.html:99
-#: templates/frontend/partials/author_info.html:25
+#: templates/frontend/partials/author_info.html:26
 msgid "Homepage"
 msgstr "Trang chủ"
 
 #: templates/frontend/material_stats.html:30
 #: templates/frontend/profile.html:43
-#: templates/frontend/partials/author_info.html:26
+#: templates/frontend/partials/author_info.html:27
 msgid "National"
 msgstr "Quốc gia"
 
 #: templates/frontend/material_stats.html:31
 #: templates/frontend/profile.html:47
 #: templates/frontend/user_edit_profile.html:111
-#: templates/frontend/partials/author_info.html:27
+#: templates/frontend/partials/author_info.html:28
 msgid "Biography"
 msgstr "Tiểu sử"
 
@@ -426,7 +436,7 @@ msgstr "Xóa người dùng"
 #: templates/frontend/module/create_step3.html:136
 #: templates/frontend/module/create_step3.html:143
 #: templates/frontend/module/create_step3.html:202
-#: templates/frontend/partials/author_info.html:33
+#: templates/frontend/partials/author_info.html:34
 msgid "Author"
 msgstr "Tác giả"
 
@@ -439,7 +449,7 @@ msgstr "Tác giả"
 #: templates/frontend/module/create_step2.html:200
 #: templates/frontend/module/create_step3.html:148
 #: templates/frontend/module/create_step3.html:207
-#: templates/frontend/partials/author_info.html:37
+#: templates/frontend/partials/author_info.html:38
 msgid "Contributor"
 msgstr "Đồng biên tập"
 
@@ -452,7 +462,7 @@ msgstr "Đồng biên tập"
 #: templates/frontend/module/create_step2.html:196
 #: templates/frontend/module/create_step3.html:144
 #: templates/frontend/module/create_step3.html:203
-#: templates/frontend/partials/author_info.html:41
+#: templates/frontend/partials/author_info.html:42
 msgid "Editor"
 msgstr "Biên tập viên"
 
@@ -465,7 +475,7 @@ msgstr "Biên tập viên"
 #: templates/frontend/module/create_step2.html:197
 #: templates/frontend/module/create_step3.html:145
 #: templates/frontend/module/create_step3.html:204
-#: templates/frontend/partials/author_info.html:45
+#: templates/frontend/partials/author_info.html:46
 msgid "Licensor"
 msgstr "Người giữ tác quyền"
 
@@ -478,7 +488,7 @@ msgstr "Người giữ tác quyền"
 #: templates/frontend/module/create_step2.html:198
 #: templates/frontend/module/create_step3.html:146
 #: templates/frontend/module/create_step3.html:205
-#: templates/frontend/partials/author_info.html:49
+#: templates/frontend/partials/author_info.html:50
 msgid "Maintainer"
 msgstr "Maintainer"
 
@@ -491,7 +501,7 @@ msgstr "Maintainer"
 #: templates/frontend/module/create_step2.html:199
 #: templates/frontend/module/create_step3.html:147
 #: templates/frontend/module/create_step3.html:206
-#: templates/frontend/partials/author_info.html:53
+#: templates/frontend/partials/author_info.html:54
 msgid "Translator"
 msgstr "Dịch giả"
 
@@ -612,10 +622,6 @@ msgstr ""
 "Một địa chỉ email hợp lệ. Tất cả email của hệ thống sẽ gửi đến địa chỉ này. "
 "Địa chỉ email sẽ không công khai và chỉ sử dụng khi bạn muốn nhận mật khẩu "
 "mới, nhận tin tức hoặc thông báo qua email."
-
-#: templates/frontend/user_edit_profile.html:56
-msgid "Password"
-msgstr "Mật khẩu"
 
 #: templates/frontend/user_edit_profile.html:57
 msgid "Enter Your Password"
@@ -1068,6 +1074,20 @@ msgstr "đánh giá"
 msgid "Add to favorite"
 msgstr "Thêm vào tài liệu yêu thích"
 
+#: templates/registration/login.html:7
+#: templates/registration/registration_form.html:8
+msgid "Join VOER. Take Creative Control."
+msgstr "Tham gia vào VOER. Thoả sức sáng tạo."
+
+#: templates/registration/login.html:18
+msgid "or login with your account"
+msgstr "hoặc đăng nhập bằng tài khoản của bạn"
+
+#: templates/registration/login.html:21
+#, fuzzy
+msgid "Please correct the errors below"
+msgstr "Hãy sửa lại các lỗi bên dưới:"
+
 #: templates/registration/login.html:29
 msgid "Show password"
 msgstr "Hiện mật khẩu"
@@ -1228,13 +1248,9 @@ msgstr ""
 msgid "Sign up"
 msgstr "Đăng ký"
 
-#: templates/registration/registration_form.html:8
-msgid "Join VOER. Take Creative Control."
-msgstr ""
-
 #: templates/registration/registration_form.html:22
 msgid "or sign up using your email"
-msgstr ""
+msgstr "hoặc đăng ký sử dụng thư điện tử của bạn"
 
 #: templates/registration/registration_form.html:27
 msgid "Please correct the errors below:"
@@ -1276,73 +1292,73 @@ msgstr "Nhập URL cơ quan"
 msgid "I'm a human"
 msgstr ""
 
-#: vpw/views.py:551 vpw/views.py:776
+#: vpw/views.py:552 vpw/views.py:777
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:677 vpw/views.py:847 vpw/views.py:1957 vpw/views.py:2013
-#: vpw/views.py:2110 vpw/views.py:2195
+#: vpw/views.py:678 vpw/views.py:848 vpw/views.py:1968 vpw/views.py:2024
+#: vpw/views.py:2121 vpw/views.py:2206
 msgid "The content is successfully published."
 msgstr "Nội dung đã được xuất bản thành công."
 
-#: vpw/views.py:1175
+#: vpw/views.py:1176
 msgid "Top 12 Most Favorited Documents"
 msgstr "Danh sách 12 tài liệu được ưa thích nhất"
 
-#: vpw/views.py:1418
+#: vpw/views.py:1419
 msgid "Profile details updated."
 msgstr "Cập nhật thông tin hồ sơ thành công."
 
-#: vpw/views.py:1452
+#: vpw/views.py:1453
 msgid "Add favorite successful"
 msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1456
+#: vpw/views.py:1457
 msgid "Delete favorite successful"
 msgstr "Xoá tài liệu ưa thích thành công."
 
-#: vpw/views.py:1537
+#: vpw/views.py:1548
 msgid "Please enter default password."
 msgstr "Nhập mật khẩu mặc định"
 
-#: vpw/views.py:1539
+#: vpw/views.py:1550
 msgid "Please select file"
 msgstr "Hãy chọn tập tin"
 
-#: vpw/views.py:1611
+#: vpw/views.py:1622
 msgid "Import user successful."
 msgstr "Thêm người dùng thành công."
 
-#: vpw/views.py:2096
+#: vpw/views.py:2107
 msgid "Please choose a category for this module"
 msgstr "Hãy chọn 1 danh mục cho tài liệu"
 
-#: vpw/views.py:2099
+#: vpw/views.py:2110
 msgid "Please add an author for this module"
 msgstr "Hãy thêm tác giả cho tài liệu"
 
-#: vpw/views.py:2102
+#: vpw/views.py:2113
 msgid "Please choose a language for this module"
 msgstr "Hãy chọn ngôn ngữ cho tài liệu"
 
-#: vpw/views.py:2133
+#: vpw/views.py:2144
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2222
+#: vpw/views.py:2233
 msgid "Settings updated successfully."
 msgstr "Lưu cài đặt thành công."
 
-#: vpw/views.py:2224
+#: vpw/views.py:2235
 msgid "Error while updating settings."
 msgstr "Có lỗi khi lưu cài đặt."
 
-#: vpw/views.py:2397
+#: vpw/views.py:2408
 msgid "Please login"
 msgstr "Hãy đăng nhập"
 
-#: vpw/views.py:2425
+#: vpw/views.py:2436
 msgid "Delete avatar successfull"
 msgstr "Xoá ảnh đại diện thành công."
 
