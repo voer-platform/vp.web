@@ -173,8 +173,9 @@ def vpr_create_material(material, files=None):
     return result
 
 
-def vpr_checkin_material(**kwargs):
-    result = vpr_request("PUT", "materials/%s/%s" % (kwargs.get("material_id", ""), kwargs.get("version", "latest")), {
+def vpr_checkin_material(material, files=None):
+    url = settings.VPR_URL + "materials"
+    result = vpr_request("PUT", "materials/%s/%s" % (material.get("material_id", ""), material.get("version", "latest")), {
         "material_type": kwargs.get("material_type", 1),
         "text": kwargs.get("text"),
         # "version": kwargs.get("version"),

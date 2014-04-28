@@ -161,9 +161,9 @@ def aboutus(request):
 def _get_image(list_images):
     def replace_image(match_object):
         try:
-            result = "<img src='" + reverse('get_content_file', kwargs={'fid': list_images[match_object.group(1)]}) + "'"
+            result = "<img" + match_object.group(1) + "src='" + reverse('get_content_file', kwargs={'fid': list_images[match_object.group(2)]}) + "'"
         except KeyError:
-            result = "<img src='" + match_object.group(1) + "'"
+            result = "<img" + match_object.group(1) + "src='" + match_object.group(2) + "'"
         return result
 
     return replace_image
@@ -216,7 +216,7 @@ def module_detail(request, title, mid, version):
     # lay anh trong noi dung
     list_images = vpr_get_material_images(mid)
     # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
-    content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+    content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
     content = re.sub(r'href="([^"]*)"', _replace_attachment_link(list_images), content)
     material['text'] = content
 
@@ -375,7 +375,7 @@ def collection_detail(request, title, cid, mid):
             list_images = vpr_get_material_images(mid)
             # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
             if "text" in material:
-                content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+                content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
                 material['text'] = content
 
             file_data = []
@@ -503,7 +503,7 @@ def user_collection_detail(request, cid, mid):
             list_images = vpr_get_material_images(mid)
             # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
             if "text" in material:
-                content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
+                content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
                 material['text'] = content
         else:
             material = {}
@@ -1967,7 +1967,7 @@ def user_module_reuse(request, mid, version=1):
     else:
         # lay anh trong noi dung
         list_images = vpr_get_material_images(mid)
-        content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material_origin['text'])
+        content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material_origin['text'])
         material_origin['text'] = content
         form = ModuleForm(dict(body=content,
                                title=material_origin.get('title', ''),

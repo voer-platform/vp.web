@@ -270,9 +270,9 @@
 .math .mover-overscript {
     display: block;
     width: 100%;
-
+    line-height: 0;
     text-align: center;
-    font-size: 64%;
+    font-size: 100%;
 }
 
 .math .munderover {
