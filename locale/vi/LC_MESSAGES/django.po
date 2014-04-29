@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-24 19:32+0000\n"
-"PO-Revision-Date: 2014-04-25 02:31+0700\n"
+"POT-Creation-Date: 2014-04-29 18:12+0000\n"
+"PO-Revision-Date: 2014-04-29 03:54+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -56,7 +56,6 @@ msgid "Home"
 msgstr "Trang chủ"
 
 #: templates/base/header.html:34 templates/frontend/index.html:102
-#: templates/frontend/profile.html:109
 msgid "Browse All"
 msgstr "Duyệt tài liệu"
 
@@ -97,7 +96,7 @@ msgstr "Đăng nhập"
 msgid "Username"
 msgstr "Tên đăng nhập"
 
-#: templates/base/header.html:146 templates/frontend/user_edit_profile.html:56
+#: templates/base/header.html:146 templates/frontend/user_edit_profile.html:57
 #: templates/registration/login.html:25
 msgid "Password"
 msgstr "Mật khẩu"
@@ -114,7 +113,7 @@ msgstr "Quên mật khẩu?"
 msgid "Don't have an account? Sign up for VOER"
 msgstr "Bạn chưa có tài khoản? Hãy đăng ký."
 
-#: templates/base/header.html:168
+#: templates/base/header.html:168 vpw/views.py:1086
 msgid "The username or password is incorrect."
 msgstr "Tên đăng nhập hoặc mật khẩu chưa đúng"
 
@@ -182,7 +181,7 @@ msgstr "Tệp"
 
 #: templates/frontend/admin_import_user.html:41
 #: templates/frontend/admin_settings.html:46
-#: templates/frontend/user_edit_profile.html:124
+#: templates/frontend/user_edit_profile.html:127
 #: templates/frontend/collection/create_step3.html:484
 #: templates/frontend/module/create_step3.html:413
 msgid "Save"
@@ -210,15 +209,15 @@ msgstr "Giấy phép của Giáo trình"
 msgid "Set license content for collection creation."
 msgstr "Xác lập giấy phép cho collection."
 
-#: templates/frontend/browse.html:50 templates/frontend/profile.html:138
+#: templates/frontend/browse.html:50 templates/frontend/profile.html:61
 #: templates/frontend/user_favorite.html:19
 #: templates/frontend/user_profile.html:20
 #: templates/frontend/user_unpublish.html:20
 msgid "Sort by"
 msgstr "Sắp xếp theo"
 
-#: templates/frontend/browse.html:52 templates/frontend/profile.html:140
-#: templates/frontend/user_edit_profile.html:95
+#: templates/frontend/browse.html:52 templates/frontend/profile.html:63
+#: templates/frontend/user_edit_profile.html:98
 #: templates/frontend/user_favorite.html:21
 #: templates/frontend/user_profile.html:22
 #: templates/frontend/user_unpublish.html:22
@@ -229,60 +228,60 @@ msgstr "Sắp xếp theo"
 msgid "Title"
 msgstr "Tiêu đề"
 
-#: templates/frontend/browse.html:53 templates/frontend/profile.html:141
+#: templates/frontend/browse.html:53 templates/frontend/profile.html:64
 #: templates/frontend/user_profile.html:23
 #: templates/frontend/user_unpublish.html:23
 msgid "Relevance"
 msgstr "Mức tương tự"
 
-#: templates/frontend/browse.html:54 templates/frontend/profile.html:142
+#: templates/frontend/browse.html:54 templates/frontend/profile.html:65
 #: templates/frontend/user_profile.html:24
 #: templates/frontend/user_unpublish.html:24
 msgid "Rating"
 msgstr "Đánh giá"
 
-#: templates/frontend/browse.html:55 templates/frontend/profile.html:143
+#: templates/frontend/browse.html:55 templates/frontend/profile.html:66
 #: templates/frontend/user_favorite.html:22
 #: templates/frontend/user_profile.html:25
 #: templates/frontend/user_unpublish.html:25
 msgid "Date"
 msgstr "Ngày"
 
-#: templates/frontend/browse.html:192 templates/frontend/profile.html:307
+#: templates/frontend/browse.html:192 templates/frontend/profile.html:85
 #: templates/frontend/search_result.html:22
 msgid "Filter By"
 msgstr "Lọc theo"
 
-#: templates/frontend/browse.html:267 templates/frontend/profile.html:362
+#: templates/frontend/browse.html:267 templates/frontend/profile.html:140
 msgid "All types"
 msgstr "Tất cả"
 
-#: templates/frontend/browse.html:279 templates/frontend/profile.html:375
+#: templates/frontend/browse.html:279 templates/frontend/profile.html:153
 #: templates/frontend/partials/material_author.html:29
 msgid "Modules"
 msgstr "Tài liệu"
 
 #: templates/frontend/browse.html:291
 #: templates/frontend/collection_detail.html:48
-#: templates/frontend/index.html:67 templates/frontend/profile.html:388
+#: templates/frontend/index.html:67 templates/frontend/profile.html:166
 #: templates/frontend/partials/browse-list.html:51
 #: templates/frontend/partials/browse-list.html:59
 msgid "Collection"
 msgstr "Giáo trình"
 
-#: templates/frontend/browse.html:306 templates/frontend/profile.html:404
+#: templates/frontend/browse.html:306 templates/frontend/profile.html:182
 msgid "All languages"
 msgstr "Tất cả ngôn ngữ"
 
-#: templates/frontend/browse.html:318 templates/frontend/profile.html:417
+#: templates/frontend/browse.html:318 templates/frontend/profile.html:195
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: templates/frontend/browse.html:330 templates/frontend/profile.html:430
+#: templates/frontend/browse.html:330 templates/frontend/profile.html:208
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: templates/frontend/browse.html:345 templates/frontend/profile.html:446
+#: templates/frontend/browse.html:345 templates/frontend/profile.html:224
 msgid "All categories"
 msgstr "Tất cả chủ đề"
 
@@ -335,75 +334,10 @@ msgid "Module"
 msgstr "Tài liệu"
 
 #: templates/frontend/material_stats.html:7 templates/frontend/profile.html:7
-#: templates/frontend/user_edit_profile.html:6
+#: templates/frontend/user_edit_profile.html:7
 #: templates/frontend/user_profile.html:7
 msgid "User profile"
 msgstr "Hồ sơ cá nhân"
-
-#: templates/frontend/material_stats.html:27
-#: templates/frontend/material_stats.html:28
-#: templates/frontend/material_stats.html:29
-#: templates/frontend/material_stats.html:30
-#: templates/frontend/material_stats.html:31
-#: templates/frontend/partials/author_info.html:24
-#: templates/frontend/partials/author_info.html:25
-#: templates/frontend/partials/author_info.html:26
-#: templates/frontend/partials/author_info.html:27
-#: templates/frontend/partials/author_info.html:28
-msgid "Not available"
-msgstr "Chưa cập nhật"
-
-#: templates/frontend/material_stats.html:29
-#: templates/frontend/profile.html:39
-#: templates/frontend/user_edit_profile.html:99
-#: templates/frontend/partials/author_info.html:26
-msgid "Homepage"
-msgstr "Trang chủ"
-
-#: templates/frontend/material_stats.html:30
-#: templates/frontend/profile.html:43
-#: templates/frontend/partials/author_info.html:27
-msgid "National"
-msgstr "Quốc gia"
-
-#: templates/frontend/material_stats.html:31
-#: templates/frontend/profile.html:47
-#: templates/frontend/user_edit_profile.html:111
-#: templates/frontend/partials/author_info.html:28
-msgid "Biography"
-msgstr "Tiểu sử"
-
-#: templates/frontend/material_stats.html:79
-msgid "Business"
-msgstr "Kinh tế"
-
-#: templates/frontend/material_stats.html:81
-msgid "Social Sciences"
-msgstr "Khoa học xã hội"
-
-#: templates/frontend/material_stats.html:83
-msgid "Science and Technology"
-msgstr "Khoa học và công nghệ"
-
-#: templates/frontend/material_stats.html:85
-msgid "Humanities"
-msgstr "Nhân văn"
-
-#: templates/frontend/material_stats.html:87
-msgid "Arts"
-msgstr "Nghệ thuật"
-
-#: templates/frontend/material_stats.html:89
-msgid "Mathematics and Statistics"
-msgstr "Toán học và thống kê"
-
-#: templates/frontend/material_stats.html:91
-msgid "Others"
-msgstr "Khác"
-
-#: templates/frontend/material_stats.html:110
-msgid "Uploaded On:"
-msgstr "Tải lên ngày:"
 
 #: templates/frontend/module_detail.html:20
 #: templates/frontend/collection/create_step3.html:483
@@ -419,11 +353,51 @@ msgstr "Tài liệu này được kế thừa từ"
 msgid "of"
 msgstr "của"
 
+#: templates/frontend/profile.html:39
+#: templates/frontend/user_edit_profile.html:102
+#: templates/frontend/partials/author_info.html:26
+msgid "Homepage"
+msgstr "Trang chủ"
+
+#: templates/frontend/profile.html:43
+#: templates/frontend/partials/author_info.html:27
+msgid "National"
+msgstr "Quốc gia"
+
+#: templates/frontend/profile.html:47
+#: templates/frontend/user_edit_profile.html:114
+#: templates/frontend/partials/author_info.html:28
+msgid "Biography"
+msgstr "Tiểu sử"
+
 #: templates/frontend/profile.html:51
 msgid "Delete person"
 msgstr "Xóa người dùng"
 
-#: templates/frontend/profile.html:58 templates/frontend/search_result.html:51
+#: templates/frontend/profile.html:137 templates/frontend/profile.html:150
+#: templates/frontend/profile.html:163 templates/frontend/profile.html:179
+#: templates/frontend/profile.html:192 templates/frontend/profile.html:205
+#: templates/frontend/profile.html:221 templates/frontend/profile.html:235
+#: templates/frontend/search_result.html:28
+#: templates/frontend/search_result.html:37
+#: templates/frontend/search_result.html:48
+#: templates/frontend/partials/browse-list.html:66
+msgid "Select/Deselect Item"
+msgstr "Chọn/bỏ chọn đối tượng"
+
+#: templates/frontend/search_result.html:6
+msgid "Search result"
+msgstr "Kết quả tìm kiếm"
+
+#: templates/frontend/search_result.html:30
+msgid "All"
+msgstr ""
+
+#: templates/frontend/search_result.html:40
+msgid "Material"
+msgstr ""
+
+#: templates/frontend/search_result.html:51
 #: templates/frontend/collection/create_step2.html:138
 #: templates/frontend/collection/create_step2.html:145
 #: templates/frontend/collection/create_step2.html:203
@@ -440,179 +414,26 @@ msgstr "Xóa người dùng"
 msgid "Author"
 msgstr "Tác giả"
 
-#: templates/frontend/profile.html:62
-#: templates/frontend/collection/create_step2.html:150
-#: templates/frontend/collection/create_step2.html:208
-#: templates/frontend/collection/create_step3.html:183
-#: templates/frontend/collection/create_step3.html:242
-#: templates/frontend/module/create_step2.html:142
-#: templates/frontend/module/create_step2.html:200
-#: templates/frontend/module/create_step3.html:148
-#: templates/frontend/module/create_step3.html:207
-#: templates/frontend/partials/author_info.html:38
-msgid "Contributor"
-msgstr "Đồng biên tập"
-
-#: templates/frontend/profile.html:66
-#: templates/frontend/collection/create_step2.html:146
-#: templates/frontend/collection/create_step2.html:204
-#: templates/frontend/collection/create_step3.html:179
-#: templates/frontend/collection/create_step3.html:238
-#: templates/frontend/module/create_step2.html:138
-#: templates/frontend/module/create_step2.html:196
-#: templates/frontend/module/create_step3.html:144
-#: templates/frontend/module/create_step3.html:203
-#: templates/frontend/partials/author_info.html:42
-msgid "Editor"
-msgstr "Biên tập viên"
-
-#: templates/frontend/profile.html:70
-#: templates/frontend/collection/create_step2.html:147
-#: templates/frontend/collection/create_step2.html:205
-#: templates/frontend/collection/create_step3.html:180
-#: templates/frontend/collection/create_step3.html:239
-#: templates/frontend/module/create_step2.html:139
-#: templates/frontend/module/create_step2.html:197
-#: templates/frontend/module/create_step3.html:145
-#: templates/frontend/module/create_step3.html:204
-#: templates/frontend/partials/author_info.html:46
-msgid "Licensor"
-msgstr "Người giữ tác quyền"
-
-#: templates/frontend/profile.html:74
-#: templates/frontend/collection/create_step2.html:148
-#: templates/frontend/collection/create_step2.html:206
-#: templates/frontend/collection/create_step3.html:181
-#: templates/frontend/collection/create_step3.html:240
-#: templates/frontend/module/create_step2.html:140
-#: templates/frontend/module/create_step2.html:198
-#: templates/frontend/module/create_step3.html:146
-#: templates/frontend/module/create_step3.html:205
-#: templates/frontend/partials/author_info.html:50
-msgid "Maintainer"
-msgstr "Maintainer"
-
-#: templates/frontend/profile.html:78
-#: templates/frontend/collection/create_step2.html:149
-#: templates/frontend/collection/create_step2.html:207
-#: templates/frontend/collection/create_step3.html:182
-#: templates/frontend/collection/create_step3.html:241
-#: templates/frontend/module/create_step2.html:141
-#: templates/frontend/module/create_step2.html:199
-#: templates/frontend/module/create_step3.html:147
-#: templates/frontend/module/create_step3.html:206
-#: templates/frontend/partials/author_info.html:54
-msgid "Translator"
-msgstr "Dịch giả"
-
-#: templates/frontend/profile.html:111
-msgid "Popular"
-msgstr "Phổ biến"
-
-#: templates/frontend/profile.html:112
-msgid "All Creative Fields"
-msgstr ""
-
-#: templates/frontend/profile.html:113
-msgid "Architecture"
-msgstr ""
-
-#: templates/frontend/profile.html:114
-msgid "Art Direction"
-msgstr ""
-
-#: templates/frontend/profile.html:115
-msgid "Branding"
-msgstr ""
-
-#: templates/frontend/profile.html:116
-msgid "Fashion"
-msgstr ""
-
-#: templates/frontend/profile.html:117
-msgid "Graphic Design"
-msgstr ""
-
-#: templates/frontend/profile.html:118
-msgid "Illustration"
-msgstr ""
-
-#: templates/frontend/profile.html:119
-msgid "Industrial Design"
-msgstr ""
-
-#: templates/frontend/profile.html:120
-msgid "Interaction Design"
-msgstr ""
-
-#: templates/frontend/profile.html:121
-msgid "Motion Graphics"
-msgstr ""
-
-#: templates/frontend/profile.html:122
-msgid "Photography"
-msgstr ""
-
-#: templates/frontend/profile.html:123
-msgid "UI/UX"
-msgstr ""
-
-#: templates/frontend/profile.html:124
-msgid "Web Design"
-msgstr ""
-
-#: templates/frontend/profile.html:128 templates/frontend/profile.html:130
-msgid "Featured"
-msgstr "Tiêu biểu"
-
-#: templates/frontend/profile.html:131
-msgid "Most Liked"
-msgstr "Yêu thích nhất"
-
-#: templates/frontend/profile.html:132
-msgid "Most Viewed"
-msgstr "Xem nhiều nhất"
-
-#: templates/frontend/profile.html:133
-msgid "Most Discussed"
-msgstr "Thảo luận nhiều nhất"
-
-#: templates/frontend/profile.html:134
-msgid "Most Recent"
-msgstr "Mới nhất"
-
-#: templates/frontend/search_result.html:6
-msgid "Search result"
-msgstr "Kết quả tìm kiếm"
-
-#: templates/frontend/search_result.html:30
-msgid "All"
-msgstr ""
-
-#: templates/frontend/search_result.html:40
-msgid "Material"
-msgstr ""
-
-#: templates/frontend/user_edit_profile.html:17
+#: templates/frontend/user_edit_profile.html:18
 #: templates/frontend/user_favorite.html:12
 #: templates/frontend/user_profile.html:13
 #: templates/frontend/user_unpublish.html:13
 msgid "My VOER"
 msgstr "VOER của tôi"
 
-#: templates/frontend/user_edit_profile.html:47
+#: templates/frontend/user_edit_profile.html:48
 msgid "Account Settings"
 msgstr "Cài đặt"
 
-#: templates/frontend/user_edit_profile.html:51
+#: templates/frontend/user_edit_profile.html:52
 msgid "E-mail address"
 msgstr "Địa chỉ email"
 
-#: templates/frontend/user_edit_profile.html:52
+#: templates/frontend/user_edit_profile.html:53
 msgid "Enter Emai Address"
 msgstr "Email của bạn"
 
-#: templates/frontend/user_edit_profile.html:53
+#: templates/frontend/user_edit_profile.html:54
 msgid ""
 "A valid e-mail address. All e-mails from the system will be sent to this "
 "address. The e-mail address is not made public and will only be used if you "
@@ -623,52 +444,52 @@ msgstr ""
 "Địa chỉ email sẽ không công khai và chỉ sử dụng khi bạn muốn nhận mật khẩu "
 "mới, nhận tin tức hoặc thông báo qua email."
 
-#: templates/frontend/user_edit_profile.html:57
+#: templates/frontend/user_edit_profile.html:58
 msgid "Enter Your Password"
 msgstr "Nhập mật khẩu mới"
 
-#: templates/frontend/user_edit_profile.html:60
+#: templates/frontend/user_edit_profile.html:61
 msgid "Confirm password"
 msgstr "Xác nhận mật khẩu"
 
-#: templates/frontend/user_edit_profile.html:61
+#: templates/frontend/user_edit_profile.html:62
 msgid "Enter Confirm Password"
 msgstr "Xác nhận mật khẩu mới"
 
-#: templates/frontend/user_edit_profile.html:63
+#: templates/frontend/user_edit_profile.html:64
 msgid "To make your password stronger:"
 msgstr "Để mật khẩu của bạn mạnh hơn:"
 
-#: templates/frontend/user_edit_profile.html:64
+#: templates/frontend/user_edit_profile.html:65
 msgid "Make it at least 6 characters"
 msgstr "Tối thiểu có 6 kí tự"
 
-#: templates/frontend/user_edit_profile.html:65
+#: templates/frontend/user_edit_profile.html:66
 msgid "Add lowercase letters"
 msgstr "Thêm kí tự thường"
 
-#: templates/frontend/user_edit_profile.html:66
+#: templates/frontend/user_edit_profile.html:67
 msgid "Add uppercase letters"
 msgstr "Thêm kí tự viết hoa"
 
-#: templates/frontend/user_edit_profile.html:67
+#: templates/frontend/user_edit_profile.html:68
 msgid "Add numbers"
 msgstr "Thêm số"
 
-#: templates/frontend/user_edit_profile.html:68
+#: templates/frontend/user_edit_profile.html:69
 msgid "Add punctuation"
 msgstr "Thêm dấu '.'"
 
-#: templates/frontend/user_edit_profile.html:69
+#: templates/frontend/user_edit_profile.html:70
 msgid ""
 "To change the current user password, enter the new password in both fields."
 msgstr "Để thay đổi mật khẩu hiện tại, hãy nhập mật khẩu mới vào hai trường"
 
-#: templates/frontend/user_edit_profile.html:73
+#: templates/frontend/user_edit_profile.html:74
 msgid "Picture"
 msgstr "Ảnh đại diện"
 
-#: templates/frontend/user_edit_profile.html:75
+#: templates/frontend/user_edit_profile.html:76
 msgid ""
 "Your virtual face or picture. Pictures larger than 1024x1024 pixels will be "
 "scaled down."
@@ -676,63 +497,63 @@ msgstr ""
 "Ảnh chứa khuôn mặt thật của bạn. Ảnh có kích thước lớn hơn 1024x1024 sẽ được "
 "thu nhỏ lại."
 
-#: templates/frontend/user_edit_profile.html:78
+#: templates/frontend/user_edit_profile.html:80
 msgid "Remove avatar"
 msgstr "Xoá ảnh đại diện"
 
-#: templates/frontend/user_edit_profile.html:83
+#: templates/frontend/user_edit_profile.html:86
 msgid "Full name"
 msgstr "Họ và tên"
 
-#: templates/frontend/user_edit_profile.html:84
+#: templates/frontend/user_edit_profile.html:87
 msgid "Enter fullname"
 msgstr "Nhập tên đầy đủ"
 
-#: templates/frontend/user_edit_profile.html:87
+#: templates/frontend/user_edit_profile.html:90
 msgid "First name"
 msgstr "Tên"
 
-#: templates/frontend/user_edit_profile.html:88
+#: templates/frontend/user_edit_profile.html:91
 msgid "Enter first name"
 msgstr "Nhập tên"
 
-#: templates/frontend/user_edit_profile.html:91
+#: templates/frontend/user_edit_profile.html:94
 msgid "Last name"
 msgstr "Họ"
 
-#: templates/frontend/user_edit_profile.html:92
+#: templates/frontend/user_edit_profile.html:95
 msgid "Enter last name"
 msgstr "Nhập họ"
 
-#: templates/frontend/user_edit_profile.html:103
+#: templates/frontend/user_edit_profile.html:106
 msgid "Affiliation"
 msgstr "Cơ quan"
 
-#: templates/frontend/user_edit_profile.html:104
+#: templates/frontend/user_edit_profile.html:107
 msgid "Enter affiliation"
 msgstr "Nhập tên cơ quan"
 
-#: templates/frontend/user_edit_profile.html:107
+#: templates/frontend/user_edit_profile.html:110
 msgid "Affiliation URL"
 msgstr "URL cơ quan"
 
-#: templates/frontend/user_edit_profile.html:115
+#: templates/frontend/user_edit_profile.html:118
 msgid "Nationality"
 msgstr "Quốc tịch"
 
-#: templates/frontend/user_edit_profile.html:116
+#: templates/frontend/user_edit_profile.html:119
 msgid "Enter nationality"
 msgstr "Nhập quốc tịch"
 
-#: templates/frontend/user_edit_profile.html:119
+#: templates/frontend/user_edit_profile.html:122
 msgid "Current password"
 msgstr "Mật khẩu hiện tại"
 
-#: templates/frontend/user_edit_profile.html:120
+#: templates/frontend/user_edit_profile.html:123
 msgid "Enter Current Password"
 msgstr "Nhập mật khẩu hiện tại"
 
-#: templates/frontend/user_edit_profile.html:121
+#: templates/frontend/user_edit_profile.html:124
 msgid ""
 "Enter your current password to change the E-mail address or Password. <a "
 "href=\"/user/password/reset/\">Request new password</a>."
@@ -740,11 +561,11 @@ msgstr ""
 "Nhập mật khẩu hiện tại để thay đổi thông tin. <a href=\"/user/password/reset/"
 "\">Quên mật khẩu </a>."
 
-#: templates/frontend/user_edit_profile.html:125
+#: templates/frontend/user_edit_profile.html:128
 msgid "Cancel"
 msgstr "Hủy"
 
-#: templates/frontend/user_edit_profile.html:145
+#: templates/frontend/user_edit_profile.html:148
 msgid "Do you want to remove avatar?"
 msgstr "Bạn muốn xoá ảnh đại diện?"
 
@@ -841,7 +662,7 @@ msgstr "Xem nhiều nhất"
 
 #: templates/frontend/block/left_block_user.html:48
 msgid "Most favourite"
-msgstr "Mục yêu thích"
+msgstr "Tài liệu yêu thích nhiều nhất"
 
 #: templates/frontend/collection/create_step1.html:3
 #: templates/frontend/collection/create_step2.html:5
@@ -921,6 +742,66 @@ msgstr "Mô tả"
 #: templates/frontend/module/create_step3.html:201
 msgid "Name"
 msgstr "Tên"
+
+#: templates/frontend/collection/create_step2.html:146
+#: templates/frontend/collection/create_step2.html:204
+#: templates/frontend/collection/create_step3.html:179
+#: templates/frontend/collection/create_step3.html:238
+#: templates/frontend/module/create_step2.html:138
+#: templates/frontend/module/create_step2.html:196
+#: templates/frontend/module/create_step3.html:144
+#: templates/frontend/module/create_step3.html:203
+#: templates/frontend/partials/author_info.html:42
+msgid "Editor"
+msgstr "Biên tập viên"
+
+#: templates/frontend/collection/create_step2.html:147
+#: templates/frontend/collection/create_step2.html:205
+#: templates/frontend/collection/create_step3.html:180
+#: templates/frontend/collection/create_step3.html:239
+#: templates/frontend/module/create_step2.html:139
+#: templates/frontend/module/create_step2.html:197
+#: templates/frontend/module/create_step3.html:145
+#: templates/frontend/module/create_step3.html:204
+#: templates/frontend/partials/author_info.html:46
+msgid "Licensor"
+msgstr "Người giữ tác quyền"
+
+#: templates/frontend/collection/create_step2.html:148
+#: templates/frontend/collection/create_step2.html:206
+#: templates/frontend/collection/create_step3.html:181
+#: templates/frontend/collection/create_step3.html:240
+#: templates/frontend/module/create_step2.html:140
+#: templates/frontend/module/create_step2.html:198
+#: templates/frontend/module/create_step3.html:146
+#: templates/frontend/module/create_step3.html:205
+#: templates/frontend/partials/author_info.html:50
+msgid "Maintainer"
+msgstr "Maintainer"
+
+#: templates/frontend/collection/create_step2.html:149
+#: templates/frontend/collection/create_step2.html:207
+#: templates/frontend/collection/create_step3.html:182
+#: templates/frontend/collection/create_step3.html:241
+#: templates/frontend/module/create_step2.html:141
+#: templates/frontend/module/create_step2.html:199
+#: templates/frontend/module/create_step3.html:147
+#: templates/frontend/module/create_step3.html:206
+#: templates/frontend/partials/author_info.html:54
+msgid "Translator"
+msgstr "Dịch giả"
+
+#: templates/frontend/collection/create_step2.html:150
+#: templates/frontend/collection/create_step2.html:208
+#: templates/frontend/collection/create_step3.html:183
+#: templates/frontend/collection/create_step3.html:242
+#: templates/frontend/module/create_step2.html:142
+#: templates/frontend/module/create_step2.html:200
+#: templates/frontend/module/create_step3.html:148
+#: templates/frontend/module/create_step3.html:207
+#: templates/frontend/partials/author_info.html:38
+msgid "Contributor"
+msgstr "Đồng biên tập"
 
 #: templates/frontend/collection/create_step2.html:194
 #: templates/frontend/module/create_step2.html:186
@@ -1020,18 +901,31 @@ msgstr "Kích thước tệp tin tải lên phải nhỏ hơn 20MB"
 msgid "Body"
 msgstr "Thân"
 
-#: templates/frontend/partials/browse-list.html:66
-msgid "Select/Deselect Item"
-msgstr "Chọn/bỏ chọn đối tượng"
+#: templates/frontend/partials/author_info.html:24
+#: templates/frontend/partials/author_info.html:25
+#: templates/frontend/partials/author_info.html:26
+#: templates/frontend/partials/author_info.html:27
+#: templates/frontend/partials/author_info.html:28
+msgid "Not available"
+msgstr "Chưa cập nhật"
 
 #: templates/frontend/partials/browse-list.html:131
 msgid "View count"
 msgstr "Lượt xem"
 
-#: templates/frontend/partials/browse-list.html:138
+#: templates/frontend/partials/browse-list.html:139
+#: templates/frontend/partials/material_tools.html:11
+msgid "Add to favorite"
+msgstr "Thêm vào tài liệu yêu thích"
+
+#: templates/frontend/partials/browse-list.html:140
 #: templates/frontend/partials/material_tools.html:12
 msgid "Favorite count"
 msgstr "Lượt ưa thích"
+
+#: templates/frontend/partials/browse-list.html:161
+msgid "Uploaded date"
+msgstr "Ngày tải lên"
 
 #: templates/frontend/partials/material_actions.html:11
 #: templates/frontend/partials/material_actions.html:17
@@ -1069,10 +963,6 @@ msgstr "dựa trên"
 #: templates/frontend/partials/material_rate.html:9
 msgid "rating"
 msgstr "đánh giá"
-
-#: templates/frontend/partials/material_tools.html:11
-msgid "Add to favorite"
-msgstr "Thêm vào tài liệu yêu thích"
 
 #: templates/registration/login.html:7
 #: templates/registration/registration_form.html:8
@@ -1292,75 +1182,118 @@ msgstr "Nhập URL cơ quan"
 msgid "I'm a human"
 msgstr ""
 
-#: vpw/views.py:552 vpw/views.py:777
+#: vpw/views.py:554 vpw/views.py:779
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:678 vpw/views.py:848 vpw/views.py:1968 vpw/views.py:2024
-#: vpw/views.py:2121 vpw/views.py:2206
+#: vpw/views.py:680 vpw/views.py:850 vpw/views.py:2014 vpw/views.py:2070
+#: vpw/views.py:2167 vpw/views.py:2252
 msgid "The content is successfully published."
 msgstr "Nội dung đã được xuất bản thành công."
 
-#: vpw/views.py:1176
+#: vpw/views.py:1183
+msgid "Top 12 Most Viewed Documents"
+msgstr "Danh sách 12 tài liệu được xem nhiều nhất"
+
+#: vpw/views.py:1216
 msgid "Top 12 Most Favorited Documents"
 msgstr "Danh sách 12 tài liệu được ưa thích nhất"
 
-#: vpw/views.py:1419
+#: vpw/views.py:1459
 msgid "Profile details updated."
 msgstr "Cập nhật thông tin hồ sơ thành công."
 
-#: vpw/views.py:1453
+#: vpw/views.py:1493
 msgid "Add favorite successful"
 msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1457
+#: vpw/views.py:1497
 msgid "Delete favorite successful"
 msgstr "Xoá tài liệu ưa thích thành công."
 
-#: vpw/views.py:1548
+#: vpw/views.py:1586
 msgid "Please enter default password."
 msgstr "Nhập mật khẩu mặc định"
 
-#: vpw/views.py:1550
+#: vpw/views.py:1588
 msgid "Please select file"
 msgstr "Hãy chọn tập tin"
 
-#: vpw/views.py:1622
+#: vpw/views.py:1660
 msgid "Import user successful."
 msgstr "Thêm người dùng thành công."
 
-#: vpw/views.py:2107
+#: vpw/views.py:2153
 msgid "Please choose a category for this module"
 msgstr "Hãy chọn 1 danh mục cho tài liệu"
 
-#: vpw/views.py:2110
+#: vpw/views.py:2156
 msgid "Please add an author for this module"
 msgstr "Hãy thêm tác giả cho tài liệu"
 
-#: vpw/views.py:2113
+#: vpw/views.py:2159
 msgid "Please choose a language for this module"
 msgstr "Hãy chọn ngôn ngữ cho tài liệu"
 
-#: vpw/views.py:2144
+#: vpw/views.py:2190
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2233
+#: vpw/views.py:2279
 msgid "Settings updated successfully."
 msgstr "Lưu cài đặt thành công."
 
-#: vpw/views.py:2235
+#: vpw/views.py:2281
 msgid "Error while updating settings."
 msgstr "Có lỗi khi lưu cài đặt."
 
-#: vpw/views.py:2408
+#: vpw/views.py:2455
 msgid "Please login"
 msgstr "Hãy đăng nhập"
 
-#: vpw/views.py:2436
+#: vpw/views.py:2483
 msgid "Delete avatar successfull"
 msgstr "Xoá ảnh đại diện thành công."
+
+#~ msgid "Popular"
+#~ msgstr "Phổ biến"
+
+#~ msgid "Featured"
+#~ msgstr "Tiêu biểu"
+
+#~ msgid "Most Liked"
+#~ msgstr "Yêu thích nhất"
+
+#~ msgid "Most Viewed"
+#~ msgstr "Xem nhiều nhất"
+
+#~ msgid "Most Discussed"
+#~ msgstr "Thảo luận nhiều nhất"
+
+#~ msgid "Most Recent"
+#~ msgstr "Mới nhất"
+
+#~ msgid "Business"
+#~ msgstr "Kinh tế"
+
+#~ msgid "Social Sciences"
+#~ msgstr "Khoa học xã hội"
+
+#~ msgid "Science and Technology"
+#~ msgstr "Khoa học và công nghệ"
+
+#~ msgid "Humanities"
+#~ msgstr "Nhân văn"
+
+#~ msgid "Arts"
+#~ msgstr "Nghệ thuật"
+
+#~ msgid "Mathematics and Statistics"
+#~ msgstr "Toán học và thống kê"
+
+#~ msgid "Others"
+#~ msgstr "Khác"
 
 #~ msgid "Tags"
 #~ msgstr "Các Tag"

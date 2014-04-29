@@ -353,7 +353,7 @@
                                 <div title="Select/Deselect Item" class="checkbox-custom" data-key="categories-{{category.id}}"></div>
                             </div>
                             <div class="hfcheckinfo">
-                                <a href="{% url "browse"  %}?categories={{ category.id }}" title="{{ category.name }}">{{ category.name }}</a>
+                                <a href="{% url "browse"  %}?categories={{ category.id }}" title="{% trans category.name %}">{% trans category.name %}</a>
                             </div>
                             <div class="hfchecknumber">
                             </div>

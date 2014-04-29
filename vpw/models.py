@@ -66,6 +66,7 @@ class Material(models.Model):
         material['description'] = self.description
         material['categories'] = self.categories
         material['status'] = self.status
+        material['modified'] = self.modified
 
         if self.author:
             material['author'] = self.author
