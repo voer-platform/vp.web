@@ -1,7 +1,7 @@
 # Setup VPW
 
 ## Install the required packages
-        sudo apt-get install build-essential python2.7-dev python-dev python-pip
+	sudo apt-get install build-essential python2.7-dev python-dev python-pip
         
 ## Dependencies
 ### Mysql
@@ -46,6 +46,13 @@
 	# Register on http://www.captcha.net
 	RECAPTCHA_PUBLIC_KEY = 'public_key'
 	RECAPTCHA_PRIVATE_KEY = 'private_key'
+	
+	#Email setup
+	EMAIL_HOST = 'smtp.gmail.com'
+	EMAIL_PORT = 587
+	EMAIL_USE_TLS = True
+	EMAIL_HOST_USER = 'youremail@gmail.com'
+	EMAIL_HOST_PASSWORD = 'yourpassword'
 ## Change manage.py
 	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "voer.settings.local")
 ## Install Database
