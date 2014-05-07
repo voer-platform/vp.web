@@ -1,4 +1,14 @@
 # Setup VPW
+
+## Install the required packages
+        sudo apt-get install build-essential python2.7-dev python-dev python-pip
+        
+## Dependencies
+### Mysql
+	sudo add-apt-repository -y ppa:ondrej/mysql-5.6
+	sudo apt-get update
+	sudo apt-get -y install mysql-server
+	
 ## Install virtualenv
 	pip install virtualenv
 ## Create a virtualenv on local system
