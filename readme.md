@@ -1,6 +1,6 @@
 # Setup VPW
 ## Install virtualenv
-	pip install virtualevn
+	pip install virtualenv
 ## Create a virtualenv on local system
 	virtualenv vpw.env
 	cd vpw.env
