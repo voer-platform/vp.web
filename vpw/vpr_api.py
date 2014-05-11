@@ -13,8 +13,7 @@ import urllib
 import os
 from django.conf import settings
 import requests
-
-import vpw.models
+import vpw
 
 
 def vpt_request(method, path, body=None):
@@ -312,7 +311,7 @@ def vpr_materials_by_author(aid, page=1, sort_on=''):
 
 
 def vpr_create_person(**kwargs):
-    result = vpr_request("POST", "persons/", {
+    result = vpr_request("POST", "persons/", data={
         "fullname": kwargs.get("fullname"),
         "user_id": kwargs.get("user_id"),
         "first_name": kwargs.get("first_name"),
