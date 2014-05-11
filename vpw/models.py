@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models.fields import IntegerField, TextField, DateTimeField,\
     CharField
 from registration.signals import user_activated
-from vpw.vpr_api import vpr_create_person
+from vpw.receiver import user_activated_callback
 from django.utils.translation import ugettext as _
 
 # Create your models here.
@@ -73,26 +73,5 @@ class Material(models.Model):
 
         return material
 
-
-# Declare Signs
-def user_activated_callback(sender, user, request, **kwargs):
-    try:
-        author = Author.objects.get(user=user)
-    except Author.DoesNotExist:
-        # create person on vpr
-        params = dict()
-        params["fullname"] = '%s %s' % (user.first_name, user.last_name)
-        params["user_id"] = user.username
-        params["first_name"] = user.first_name
-        params["last_name"] = user.last_name
-        params["email"] = user.email
-
-        new_person = vpr_create_person(**params)
-
-        if 'id' in new_person:
-            if new_person["id"] > 0:
-                author = Author(user=user)
-                author.author_id = new_person['id']
-                author.save()
 
 user_activated.connect(user_activated_callback, dispatch_uid="ACTIVE_USER")

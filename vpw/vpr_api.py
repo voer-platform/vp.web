@@ -14,8 +14,6 @@ import os
 from django.conf import settings
 import requests
 
-import vpw.models
-
 
 def vpt_request(method, path, body=None):
     connection = httplib.HTTPConnection(settings.VPT_URL, settings.VPT_PORT)
@@ -312,7 +310,7 @@ def vpr_materials_by_author(aid, page=1, sort_on=''):
 
 
 def vpr_create_person(**kwargs):
-    result = vpr_request("POST", "persons/", {
+    result = vpr_request("POST", "persons/", data={
         "fullname": kwargs.get("fullname"),
         "user_id": kwargs.get("user_id"),
         "first_name": kwargs.get("first_name"),
