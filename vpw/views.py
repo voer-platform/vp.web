@@ -219,6 +219,7 @@ def module_detail(request, title, mid, version):
     # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
     content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
     content = re.sub(r'href="([^"]*)"', _replace_attachment_link(list_images), content)
+    content = re.sub(r'(?<!<pre>)<code((.|\n)*?)code>', r'<pre><code\1code></pre>', content)
     material['text'] = content
 
     author = _get_author(material)
