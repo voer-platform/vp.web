@@ -93,7 +93,11 @@ def vpt_download(url):
 
 
 def vpr_get_categories():
+    from django.utils.translation import ugettext as _
+
     result = vpr_request("GET", "categories")
+    for r in result:
+        r['name'] = _(r['name'])
     return result
 
 
