@@ -1033,6 +1033,7 @@ Browse page
 
 
 def browse(request):
+    from django.utils.translation import ugettext as _
     current_user = request.user
     if current_user.is_authenticated():
         person_id = current_user.author.author_id
@@ -1041,6 +1042,8 @@ def browse(request):
 
     page = int(request.GET.get('page', 1))
     categories = vpr_get_categories()
+    for c in categories:
+        c['name'] = _(c['name'])
 
     cats = request.GET.get("categories", "")
     types = request.GET.get("types", "")
