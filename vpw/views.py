@@ -404,16 +404,16 @@ def collection_detail(request, title, cid, mid):
 
         material['links'] = new_links
 
-        authors = []
         if material['author']:
+            material_authors = []
             author_ids = material['author'].split(',')
 
             for pid in author_ids:
                 pid = pid.strip()
                 person = vpr_get_person(pid)
                 if person:
-                    authors.append(person)
-            material['material_authors'] = authors
+                    material_authors.append(person)
+            material['material_authors'] = material_authors
 
     else:
         material = {}
@@ -520,16 +520,16 @@ def user_collection_detail(request, cid, mid):
                 content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
                 material['text'] = content
 
-            authors = []
             if material['author']:
+                material_authors = []
                 author_ids = material['author'].split(',')
 
                 for pid in author_ids:
                     pid = pid.strip()
                     person = vpr_get_person(pid)
                     if person:
-                        authors.append(person)
-                material['material_authors'] = authors
+                        material_authors.append(person)
+                material['material_authors'] = material_authors
         else:
             material = {}
             file_data = []
