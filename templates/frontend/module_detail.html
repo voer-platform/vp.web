@@ -13,7 +13,7 @@
     <div class="module-view-title left padding-content-15">
         <div class="material-type">{% trans "Module" %}</div>
         <h1 class="module-title left clear">{{ material.title }}</h1>
-        <a class="module-view-category left clear" title="{{ category.name }}">{{ category.name }}</a>
+        <a class="module-view-category left clear" title="{% trans category.name %}">{% trans category.name %}</a>
         {% if material.id %}
         {% if unpublished %}
         <a href="{% url 'user_module_edit' mid=material.id %}" class="btn btn-primary" style="float: right;">{% trans 'Edit' %}</a>

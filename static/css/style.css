@@ -736,7 +736,7 @@ article.flatpage {
 }
 .collection-view-title h2 {
   margin-top: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 4px;
   border-top: 1px dashed #ddd;
   padding-top: 10px;
 }
@@ -1128,4 +1128,16 @@ border-color: #d0e3f0;
 
 div.equation{
     text-align: center;
+}
+.author-module-list a {
+    margin-right: 5px;
+}
+.author-module-list a:after {
+    content: ',';
+}
+.author-module-list a:last-child:after {
+    content: '';
+}
+.author-module-list a:hover {
+    text-decoration: underline;
 }
