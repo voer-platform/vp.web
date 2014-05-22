@@ -378,6 +378,8 @@ def collection_detail(request, title, cid, mid):
             # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
             if "text" in material:
                 content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
+                content = re.sub(r'href="([^"]*)"', _replace_attachment_link(list_images), content)
+                content = re.sub(r'(?<!<pre>)<code((.|\n)*?)code>', r'<pre><code\1code></pre>', content)
                 material['text'] = content
 
             file_data = []
