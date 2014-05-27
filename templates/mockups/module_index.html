@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block css %}
+	<link href="{{STATIC_URL}}mockups/mockups.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}mockups/bootstrap-nav-wizard.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+    <div class="compose-header">
+        <div class="breadcumb">my workspace &#8594; new module</div>
+        <ul class="compose-wizard list-inline">
+            <li class="done clearfix">
+                <div class="wiz-step">1</div>
+                <div class="step-name">License</div>
+            </li>
+            <li class="active">
+                <div class="wiz-step">2</div>
+                <div class="step-name">Metadata</div>
+            </li>
+            <li>
+                <div class="wiz-step">3</div>
+                <div class="step-name">Content</div>
+            </li>
+            <li>
+                <div class="wiz-step">4</div>
+                <div class="step-name">Review &amp; Publish</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="clearfix">
+        <div class="material-brief">
+            <div id="brief-header">
+              <div>Your Module</div>
+              <div>Hide</div>
+            </div>
+            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h5>
+            <div><label>License: </label><span><img src="{% static 'images/icon/cc-by.png' %}"></span></div>
+            <div><label>Category: </label><span>Business</span></div>
+            <div><label>Author: </label><span>Albert Einstein</span></div>
+            <div><label>Keywords: </label><span>funny, stuff, work</span></div>
+        </div>
+
+        <div class="edit-content">
+          <div class="wizard-step-heading panel-heading">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseGuide">
+              <span style="pull-left">Module metadata </span><span class="wizard-step-info pull-right">?</span>
+            </a>
+          </div>
+          <div id="collapseGuide" class="panel-collapse collapse in">
+            <div class="panel-body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fringilla laoreet lorem vitae auctor. Vestibulum non odio sed nisl volutpat porttitor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            </div>
+          </div>
+          <fieldset>
+            <div class="field">
+                <label class="required">Module Title</label>
+                <input type="text" name="title">
+            </div>
+            <div class="field">
+                <label>Description</label>
+                <textarea name="description"></textarea>
+            </div>
+            <div class="field">
+                <label>Keywords</label>
+                <input type="text" name="keywords">
+            </div>
+          </fieldset>
+        </div>
+    </div>
+{% endblock %}

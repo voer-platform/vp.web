@@ -1,0 +1,209 @@
+input,
+textarea {
+  width: 60%;
+  height: 30px;
+  font-size: 15px;
+}
+textarea {
+  height: 100px;
+}
+h5 {
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.compose-header {
+  margin-bottom: 15px;
+}
+.compose-header .breadcumb {
+  font-variant: small-caps;
+  color: #6866D2;
+}
+.compose-wizard {
+  margin: 10px 0px 20px;
+  border-bottom: 2px solid #FCCF7C;
+  height: 41px;
+}
+.compose-wizard li {
+  color: lightgray;
+  height: 38px;
+  text-transform: uppercase;
+  text-align: center;
+  //border: 1px dashed #ccc;
+  width: 250px;
+  padding: 9px 0px;
+  margin-right: -3px;
+  overflow: hidden;
+  //box-shadow: 1px 1px 5px #eee;
+  //background: #eaeaea;
+  //background: -moz-linear-gradient(-45deg,  #eaeaea 0%, #f9f9f9 58%, #ffffff 100%);
+  //background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#eaeaea), color-stop(58%,#f9f9f9), color-stop(100%,#ffffff));
+  //background: -webkit-linear-gradient(-45deg,  #eaeaea 0%,#f9f9f9 58%,#ffffff 100%);
+  //background: -o-linear-gradient(-45deg,  #eaeaea 0%,#f9f9f9 58%,#ffffff 100%);
+  //background: -ms-linear-gradient(-45deg,  #eaeaea 0%,#f9f9f9 58%,#ffffff 100%);
+  //background: linear-gradient(135deg,  #eaeaea 0%,#f9f9f9 58%,#ffffff 100%);
+  //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#ffffff',GradientType=1 );
+}
+.compose-wizard > li > div  {
+  float: left;
+}
+.compose-wizard .active {
+  background: #FFE551;
+  //background: -moz-linear-gradient(-45deg,  #ffd45e 0%, #ffea8e 46%, #ffef99 50%, #ffea8e 54%, #ffd05b 100%);
+  //background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ffd45e), color-stop(46%,#ffea8e), color-stop(50%,#ffef99), color-stop(54%,#ffea8e), color-stop(100%,#ffd05b));
+  //background: -webkit-linear-gradient(-45deg,  #ffd45e 0%,#ffea8e 46%,#ffef99 50%,#ffea8e 54%,#ffd05b 100%);
+  //background: -o-linear-gradient(-45deg,  #ffd45e 0%,#ffea8e 46%,#ffef99 50%,#ffea8e 54%,#ffd05b 100%);
+  //background: -ms-linear-gradient(-45deg,  #ffd45e 0%,#ffea8e 46%,#ffef99 50%,#ffea8e 54%,#ffd05b 100%);
+  //background: linear-gradient(135deg,  #ffd45e 0%,#ffea8e 46%,#ffef99 50%,#ffea8e 54%,#ffd05b 100%);
+  //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd45e', endColorstr='#ffd05b',GradientType=1 );
+  font-weight: bold;
+  color: white;
+  //border: 1px solid #aaa;
+}
+.compose-wizard .done {
+  background: #D0E3F2;
+  //border: 1px solid #aaa;
+}
+.active .wiz-step {
+  font-size: 60px;
+}
+.done .wiz-step {
+  color: white;
+}
+.active .step-name {
+  color: white;
+}
+.compose-wizard span {
+}
+.wiz-step {
+  font-size: 30px;
+  padding: 0px 10px;
+  font-weight: bold;
+}
+.step-name {
+  font-family: verdana, arial;
+  color: #666;
+}
+.material-brief {
+  width: 22%;
+  float: left;
+  margin-right: -1px;
+  padding-right: 10px;
+  color: gray;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 14px;
+}
+.material-brief h5 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  margin-bottom: 10px;
+}
+.material-brief > div > label {
+  float: left;
+}
+.material-brief > div > span {
+  padding-right: 10px;
+  float: right;
+}
+.material-brief > div {
+  clear: both;
+}
+#brief-header {
+  margin-top: 0px;
+}
+#brief-header > div {
+  float: left;
+  width: 50%;
+  text-transform: uppercase;
+}
+.material-brief div {
+  margin: 5px 0;
+}
+.step-guideline {
+  background-color: lightgray;
+  color: white;
+  font-style: italic;
+  padding: 10px;
+}
+.edit-content {
+  width: 78%;
+  float: left;
+}
+.edit-steps li {
+  padding: 15px 10px 15px 40px;
+  text-transform: uppercase;
+}
+
+.edit-steps .step01 {
+  background: url('/static/mockups/step1-white.png') no-repeat 3px;
+}
+//.edit-steps .step02 {
+//  background: url('/static/mockups/step2-white.png') no-repeat 3px;
+//}
+.edit-steps .step03 {
+  background: url('/static/mockups/step3-white.png') no-repeat 3px;
+}
+.edit-steps .step04 {
+  background: url('/static/mockups/step4-white.png') no-repeat 3px;
+}
+.edit-steps .step05 {
+  background: url('/static/mockups/step5-white.png') no-repeat 3px;
+}
+.edit-steps .active {
+  background: url('/static/mockups/step-active-bg.png') right repeat-y rgb(255, 238, 113);
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0px;
+}
+.step02-orange div {
+  padding: 15px 15px 15px 80px;
+  background: url('/static/mockups/step2-orange.png') no-repeat 3px;
+}
+.edit-content {
+  padding: 0px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  min-height: 300px;
+  background-color: white;
+}
+.edit-content label {
+  font-weight: bold;
+  display: block;
+  color: #5564A2;
+  margin-bottom: 5px;
+}
+.edit-content fieldset {
+  border-top: 1px solid #f1f1f1;
+}
+label.required:after {
+  margin-left: 5px;
+  content: "*";
+  color: rgb(252, 116, 116);
+}
+
+.field {
+  border-top: solid 1px #fefefe; 
+  padding: 15px 20px 20px 20px;
+  border-bottom: solid 1px #f1f1f1; 
+  background-color: #f8f8f8;
+  margin-bottom: 0px;
+}
+.field-even {
+  background-color: #f7ffe4;
+  border-top: solid 1px #f1f1f1; 
+  border-bottom: solid 1px #f1f1f1; 
+}
+.field-odd {
+  background-color: #fff;
+}
+#collapseGuide .panel-body {
+  padding-top: 0px;
+}
+.wizard-step-heading {
+  text-transform: uppercase;
+}
+.wizard-step-info {
+  font-size: 100%;
+  padding-left: 10px;
+  color: lightgray;
+}
