@@ -53,6 +53,11 @@
 	EMAIL_USE_TLS = True
 	EMAIL_HOST_USER = 'youremail@gmail.com'
 	EMAIL_HOST_PASSWORD = 'yourpassword'
+	
+	# Client ID which register in VPR
+	CLIENT_ID = "ID"
+	CLIENT_KEY = "KEY"
+	
 ## Change manage.py
 	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "voer.settings.local")
 ## Install Database
