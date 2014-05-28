@@ -154,6 +154,9 @@
 .icon22.icon-favorite.active {
     background-position: -22px -32px;
 }
+.icon-rating {
+    background-position: 0 -54px;
+}
 /*************************** END ICON *************************/
 .voer-mol-ico {
   background: url("../images/icon/icon-module.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);

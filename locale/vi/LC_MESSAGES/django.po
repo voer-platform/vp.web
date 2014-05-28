@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-29 18:12+0000\n"
-"PO-Revision-Date: 2014-04-29 03:54+0700\n"
+"POT-Creation-Date: 2014-05-27 15:10+0000\n"
+"PO-Revision-Date: 2014-05-27 22:14+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -113,7 +113,7 @@ msgstr "Quên mật khẩu?"
 msgid "Don't have an account? Sign up for VOER"
 msgstr "Bạn chưa có tài khoản? Hãy đăng ký."
 
-#: templates/base/header.html:168 vpw/views.py:1086
+#: templates/base/header.html:168 vpw/views.py:1107
 msgid "The username or password is incorrect."
 msgstr "Tên đăng nhập hoặc mật khẩu chưa đúng"
 
@@ -123,7 +123,7 @@ msgstr "Hướng dẫn sử dụng"
 
 #: templates/frontend/admin_featured_authors.html:5
 #: templates/frontend/admin_featured_authors.html:23
-#: templates/frontend/block/left_block_user.html:50
+#: templates/frontend/block/left_block_user.html:51
 msgid "Featured authors"
 msgstr "Tác giả tiêu biểu"
 
@@ -148,7 +148,7 @@ msgstr "Xóa"
 
 #: templates/frontend/admin_featured_materials.html:5
 #: templates/frontend/admin_featured_materials.html:23
-#: templates/frontend/block/left_block_user.html:49
+#: templates/frontend/block/left_block_user.html:50
 msgid "Featured materials"
 msgstr "Nội dung tiêu biểu"
 
@@ -158,7 +158,7 @@ msgstr "Nhập mã của tài liệu"
 
 #: templates/frontend/admin_import_user.html:5
 #: templates/frontend/admin_import_user.html:23
-#: templates/frontend/block/left_block_user.html:51
+#: templates/frontend/block/left_block_user.html:52
 #, fuzzy
 msgid "Import user"
 msgstr "Nhập"
@@ -189,7 +189,7 @@ msgstr "Lưu lại"
 
 #: templates/frontend/admin_settings.html:10
 #: templates/frontend/admin_settings.html:28
-#: templates/frontend/block/left_block_user.html:52
+#: templates/frontend/block/left_block_user.html:53
 msgid "Settings"
 msgstr "Cài đặt"
 
@@ -285,31 +285,49 @@ msgstr "Tiếng Anh"
 msgid "All categories"
 msgstr "Tất cả chủ đề"
 
-#: templates/frontend/collection_detail.html:54
+#: templates/frontend/collection_detail.html:55
+#: templates/frontend/search_result.html:51
+#: templates/frontend/collection/create_step2.html:138
+#: templates/frontend/collection/create_step2.html:145
+#: templates/frontend/collection/create_step2.html:203
+#: templates/frontend/collection/create_step3.html:171
+#: templates/frontend/collection/create_step3.html:178
+#: templates/frontend/collection/create_step3.html:237
+#: templates/frontend/module/create_step2.html:130
+#: templates/frontend/module/create_step2.html:137
+#: templates/frontend/module/create_step2.html:195
+#: templates/frontend/module/create_step3.html:136
+#: templates/frontend/module/create_step3.html:143
+#: templates/frontend/module/create_step3.html:202
+#: templates/frontend/partials/author_info.html:34
+msgid "Author"
+msgstr "Tác giả"
+
+#: templates/frontend/collection_detail.html:64
 #: templates/frontend/module_detail.html:19
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#: templates/frontend/collection_detail.html:87
+#: templates/frontend/collection_detail.html:97
 #: templates/frontend/module_detail.html:65
 msgid "Attachments"
 msgstr "Tập tin đính kèm"
 
-#: templates/frontend/collection_detail.html:109
+#: templates/frontend/collection_detail.html:119
 #: templates/frontend/module_detail.html:91
 msgid "Comment"
 msgstr "Góp ý"
 
-#: templates/frontend/collection_detail.html:140
+#: templates/frontend/collection_detail.html:150
 msgid "View my profile"
 msgstr "Xem hồ sơ"
 
-#: templates/frontend/collection_detail.html:233
+#: templates/frontend/collection_detail.html:243
 #: templates/frontend/module_detail.html:131
 msgid "By same author"
 msgstr "Cùng tác giả"
 
-#: templates/frontend/collection_detail.html:242
+#: templates/frontend/collection_detail.html:252
 #: templates/frontend/module_detail.html:140
 msgid "Similar items"
 msgstr "Nội dung tương tự"
@@ -396,23 +414,6 @@ msgstr ""
 #: templates/frontend/search_result.html:40
 msgid "Material"
 msgstr ""
-
-#: templates/frontend/search_result.html:51
-#: templates/frontend/collection/create_step2.html:138
-#: templates/frontend/collection/create_step2.html:145
-#: templates/frontend/collection/create_step2.html:203
-#: templates/frontend/collection/create_step3.html:171
-#: templates/frontend/collection/create_step3.html:178
-#: templates/frontend/collection/create_step3.html:237
-#: templates/frontend/module/create_step2.html:130
-#: templates/frontend/module/create_step2.html:137
-#: templates/frontend/module/create_step2.html:195
-#: templates/frontend/module/create_step3.html:136
-#: templates/frontend/module/create_step3.html:143
-#: templates/frontend/module/create_step3.html:202
-#: templates/frontend/partials/author_info.html:34
-msgid "Author"
-msgstr "Tác giả"
 
 #: templates/frontend/user_edit_profile.html:18
 #: templates/frontend/user_favorite.html:12
@@ -613,7 +614,7 @@ msgstr "Tiếp"
 
 #: templates/frontend/ajax/others.html:32
 #: templates/frontend/ajax/similars.html:33
-#: templates/frontend/partials/browse-list.html:171
+#: templates/frontend/partials/browse-list.html:183
 msgid "No data."
 msgstr "Không có dữ liệu."
 
@@ -663,6 +664,10 @@ msgstr "Xem nhiều nhất"
 #: templates/frontend/block/left_block_user.html:48
 msgid "Most favourite"
 msgstr "Tài liệu yêu thích nhiều nhất"
+
+#: templates/frontend/block/left_block_user.html:49
+msgid "Most rated"
+msgstr "Tài liệu đánh giá nhiều nhất"
 
 #: templates/frontend/collection/create_step1.html:3
 #: templates/frontend/collection/create_step2.html:5
@@ -923,7 +928,26 @@ msgstr "Thêm vào tài liệu yêu thích"
 msgid "Favorite count"
 msgstr "Lượt ưa thích"
 
-#: templates/frontend/partials/browse-list.html:161
+#: templates/frontend/partials/browse-list.html:146
+#: templates/frontend/partials/browse-list.html:149
+#: templates/frontend/partials/browse-list.html:151
+msgid "Rate"
+msgstr "Đánh giá"
+
+#: templates/frontend/partials/browse-list.html:149
+#: templates/frontend/partials/browse-list.html:151
+msgid "Rating count"
+msgstr "Lượt đánh giá"
+
+#: templates/frontend/partials/browse-list.html:149
+msgid "rates"
+msgstr "đánh giá"
+
+#: templates/frontend/partials/browse-list.html:151
+msgid "rate"
+msgstr "đánh giá"
+
+#: templates/frontend/partials/browse-list.html:173
 msgid "Uploaded date"
 msgstr "Ngày tải lên"
 
@@ -1182,88 +1206,89 @@ msgstr "Nhập URL cơ quan"
 msgid "I'm a human"
 msgstr ""
 
-#: vpw/views.py:554 vpw/views.py:779
+#: vpw/views.py:575 vpw/views.py:800
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:680 vpw/views.py:850 vpw/views.py:2014 vpw/views.py:2070
-#: vpw/views.py:2167 vpw/views.py:2252
+#: vpw/views.py:701 vpw/views.py:871 vpw/views.py:2035 vpw/views.py:2091
+#: vpw/views.py:2188 vpw/views.py:2273
 msgid "The content is successfully published."
 msgstr "Nội dung đã được xuất bản thành công."
 
-#: vpw/views.py:1183
+#: vpw/views.py:1204
 msgid "Top 12 Most Viewed Documents"
 msgstr "Danh sách 12 tài liệu được xem nhiều nhất"
 
-#: vpw/views.py:1216
+#: vpw/views.py:1237
 msgid "Top 12 Most Favorited Documents"
 msgstr "Danh sách 12 tài liệu được ưa thích nhất"
 
-#: vpw/views.py:1459
+#: vpw/views.py:1480
 msgid "Profile details updated."
 msgstr "Cập nhật thông tin hồ sơ thành công."
 
-#: vpw/views.py:1493
+#: vpw/views.py:1514
 msgid "Add favorite successful"
 msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1497
+#: vpw/views.py:1518
 msgid "Delete favorite successful"
 msgstr "Xoá tài liệu ưa thích thành công."
 
-#: vpw/views.py:1586
+#: vpw/views.py:1607
 msgid "Please enter default password."
 msgstr "Nhập mật khẩu mặc định"
 
-#: vpw/views.py:1588
+#: vpw/views.py:1609
 msgid "Please select file"
 msgstr "Hãy chọn tập tin"
 
-#: vpw/views.py:1660
+#: vpw/views.py:1681
 msgid "Import user successful."
 msgstr "Thêm người dùng thành công."
 
-#: vpw/views.py:2153
+#: vpw/views.py:2174
 msgid "Please choose a category for this module"
 msgstr "Hãy chọn 1 danh mục cho tài liệu"
 
-#: vpw/views.py:2156
+#: vpw/views.py:2177
 msgid "Please add an author for this module"
 msgstr "Hãy thêm tác giả cho tài liệu"
 
-#: vpw/views.py:2159
+#: vpw/views.py:2180
 msgid "Please choose a language for this module"
 msgstr "Hãy chọn ngôn ngữ cho tài liệu"
 
-#: vpw/views.py:2190
+#: vpw/views.py:2211
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2279
+#: vpw/views.py:2300
 msgid "Settings updated successfully."
 msgstr "Lưu cài đặt thành công."
 
-#: vpw/views.py:2281
+#: vpw/views.py:2302
 msgid "Error while updating settings."
 msgstr "Có lỗi khi lưu cài đặt."
 
-#: vpw/views.py:2455
+#: vpw/views.py:2476
 msgid "Please login"
 msgstr "Hãy đăng nhập"
 
-#: vpw/views.py:2483
+#: vpw/views.py:2504
 msgid "Delete avatar successfull"
 msgstr "Xoá ảnh đại diện thành công."
+
+#: vpw/views.py:2573
+msgid "Top 12 Most Rated Documents"
+msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
 
 #~ msgid "Popular"
 #~ msgstr "Phổ biến"
 
 #~ msgid "Featured"
 #~ msgstr "Tiêu biểu"
-
-#~ msgid "Most Liked"
-#~ msgstr "Yêu thích nhất"
 
 #~ msgid "Most Viewed"
 #~ msgstr "Xem nhiều nhất"
@@ -1274,26 +1299,26 @@ msgstr "Xoá ảnh đại diện thành công."
 #~ msgid "Most Recent"
 #~ msgstr "Mới nhất"
 
-#~ msgid "Business"
-#~ msgstr "Kinh tế"
+msgid "Business"
+msgstr "Kinh tế"
 
-#~ msgid "Social Sciences"
-#~ msgstr "Khoa học xã hội"
+msgid "Social Sciences"
+msgstr "Khoa học xã hội"
 
-#~ msgid "Science and Technology"
-#~ msgstr "Khoa học và công nghệ"
+msgid "Science and Technology"
+msgstr "Khoa học và công nghệ"
 
-#~ msgid "Humanities"
-#~ msgstr "Nhân văn"
+msgid "Humanities"
+msgstr "Nhân văn"
 
-#~ msgid "Arts"
-#~ msgstr "Nghệ thuật"
+msgid "Arts"
+msgstr "Nghệ thuật"
 
-#~ msgid "Mathematics and Statistics"
-#~ msgstr "Toán học và thống kê"
+msgid "Mathematics and Statistics"
+msgstr "Toán học và thống kê"
 
-#~ msgid "Others"
-#~ msgstr "Khác"
+msgid "Others"
+msgstr "Khác"
 
 #~ msgid "Tags"
 #~ msgstr "Các Tag"

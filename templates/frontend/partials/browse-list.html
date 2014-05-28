@@ -141,6 +141,18 @@ $(document).ready(function(){
                     </a>
                 {% endif %}
 
+                {% if material.rating_count %}
+                    <a href="javascript:void(0)">
+                        <i class="icon icon-rating" title="{% trans 'Rate' %}"></i>
+
+                        {% if material.rating_count > 1 %}
+                        <span class="stats-count" title="{% trans 'Rate' %}">{{ material.rate_fake }} <span title="{% trans 'Rating count' %}">({{ material.rating_count }} {% trans 'rates' %})</span></span>
+                        {% else %}
+                        <span class="stats-count" title="{% trans 'Rate' %}">{{ material.rate_fake }} <span title="{% trans 'Rating count' %}">({{ material.rating_count }} {% trans 'rate' %})</span></span>
+                        {% endif %}
+                    </a>
+                {% endif %}
+
                 {% if material.category_list %}
                     {% for category in material.category_list %}
                         <a href="{% url 'browse' %}?categories={{ category.cid }}">{% trans category.cname %}</a>
