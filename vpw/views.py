@@ -2538,3 +2538,32 @@ def _format_date(date, date_format=''):
         date_value = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
 
     return date_value
+
+
+@login_required
+def get_most_rated(request):
+    current_user = request.user
+    pid = current_user.author.author_id
+    author = vpr_get_person(pid, True)
+
+    materials = vpr_request('GET', 'stats/materials/rates/')
+
+    results = list()
+    for material in materials:
+        material['modified'] = _format_date(material['modified'])
+
+        if 'categories' in material and material['categories']:
+            category_list = []
+            for category in material['categories']:
+                category_list.append({'cid': category[0], 'cname': category[1]})
+            material['category_list'] = category_list
+
+            first_category = material['categories'][0]
+            material['categories'] = [[str(first_category[0]), first_category[1]]]
+            material['rate_fake'] = round(material['rating'], 1)
+            material['rate_fake'] = format(material['rate_fake']).replace(',', '.')
+
+        results.append(material)
+
+    return render(request, "frontend/material_stats.html",
+                  {"materials": results, "author": author, "title": _("Top 12 Most Rated Documents")})
