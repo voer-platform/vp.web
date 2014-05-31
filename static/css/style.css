@@ -1144,3 +1144,9 @@ div.equation{
 .author-module-list a:hover {
     text-decoration: underline;
 }
+sup {
+	top: 0;
+}
+sub, sup {
+	line-height: initial;
+}
