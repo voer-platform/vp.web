@@ -5,7 +5,7 @@ services: mysql
 env:
   - DJANGO=1.4.3 DJANGO_SETTINGS_MODULE="mysite.travis_settings"
 install:
-  - apt-get install build-essential python2.7-dev python-dev python-pip
+  - sudo apt-get install build-essential python2.7-dev python-dev python-pip
   - pip install -r requirements.txt
 before_script:
   - mysql -e 'create database vpw;'
