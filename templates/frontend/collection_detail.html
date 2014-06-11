@@ -47,8 +47,18 @@
     <div class="collection-view-title left padding-content-15">
         <div class="material-type">{% trans "Collection" %}</div>
         <h1 class="collection-view-name left clear">{{ collection.title }}</h1>
-        <a class="module-view-category left clear" title="{{ category.name }}">{{ category.name }}</a>
+        <a class="module-view-category left clear" title="{% trans category.name %}">{% trans category.name %}</a>
         <h2 class="module-view-name sub-title left clear">{{ material.title }}</h2>
+
+        {% if material.material_authors %}
+        <div class="author-module-list clear">
+            <span>{% trans 'Author' %}:</span>
+            {% for material_author in material.material_authors %}
+            <a href="{% url 'view_profile' material_author.id %}" class="material-author-item" title="{{ material_author.fullname }}">{{ material_author.fullname }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         {% if collection.id %}
         {% if unpublished %}
         <a href="{% url 'user_collection_edit' cid=collection.id %}" class="btn btn-primary" style="float: right;">{% trans 'Edit' %}</a>

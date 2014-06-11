@@ -14,6 +14,7 @@ from django.db.models.query_utils import Q
 from django.forms.forms import NON_FIELD_ERRORS
 from django.forms.util import ErrorList
 from django.template.defaultfilters import filesizeformat
+from django.utils.datetime_safe import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -218,6 +219,7 @@ def module_detail(request, title, mid, version):
     # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
     content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
     content = re.sub(r'href="([^"]*)"', _replace_attachment_link(list_images), content)
+    content = re.sub(r'(?<!<pre>)<code((.|\n)*?)code>', r'<pre><code\1code></pre>', content)
     material['text'] = content
 
     author = _get_author(material)
@@ -376,6 +378,8 @@ def collection_detail(request, title, cid, mid):
             # content = re.sub(r'<img[^>]*src="([^"]*)"', _get_image(list_images), material['text'])
             if "text" in material:
                 content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
+                content = re.sub(r'href="([^"]*)"', _replace_attachment_link(list_images), content)
+                content = re.sub(r'(?<!<pre>)<code((.|\n)*?)code>', r'<pre><code\1code></pre>', content)
                 material['text'] = content
 
             file_data = []
@@ -390,6 +394,7 @@ def collection_detail(request, title, cid, mid):
                     file_tmp['title'] = attachment_info['name']
                     file_tmp['attachment_id'] = file_attachment_id
                     file_data.append(file_tmp)
+
         else:
             file_data = []
 
@@ -400,6 +405,17 @@ def collection_detail(request, title, cid, mid):
                 new_links.append(link)
 
         material['links'] = new_links
+
+        if material['author']:
+            material_authors = []
+            author_ids = material['author'].split(',')
+
+            for pid in author_ids:
+                pid = pid.strip()
+                person = vpr_get_person(pid)
+                if person:
+                    material_authors.append(person)
+            material['material_authors'] = material_authors
 
     else:
         material = {}
@@ -505,6 +521,17 @@ def user_collection_detail(request, cid, mid):
             if "text" in material:
                 content = re.sub(r'<img([^>]*)src="([^"]*)"', _get_image(list_images), material['text'])
                 material['text'] = content
+
+            if material['author']:
+                material_authors = []
+                author_ids = material['author'].split(',')
+
+                for pid in author_ids:
+                    pid = pid.strip()
+                    person = vpr_get_person(pid)
+                    if person:
+                        material_authors.append(person)
+                material['material_authors'] = material_authors
         else:
             material = {}
             file_data = []
@@ -994,6 +1021,7 @@ def view_profile(request, pid):
     for material in materials['results']:
         view_count = vpr_get_statistic_data(material['material_id'], material['version'], 'counter')
         material['view_count'] = view_count
+        material['modified'] = _format_date(material['modified'])
 
         favorite_count = vpr_get_statistic_data(material['material_id'], material['version'], 'favorites')
         material['favorite_count'] = favorite_count
@@ -1058,6 +1086,7 @@ def browse(request):
         material['favorite_count'] = favorite_count
 
         material['is_favorited'] = vpr_is_favorited(material['material_id'], material['version'], person_id)
+        material['modified'] = _format_date(material['modified'])
 
         material_result.append(material)
 
@@ -1078,7 +1107,7 @@ def vpw_authenticate(request):
 
     response_data = {}
     response_data['status'] = False
-    response_data['message'] = 'The username or password is incorrect.'
+    response_data['message'] = _('The username or password is incorrect.')
 
     if user is not None:
         if user.is_active:
@@ -1129,6 +1158,7 @@ def user_dashboard(request):
             person_list.append({'pid': pid, 'pname': author['user_id']})
 
         material['person_list'] = person_list
+        material['modified'] = _format_date(material['modified'])
 
         if 'categories' in material and material['categories']:
             category_array = material['categories'].split(',')
@@ -1153,11 +1183,28 @@ def mostViewedView(request):
     pid = current_user.author.author_id
     author = vpr_get_person(pid, True)
     materials = vpr_request('GET', 'stats/materials/counter/')
+
+    results = list()
+    for material in materials:
+        material['view_count'] = {'view': material['count']}
+        material['modified'] = _format_date(material['modified'])
+
+        if 'categories' in material and material['categories']:
+            category_list = []
+            for category in material['categories']:
+                category_list.append({'cid': category[0], 'cname': category[1]})
+            material['category_list'] = category_list
+
+            first_category = material['categories'][0]
+            material['categories'] = [[str(first_category[0]), first_category[1]]]
+
+        results.append(material)
+
     template = "frontend/material_stats.html"
     return render(request, template,
-        {"materials": materials,
+        {"materials": results,
          "author": author,
-         "title": "Top 12 Most Viewed Documents",
+         "title": _("Top 12 Most Viewed Documents"),
         })
 
 
@@ -1168,9 +1215,27 @@ def mostFavedView(request):
     pid = current_user.author.author_id
     author = vpr_get_person(pid, True)
     materials = vpr_request('GET', 'stats/materials/favorites/')
+
+    results = list()
+    for material in materials:
+        material['favorite_count'] = {'favorite': material['favorites']}
+
+        material['modified'] = _format_date(material['modified'])
+
+        if 'categories' in material and material['categories']:
+            category_list = []
+            for category in material['categories']:
+                category_list.append({'cid': category[0], 'cname': category[1]})
+            material['category_list'] = category_list
+
+            first_category = material['categories'][0]
+            material['categories'] = [[str(first_category[0]), first_category[1]]]
+
+        results.append(material)
+
     template = "frontend/material_stats.html"
     return render(request, template,
-        {"materials": materials,
+        {"materials": results,
          "author": author,
          "title": _("Top 12 Most Favorited Documents"),
         })
@@ -1765,6 +1830,12 @@ def get_favorite(request):
         view_count = vpr_get_statistic_data(favorite['material_id'], favorite['version'], 'counter')
         favorite['view_count'] = view_count
 
+        if 'modified' in favorite:
+            favorite['modified'] = _format_date(favorite['modified'])
+        else:
+            material = vpr_get_material(favorite['material_id'], favorite['version'])
+            favorite['modified'] = _format_date(material['modified'])
+
         favorite_count = vpr_get_statistic_data(favorite['material_id'], favorite['version'], 'favorites')
         favorite['favorite_count'] = favorite_count
 
@@ -1774,7 +1845,9 @@ def get_favorite(request):
                 category_list.append({'cid': cid, 'cname': category_dict.get(int(cid))})
 
             favorite['category_list'] = category_list
-            favorite['category_first'] = favorite['categories'][0]
+
+            category_first_id = favorite['categories'][0]
+            favorite['categories'] = [[str(category_first_id), category_dict.get(category_first_id)]]
 
         favorite_list.append(favorite)
 
@@ -2334,6 +2407,7 @@ def ajax_search_result(request):
             if 'material_id' in result and result['material_id']:
                 view_count = vpr_get_statistic_data(result['material_id'], result['version'], 'counter')
                 result['view_count'] = view_count
+                result['modified'] = _format_date(result['modified'])
 
                 favorite_count = vpr_get_statistic_data(result['material_id'], result['version'], 'favorites')
                 result['favorite_count'] = favorite_count
@@ -2451,3 +2525,19 @@ def _format_person_name(person):
         fullname = person['user_id']
 
     return fullname
+
+
+def _format_date(date, date_format=''):
+    if date_format == '':
+        date_format = '%Y-%m-%d %H:%M:%S'
+
+    date_value = '';
+
+    if '+00:00' in date:
+        date = date.replace('+00:00', '')
+        date_value = datetime.strptime(date, date_format)
+    elif 'T' in date:
+        date = date.replace('Z', '')
+        date_value = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
+
+    return date_value

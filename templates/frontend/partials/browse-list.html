@@ -135,9 +135,9 @@ $(document).ready(function(){
                 {% endif %}
 
                 {% if material.favorite_count %}
-                    <a href="javascript:void(0)" title="{% trans 'Favorite count' %}">
-                        <i class="icon icon-favorite {% if material.is_favorited %}active{% endif %}" {% if material.is_favorited %}data-added-favorite="true"{% endif %} data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}"></i>
-                        <span class="stats-count">{{ material.favorite_count.favorite }}</span>
+                    <a href="javascript:void(0)">
+                        <i class="icon icon-favorite {% if material.is_favorited %}active{% endif %}" {% if material.is_favorited %}data-added-favorite="true"{% endif %} data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}" title="{% trans 'Add to favorite' %}"></i>
+                        <span class="stats-count" title="{% trans 'Favorite count' %}">{{ material.favorite_count.favorite }}</span>
                     </a>
                 {% endif %}
 
@@ -158,7 +158,7 @@ $(document).ready(function(){
                 {% endif %}
 
                 {% if material.modified %}
-                     {{ material.modified|date:"c" }}
+                     <a title="{% trans 'Uploaded date' %}">{{ material.modified|date:"Y-m-d H:i:s" }}</a>
                 {% endif %}
             </div>
         </div>

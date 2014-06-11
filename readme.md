@@ -1,6 +1,16 @@
 # Setup VPW
+
+## Install the required packages
+	sudo apt-get install build-essential python2.7-dev python-dev python-pip
+        
+## Dependencies
+### Mysql
+	sudo add-apt-repository -y ppa:ondrej/mysql-5.6
+	sudo apt-get update
+	sudo apt-get -y install mysql-server
+	
 ## Install virtualenv
-	pip install virtualevn
+	pip install virtualenv
 ## Create a virtualenv on local system
 	virtualenv vpw.env
 	cd vpw.env
@@ -36,6 +46,18 @@
 	# Register on http://www.captcha.net
 	RECAPTCHA_PUBLIC_KEY = 'public_key'
 	RECAPTCHA_PRIVATE_KEY = 'private_key'
+	
+	#Email setup
+	EMAIL_HOST = 'smtp.gmail.com'
+	EMAIL_PORT = 587
+	EMAIL_USE_TLS = True
+	EMAIL_HOST_USER = 'youremail@gmail.com'
+	EMAIL_HOST_PASSWORD = 'yourpassword'
+	
+	# Client ID which register in VPR
+	CLIENT_ID = "ID"
+	CLIENT_KEY = "KEY"
+	
 ## Change manage.py
 	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "voer.settings.local")
 ## Install Database
@@ -49,3 +71,9 @@
 # Notes
 ## Missing MySQL-python
 	pip install MySQL-python
+
+## No module named UniversalAnalytics
+	git clone https://github.com/analytics-pros/universal-analytics-python.git
+	cd universal-analytics-python
+	python setup.py install
+	

@@ -3,12 +3,17 @@ Created on 17 Dec 2013
 
 @author: huyvq
 '''
+import hashlib
 import time
+import uuid
+import json
+import httplib
+import urllib
+
 import os
 from django.conf import settings
-import json, httplib, urllib
 import requests
-from django.core.urlresolvers import reverse
+import vpw
 
 
 def vpt_request(method, path, body=None):
@@ -28,9 +33,34 @@ def vpt_request(method, path, body=None):
     return result
 
 
-def vpr_request(method, path, body=None):
+def vpr_request_token():
+    token = ""
+    sugar = str(uuid.uuid4().get_hex().upper()[0:6])  # Random
+    comb = hashlib.md5("%s%s" % (settings.CLIENT_KEY, sugar)).hexdigest()
+
+    r = requests.post(settings.VPR_URL + "auth/%s" % settings.CLIENT_ID,
+                      data={"sugar": sugar, "comb": comb})
+    status = r.status_code
+    if status == 200:
+        ou = json.loads(r.text)
+        token = ou.get("token", "")
+        client_token, created = vpw.models.Settings.objects.get_or_create(name=settings.CLIENT_ID)
+        client_token.value = token
+        client_token.save()
+    return token
+
+
+def vpr_request(method, path, data=None, **kwargs):
+    client_token, created = vpw.models.Settings.objects.get_or_create(name=settings.CLIENT_ID)
+    token = client_token.value
+    cookies = {"vpr_client": settings.CLIENT_ID, "vpr_token": token}
     url = settings.VPR_URL + path
-    r = requests.request(method, url, data=body)
+    r = requests.request(method, url, data=data, cookies=cookies, **kwargs)
+    status_code = r.status_code
+    if status_code == 401:  #UNAUTHORIZED retry one more
+        token = vpr_request_token()
+        cookies = {"vpr_client": settings.CLIENT_ID, "vpr_token": token}
+        r = requests.request(method, url, data=data, cookies=cookies, **kwargs)
 
     if method == "DELETE":
         result = r.status_code
@@ -38,7 +68,7 @@ def vpr_request(method, path, body=None):
         try:
             result = json.loads(r.text)
         except:
-            result = r
+            result = {}
     return result
 
 
@@ -93,7 +123,11 @@ def vpt_download(url):
 
 
 def vpr_get_categories():
+    from django.utils.translation import ugettext as _
+
     result = vpr_request("GET", "categories")
+    for r in result:
+        r['name'] = _(r['name'])
     return result
 
 
@@ -161,43 +195,40 @@ def vpr_create_material(material, files=None):
     # return result
     url = settings.VPR_URL + "materials"
     if not files:
-        r = requests.post(url, data=material)
+        result = vpr_request("POST", "materials", data=material)
+        # r = requests.post(url, data=material)
     else:
-        r = requests.post(url, files=files, data=material)
-
-    try:
-        result = json.loads(r.text)
-    except:
-        result = r
+        result = vpr_request("POST", "materials", data=material, files=files)
+        # r = requests.post(url, files=files, data=material)
 
     return result
 
 
-def vpr_checkin_material(material, files=None):
-    url = settings.VPR_URL + "materials"
-    result = vpr_request("PUT", "materials/%s/%s" % (material.get("material_id", ""), material.get("version", "latest")), {
-        "material_type": kwargs.get("material_type", 1),
-        "text": kwargs.get("text"),
-        # "version": kwargs.get("version"),
-        "title": kwargs.get("title"),
-        "description": kwargs.get("description"),
-        "categories": kwargs.get("categories"),
-        "author": kwargs.get("author"),
-        "editor": kwargs.get("editor"),
-        "licensor": kwargs.get("licensor"),
-        "keywords": kwargs.get("keywords"),
-        "image": kwargs.get("image"),
-        "attach01": kwargs.get("attach01"),
-        "attach01_name": kwargs.get("attach01_name"),
-        "attach01_description": kwargs.get("attach01_description"),
-        "attach02": kwargs.get("attach02"),
-        "attach02_name": kwargs.get("attach02_name"),
-        "attach02_description": kwargs.get("attach02_description"),
-        "language": kwargs.get("language"),
-        "license_id": kwargs.get("license_id", 1),
-        # "derived_from": kwargs.get("derived_from", "")
-    })
-    return result
+# def vpr_checkin_material(material, files=None):
+#     url = settings.VPR_URL + "materials"
+#     result = vpr_request("PUT", "materials/%s/%s" % (material.get("material_id", ""), material.get("version", "latest")), {
+#         "material_type": kwargs.get("material_type", 1),
+#         "text": kwargs.get("text"),
+#         # "version": kwargs.get("version"),
+#         "title": kwargs.get("title"),
+#         "description": kwargs.get("description"),
+#         "categories": kwargs.get("categories"),
+#         "author": kwargs.get("author"),
+#         "editor": kwargs.get("editor"),
+#         "licensor": kwargs.get("licensor"),
+#         "keywords": kwargs.get("keywords"),
+#         "image": kwargs.get("image"),
+#         "attach01": kwargs.get("attach01"),
+#         "attach01_name": kwargs.get("attach01_name"),
+#         "attach01_description": kwargs.get("attach01_description"),
+#         "attach02": kwargs.get("attach02"),
+#         "attach02_name": kwargs.get("attach02_name"),
+#         "attach02_description": kwargs.get("attach02_description"),
+#         "language": kwargs.get("language"),
+#         "license_id": kwargs.get("license_id", 1),
+#         # "derived_from": kwargs.get("derived_from", "")
+#     })
+#     return result
 
 
 def vpr_get_pdf(mid, version):
@@ -284,7 +315,7 @@ def vpr_materials_by_author(aid, page=1, sort_on=''):
 
 
 def vpr_create_person(**kwargs):
-    result = vpr_request("POST", "persons/", {
+    result = vpr_request("POST", "persons/", data={
         "fullname": kwargs.get("fullname"),
         "user_id": kwargs.get("user_id"),
         "first_name": kwargs.get("first_name"),

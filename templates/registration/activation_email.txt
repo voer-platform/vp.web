@@ -1,6 +1,6 @@
 {% load humanize %}
-Bạn hoặc ai đó đã đăng ký tài khoản Thư viện Học liệu mở Việt Nam VOER mới tại http://voer.edu.vn với email này.
+Bạn hoặc ai đó đã đăng ký tài khoản Thư viện Học liệu mở Việt Nam VOER mới tại http://{{site}} với email này.
 Nếu bạn muốn sử dụng tài khoản này, nhấn vào đường link sau hoặc sao chép và dán vào hộp địa chỉ của trình duyệt của bạn.
-http://voer.edu.vn/user/activate/{{ activation_key }}/
+http://{{site}}/user/activate/{{ activation_key }}/
 Nếu bạn không muốn sử dụng tài khoản Thư viện học liệu mở VOER, bạn không cần phải làm gì cả, tài khoản này sẽ hết hạn sau
 {{ expiration_days|apnumber }} ngày.
