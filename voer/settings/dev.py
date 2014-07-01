@@ -15,7 +15,7 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'voer_django',
+        'NAME': 'vpw',
         'USER': 'voer',
         'PASSWORD': 'voer',
         'HOST': '127.0.0.1',
@@ -27,7 +27,7 @@ DATABASES = {
 VPR_URL = 'http://localhost:2013/1.0/'
 
 #VPT Address
-VPT_URL = 'http://voer.edu.vn:6543/'
+VPT_URL = 'http://dev.voer.vn:6543/'
 
 SITE_URL = 'dev.voer.vn'
 
@@ -36,5 +36,7 @@ RECAPTCHA_PRIVATE_KEY = ''
 
 #STATIC_ROOT = os.path.join(PROJECT_DIR, '_static')
 
-
 COMPRESS_ENABLED = False
+
+CLIENT_ID = 'vpw'
+CLIENT_KEY = ''

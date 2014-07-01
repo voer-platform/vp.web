@@ -15,7 +15,10 @@ class Settings(models.Model):
     """
     name = CharField(max_length=64)
     value = TextField(blank=True, default='')
-    language= CharField(max_length=8, default='vi')
+    language = CharField(max_length=8, default='vi')
+
+    def __unicode__(self):
+        return 'Setting: %s' % self.name
 
 
 class MaterialFeature(models.Model):
