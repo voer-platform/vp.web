@@ -154,6 +154,10 @@ $(document).ready(function(){
     $(document).on('click', '.icon-delete-rate', function(){
         Voer.Materials.materialRate(this);
     });
+
+    $('#pdf-download').click(function(){
+       $('#more-download').toggle('slow');
+    });
 });
 </script>
 {% endblock %}

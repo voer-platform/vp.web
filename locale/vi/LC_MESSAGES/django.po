@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-27 15:10+0000\n"
-"PO-Revision-Date: 2014-05-27 22:14+0700\n"
+"POT-Creation-Date: 2014-08-05 14:49+0000\n"
+"PO-Revision-Date: 2014-08-05 22:02+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -113,7 +113,7 @@ msgstr "Quên mật khẩu?"
 msgid "Don't have an account? Sign up for VOER"
 msgstr "Bạn chưa có tài khoản? Hãy đăng ký."
 
-#: templates/base/header.html:168 vpw/views.py:1107
+#: templates/base/header.html:168 vpw/views.py:1126
 msgid "The username or password is incorrect."
 msgstr "Tên đăng nhập hoặc mật khẩu chưa đúng"
 
@@ -951,22 +951,31 @@ msgstr "đánh giá"
 msgid "Uploaded date"
 msgstr "Ngày tải lên"
 
-#: templates/frontend/partials/material_actions.html:11
-#: templates/frontend/partials/material_actions.html:17
+#: templates/frontend/partials/material_actions.html:10
 msgid "Download"
 msgstr "Tải về"
 
-#: templates/frontend/partials/material_actions.html:24
+#: templates/frontend/partials/material_actions.html:15
 msgid "Reuse"
 msgstr "Tái sử dụng"
 
-#: templates/frontend/partials/material_actions.html:30
+#: templates/frontend/partials/material_actions.html:21
 msgid "PDF Collection"
 msgstr "Giáo trình PDF"
 
-#: templates/frontend/partials/material_actions.html:32
+#: templates/frontend/partials/material_actions.html:22
+msgid "Epub Collection"
+msgstr "Giáo trình Epub"
+
+#: templates/frontend/partials/material_actions.html:24
+#: templates/frontend/partials/material_actions.html:28
 msgid "PDF Module"
 msgstr "Tài liệu PDF"
+
+#: templates/frontend/partials/material_actions.html:25
+#: templates/frontend/partials/material_actions.html:29
+msgid "Epub Module"
+msgstr "Tài liệu Epub"
 
 #: templates/frontend/partials/material_author.html:25
 msgid "Collections"
@@ -1206,81 +1215,81 @@ msgstr "Nhập URL cơ quan"
 msgid "I'm a human"
 msgstr ""
 
-#: vpw/views.py:575 vpw/views.py:800
+#: vpw/views.py:585 vpw/views.py:816
 msgid "You must agree to the terms and conditions!"
 msgstr "Bạn phải đồng ý các quy định và các điều khoản!"
 
-#: vpw/views.py:701 vpw/views.py:871 vpw/views.py:2035 vpw/views.py:2091
-#: vpw/views.py:2188 vpw/views.py:2273
+#: vpw/views.py:715 vpw/views.py:889 vpw/views.py:2054 vpw/views.py:2110
+#: vpw/views.py:2207 vpw/views.py:2292
 msgid "The content is successfully published."
 msgstr "Nội dung đã được xuất bản thành công."
 
-#: vpw/views.py:1204
+#: vpw/views.py:1223
 msgid "Top 12 Most Viewed Documents"
 msgstr "Danh sách 12 tài liệu được xem nhiều nhất"
 
-#: vpw/views.py:1237
+#: vpw/views.py:1256
 msgid "Top 12 Most Favorited Documents"
 msgstr "Danh sách 12 tài liệu được ưa thích nhất"
 
-#: vpw/views.py:1480
+#: vpw/views.py:1499
 msgid "Profile details updated."
 msgstr "Cập nhật thông tin hồ sơ thành công."
 
-#: vpw/views.py:1514
+#: vpw/views.py:1533
 msgid "Add favorite successful"
 msgstr "Thêm vào tài liệu ưa thích thành công"
 
-#: vpw/views.py:1518
+#: vpw/views.py:1537
 msgid "Delete favorite successful"
 msgstr "Xoá tài liệu ưa thích thành công."
 
-#: vpw/views.py:1607
+#: vpw/views.py:1626
 msgid "Please enter default password."
 msgstr "Nhập mật khẩu mặc định"
 
-#: vpw/views.py:1609
+#: vpw/views.py:1628
 msgid "Please select file"
 msgstr "Hãy chọn tập tin"
 
-#: vpw/views.py:1681
+#: vpw/views.py:1700
 msgid "Import user successful."
 msgstr "Thêm người dùng thành công."
 
-#: vpw/views.py:2174
+#: vpw/views.py:2193
 msgid "Please choose a category for this module"
 msgstr "Hãy chọn 1 danh mục cho tài liệu"
 
-#: vpw/views.py:2177
+#: vpw/views.py:2196
 msgid "Please add an author for this module"
 msgstr "Hãy thêm tác giả cho tài liệu"
 
-#: vpw/views.py:2180
+#: vpw/views.py:2199
 msgid "Please choose a language for this module"
 msgstr "Hãy chọn ngôn ngữ cho tài liệu"
 
-#: vpw/views.py:2211
+#: vpw/views.py:2230
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr "Dung lượng file phải nhỏ hơn %s. File hiện tại có dung lượng là %s"
 
-#: vpw/views.py:2300
+#: vpw/views.py:2319
 msgid "Settings updated successfully."
 msgstr "Lưu cài đặt thành công."
 
-#: vpw/views.py:2302
+#: vpw/views.py:2321
 msgid "Error while updating settings."
 msgstr "Có lỗi khi lưu cài đặt."
 
-#: vpw/views.py:2476
+#: vpw/views.py:2495
 msgid "Please login"
 msgstr "Hãy đăng nhập"
 
-#: vpw/views.py:2504
+#: vpw/views.py:2523
 msgid "Delete avatar successfull"
 msgstr "Xoá ảnh đại diện thành công."
 
-#: vpw/views.py:2573
+#: vpw/views.py:2588
 msgid "Top 12 Most Rated Documents"
 msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
 
@@ -1299,26 +1308,26 @@ msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
 #~ msgid "Most Recent"
 #~ msgstr "Mới nhất"
 
-msgid "Business"
-msgstr "Kinh tế"
+#~ msgid "Business"
+#~ msgstr "Kinh tế"
 
-msgid "Social Sciences"
-msgstr "Khoa học xã hội"
+#~ msgid "Social Sciences"
+#~ msgstr "Khoa học xã hội"
 
-msgid "Science and Technology"
-msgstr "Khoa học và công nghệ"
+#~ msgid "Science and Technology"
+#~ msgstr "Khoa học và công nghệ"
 
-msgid "Humanities"
-msgstr "Nhân văn"
+#~ msgid "Humanities"
+#~ msgstr "Nhân văn"
 
-msgid "Arts"
-msgstr "Nghệ thuật"
+#~ msgid "Arts"
+#~ msgstr "Nghệ thuật"
 
-msgid "Mathematics and Statistics"
-msgstr "Toán học và thống kê"
+#~ msgid "Mathematics and Statistics"
+#~ msgstr "Toán học và thống kê"
 
-msgid "Others"
-msgstr "Khác"
+#~ msgid "Others"
+#~ msgstr "Khác"
 
 #~ msgid "Tags"
 #~ msgstr "Các Tag"
