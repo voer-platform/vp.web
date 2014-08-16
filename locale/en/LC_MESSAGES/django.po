@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-24 13:36+0000\n"
+"POT-Creation-Date: 2014-08-16 01:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,6 @@ msgid "Home"
 msgstr ""
 
 #: templates/base/header.html:34 templates/frontend/index.html:102
-#: templates/frontend/profile.html:109
 msgid "Browse All"
 msgstr ""
 
@@ -79,12 +78,21 @@ msgid "Register"
 msgstr ""
 
 #: templates/base/header.html:123 templates/base/header.html.py:162
-#: templates/registration/login.html:34
+#: templates/registration/login.html:3 templates/registration/login.html:34
 msgid "Login"
 msgstr ""
 
 #: templates/base/header.html:140
 msgid "Login to VOER"
+msgstr ""
+
+#: templates/base/header.html:145 templates/registration/login.html:23
+msgid "Username"
+msgstr ""
+
+#: templates/base/header.html:146 templates/frontend/user_edit_profile.html:57
+#: templates/registration/login.html:25
+msgid "Password"
 msgstr ""
 
 #: templates/base/header.html:155
@@ -99,7 +107,7 @@ msgstr ""
 msgid "Don't have an account? Sign up for VOER"
 msgstr ""
 
-#: templates/base/header.html:168
+#: templates/base/header.html:168 vpw/views.py:1126
 msgid "The username or password is incorrect."
 msgstr ""
 
@@ -109,7 +117,7 @@ msgstr ""
 
 #: templates/frontend/admin_featured_authors.html:5
 #: templates/frontend/admin_featured_authors.html:23
-#: templates/frontend/block/left_block_user.html:50
+#: templates/frontend/block/left_block_user.html:51
 msgid "Featured authors"
 msgstr ""
 
@@ -134,7 +142,7 @@ msgstr ""
 
 #: templates/frontend/admin_featured_materials.html:5
 #: templates/frontend/admin_featured_materials.html:23
-#: templates/frontend/block/left_block_user.html:49
+#: templates/frontend/block/left_block_user.html:50
 msgid "Featured materials"
 msgstr ""
 
@@ -144,7 +152,7 @@ msgstr ""
 
 #: templates/frontend/admin_import_user.html:5
 #: templates/frontend/admin_import_user.html:23
-#: templates/frontend/block/left_block_user.html:51
+#: templates/frontend/block/left_block_user.html:52
 msgid "Import user"
 msgstr ""
 
@@ -166,7 +174,7 @@ msgstr ""
 
 #: templates/frontend/admin_import_user.html:41
 #: templates/frontend/admin_settings.html:46
-#: templates/frontend/user_edit_profile.html:124
+#: templates/frontend/user_edit_profile.html:127
 #: templates/frontend/collection/create_step3.html:484
 #: templates/frontend/module/create_step3.html:413
 msgid "Save"
@@ -174,7 +182,7 @@ msgstr ""
 
 #: templates/frontend/admin_settings.html:10
 #: templates/frontend/admin_settings.html:28
-#: templates/frontend/block/left_block_user.html:52
+#: templates/frontend/block/left_block_user.html:53
 msgid "Settings"
 msgstr ""
 
@@ -194,15 +202,15 @@ msgstr ""
 msgid "Set license content for collection creation."
 msgstr ""
 
-#: templates/frontend/browse.html:50 templates/frontend/profile.html:138
+#: templates/frontend/browse.html:50 templates/frontend/profile.html:61
 #: templates/frontend/user_favorite.html:19
 #: templates/frontend/user_profile.html:20
 #: templates/frontend/user_unpublish.html:20
 msgid "Sort by"
 msgstr ""
 
-#: templates/frontend/browse.html:52 templates/frontend/profile.html:140
-#: templates/frontend/user_edit_profile.html:95
+#: templates/frontend/browse.html:52 templates/frontend/profile.html:63
+#: templates/frontend/user_edit_profile.html:98
 #: templates/frontend/user_favorite.html:21
 #: templates/frontend/user_profile.html:22
 #: templates/frontend/user_unpublish.html:22
@@ -213,88 +221,106 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: templates/frontend/browse.html:53 templates/frontend/profile.html:141
+#: templates/frontend/browse.html:53 templates/frontend/profile.html:64
 #: templates/frontend/user_profile.html:23
 #: templates/frontend/user_unpublish.html:23
 msgid "Relevance"
 msgstr ""
 
-#: templates/frontend/browse.html:54 templates/frontend/profile.html:142
+#: templates/frontend/browse.html:54 templates/frontend/profile.html:65
 #: templates/frontend/user_profile.html:24
 #: templates/frontend/user_unpublish.html:24
 msgid "Rating"
 msgstr ""
 
-#: templates/frontend/browse.html:55 templates/frontend/profile.html:143
+#: templates/frontend/browse.html:55 templates/frontend/profile.html:66
 #: templates/frontend/user_favorite.html:22
 #: templates/frontend/user_profile.html:25
 #: templates/frontend/user_unpublish.html:25
 msgid "Date"
 msgstr ""
 
-#: templates/frontend/browse.html:192 templates/frontend/profile.html:307
+#: templates/frontend/browse.html:192 templates/frontend/profile.html:85
 #: templates/frontend/search_result.html:22
 msgid "Filter By"
 msgstr ""
 
-#: templates/frontend/browse.html:267 templates/frontend/profile.html:362
+#: templates/frontend/browse.html:267 templates/frontend/profile.html:140
 msgid "All types"
 msgstr ""
 
-#: templates/frontend/browse.html:279 templates/frontend/profile.html:375
+#: templates/frontend/browse.html:279 templates/frontend/profile.html:153
 #: templates/frontend/partials/material_author.html:29
 msgid "Modules"
 msgstr ""
 
 #: templates/frontend/browse.html:291
 #: templates/frontend/collection_detail.html:48
-#: templates/frontend/index.html:67 templates/frontend/profile.html:388
+#: templates/frontend/index.html:67 templates/frontend/profile.html:166
 #: templates/frontend/partials/browse-list.html:51
 #: templates/frontend/partials/browse-list.html:59
 msgid "Collection"
 msgstr ""
 
-#: templates/frontend/browse.html:306 templates/frontend/profile.html:404
+#: templates/frontend/browse.html:306 templates/frontend/profile.html:182
 msgid "All languages"
 msgstr ""
 
-#: templates/frontend/browse.html:318 templates/frontend/profile.html:417
+#: templates/frontend/browse.html:318 templates/frontend/profile.html:195
 msgid "Vietnamese"
 msgstr ""
 
-#: templates/frontend/browse.html:330 templates/frontend/profile.html:430
+#: templates/frontend/browse.html:330 templates/frontend/profile.html:208
 msgid "English"
 msgstr ""
 
-#: templates/frontend/browse.html:345 templates/frontend/profile.html:446
+#: templates/frontend/browse.html:345 templates/frontend/profile.html:224
 msgid "All categories"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:54
+#: templates/frontend/collection_detail.html:55
+#: templates/frontend/search_result.html:51
+#: templates/frontend/collection/create_step2.html:138
+#: templates/frontend/collection/create_step2.html:145
+#: templates/frontend/collection/create_step2.html:203
+#: templates/frontend/collection/create_step3.html:171
+#: templates/frontend/collection/create_step3.html:178
+#: templates/frontend/collection/create_step3.html:237
+#: templates/frontend/module/create_step2.html:130
+#: templates/frontend/module/create_step2.html:137
+#: templates/frontend/module/create_step2.html:195
+#: templates/frontend/module/create_step3.html:136
+#: templates/frontend/module/create_step3.html:143
+#: templates/frontend/module/create_step3.html:202
+#: templates/frontend/partials/author_info.html:34
+msgid "Author"
+msgstr ""
+
+#: templates/frontend/collection_detail.html:64
 #: templates/frontend/module_detail.html:19
 msgid "Edit"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:87
+#: templates/frontend/collection_detail.html:97
 #: templates/frontend/module_detail.html:65
 msgid "Attachments"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:109
+#: templates/frontend/collection_detail.html:119
 #: templates/frontend/module_detail.html:91
 msgid "Comment"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:140
+#: templates/frontend/collection_detail.html:150
 msgid "View my profile"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:233
+#: templates/frontend/collection_detail.html:243
 #: templates/frontend/module_detail.html:131
 msgid "By same author"
 msgstr ""
 
-#: templates/frontend/collection_detail.html:242
+#: templates/frontend/collection_detail.html:252
 #: templates/frontend/module_detail.html:140
 msgid "Similar items"
 msgstr ""
@@ -317,74 +343,9 @@ msgid "Module"
 msgstr ""
 
 #: templates/frontend/material_stats.html:7 templates/frontend/profile.html:7
-#: templates/frontend/user_edit_profile.html:6
+#: templates/frontend/user_edit_profile.html:7
 #: templates/frontend/user_profile.html:7
 msgid "User profile"
-msgstr ""
-
-#: templates/frontend/material_stats.html:27
-#: templates/frontend/material_stats.html:28
-#: templates/frontend/material_stats.html:29
-#: templates/frontend/material_stats.html:30
-#: templates/frontend/material_stats.html:31
-#: templates/frontend/partials/author_info.html:23
-#: templates/frontend/partials/author_info.html:24
-#: templates/frontend/partials/author_info.html:25
-#: templates/frontend/partials/author_info.html:26
-#: templates/frontend/partials/author_info.html:27
-msgid "Not available"
-msgstr ""
-
-#: templates/frontend/material_stats.html:29
-#: templates/frontend/profile.html:39
-#: templates/frontend/user_edit_profile.html:99
-#: templates/frontend/partials/author_info.html:25
-msgid "Homepage"
-msgstr ""
-
-#: templates/frontend/material_stats.html:30
-#: templates/frontend/profile.html:43
-#: templates/frontend/partials/author_info.html:26
-msgid "National"
-msgstr ""
-
-#: templates/frontend/material_stats.html:31
-#: templates/frontend/profile.html:47
-#: templates/frontend/user_edit_profile.html:111
-#: templates/frontend/partials/author_info.html:27
-msgid "Biography"
-msgstr ""
-
-#: templates/frontend/material_stats.html:79
-msgid "Business"
-msgstr ""
-
-#: templates/frontend/material_stats.html:81
-msgid "Social Sciences"
-msgstr ""
-
-#: templates/frontend/material_stats.html:83
-msgid "Science and Technology"
-msgstr ""
-
-#: templates/frontend/material_stats.html:85
-msgid "Humanities"
-msgstr ""
-
-#: templates/frontend/material_stats.html:87
-msgid "Arts"
-msgstr ""
-
-#: templates/frontend/material_stats.html:89
-msgid "Mathematics and Statistics"
-msgstr ""
-
-#: templates/frontend/material_stats.html:91
-msgid "Others"
-msgstr ""
-
-#: templates/frontend/material_stats.html:110
-msgid "Uploaded On:"
 msgstr ""
 
 #: templates/frontend/module_detail.html:20
@@ -401,166 +362,36 @@ msgstr ""
 msgid "of"
 msgstr ""
 
+#: templates/frontend/profile.html:39
+#: templates/frontend/user_edit_profile.html:102
+#: templates/frontend/partials/author_info.html:26
+msgid "Homepage"
+msgstr ""
+
+#: templates/frontend/profile.html:43
+#: templates/frontend/partials/author_info.html:27
+msgid "National"
+msgstr ""
+
+#: templates/frontend/profile.html:47
+#: templates/frontend/user_edit_profile.html:114
+#: templates/frontend/partials/author_info.html:28
+msgid "Biography"
+msgstr ""
+
 #: templates/frontend/profile.html:51
 msgid "Delete person"
 msgstr ""
 
-#: templates/frontend/profile.html:58 templates/frontend/search_result.html:51
-#: templates/frontend/collection/create_step2.html:138
-#: templates/frontend/collection/create_step2.html:145
-#: templates/frontend/collection/create_step2.html:203
-#: templates/frontend/collection/create_step3.html:171
-#: templates/frontend/collection/create_step3.html:178
-#: templates/frontend/collection/create_step3.html:237
-#: templates/frontend/module/create_step2.html:130
-#: templates/frontend/module/create_step2.html:137
-#: templates/frontend/module/create_step2.html:195
-#: templates/frontend/module/create_step3.html:136
-#: templates/frontend/module/create_step3.html:143
-#: templates/frontend/module/create_step3.html:202
-#: templates/frontend/partials/author_info.html:33
-msgid "Author"
-msgstr ""
-
-#: templates/frontend/profile.html:62
-#: templates/frontend/collection/create_step2.html:150
-#: templates/frontend/collection/create_step2.html:208
-#: templates/frontend/collection/create_step3.html:183
-#: templates/frontend/collection/create_step3.html:242
-#: templates/frontend/module/create_step2.html:142
-#: templates/frontend/module/create_step2.html:200
-#: templates/frontend/module/create_step3.html:148
-#: templates/frontend/module/create_step3.html:207
-#: templates/frontend/partials/author_info.html:37
-msgid "Contributor"
-msgstr ""
-
-#: templates/frontend/profile.html:66
-#: templates/frontend/collection/create_step2.html:146
-#: templates/frontend/collection/create_step2.html:204
-#: templates/frontend/collection/create_step3.html:179
-#: templates/frontend/collection/create_step3.html:238
-#: templates/frontend/module/create_step2.html:138
-#: templates/frontend/module/create_step2.html:196
-#: templates/frontend/module/create_step3.html:144
-#: templates/frontend/module/create_step3.html:203
-#: templates/frontend/partials/author_info.html:41
-msgid "Editor"
-msgstr ""
-
-#: templates/frontend/profile.html:70
-#: templates/frontend/collection/create_step2.html:147
-#: templates/frontend/collection/create_step2.html:205
-#: templates/frontend/collection/create_step3.html:180
-#: templates/frontend/collection/create_step3.html:239
-#: templates/frontend/module/create_step2.html:139
-#: templates/frontend/module/create_step2.html:197
-#: templates/frontend/module/create_step3.html:145
-#: templates/frontend/module/create_step3.html:204
-#: templates/frontend/partials/author_info.html:45
-msgid "Licensor"
-msgstr ""
-
-#: templates/frontend/profile.html:74
-#: templates/frontend/collection/create_step2.html:148
-#: templates/frontend/collection/create_step2.html:206
-#: templates/frontend/collection/create_step3.html:181
-#: templates/frontend/collection/create_step3.html:240
-#: templates/frontend/module/create_step2.html:140
-#: templates/frontend/module/create_step2.html:198
-#: templates/frontend/module/create_step3.html:146
-#: templates/frontend/module/create_step3.html:205
-#: templates/frontend/partials/author_info.html:49
-msgid "Maintainer"
-msgstr ""
-
-#: templates/frontend/profile.html:78
-#: templates/frontend/collection/create_step2.html:149
-#: templates/frontend/collection/create_step2.html:207
-#: templates/frontend/collection/create_step3.html:182
-#: templates/frontend/collection/create_step3.html:241
-#: templates/frontend/module/create_step2.html:141
-#: templates/frontend/module/create_step2.html:199
-#: templates/frontend/module/create_step3.html:147
-#: templates/frontend/module/create_step3.html:206
-#: templates/frontend/partials/author_info.html:53
-msgid "Translator"
-msgstr ""
-
-#: templates/frontend/profile.html:111
-msgid "Popular"
-msgstr ""
-
-#: templates/frontend/profile.html:112
-msgid "All Creative Fields"
-msgstr ""
-
-#: templates/frontend/profile.html:113
-msgid "Architecture"
-msgstr ""
-
-#: templates/frontend/profile.html:114
-msgid "Art Direction"
-msgstr ""
-
-#: templates/frontend/profile.html:115
-msgid "Branding"
-msgstr ""
-
-#: templates/frontend/profile.html:116
-msgid "Fashion"
-msgstr ""
-
-#: templates/frontend/profile.html:117
-msgid "Graphic Design"
-msgstr ""
-
-#: templates/frontend/profile.html:118
-msgid "Illustration"
-msgstr ""
-
-#: templates/frontend/profile.html:119
-msgid "Industrial Design"
-msgstr ""
-
-#: templates/frontend/profile.html:120
-msgid "Interaction Design"
-msgstr ""
-
-#: templates/frontend/profile.html:121
-msgid "Motion Graphics"
-msgstr ""
-
-#: templates/frontend/profile.html:122
-msgid "Photography"
-msgstr ""
-
-#: templates/frontend/profile.html:123
-msgid "UI/UX"
-msgstr ""
-
-#: templates/frontend/profile.html:124
-msgid "Web Design"
-msgstr ""
-
-#: templates/frontend/profile.html:128 templates/frontend/profile.html:130
-msgid "Featured"
-msgstr ""
-
-#: templates/frontend/profile.html:131
-msgid "Most Liked"
-msgstr ""
-
-#: templates/frontend/profile.html:132
-msgid "Most Viewed"
-msgstr ""
-
-#: templates/frontend/profile.html:133
-msgid "Most Discussed"
-msgstr ""
-
-#: templates/frontend/profile.html:134
-msgid "Most Recent"
+#: templates/frontend/profile.html:137 templates/frontend/profile.html:150
+#: templates/frontend/profile.html:163 templates/frontend/profile.html:179
+#: templates/frontend/profile.html:192 templates/frontend/profile.html:205
+#: templates/frontend/profile.html:221 templates/frontend/profile.html:235
+#: templates/frontend/search_result.html:28
+#: templates/frontend/search_result.html:37
+#: templates/frontend/search_result.html:48
+#: templates/frontend/partials/browse-list.html:66
+msgid "Select/Deselect Item"
 msgstr ""
 
 #: templates/frontend/search_result.html:6
@@ -575,26 +406,26 @@ msgstr ""
 msgid "Material"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:17
+#: templates/frontend/user_edit_profile.html:18
 #: templates/frontend/user_favorite.html:12
 #: templates/frontend/user_profile.html:13
 #: templates/frontend/user_unpublish.html:13
 msgid "My VOER"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:47
+#: templates/frontend/user_edit_profile.html:48
 msgid "Account Settings"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:51
+#: templates/frontend/user_edit_profile.html:52
 msgid "E-mail address"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:52
+#: templates/frontend/user_edit_profile.html:53
 msgid "Enter Emai Address"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:53
+#: templates/frontend/user_edit_profile.html:54
 msgid ""
 "A valid e-mail address. All e-mails from the system will be sent to this "
 "address. The e-mail address is not made public and will only be used if you "
@@ -602,128 +433,124 @@ msgid ""
 "notifications by e-mail."
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:56
-msgid "Password"
-msgstr ""
-
-#: templates/frontend/user_edit_profile.html:57
+#: templates/frontend/user_edit_profile.html:58
 msgid "Enter Your Password"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:60
+#: templates/frontend/user_edit_profile.html:61
 msgid "Confirm password"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:61
+#: templates/frontend/user_edit_profile.html:62
 msgid "Enter Confirm Password"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:63
+#: templates/frontend/user_edit_profile.html:64
 msgid "To make your password stronger:"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:64
+#: templates/frontend/user_edit_profile.html:65
 msgid "Make it at least 6 characters"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:65
+#: templates/frontend/user_edit_profile.html:66
 msgid "Add lowercase letters"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:66
+#: templates/frontend/user_edit_profile.html:67
 msgid "Add uppercase letters"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:67
+#: templates/frontend/user_edit_profile.html:68
 msgid "Add numbers"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:68
+#: templates/frontend/user_edit_profile.html:69
 msgid "Add punctuation"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:69
+#: templates/frontend/user_edit_profile.html:70
 msgid ""
 "To change the current user password, enter the new password in both fields."
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:73
+#: templates/frontend/user_edit_profile.html:74
 msgid "Picture"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:75
+#: templates/frontend/user_edit_profile.html:76
 msgid ""
 "Your virtual face or picture. Pictures larger than 1024x1024 pixels will be "
 "scaled down."
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:78
+#: templates/frontend/user_edit_profile.html:80
 msgid "Remove avatar"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:83
+#: templates/frontend/user_edit_profile.html:86
 msgid "Full name"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:84
+#: templates/frontend/user_edit_profile.html:87
 msgid "Enter fullname"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:87
+#: templates/frontend/user_edit_profile.html:90
 msgid "First name"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:88
+#: templates/frontend/user_edit_profile.html:91
 msgid "Enter first name"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:91
+#: templates/frontend/user_edit_profile.html:94
 msgid "Last name"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:92
+#: templates/frontend/user_edit_profile.html:95
 msgid "Enter last name"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:103
+#: templates/frontend/user_edit_profile.html:106
 msgid "Affiliation"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:104
+#: templates/frontend/user_edit_profile.html:107
 msgid "Enter affiliation"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:107
+#: templates/frontend/user_edit_profile.html:110
 msgid "Affiliation URL"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:115
+#: templates/frontend/user_edit_profile.html:118
 msgid "Nationality"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:116
+#: templates/frontend/user_edit_profile.html:119
 msgid "Enter nationality"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:119
+#: templates/frontend/user_edit_profile.html:122
 msgid "Current password"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:120
+#: templates/frontend/user_edit_profile.html:123
 msgid "Enter Current Password"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:121
+#: templates/frontend/user_edit_profile.html:124
 msgid ""
 "Enter your current password to change the E-mail address or Password. <a "
 "href=\"/user/password/reset/\">Request new password</a>."
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:125
+#: templates/frontend/user_edit_profile.html:128
 msgid "Cancel"
 msgstr ""
 
-#: templates/frontend/user_edit_profile.html:145
+#: templates/frontend/user_edit_profile.html:148
 msgid "Do you want to remove avatar?"
 msgstr ""
 
@@ -771,7 +598,7 @@ msgstr ""
 
 #: templates/frontend/ajax/others.html:32
 #: templates/frontend/ajax/similars.html:33
-#: templates/frontend/partials/browse-list.html:171
+#: templates/frontend/partials/browse-list.html:183
 msgid "No data."
 msgstr ""
 
@@ -820,6 +647,10 @@ msgstr ""
 
 #: templates/frontend/block/left_block_user.html:48
 msgid "Most favourite"
+msgstr ""
+
+#: templates/frontend/block/left_block_user.html:49
+msgid "Most rated"
 msgstr ""
 
 #: templates/frontend/collection/create_step1.html:3
@@ -897,6 +728,66 @@ msgstr ""
 #: templates/frontend/module/create_step3.html:142
 #: templates/frontend/module/create_step3.html:201
 msgid "Name"
+msgstr ""
+
+#: templates/frontend/collection/create_step2.html:146
+#: templates/frontend/collection/create_step2.html:204
+#: templates/frontend/collection/create_step3.html:179
+#: templates/frontend/collection/create_step3.html:238
+#: templates/frontend/module/create_step2.html:138
+#: templates/frontend/module/create_step2.html:196
+#: templates/frontend/module/create_step3.html:144
+#: templates/frontend/module/create_step3.html:203
+#: templates/frontend/partials/author_info.html:42
+msgid "Editor"
+msgstr ""
+
+#: templates/frontend/collection/create_step2.html:147
+#: templates/frontend/collection/create_step2.html:205
+#: templates/frontend/collection/create_step3.html:180
+#: templates/frontend/collection/create_step3.html:239
+#: templates/frontend/module/create_step2.html:139
+#: templates/frontend/module/create_step2.html:197
+#: templates/frontend/module/create_step3.html:145
+#: templates/frontend/module/create_step3.html:204
+#: templates/frontend/partials/author_info.html:46
+msgid "Licensor"
+msgstr ""
+
+#: templates/frontend/collection/create_step2.html:148
+#: templates/frontend/collection/create_step2.html:206
+#: templates/frontend/collection/create_step3.html:181
+#: templates/frontend/collection/create_step3.html:240
+#: templates/frontend/module/create_step2.html:140
+#: templates/frontend/module/create_step2.html:198
+#: templates/frontend/module/create_step3.html:146
+#: templates/frontend/module/create_step3.html:205
+#: templates/frontend/partials/author_info.html:50
+msgid "Maintainer"
+msgstr ""
+
+#: templates/frontend/collection/create_step2.html:149
+#: templates/frontend/collection/create_step2.html:207
+#: templates/frontend/collection/create_step3.html:182
+#: templates/frontend/collection/create_step3.html:241
+#: templates/frontend/module/create_step2.html:141
+#: templates/frontend/module/create_step2.html:199
+#: templates/frontend/module/create_step3.html:147
+#: templates/frontend/module/create_step3.html:206
+#: templates/frontend/partials/author_info.html:54
+msgid "Translator"
+msgstr ""
+
+#: templates/frontend/collection/create_step2.html:150
+#: templates/frontend/collection/create_step2.html:208
+#: templates/frontend/collection/create_step3.html:183
+#: templates/frontend/collection/create_step3.html:242
+#: templates/frontend/module/create_step2.html:142
+#: templates/frontend/module/create_step2.html:200
+#: templates/frontend/module/create_step3.html:148
+#: templates/frontend/module/create_step3.html:207
+#: templates/frontend/partials/author_info.html:38
+msgid "Contributor"
 msgstr ""
 
 #: templates/frontend/collection/create_step2.html:194
@@ -995,34 +886,75 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: templates/frontend/partials/browse-list.html:66
-msgid "Select/Deselect Item"
+#: templates/frontend/partials/author_info.html:24
+#: templates/frontend/partials/author_info.html:25
+#: templates/frontend/partials/author_info.html:26
+#: templates/frontend/partials/author_info.html:27
+#: templates/frontend/partials/author_info.html:28
+msgid "Not available"
 msgstr ""
 
 #: templates/frontend/partials/browse-list.html:131
 msgid "View count"
 msgstr ""
 
-#: templates/frontend/partials/browse-list.html:138
+#: templates/frontend/partials/browse-list.html:139
+#: templates/frontend/partials/material_tools.html:11
+msgid "Add to favorite"
+msgstr ""
+
+#: templates/frontend/partials/browse-list.html:140
 #: templates/frontend/partials/material_tools.html:12
 msgid "Favorite count"
 msgstr ""
 
-#: templates/frontend/partials/material_actions.html:11
-#: templates/frontend/partials/material_actions.html:17
+#: templates/frontend/partials/browse-list.html:146
+#: templates/frontend/partials/browse-list.html:149
+#: templates/frontend/partials/browse-list.html:151
+msgid "Rate"
+msgstr ""
+
+#: templates/frontend/partials/browse-list.html:149
+#: templates/frontend/partials/browse-list.html:151
+msgid "Rating count"
+msgstr ""
+
+#: templates/frontend/partials/browse-list.html:149
+msgid "rates"
+msgstr ""
+
+#: templates/frontend/partials/browse-list.html:151
+msgid "rate"
+msgstr ""
+
+#: templates/frontend/partials/browse-list.html:173
+msgid "Uploaded date"
+msgstr ""
+
+#: templates/frontend/partials/material_actions.html:10
 msgid "Download"
 msgstr ""
 
-#: templates/frontend/partials/material_actions.html:24
+#: templates/frontend/partials/material_actions.html:15
 msgid "Reuse"
 msgstr ""
 
-#: templates/frontend/partials/material_actions.html:30
+#: templates/frontend/partials/material_actions.html:21
 msgid "PDF Collection"
 msgstr ""
 
-#: templates/frontend/partials/material_actions.html:32
+#: templates/frontend/partials/material_actions.html:22
+msgid "EPUB Collection"
+msgstr ""
+
+#: templates/frontend/partials/material_actions.html:24
+#: templates/frontend/partials/material_actions.html:28
 msgid "PDF Module"
+msgstr ""
+
+#: templates/frontend/partials/material_actions.html:25
+#: templates/frontend/partials/material_actions.html:29
+msgid "EPUB Module"
 msgstr ""
 
 #: templates/frontend/partials/material_author.html:25
@@ -1045,8 +977,43 @@ msgstr ""
 msgid "rating"
 msgstr ""
 
-#: templates/frontend/partials/material_tools.html:11
-msgid "Add to favorite"
+#: templates/registration/activate.html:4
+#: templates/registration/activate.html:7
+msgid "Account activated., Activate Failed!"
+msgstr ""
+
+#: templates/registration/activate.html:10
+msgid "Thanks for signing up! Now you can"
+msgstr ""
+
+#: templates/registration/activate.html:10
+msgid "log in"
+msgstr ""
+
+#: templates/registration/activate.html:12
+msgid ""
+" Sorry, it didn't work. Either your activation link was incorrect, or\n"
+"    the activation key for your account has expired; activation keys are\n"
+"    only valid for "
+msgstr ""
+
+#: templates/registration/activate.html:14
+msgid ""
+" days after\n"
+"    registration. "
+msgstr ""
+
+#: templates/registration/login.html:7
+#: templates/registration/registration_form.html:8
+msgid "Join VOER. Take Creative Control."
+msgstr ""
+
+#: templates/registration/login.html:18
+msgid "or login with your account"
+msgstr ""
+
+#: templates/registration/login.html:21
+msgid "Please correct the errors below"
 msgstr ""
 
 #: templates/registration/login.html:29
@@ -1200,10 +1167,6 @@ msgstr ""
 msgid "Sign up"
 msgstr ""
 
-#: templates/registration/registration_form.html:8
-msgid "Join VOER. Take Creative Control."
-msgstr ""
-
 #: templates/registration/registration_form.html:22
 msgid "or sign up using your email"
 msgstr ""
@@ -1248,72 +1211,80 @@ msgstr ""
 msgid "I'm a human"
 msgstr ""
 
-#: vpw/views.py:551 vpw/views.py:776
+#: vpw/views.py:585 vpw/views.py:816
 msgid "You must agree to the terms and conditions!"
 msgstr ""
 
-#: vpw/views.py:677 vpw/views.py:847 vpw/views.py:1957 vpw/views.py:2013
-#: vpw/views.py:2110 vpw/views.py:2195
+#: vpw/views.py:715 vpw/views.py:889 vpw/views.py:2054 vpw/views.py:2110
+#: vpw/views.py:2207 vpw/views.py:2292
 msgid "The content is successfully published."
 msgstr ""
 
-#: vpw/views.py:1175
+#: vpw/views.py:1223
+msgid "Top 12 Most Viewed Documents"
+msgstr ""
+
+#: vpw/views.py:1256
 msgid "Top 12 Most Favorited Documents"
 msgstr ""
 
-#: vpw/views.py:1418
+#: vpw/views.py:1499
 msgid "Profile details updated."
 msgstr ""
 
-#: vpw/views.py:1452
+#: vpw/views.py:1533
 msgid "Add favorite successful"
 msgstr ""
 
-#: vpw/views.py:1456
+#: vpw/views.py:1537
 msgid "Delete favorite successful"
 msgstr ""
 
-#: vpw/views.py:1537
+#: vpw/views.py:1626
 msgid "Please enter default password."
 msgstr ""
 
-#: vpw/views.py:1539
+#: vpw/views.py:1628
 msgid "Please select file"
 msgstr ""
 
-#: vpw/views.py:1611
+#: vpw/views.py:1700
 msgid "Import user successful."
 msgstr ""
 
-#: vpw/views.py:2096
+#: vpw/views.py:2193
 msgid "Please choose a category for this module"
 msgstr ""
 
-#: vpw/views.py:2099
+#: vpw/views.py:2196
 msgid "Please add an author for this module"
 msgstr ""
 
-#: vpw/views.py:2102
+#: vpw/views.py:2199
 msgid "Please choose a language for this module"
 msgstr ""
 
-#: vpw/views.py:2133
+#: vpw/views.py:2230
 #, python-format
 msgid "Please keep file size under %s. Current filesize %s"
 msgstr ""
 
-#: vpw/views.py:2222
+#: vpw/views.py:2319
 msgid "Settings updated successfully."
 msgstr ""
 
-#: vpw/views.py:2224
+#: vpw/views.py:2321
 msgid "Error while updating settings."
 msgstr ""
 
-#: vpw/views.py:2397
+#: vpw/views.py:2495
 msgid "Please login"
 msgstr ""
 
-#: vpw/views.py:2425
+#: vpw/views.py:2523
 msgid "Delete avatar successfull"
+msgstr ""
+
+#: vpw/views.py:2588
+msgid "Top 12 Most Rated Documents"
 msgstr ""

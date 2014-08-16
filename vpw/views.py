@@ -27,6 +27,7 @@ from django.conf import settings
 from django.utils.translation import ugettext as _, get_language
 from registration.backends.default.views import RegistrationView
 from django.core.urlresolvers import reverse
+from UniversalAnalytics import Tracker
 
 from vpw.models import Material, Author, Settings, MaterialFeature, FeaturedAuthor
 from vpw.utils import normalize_string, normalize_filename, extract_images
@@ -69,6 +70,9 @@ FAVORITE_TYPE_INSERT = 'insert'
 FAVORITE_TYPE_DELETE = 'delete'
 
 EXPORT_PDF_DIR = '%s/pdf_export/' % settings.MEDIA_ROOT
+
+# Create the tracker
+tracker = Tracker.create(settings.GOOGLE_ANALYTICS_ID, name=settings.SITE_URL, use_post=True)
 
 
 class RecaptchaRegistrationView(RegistrationView):
@@ -565,6 +569,8 @@ def create_module(request):
 
     if request.method == "GET":
         params['license'] = get_setting_value('module_license', language)
+        # Vao phan tao module
+        tracker.send('event', 'module', 'create', 'step-1')
 
     if request.method == "POST":
         try:
@@ -573,6 +579,7 @@ def create_module(request):
             previous_step = 0
 
         categories_list = vpr_get_categories()
+
         if previous_step == 1:
             if not request.POST.get("agree"):
                 errors = _('You must agree to the terms and conditions!')
@@ -582,6 +589,7 @@ def create_module(request):
                 current_step = 2
                 params['categories'] = categories_list
                 params['author'] = author
+                tracker.send('event', 'module', 'create', 'step-2')
         elif previous_step == 2:
             # Save metadata
             if form.is_valid():
@@ -597,6 +605,7 @@ def create_module(request):
                     params['authors'] = authors
                     params['material_categories'] = material_categories
                     params['roles'] = roles
+                    tracker.send('event', 'module', 'create', 'step-3')
                 else:
                     # Save khong thanh cong
                     current_step = 2
@@ -651,6 +660,7 @@ def create_module(request):
                     form = ModuleForm(request.POST)
                     # set form body
                     form.data['body'] = content
+                    tracker.send('event', 'module', 'create', 'imported')
 
                 current_step = 3
                 params['categories'] = categories_list
@@ -679,6 +689,7 @@ def create_module(request):
                         material = _save_material(form, MODULE_TYPE, request)
                         material.text = form.cleaned_data['body']
                         material.save()
+                        tracker.send('event', 'module', 'create', 'saved')
                         return redirect('user_module_detail', mid=mid)
                 except Material.DoesNotExist:
                     current_step = 2
@@ -702,6 +713,7 @@ def create_module(request):
                             material.version = result['version']
                             material.save()
                             messages.success(request, _('The content is successfully published.'))
+                            tracker.send('event', 'module', 'create', 'published')
                             return redirect('module_detail', title=normalize_string(material.title),
                                             mid=result['material_id'])
                 except Material.DoesNotExist:
@@ -789,6 +801,7 @@ def create_collection(request):
 
     if request.method == "GET":
         params['license'] = get_setting_value('collection_license', language)
+        tracker.send('event', 'collection', 'create', 'step-1')
 
     if request.method == "POST":
         action = request.POST.get("action", "")
@@ -807,6 +820,7 @@ def create_collection(request):
                 current_step = 2
                 params['categories'] = categories_list
                 params['author'] = author
+                tracker.send('event', 'collection', 'create', 'step-2')
         elif previous_step == 2:
             if action == 'back':
                 current_step = 1
@@ -824,6 +838,7 @@ def create_collection(request):
                         params['authors'] = authors
                         params['material_categories'] = material_categories
                         params['roles'] = roles
+                        tracker.send('event', 'collection', 'create', 'step-3')
                     else:
                         # Save khong thanh cong
                         params['author'] = author
@@ -849,6 +864,7 @@ def create_collection(request):
                     outline_format = json.dumps(tmp)
                     material.text = outline_format
                     material.save()
+                    tracker.send('event', 'collection', 'create', 'saved')
                     return redirect('user_collection_detail', cid=mid)
                 else:
                     current_step = 2
@@ -870,8 +886,8 @@ def create_collection(request):
                         material.material_id = result['material_id']
                         material.version = result['version']
                         material.save()
-
                         messages.success(request, _('The content is successfully published.'))
+                        tracker.send('event', 'collection', 'create', 'published')
                         return redirect('collection_detail', title=normalize_string(material.title),
                                         cid=result['material_id'])
 
@@ -2541,3 +2557,32 @@ def _format_date(date, date_format=''):
         date_value = datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
 
     return date_value
+
+
+@login_required
+def get_most_rated(request):
+    current_user = request.user
+    pid = current_user.author.author_id
+    author = vpr_get_person(pid, True)
+
+    materials = vpr_request('GET', 'stats/materials/rates/')
+
+    results = list()
+    for material in materials:
+        material['modified'] = _format_date(material['modified'])
+
+        if 'categories' in material and material['categories']:
+            category_list = []
+            for category in material['categories']:
+                category_list.append({'cid': category[0], 'cname': category[1]})
+            material['category_list'] = category_list
+
+            first_category = material['categories'][0]
+            material['categories'] = [[str(first_category[0]), first_category[1]]]
+            material['rate_fake'] = round(material['rating'], 1)
+            material['rate_fake'] = format(material['rate_fake']).replace(',', '.')
+
+        results.append(material)
+
+    return render(request, "frontend/material_stats.html",
+                  {"materials": results, "author": author, "title": _("Top 12 Most Rated Documents")})
