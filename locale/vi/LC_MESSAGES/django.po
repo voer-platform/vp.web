@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-05 14:49+0000\n"
-"PO-Revision-Date: 2014-08-05 22:02+0700\n"
+"POT-Creation-Date: 2014-08-16 01:59+0000\n"
+"PO-Revision-Date: 2014-08-16 08:59+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -964,8 +964,8 @@ msgid "PDF Collection"
 msgstr "Giáo trình PDF"
 
 #: templates/frontend/partials/material_actions.html:22
-msgid "Epub Collection"
-msgstr "Giáo trình Epub"
+msgid "EPUB Collection"
+msgstr "Giáo trình EPUB"
 
 #: templates/frontend/partials/material_actions.html:24
 #: templates/frontend/partials/material_actions.html:28
@@ -974,8 +974,8 @@ msgstr "Tài liệu PDF"
 
 #: templates/frontend/partials/material_actions.html:25
 #: templates/frontend/partials/material_actions.html:29
-msgid "Epub Module"
-msgstr "Tài liệu Epub"
+msgid "EPUB Module"
+msgstr "Tài liệu EPUB"
 
 #: templates/frontend/partials/material_author.html:25
 msgid "Collections"
@@ -996,6 +996,34 @@ msgstr "dựa trên"
 #: templates/frontend/partials/material_rate.html:9
 msgid "rating"
 msgstr "đánh giá"
+
+#: templates/registration/activate.html:4
+#: templates/registration/activate.html:7
+msgid "Account activated., Activate Failed!"
+msgstr ""
+
+#: templates/registration/activate.html:10
+#, fuzzy
+msgid "Thanks for signing up! Now you can"
+msgstr "Cảm ơn bạn đã sử dụng Thư viện Học liệu Mở Việt Nam"
+
+#: templates/registration/activate.html:10
+#, fuzzy
+msgid "log in"
+msgstr "Đăng nhập"
+
+#: templates/registration/activate.html:12
+msgid ""
+" Sorry, it didn't work. Either your activation link was incorrect, or\n"
+"    the activation key for your account has expired; activation keys are\n"
+"    only valid for "
+msgstr ""
+
+#: templates/registration/activate.html:14
+msgid ""
+" days after\n"
+"    registration. "
+msgstr ""
 
 #: templates/registration/login.html:7
 #: templates/registration/registration_form.html:8
@@ -1292,6 +1320,12 @@ msgstr "Xoá ảnh đại diện thành công."
 #: vpw/views.py:2588
 msgid "Top 12 Most Rated Documents"
 msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
+
+#~ msgid "Epub Collection"
+#~ msgstr "Giáo trình Epub"
+
+#~ msgid "Epub Module"
+#~ msgstr "Tài liệu Epub"
 
 #~ msgid "Popular"
 #~ msgstr "Phổ biến"

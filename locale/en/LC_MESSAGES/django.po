@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-05 14:49+0000\n"
+"POT-Creation-Date: 2014-08-16 01:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -944,7 +944,7 @@ msgid "PDF Collection"
 msgstr ""
 
 #: templates/frontend/partials/material_actions.html:22
-msgid "Epub Collection"
+msgid "EPUB Collection"
 msgstr ""
 
 #: templates/frontend/partials/material_actions.html:24
@@ -954,7 +954,7 @@ msgstr ""
 
 #: templates/frontend/partials/material_actions.html:25
 #: templates/frontend/partials/material_actions.html:29
-msgid "Epub Module"
+msgid "EPUB Module"
 msgstr ""
 
 #: templates/frontend/partials/material_author.html:25
@@ -975,6 +975,32 @@ msgstr ""
 
 #: templates/frontend/partials/material_rate.html:9
 msgid "rating"
+msgstr ""
+
+#: templates/registration/activate.html:4
+#: templates/registration/activate.html:7
+msgid "Account activated., Activate Failed!"
+msgstr ""
+
+#: templates/registration/activate.html:10
+msgid "Thanks for signing up! Now you can"
+msgstr ""
+
+#: templates/registration/activate.html:10
+msgid "log in"
+msgstr ""
+
+#: templates/registration/activate.html:12
+msgid ""
+" Sorry, it didn't work. Either your activation link was incorrect, or\n"
+"    the activation key for your account has expired; activation keys are\n"
+"    only valid for "
+msgstr ""
+
+#: templates/registration/activate.html:14
+msgid ""
+" days after\n"
+"    registration. "
 msgstr ""
 
 #: templates/registration/login.html:7
