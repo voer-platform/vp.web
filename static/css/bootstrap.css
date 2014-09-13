@@ -1468,9 +1468,15 @@ pre code {
     width: 25%;
   }
   .col-lg-2 {
-    width: 28.15%;
+    width: 16.666666666666664%;
   }
   .col-lg-1 {
+    width: 8.333333333333332%;
+  }
+  .col-lg-2-custom {
+    width: 28.15%;
+  }
+  .col-lg-1-custom {
     width: 71.85%;
   }
   .col-lg-pull-12 {
