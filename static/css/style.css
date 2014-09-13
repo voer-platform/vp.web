@@ -2,7 +2,7 @@
   padding-left: 0;
   padding-right: 0;
 }
-.clearfix:before,
+.clearfix:before
 .clearfix:after {
   display: table;
   content: "";
@@ -469,7 +469,7 @@ button.btn-upload{
   margin-bottom: 0;
 }
 .hfuser-information {
-    width: 70%;
+  padding: 20px;  
 }
 .hfuser-info {
     display: block;
