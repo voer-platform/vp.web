@@ -8,7 +8,8 @@
 
 {% block content %}
 <!-- LEFT ROW -->
-<div class="col-lg-1 col-lg-1-custom left-row">
+<div class="row">
+<div class="col-lg-9 left-row material-main">
     <!-- TITLE MODULE -->
     <div class="module-view-title left padding-content-15">
         <div class="material-type">{% trans "Module" %}</div>
@@ -95,7 +96,7 @@
 </div>
 <!-- END LEFT ROW -->
 <!-- RIGHT ROW -->
-<div id="material-right-side" class="col-lg-2 col-lg-2-custom right-row">
+<div id="material-right-side" class="col-lg-3 right-row material-info">
     {% include 'frontend/partials/material_actions.html' %}
     <div class="clearfix"></div>
 
@@ -143,6 +144,7 @@
         </div>
     </div>
 
+</div>
 </div>
 
 <script type="text/javascript">

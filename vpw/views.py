@@ -125,12 +125,12 @@ def home(request):
     for featured_author in featured_authors:
         person_features_sample.append(featured_author.author_id)
     if person_features_sample.__len__()>0:
-        max_random_author = 5
+        max_random_author = 6
         if person_features_sample.__len__() < max_random_author:
             max_random_author = person_features_sample.__len__()
         person_features = random.sample(person_features_sample, max_random_author)
     else:
-        person_features = [1233, 214, 702, 50, 69]
+        person_features = [1233, 214, 702, 50, 69, 35]
     person_list = []
     for pid in person_features:
         person = vpr_get_person(pid)

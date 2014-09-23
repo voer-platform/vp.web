@@ -32,6 +32,7 @@
     <link href="{{STATIC_URL}}fonts/font.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/responsive.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/display-mathml.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/font-awesome.min.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/jquery/jRating/jRating.jquery.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
     {% endcompress %}
@@ -73,9 +74,9 @@
   		<div class="container">
   			<div class="row">
   			    {% block content %}{% endblock %}
-                {% block footer %}
+            {% block footer %}
   				    {% include "base/footer.html" %}
-                {% endblock %}
+            {% endblock %}
   			</div>
   		</div>
   	</div>
