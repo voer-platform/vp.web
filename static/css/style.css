@@ -1,3 +1,6 @@
+.fa {
+  margin-right: 10px;
+}
 .voer-container {
   padding-left: 0;
   padding-right: 0;
@@ -880,24 +883,28 @@ article.flatpage {
 #collection-outline{
     overflow: auto;
 }
-.browser-author-img img {
-    height: 151px;
-    //width: 200px;
+.list-author-mainpage {
+  margin-bottom: -20px;
 }
-.browser-author-img{
-	//width: 200px;
-	height: 151px;
-	border-bottom: 1px solid #e8e8e8;
-	-webkit-border-radius: 5px 5px 0 0;-moz-border-radius: 5px 5px 0 0;border-radius: 5px 5px 0 0;
+.list-author-mainpage > div {
+  margin-bottom: 20px;
 }
 .browser-author-img img{
-	border-bottom: 1px solid #e8e8e8;
-	-webkit-border-radius: 5px 5px 0 0;-moz-border-radius: 5px 5px 0 0;border-radius: 5px 5px 0 0;
+	border: 1px solid #888;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 100%;
 }
 .browser-author-details{
-	//width: 200px;
 	position: relative;
 	padding-top: 8px;
+}
+.browser-author-name {
+  font-weight: bold;
+}
+.browser-author-add {
+  font-size: 90%;
 }
 .icon-browser-author{
 	width: 18px;
@@ -931,14 +938,14 @@ article.flatpage {
     background-color: #F4F4F4;
 }
 @media screen and (max-width: 420px) {
-    .browser-author-img img{
+    //.browser-author-img img{
         //width: 177px;
-        height: 125px;
-    }
+    //    height: 125px;
+    //}
 
-    ul.list-author-mainpage li:nth-child(5){
+    //ul.list-author-mainpage li:nth-child(5){
         display: none;
-    }
+    //}
 
     .hfuser-information{
         width: auto;
@@ -1053,21 +1060,12 @@ article.flatpage {
     overflow: hidden;
     display: block;
 }
-@media (max-width: 768px){
-    #input-search-right-top {display: none;}
-}
 .navbar-toggle.btn-search {right: 60px; padding: 7px 13px;}
 .icon-search {
     background: url(../images/icon-search-top-while.png)no-repeat;
     width: 18px;
     height: 18px;
     display: block;
-}
-@media (min-width: 768px){
-    .btn-search, .search-collapse {
-        display: none;
-    }
-
 }
 @media (min-width: 420px) {
     .hidden-home {display: none;}
@@ -1186,4 +1184,30 @@ sub, sup {
 }
 .home-browse {
   margin: 20px 0;
+}
+.home-section-heading {
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px){
+  .btn-search, .search-collapse {
+      display: none;
+  }
+  #mainpage {
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 768px){
+  #input-search-right-top {
+    display: none;
+  }
+  .text-slider-left{
+    font-size: 16px;
+  }
+  #mainpage {
+    padding-top: 20px;
+  }
 }
