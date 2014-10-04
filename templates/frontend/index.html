@@ -73,7 +73,7 @@
             {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
             {% trans "Collection" as type_name %}
         {% endif %}
-        <div class="col-xs-6 col-sm-3 col-md-4">
+        <div class="col-xs-6 col-sm-4 col-md-4">
             <div class="icon-hot"></div>
             <div class="collection-mainpage-cover">
                 <a href="{{ material_url }}" title="{{ type_name }}: {{ material.title }}">

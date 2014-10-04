@@ -27,7 +27,7 @@
         </div>
         <div id="main-menu" class="navbar-collapse collapse">
             <ul class="nav navbar-nav main-menu-nav">
-                <li>
+                <li class="">
                   <a href="/">{% trans 'Home' %}</a>
                 </li>
                 <li>
@@ -48,7 +48,7 @@
                   {% endif %}
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right list-right-top">
+            <ul class="nav navbar-nav navbar-right list-right-top hidden-sm">
                 {% if not is_home %}
                 <li id="input-search-right-top">
                     <form action="{% url 'search' %}" method="GET">
@@ -119,7 +119,7 @@
                     <li>
                         <a href="/user/register">{% trans 'Register' %}</a>
                     </li>
-                    <li>
+                    <li class="">
                         <a class="btn-top-login" data-toggle="modal" data-target="#modal-user-login">{% trans 'Login' %}</a>
                     </li>
                     {% endif %}
