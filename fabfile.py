@@ -10,6 +10,7 @@ def deploy_staging():
     project_dir = '/home/voer/vpw/vpw'
     with cd(project_dir):
         run('git pull')
+        put('static/*', '/home/voer/vpw/static/')
         run('sudo supervisorctl restart vpw')
 
 
