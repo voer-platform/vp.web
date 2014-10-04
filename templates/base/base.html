@@ -24,8 +24,6 @@
 
     {% compress css %}
     <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/templates.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/slide.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/scrollbar.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/common.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/flat-ui.css" rel="stylesheet">
@@ -34,17 +32,19 @@
     <link href="{{STATIC_URL}}css/display-mathml.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/font-awesome.min.css" rel="stylesheet">
     <link href="{{STATIC_URL}}css/jquery/jRating/jRating.jquery.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/slide.css?v=1" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/templates.css?v=1" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/style.css?v=1" rel="stylesheet">
     {% endcompress %}
 
     {% compress js %}
-	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-select.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/flatui-checkbox.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/application.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/display-mathml.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/flatui-checkbox.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/application.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/display-mathml.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/scrollbar.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/jRating.jquery.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/voer.js"></script>
