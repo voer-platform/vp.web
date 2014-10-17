@@ -63,9 +63,11 @@
     </div>
 </div>
 
-<div class="content-wrapper">
+<!--div class="content-wrapper"-->
+<div class="container">
+<div class="row">
     <!-- left content -->
-    <div class="col-lg-1 left-row">
+    <div class="col-lg-9 left-row">
         <script>
         $(document).ready(function(){
             $(document).on('click', '.dropdown-menu-sort a', function(){
@@ -184,7 +186,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2 right-row">
+    <div class="col-lg-3 right-row">
         <div class="hffilter-right">
         <div class="bigbox-common">
             <div class="title">{% trans 'Filter By' %}</div>
@@ -368,6 +370,8 @@
         </div>
     </div>
 </div>
+</div>
+  
 </div>
 
 <script type="text/javascript">$(function(){ Voer.Materials.run(); });</script>

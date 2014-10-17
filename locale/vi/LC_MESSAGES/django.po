@@ -57,7 +57,7 @@ msgstr "Trang chủ"
 
 #: templates/base/header.html:34 templates/frontend/index.html:102
 msgid "Browse All"
-msgstr "Duyệt tài liệu"
+msgstr "Tra cứu Tài liệu"
 
 #: templates/base/header.html:38 templates/base/header.html.py:40
 #: templates/flatpages/default.html:15 templates/flatpages/default.html:19
@@ -1531,3 +1531,9 @@ msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
 
 #~ msgid "Member Since:"
 #~ msgstr "Thành viên từ:"
+
+msgid "Featured Authors"
+msgstr "Tác giả Tiêu biểu"
+
+msgid "Featured Materials"
+msgstr "Tài liệu Tiêu biểu"

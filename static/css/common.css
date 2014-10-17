@@ -343,7 +343,7 @@
 }
 /* box common */
 .bigbox-common {
-	padding:5px 20px;
+	padding: 15px 0px;
 }
 .bigbox-common .title {
 	font-size:15px;
@@ -410,14 +410,14 @@
 	overflow:hidden;
 	border-bottom:1px solid #E8E8E8;
 }
-.hfuser-information {
-	width:60%;
-	margin:20px;
-}
 .hfuser-info {
 	display:inline-block;
 }
+.hfuser-biography {
+  margin-top: 10px;
+}
 .hfuser-avatar {
+  margin-bottom: 10px;
 	margin-right:20px;
 	border-right:1px solid #dbdbdb;
 	padding-right:20px;

@@ -1,7 +1,7 @@
 import urllib2, urllib
 
-API_SSL_SERVER="https://www.google.com/recaptcha/api"
-API_SERVER="http://www.google.com/recaptcha/api"
+# API_SSL_SERVER="https://www.google.com/recaptcha/api"
+API_SERVER="//www.google.com/recaptcha/api"
 VERIFY_SERVER="www.google.com"
 
 class RecaptchaResponse(object):
@@ -22,10 +22,10 @@ def displayhtml (public_key,
     if error:
         error_param = '&error=%s' % error
 
-    if use_ssl:
-        server = API_SSL_SERVER
-    else:
-        server = API_SERVER
+    # if use_ssl:
+    #     server = API_SSL_SERVER
+    # else:
+    server = API_SERVER
 
     return """<script type="text/javascript" src="%(ApiServer)s/challenge?k=%(PublicKey)s%(ErrorParam)s"></script>
 

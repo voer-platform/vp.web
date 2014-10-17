@@ -1,7 +1,5 @@
 '''
-Created on 16 Dec 2013
-
-@author: huyvq
+@author: nampnq
 '''
 from base import *
 
@@ -15,29 +13,26 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vpw',
-        'USER': 'vpw',
-        'PASSWORD': 'vpw',
+        'NAME': 'voer_django',
+        'USER': 'travis',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }
 }
 
-#VPR SETTINGS
-VPR_URL = 'http://localhost:2013/1.0/'
-CLIENT_ID = 'vpw'
-CLIENT_KEY = 'd68e9d65eec17f27d0ce6747'
-
+#VPR Address
+VPR_URL = 'http://dev.voer.vn:2013/1.0/'
 
 #VPT Address
-VPT_URL = 'http://voer.edu.vn:6543/'
+VPT_URL = 'http://dev.voer.vn:6543/'
 
-SITE_URL = 'http://dev.voer.vn'
+SITE_URL = 'dev.voer.vn'
 
 RECAPTCHA_PUBLIC_KEY = ''
 RECAPTCHA_PRIVATE_KEY = ''
 
 #STATIC_ROOT = os.path.join(PROJECT_DIR, '_static')
 
-COMPRESS_ENABLED = False
 
+COMPRESS_ENABLED = False

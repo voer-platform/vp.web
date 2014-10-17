@@ -1288,3 +1288,9 @@ msgstr ""
 #: vpw/views.py:2588
 msgid "Top 12 Most Rated Documents"
 msgstr ""
+
+msgid "Featured Authors"
+msgstr ""
+
+msgid "Featured Materials"
+msgstr ""

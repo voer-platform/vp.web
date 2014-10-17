@@ -1,6 +1,8 @@
 {% extends "base/base.html" %}
 {% load i18n %}
 {% load vpw_filters %}
+{% load thumbnail %}
+
 {% block titleSite %}Vietnam OER, Tài nguyên giáo dục Mở Việt Nam{% endblock %}
 
 {% block slide %}
@@ -19,7 +21,7 @@
                 {% blocktrans with module_count=material_statistic.module_count collection_count=material_statistic.collection_count person_count=material_statistic.person_count %}Discover {{ module_count }} modules, {{ collection_count }} collections from {{ person_count }} authors{% endblocktrans %}
             </div>
         </div>
-        <div class="hfslide right">
+        <div class="hidden-xs hidden-sm hidden-md hfslide right">
             <div id="generic" class="slide active" style="display:block;">
                 <div class="book"></div>
                 <div class="cloud1"></div>
@@ -55,70 +57,86 @@
 <!-- END SLIDE -->
 {% endblock %}
 
-{% block content %}
-<!-- LIST MODULE MAINPAGE -->
-<ul class="list-collection-mainpage left">
-    {% for material in materials_list %}
-    {% if material.material_type == 1 %}
-        {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
-        {% trans "Module" as type_name %}
-    {% else %}
-        {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
-        {% trans "Collection" as type_name %}
-    {% endif %}
-    <li>
-        <div class="icon-hot"></div>
-        <div class="collection-mainpage-cover left clear">
-            <a href="{{ material_url }}" title="{{ type_name }}: {{ material.title }}">
-            {% if material.categories %}
-		    <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg" alt="{{ type_name }}: {{ material.title }}"/>
-		    {% else %}
-		    <img src="{{STATIC_URL}}images/cat_other.jpg" alt="{{ type_name }}: {{ material.title }}"/>
-		    {% endif %}
-            </a>
-        </div>
-        <div class="collection-mainpage-details left clear">
-
-            <div class="collection-details-icon {% if material.material_type == 1 %} icon-puzzle {% else %} icon-book {% endif %} left">
-
+{% block base-content %}
+<div id="mainpage" class="main">
+  <div class="container">
+    <!-- LIST MODULE MAINPAGE -->
+    <h5 class="home-section-heading">
+      <i class="fa fa-university"></i>{% trans "Featured Materials" %}
+    </h5>
+    <div class="list-collection-mainpage row">
+        {% for material in materials_list %}
+        {% if material.material_type == 1 %}
+            {% url 'module_detail' title=material.title|normalize_string mid=material.material_id as material_url %}
+            {% trans "Module" as type_name %}
+        {% else %}
+            {% url 'collection_detail' title=material.title|normalize_string cid=material.material_id as material_url %}
+            {% trans "Collection" as type_name %}
+        {% endif %}
+        <div class="col-xs-6 col-sm-4 col-md-4">
+            <div class="icon-hot"></div>
+            <div class="collection-mainpage-cover">
+                <a href="{{ material_url }}" title="{{ type_name }}: {{ material.title }}">
+                {% if material.categories %}
+            <img src="{{STATIC_URL}}images/contents/{{material.material_id}}.jpg" alt="{{ type_name }}: {{ material.title }}"/>
+            {% else %}
+            <img src="{{STATIC_URL}}images/cat_other.jpg" alt="{{ type_name }}: {{ material.title }}"/>
+            {% endif %}
+                </a>
             </div>
-            <div class="collection-details-text left">
-                <div class="title-collection left clear">
-                    <a href='{{ material_url }}' title="{{ type_name }}: {{ material.title }}">{{ material.title }}</a>
-                </div>
-                {% for person in material.author_list %}
-                <div class="author-collection left clear">
-                    <a href="{% url 'view_profile' person.pid %}" a>{{ person.pname }}</a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
-<!-- LIST MODULE MAINPAGE -->
-<!-- BROWSER -->
-<div class="mainpage-browser left">
-    <a class="btn-browser-all left clear" href="{% url 'browse' %}" title="{% trans 'Browse All' %}">{% trans 'Browse All' %}</a>
-    <div class="mainpage-browser-content left">
-        <ul class="list-mainpage-browser left list-author-mainpage">
-			{% for material in person_list %}
-            <li>
-                <div class="browser-author-img left clear">
-                    <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}"><img src="{% url 'get_avatar' material.id %}" /></a>
-                </div>
-                <div class="browser-author-details left clear">
-                    <div class="icon-browser-author"></div>
-                    <div class="browser-author-name left clear">
-                        <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}">{% if material.fullname != NULL %} {{ material.fullname }} {% else %} {{ material.user_id }} {% endif %}</a>
+            <div class="collection-mainpage-details clearfix">
+                <div class="hidden-xs hidden-sm collection-details-icon {% if material.material_type == 1 %}icon-puzzle{% else %}icon-book{% endif %} left"></div>
+                <div class="collection-details-text left">
+                    <div class="title-collection">
+                        <a href='{{ material_url }}' title="{{ type_name }}: {{ material.title }}">{{ material.title }}</a>
                     </div>
-                    <div class="browser-author-add left clear">{% if material.affiliation != NULL %} {{ material.affiliation }} {% endif %}</div>
+                    {% for person in material.author_list %}
+                    <div class="author-collection">
+                        <a href="{% url 'view_profile' person.pid %}" a>{{ person.pname }}</a>
+                    </div>
+                    {% endfor %}
                 </div>
-            </li>
-			{% endfor %}
-        </ul>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-</div>
-<!-- END BROWSER -->
+    <!-- LIST MODULE MAINPAGE -->
+    <!-- BROWSER -->
+    <div class="home-browse clearfix">
+      <a class="btn-browser-all left clear" href="{% url 'browse' %}" title="{% trans 'Browse All' %}">
+        {% trans 'Browse All' %}
+      </a>
+    </div>
 
+    <div class="mainpage-browser-content">
+      <h5 class="home-section-heading">
+        <i class="fa fa-user"></i>{% trans "Featured Authors" %}
+      </h5>
+      <div class="list-mainpage-browser list-author-mainpage row">
+      {% for material in person_list %}
+        <div class="col-xs-4 col-sm-3 col-md-2">
+            <div class="browser-author-img">
+                {% url 'get_avatar' material.id as avatar_url %}
+                {% thumbnail 'http://'|add:request.get_host|add:avatar_url "165x165" crop="center" as thumb %}
+                <a href="{% url 'view_profile' material.id  as avatar_url %}" title="{{ material.fullname }}"><img src="{{ thumb.url }}" /></a>
+                {% endthumbnail %}
+            </div>
+            <div class="browser-author-details">
+                <div class="icon-browser-author"></div>
+                <div class="browser-author-name">
+                    <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}">{% if material.fullname != NULL %} {{ material.fullname }} {% else %} {{ material.user_id }} {% endif %}</a>
+                </div>
+                <div class="browser-author-add">{% if material.affiliation != NULL %} {{ material.affiliation }} {% endif %}</div>
+            </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+    <!-- END BROWSER -->
+
+  </div>
+</div>
+{% block footer %}
+   {{ block.super }}
+{% endblock %}
 {% endblock %}

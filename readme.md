@@ -71,3 +71,9 @@
 # Notes
 ## Missing MySQL-python
 	pip install MySQL-python
+
+## No module named UniversalAnalytics
+	git clone https://github.com/analytics-pros/universal-analytics-python.git
+	cd universal-analytics-python
+	python setup.py install
+	

@@ -10,11 +10,9 @@
 
 {% block base-content %}
   	<div id="mainpage" class="main mainpage-content">
-  		<div class="container">
-  			<div class="row">
-  			    {% block content %}{% endblock %}
-  				{% include "base/footer.html" %}
-  			</div>
+  		<div class="container voer-container">
+          {% block content %}{% endblock %}
+          {% include "base/footer.html" %}
   		</div>
   	</div>
 {% endblock %}
