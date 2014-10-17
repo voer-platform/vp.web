@@ -29,7 +29,7 @@ VPR_URL = 'http://localhost:2013/1.0/'
 #VPT Address
 VPT_URL = 'http://voer.edu.vn:6543/'
 
-SITE_URL = 'dev.voer.vn'
+SITE_URL = 'http://dev.voer.vn'
 
 RECAPTCHA_PUBLIC_KEY = ''
 RECAPTCHA_PRIVATE_KEY = ''
