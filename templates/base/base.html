@@ -4,46 +4,46 @@
 
     <title>{% block titleSite %}{% endblock %}</title>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	{% block meta-description %}
-	<meta name="description" content="VOER là dự án của chương trình Tài nguyên Giáo dục Mở Việt Nam (hỗ trợ bởi Quỹ Việt Nam, The Vietnam Foundation - VNF). Đây là nguồn dữ liệu trung tâm cho các giáo sư, các cán bộ giảng dạy, sinh viên và những cá nhân tự học đại học ở Việt Nam.">
-	{% endblock %}
-	<meta name="author" content="VOER">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block meta-description %}
+  <meta name="description" content="VOER là dự án của chương trình Tài nguyên Giáo dục Mở Việt Nam (hỗ trợ bởi Quỹ Việt Nam, The Vietnam Foundation - VNF). Đây là nguồn dữ liệu trung tâm cho các giáo sư, các cán bộ giảng dạy, sinh viên và những cá nhân tự học đại học ở Việt Nam.">
+  {% endblock %}
+  <meta name="author" content="VOER">
     <meta name="keywords" content="voer, ocw, vietnam oer, vietnam ocw, học liệu mở, tài nguyên, giáo dục mở, giáo trình, tài liệu, material, collection, module, {% block keywords %}{% endblock %}"/>
 
     {% if voer_fb_id %}
         <meta property="fb:app_id" content="{{ voer_fb_id }}"/>
     {% endif %}
 
-	<link rel="shortcut icon" href="">
+  <link rel="shortcut icon" href="">
     <link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="{{STATIC_URL}}images/favicon.ico" type="image/x-icon">
 
     {% load compress %}
 
-    {% compress css %}
-	<link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}css/templates.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}css/slide.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}css/scrollbar.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}css/common.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}css/flat-ui.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}fonts/font.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/responsive.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}css/display-mathml.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/jquery/jRating/jRating.jquery.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
-    {% endcompress %}
+  {% compress css %}
+  <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/templates.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/slide.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/scrollbar.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/common.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/flat-ui.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}fonts/font.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/responsive.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/display-mathml.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/jquery/jRating/jRating.jquery.css" rel="stylesheet">
+  <link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
+  {% endcompress %}
 
     {% compress js %}
-	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-select.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/flatui-checkbox.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/application.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}js/display-mathml.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-select.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/flatui-checkbox.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/application.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/display-mathml.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/scrollbar.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/jRating.jquery.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/voer.js"></script>
@@ -52,33 +52,33 @@
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery.bootstrap-growl.js"></script>
     {% endcompress %}
 
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	  <script src="../../assets/js/html5shiv.js"></script>
-	  <script src="../../assets/js/respond.min.js"></script>
-	<![endif]-->
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="../../assets/js/html5shiv.js"></script>
+    <script src="../../assets/js/respond.min.js"></script>
+  <![endif]-->
 
     {% block css %}{% endblock %}
     {% block js %}{% endblock %}
 
   </head>
   <body>
-  	{% block topbar %}
-  	{% include "base/header.html" %}
-	{% endblock %}
-	{% block slide %}{% endblock %}
+    {% block topbar %}
+    {% include "base/header.html" %}
+  {% endblock %}
+  {% block slide %}{% endblock %}
 
-	{% block base-content %}
-  	<div id="mainpage" class="main">
-  		<div class="container">
-  			<div class="row">
-  			    {% block content %}{% endblock %}
+  {% block base-content %}
+    <div id="mainpage" class="main">
+      <div class="container">
+        <div class="row">
+            {% block content %}{% endblock %}
                 {% block footer %}
-  				    {% include "base/footer.html" %}
+              {% include "base/footer.html" %}
                 {% endblock %}
-  			</div>
-  		</div>
-  	</div>
+        </div>
+      </div>
+    </div>
     {% endblock %}
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
