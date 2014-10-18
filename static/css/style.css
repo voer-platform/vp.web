@@ -1211,3 +1211,12 @@ sub, sup {
     padding-top: 20px;
   }
 }
+
+a.topica-banner{
+    width: 100%;
+    display: block;
+}
+
+a.topica-banner img{
+    width:100%;
+}
