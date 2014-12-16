@@ -1225,3 +1225,12 @@ sub, sup {
         height: 110px;
     }
 } /* max-width: 420px */
+
+a.topica-banner{
+    width: 100%;
+    display: block;
+}
+
+a.topica-banner img{
+    width:100%;
+}

@@ -32,7 +32,7 @@ CLIENT_KEY = 'd68e9d65eec17f27d0ce6747'
 #VPT Address
 VPT_URL = 'http://voer.edu.vn:6543/'
 
-SITE_URL = 'dev.voer.vn'
+SITE_URL = 'http://dev.voer.vn'
 
 RECAPTCHA_PUBLIC_KEY = ''
 RECAPTCHA_PRIVATE_KEY = ''

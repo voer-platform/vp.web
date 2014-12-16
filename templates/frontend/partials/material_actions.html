@@ -19,14 +19,14 @@
         <ul>
             {% if collection.material_id %}
                 <li class="collection"><a href="{% url 'get_pdf' collection.material_id collection.version %}" title="{{ collection.title }}">{% trans 'PDF Collection' %}</a></li>
-                <li class="collection"><a href="/epub/{{collection.material_id}}/{{collection.version}}" title="{{ collection.title }}">{% trans 'Epub Collection' %}</a></li>
+                <li class="collection"><a href="/epub/{{collection.material_id}}/{{collection.version}}" title="{{ collection.title }}">{% trans 'EPUB Collection' %}</a></li>
                 {% if 'material_id' in material %}
                 <li class="module"><a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'PDF Module' %}</a></li>
-                <li class="module"><a href="/epub/{{material.material_id}}/{{material.version}}" title="{{ material.title }}">{% trans 'Epub Module' %}</a></li>
+                <li class="module"><a href="/epub/{{material.material_id}}/{{material.version}}" title="{{ material.title }}">{% trans 'EPUB Module' %}</a></li>
                 {% endif %}
             {% else %}
                 <li class="module"><a href="{% url 'get_pdf' material.material_id material.version %}" title="{{ material.title }}">{% trans 'PDF Module' %}</a></li>
-                <li class="module"><a href="/epub/{{material.material_id}}/{{material.version}}" title="{{ material.title }}">{% trans 'Epub Module' %}</a></li>
+                <li class="module"><a href="/epub/{{material.material_id}}/{{material.version}}" title="{{ material.title }}">{% trans 'EPUB Module' %}</a></li>
             {% endif %}
         </ul>
     </div>
