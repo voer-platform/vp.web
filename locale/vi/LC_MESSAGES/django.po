@@ -1253,12 +1253,12 @@ msgid "The content is successfully published."
 msgstr "Nội dung đã được xuất bản thành công."
 
 #: vpw/views.py:1223
-msgid "Top 12 Most Viewed Documents"
-msgstr "Danh sách 12 tài liệu được xem nhiều nhất"
+msgid "Top Viewed Documents"
+msgstr "Danh sách tài liệu được xem nhiều nhất"
 
 #: vpw/views.py:1256
-msgid "Top 12 Most Favorited Documents"
-msgstr "Danh sách 12 tài liệu được ưa thích nhất"
+msgid "Top Favorited Documents"
+msgstr "Danh sách tài liệu được ưa thích nhất"
 
 #: vpw/views.py:1499
 msgid "Profile details updated."
@@ -1318,8 +1318,8 @@ msgid "Delete avatar successfull"
 msgstr "Xoá ảnh đại diện thành công."
 
 #: vpw/views.py:2588
-msgid "Top 12 Most Rated Documents"
-msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
+msgid "Top Rated Documents"
+msgstr "Danh sách tài liệu được đánh giá nhiều nhất"
 
 #~ msgid "Epub Collection"
 #~ msgstr "Giáo trình Epub"
