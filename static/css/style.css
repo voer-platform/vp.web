@@ -1220,3 +1220,18 @@ a.topica-banner{
 a.topica-banner img{
     width:100%;
 }
+
+div#similar-items{
+    background-color: #eaf2fb;
+}
+
+div#similar-items h4{
+    color: #444;
+}
+div#by-same-author{
+    background-color: #bfe7bf;
+}
+
+div#by-same-author h4{
+    color: #444;
+}

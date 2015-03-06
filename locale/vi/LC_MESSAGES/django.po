@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: VOER Platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-16 01:59+0000\n"
-"PO-Revision-Date: 2014-08-16 08:59+0700\n"
+"PO-Revision-Date: 2015-03-06 07:42+0700\n"
 "Last-Translator: \n"
 "Language-Team: VOER Dev <tech@voer.edu.vn>\n"
 "Language: vi\n"
@@ -325,7 +325,7 @@ msgstr "Xem hồ sơ"
 #: templates/frontend/collection_detail.html:243
 #: templates/frontend/module_detail.html:131
 msgid "By same author"
-msgstr "Cùng tác giả"
+msgstr "Nội dung cùng tác giả"
 
 #: templates/frontend/collection_detail.html:252
 #: templates/frontend/module_detail.html:140
@@ -1321,6 +1321,12 @@ msgstr "Xoá ảnh đại diện thành công."
 msgid "Top 12 Most Rated Documents"
 msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
 
+msgid "Featured Authors"
+msgstr "Tác giả Tiêu biểu"
+
+msgid "Featured Materials"
+msgstr "Tài liệu Tiêu biểu"
+
 #~ msgid "Epub Collection"
 #~ msgstr "Giáo trình Epub"
 
@@ -1531,9 +1537,3 @@ msgstr "Danh sách 12 tài liệu được đánh giá nhiều nhất"
 
 #~ msgid "Member Since:"
 #~ msgstr "Thành viên từ:"
-
-msgid "Featured Authors"
-msgstr "Tác giả Tiêu biểu"
-
-msgid "Featured Materials"
-msgstr "Tài liệu Tiêu biểu"
