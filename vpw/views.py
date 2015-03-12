@@ -1220,7 +1220,7 @@ def mostViewedView(request):
     return render(request, template,
         {"materials": results,
          "author": author,
-         "title": _("Top 12 Most Viewed Documents"),
+         "title": _("Top Viewed Documents"),
         })
 
 
@@ -1253,7 +1253,7 @@ def mostFavedView(request):
     return render(request, template,
         {"materials": results,
          "author": author,
-         "title": _("Top 12 Most Favorited Documents"),
+         "title": _("Top Favorited Documents"),
         })
 
 
@@ -2585,4 +2585,4 @@ def get_most_rated(request):
         results.append(material)
 
     return render(request, "frontend/material_stats.html",
-                  {"materials": results, "author": author, "title": _("Top 12 Most Rated Documents")})
+                  {"materials": results, "author": author, "title": _("Top Rated Documents")})
