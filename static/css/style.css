@@ -1246,6 +1246,26 @@ div#by-same-author{
     background-color: #bfe7bf;
 }
 
-div#by-same-author h4{
-    color: #444;
+div.table-of-contents{
+    font-weight: bold;
+    line-height: 2;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #fff;
+    background-color: #f4c239;
+}
+
+.right-row > div.hflistmodule {
+    border-bottom: 0px;
+}
+
+div.title-box{
+    background: none repeat scroll 0 0 #f4c239;
+    color: rgb(255, 255, 255);
+    display: block;
+    font-family: verdana;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
 }

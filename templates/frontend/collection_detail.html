@@ -198,8 +198,9 @@
             */
         });
     </script>
-
+    <div class="clear"></div>
     <div class="hflistmodule">
+        <div class="table-of-contents">{% trans 'Table of contents' %}</div>
         <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host material-outline-scrool">
             <div class="hffolders">
                 <ul id="level-0">
@@ -238,18 +239,18 @@
     {% include 'frontend/partials/material_list.html' with links=material.links %}
 
     <!-- OTHER FROM AUTHOR -->
-    <div id="by-same-author" class="module-block module-simple padding-content-15">
-        <h4>{% trans 'By same author' %}</h4>
-        <div class="">
+    <div id="by-same-author" class="module-block module-simple">
+        <div class="title-box">{% trans 'By same author' %}</div>
+        <div class="padding-content-15">
             <div id="module-others" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-others?authors={{ collection.author }}">&nbsp;</div>
         </div>
     </div>
     <!-- END OTHER FROM AUTHOR -->
 
     <!-- SIMILAR ITEMS -->
-    <div id="similar-items" class="module-block module-simple padding-content-15">
-        <h4>{% trans 'Similar items' %}</h4>
-        <div >
+    <div id="similar-items" class="module-block module-simple">
+        <div class="title-box">{% trans 'Similar items' %}</div>
+        <div class="padding-content-15">
             <div id="module-similars" class="ajax-ev" data-ajax-trigger="load" data-ajax-url="/ajax/get-similars?mid={{ material.material_id }}&version={{ material.version }}">&nbsp;</div>
         </div>
     </div>
