@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n staticfiles %}
 
 <!-- Modal -->
 <div class="modal fade" id="voer-message-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -12,19 +12,21 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="footer left">
-    <div class="logo-footer left">
+<div class="footer">
+  <div class="row">
+    <div class="logo-footer col-md-1">
+      <img src="{% static 'images/logo-footer.png' %}" alt="" />
     </div>
-    <div class="list-menu-footer left">
-        <p>{% trans 'The Vietnam Open Educational Resources (VOER) is supported by <a href="http://www.vnfoundation.org">The Vietnam Foundation</a> and powered by <a href="http://www.hanoispring.com">Hanoi Spring Platform</a>. <br>Except where otherwise noted, content created on this site is licensed under a Creative Commons Attribution 3.0 License.' %}</p>
+    <div class="footer-message col-md-11">
+      <p>{% trans 'The Vietnam Open Educational Resources (VOER) is supported by <a href="http://www.vnfoundation.org">The Vietnam Foundation</a> and powered by <a href="http://www.hanoispring.com">Hanoi Spring Platform</a>. Except where otherwise noted, content created on this site is licensed under a Creative Commons Attribution 3.0 License.' %}</p>
+      <div class="support-logo right">
+        <a href="http://www.jetbrains.com/pycharm/"><img src="http://www.jetbrains.com/pycharm/docs/logo_pycharm.png" alt="" /></a>
+      </div>
+      <ul class="list-footer-social left">
+          <li><a href="https://www.facebook.com/voer.edu.vn" rel="nofollow"><img src="{% static 'images/facebook-connect-button.png' %}" alt="VOER on Facebook" /></a></li>
+      </ul>
     </div>
-    <ul class="list-footer-social right">
-        <li><a href="https://www.facebook.com/voer.edu.vn" rel="nofollow">Facebook</a></li>
-        <!--
-        <li><a href="#" rel="nofollow">Google+</a></li>
-        <li><a href="https://twitter.com/oervietnam" rel="nofollow">Twitter</a></li>
-        -->
-    </ul>
+  </div>
 </div>
 
 {% if voer_fb_id %}
