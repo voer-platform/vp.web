@@ -397,6 +397,7 @@
 .footer-message {
   padding-left: 30px;
   padding-top: 10px;
+  padding-right: 30px;
   color: gray; 
   font-size: 14px;
 }

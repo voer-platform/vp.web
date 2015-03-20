@@ -1334,6 +1334,9 @@ msgstr "Xoá ảnh đại diện thành công."
 msgid "Top Rated Documents"
 msgstr "Danh sách tài liệu được đánh giá nhiều nhất"
 
+msgid "Development Support"
+msgstr "Hỗ trợ phát triển"
+
 #~ msgid "Epub Collection"
 #~ msgstr "Giáo trình Epub"
 
