@@ -1281,3 +1281,9 @@ div.title-box{
   padding-top: 3px;
   color: gray;
 }
+
+
+.gsc-control-searchbox-only {
+  padding: 10px 10px 7px 10px !important;
+  width: 600px !important;
+}
