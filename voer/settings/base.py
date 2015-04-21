@@ -125,10 +125,16 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(PROJECT_DIR, 'logs/errors.log'),
+            'formatter': 'verbose',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            'filters': [],
+            'formatter': 'simple',
         }
     },
     'loggers': {
@@ -138,8 +144,8 @@ LOGGING = {
             'level': 'INFO',
         },
         'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
+            'handlers': ['file', 'mail_admins'],
+            'level': 'WARNING',
             'propagate': False,
         },
     }
