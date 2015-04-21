@@ -111,10 +111,10 @@ def home(request):
         for pid in author_id_list:
             pid = pid.strip()
             person = vpr_get_person(pid)
-            if person['fullname']:
+            if person.get('fullname', None):
                 p_list.append({'pid': pid, 'pname': person['fullname']})
             else:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
+                p_list.append({'pid': pid, 'pname': pid})
         material['author_list'] = p_list
         materials_list.append(material)
 
@@ -1168,7 +1168,7 @@ def user_dashboard(request):
 
         person_list = []
 
-        if author['fullname']:
+        if author.get('fullname', None):
             person_list.append({'pid': pid, 'pname': author['fullname']})
         else:
             person_list.append({'pid': pid, 'pname': author['user_id']})
@@ -1837,7 +1837,7 @@ def get_favorite(request):
             for pid in author_array:
                 pid = pid.strip()
                 person = vpr_get_person(pid)
-                if person['fullname']:
+                if person.get('fullname', None):
                     person_list.append({'pid': pid, 'pname': person['fullname']})
                 else:
                     person_list.append({'pid': pid, 'pname': person['user_id']})
@@ -1915,7 +1915,7 @@ def get_unpublish(request):
                 person_list = []
 
                 author_info = vpr_get_person(author_array[0])  # get only first author
-                if author_info['fullname']:
+                if author_info.get('fullname', None):
                     person_list.append({'pid': pid, 'pname': author_info['fullname']})
                 else:
                     person_list.append({'pid': pid, 'pname': author_info['user_id']})
@@ -1968,10 +1968,10 @@ def ajax_get_similars(request):
             for pid in author_id_list:
                 pid = pid.strip()
                 person = vpr_get_person(pid)
-                if person['fullname']:
+                if person.get('fullname', None):
                     p_list.append({'pid': pid, 'pname': person['fullname']})
                 else:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
+                    p_list.append({'pid': pid, 'pname': str(pid)})
             material_tmp['author_list'] = p_list
 
             similar_data.append(material_tmp)
@@ -2390,7 +2390,7 @@ def ajax_search_result(request):
         result_array = []
         for result in search_results:
             if result['user_id']:
-                if 'fullname' in result and result['fullname']:
+                if result.get('fullname', None):
                     result['title'] = result['fullname']
                 else:
                     result['title'] = result['user_id']
@@ -2404,10 +2404,10 @@ def ajax_search_result(request):
                 for pid in author_array:
                     pid = pid.strip()
                     person = vpr_get_person(pid)
-                    if person['fullname']:
+                    if person.get('fullname', None):
                         person_list.append({'pid': pid, 'pname': person['fullname']})
                     else:
-                        person_list.append({'pid': pid, 'pname': person['fullname']})
+                        person_list.append({'pid': pid, 'pname': pid})
                 result['person_list'] = person_list
 
             if 'categories' in result and result['categories']:
