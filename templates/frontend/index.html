@@ -133,7 +133,7 @@
             <div class="browser-author-img">
                 {% url 'get_avatar' material.id as avatar_url %}
                 {% thumbnail 'http://'|add:request.get_host|add:avatar_url "165x165" crop="center" as thumb %}
-                <a href="{% url 'view_profile' material.id  as avatar_url %}" title="{{ material.fullname }}"><img src="{{ thumb.url }}" /></a>
+                <a href="{% url 'view_profile' material.id %}" title="{{ material.fullname }}"><img src="{{ thumb.url }}" /></a>
                 {% endthumbnail %}
             </div>
             <div class="browser-author-details">

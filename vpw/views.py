@@ -1991,10 +1991,10 @@ def ajax_get_others(request):
     other_data = []
     other_materials = vpr_materials_by_author(author_list, real_page)
 
-    if other_materials['next']:
+    if other_materials.get('next', ''):
         next_page = str(page + 1)
 
-    if other_materials['previous']:
+    if other_materials.get('previous', ''):
         prev_page = str(page - 1)
 
     actual_page = page % (12 / number_record)
