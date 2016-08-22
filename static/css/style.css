@@ -803,6 +803,7 @@ article.flatpage {
   padding-bottom: 5px;
   margin: 0 0 5px 0;
   position: relative;
+  /*border-bottom: 1px dashed #f1f1f1;*/
 }
 .material-cover {
   width: 10%;
@@ -829,14 +830,14 @@ article.flatpage {
 }
 .material-brief h5 a {
   color: #DF1E1E;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   font-weight: normal;
   font-family: verdana, tahoma, arial;
-  font-size: 11px;
+  font-size: 15px;
 }
 .material-brief p {
-  color: gray;
-  font-size: 11px;
+  color: #34495e;
+  font-size: 13px;
   font-family: tahoma, verdana;
   margin: 0px;
 }
@@ -849,13 +850,14 @@ article.flatpage {
   font-size: 11px;
   color: #bbb;
   //text-transform: uppercase;
-  border-top: 1px dashed #f1f1f1;
-  text-align: right;
+  border-bottom: 1px dashed #999999;
+  text-align: left;
   margin-top: 3px;
+  padding-bottom: 5px;
 }
 .brief-published a {
   border-left: 1px solid #CCCCCC;
-  color: #D3D3D3;
+  color: #557392;
   display: inline-block;
   height: 16px;
   line-height: 16px;
@@ -1286,4 +1288,7 @@ div.title-box{
 .gsc-control-searchbox-only {
   padding: 10px 10px 7px 10px !important;
   width: 600px !important;
+}
+.menu-new-update{
+  display: block;
 }
