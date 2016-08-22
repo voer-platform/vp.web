@@ -836,7 +836,7 @@ article.flatpage {
   font-size: 15px;
 }
 .material-brief p {
-  color: #34495e;
+  color: #000;
   font-size: 13px;
   font-family: tahoma, verdana;
   margin: 0px;
@@ -857,7 +857,7 @@ article.flatpage {
 }
 .brief-published a {
   border-left: 1px solid #CCCCCC;
-  color: #557392;
+  color: #17191d;
   display: inline-block;
   height: 16px;
   line-height: 16px;
