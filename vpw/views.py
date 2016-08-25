@@ -1090,7 +1090,7 @@ def browse(request):
     types = request.GET.get("types", "")
     languages = request.GET.get("languages", "")
     author = request.GET.get("author", "")
-    sort = request.GET.get("sort", "title")
+    sort = request.GET.get("sort", "-modified")
 
     materials = vpr_browse(page=page, categories=cats, types=types, languages=languages, author=author, sort=sort)
     material_result = []
