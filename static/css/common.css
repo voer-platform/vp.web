@@ -12,8 +12,8 @@
 	height:40px;
 }
 .hffitertop .dropdown {
-	border-right:1px solid #E8E8E8;
-	padding:0px 15px;
+	/*border-right:1px solid #E8E8E8;
+	padding:0px 15px;*/
 }
 .hffitertop ul.dropdown-menu{
     background: none repeat scroll 0 0 #F9FAF7;
@@ -42,6 +42,7 @@
     line-height: 40px;
     padding-left: 24px;
     color:#555555;
+    text-transform: uppercase;
 }
 .arrow-down {
 	background:url('../images/icon/arrow-down.png') no-repeat left transparent;

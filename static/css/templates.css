@@ -1254,3 +1254,6 @@
 .display-searchbox{
 	display: inline-block !important;
 }
+.footer .row{
+	margin-right: 0px!important;
+}
