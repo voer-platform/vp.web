@@ -1562,8 +1562,12 @@ def ajax_search_author(request):
 
 def ajax_search_module(request):
     keyword = request.GET.get('keyword', '')
-    result = vpr_search_module(keyword)
     modules = []
+    m = vpr_get_material(keyword)
+    if m is not None and m['material_type'] == MODULE_TYPE:
+        modules.append(m)
+
+    result = vpr_search_module(keyword)
     if 'count' in result:
         if result['count'] > 0:
             modules = []
