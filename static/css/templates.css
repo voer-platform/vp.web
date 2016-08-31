@@ -1,4 +1,4 @@
-.clear{
+f.clear{
 	clear: both;
 }
 .left{
@@ -204,8 +204,8 @@
 	margin-right: 0;
 }
 .collection-mainpage-cover{
-	//width: 345px;
-	//height: 185px;
+	width: 345px;
+	height: 185px;
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
@@ -389,10 +389,6 @@
 	text-decoration: underline;
 }
 .logo-footer{
-	//width: 108px;
-	//height: 32px;
-	//background: url('../images/logo-footer.png') no-repeat;
-	//margin-right: 25px;
 }
 .footer-message {
   padding-left: 30px;
@@ -583,7 +579,6 @@
 	margin-top: 1px;
 	text-transform: uppercase;
 	font-size: 10px;
-	//font-weight: bold;
 	font-family: verdana;
 }
 .icon-checkout{
