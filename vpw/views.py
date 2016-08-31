@@ -111,10 +111,10 @@ def home(request):
         for pid in author_id_list:
             pid = pid.strip()
             person = vpr_get_person(pid)
-            if person['fullname']:
+            if person.get('fullname', None):
                 p_list.append({'pid': pid, 'pname': person['fullname']})
             else:
-                p_list.append({'pid': pid, 'pname': person['fullname']})
+                p_list.append({'pid': pid, 'pname': pid})
         material['author_list'] = p_list
         materials_list.append(material)
 
@@ -266,7 +266,7 @@ def module_detail(request, title, mid, version):
         attachment_info = voer_get_attachment_info(file_attachment_id)
 
         image_mime_type = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2', 'image/iff']
-        if attachment_info['mime_type'] not in image_mime_type:
+        if attachment_info.get('mime_type') not in image_mime_type:
             file_tmp = {}
             file_tmp['title'] = attachment_info['name']
             file_tmp['attachment_id'] = file_attachment_id
@@ -393,7 +393,7 @@ def collection_detail(request, title, cid, mid):
 
                 image_mime_types = ['image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff', 'image/jp2',
                                     'image/iff']
-                if attachment_info['mime_type'] not in image_mime_types:
+                if attachment_info.get('mime_type') not in image_mime_types:
                     file_tmp = {}
                     file_tmp['title'] = attachment_info['name']
                     file_tmp['attachment_id'] = file_attachment_id
@@ -1025,6 +1025,9 @@ def view_profile(request, pid):
     current_person = vpr_get_person(pid, True)
     categories = vpr_get_categories()
 
+    if current_person.get('detail', '').lower() == 'not found':
+        raise Http404
+
     page = int(request.GET.get('page', 1))
 
     cats = request.GET.get("categories", "")
@@ -1051,7 +1054,7 @@ def view_profile(request, pid):
         pager = pager_default_initialize(materials['count'], 12, page)
         page_query = get_page_query(request)
 
-    person_name = current_person['fullname'].strip() or current_person['user_id']
+    person_name = current_person.get('fullname', '').strip() or current_person['user_id']
 
     return render(request, "frontend/profile.html", {
         "materials": materials, "categories": categories,
@@ -1167,11 +1170,10 @@ def user_dashboard(request):
         material['favorite_count'] = favorite_count
 
         person_list = []
-
-        if author['fullname']:
-            person_list.append({'pid': pid, 'pname': author['fullname']})
-        else:
-            person_list.append({'pid': pid, 'pname': author['user_id']})
+        person_list.append({
+            'pid': pid,
+            'pname': author.get('fullname', author['user_id'])
+        })
 
         material['person_list'] = person_list
         material['modified'] = _format_date(material['modified'])
@@ -1776,7 +1778,6 @@ def admin_featured_authors(request):
             m = FeaturedAuthor.objects.get(author_id = delete_author_id).delete()
             messages.success(request, "Success!!!")
 
-    # import pdb;pdb.set_trace()
     featuredAuthors = FeaturedAuthor.objects.all()
     authors = []
     for featuredAuthor in featuredAuthors:
@@ -1784,7 +1785,7 @@ def admin_featured_authors(request):
         a = vpr_get_person(featuredAuthor.author_id)
         author['id'] = a['id']
         author['user_id'] = a['user_id']
-        name=''
+        name = ''
         if not a['title']== None:
             if not isinstance(name, unicode):
                 name = name.encode('utf-8')
@@ -1808,10 +1809,7 @@ def admin_featured_authors(request):
                 name = name + ' ' + first_name
 
         if name == '  ':
-            if a['fullname'] != None:
-                name = a['fullname']
-            else:
-                name = a['user_id']
+            name = a.get('fullname', a['user_id'])
         author['name'] = name
         authors.append(author)
     return render(request, "frontend/admin_featured_authors.html", {'authors': authors})
@@ -1841,7 +1839,7 @@ def get_favorite(request):
             for pid in author_array:
                 pid = pid.strip()
                 person = vpr_get_person(pid)
-                if person['fullname']:
+                if person.get('fullname', None):
                     person_list.append({'pid': pid, 'pname': person['fullname']})
                 else:
                     person_list.append({'pid': pid, 'pname': person['user_id']})
@@ -1919,10 +1917,10 @@ def get_unpublish(request):
                 person_list = []
 
                 author_info = vpr_get_person(author_array[0])  # get only first author
-                if author_info['fullname']:
-                    person_list.append({'pid': pid, 'pname': author_info['fullname']})
-                else:
-                    person_list.append({'pid': pid, 'pname': author_info['user_id']})
+                person_list.append({
+                    'pid': pid,
+                    'pname': author_info.get('fullname', author_info['user_id']),
+                })
 
                 material['person_list'] = person_list
 
@@ -1972,10 +1970,10 @@ def ajax_get_similars(request):
             for pid in author_id_list:
                 pid = pid.strip()
                 person = vpr_get_person(pid)
-                if person['fullname']:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
-                else:
-                    p_list.append({'pid': pid, 'pname': person['fullname']})
+                p_list.append({
+                    'pid': pid,
+                    'pname': person.get('fullname', str(pid)),
+                })
             material_tmp['author_list'] = p_list
 
             similar_data.append(material_tmp)
@@ -1995,10 +1993,10 @@ def ajax_get_others(request):
     other_data = []
     other_materials = vpr_materials_by_author(author_list, real_page)
 
-    if other_materials['next']:
+    if other_materials.get('next', ''):
         next_page = str(page + 1)
 
-    if other_materials['previous']:
+    if other_materials.get('previous', ''):
         prev_page = str(page - 1)
 
     actual_page = page % (12 / number_record)
@@ -2394,7 +2392,7 @@ def ajax_search_result(request):
         result_array = []
         for result in search_results:
             if result['user_id']:
-                if 'fullname' in result and result['fullname']:
+                if result.get('fullname', None):
                     result['title'] = result['fullname']
                 else:
                     result['title'] = result['user_id']
@@ -2408,10 +2406,10 @@ def ajax_search_result(request):
                 for pid in author_array:
                     pid = pid.strip()
                     person = vpr_get_person(pid)
-                    if person['fullname']:
+                    if person.get('fullname', None):
                         person_list.append({'pid': pid, 'pname': person['fullname']})
                     else:
-                        person_list.append({'pid': pid, 'pname': person['fullname']})
+                        person_list.append({'pid': pid, 'pname': pid})
                 result['person_list'] = person_list
 
             if 'categories' in result and result['categories']:

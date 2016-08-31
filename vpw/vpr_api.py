@@ -296,7 +296,7 @@ def vpr_browse(**kwargs):
 
     # update image url
     items = []
-    for material in result['results']:
+    for material in result.get('results', []):
         if material['image']:
             material['image'] = os.path.join(settings.VPR_URL, 'materials',
                 material['material_id'], str(material['version']), 'image')

@@ -15,16 +15,16 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vpw',
-        'USER': 'vpw',
-        'PASSWORD': 'vpw',
+        'NAME': 'voer_django',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }
 }
 
 #VPR SETTINGS
-VPR_URL = 'http://localhost:2013/1.0/'
+VPR_URL = 'http://dev.voer.edu.vn:2013/1.0/'
 CLIENT_ID = 'vpw'
 CLIENT_KEY = 'd68e9d65eec17f27d0ce6747'
 

@@ -384,20 +384,22 @@
 	background-color: rgb(236, 236, 236);
 }
 .footer a{
-	color: #555555;
-	font-size: 13px;
 }
 .footer a:hover{
 	text-decoration: underline;
 }
 .logo-footer{
-	width: 108px;
-	height: 32px;
-	background: url('../images/logo-footer.png');
-	margin-right: 25px;
+	//width: 108px;
+	//height: 32px;
+	//background: url('../images/logo-footer.png') no-repeat;
+	//margin-right: 25px;
 }
-.list-menu-footer{
-	margin: 6px 0 0 0;
+.footer-message {
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-right: 30px;
+  color: gray; 
+  font-size: 14px;
 }
 .list-menu-footer li{
 	display: inline-block;
@@ -1251,4 +1253,7 @@
 }
 .display-searchbox{
 	display: inline-block !important;
+}
+.footer .row{
+	margin-right: 0px!important;
 }
