@@ -1566,7 +1566,7 @@ def ajax_search_module(request):
     keyword = request.GET.get('keyword', '')
     modules = []
     m = vpr_get_material(keyword)
-    if m is not None and m['material_type'] == MODULE_TYPE:
+    if m.has_key("material_type") and m['material_type'] == MODULE_TYPE:
         modules.append(m)
 
     result = vpr_search_module(keyword)
