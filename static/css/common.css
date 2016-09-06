@@ -3,7 +3,8 @@
 	background:#fff;
 }
 .hffitertop {
-	height:40px;
+	float: left;
+	/*height:40px;*/
 	width:100%;
 	border-bottom:1px solid #E8E8E8;
 }
@@ -40,12 +41,12 @@
     font-size: 14px;
     height: 40px;
     line-height: 40px;
-    padding-left: 24px;
+    /*padding-left: 24px;*/
     color:#555555;
     text-transform: uppercase;
 }
 .arrow-down {
-	background:url('../images/icon/arrow-down.png') no-repeat left transparent;
+/*	background:url('../images/icon/arrow-down.png') no-repeat left transparent;*/
 }
 .fiterbutton > a {
 	text-indent: -999em;
@@ -1172,7 +1173,7 @@ ul.successfull li.label {
     background-image: -webkit-linear-gradient(center top , #FFFFFF 20%, rgba(255, 255, 255, 0));
     background-image: -ms-linear-gradient(center top , #FFFFFF 20%, rgba(255, 255, 255, 0));
 
-    border: 1px solid #B2BAC2;
+    border: 1px solid #000;
     border-radius: 2px 2px 2px 2px;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85) inset, 0 1px 0 0 rgba(0, 0, 0, 0.06);
     cursor: default;
@@ -1180,6 +1181,40 @@ ul.successfull li.label {
 .checkbox-custom.file_selected {
     background: url("../images/icon/custom-checkbox-tick.png") no-repeat scroll center center #FFFFFF;
     opacity: 1;
+}
+.edit-sort{
+	background: url("../images/icon/icon-radio_04.png") no-repeat scroll left center #FFFFFF!important;
+    opacity: 1;
+    font-weight: bold;
+    /*border: 1px solid #B2BAC2;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85) inset, 0 1px 0 0 rgba(0, 0, 0, 0.06);
+    cursor: default;*/
+}
+.menu-new-update li a{
+	background: url("../images/icon/icon-radio-check_06.png") no-repeat scroll left center #FFFFFF;
+    opacity: 1;
+    /*border: 1px solid #B2BAC2;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85) inset, 0 1px 0 0 rgba(0, 0, 0, 0.06);
+    cursor: default;*/
+}
+
+#fitertop-browserall ul li a{
+	padding-left: 24px;
+	color: #555;
+}
+.menu-new-update{
+	/*margin-bottom: 8px;*/
+}
+.bigbox-common{
+	padding-top: 88px;
+}
+.menu-new-update li {
+	padding-bottom: 7px;
+}
+.menu-new-update li a:hover{
+	color: #c10c3e!important;
 }
 .hfcheckinfo {
 	float:left;

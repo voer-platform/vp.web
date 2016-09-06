@@ -127,19 +127,7 @@ $(document).ready(function(){
             </h5>
             <p>{{ material.description|safe|truncatewords:28 }}</p>
             <div class="brief-published">
-                {% if material.view_count %}
-                    <a href="javascript:void(0)" title="{% trans 'View count' %}">
-                        <i class="icon icon-view"></i>
-                        <span class="stats-count">{{ material.view_count.view }}</span>
-                    </a>
-                {% endif %}
-
-                {% if material.favorite_count %}
-                    <a href="javascript:void(0)">
-                        <i class="icon icon-favorite {% if material.is_favorited %}active{% endif %}" {% if material.is_favorited %}data-added-favorite="true"{% endif %} data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}" title="{% trans 'Add to favorite' %}"></i>
-                        <span class="stats-count" title="{% trans 'Favorite count' %}">{{ material.favorite_count.favorite }}</span>
-                    </a>
-                {% endif %}
+                
 
                 {% if material.rating_count %}
                     <a href="javascript:void(0)">
@@ -168,6 +156,20 @@ $(document).ready(function(){
                 {% elif 'author' in material %}
                     <a href="{% url 'view_profile' material.author.0.0 %}">{{ material.author.0.1 }}</a>
                 {% endif %}
+
+                {% if material.view_count %}
+                    <a href="javascript:void(0)" title="{% trans 'View count' %}">
+                        <i class="icon icon-view"></i>
+                        <span class="stats-count">{{ material.view_count.view }}</span>
+                    </a>
+                {% endif %}
+
+                <!-- {% if material.favorite_count %}
+                    <a href="javascript:void(0)">
+                        <i class="icon icon-favorite {% if material.is_favorited %}active{% endif %}" {% if material.is_favorited %}data-added-favorite="true"{% endif %} data-material-id="{{ material.material_id }}" data-material-version="{{ material.version }}" title="{% trans 'Add to favorite' %}"></i>
+                        <span class="stats-count" title="{% trans 'Favorite count' %}">{{ material.favorite_count.favorite }}</span>
+                    </a>
+                {% endif %} -->
 
                 {% if material.modified %}
                      <a title="{% trans 'Uploaded date' %}">{{ material.modified|date:"Y-m-d H:i:s" }}</a>

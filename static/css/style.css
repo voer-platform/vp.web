@@ -130,7 +130,7 @@
 }
 /*************************** ICON *************************/
 .icon {
-    background: url("../images/icon-sprite.png") no-repeat center left transparent;
+    background: url("../images/icon-sprite-01.png") no-repeat center left transparent;
     display: inline-block;
     float: left;
     width: 16px;
@@ -862,6 +862,15 @@ article.flatpage {
   height: 16px;
   line-height: 16px;
   padding: 0 5px 0 7px;
+  vertical-align: middle;
+}
+.brief-published a:first-child {
+  border-left: 1px solid #CCCCCC;
+  color: #17191d;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  padding: 0 5px 0 0px;
   vertical-align: middle;
 }
 .brief-published a:first-child {
