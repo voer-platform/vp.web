@@ -28,23 +28,30 @@
 
                 if($(this).attr('rel')=='modified') {
                     $(this).attr('rel', '-modified');
-                    $(this).html('Ngày z-a');
-                    $('.filter-title').html('Ngày a-z');
+                   $(this).html('Ngày mới nhất');
+                    //$(this).addClass('edit-sort');
+                    $('.dropdown-menu-sort a').removeClass('edit-sort').filter('a[rel^="-modified"]').addClass('edit-sort');
+                   // $('.filter-title').html('Ngày a-z');
                 }
                 else if($(this).attr('rel') == '-modified'){
-                    $(this).attr('rel', 'modified');
-                    $(this).html('Ngày a-z');
-                    $('.filter-title').html('Ngày z-a');
+                   $(this).attr('rel', 'modified');
+                   $(this).html('Ngày cũ nhất');
+                    $('.dropdown-menu-sort a').removeClass('edit-sort').filter('a[rel^="modified"]').addClass('edit-sort');
+                    //$('.filter-title').html('Ngày z-a');
                 }
                 else if($(this).attr('rel')=='title') {
                     $(this).attr('rel', '-title');
-                    $(this).html('Tiêu đề z-a');
-                    $('.filter-title').html('Tiêu đề a-z');
+                    $(this).html('Tiêu đề a-z');
+                    // $(this).addClass('edit-sort');
+                   // $('.filter-title').html('Tiêu đề a-z');
+                   $('.dropdown-menu-sort a').removeClass('edit-sort').filter('a[rel^="-title"]').addClass('edit-sort');
                 }
                 else if($(this).attr('rel') == '-title'){
                     $(this).attr('rel', 'title');
-                    $(this).html('Tiêu đề a-z');
-                    $('.filter-title').html('Tiêu đề z-a');
+                    $(this).html('Tiêu đề z-a'); 
+                    // $(this).addClass('edit-sort');
+                   // $('.filter-title').html('Tiêu đề z-a');
+                   $('.dropdown-menu-sort a').removeClass('edit-sort').filter('a[rel^="title"]').addClass('edit-sort');
                 }
                 ajaxGetMaterialByCondition();
             });
@@ -143,12 +150,15 @@
         <div class="hffilter-right">
         <div id="fitertop-browserall" class="hffitertop">
 		    <div class="dropdown left">
-		        <a class="filter-title arrow-down" data-toggle="dropdown" href="#">Sắp xếp theo</a>
-		        <ul class="dropdown-menu dropdown-menu-sort menu-new-update" role="menu" aria-labelledby="dLabel">
-		            <li><a href="javascript:void(0)" rel="title">{% trans 'Title' %}</a></li>
+		        <a class="filter-title arrow-down" data-toggle="dropdown" href="#">{% trans 'Sort by' %}</a>
+		        <ul class="dropdown-menu-sort menu-new-update" role="menu" aria-labelledby="dLabel">
+		        	<li><a href="javascript:void(0)"  rel="modified">{% trans 'Ngày mới nhất' %}</a></li>
+                    <!-- <li><a href="javascript:void(0)" rel="-modified">{% trans 'Ngày z-a' %}</a></li> -->
+		            <li><a href="javascript:void(0)"  rel="title">{% trans 'Tiêu đề a-z' %}</a></li>
+                    <!--  <li><a href="javascript:void(0)" rel="-title">{% trans 'Tiêu đề z-a' %}</a></li> -->
 		            <!--<li><a>{% trans 'Relevance' %}</a></li>
 		            <li><a>{% trans 'Rating' %}</a></li>-->
-		            <li><a href="javascript:void(0)" rel="modified">{% trans 'Date' %}</a></li>
+		            
 		        </ul>
 		    </div>
 		    <div class="fiterbutton right">
