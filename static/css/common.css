@@ -16,6 +16,15 @@
 	/*border-right:1px solid #E8E8E8;
 	padding:0px 15px;*/
 }
+.hfitems {
+    float: right!important;
+}
+.hffitertop {
+    width: auto!important;
+}
+.material-unpublished-items {
+    width: 100%!important;
+}
 .hffitertop ul.dropdown-menu{
     background: none repeat scroll 0 0 #F9FAF7;
     border: 1px solid #E8E8E8;
@@ -490,6 +499,7 @@ ul.hfuser-statics li.like {
 }
 .hfbtn-create a {
 	color:#fff;
+	font-weight: normal;
 }
 .hfbtn-create.module {
 	background:url('../images/icon/btn-module.png') no-repeat 10px 0px #c8293c;
@@ -1194,6 +1204,7 @@ ul.successfull li.label {
 .menu-new-update li a{
 	background: url("../images/icon/icon-radio-check_06.png") no-repeat scroll left center #FFFFFF;
     opacity: 1;
+    
     /*border: 1px solid #B2BAC2;
     border-radius: 2px 2px 2px 2px;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.85) inset, 0 1px 0 0 rgba(0, 0, 0, 0.06);
