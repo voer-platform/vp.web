@@ -171,7 +171,6 @@
     <!-- END AUTHOR STATUS -->
     {% endif %}
     {% endcomment %}
-
     <script>
         $(document).ready(function(){
             $('.collspan').click(function(){
@@ -179,26 +178,9 @@
                 $(this).toggleClass('exspan');
                 $('ul[metadata=child-'+$iditemshow+']').toggleClass('collspaned');
             });
-            /*
-            var wh = $(window).height();
-            $(window).scroll(function(){
-                var wh = $(window).height();
-                var wp = $(window).scrollTop();
-                var dh = $(document).height();
-                var visible = Math.round((wp/dh)*100);
-                if(wp > 150){
-                    $(".hflistmodule").addClass('extends');
-                    $("#hfgroupright").addClass('extends');
-                }else{
-                    $(".hflistmodule").removeClass('extends');
-                    $("#hfgroupright").removeClass('extends');
-                }
-
-            });
-            */
         });
     </script>
-    <div class="clear"></div>
+    <div class="clearfix"></div>
     <div class="hflistmodule">
         <div class="table-of-contents">{% trans 'Table of contents' %}</div>
         <div class="list-module-name padding-content-10 scrollpanel no4 left sp-host material-outline-scrool">

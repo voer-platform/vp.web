@@ -81,6 +81,10 @@ class RecaptchaRegistrationView(RegistrationView):
     """
     form_class = RecaptchaRegistrationForm
 
+    def get_context_data(self, **kwargs):
+        data = super(RecaptchaRegistrationView, self).get_context_data(**kwargs)
+        data['captcha_site_key'] = settings.RECAPTCHA_PUBLIC_KEY
+        return data
 
 # Create your views here.
 def home(request):

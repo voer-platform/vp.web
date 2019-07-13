@@ -6,15 +6,7 @@
 {% block content %}
 <div class="signup-form">
     <div class="header-signup-form">{% trans 'Join VOER. Take Creative Control.' %}</div>
-    <!--
-    <div class="social-signup-form">
-        <a class="link-fb-signup left"></a>
-        <a class="link-tw-signup left"></a>
-        <a class="link-gg-signup left"></a>
-        <a class="link-in-signup left"></a>
-    </div>
-    -->
-    <form method="post" action="" class="wide">
+    <form method="post" action="" class="wide" id="registrationform">
     {% csrf_token %}
     <div class="content-signup-form">
         <!--
@@ -37,10 +29,23 @@
         </div>
         <input class="form-control" id="id_password2" type="password" name="password2" placeholder="{% trans 'Enter password again' %}">
         {{ form.recaptcha }}
-
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render={{ captcha_site_key }}"></script>
+        <script>
+          grecaptcha.ready(function() {
+              $('#registrationform').submit(function(e){
+                  var $form = this;
+                  e.preventDefault();
+                  grecaptcha.execute('{{ captcha_site_key }}', {action: 'registrationform'}).then(function(token) {
+                      $('#id_recaptcha').val(token);
+                      $form.submit()
+                  });
+              })
+          });
+        </script>
         <span class="left clear">
             By registering you are agreeing to our <a class="link-blue">Terms of Use</a> and <a class="link-blue">Privacy Policy</a>.</span>
-        <!-- <a href="info_signup.html" class="btn-sign-up left clear">Get started</a> -->
         <input class="btn btn-sign-up left clear" type="submit" value="{% trans 'Register' %}">
     </div>
     </form>

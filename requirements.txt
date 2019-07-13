@@ -13,3 +13,4 @@ requests==2.1.0
 six==1.5.2
 sorl-thumbnail==11.12
 wsgiref==0.1.2
+universal-analytics-python==0.2.4

@@ -25,7 +25,7 @@ SECRET_KEY = 'p-z#m!yb%6(3k6fq+=mq6ikr@bbcjlp-gn8mu)ec#6x86tz+*7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 TEMPLATE_DEBUG = False
-ALLOWED_HOSTS = ['localhost', 'dev.voer.vn', 'voer.edu.vn']
+ALLOWED_HOSTS = ['localhost', 'dev.voer.vn', 'voer.edu.vn', 'www.voer.edu.vn']
 
 
 # Application definition

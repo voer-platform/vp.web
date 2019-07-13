@@ -13,7 +13,7 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'voer_django',
+        'NAME': 'vpw',
         'USER': 'travis',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
@@ -22,12 +22,12 @@ DATABASES = {
 }
 
 #VPR Address
-VPR_URL = 'http://dev.voer.vn:2013/1.0/'
+VPR_URL = 'https://dev.voer.edu.vn:1122/1.0/'
 
 #VPT Address
-VPT_URL = 'http://dev.voer.vn:6543/'
+VPT_URL = 'https://dev.voer.edu.vn:1133/'
 
-SITE_URL = 'dev.voer.vn'
+SITE_URL = 'dev.voer.edu.vn'
 
 RECAPTCHA_PUBLIC_KEY = ''
 RECAPTCHA_PRIVATE_KEY = ''

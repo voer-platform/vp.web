@@ -6,27 +6,25 @@ Created on 16 Dec 2013
 from base import *
 
 # FOR DEBUG
-DEBUG = True
-DEVELOPMENT = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = DEVELOPMENT = TEMPLATE_DEBUG = False
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'voer_django',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': 'vpw',
+        'USER': 'voer',
+        'PASSWORD': 'voer',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }
 }
 
 #VPR Address
-VPR_URL = 'http://dev.voer.vn:2013/1.0/'
+VPR_URL = 'https://dev.voer.edu.vn:1122/1.0/'
 
 #VPT Address
-VPT_URL = 'http://voer.edu.vn:6543/'
+VPT_URL = 'https://dev.voer.edu.vn:1133/'
 
-SITE_URL = 'voer.edu.vn'
+SITE_URL = 'dev.voer.edu.vn'

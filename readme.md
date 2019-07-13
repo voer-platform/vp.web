@@ -1,7 +1,7 @@
 # Setup VPW
 
 ## Install the required packages
-	sudo apt-get install build-essential python2.7-dev python-dev python-pip
+	sudo apt-get install build-essential python2.7-dev python-dev python-pip software-properties-common
         
 ## Dependencies
 ### Mysql
@@ -36,12 +36,12 @@
 	}
 
 	#VPR Address
-	VPR_URL = 'http://dev.voer.vn:2013/1.0/'
+	VPR_URL = 'https://dev.voer.edu.vn:1122/1.0/'
 
 	#VPT Address
-	VPT_URL = 'http://dev.voer.vn:6543/'
+	VPT_URL = 'https://dev.voer.edu.vn:1133/'
 
-	SITE_URL = 'dev.voer.vn'
+	SITE_URL = 'https://dev.voer.edu.vn'
 
 	# Register on http://www.captcha.net
 	RECAPTCHA_PUBLIC_KEY = 'public_key'

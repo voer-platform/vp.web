@@ -15,29 +15,28 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'voer_django',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': 'vpw',
+        'USER': 'voer',
+        'PASSWORD': 'voer',
         'HOST': '127.0.0.1',
         'PORT': 3306,
     }
 }
 
 #VPR SETTINGS
-VPR_URL = 'http://dev.voer.edu.vn:2013/1.0/'
+VPR_URL = 'https://dev.voer.edu.vn:1122/1.0/'
 CLIENT_ID = 'vpw'
-CLIENT_KEY = 'd68e9d65eec17f27d0ce6747'
+CLIENT_KEY = ''
 
 
 #VPT Address
-VPT_URL = 'http://voer.edu.vn:6543/'
+VPT_URL = 'https://dev.voer.edu.vn:1133/'
 
-SITE_URL = 'http://dev.voer.vn'
+SITE_URL = 'https://dev.voer.edu.vn'
 
 RECAPTCHA_PUBLIC_KEY = ''
-RECAPTCHA_PRIVATE_KEY = ''
+RECAPTCHA_SECRET_KEY = ''
 
 #STATIC_ROOT = os.path.join(PROJECT_DIR, '_static')
 
 COMPRESS_ENABLED = False
-

@@ -1,10 +1,13 @@
+import requests
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.models import ModelForm
 from registration.forms import RegistrationForm
-from vpw.fields import ReCaptchaField
 from tinymce.widgets import TinyMCE
 from django.utils.translation import ugettext as _
+from django.conf import settings
+
 from vpw.models import Material
 
 
@@ -89,5 +92,19 @@ class SettingsForm(forms.Form):
 
 
 class RecaptchaRegistrationForm(RegistrationForm):
-    recaptcha = ReCaptchaField(label=_("I'm a human"))
+    recaptcha = forms.CharField(max_length=512, required=False, widget=forms.HiddenInput())
 
+    def clean(self):
+        cleaned_data = super(RecaptchaRegistrationForm, self).clean()
+
+        recaptcha_response = cleaned_data.get('recaptcha', '')
+        data = {
+            'response': recaptcha_response,
+            'secret': settings.RECAPTCHA_SECRET_KEY
+        }
+        resp = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+        result_json = resp.json()
+        if not result_json.get('success', False):
+            raise ValidationError("Captcha validation failed")
+
+        return cleaned_data

@@ -16,11 +16,11 @@
 	/*border-right:1px solid #E8E8E8;
 	padding:0px 15px;*/
 }
-.hfitems {
-    float: right!important;
+right-row .hfitems {
+	float: left !important;
 }
 .hffitertop {
-    width: auto!important;
+	width: 100%!important;
 }
 .material-unpublished-items {
     width: 100%!important;
