@@ -1,4 +1,4 @@
-Django==1.6
+Django==2.2.24
 Django-tinymce-filebrowser==0.2.1
 MySQL-python
 Pillow==2.2.2
