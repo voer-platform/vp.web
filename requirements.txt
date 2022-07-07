@@ -9,7 +9,7 @@ django-registration==1.0
 django-taggit==0.11.2
 django-tinymce==1.5.2
 gunicorn==18.0
-requests==2.1.0
+requests==2.20.0
 six==1.5.2
 sorl-thumbnail==11.12
 wsgiref==0.1.2
